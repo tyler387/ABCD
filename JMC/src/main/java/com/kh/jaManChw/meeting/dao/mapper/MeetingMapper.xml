@@ -14,6 +14,15 @@
 
 </insert>
 
+<select id="selectFriendListAll" resultType="com.kh.jaManChw.dto.Users">
+
+	select user_name, friend_userno
+	from friend_list
+    inner join users
+    on friend_list.friend_userno = users.userno
+	where friend_list.userno = 1
+
+</select>
 
 
 

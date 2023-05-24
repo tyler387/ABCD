@@ -99,7 +99,15 @@
 	<label>참가비<input type="text" id="fee" name="fee" placeholder="원"></label><br><br>
 	<label>인원 수<input type="number" id="headCount" name="headCount" min="2"  max="10"></label><br><br>
 	<label>모임 소개<input type="text" id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></label><br><br>
-<!-- 	<label>친구 초대<input type="text" id="mname" name="mname" placeholder="친구목록"></label><br> -->
+	
+	
+	<label>친구 목록</label>
+	<select>
+	<c:forEach var = "friendlist" items="${friendList }">
+	<option value="${ friend_userno}">${friendlist.userName }</option>
+	
+	</c:forEach>
+	</select>
 	
 	
 	<button>등록</button>

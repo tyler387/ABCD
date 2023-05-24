@@ -57,7 +57,7 @@
 <%--===================Basic Pagination Numbering=======================--%>
 <%-- ./list페이지로 이동할때 현재 페이지 정보를 쿼리스트링형태로 전송함 --%>
 <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-	<li><a href="./list?curPage=${i}"></a>${i}</li>	
+	<li><a href="./list?curPage=${i}">${i}</a></li>	
 </c:forEach>
 <%--====================================================================--%>
 

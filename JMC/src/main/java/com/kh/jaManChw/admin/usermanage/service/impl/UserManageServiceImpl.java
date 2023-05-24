@@ -59,7 +59,7 @@ public class UserManageServiceImpl implements UserManageService {
 		
 		//페이징 객체
 //		Paging paging = new Paging(totalCount, curPage, 30, 5); //listCount:30, pageCount:5
-		Paging paging = new Paging(totalCount, curPage);
+		Paging paging = new Paging(curPage, totalCount);
 		
 		return paging;
 	}

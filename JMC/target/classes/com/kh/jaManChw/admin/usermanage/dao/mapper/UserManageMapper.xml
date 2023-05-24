@@ -7,8 +7,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace ="com.kh.jaManChw.admin.usermanage.dao.face.UserManageDao">
 
-	<select id="selectUserMgPage" resultType="com.kh.jaManChw.dto.Users">
-		select * FROM users
+	<select id="selectCntAll"  resultType="int"  parameterType="int">
+		SELECT count(*) FROM USERS
+	</select>
+	
+	<select id="selectUserMgPage" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.util.Paging">
+		SELECT * FROM (
+		SELECT rownum rnum, B.* FROM (
+		SELECT
+ 			*
+		FROM users
+		ORDER BY userno DESC
+		) B
+		)users
+		WHERE rnum BETWEEN #{startno} AND #{endno}
+	</select>
+	
+	<!--  $ 따옴표 없는 거          # 따옴표 있는 거  '' 자동으로 삽입-->
+	<select id="selectUserMgFiltering" resultType="com.kh.jaManChw.dto.Users"  parameterType="map">
+	select * FROM users WHERE ${filter} = #{content}
 	</select>
 
 </mapper>

@@ -9,5 +9,8 @@
 <body>
 <h1>관리자 메인 페이지</h1>
 <hr>
+
+<a href="./board/list?boardOption=notice"><button>공지사항</button></a>
+<a href="./board/list?boardOption=event"><button>이벤트</button></a>
 </body>
 </html>

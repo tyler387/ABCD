@@ -40,14 +40,14 @@ public class Paging {
 		totalPage = totalCount / listCount;
 		if(totalCount%listCount != 0 ) totalPage ++;
 		
-		if(curPage >= totalPage) curPage = totalCount;
+		if(curPage >= totalPage) curPage = totalPage;
 		
 		startPage = ((curPage -1)/pageCount)*pageCount + 1;
 		endPage = startPage + pageCount -1;
 		
 		if(endPage > totalPage) endPage = totalPage;
 		
-		startno = (curPage-1)*listCount - 1;
+		startno = (curPage-1)*listCount + 1;
 		endno = curPage*listCount;
 	}
 	

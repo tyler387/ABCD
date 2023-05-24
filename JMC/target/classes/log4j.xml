@@ -32,6 +32,11 @@
 	<logger name="com.kh.jaManChw">
 		<level value="trace" />
 	</logger>
+	
+	<!-- aop.LogAspect (프로젝트 내부 로거 수행) -->	
+	<logger name="com.kh.jaManChw.aop">
+		<level value="info" />
+	</logger>
 
 	<!-- 관리자 메인페이지 -->
 	<logger name="com.kh.jaManChw.admin.main">

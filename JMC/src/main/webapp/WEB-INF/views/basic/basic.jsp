@@ -3,24 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp" />
-
 <h1>신규 개발 페이지</h1>
-<hr>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
 
-
+a<br>
+a<br>
+a<br>
+a<br>
+a<br>
+a<br>
+a<br>
+a<br>
+a<br>
+a<br>
 
 <c:import url="../layout/footer.jsp" />

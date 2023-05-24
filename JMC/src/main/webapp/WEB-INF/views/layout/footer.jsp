@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 
-<footer class="footer">
+<div class="footer">
 
 	<div class="company">
 		<h2>(주)JAMANCHO</h2>
@@ -16,7 +16,7 @@
 		<small>Copyright 2023. </small>
 		<small>All right reserved</small>
 	</div>
-</footer>
+</div>
 
 </body>
 </html>

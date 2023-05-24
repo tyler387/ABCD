@@ -52,6 +52,5 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping("/basic/basic")
-	public void test1() {}
+	
 }

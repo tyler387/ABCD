@@ -102,28 +102,28 @@ a {
 }
 
 .footer html, body {
-        height: 100%;
-        padding: 0px;
-        margin: 0px;
-      }
+   height: 100%;
+   padding: 0px;
+   margin: 0px;
+ }
 
-.footer      header {
-        height: 60px;
-        background-color: #e9eaed;
-      }
+.footer header {
+   height: 60px;
+   background-color: #e9eaed;
+}
 
-       #wrap {
-        min-height: calc(100% - 120px);
-      }
+ #wrap {
+  min-height: calc(100% - 120px);
+}
 
 
-      footer {
-        height: 300px;
-        background-color: black;
-        text-align: center;
-        padding-top: 70px;
-        color: white;
-      }
+ .footer {
+   height: 300px;
+   background-color: black;
+   text-align: center;
+   padding-top: 70px;
+   color: white;
+ }
 
 
 </style>
@@ -156,7 +156,3 @@ a {
 </div>
 </div>
 
-  </body>
-
-
-</html>

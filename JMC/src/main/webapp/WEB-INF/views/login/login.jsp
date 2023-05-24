@@ -63,19 +63,19 @@ input[type=text],[type=password]{
 
 <div class="container">
 <form action="" method="post">
-	
+
 	<div>
 		<h1 style="font-size: 68px;">Login</h1>
 	</div>
 	
 	<div class="input_box">
-		<label for="userid"></label>
-		<input type="text" name="userid" id="userid" placeholder=" ID"><br>
+		<label for="userId"></label>
+		<input type="text" name="userId" id="userId" placeholder=" ID"><br>
 	</div>
 
 	<div class="input_box">
-		<label for="userpw"></label>
-		<input type="password" name="userpw" id="userpw"placeholder=" PASSWORD"><br>
+		<label for="userPw"></label>
+		<input type="password" name="userPw" id="userPw"placeholder=" PASSWORD"><br>
 	</div>
 	
 	<div class="input_box">

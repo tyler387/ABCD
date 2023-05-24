@@ -13,25 +13,25 @@ public interface UsersService {
 	 */
 	public boolean login(Users users);
 
-//	/**
-//	 * 
-//	 * @param code
-//	 * @return
-//	 */
-//	public String getAccessToken(String code);
-//
-//	/**
-//	 * 
-//	 * @param access_Token
-//	 * @return
-//	 */
-//	public HashMap<String, Object> getUserInfo(String access_Token);
-//
-//	/**
-//	 * 
-//	 * @param attribute
-//	 */
-//	public void kakaoLogout(String attribute);
+	/**
+	 * 
+	 * @param code
+	 * @return
+	 */
+	public String getAccessToken(String code);
+
+	/**
+	 * 
+	 * @param access_Token
+	 * @return
+	 */
+	public HashMap<String, Object> getUserInfo(String access_Token);
+
+	/**
+	 * 
+	 * @param attribute
+	 */
+	public void kakaoLogout(String attribute);
 	
 
 	

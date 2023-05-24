@@ -134,18 +134,18 @@ a {
 <div id="header">
 <header>
 <c:if test="${userId eq null }">
-	<a href="#">로그인</a>
+	<a href="/login/login">로그인</a>
 </c:if>	
 <c:if test="${userId ne null }">
 	<a href="#">로그아웃</a>
-</c:if>
 	<a href="#">마이페이지</a>
 	<a href="#">알람</a>
+</c:if>
 </header>
 
 <div id="menu">
   <ul class="main1">
-    <li style="border: none;"><a href="#">JAMANCHO</a>
+    <li style="border: none;"><a href="/login/main">JAMANCHO</a>
     </li>
     <li><a href="#">회사소개</a></li>
     <li style="border: none;"><a href="#">모임</a>

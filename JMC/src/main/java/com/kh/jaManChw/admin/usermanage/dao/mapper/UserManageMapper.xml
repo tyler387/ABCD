@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace ="com.kh.jaManChw.admin.usermanage.dao.face.UserManageDao">
 
-	<select id="selectCntAll"  resultType="int"  parameterType="int">
+	<select id="selectCntAll"  resultType="int"  >
 		SELECT count(*) FROM USERS
 	</select>
 	

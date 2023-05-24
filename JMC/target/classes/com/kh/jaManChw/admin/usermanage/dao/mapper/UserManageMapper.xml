@@ -6,4 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace ="com.kh.jaManChw.admin.usermanage.dao.face.UserManageDao">
 
+	<select id="selectUserMgPage" resultType="com.kh.jaManChw.dto.Users">
+		select * FROM users
+	</select>
+
 </mapper>

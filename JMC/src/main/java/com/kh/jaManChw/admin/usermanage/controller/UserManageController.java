@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.jaManChw.admin.usermanage.service.face.UserManageService;
@@ -21,12 +22,21 @@ public class UserManageController {
 	@Autowired UserManageService userManageService;
 	
 	@RequestMapping("/mg")
-	public void user() {
-		logger.info("abc");
+	public void user(Model model) {
+		logger.info("user list");
 		
 		List<Users> users = userManageService.UserMgPage();
 		logger.info("{}", users);
+		model.addAttribute("users", users);
 	}
 	
+	@RequestMapping("/filter")
+	public void userfilter(Model model, Users user) {
+		logger.info("user filter");
+		logger.info("{}", user);
+		List<Users> userfilter = userManageService.UserMgPage();
+		logger.info("{}", userfilter);
+		model.addAttribute("usersfilter", userfilter);
+	}
 	
 }

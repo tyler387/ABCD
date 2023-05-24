@@ -8,8 +8,10 @@ public class Meeting {
 	private int userno;
 	private String mname;
 	private String loc;
-	private Date meetingDate;
-	private Date meetiongTime;
+	private String loc1;
+	private String loc2;
+	private String loc3;
+	private String meetingDate;
 	private double fee;
 	private String introduce;
 	private int headCount;
@@ -17,26 +19,11 @@ public class Meeting {
 	
 	public Meeting() {}
 
-	public Meeting(int meetingno, int userno, String mname, String loc, Date meetingDate, Date meetiongTime, double fee,
-			String introduce, int headCount, String status) {
-		super();
-		this.meetingno = meetingno;
-		this.userno = userno;
-		this.mname = mname;
-		this.loc = loc;
-		this.meetingDate = meetingDate;
-		this.meetiongTime = meetiongTime;
-		this.fee = fee;
-		this.introduce = introduce;
-		this.headCount = headCount;
-		this.status = status;
-	}
-
 	@Override
 	public String toString() {
 		return "Meeting [meetingno=" + meetingno + ", userno=" + userno + ", mname=" + mname + ", loc=" + loc
-				+ ", meetingDate=" + meetingDate + ", meetiongTime=" + meetiongTime + ", fee=" + fee + ", introduce="
-				+ introduce + ", headCount=" + headCount + ", status=" + status + "]";
+				+ ", loc1=" + loc1 + ", loc2=" + loc2 + ", loc3=" + loc3 + ", meetingDate=" + meetingDate + ", fee="
+				+ fee + ", introduce=" + introduce + ", headCount=" + headCount + ", status=" + status + "]";
 	}
 
 	public int getMeetingno() {
@@ -71,20 +58,36 @@ public class Meeting {
 		this.loc = loc;
 	}
 
-	public Date getMeetingDate() {
+	public String getLoc1() {
+		return loc1;
+	}
+
+	public void setLoc1(String loc1) {
+		this.loc1 = loc1;
+	}
+
+	public String getLoc2() {
+		return loc2;
+	}
+
+	public void setLoc2(String loc2) {
+		this.loc2 = loc2;
+	}
+
+	public String getLoc3() {
+		return loc3;
+	}
+
+	public void setLoc3(String loc3) {
+		this.loc3 = loc3;
+	}
+
+	public String getMeetingDate() {
 		return meetingDate;
 	}
 
-	public void setMeetingDate(Date meetingDate) {
+	public void setMeetingDate(String meetingDate) {
 		this.meetingDate = meetingDate;
-	}
-
-	public Date getMeetiongTime() {
-		return meetiongTime;
-	}
-
-	public void setMeetiongTime(Date meetiongTime) {
-		this.meetiongTime = meetiongTime;
 	}
 
 	public double getFee() {
@@ -118,5 +121,23 @@ public class Meeting {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public Meeting(int meetingno, int userno, String mname, String loc, String loc1, String loc2, String loc3,
+			String meetingDate, double fee, String introduce, int headCount, String status) {
+		super();
+		this.meetingno = meetingno;
+		this.userno = userno;
+		this.mname = mname;
+		this.loc = loc;
+		this.loc1 = loc1;
+		this.loc2 = loc2;
+		this.loc3 = loc3;
+		this.meetingDate = meetingDate;
+		this.fee = fee;
+		this.introduce = introduce;
+		this.headCount = headCount;
+		this.status = status;
+	}
+
 	
 }

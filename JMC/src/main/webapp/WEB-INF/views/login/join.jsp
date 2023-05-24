@@ -98,13 +98,13 @@ input{
 </style>
 </head>
 <body>
-<form action="" method="post">
+<form action="/login/join" method="post">
 <h1 style="font-size:63px;">JAMANCHO</h1> 
 
 <div class="input1">
-	<label for="userid">아이디*</label>
+	<label for="userId">아이디*</label>
 	<div class="input3">
-		<input type="text" name="userid" id="userid">
+		<input type="text" name="userId" id="userId">
 		<button class="btn1">중복확인</button>
 	</div>
 	
@@ -112,25 +112,25 @@ input{
 
 
 <div class="input1">
-		<label for="userpw">패스워드*</label>
+		<label for="userPw">패스워드*</label>
 	<div class="input2">
-		<input type="password" name="userpw" id="userpw">
+		<input type="password" name="userPw" id="userPw">
 	</div>
 </div>
 
 
 <div class="input1">
-	<label for="userpw_chk">패스워드 확인*</label>
+	<label for="userPw_chk">패스워드 확인*</label>
 	<div class="input2">
-		<input type="password" name="userpw_chk" id="userpw_chk">
+		<input type="password" name="userPw_chk" id="userPw_chk">
 	</div>
 </div>
 
 
 <div class="input1">
-	<label for="username">이름*</label>
+	<label for="userName">이름*</label>
 	<div class="input2">
-		<input type="text" name="userpw_chk" id="userpw_chk">
+		<input type="text" name="userName" id="userName">
 	</div>
 </div>
 
@@ -138,7 +138,7 @@ input{
 <div class="input1">
 	<label for="birth">생년월일*</label>
 	<div class="input">
-		<input type="text" name="birth" id="birth">
+		<input type="date" name="birth" id="birth">
 	</div>	
 </div>
 

@@ -4,4 +4,22 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kh.jaManChw.admin.boardmanage.dao.face.AdminBoardDao">
+
+	<select id="selectAllCnt" resultType="int" parameterType="String">
+		SELECT count(*) FROM admin_board
+		WHERE ab_option = #{boardOption}
+	</select>
+
+	<select id="selectAdminBoardAllByBoardOption" resultType="map" parameterType="map">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+		        SELECT * FROM admin_board
+		        WHERE ab_option = #{boardOption}
+		        ORDER BY admin_boardno
+		    )B
+		)
+		WHERE 1= 1
+		    AND rnum BETWEEN ${paging.startno} AND ${paging.endno}
+	</select>
+
 </mapper>

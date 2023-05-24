@@ -55,4 +55,4 @@
 </tr>
 </c:forEach>
 </table>
-<c:import url="../../layout/paging.jsp" />
+<c:import url="./paging.jsp" />

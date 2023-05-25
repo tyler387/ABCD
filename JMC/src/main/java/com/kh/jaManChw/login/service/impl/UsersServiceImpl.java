@@ -27,6 +27,7 @@ public class UsersServiceImpl implements UsersService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired UsersDao usersDao;
 
+	// 로그인 유무
 	@Override
 	public boolean login(Users users) {
 		
@@ -42,6 +43,7 @@ public class UsersServiceImpl implements UsersService {
 		return false;
 	}
 
+	// accessToken 가져오기
 	@Override
 	public String getAccessToken(String code) {
 		String access_Token = "";
@@ -103,6 +105,7 @@ public class UsersServiceImpl implements UsersService {
         return access_Token;
 	}
 
+	// 가져온 accessToken으로 유저 정보 가져오기
 	@Override
 	public HashMap<String, Object> getUserInfo(String access_Token) {
 	//   요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
@@ -131,7 +134,7 @@ public class UsersServiceImpl implements UsersService {
 		        logger.info("response body : {}",result);
 		        
 		        
-		        
+		        // 아래 두 코드는 이제 사용 안하는 코드 - 정적메소드로 처리해야함
 		        //JsonParser parser = new JsonParser();
 		        //JsonElement element = parser.parse(result);
 		        JsonElement element = JsonParser.parseString(result);
@@ -151,7 +154,7 @@ public class UsersServiceImpl implements UsersService {
 		    
 		    return userInfo;
 	}
-
+	// 카카오 로그인 로그아웃 하기
 	@Override
 	public void kakaoLogout(String access_Token) {
 		String reqURL = "https://kapi.kakao.com/v1/user/logout";

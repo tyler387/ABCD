@@ -55,8 +55,10 @@ public class KakaoController {
         session.removeAttribute("access_Token");
         session.removeAttribute("userId");
         
-        logger.info("로그아웃");
-        return "/login/main";
+        // 세션 삭제
+     	session.invalidate();
+        logger.info("logout() - 로그아웃 성공");
+        return "redirect:/login/main";
     }
 
 }

@@ -137,7 +137,7 @@ a {
 	<a href="/login/login">로그인</a>
 </c:if>	
 <c:if test="${userId ne null }">
-	<a href="#">로그아웃</a>
+	<a href="/login/logout">로그아웃</a>
 	<a href="#">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>

@@ -57,17 +57,14 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("/logout")
-	public String userLogout(HttpSession session) {
-		
-		logger.info("userLogout() - 로그아웃 성공");
-		
-		// 세션 삭제
-		session.invalidate();
-		
-		// 메인페이지로 리다이렉트
-		return "redirect:/login/main";
-	}
+//	@RequestMapping("/login/logout")
+//	public String userLogout(HttpSession session) {
+//		logger.info("userLogout() - 로그아웃 성공");
+//		// 세션 삭제
+//		session.invalidate();
+//		// 메인페이지로 리다이렉트
+//		return "redirect:/login/main";
+//	}
 	
 	
 	// 회원가입 페이지 이동

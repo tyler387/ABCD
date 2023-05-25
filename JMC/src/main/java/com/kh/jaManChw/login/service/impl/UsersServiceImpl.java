@@ -34,13 +34,18 @@ public class UsersServiceImpl implements UsersService {
 		// 파라미터 값을 가져와 dao에서 일치하는 행을 확인해야함.
 		// 매개변수 다시 확인해보기
 		int res = usersDao.selectCntByUserIdPw(users);
-
+		
+		String role = usersDao.selectByuserRole(users);
+		
 		if(res>0) {
 			logger.info("login() - 로그인 성공");
+			
 			return true;
-		}		
-		logger.info("login() - 로그인 실패");
-		return false;
+		}else {		
+			logger.info("login() - 로그인 실패");
+			
+			return false;
+		}
 	}
 
 	// accessToken 가져오기
@@ -179,6 +184,23 @@ public class UsersServiceImpl implements UsersService {
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+	}
+
+	@Override
+	public boolean IdCheck(Users users) {
+		logger.info("join:{}",users);
+		
+		int res = usersDao.selectCntByUserId(users);
+		
+		if(res>0) {
+			logger.info("join() - 중복아이디있음");
+			return false;
+		}else {
+			logger.info("join() - 중복아이디 없음");
+			usersDao.insertUsers(users);
+			return true;
+		}
+		
 	}
 
 }

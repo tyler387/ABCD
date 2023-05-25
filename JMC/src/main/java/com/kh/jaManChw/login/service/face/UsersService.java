@@ -32,6 +32,15 @@ public interface UsersService {
 	 * @param attribute
 	 */
 	public void kakaoLogout(String attribute);
+
+	/**
+	 * 신규 회원가입
+	 * @param users
+	 * @return 
+	 */
+	public boolean IdCheck(Users users);
+
+
 	
 
 	

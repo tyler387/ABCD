@@ -32,7 +32,7 @@ public class KakaoController {
        
         // 해쉬맵을 사용해서 유저의 정보를 가져옴 => access_Token 이용해서 가져올 수 있다.
         // 실제 구현할 때는 
-        // 닉네임(profile_nickname), 프로필사진(profile_image), 이메일(	account_email),성별(gender), 연령대(age_range) 가져와야함.
+        // 이메일(account_email) 가져와야함.
         HashMap<String, Object> userInfo = usersService.getUserInfo(access_Token);
         
         logger.info("loginController :{}",userInfo);
@@ -44,7 +44,7 @@ public class KakaoController {
             session.setAttribute("userId", userInfo.get("email"));
             session.setAttribute("access_Token", access_Token);
         }
-        return "/login/main";
+        return "redirect:/login/main";
     }
 
 	// 발급받은 토큰을 만료시켜 로그아웃 시킨다

@@ -113,7 +113,7 @@ public class Users {
 		return gender;
 	}
 
-	public void setGentder(String gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

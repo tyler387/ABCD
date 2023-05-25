@@ -184,10 +184,6 @@ input{
 </div>
 
 
-
-
-
-
 <div class="input1">
 	<label for="addr1">주소*</label> 
 	<div class="input3">

@@ -24,7 +24,7 @@ public class ChatController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping("/chat/chatroom")
-	public String chatRoom(String roomid,Model model) {
+	public String chatRoom(String roomid,Model model, HttpSession session) {
 		// roomid가 없을 경우 list로 redirect 해야한다
 		if(roomid==null) {
 			return "redirect:/chat/chatroomlist";
@@ -38,10 +38,18 @@ public class ChatController {
 	
 	@RequestMapping("/chat/chatroomlist")
 	public String chatRoomList(Model model, HttpSession session) {
+		// 처음 버튼을 눌렀을때 보여줄 창
+		// 로그인 상태가 아니라면 ? 로그인 후 이용 가능하다
+		logger.info("session{}",session.getAttribute("userId"));
+		if(session.getAttribute("userId")==null) {
+			logger.info("session이 null인가",session.getAttribute("userId"));
+			return "/chat/chatroomlist";
+		}
+		
 		
 		List<ChatRoom> list = chatService.getChatRoomAll(session);
 		logger.info("{}",list);
-		model.addAttribute(list);
+		model.addAttribute("list", list);
 		return "/chat/chatroomlist";
 		
 	}

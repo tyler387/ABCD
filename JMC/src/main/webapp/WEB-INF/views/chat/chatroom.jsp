@@ -12,28 +12,28 @@
 	var socket
 	var userid = "${sessionScope.userId}"
 $(function(){
-	var roomid = "${roomid}"
-	console.log(roomid)
+	if(userid==null){
+		alert("로그인 후 이용 가능")
+		location.href="/login/login"
+	}
 	
-	console.log("${sessionScope.userId}")
-	socket = new WebSocket("ws://localhost:8888/websocket/"+roomid)
-	socket.onmessage = function(event) {
-		console.log(event.data)
-		  $("#chat").append(event.data+"<br>")
-		};
+	connect();
 })
 
 	function test(){
 	 
 	var sendtest = $("#chatmessage").val()
 	console.log(sendtest)
-	if(sendtest==""){
-		alert("채팅내용을 입력하세요")
-		return false;
-	}else{
-	socket.send(userid +": " + sendtest)
-	}
+	socket.send(sendtest)
+
 }
+	function connect(){
+		var roomid = "${roomid}"
+			socket = new WebSocket("ws://localhost:8888/websocket/"+roomid)
+			socket.onmessage = function(event) {
+		  $("#chat").append(event.data+"<br>")
+			};
+	}
 
 </script>
 </head>
@@ -42,6 +42,7 @@ $(function(){
 <div>
 <input type="text" id="chatmessage" name="chatmessage">
 <button id="send" onclick="test()">전송</button>
+
 </div>
 </body>
 </html>

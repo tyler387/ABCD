@@ -122,7 +122,7 @@ input{
 	<label for="userId">아이디*</label>
 	<div class="input3">
 		<input type="text" name="userId" id="userId">
-		<button class="btn1">중복확인</button>
+		<button class="btn1">중복확인</button>		
 	</div>
 	
 </div>
@@ -180,7 +180,7 @@ input{
 		</select>
 		<br>
 		<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-		<button class="btn1" id="email_checkbtn">인증</button>
+		<button class="btn1" id="email_checkbtn" onclick="email_checkbtn">본인인증</button>
 	</div>	
 </div>
 
@@ -204,7 +204,7 @@ input{
 	</div>	
 </div>
 
-<button class="btn">가입하기</button><br>
+<a href="/login/login"><button class="btn">가입하기</button></a><br>
 
 </form>
 
@@ -268,12 +268,12 @@ input{
 		const checkInput = $('.email_checknumber') // 인증번호 입력하는곳 
 		
 		$.ajax({
-			type : 'get',
-			url : '<c:url value ="/login/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+			type :'get',
+			url :'<c:url value ="/login/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
 			success : function (data) {
 				console.log("data : " +  data);
 				checkInput.attr('disabled',false);
-				code =data;
+				code=data;
 				alert('인증번호가 전송되었습니다.')
 			}			
 		}); // end ajax
@@ -281,22 +281,23 @@ input{
 
 	// 인증번호 비교 
 	// blur -> focus가 벗어나는 경우 발생
-	$('#email_checkbtn').blur(function () {
-		const inputCode = $(this).val();
-		const $resultMsg = $('#mail-check-warn');
+// 	$('#email_checkbtn').blur(function () {
+// 		const inputCode = $(this).val();
+// 		const $resultMsg = $('#mail-check-warn');
 		
-		if(inputCode === code){
-			$resultMsg.html('인증번호가 일치합니다.');
-			$resultMsg.css('color','green');
-			$('#mail-Check-Btn').attr('disabled',true);
-			$('#userEamil1').attr('readonly',true);
-			$('#userEamil2').attr('readonly',true);
-			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-	         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
-		}else{
-			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
-			$resultMsg.css('color','red');
-		}
+// 		if(inputCode === code){
+// 			$resultMsg.html('인증번호가 일치합니다.');
+// 			$resultMsg.css('color','green');
+// 			$('#mail-Check-Btn').attr('disabled',true);
+// 			$('#userEamil1').attr('readonly',true);
+// 			$('#userEamil2').attr('readonly',true);
+// 			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+// 	         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+// 		}else{
+// 			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+// 			$resultMsg.css('color','red');
+// 		}
+// 	}
 </script>
 
 <c:import url="../layout/footer.jsp" />

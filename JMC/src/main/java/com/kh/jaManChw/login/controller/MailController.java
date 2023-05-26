@@ -1,7 +1,6 @@
 package com.kh.jaManChw.login.controller;
 
 
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ public class MailController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired MailService mailService;
+	
 
 	// 이메일 인증 버튼 클릭
 	@GetMapping("/login/mailCheck")
@@ -26,10 +26,4 @@ public class MailController {
 
 		return mailService.emailAuth(email);
 	} // emailCheck() end
-	
-	
-	
-	
-	
-
 } // MailController() end

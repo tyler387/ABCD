@@ -1,6 +1,7 @@
 package com.kh.jaManChw.login.service.face;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.kh.jaManChw.dto.Users;
 
@@ -39,6 +40,14 @@ public interface UsersService {
 	 * @return 
 	 */
 	public boolean IdCheck(Users users);
+
+	/**
+	 * 유저 정보 가져오기
+	 * @param users
+	 */
+	public Users getuserInfo(Users users);
+
+
 
 
 	

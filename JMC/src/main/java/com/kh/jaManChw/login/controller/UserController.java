@@ -37,7 +37,9 @@ public class UserController {
 		logger.info("{}", users);
 
 		// 로그인 인증
-		boolean isLogin = usersService.login(users);		
+		boolean isLogin = usersService.login(users);	
+		
+		Users info = usersService.getuserInfo(users);
 		
 
 		if (isLogin) {
@@ -45,9 +47,12 @@ public class UserController {
 			
 			// 세션에 파라미터 값 저장
 			session.setAttribute("login", isLogin);
-			session.setAttribute("userno", users.getUserno());
-			session.setAttribute("userId", usersService.getuserInfo(users));
-			session.setAttribute("role", users.getRole());
+			session.setAttribute("userno", info.getUserno());
+			session.setAttribute("userId", info.getUserId());
+			session.setAttribute("role", info.getRole());
+			
+			logger.info("userno : {}",info.getUserno());
+			logger.info("userrole : {}",info.getRole());
 
 			// 메인 페이지로 리다이렉트
 			return "redirect:/login/main";

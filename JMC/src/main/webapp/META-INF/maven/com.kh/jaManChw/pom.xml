@@ -95,7 +95,25 @@
 		</dependency>
 		<!-- jacson라이브러리가 3개가 추가됨,annotations, core, databind -->
 	<!-- ******************************************************************************************** -->
-		
+
+	<!-- **************************JSON으로 마샬링하기 위해 추가한 라이브러리************************ -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.15.0</version>
+		</dependency>
+		<!-- jackson라이브러리가 3개가 추가됨,annotations, core, databind -->
+	<!-- **************************JSON으로 마샬링하기 위해 추가한 라이브러리************************ -->
+	
+	<!-- JsonObject 사용하려고 추가한 JSON.Simple -->
+	<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+			
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

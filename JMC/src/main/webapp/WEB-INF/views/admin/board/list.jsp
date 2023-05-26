@@ -8,6 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:choose>
+	<c:when test="${boardOption eq 'notice'}">
+	<h1>공지사항</h1>
+	</c:when>
+	<c:when test="${boardOption eq 'event'}">
+	<h1>이벤트</h1>
+	</c:when>
+</c:choose>
+<hr>
+mt : ${boardOption}
 <div>
 <table>
 <tr>
@@ -31,12 +41,14 @@
 </tr>	
 </c:forEach>
 
-mt : ${boardOption}
-
 </table>
 
 <c:import url="./paging.jsp"/>
 
+</div>
+
+<div>
+<a href="./noticeWrite"><button>글작성</button></a>
 </div>
 </body>
 </html>

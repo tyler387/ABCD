@@ -3,6 +3,8 @@ package com.kh.jaManChw.admin.boardmanage.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.jaManChw.dto.AdminBoard;
+import com.kh.jaManChw.dto.AdminBoardFile;
 import com.kh.jaManChw.util.Paging;
 
 public interface AdminBoardDao {
@@ -22,6 +24,27 @@ public interface AdminBoardDao {
 	 * @return 조회한 게시판의 전체 게시글
 	 */
 	public List<Map<String, String>> selectAdminBoardAllByBoardOption(Map<String, Object> selectMap);
+
+	/**
+	 * adminBoardno를 생성하는 메서드
+	 * 
+	 * @return adminBoardno
+	 */
+	public int selectCreateAdminBoardno();
+
+	/**
+	 * 관리자 게시글 작성시 첨부한 파일을 DB에 저장한다
+	 * 
+	 * @param adminBoardFile - 첨부 파일 정보
+	 */
+	public void insertAdminBoardFile(AdminBoardFile adminBoardFile);
+
+	/**
+	 * 관리자 게시글 작성시 폼필드에 대한 정보를 DB에 저장한다
+	 * 
+	 * @param adminBoardParam - 폼필드 정보
+	 */
+	public void insertAdminBoard(AdminBoard adminBoardParam);
 
 
 

@@ -4,11 +4,22 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 
+
 <c:import url="../layout/header.jsp" />
 
 
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+// 	if(document.getElementById("smoke").checked){
+// 		document.getElementById("smokehidden").disabled = true;
+// 	}
+	
+// 	if(document.getElementById("friend").checked){
+// 		document.getElementById("friendhidden").disabled = true;
+// 	}
+	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -110,15 +121,33 @@
 	</select>
 	
 	
-	<button>등록</button>
-	<button>취소</button>    
+   
 	
 	<h4>선호하는 친구 타입(선택)</h4>
 	
-		
+	성별<br>
+	<label>남자<input type="radio" value="man" name="gender"></label>
+	<label>여자<input type="radio" value="woman" name="gender"></label>			
+	<label>무관<input type="radio" value="none" name="gender"></label><br><br>
 	
+	나이<br>
+	<input type="number" id="minage" name="minage" min="20" max="99">
+	~
+	<input type="number" id="maxage" name="maxage" min="20" max="99"><br><br>
+	
+	
+	추가 태그<br>
+	
+	<label>흡연여부<input type="checkbox" id="smoke" name="smoke" value="yes"></label>
+<!-- 				<input type="hidden" id="smokehidden" name="smoke" value="no"> -->
+	<label>동반자여부<input type="checkbox" id="friend" name="friend" value="yes"></label><br><br>
+<!-- 				<input type="hidden" id="friendhidden" name="friend" value="no"> -->
+	
+	
+	<button>등록</button>
 	
 	</form>		
+	<a href="/mainpage/page"><button>취소</button></a>	
 	
 	</div>
 

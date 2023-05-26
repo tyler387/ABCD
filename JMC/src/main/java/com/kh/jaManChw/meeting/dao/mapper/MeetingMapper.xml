@@ -7,10 +7,24 @@
 <mapper namespace = "com.kh.jaManChw.meeting.dao.face.MeetingDao">
 
 
+<select id="selectMeetingno" resultType = "int">
+	
+	select meeting_seq.nextval from dual
+
+</select>
+
+
 <insert id="insertMeeting" parameterType="com.kh.jaManChw.dto.Meeting">
 
-	INSERT INTO MEETING VALUES( meeting_seq.nextval , 1 , #{mname} , #{loc}, #{loc1}, #{loc2}, #{loc3} , #{meetingDate} , #{fee}, 
+	INSERT INTO MEETING VALUES( #{meetingno} , #{userno} , #{mname} , #{loc}, #{loc1}, #{loc2}, #{loc3} , #{meetingDate} , #{fee}, 
 	#{introduce}, #{headCount}, 'active' )
+
+</insert>
+
+
+<insert id="insertPreference" parameterType="com.kh.jaManChw.dto.Meeting">
+
+	INSERT INTO PREFERENCE VALUES( preference_seq.nextval , #{meetingno}, #{gender}, #{minage}, #{maxage} , #{smoke} , #{friend} )
 
 </insert>
 
@@ -24,7 +38,66 @@
 
 </select>
 
+<select id="selectUserNo" resultType="int" parameterType="int">
+	
+	SELECT userno from users 
+	where userno = #{userno} 
+	
 
+</select> 
+
+
+<select id="selectMeetinglistAll" resultType="com.kh.jaManChw.dto.Meeting">
+	
+	SELECT * FROM MEETING
+
+</select>
+
+<select id="selectMeeting" resultType="com.kh.jaManChw.dto.Meeting" parameterType="com.kh.jaManChw.dto.Meeting">
+
+	SELECT * FROM MEETING 
+	WHERE meetingno = #{meetingno} 
+
+</select>
+
+<insert id="insertReportMeeting" parameterType="com.kh.jaManChw.dto.ReportMeeting">
+
+	INSERT INTO report_meeting values(report_meeting_seq.nextval , #{meetingno} , 1 , #{rmTitle}, #{rmContent}, 'processed' , #{rmOption}, default )
+
+</insert>
+
+
+<select id="selectUserNickAll" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Meeting">
+
+	select *
+    from users inner join applicant 
+    on applicant.userno = users.userno 
+    where applicant.meetingno = #{meetingno}
+
+	
+</select>
+
+
+<select id="selectMeetingApplicant" resultType="com.kh.jaManChw.dto.Applicant" parameterType="com.kh.jaManChw.dto.Applicant">
+
+	select * from Applicant 
+	where userno = #{userno}
+
+</select>
+
+<select id = "selectMeetingApplicantUser" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
+	
+	select * from users 
+	where userno = #{userno} 
+	
+
+</select>
+
+<insert id = "insertJoinMeeting" parameterType="com.kh.jaManChw.dto.Applicant">
+	
+	insert into applicant values(24, 9, #{applicantContent}, 'yes' , 1)
+	
+</insert>
 
 
 </mapper>

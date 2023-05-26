@@ -18,7 +18,7 @@
   	WHERE USER_ID=#{userId} 
   </select>
   
-  <select id="selectByuserRole" resultType="String" parameterType="com.kh.jaManChw.dto.Users">
+  <select id="selectroleByuseridpw" resultType="String" parameterType="com.kh.jaManChw.dto.Users">
   	SELECT ROLE
   	FROM USERS
   	WHERE USER_ID=#{userId} AND USER_PW=#{userPw}

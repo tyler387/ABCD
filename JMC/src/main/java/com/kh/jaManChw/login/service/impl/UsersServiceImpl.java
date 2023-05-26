@@ -42,7 +42,7 @@ public class UsersServiceImpl implements UsersService {
 		// 매개변수 다시 확인해보기
 		int res = usersDao.selectCntByUserIdPw(users);
 		
-		String role = usersDao.selectByuserRole(users);
+		String role = usersDao.selectroleByuseridpw(users);
 		
 		if(res>0) {
 			logger.info("login() - 로그인 성공");

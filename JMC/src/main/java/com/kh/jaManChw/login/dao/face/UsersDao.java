@@ -18,7 +18,7 @@ public interface UsersDao {
 	 * @param users
 	 * @return role
 	 */
-	public String selectByuserRole(Users users);
+	public String selectroleByuseridpw(Users users);
 
 	/**
 	 * 중복 아이디 검사
@@ -33,7 +33,7 @@ public interface UsersDao {
 	public void insertUsers(Users users);
 
 	/**
-	 * 유저 정보 조회
+	 * 로그인한 유저 아이디로 유저 정보 조회
 	 * @return usersinfo
 	 */
 	public Users selectuserByUserId(Users users);

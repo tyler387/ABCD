@@ -24,14 +24,6 @@ form{
     font-size: 23px;
 }
 
-.input1,.input2{
-	padding-bottom: 15px;
-}
-
-input{
-	width: 350px;
-	height: 30px;
-}
 
 .btn {
 	border: 2px solid #333 ;
@@ -59,10 +51,7 @@ input{
 	 margin: 0 auto; 
 
 } 
-.input3{
-	padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
-}
+
 .btn1{
 	padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
@@ -108,21 +97,25 @@ input{
 }
 
 
-
+.msg{
+	color : red;
+	font-size: 5px;
+}
 
 
 
 </style>
 </head>
 <body>
-<form action="/login/join" method="post">
+<form action="/login/join" method="post"> 
 <h1 style="font-size:63px;">JAMANCHO</h1> 
 
-<div class="input1">
+<div class="input_id">
 	<label for="userId">아이디*</label>
-	<div class="input3">
+	<div class="input">
 		<input type="text" name="userId" id="userId">
-		<button class="btn1">중복확인</button>		
+		<button class="btn1" id="idchk" onclick="idchk">중복확인</button>
+		<span id="id_msg"></span>	
 	</div>
 	
 </div>
@@ -132,6 +125,7 @@ input{
 		<label for="userPw">패스워드*</label>
 	<div class="input2">
 		<input type="password" name="userPw" id="userPw">
+
 	</div>
 </div>
 
@@ -210,7 +204,10 @@ input{
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+<script type="text/javascript">
+	
+
+			
 
 	// 주소 api
 	function findAddress() {
@@ -262,42 +259,44 @@ input{
 	}
 
 	// 이메일 인증
-	$('#email_checkbtn').click(function() {
-		const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
-		console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
-		const checkInput = $('.email_checknumber') // 인증번호 입력하는곳 
-		
-		$.ajax({
-			type :'get',
-			url :'<c:url value ="/login/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-			success : function (data) {
-				console.log("data : " +  data);
-				checkInput.attr('disabled',false);
-				code=data;
-				alert('인증번호가 전송되었습니다.')
-			}			
-		}); // end ajax
-	}); // end send eamil
+		$('#email_checkbtn').click(function() {
+			const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
+			console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
+			const checkInput = $('.email_checknumber') // 인증번호 입력하는곳 
+			
+			$.ajax({
+				type :'GET',
+				url :'<c:url value ="/login/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+				success : function (data) {
+					console.log("data : " +  data);
+					checkInput.attr('disabled',false);
+					code=data;
+					alert('인증번호가 전송되었습니다.')
+				}			
+			}); // end ajax
+		}); // end send eamil
 
 	// 인증번호 비교 
-	// blur -> focus가 벗어나는 경우 발생
-// 	$('#email_checkbtn').blur(function () {
-// 		const inputCode = $(this).val();
-// 		const $resultMsg = $('#mail-check-warn');
-		
-// 		if(inputCode === code){
-// 			$resultMsg.html('인증번호가 일치합니다.');
-// 			$resultMsg.css('color','green');
-// 			$('#mail-Check-Btn').attr('disabled',true);
-// 			$('#userEamil1').attr('readonly',true);
-// 			$('#userEamil2').attr('readonly',true);
-// 			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-// 	         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
-// 		}else{
-// 			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
-// 			$resultMsg.css('color','red');
-// 		}
-// 	}
+// 	// blur -> focus가 벗어나는 경우 발생
+		$('#email_checkbtn').blur(function () {
+			const inputCode = $(this).val();
+			const $resultMsg = $('#mail-check-warn');
+			
+			if(inputCode === code){
+				$resultMsg.html('인증번호가 일치합니다.');
+				$resultMsg.css('color','green');
+				$('#mail-Check-Btn').attr('disabled',true);
+				$('#userEamil1').attr('readonly',true);
+				$('#userEamil2').attr('readonly',true);
+				$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+		         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+			}else{
+				$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+				$resultMsg.css('color','red');
+			}
+		})
+	
+
 </script>
 
 <c:import url="../layout/footer.jsp" />

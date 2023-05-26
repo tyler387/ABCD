@@ -22,13 +22,11 @@ public class UserController {
 	UsersService usersService;
 
 	@RequestMapping("/login/main")
-	public void mainPage() {
-	}
+	public void mainPage() {}
 
 	// 로그인 페이지 이동
 	@GetMapping("/login/login")
-	public void loginPage() {
-	}
+	public void loginPage() {}
 
 	// 로그인 - true or false
 	@PostMapping("/login/login")
@@ -57,8 +55,8 @@ public class UserController {
 
 			// 로그인실패시 로그인 페이지로 리다이렉트
 			return "redirect:/login/login";
-		}
-	}
+		} // if(isLogin)문 end
+	} // userlogin() end
 
 //	@RequestMapping("/login/logout")
 //	public String userLogout(HttpSession session) {
@@ -71,8 +69,7 @@ public class UserController {
 
 	// 회원가입 페이지 이동
 	@GetMapping("/login/join")
-	public void joinPage() {
-	}
+	public void joinPage() {}
 
 	// 홈페이지 내에서 회원가입, 완료 후 메인페이지로이동
 	@PostMapping("/login/join")
@@ -88,7 +85,8 @@ public class UserController {
 		} else {
 			logger.info("회원가입 실패");
 			return "redirect:/login/join";
-		}
+		} // if(joinResult)문 end
 	
-	}
-}
+	} // userJoin() end
+	
+} //userController() end 

@@ -153,7 +153,7 @@ a {
     <li><a href="#">회사소개</a></li>
     <li style="border: none;"><a href="#">모임</a>
        <ul class="main2">
-        <li><a href="#">모임 등록</a></li>
+        <li><a href="/meeting/form">모임 등록</a></li>
         <li><a href="#">모임 신청</a></li>
       </ul>
     </li>

@@ -173,7 +173,11 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 			adminBoardDao.insertAdminBoardFile(new AdminBoardFile(0, adminBoardParam.getAdminBoardno(), file.getOriginalFilename(), storedFileName, file.getSize()));
 		}
 		
-
+	}
+	
+	@Override
+	public Map<String, String> showAdminBoardDetail(AdminBoard adminBoardParam) {
 		
+		return adminBoardDao.selectAdminBoardDetail(adminBoardParam);
 	}
 }

@@ -35,8 +35,8 @@ mt : ${boardOption}
 	<td>${bl.TITLE}</td>
 	<td>${bl.WRITE_DATE}</td>
 	<td> 
-		<button>수정</button>
-		<button>삭제</button>
+		<button onclick="location.href='./update?boardOption=${boardOption}&adminBoardno=${bl.ADMIN_BOARDNO}'">수정</button>
+		<button onclick="location.href='./delete?boardOption=${boardOption}&adminBoardno=${bl.ADMIN_BOARDNO}'">삭제</button>
 	</td>
 </tr>	
 </c:forEach>

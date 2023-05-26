@@ -87,7 +87,7 @@ public class AdminBoardManageController {
 			//파일을 받는 file변수
 			MultipartFile[] file,
 			
-			//BoardOption을 담고 있을 session객체
+			//BoardOption, userno을 담고 있을 session객체
 			HttpSession session
 			) {
 		logger.info("adminBoardParam: {}", adminBoardParam);
@@ -96,7 +96,32 @@ public class AdminBoardManageController {
 		
 		adminBoardService.writeAdminBoard(session,adminBoardParam, file);
 		
-		return "board/list";
+		return "redirect:./list?boardOption="+session.getAttribute("boardOption");
+	}
+	
+	@GetMapping("/board/update")
+	public void adminBoardRevisePage(
+			String boardOption,
+			HttpSession session,
+			AdminBoard adminBoardParam,
+			Model model
+			) {
+		
+		logger.info("boardOption: {}", boardOption);
+		logger.info("session - userno : {}", session.getAttribute("userno"));
+		logger.info("adminBoardParam: {}", adminBoardParam);
+		//보드넘버를 통해 해당 게시글을 조회한다
+		//	ㄴ모델값으로 보내기 위한 정보, 접근한 사용자가 적절한 접근을 하고 있는지 확인
+		Map<String, String> detailMap = adminBoardService.showAdminBoardDetail(adminBoardParam);
+		
+		//로그인 기능시 생성될 userno, 임의로 세션에 삽입해서 Test한다
+//		session.setAttribute("userno", 10);
+		
+//		if((Integer)session.getAttribute("userno")!=adminBoardParam.getUserno()) {
+//			model.addAttribute("notAccess", false);	
+//			return "./list"+boardOption+"adminBoard";
+//		}
+		
 	}
 	
 }

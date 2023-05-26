@@ -46,6 +46,14 @@ public interface AdminBoardDao {
 	 */
 	public void insertAdminBoard(AdminBoard adminBoardParam);
 
+	/**
+	 * 여기까지 구현함...여기서부터 시작하기!!!!
+	 * 
+	 * @param adminBoardParam
+	 * @return
+	 */
+	public Map<String, String> selectAdminBoardDetail(AdminBoard adminBoardParam);
+
 
 
 }

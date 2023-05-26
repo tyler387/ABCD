@@ -49,5 +49,13 @@ public interface AdminBoardService {
 	 */
 	public void writeAdminBoard(HttpSession session, AdminBoard adminBoardParam, MultipartFile[] files);
 
+	/**
+	 * 가져온 게시글 번호를 통해서 게시글의 상세 정보를 조회하여 반환한다
+	 * 
+	 * @param adminBoardParam - 게시글 번호를 가져갈 DTO객체
+	 * @return 게시글의 전체 상세정보를 담아올 Map
+	 */
+	public Map<String, String> showAdminBoardDetail(AdminBoard adminBoardParam);
+
 
 }

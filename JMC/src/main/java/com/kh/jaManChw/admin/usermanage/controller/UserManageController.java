@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,7 +27,7 @@ public class UserManageController {
 	
 	@Autowired UserManageService userManageService;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/mg/list")
 	public void user(
 			Model model,
 			String curPage
@@ -40,16 +42,84 @@ public class UserManageController {
 		model.addAttribute("paging", paging);
 	}
 	
-	@RequestMapping("/filter")
+	@RequestMapping("/mg/filter")
 	public void userfiltering(
-			Model model,
-			@RequestParam Map<String,String> map
+			Model model, String curPage,
+			@RequestParam Map<String, Object> map
 			) {
-		
+		String ccurpage = curPage;
+		Paging paging = userManageService.getpaging(ccurpage);
+		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
 		model.addAttribute("userfilter", userfilter);
+	}
+	
+	@GetMapping("/mg/update")
+	public void UserMgUpdate(int userno, Model model) {
+		logger.info("user update");
 		
+		logger.info("{}", userno);
+		
+		Users users = userManageService.getUserData(userno);
+		
+		logger.info("유저 담긴 정보 {}", users);
+		model.addAttribute("users", users);
+		
+	}
+	@PostMapping("/mg/update")
+	public String UserMgUpdate2(@RequestParam HashMap<String, String> hashmap) {		
+		logger.info("post update 들어옴");
+		logger.info("수정될 유저 정보{}", hashmap);
+		
+//		userManageService.reviseUserMgUpdate(users);
+		return "redirect:/admin/user/mg/list";
+	}
+	@RequestMapping("/mg/withdraw")
+	public String UserMgWithdraw(int userno) {
+		
+		userManageService.reviseUserMgWithdraw(userno);
+		return "redirect:/admin/user/mg/list";
+	}
+	
+	@RequestMapping("/black/list")
+	public void UserBlackPage(
+			Model model,
+			String curPage) {
+		logger.info("user list");
+		String ccurpage = curPage;
+		Paging paging = userManageService.getpaging(ccurpage);
+		logger.info("{}",paging);
+		List<Users> users = userManageService.UserMgPage(paging);
+		logger.info("{}", users);
+		model.addAttribute("users", users);
+		model.addAttribute("paging", paging);
+	}
+	
+	@RequestMapping("/black/filter")
+	public void blackfiltering(
+			Model model, String curPage,
+			@RequestParam Map<String, Object> map
+			) { 
+		String ccurpage = curPage;
+		Paging paging = userManageService.getFilterPaging(ccurpage, map);
+		map.put("paging", paging);
+		List<Users> userfilter = userManageService.getUserMgFiltering(map);
+		logger.info("{}", userfilter);
+		model.addAttribute("userfilter", userfilter);
+		model.addAttribute("paging", paging);
+	}
+	
+	@RequestMapping("/black/update")
+	public String BlackUpdate(int userno) {
+		
+		return "redirect:/admin/user/black/list";
+	}
+	
+	@RequestMapping("/black/userstop")
+	public String BlackStop(int userno) {
+		
+		return "redirect:/admin/user/black/list";
 	}
 	
 }

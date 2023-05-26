@@ -25,7 +25,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  $ 따옴표 없는 거          # 따옴표 있는 거  '' 자동으로 삽입-->
 	<select id="selectUserMgFiltering" resultType="com.kh.jaManChw.dto.Users"  parameterType="map">
-	select * FROM users WHERE ${filter} = #{content}
+		SELECT * FROM (
+		SELECT rownum rnum, B.* FROM (
+		select * FROM users WHERE ${filter} = #{content}
+		ORDER BY userno DESC
+		) B
+		)users
+		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
+	</select>
+	
+	<select id="getUserdata" resultType="com.kh.jaManChw.dto.Users"  parameterType="int">
+	select * FROM users WHERE userno = #{userno}
 	</select>
 
+	<update id="deleteUserMgWithdraw" parameterType="int">
+	UPDATE users SET  status = 'leave'
+	WHERE userno = ${userno}
+	</update>
+	
+	<select id="selectFilterCntAll" resultType="int" parameterType="map">
+		select count(*) FROM users WHERE ${filter} = #{content}
+	</select>
+	
 </mapper>

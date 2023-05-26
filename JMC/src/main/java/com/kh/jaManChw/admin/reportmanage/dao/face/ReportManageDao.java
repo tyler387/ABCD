@@ -1,0 +1,24 @@
+package com.kh.jaManChw.admin.reportmanage.dao.face;
+
+import java.util.List;
+import java.util.Map;
+
+import com.kh.jaManChw.dto.Report;
+import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.util.Paging;
+
+public interface ReportManageDao {
+
+	public int selectCntAll();
+
+	public List<Map<String, Object>> selectReportPost(Paging paging);
+
+	public List<Map<String, Object>> selectReportPostView(String reportno);
+
+	public List<Map<String, Object>> selectUserPost(Paging paging);
+
+	public List<Map<String, Object>> selectReportUserView(String reportno);
+
+	public List<Map<String, Object>> selectReportPostFiltering(Map<String, Object> map);
+
+}

@@ -9,6 +9,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style>
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+table, td, th {
+    border-collapse : collapse;
+    border : 1px solid black;
+    text-align: center; 
+}
+</style>
+
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -41,18 +54,35 @@
 	<th>생일</th>
 	<th>성별</th>
 	<th>폰번호</th>
+	<th>가입일</th>
+	<th>관리</th>
 </tr>
 <c:forEach var="users" items="${users }">
 <tr>
 	<th>${users.userId }</th>
-	<th><input type="checkbox" name="status" value="${status }" checked disabled></th>
+<%-- 	<th><input type="checkbox" name="status" value="${status }" checked disabled></th> --%>
+	<th><c:choose>
+		<c:when test="${users.status eq 'leave'}">탈퇴</c:when>
+		<c:when test="${users.status eq	'active'}">정상</c:when>
+		<c:when test="${users.status eq 'unactive'}">휴먼</c:when>
+		<c:when test="${users.status eq 'blacklist'}">블랙리스트</c:when>
+		<c:when test="${users.status eq 'block'}">정지</c:when>
+	</c:choose>  </th>
 	<th>${users.userName }</th>
 	<th>${users.userNick }</th>
 	<th>${users.birth }</th>
 	<th>${users.userId }</th>
-	<th>${users.userId }</th>
-	<th><button>수정</button><button>탈퇴</button></th>
+	<th>${users.phone }</th>
+	<th>${users.joinDate }</th>
+	<th><a href="./update?userno=${users.userno }"><button>수정</button></a>
+	<a href="./withdraw?userno=${users.userno }"><button>탈퇴</button></a></th>
 </tr>
 </c:forEach>
 </table>
+
+<a href="/jaManChw/admin/report/post/list"><button>신고 게시글 페이지</button></a>
+<a href="/jaManChw/admin/report/user/list"><button>신고 계정 페이지</button></a>
+<a href="/jaManChw/admin/user/black/list"><button>블랙리스트 페이지</button></a>
+<a href="/jaManChw/admin/user/mg/list"><button>유저수정 페이지</button></a>
+
 <c:import url="./paging.jsp" />

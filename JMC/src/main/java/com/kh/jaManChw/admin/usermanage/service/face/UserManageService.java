@@ -23,7 +23,7 @@ public interface UserManageService {
 	 * 
 	 * @return
 	 */
-	public List<Users> getUserMgFiltering(Map<String, String> map);
+	public List<Users> getUserMgFiltering(Map<String, Object> map);
 
 	/**
 	 * 페이징 수 가져오기
@@ -31,5 +31,26 @@ public interface UserManageService {
 	 * @return
 	 */
 	public Paging getpaging(String ccurpage);
+
+	/**
+	 * 회원 수정 하기전에 회원 정보 가져오기
+	 * @param userno
+	 * @return 
+	 */
+	public Users getUserData(int userno);
+	
+	/**
+	 * userno로 해당 회원 탈퇴처리
+	 * 	
+	 * @param userno
+	 */
+	public void reviseUserMgWithdraw(int userno);
+	
+	/**
+	 * 필터된 페이
+	 * @param ccurpage
+	 * @return
+	 */
+	public Paging getFilterPaging(String ccurpage, Map<String, Object> map);
 
 }

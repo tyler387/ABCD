@@ -9,6 +9,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+table, td, th {
+    border-collapse : collapse;
+    border : 1px solid black;
+    text-align: center; 
+}
+</style>
+
+<!-- jQuery 2.2.4 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </head>
 <body>
 <h1>필터된 유저 목록 페이지</h1>
@@ -41,11 +64,16 @@
 	<th>${users.birth }</th>
 	<th>${users.userId }</th>
 	<th>${users.userId }</th>
-	<th><button>수정</button><button>탈퇴</button></th>
+	<th><a href="./update?userno=${users.userno }"><button>수정</button></a>
+	<a href="./withdraw?userno=${users.userno }"><button>탈퇴</button></a></th>
 	
 </tr>
 </c:forEach>
 </table>
 
+<a href="/jaManChw/admin/report/post/list"><button>신고 게시글 페이지</button></a>
+<a href="/jaManChw/admin/report/user/list"><button>신고 계정 페이지</button></a>
+<a href="/jaManChw/admin/user/black/list"><button>블랙리스트 페이지</button></a>
+<a href="/jaManChw/admin/user/mg/list"><button>유저수정 페이지</button></a>
 </body>
 </html>

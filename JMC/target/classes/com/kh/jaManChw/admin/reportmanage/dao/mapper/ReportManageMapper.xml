@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace ="com.kh.jaManChw.admin.reportmanage.dao.face.ReportManageDao">
+
+	<select id="selectCntAll"  resultType="int"  >
+		SELECT count(*) FROM report
+	</select>
+	
+	<select id="selectReportPost" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
+		SELECT * FROM (
+		    SELECT rownum rnum, B.* FROM (
+		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+		            WHERE R.userno = U.userno and R.report_type = 'post'  and R.r_userno = Q.userno
+		        )B
+		    )
+		WHERE rnum BETWEEN #{startno} AND #{endno}
+	</select>
+	
+	<select id="selectReportPostView" resultType="hashMap" parameterType="String">
+      SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+      WHERE R.reportno = #{reportno} and R.report_type = 'post' and R.userno = U.userno and R.r_userno = Q.userno
+	</select>
+
+	<select id="selectUserPost" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
+		SELECT * FROM (
+		    SELECT rownum rnum, B.* FROM (
+		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+		            WHERE R.userno = U.userno and R.report_type = 'user'  and R.r_userno = Q.userno
+		        )B
+		    )
+		WHERE rnum BETWEEN #{startno} AND #{endno}
+	</select>
+	<select id="selectReportUserView" resultType="hashMap" parameterType="String">
+      SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+      WHERE R.reportno = #{reportno} and R.report_type = 'user' and R.userno = U.userno and R.r_userno = Q.userno
+	</select>
+	
+		<select id="selectReportPostFiltering" resultType="hashmap"  parameterType="map">
+		SELECT * FROM (
+		SELECT rownum rnum, B.* FROM (
+		select * FROM users WHERE ${filter} = #{content}
+		ORDER BY userno DESC
+		) B
+		)users
+		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
+	</select>
+	
+</mapper>

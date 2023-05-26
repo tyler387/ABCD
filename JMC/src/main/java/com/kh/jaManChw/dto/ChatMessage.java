@@ -8,7 +8,7 @@ public class ChatMessage {
 	private int chatno;
 	private int userno;
 	private String message;
-	private Date sendTile;
+	private Date sendTime;
 	
 	public ChatMessage() {}
 
@@ -18,13 +18,13 @@ public class ChatMessage {
 		this.chatno = chatno;
 		this.userno = userno;
 		this.message = message;
-		this.sendTile = sendTile;
+		this.sendTime = sendTile;
 	}
 
 	@Override
 	public String toString() {
 		return "ChatMessage [messageno=" + messageno + ", chatno=" + chatno + ", userno=" + userno + ", message="
-				+ message + ", sendTile=" + sendTile + "]";
+				+ message + ", sendTile=" + sendTime + "]";
 	}
 
 	public int getMessageno() {
@@ -60,11 +60,11 @@ public class ChatMessage {
 	}
 
 	public Date getSendTile() {
-		return sendTile;
+		return sendTime;
 	}
 
 	public void setSendTile(Date sendTile) {
-		this.sendTile = sendTile;
+		this.sendTime = sendTile;
 	}
 	
 }

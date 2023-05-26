@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.jaManChw.chat.dao.face.ChatDao">
+	<insert id="insertMessage" parameterType="com.kh.jaManChw.dto.ChatMessage">
+		insert into chat_message values(chat_message_seq.nextval,#{chatno},1,#{message},sysdate)
+	</insert>
+	<select id="selectAllChatno" parameterType="com.kh.jaManChw.dto.ChatUser" resultType="com.kh.jaManChw.dto.ChatRoom">
+		SELECT chatno FROM CHAT_USER WHERE userno = #{userno}
+	</select>
+	
+	
+</mapper>

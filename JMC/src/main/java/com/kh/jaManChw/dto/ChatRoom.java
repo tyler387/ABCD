@@ -2,16 +2,16 @@ package com.kh.jaManChw.dto;
 
 import java.util.Date;
 
-public class Chatroom {
+public class ChatRoom {
 
 	private int chatno;
 	private int meetingno;
 	private String chatname;
 	private Date chatcloseday;
 	
-	public Chatroom() {}
+	public ChatRoom() {}
 
-	public Chatroom(int chatno, int meetingno, String chatname, Date chatcloseday) {
+	public ChatRoom(int chatno, int meetingno, String chatname, Date chatcloseday) {
 		super();
 		this.chatno = chatno;
 		this.meetingno = meetingno;

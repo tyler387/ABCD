@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,12 @@ public class UsersServiceImpl implements UsersService {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired UsersDao usersDao;
+	
+	//유저 정보 가져오기
+	@Override
+	public Users getuserInfo(Users users) {
+		return usersDao.selectuserByUserId(users);
+	}
 
 	// 로그인 유무
 	@Override
@@ -202,5 +209,7 @@ public class UsersServiceImpl implements UsersService {
 		}
 		
 	}
+
+
 
 }

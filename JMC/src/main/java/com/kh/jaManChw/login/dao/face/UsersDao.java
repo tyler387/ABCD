@@ -1,5 +1,7 @@
 package com.kh.jaManChw.login.dao.face;
 
+import java.util.List;
+
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersDao {
@@ -29,6 +31,14 @@ public interface UsersDao {
 	 * @param users
 	 */
 	public void insertUsers(Users users);
+
+	/**
+	 * 유저 정보 조회
+	 * @return usersinfo
+	 */
+	public Users selectuserByUserId(Users users);
+
+
 
 	
 	

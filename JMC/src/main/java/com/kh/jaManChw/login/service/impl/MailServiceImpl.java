@@ -28,14 +28,14 @@ public class MailServiceImpl implements MailService {
 		//111111 ~ 999999까지 인증번호 : .nextInt() + n => 범위지정
 		int randomNum = n.nextInt(888888)+111111;
 		logger.info("인증번호 : {}",randomNum);
-		int authNumber = randomNum;	
+		authNumber = randomNum;	
 	
 	} // makeRandomNumber() end
 	
 	@Override
 	public String emailAuth(String email) {
 		makeRandomNumber();
-		String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
+		String setFrom = "projectemailauth@gmail.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
 		String toMail = email;
 		String title = "회원 가입 인증 이메일 입니다."; // 이메일 제목 
 		String content = 

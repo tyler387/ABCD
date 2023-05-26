@@ -1,5 +1,8 @@
 package com.kh.jaManChw.login.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -34,16 +37,22 @@ public class UserController {
 		logger.info("{}", users);
 
 		// 로그인 인증
-		boolean isLogin = usersService.login(users);
+		boolean isLogin = usersService.login(users);	
+		
+		Users info = usersService.getuserInfo(users);
+		
 
 		if (isLogin) {
 			logger.info("userlogin() - 로그인 성공");
-
+			
 			// 세션에 파라미터 값 저장
 			session.setAttribute("login", isLogin);
-			session.setAttribute("userNo", users.getUserno());
-			session.setAttribute("userId", users.getUserId());
-			session.setAttribute("role", users.getRole());
+			session.setAttribute("userno", info.getUserno());
+			session.setAttribute("userId", info.getUserId());
+			session.setAttribute("role", info.getRole());
+			
+			logger.info("userno : {}",info.getUserno());
+			logger.info("userrole : {}",info.getRole());
 
 			// 메인 페이지로 리다이렉트
 			return "redirect:/login/main";

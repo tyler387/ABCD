@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.jaManChw.admin.usermanage.service.face.UserManageService;
 import com.kh.jaManChw.dto.Users;
@@ -53,6 +55,22 @@ public class UserManageController {
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
 		model.addAttribute("userfilter", userfilter);
+	}
+	
+	@RequestMapping("/mg/filter1")
+	@ResponseBody
+	public boolean userfiltering1(
+			Model model, String curPage,
+			@RequestBody Map<String, Object> map
+			) {
+		logger.info("에이잭스 출력 : {}", map);
+		String ccurpage = curPage;
+		Paging paging = userManageService.getpaging(ccurpage);
+		map.put("paging", paging);
+		List<Users> userfilter = userManageService.getUserMgFiltering(map);
+//		logger.info("{}", userfilter);
+		model.addAttribute("userfilter", userfilter);
+		return true;
 	}
 	
 	@GetMapping("/mg/update")

@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
       
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,9 +69,9 @@ table, td, th {
 </tr>
 </c:forEach>
 </table>
-
-<a href="/jaManChw/admin/report/post/list"><button>신고 게시글 페이지</button></a>
-<a href="/jaManChw/admin/report/user/list"><button>신고 계정 페이지</button></a>
-<a href="/jaManChw/admin/user/black/list"><button>블랙리스트 페이지</button></a>
-<a href="/jaManChw/admin/user/mg/list"><button>유저수정 페이지</button></a>
+<br><br><br>
+<a href="<%=request.getContextPath() %>/admin/report/post/list"><button>신고 게시글 페이지</button></a>
+<a href="<%=request.getContextPath() %>/admin/report/user/list"><button>신고 계정 페이지</button></a>
+<a href="<%=request.getContextPath() %>/admin/user/black/list"><button>블랙리스트 페이지</button></a>
+<a href="<%=request.getContextPath() %>/admin/user/mg/list"><button>유저수정 페이지</button></a>
 <c:import url="./paging.jsp" />

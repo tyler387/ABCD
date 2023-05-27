@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.jaManChw.login.service.face.KakaoService;
 import com.kh.jaManChw.login.service.face.UsersService;
 
 @Controller
@@ -19,7 +20,7 @@ public class KakaoController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired UsersService usersService; 
+	@Autowired KakaoService kakaoService; 
 	
 	@RequestMapping("/oauth/kakao")
     public String login(@RequestParam("code") String code, HttpSession session) {
@@ -27,13 +28,13 @@ public class KakaoController {
     	// accessToken : 사용자 인증과 카카오 api 호출 권한부여 : 6시간 만료
     	// 사용자에 대한 정보가 담겨있다.
     	// 토큰에 담겨있는 정보가 해당 사용자의 정보가 맞는지 확인하고 회원가입 or로그인 시키고 DB에 저장한다.
-        String access_Token = usersService.getAccessToken(code);
+        String access_Token = kakaoService.getAccessToken(code);
         logger.info("Controller access_Token: {}",access_Token);
        
         // 해쉬맵을 사용해서 유저의 정보를 가져옴 => access_Token 이용해서 가져올 수 있다.
         // 실제 구현할 때는 
         // 이메일(account_email) 가져와야함.
-        HashMap<String, Object> userInfo = usersService.getUserInfo(access_Token);
+        HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
         
         logger.info("loginController :{}",userInfo);
         logger.info("userid: {}", userInfo.get("email"));
@@ -52,7 +53,7 @@ public class KakaoController {
 	// 리턴은 메인페이지로
     @RequestMapping("/login/logout")
     public String logout(HttpSession session) {
-    	usersService.kakaoLogout((String)session.getAttribute("access_Token"));
+    	kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
         session.removeAttribute("access_Token");
         session.removeAttribute("userId");
         

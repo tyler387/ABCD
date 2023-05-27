@@ -97,24 +97,21 @@ form{
 }
 
 
-.msg{
-	color : red;
-	font-size: 5px;
-}
 
 
 
 </style>
 </head>
 <body>
+<div id="join_form">
 <form action="/login/join" method="post"> 
 <h1 style="font-size:63px;">JAMANCHO</h1> 
 
-<div class="input_id">
+<div class="input">
 	<label for="userId">아이디*</label>
 	<div class="input">
 		<input type="text" name="userId" id="userId">
-		<button class="btn1" id="idchk" onclick="idchk">중복확인</button>
+		<button type="button" id="idchk" name="idchk" onclick="idcheck()">중복확인</button>
 		<span id="id_msg"></span>	
 	</div>
 	
@@ -155,7 +152,7 @@ form{
 
 
 <div class="input1">
-<label for="gender">성별*</label>
+<label>성별*</label>
 	<div class="select">
 		<input type="radio" id="select" name="gender" value="M"><label for="select">남자</label>	
 		<input type="radio" id="select2" name="gender" value="F"><label for="select2">여자</label>
@@ -163,10 +160,10 @@ form{
 </div>
 
 <div class="email-group">
-	<label for="email">이메일*</label>
+	<label>이메일*</label>
 	<div class="input-group">
-		<input type="text" name="userEmail1" id="userEmail1">
-		<select name="userEmail2" id="userEmail2">
+		<input type="text" name="email" id="userEmail1">
+		<select name="email" id="userEmail2">
 			<option>@naver.com</option>
 			<option>@google.com</option>
 			<option>@daum.net</option>
@@ -174,7 +171,7 @@ form{
 		</select>
 		<br>
 		<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-		<button class="btn1" id="email_checkbtn" onclick="email_checkbtn">본인인증</button>
+		<button type="button" id="email_checkbtn" name="email_checkbtn" onclick="emailcheck()">본인인증</button>
 	</div>	
 </div>
 
@@ -188,7 +185,7 @@ form{
 
 
 <div class="input1">
-	<label for="addr1">주소*</label> 
+	<label>주소*</label> 
 	<div class="input3">
 		<input type="text" name="addr1" id="addr1" placeholder="우편번호">
 		<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
@@ -201,15 +198,36 @@ form{
 <a href="/login/login"><button class="btn">가입하기</button></a><br>
 
 </form>
-
+</div>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 	
-
-			
-
-	// 주소 api
+ function idcheck() {
+		
+		var userId = $('#userId').val();
+		
+		$.ajax({
+		    type : 'post',           // 타입 (get, post, put 등등)
+		    url : '/login/idcheck',           // 요청할 서버url
+		    dataType : 'json',       // 데이터 타입 (html, xml, json, text 등등)
+		    data : {userId:userId} , // 보낼 데이터 (Object , String, Array)
+		    success : function(res) { // 결과 성공 콜백함수
+		        if(res == 1){
+		        	$('#id_msg').html('이미 사용중인 아이디입니다.');
+		        	$('#id_msg').css('color,#dc3545');
+		        }else{
+		        	$('#id_msg').html('사용 가능한 아이디입니다.');
+		        	$('#id_msg').css('color,#2fb380');
+		        }
+		    	console.log(res);
+		    },
+		    error : function() { // 결과 에러 콜백함수
+		        alert('서버요청 실패');
+		    }
+		}) // ajax end			
+ }	
+ 	// 주소 api
 	function findAddress() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
@@ -257,7 +275,8 @@ form{
 	        }
 	    }).open();
 	}
-
+	
+	function emailcheck() {
 	// 이메일 인증
 		$('#email_checkbtn').click(function() {
 			const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
@@ -274,11 +293,11 @@ form{
 					alert('인증번호가 전송되었습니다.')
 				}			
 			}); // end ajax
-		}); // end send eamil
+		}); // end send eamil 
 
 	// 인증번호 비교 
 // 	// blur -> focus가 벗어나는 경우 발생
-		$('#email_checkbtn').blur(function () {
+ /* 		$('#email_checkbtn').blur(function () {
 			const inputCode = $(this).val();
 			const $resultMsg = $('#mail-check-warn');
 			
@@ -294,9 +313,9 @@ form{
 				$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
 				$resultMsg.css('color','red');
 			}
-		})
-	
-
+		})  
+ */
+	} 
 </script>
 
 <c:import url="../layout/footer.jsp" />

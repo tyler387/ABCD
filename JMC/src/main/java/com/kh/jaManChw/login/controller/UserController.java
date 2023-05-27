@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.login.service.face.UsersService;
@@ -19,8 +21,7 @@ public class UserController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	UsersService usersService;
+	@Autowired UsersService usersService;
 
 	@RequestMapping("/login/main")
 	public void mainPage() {}
@@ -82,18 +83,25 @@ public class UserController {
 	@PostMapping("/login/join")
 	public String userJoin(Users users) {
 		logger.info("{}",users);
+		
+		//회원가입 메소드 호출
+		usersService.join(users);
+		logger.info("회원가입 성공");
 
-		//회원가입 성공 유무 -> 중복 아이디 체크메소드
-		boolean joinResult = usersService.IdCheck(users);
-
-		if(joinResult) {
-			logger.info("회원가입 성공");
-			return "redirect:/login/main";			
-		} else {
-			logger.info("회원가입 실패");
-			return "redirect:/login/join";
-		} // if(joinResult)문 end
-	
+		return "redirect:/login/main";
 	} // userJoin() end
+	
+	@RequestMapping("/login/idcheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("userId") String userId) {
+		int res = usersService.IdCheck(userId);
+		
+		if(res>0) {
+			logger.info("join() - 중복아이디있음");
+		}else {
+			logger.info("join() - 중복아이디 없음");		
+		}
+		return res;
+	}
 	
 } //userController() end 

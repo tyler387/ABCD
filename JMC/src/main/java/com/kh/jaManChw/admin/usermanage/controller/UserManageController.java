@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaManChw.admin.usermanage.service.face.UserManageService;
 import com.kh.jaManChw.dto.Users;
@@ -29,12 +32,12 @@ public class UserManageController {
 	
 	@Autowired UserManageService userManageService;
 	
-	@RequestMapping("/mg/list")
+	@GetMapping("/mg/list")
 	public void user(
 			Model model,
 			String curPage
 			) {
-		logger.info("user list");
+		logger.info("user list 처음 ");
 		String ccurpage = curPage;
 		Paging paging = userManageService.getpaging(ccurpage);
 		logger.info("{}",paging);
@@ -42,6 +45,32 @@ public class UserManageController {
 		logger.info("{}", users);
 		model.addAttribute("users", users);
 		model.addAttribute("paging", paging);
+	}
+	
+	
+	@PostMapping("/mg/list")
+	public @ResponseBody ModelAndView userfiltering23(
+			ModelAndView mav, String curPage,
+			@RequestParam Map<String, Object> map
+			) {
+		logger.info("filter1 에이잭스 출력 : {}", map);
+		String ccurpage = curPage;
+		logger.info("11111111");
+		Paging paging = userManageService.getpaging(ccurpage);
+		logger.info("2222222222");
+		map.put("paging", paging);
+		logger.info("3333333333333");
+		List<Users> userfilter = userManageService.getUserMgFiltering(map);
+		logger.info("444444444444444444");
+		
+		//모델값 지정	-> 응답 데이터 JSON 변환
+		mav.addObject("userfilter", userfilter);
+		mav.addObject("paging", paging);
+		
+		//뷰네임 지정	-> jsonView 적용
+		mav.setViewName("jsonView");
+		
+		return mav; 
 	}
 	
 	@RequestMapping("/mg/filter")
@@ -57,21 +86,49 @@ public class UserManageController {
 		model.addAttribute("userfilter", userfilter);
 	}
 	
+//	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
+//	public @ResponseBody ModelAndView userfiltering2(
+//			ModelAndView mav, String curPage,
+//			@RequestParam Map<String, Object> map
+//			) {
+//		logger.info("filter1 에이잭스 출력 : {}", map);
+//		String ccurpage = curPage;
+//		logger.info("11111111");
+//		Paging paging = userManageService.getpaging(ccurpage);
+//		logger.info("2222222222");
+//		map.put("paging", paging);
+//		logger.info("3333333333333");
+//		List<Users> userfilter = userManageService.getUserMgFiltering(map);
+//		logger.info("444444444444444444");
+//		//모델값 지정	-> 응답 데이터 JSON 변환
+//		mav.addObject("userfilter", userfilter);
+//		mav.addObject("paging", paging);
+//		logger.info("mav 내용 {}", mav);
+//		//뷰네임 지정	-> jsonView 적용
+//		mav.setViewName("jsonView");
+//		
+//		return mav; 
+//	}
+	
+//	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
 	@RequestMapping("/mg/filter1")
-	@ResponseBody
-	public boolean userfiltering1(
+	public String userfiltering2(
 			Model model, String curPage,
-			@RequestBody Map<String, Object> map
+			@RequestParam Map<String, Object> map
 			) {
-		logger.info("에이잭스 출력 : {}", map);
+		logger.info("filter1 에이잭스 출력 : {}", map);
 		String ccurpage = curPage;
-		Paging paging = userManageService.getpaging(ccurpage);
+		Paging paging = userManageService.getFilterPaging(curPage, map);
+		logger.info("페이징 {}", paging);
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
-//		logger.info("{}", userfilter);
+		logger.info("{}", userfilter);
 		model.addAttribute("userfilter", userfilter);
-		return true;
+		model.addAttribute("paging", paging);
+		logger.info("모델값 {}", model);
+		return "/admin/user/mg/filter";
 	}
+	
 	
 	@GetMapping("/mg/update")
 	public void UserMgUpdate(int userno, Model model) {
@@ -115,7 +172,7 @@ public class UserManageController {
 	}
 	
 	@RequestMapping("/black/filter")
-	public void blackfiltering(
+	public String blackfiltering(
 			Model model, String curPage,
 			@RequestParam Map<String, Object> map
 			) { 
@@ -126,6 +183,9 @@ public class UserManageController {
 		logger.info("{}", userfilter);
 		model.addAttribute("userfilter", userfilter);
 		model.addAttribute("paging", paging);
+		
+		return "/admin/user/black/filter";
+
 	}
 	
 	@RequestMapping("/black/update")

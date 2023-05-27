@@ -93,6 +93,6 @@ public class UserManageServiceImpl implements UserManageService {
 		return paging;
 	}
 
+
 }
 
-//	userManageDao.updateUserMgUpdate();

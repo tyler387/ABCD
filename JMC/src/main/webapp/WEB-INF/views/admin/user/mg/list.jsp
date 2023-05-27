@@ -22,6 +22,8 @@ table, td, th {
 }
 </style>
 
+
+
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -30,23 +32,45 @@ table, td, th {
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script type="text/javascript">
+$(function() {
+	$("#searchBtn").click(function() {
+		
+			 $.ajax({
+			type: "post"
+			, url: "./filter1"
+// 			, data:  {filter : "user_id", content : "cc"}
+			, data:  {filter : $("#filter").val(), content : $("#content").val()}
+			, dataType: "html" 
+			, success: function( res ) {
+				console.log("AJAX 성공")
+				$("#result").html(res)
+			}
+			, error: function() {
+				console.log("AJAX 실패")
+			}
+		}) 
+	})
+})
+</script>
+
 </head>
 <body>
 <h1>유저 수정 페이지</h1>
 
 <!-- <form action="./filter" method="post"> -->
-<form>
-<select name ="filter">
+<select name ="filter" id="filter">
    <option value = "user_id" selected>아이디</option>
    <option value = "user_name">이름</option>
    <option value = "grade">등급</option>
 </select>
 
-검색 : <input type="text" name="content">
+검색 : <input type="text" name="content" id="content">
 <button id="searchBtn">검색하기</button>
-</form>
-
-<div class="itemone">
+ 
+<div id="result">
 <table>
 <tr>
 	<th>아이디</th>
@@ -80,29 +104,9 @@ table, td, th {
 </tr>
 </c:forEach>
 </table>
+<br><br><br>
+<c:import url="./paging.jsp" />
 </div>
-<script type="text/javascript">
-$('#searchBtn').click(function(){
-	
-	 var data = {
-		        "데이터1": 데이터1,
-		        "데이터2": 데이터2,
-		        "데이터3": 데이터3,
-		    }
-	
-  $.ajax({
-      url: "./filter.jsp",
-      type: "POST",
-      data: form,
-      success: function(data){
-   	    $('#itemone').html(data);
-      },
-      error: function(){
-          alert("simpleWithObject err");
-      }
-  });
-});
-</script> 
 
 <br><br><br>
 <a href="<%=request.getContextPath() %>/admin/report/post/list"><button>신고 게시글 페이지</button></a>
@@ -110,4 +114,3 @@ $('#searchBtn').click(function(){
 <a href="<%=request.getContextPath() %>/admin/user/black/list"><button>블랙리스트 페이지</button></a>
 <a href="<%=request.getContextPath() %>/admin/user/mg/list"><button>유저수정 페이지</button></a>
 
-<c:import url="./paging.jsp" />

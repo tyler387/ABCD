@@ -47,10 +47,11 @@ public interface UserManageService {
 	public void reviseUserMgWithdraw(int userno);
 	
 	/**
-	 * 필터된 페이
+	 * 필터된 페이지 목록 조회
 	 * @param ccurpage
 	 * @return
 	 */
 	public Paging getFilterPaging(String ccurpage, Map<String, Object> map);
+	
 
 }

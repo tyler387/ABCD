@@ -22,4 +22,5 @@ public interface UserManageDao {
 
 	public int selectFilterCntAll(Map<String, Object> map);
 
+	
 }

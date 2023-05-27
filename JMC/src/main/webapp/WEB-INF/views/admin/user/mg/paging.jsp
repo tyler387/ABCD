@@ -45,7 +45,7 @@
 <c:if test="${paging.curPage gt 1}">
 	<li><a href="./list?curPage=${paging.curPage-1}">&lt;</a></li>
 </c:if>
-
+  
 <%-- 현재 페이지가 1보다 작거나 같다면 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage le 1}">
 	<li class="disabled"><a>&lt;</a></li>

@@ -2,6 +2,8 @@ package com.kh.jaManChw.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Users {
 
 	private int userno;
@@ -9,6 +11,7 @@ public class Users {
 	private String userPw;
 	private String userName;
 	private String userNick;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birth;
 	private String gender;
 	private String email;
@@ -25,15 +28,6 @@ public class Users {
 	private Date joinDate;
 	
 	public Users() {}
-
-	@Override
-	public String toString() {
-		return "Users [userno=" + userno + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
-				+ ", userNick=" + userNick + ", birth=" + birth + ", gender=" + gender + ", email=" + email + ", phone="
-				+ phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
-				+ ", warnCount=" + warnCount + ", profileImgUrl=" + profileImgUrl + ", status=" + status + ", role="
-				+ role + ", platFormOption=" + platFormOption + ", joinDate=" + joinDate + "]";
-	}
 
 	public Users(int userno, String userId, String userPw, String userName, String userNick, Date birth, String gender,
 			String email, String phone, String addr1, String addr2, String addr3, String grade, int warnCount,
@@ -58,6 +52,15 @@ public class Users {
 		this.role = role;
 		this.platFormOption = platFormOption;
 		this.joinDate = joinDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Users [userno=" + userno + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
+				+ ", userNick=" + userNick + ", birth=" + birth + ", gender=" + gender + ", email=" + email
+				+ ", phone=" + phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
+				+ ", warnCount=" + warnCount + ", profileImgUrl=" + profileImgUrl + ", status=" + status + ", role="
+				+ role + ", platFormOption=" + platFormOption + "]";
 	}
 
 	public int getUserno() {

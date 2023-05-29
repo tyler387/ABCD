@@ -49,7 +49,7 @@
 
 </table>
 
-<a onclick="window.open('/meeting/join')"><button>모임 신청</button></a>
+<a onclick="window.open('/meeting/join?meetingno=${viewmeeting.meetingno}')"><button>모임 신청</button></a>
 
 
 <c:forEach var = "applicantnick" items="${applicantnick }">
@@ -61,7 +61,7 @@
 		</tr>
 	
 		<tr>
-		<td><a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}' )" >${applicantnick.userNick}</a></td>
+		<td><a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )" >${applicantnick.userNick}</a></td>
 		
 		</tr>
 		

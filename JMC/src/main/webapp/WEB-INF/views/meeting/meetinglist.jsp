@@ -11,8 +11,8 @@
 
 .yellow{
   background-color:#f5f5dc;
-  width:250px;
-  height:50px;
+  width:300px;
+  height:100px;
   margin-bottom:5px;
   	
 }

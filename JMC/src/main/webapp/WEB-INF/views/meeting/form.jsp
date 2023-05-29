@@ -3,8 +3,6 @@
 
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-
-
 <c:import url="../layout/header.jsp" />
 
 
@@ -72,11 +70,15 @@
 
  <style type="text/css">
 
- 
-	
- .div1 {
+ .my-hr2 { 
+ 	border: 0;
+ 	height: 5px;
+ 	background: #ccc;	 
+
+	}
+ .meeting {
 	background-color: #E2E2E2;
-	height: 600px;
+	height: 700px;
 	width: 600px;
 	margin: 0 auto;
 	}
@@ -92,7 +94,7 @@
 	<h1>모임 등록</h1>
 	
 	
-	<div class="div1"> 
+	<div class="meeting"> 
 	
 	<h4>모임의 정보를 등록해 주세요</h4>
 	
@@ -120,7 +122,7 @@
 	</c:forEach>
 	</select>
 	
-	
+	<hr class="my-hr2">
    
 	
 	<h4>선호하는 친구 타입(선택)</h4>
@@ -149,6 +151,6 @@
 	</form>		
 	<a href="/mainpage/page"><button>취소</button></a>	
 	
-	</div>
+	</div><br><br><br><br>
 
 <c:import url="../layout/footer.jsp" />

@@ -11,7 +11,7 @@ import com.kh.jaManChw.dto.Users;
 
 public interface MeetingService {
 	
-	public List<Users> selectFriendListAll();
+	public List<Users> selectFriendListAll(int userno);
 
 	public void inputMeeting(Meeting meeting , Preference preference);
 

@@ -30,6 +30,7 @@
 	<form id="join" action="/meeting/join" method="post">
 	
 	<label>한줄 신청창</label>
+	<input type="hidden" name="meetingno" id="meetingno" value=${viewmeeting.meetingno }>
 	<input type="text" id="applicantContent" name="applicantContent">
 	
 	

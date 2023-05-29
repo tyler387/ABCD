@@ -3,17 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp"/>
+
 <style type="text/css">
 
-.find_btn{
+.find-btn{
 	text-align:center;
 }
-.meetinginput{
+.find-btn1{
 	display :inline-block;
 }
-.meetingselect{
+.find-btn1{
 	display :inline-block;
 }
+
 
 </style>
 
@@ -28,8 +30,8 @@
 	<br><br><br><br><br><br><br><br>	<br><br><br><br><br><br><br><br>	
 	
 	
-	<button type="button" class="btn meetinginput" onclick="location.href='/meeting/form'" >모임 등록</button>
-	<button type="button" class= "btn meetingselect" onclick="location.href='/meeting/meetinglist'">모임 신청</button>
+	<button type="button" class="btn btn-navy navbar-btn find-btn1" onclick="location.href='/meeting/form'" >모임 등록</button>
+	<button type="button" class="btn btn-grey navbar-btn find-btn1" onclick="location.href='/meeting/meetinglist'">모임 신청</button>
 	
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

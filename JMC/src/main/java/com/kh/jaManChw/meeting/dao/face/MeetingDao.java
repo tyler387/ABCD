@@ -12,7 +12,7 @@ public interface MeetingDao {
 
 	public void insertMeeting(Meeting meeting);
 
-	public List<Users> selectFriendListAll();
+	public List<Users> selectFriendListAll(int userno);
 
 	public int selectMeetingno();
 

@@ -28,13 +28,13 @@
 
 </insert>
 
-<select id="selectFriendListAll" resultType="com.kh.jaManChw.dto.Users">
+<select id="selectFriendListAll" resultType="com.kh.jaManChw.dto.Users" parameterType="int">
 
 	select user_name, friend_userno
 	from friend_list
     inner join users
     on friend_list.friend_userno = users.userno
-	where friend_list.userno = 1
+	where friend_list.userno = #{userno}
 
 </select>
 
@@ -49,7 +49,8 @@
 
 <select id="selectMeetinglistAll" resultType="com.kh.jaManChw.dto.Meeting">
 	
-	SELECT * FROM MEETING
+	SELECT * FROM MEETING 
+	order by meetingno desc
 
 </select>
 
@@ -62,7 +63,7 @@
 
 <insert id="insertReportMeeting" parameterType="com.kh.jaManChw.dto.ReportMeeting">
 
-	INSERT INTO report_meeting values(report_meeting_seq.nextval , #{meetingno} , 1 , #{rmTitle}, #{rmContent}, 'processed' , #{rmOption}, default )
+	INSERT INTO report_meeting values(report_meeting_seq.nextval , #{meetingno} , #{userno} , #{rmTitle}, #{rmContent}, 'processed' , #{rmOption}, default )
 
 </insert>
 
@@ -81,21 +82,21 @@
 <select id="selectMeetingApplicant" resultType="com.kh.jaManChw.dto.Applicant" parameterType="com.kh.jaManChw.dto.Applicant">
 
 	select * from Applicant 
-	where userno = #{userno}
+	where userno = #{userno} and meetingno = #{meetingno}
 
 </select>
 
 <select id = "selectMeetingApplicantUser" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
 	
 	select * from users 
-	where userno = #{userno} 
+	where userno = #{userno}
 	
 
 </select>
 
 <insert id = "insertJoinMeeting" parameterType="com.kh.jaManChw.dto.Applicant">
 	
-	insert into applicant values(24, 9, #{applicantContent}, 'yes' , 1)
+	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'yes' , 1)
 	
 </insert>
 

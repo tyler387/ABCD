@@ -43,9 +43,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	}
 	
 	@Override
-	public List<Users> selectFriendListAll() {
+	public List<Users> selectFriendListAll(int userno) {
 		
-		return meetingDao.selectFriendListAll();
+		return meetingDao.selectFriendListAll(userno);
 	}
 	
 	@Override

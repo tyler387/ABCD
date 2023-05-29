@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.jaManChw.dto.Applicant;
@@ -34,12 +35,17 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 
 	//모임 작성 폼으로 이동 
 	@GetMapping("/meeting/form")
-	public String meetingWriteForm(Model model, HttpSession session) {
+	public String meetingWriteForm(Meeting meeting , Model model, HttpSession session) {
 		
 		logger.info("/meeting/form [GET]");
 		
+		int userno = (int)session.getAttribute("userno");
+		meeting.setUserno(meetingService.getUserno(userno));
+		
+		logger.info("{}!!!" , userno);
+		
 		//모임 작성 폼에 가져올 친구 목록 조회
-		List<Users> friendList = meetingService.selectFriendListAll();
+		List<Users> friendList = meetingService.selectFriendListAll(userno);
 		
 		logger.info("{}", friendList);
 	
@@ -61,13 +67,18 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//모임 작성 폼에 적은 모임 등록
 	@PostMapping("/meeting/form")
-	public String meetingWrite(Meeting meeting , Preference preference, HttpSession session ) {
+	public String meetingWrite(Meeting meeting , @RequestParam(required = false) Preference preference, HttpSession session ) {
 		
 		logger.info("/meeting/form [POST]");
 		
 		//알림기능 추가개발예정 
 		
-		int userno = (int)session.getAttribute("userNo");
+		//선호하는 타입에 null이들어가면 preference 객체를 새로 생성  
+		if(preference == null) {
+			preference = new Preference();
+		}
+		
+		int userno = (int)session.getAttribute("userno");
 		System.out.println(userno);
 		meeting.setUserno(meetingService.getUserno(userno));
 		
@@ -125,6 +136,10 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("/meeting/report [POST]");
 		
+		int userno = (int)session.getAttribute("userno");
+		System.out.println(userno);
+		reportMeeting.setUserno(meetingService.getUserno(userno));
+		
 		
 		meetingService.inputReportMeeting(reportMeeting);
 		
@@ -148,19 +163,25 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	
 	@GetMapping("/meeting/join")
-	public void joinMeetingComment(Model model, HttpSession session ,Users users) {
+	public void joinMeetingComment(Meeting viewmeeting, Model model, HttpSession session ,Users users) {
 		
 		logger.info("/meeting/join [GET]");
+		
+		model.addAttribute("viewmeeting" , viewmeeting);
 		
 		
 	}
 	
 	@PostMapping("/meeting/join")
-	public void meetingJoinInput(Model model , Applicant applicant) {
+	public void meetingJoinInput(HttpSession session, Model model , Applicant applicant) {
 		
 		logger.info("/meeting/join [POST]");
 		
+		int userno = (int)session.getAttribute("userno");
+		applicant.setUserno(meetingService.getUserno(userno));
+		
 		meetingService.inputJoinMeeting(applicant);
+		
 	}
 	
 	

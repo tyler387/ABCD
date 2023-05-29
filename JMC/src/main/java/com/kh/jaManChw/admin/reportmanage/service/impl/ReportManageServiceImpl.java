@@ -17,7 +17,7 @@ public class ReportManageServiceImpl implements ReportManageService {
 
 	@Autowired ReportManageDao reportManageDao;
 	@Override
-	public Paging getpaging(String ccurpage) {
+	public Paging getpaging(String ccurpage,  String type) {
 		//전달파라미터 curPage 추출
 		
 		String param = ccurpage;
@@ -29,7 +29,7 @@ public class ReportManageServiceImpl implements ReportManageService {
 		}
 		
 		//총 게시글 수 조회하기
-		int totalCount = reportManageDao.selectCntAll();
+		int totalCount = reportManageDao.selectCntAll(type);
 		
 		//페이징 객체
 //		Paging paging = new Paging(totalCount, curPage, 30, 5); //listCount:30, pageCount:5
@@ -63,6 +63,13 @@ public class ReportManageServiceImpl implements ReportManageService {
 	public List<Map<String, Object>> getReportPostFiltering(Map<String, Object> map) {
 		
 		return reportManageDao.selectReportPostFiltering(map);
+	}
+	
+	@Override
+	public void reviseReportPostSate(Map<String, Object> map) {
+		
+		reportManageDao.updateReportPostState(map);
+		
 	}
 	
 }

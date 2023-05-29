@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace ="com.kh.jaManChw.admin.reportmanage.dao.face.ReportManageDao">
 
-	<select id="selectCntAll"  resultType="int"  >
-		SELECT count(*) FROM report
+	<select id="selectCntAll"  resultType="int"  parameterType="String">
+		SELECT count(*) FROM report where report_type = #{type}
 	</select>
 	
 	<select id="selectReportPost" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    SELECT rownum rnum, B.* FROM (
 		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
 		            WHERE R.userno = U.userno and R.report_type = 'post'  and R.r_userno = Q.userno
+		            ORDER BY R.userno DESC
 		        )B
 		    )
 		WHERE rnum BETWEEN #{startno} AND #{endno}
@@ -31,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    SELECT rownum rnum, B.* FROM (
 		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
 		            WHERE R.userno = U.userno and R.report_type = 'user'  and R.r_userno = Q.userno
+		            ORDER BY R.userno DESC
 		        )B
 		    )
 		WHERE rnum BETWEEN #{startno} AND #{endno}
@@ -49,5 +51,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)users
 		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
 	</select>
+	
+	<update id="updateReportPostState" parameterType="map">
+	<if test="type == 'approval'">
+	    {call
+	        declare
+	        begin
+				UPDATE users SET warn_count = warn_count+1
+				WHERE userno = ${userno};
+				UPDATE report SET status = 'processed'
+				WHERE reportno = ${reportno};
+			end
+		}
+	</if>
+		<if test="type == 'cancel'">
+		UPDATE report SET status = 'processed'
+		WHERE reportno = ${reportno}
+	</if>
+	</update>
 	
 </mapper>

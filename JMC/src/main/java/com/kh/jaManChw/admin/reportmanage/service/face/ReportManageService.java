@@ -9,7 +9,7 @@ import com.kh.jaManChw.util.Paging;
 
 public interface ReportManageService {
 
-	public Paging getpaging(String ccurpage);
+	public Paging getpaging(String ccurpage, String type);
 	
 	/**
 	 * 신고 게시글 목록 조회
@@ -53,5 +53,13 @@ public interface ReportManageService {
 	 * @return
 	 */
 	public List<Map<String, Object>> getReportPostFiltering(Map<String, Object> map);
+	
+	/**
+	 *  신고 게시글에서 승인 클릭시
+	 * @param username
+	 * @param type 
+	 */
+	public void reviseReportPostSate(Map<String, Object> map);
+
 
 }

@@ -92,6 +92,19 @@ public class UserManageServiceImpl implements UserManageService {
 		
 		return paging;
 	}
+	
+	@Override
+	public void reviseUserUpdate(int userno) {
+		
+		userManageDao.updateUserMgUpdate(userno);
+	}
+	
+	@Override
+	public void reviseUserBlackStop(int userno) {
+		userManageDao.updateUserMgStop(userno);
+		
+	}
+	
 
 
 }

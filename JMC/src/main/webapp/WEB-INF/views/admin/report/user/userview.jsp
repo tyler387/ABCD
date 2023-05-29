@@ -25,12 +25,12 @@
 	피신고자 아이디 : ${report.R_USER_NAME }<br> 
 	신고분류 : ${report.REPORT_OPTION }<br>
 	내용 : ${report.CONTENT} <br>
-</c:forEach>
+	
 <br><Br><br>
-<button>게시글 삭제</button>
-<button>승인</button>
-<button>반려</button>
-<button>취소</button>
+<a href="<%=request.getContextPath() %>/admin/report/post/state?userno=${report.USERNO}&type=approval&reportno=${report.REPORTNO}"><button id="approval_btn">승인</button></a>
+<a href="<%=request.getContextPath() %>/admin/report/post/state?reportno=${report.REPORTNO}&type=cancel"><button id="cancel_btn">반려</button></a>
+<button>취소</button>	
+</c:forEach>
 
 <br><br><br>
 <a href="<%=request.getContextPath() %>/admin/report/post/list"><button>신고 게시글 페이지</button></a>

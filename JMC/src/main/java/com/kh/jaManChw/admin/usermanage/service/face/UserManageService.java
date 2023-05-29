@@ -53,5 +53,17 @@ public interface UserManageService {
 	 */
 	public Paging getFilterPaging(String ccurpage, Map<String, Object> map);
 	
+	/**
+	 * 회원 블랙리스트 설정
+	 * @param userno
+	 */
+	public void reviseUserUpdate(int userno);
+
+	/** 
+	 * 회원 정지 설정
+	 * @param userno
+	 */
+	public void reviseUserBlackStop(int userno);
+	
 
 }

@@ -162,6 +162,7 @@ public class UserManageController {
 			Model model,
 			String curPage) {
 		logger.info("user list");
+		logger.info("curPage: {}", curPage);
 		String ccurpage = curPage;
 		Paging paging = userManageService.getpaging(ccurpage);
 		logger.info("{}",paging);
@@ -189,15 +190,22 @@ public class UserManageController {
 	}
 	
 	@RequestMapping("/black/update")
-	public String BlackUpdate(int userno) {
+	public String BlackUpdate(int userno, String curPage) {
+		logger.info("유저번호 입력 받은 거 : {}", userno);
+		userManageService.reviseUserUpdate(userno);
 		
 		return "redirect:/admin/user/black/list";
 	}
 	
-	@RequestMapping("/black/userstop")
-	public String BlackStop(int userno) {
+	@RequestMapping("/black/stop")
+	public String BlackStop(int userno, String curPage) {
+		logger.info("유저번호 입력 받은 거 : {}", userno);
+		logger.info("현재페이지 입력 받은 거 : {}", curPage);
 		
-		return "redirect:/admin/user/black/list";
+		userManageService.reviseUserBlackStop(userno);
+		
+		//url이 변경됨 인서트 및 딜리트 
+		return "forward:/admin/user/black/list";
 	}
 	
 }

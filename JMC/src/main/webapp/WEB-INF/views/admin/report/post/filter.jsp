@@ -1,14 +1,13 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style>
 table {
     margin-left:auto; 
@@ -30,29 +29,6 @@ table, td, th {
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-<script type="text/javascript">
-$(function() {
-	$("#searchBtn").click(function() {
-		
-			 $.ajax({
-			type: "post"
-			, url: "./filter"
-			, data:  {filter : $("#filter").val(), content : $("#content").val(), curPage: ${paging.curPage}}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공")
-				$("#result").html(res)
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		}) 
-	})
-})
-</script>
-
 
 </head>
 <body>

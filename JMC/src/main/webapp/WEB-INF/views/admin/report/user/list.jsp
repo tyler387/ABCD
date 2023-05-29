@@ -63,7 +63,10 @@ table, td, th {
 	<th>${report.USER_NAME }</th>
 	<th><a href="./userview?reportno=${report.REPORTNO }">${report.TITLE }</a></th>
 	<th>${report.REPORT_OPTION }</th>
-	<th>${report.STATUS }</th>
+	<th><c:choose>
+		<c:when test="${report.STATUS eq 'processed'}"> 승인</c:when>
+		<c:when test="${report.STATUS eq 'unprocessed'}">미승인</c:when>
+	</c:choose>  </th>
 	<th>${report.WRITE_DATE }</th>
 </tr>
 </c:forEach>

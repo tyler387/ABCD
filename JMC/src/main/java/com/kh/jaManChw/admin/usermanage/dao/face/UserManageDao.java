@@ -22,5 +22,9 @@ public interface UserManageDao {
 
 	public int selectFilterCntAll(Map<String, Object> map);
 
+	public void updateUserMgUpdate(int userno);
+
+	public void updateUserMgStop(int userno);
+
 	
 }

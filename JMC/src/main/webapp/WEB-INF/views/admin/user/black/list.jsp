@@ -38,7 +38,7 @@ $(function() {
 			 $.ajax({
 			type: "post"
 			, url: "./filter"
-			, data:  {filter : $("#filter").val(), content : $("#content").val()}
+			, data:  {filter : $("#filter").val(), content : $("#content").val(), curPage: ${paging.curPage}}
 			, dataType: "html" 
 			, success: function( res ) {
 				console.log("AJAX 성공")
@@ -72,6 +72,7 @@ $(function() {
 	<th>아이디</th>
 	<th>이름</th>
 	<th>등급</th>
+	<th>상태</th>
 	<th>신고 누적수</th>
 	<th>가입일</th>
 	<th>관리</th>
@@ -82,14 +83,21 @@ $(function() {
 	<th>${users.userId }</th>
 	<th>${users.userName }</th>
 	<th><c:choose>
+		<c:when test="${users.status eq 'blacklist'}">블랙리스트</c:when>
+		<c:when test="${users.status eq	'block'}">정지</c:when>
+		<c:when test="${users.status eq 'active'}">활동중</c:when>
+		<c:when test="${users.status eq 'unactive'}">휴먼</c:when>
+		<c:when test="${users.status eq 'leave'}">탈퇴</c:when>
+	</c:choose> </th>
+	<th><c:choose>
 		<c:when test="${users.grade eq '1'}">차가움</c:when>
 		<c:when test="${users.grade eq	'2'}">보통</c:when>
 		<c:when test="${users.grade eq '3'}">따듯함</c:when>
 	</c:choose>  </th>
 	<th>${users.warnCount }</th>
 	<th>${users.joinDate }</th>
-	<th><a href="./update?userno=${users.userno }"><button>블랙리스트</button></a>
-	<a href="./stop?userno=${users.userno }"><button>회원정지</button></a></th>
+	<th><a href="./update?userno=${users.userno }&curPage=${paging.curPage}"><button>블랙리스트</button></a>
+	<a href="./stop?userno=${users.userno }&curPage=${paging.curPage}"><button>회원정지</button></a></th>
 </tr>
 </c:forEach>
 </table>

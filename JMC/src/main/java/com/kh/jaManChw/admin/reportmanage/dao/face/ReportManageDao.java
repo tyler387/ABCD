@@ -9,7 +9,7 @@ import com.kh.jaManChw.util.Paging;
 
 public interface ReportManageDao {
 
-	public int selectCntAll();
+	public int selectCntAll(String type);
 
 	public List<Map<String, Object>> selectReportPost(Paging paging);
 
@@ -20,5 +20,8 @@ public interface ReportManageDao {
 	public List<Map<String, Object>> selectReportUserView(String reportno);
 
 	public List<Map<String, Object>> selectReportPostFiltering(Map<String, Object> map);
+
+	public void updateReportPostState(Map<String, Object> map);
+
 
 }

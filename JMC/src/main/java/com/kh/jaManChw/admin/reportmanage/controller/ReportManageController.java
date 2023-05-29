@@ -33,7 +33,8 @@ public class ReportManageController {
 			) {
 		logger.info("post list");
 		String ccurpage = curPage;
-		Paging paging = reportManageService.getpaging(ccurpage);
+		String type = "post";
+		Paging paging = reportManageService.getpaging(ccurpage, type);
 		logger.info("{}",paging);
 		List<Map<String, Object>> reportB = reportManageService.reportPostPage(paging);
 		logger.info("report B : {}", reportB);
@@ -43,16 +44,20 @@ public class ReportManageController {
 	}
 	
 	@RequestMapping("/post/filter")
-	public void userfiltering(
+	public String userfiltering(
 			Model model, String curPage,
 			@RequestParam Map<String, Object> map
 			) {
+		logger.info("map 출력 {}", map);
 		String ccurpage = curPage;
-		Paging paging = reportManageService.getpaging(ccurpage);
+		String type = "post";
+		Paging paging = reportManageService.getpaging(ccurpage, type);
 		map.put("paging", paging);
 		List<Map<String, Object>> reportpost = reportManageService.getReportPostFiltering(map);
 		logger.info("{}", reportpost);
 		model.addAttribute("userfilter", reportpost);
+		
+		return "/admin/report/post/filter";
 	}
 	
 	@RequestMapping("/post/postview")
@@ -66,6 +71,13 @@ public class ReportManageController {
 		
 	}
 	
+	@RequestMapping("/post/state")
+	public String ReportPostState(@RequestParam Map<String, Object> map) {
+		logger.info("승인, 반려 타입 {}", map);
+		reportManageService.reviseReportPostSate(map);
+		
+		return "redirect:/admin/report/post/list";
+	}
 	
 	@RequestMapping("/user/list")
 	public void ReportUserList(
@@ -73,8 +85,9 @@ public class ReportManageController {
 			String curPage
 			) {
 		logger.info("user list");
+		String type = "user";
 		String ccurpage = curPage;
-		Paging paging = reportManageService.getpaging(ccurpage);
+		Paging paging = reportManageService.getpaging(ccurpage, type);
 		logger.info("{}",paging);
 		List<Map<String, Object>> reportU = reportManageService.reportUserPage(paging);
 		logger.info("report U : {}", reportU);
@@ -92,5 +105,6 @@ public class ReportManageController {
 		model.addAttribute("userView", userView);
 		
 	}
+	
 	
 }

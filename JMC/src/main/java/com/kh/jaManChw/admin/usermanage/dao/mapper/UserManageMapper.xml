@@ -47,5 +47,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) FROM users WHERE ${filter} = #{content}
 	</select>
 	
+	<update id="updateUserMgUpdate" parameterType="int">
+	UPDATE users SET status = 'blacklist'
+	WHERE userno = ${userno}
+	</update>
+	
+	<update id="updateUserMgStop" parameterType="int">
+	UPDATE users SET status = 'block'
+	WHERE userno = ${userno}
+	</update>
+	
+	
 	
 </mapper>

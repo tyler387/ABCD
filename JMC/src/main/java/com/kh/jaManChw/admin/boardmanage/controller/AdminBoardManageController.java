@@ -170,4 +170,5 @@ public class AdminBoardManageController {
 		model.addAttribute("paging",paging);
 	}
 	
+	
 }

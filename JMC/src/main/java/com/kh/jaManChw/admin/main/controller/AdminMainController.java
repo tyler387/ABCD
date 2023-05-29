@@ -11,7 +11,7 @@ public class AdminMainController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
-	@RequestMapping("/admin/main")
+	@RequestMapping("/admin/main2")
 	public void adminmain() {
 		logger.info("어드민 메인 접속");
 	}

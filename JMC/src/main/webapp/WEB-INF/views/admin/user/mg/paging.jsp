@@ -14,12 +14,14 @@
 }
 </style>
 
-<div class="page">
+
+<nav aria-label="Page navigation example">
+<!-- <div class="page"> -->
 <ul class="pagination justify-content-center">
 <%--===========================Go to First=============================--%>
 <%-- 첫 페이지로 이동 --%>
 <c:if test="${paging.curPage ne 1}">
-	<li class ="page-item"><a href="./list">첫 페이지</a></li>
+	<li class ="page-item"><a class="page-link" href="./list">첫 페이지</a></li>
 </c:if>
 
 <%-- 현재 페이지가 1이라면 첫 페이지로 이동하는 기능을 비활성화한다 --%>
@@ -97,4 +99,5 @@
 <%--====================================================================--%>
 
 </ul>
-</div>
+</nav>
+<!-- </div> -->

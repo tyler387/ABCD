@@ -11,12 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaManChw.admin.usermanage.service.face.UserManageService;
@@ -32,7 +29,8 @@ public class UserManageController {
 	
 	@Autowired UserManageService userManageService;
 	
-	@GetMapping("/mg/list")
+//	@GetMapping("/mg/list")
+	@GetMapping("/mg/main")
 	public void user(
 			Model model,
 			String curPage
@@ -157,7 +155,8 @@ public class UserManageController {
 		return "redirect:/admin/user/mg/list";
 	}
 	
-	@RequestMapping("/black/list")
+	@GetMapping("/black/list")
+//	@RequestMapping("/black/main2")
 	public void UserBlackPage(
 			Model model,
 			String curPage) {

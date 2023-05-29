@@ -83,7 +83,7 @@
 	<p><a href="<%=request.getContextPath() %>/admin/user/black/list">블랙리스트 관리</a><br><br></p>
 	<h2>신고관리</h2>
 	<p><a href="<%=request.getContextPath() %>/admin/report/post/list">신고글 확인</a><br></p>
-	<p><a href="<%=request.getContextPath() %>/admin/report/post/list">미팅 신고 확인</a><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/report/post/meeting">미팅 신고 확인</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/report/user/list">신고 계정 확인</a><br><br></p>
 	<h2>판매관리</h2>
 	<p><a href="./board/list?boardOption=event">상품 등록</a><br></p>
@@ -96,7 +96,7 @@
 	
 	</div>
 	<div class="right">
-	<c:import url="./main.jsp"></c:import>
+	<c:import url="./list.jsp"></c:import>
 	</div>
 </div>
 </body>

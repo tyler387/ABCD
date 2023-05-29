@@ -53,9 +53,24 @@ public interface AdminBoardService {
 	 * 가져온 게시글 번호를 통해서 게시글의 상세 정보를 조회하여 반환한다
 	 * 
 	 * @param adminBoardParam - 게시글 번호를 가져갈 DTO객체
-	 * @return 게시글의 전체 상세정보를 담아올 Map
+	 * @return 게시글의 전체 상세정보를 담아올 DTO객체
 	 */
-	public Map<String, String> showAdminBoardDetail(AdminBoard adminBoardParam);
+	public AdminBoard showAdminBoardDetail(AdminBoard adminBoardParam);
+
+	/**
+	 * 입력받은 정보로 해당 게시글의 정보를 수정한다
+	 * 
+	 * @param adminBoardParam - 수정을 위해 입력받은 정보를 담은 DTO객체
+	 */
+	public void reviseAdminBoard(AdminBoard adminBoardParam);
+
+	/**
+	 * 삭제버튼을 누르면 해당 게시글의 번호가 전달되고
+	 *  해당 게시글의 [상태]를 "delete" 로 변경한다
+	 * 
+	 * @param adminBoardno - 상태를 변경할 게시글의 번호를 지정한다
+	 */
+	public void eraseAdminBoardStatus(int adminBoardno);
 
 
 }

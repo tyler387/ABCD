@@ -20,7 +20,8 @@
       			SELECT ab.*, u.user_id FROM admin_board ab, users u
 		        WHERE ab_option = #{boardOption}
 		        AND ab.userno = u.userno
-		        ORDER BY admin_boardno
+		        AND ab.ab_status = 'undelete'
+		        ORDER BY admin_boardno DESC
 		    )B
 		)
 		WHERE 1= 1
@@ -41,5 +42,23 @@
 		VALUES(admin_board_file_seq.nextval, ${adminBoardno}, #{abf_origin_name}, #{abf_stored_name}, ${filesize})
 	</insert>
 	
+	<select id="selectAdminBoardDetail" resultType="AdminBoard" parameterType="AdminBoard">
+		SELECT * FROM admin_board
+		WHERE 1 = 1
+		AND admin_boardno = ${adminBoardno}
+	</select>
 	
+	<update id="updateAdminBoard" parameterType="AdminBoard">
+		UPDATE admin_board SET 
+			title = #{title}, 
+			content = #{content},
+			last_update_date = current_timestamp
+		WHERE admin_boardno = #{adminBoardno}
+	</update>
+	
+	<update id="updateAdminBoarStatus" parameterType="int">
+		UPDATE admin_board SET
+			ab_status = 'delete'
+		WHERE admin_boardno = #{admonBoardno}
+	</update>
 </mapper>

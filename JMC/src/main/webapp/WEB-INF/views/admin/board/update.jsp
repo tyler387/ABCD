@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -16,6 +17,17 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script type="text/javascript">
 
+</script>
+<style type="text/css">
+#summernoteDiv{
+	display: inline-block;
+}
+#files{
+	display: inline-block;
+}
+</style>
+
+<script type="text/javascript">
 $(function() {
 	
 	
@@ -35,6 +47,8 @@ $(function() {
 					}
 				}
 			});
+	
+	$(".note-editable").html('${detail.content}');
 	
 	function sendFile(file, el) {
 		console.log("el {}", el);
@@ -63,33 +77,27 @@ $(function() {
 })
 
 </script>
-<style type="text/css">
-#summernoteDiv{
-	display: inline-block;
-}
-#files{
-	display: inline-block;
-}
-</style>
 </head>
 <body>
 
 <c:choose>
 <c:when test="${not empty boardOption  and boardOption eq 'notice'}">
-<h1>공지사항 글쓰기</h1>
+<h1>공지사항 글수정</h1>
 <hr>
 </c:when>
 <c:when test="${not empty boardOption and boardOption eq 'event'}">
-<h1>이벤트 글쓰기</h1>
+<h1>이벤트 글수정</h1>
 <hr>
 </c:when>
 </c:choose>
 
 <div>
-<form action="./write" method="post" enctype="multipart/form-data">
+<form action="./update" method="post" enctype="multipart/form-data">
+	
+	<input type="hidden" id="adminBoardno" name="adminBoardno" value="${detail.adminBoardno}">
 	
 	<label>제목</label>
-	<input type="text" id="title" name="title">
+	<input type="text" id="title" name="title" value="${detail.title}">
 	<br>
 
 	<label>내용</label>
@@ -103,11 +111,6 @@ $(function() {
 	<button>전송</button>
 </form>
 </div>
-
-<div>
-<a href="./list"><button>작성취소</button></a>
-</div>
-
 
 </body>
 </html>

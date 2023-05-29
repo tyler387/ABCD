@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaManChw.admin.boardmanage.service.face.AdminBoardService;
@@ -34,23 +35,20 @@ public class AdminBoardManageController {
 	@Autowired private QnAAService qnAAService;
 	@Autowired private QnAQService qnAQService;
 	
+	
 	//관리자 게시글 관리 페이지로 이동
 	@GetMapping("/board/list")
 	public void adminBoardPage(
-				String boardOption,
 				String curPage,
-				HttpSession session,
+				@SessionAttribute(name ="boardOption") String boardOption,
 				Model model
 			) {
-		
-		session.setAttribute("boardOption", boardOption);
-		
+		logger.info("boardOption: {}", boardOption);
 		Paging page = adminBoardService.getBoardPaging(curPage, boardOption);
 		
 		List<Map<String, String>> boardList = adminBoardService.showAdminBoardListByBoardOption(boardOption, page);
 		
-		logger.info("session:{}",session.getAttribute("boardOption"));
-		model.addAttribute("boardOption", session.getAttribute("boardOption"));
+		logger.info("boardOption:{}",boardOption);
 		model.addAttribute("paging", page);
 		model.addAttribute("boardList",boardList);
 		
@@ -58,7 +56,7 @@ public class AdminBoardManageController {
 	
 	//관리자 게시글 등록 페이지로 이동
 	@GetMapping("/board/noticeWrite")
-	public void adminBoardWritePage() {
+	public void adminBoardWritePage(HttpSession session) {
 	}
 	
 
@@ -96,23 +94,24 @@ public class AdminBoardManageController {
 		
 		adminBoardService.writeAdminBoard(session,adminBoardParam, file);
 		
-		return "redirect:./list?boardOption="+session.getAttribute("boardOption");
+		return "redirect:./list";
 	}
 	
 	@GetMapping("/board/update")
 	public void adminBoardRevisePage(
-			String boardOption,
 			HttpSession session,
 			AdminBoard adminBoardParam,
 			Model model
 			) {
 		
-		logger.info("boardOption: {}", boardOption);
+		logger.info("session - boardOption : {}", session.getAttribute("boardOption"));
 		logger.info("session - userno : {}", session.getAttribute("userno"));
 		logger.info("adminBoardParam: {}", adminBoardParam);
+		
+		
 		//보드넘버를 통해 해당 게시글을 조회한다
 		//	ㄴ모델값으로 보내기 위한 정보, 접근한 사용자가 적절한 접근을 하고 있는지 확인
-		Map<String, String> detailMap = adminBoardService.showAdminBoardDetail(adminBoardParam);
+		AdminBoard detailAdminBoard = adminBoardService.showAdminBoardDetail(adminBoardParam);
 		
 		//로그인 기능시 생성될 userno, 임의로 세션에 삽입해서 Test한다
 //		session.setAttribute("userno", 10);
@@ -122,6 +121,53 @@ public class AdminBoardManageController {
 //			return "./list"+boardOption+"adminBoard";
 //		}
 		
+		logger.info("detailAdminBoard: {}", detailAdminBoard);
+		
+		model.addAttribute("detail", detailAdminBoard);
+		
+	}
+	
+	@PostMapping("/board/update")
+	public String adminBoardRevise(
+			HttpSession session,
+			AdminBoard adminBoardParam
+			) {
+		
+		logger.info("POST adminBoardParam: {}", adminBoardParam);
+		logger.info("POST adminBoardParam boardOption: {}", session.getAttribute("boardOption"));
+		
+		adminBoardService.reviseAdminBoard(adminBoardParam);
+		
+		return "redirect:./list";
+	}
+	
+	@RequestMapping("/board/delete")
+	public String adminBoardErase(
+			int adminBoardno
+			) {
+		logger.info("adminBoardno : {}", adminBoardno);
+		adminBoardService.eraseAdminBoardStatus(adminBoardno);
+		
+		return "redirect:./list";
+	}
+
+	//-----------------------------관리자 게시글 관리 끝----------------------------------------
+	
+	@RequestMapping("/qna/list")
+	public void qnAPage(
+			String curPage,
+			Paging paging,
+			Model model
+			) {
+		paging = qnAQService.getPaging(curPage);
+		List<Map<String, Object>> qnAQList = qnAQService.showQnAList(paging);
+		
+
+		
+		logger.info("상태:{}",qnAQList);
+		
+		model.addAttribute("qnAQList",qnAQList);
+		model.addAttribute("paging",paging);
 	}
 	
 }

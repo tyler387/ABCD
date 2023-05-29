@@ -176,8 +176,22 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 	
 	@Override
-	public Map<String, String> showAdminBoardDetail(AdminBoard adminBoardParam) {
+	public AdminBoard showAdminBoardDetail(AdminBoard adminBoardParam) {
 		
 		return adminBoardDao.selectAdminBoardDetail(adminBoardParam);
 	}
+	
+	@Override
+	public void reviseAdminBoard(AdminBoard adminBoardParam) {
+		adminBoardDao.updateAdminBoard(adminBoardParam);
+	}
+	
+	@Override
+	public void eraseAdminBoardStatus(int adminBoardno) {
+		adminBoardDao.updateAdminBoarStatus(adminBoardno);
+	}
+	
+	//--------------------관리자 게시글 끝----------------------------
+	
+	
 }

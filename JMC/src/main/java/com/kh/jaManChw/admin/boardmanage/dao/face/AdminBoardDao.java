@@ -47,12 +47,27 @@ public interface AdminBoardDao {
 	public void insertAdminBoard(AdminBoard adminBoardParam);
 
 	/**
-	 * 여기까지 구현함...여기서부터 시작하기!!!!
+	 * 가져온 게시글 번호를 통해서 게시글의 상세 정보를 조회하여 반환한다
 	 * 
-	 * @param adminBoardParam
-	 * @return
+	 * @param adminBoardParam - 게시글 번호를 가져갈 DTO객체
+	 * @return 게시글의 전체 상세정보를 담아올 DTO객체
 	 */
-	public Map<String, String> selectAdminBoardDetail(AdminBoard adminBoardParam);
+	public AdminBoard selectAdminBoardDetail(AdminBoard adminBoardParam);
+
+	/**
+	 * 입력받은 정보를 통해 DB에 존재하는 해당 게시글의 정보를 수정한다
+	 * 
+	 * @param adminBoardParam - 수정할 정보를 담은 DTO객체
+	 */
+	public void updateAdminBoard(AdminBoard adminBoardParam);
+
+	/**
+	 * 삭제버튼을 누르면 해당 게시글의 번호가 전달되고
+	 *  해당 게시글의 [상태]를 "delete" 로 변경한다
+	 * 
+	 * @param adminBoardno - 상태를 변경할 게시글의 번호를 지정한다
+	 */
+	public void updateAdminBoarStatus(int adminBoardno);
 
 
 

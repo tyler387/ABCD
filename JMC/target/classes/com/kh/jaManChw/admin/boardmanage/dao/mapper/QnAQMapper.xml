@@ -4,4 +4,23 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kh.jaManChw.admin.boardmanage.dao.face.QnAQDao">
+
+	<select id="selectCntQnAQ" resultType="int">
+		SELECT count(*) FROM QnA_Q
+	</select>
+	
+	<select id="selectQnAQAll" resultType="map" parameterType="Paging">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+      			SELECT q.questionno, u.user_id userId, q.q_title qTitle, q.q_status qStatus, q.write_date writeDate, a.answerno FROM QnA_Q q, users u, QnA_A a
+		        WHERE 1 = 1
+		        AND q.userno = u.userno
+                AND a.questionno(+) = q.questionno
+		        ORDER BY questionno DESC
+		    )B
+		)
+		WHERE 1= 1
+		    AND rnum BETWEEN ${startno} AND ${endno}
+	</select>
+
 </mapper>

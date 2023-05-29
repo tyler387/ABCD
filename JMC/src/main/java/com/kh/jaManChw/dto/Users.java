@@ -25,12 +25,13 @@ public class Users {
 	private String status;
 	private String role;
 	private String platFormOption;
+	private Date joinDate;
 	
 	public Users() {}
 
 	public Users(int userno, String userId, String userPw, String userName, String userNick, Date birth, String gender,
 			String email, String phone, String addr1, String addr2, String addr3, String grade, int warnCount,
-			String profileImgUrl, String status, String role, String platFormOption) {
+			String profileImgUrl, String status, String role, String platFormOption, Date joinDate) {
 		super();
 		this.userno = userno;
 		this.userId = userId;
@@ -50,6 +51,7 @@ public class Users {
 		this.status = status;
 		this.role = role;
 		this.platFormOption = platFormOption;
+		this.joinDate = joinDate;
 	}
 
 	@Override
@@ -204,5 +206,15 @@ public class Users {
 	public void setPlatFormOption(String platFormOption) {
 		this.platFormOption = platFormOption;
 	}
+
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+	
+	
 	
 }

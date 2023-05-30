@@ -1,12 +1,12 @@
 package com.kh.jaManChw.login.controller;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,6 +102,47 @@ public class UserController {
 			logger.info("join() - 중복아이디 없음");		
 		}
 		return res;
+	} // idchdck() end
+	
+	// 아이디찾기 페이지 이동
+	@GetMapping("/login/searchId")
+	public void searchIdPage() {}
+	
+	// 찾은 아이디 보여주는 페이지 이동
+	@GetMapping("/login/searchResultId")
+	public void searchResultIdPage() {}
+	
+	// 이메일로 아이디 찾기
+	@PostMapping("/login/searchResultId")
+	public String findIdByemail(Users users,Model model) {
+		
+		Users res = usersService.searchId(users);
+		
+		if(res==null) {
+			logger.info("조회된 아이디 없음");
+			return "/login/searchId";
+		}else {
+			logger.info("조회된 아이디 있음");
+			model.addAttribute("userId",res.getUserId() );
+		}
+		return "/login/searchResultId";
+	} // findIdByemail() end
+	
+	// 비밀번호 찾기 페이지
+	@GetMapping("/login/searchPw")
+	public void searchPwPage() {}
+	
+	// 찾는 비밀번호 페이지
+	@GetMapping("/login/searchResultPw")
+	public void searchResultPwPage() {}
+	
+	// 아이디 조회 후 비밀번호 수정
+	@PostMapping("/login/searchResultPw")
+	public void searchPw() {
+		
+		
 	}
+	
+	
 	
 } //userController() end 

@@ -5,10 +5,11 @@
 <div class="footer">
 
 	<div class="company">
-		<h2>(주)JAMANCHO</h2>
-		<p>상호명 : JAMANCHO   사업자 등록번호 : 000-00-00000</p>
-		<p>ADDRESS : 서울특별시</p>
-		<p>TEL : 000-0000-0000    EMAIL : jamanchu@xxxxx.xxx</p>
+		<h2>(주)JAMANCHU</h2>
+		<p>상호명 : JAMANCHU   사업자 등록번호 : 012-34-56789</p>
+		<p>대표명 : </p>
+		<p>ADDRESS : 서울특별시 강남구 역삼동</p>
+		<p>TEL : 02)012-3456    EMAIL : jamanchu@xxxxx.xxx</p>
 	</div>
 
 	

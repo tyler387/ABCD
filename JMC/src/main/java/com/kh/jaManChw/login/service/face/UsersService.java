@@ -1,5 +1,7 @@
 package com.kh.jaManChw.login.service.face;
 
+import org.springframework.ui.Model;
+
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersService {
@@ -29,6 +31,22 @@ public interface UsersService {
 	 * @param users
 	 */
 	public void join(Users users);
+
+	/**
+	 * 
+	 * @param users
+	 * @return
+	 */
+	public Users searchId(Users users);
+
+	
+
+	
+
+
+	
+
+
 
 	
 

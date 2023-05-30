@@ -148,7 +148,7 @@ a {
 
 <div id="menu">
   <ul class="main1">
-    <li style="border: none;"><a href="/login/main">JAMANCHO</a>
+    <li style="border: none;"><a href="/login/main">JAMANCHU</a>
     </li>
     <li><a href="#">회사소개</a></li>
     <li style="border: none;"><a href="#">모임</a>

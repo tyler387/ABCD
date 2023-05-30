@@ -28,13 +28,18 @@
   	SELECT count(*)
   	FROM USERS
   	WHERE USER_ID=#{userId}
-  
   </select>
   
   <insert id="insertUsers" parameterType="com.kh.jaManChw.dto.Users">
   	INSERT INTO USERS(USERNO,USER_ID,USER_PW,USER_NICK,USER_NAME,BIRTH,GENDER,EMAIL,PHONE,ADDR1,ADDR2,ADDR3,GRADE,WARN_COUNT,PROFIL_IMG_URL,STATUS,ROLE,PLATFORM_OPTION,JOIN_DATE)
   	VALUES (USERS_SEQ.NEXTVAL,#{userId},#{userPw},#{userId},#{userName},#{birth},#{gender},#{email},#{phone},#{addr1},#{addr2},#{addr3},DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,sysdate) 
   </insert>
+  
+  <select id="selectIdByUserNameEmail" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
+  	SELECT USER_ID
+  	FROM USERS
+  	WHERE EMAIL=#{email} and USER_NAME=#{userName}
+  </select>
   
   
   </mapper>

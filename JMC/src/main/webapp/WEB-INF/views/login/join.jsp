@@ -2,19 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
 <c:import url="../layout/header.jsp" />
 <style type="text/css">
 form{
-	display:grid; 
 	justify-content: center;
-	align-items: center; 
-	/* display: flex;
-  	justify-content: center;
-  	align-items: center;
- 	min-height: 100vh; */
- 	 
+	align-items: center;  
+	display: flex;
+ 	min-height: 100vh; 
+ 	flex-direction:column; 
 	font-weight: bold;
 	width: 1000px;
 	height: 100%;
@@ -23,6 +18,17 @@ form{
     margin: 0 auto;
     font-size: 23px;
 }
+
+.box1{
+	display: flex;
+	flex-direction:column;  
+	justify-content: flex-start;
+	width: 380px;
+}
+
+.labelbox{
+}
+
 
 
 .btn {
@@ -103,65 +109,79 @@ form{
 </style>
 </head>
 <body>
-<div id="join_form">
-<form action="/login/join" method="post"> 
+<div id="join_continner">
+<form action="/login/join" method="post" onsubmit="return submitCheck();"> 
 <h1 style="font-size:63px;">JAMANCHO</h1> 
-
-<div class="input">
-	<label for="userId">아이디*</label>
-	<div class="input">
+<!-- <div class=""> -->
+<div class="box1">
+	<div class="labelbox">
+		<label for="userId">아이디*</label>
+	</div>
+	<div class="box2">
 		<input type="text" name="userId" id="userId">
 		<button type="button" id="idchk" name="idchk" onclick="idcheck()">중복확인</button>
+	</div>	
+	<div class="msgbox">
 		<span id="id_msg"></span>	
-	</div>
-	
+	</div>	
 </div>
+ 
 
-
-<div class="input1">
+<div class="box1">
+	<div class="labelbox">
 		<label for="userPw">패스워드*</label>
-	<div class="input2">
+	</div>	
+	<div class="box2">
 		<input type="password" name="userPw" id="userPw">
-
 	</div>
 </div>
 
 
-<div class="input1">
+<div class="box1">
+	<div class="labelbox">
 	<label for="userPw_chk">패스워드 확인*</label>
-	<div class="input2">
+	</div>
+	<div class="box2">
 		<input type="password" name="userPw_chk" id="userPw_chk">
 	</div>
 </div>
 
 
-<div class="input1">
+<div class="box1">
+	<div class="labelbox">
 	<label for="userName">이름*</label>
-	<div class="input2">
+	</div>
+	<div class="box2">
 		<input type="text" name="userName" id="userName">
 	</div>
 </div>
 
 
-<div class="input1">
+<div class="box1">
+<div class="labelbox">
 	<label for="birth">생년월일*</label>
-	<div class="input">
+</div>	
+	<div class="box2">
 		<input type="date" name="birth" id="birth">
 	</div>	
 </div>
 
 
-<div class="input1">
-<label>성별*</label>
+<div class="box1">
+<div class="labelbox">
+	<label>성별*</label>
+</div>	
 	<div class="select">
 		<input type="radio" id="select" name="gender" value="M"><label for="select">남자</label>	
 		<input type="radio" id="select2" name="gender" value="F"><label for="select2">여자</label>
 	</div>
 </div>
 
-<div class="email-group">
+<div class="box1">
+<div class="labelbox">
 	<label>이메일*</label>
-	<div class="input-group">
+</div>	
+	<div class="box2">
 		<input type="text" name="email" id="userEmail1">
 		<select name="email" id="userEmail2">
 			<option>@naver.com</option>
@@ -171,38 +191,45 @@ form{
 		</select>
 		<br>
 		<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-		<button type="button" id="email_checkbtn" name="email_checkbtn" onclick="emailcheck()">본인인증</button>
-	</div>	
+		<button type="button" id="email_checkbtn" name="email_checkbtn">본인인증</button>
+	</div>
+	<div class="msgbox">	
+		<span id="mail-check-warn"></span>
+	</div>
 </div>
 
 
-<div class="input1">
+<div class="box1">
+<div class="labelbox">
 	<label for="phone">휴대전화*</label>
-	<div class="input2">
+</div>	
+	<div class="box2">
 		<input type="tel" name="phone" id="phone">
 	</div>
 </div>
 
 
-<div class="input1">
-	<label>주소*</label> 
-	<div class="input3">
+<div class="box1">
+<div class="labelbox">
+	<label>주소*</label>
+</div>	
+	<div class="box2">
 		<input type="text" name="addr1" id="addr1" placeholder="우편번호">
-		<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input type="text" name="addr2" id="addr2" placeholder="도로명주소"><br>
-		<input type="text" name="addr3" id="addr3" placeholder="상세주소"><br>
+		<input type="button" onclick="findAddress()" value="우편번호 찾기">
+		<input type="text" name="addr2" id="addr2" placeholder="도로명주소">
+		<input type="text" name="addr3" id="addr3" placeholder="상세주소">
 		<input type="text" id="addr4" placeholder="참고항목">
 	</div>	
 </div>
+<a href="/login/login"><button class="btn" id="submit">가입하기</button></a><br>
+<!-- </div> -->
 
-<a href="/login/login"><button class="btn">가입하기</button></a><br>
-
-</form>
+</form> 
 </div>
+
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-	
  function idcheck() {
 		
 		var userId = $('#userId').val();
@@ -276,46 +303,66 @@ form{
 	    }).open();
 	}
 	
-	function emailcheck() {
+
 	// 이메일 인증
+		var code = ""; // 인증번호 저장을 위한 코드
+		var isCertification = false; // 인증 여부 변수
+	
 		$('#email_checkbtn').click(function() {
-			const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
-			console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
-			const checkInput = $('.email_checknumber') // 인증번호 입력하는곳 
-			
-			$.ajax({
-				type :'GET',
-				url :'<c:url value ="/login/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-				success : function (data) {
-					console.log("data : " +  data);
-					checkInput.attr('disabled',false);
-					code=data;
-					alert('인증번호가 전송되었습니다.')
-				}			
-			}); // end ajax
-		}); // end send eamil 
+		  const email = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
+		  console.log('완성된 이메일: ' + email); // 이메일 오는지 확인
+		  
+		  const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
+		  
+		  $.ajax({
+		    type: 'GET',
+		    url: '/login/mailCheck?email=' + email, // GET 방식이라 Url 뒤에 email을 뭍힐 수 있다.
+		    dataType: 'text',
+		    success: function(data) {
+		      /* console.log('data: ' + data); */
+		      checkInput.attr('disabled', false); // 인증번호 입력이 가능하도록 속성 변환
+		      code = data;
+		      isCertification = true; // 인증이 완료되었음을 표시
+		      alert('인증번호가 전송되었습니다.');
+		    },
+		    error : function() { // 결과 에러 콜백함수
+		        alert('서버요청 실패');
+		    }      
+		  }); // end ajax
+		}); // end send email
 
 	// 인증번호 비교 
 // 	// blur -> focus가 벗어나는 경우 발생
- /* 		$('#email_checkbtn').blur(function () {
-			const inputCode = $(this).val();
+ 		$('#email_checknumber').blur(function () {
+			const inputCode = $('#email_checknumber').val();
 			const $resultMsg = $('#mail-check-warn');
 			
 			if(inputCode === code){
 				$resultMsg.html('인증번호가 일치합니다.');
 				$resultMsg.css('color','green');
-				$('#mail-Check-Btn').attr('disabled',true);
+				$('#email_checkbtn').attr('disabled',true);
 				$('#userEamil1').attr('readonly',true);
 				$('#userEamil2').attr('readonly',true);
-				$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-		         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+				/* $('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+		        $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect'); */
+		       
 			}else{
 				$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
 				$resultMsg.css('color','red');
 			}
 		})  
- */
-	} 
+
+
+		// 인증번호가 다르면 sumit 안되게
+		$('#submit').click(function submitCheck() {
+			if(!isCertification){
+				alert('인증이 완료되지 않았습니다.');
+				return false;
+			}else{
+				return true;
+			}
+		})
+		
 </script>
 
 <c:import url="../layout/footer.jsp" />

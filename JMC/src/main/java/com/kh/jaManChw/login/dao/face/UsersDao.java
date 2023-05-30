@@ -1,5 +1,7 @@
 package com.kh.jaManChw.login.dao.face;
 
+import org.springframework.ui.Model;
+
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersDao {
@@ -35,6 +37,11 @@ public interface UsersDao {
 	 * @return usersinfo
 	 */
 	public Users selectuserByUserId(Users users);
+
+	public Users selectIdByUserNameEmail(Users users);
+
+	
+
 
 
 

@@ -60,6 +60,22 @@ public interface ReportManageService {
 	 * @param type 
 	 */
 	public void reviseReportPostSate(Map<String, Object> map);
+	
+	/**
+	 * 미팅 신고 전체 조회
+	 * 
+	 * @param paging
+	 * @return
+	 */
+	public List<Map<String, Object>> reportMeetingPage(Paging paging);
+	
+	/**
+	 * 미팅 신고 상세 조회
+	 * 
+	 * @param reportno
+	 * @return
+	 */
+	public List<Map<String, Object>> getReportPostMeeting(String reportno);
 
 
 }

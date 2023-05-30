@@ -1,4 +1,5 @@
 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -72,7 +73,7 @@ $(function() {
 
 <div id="Alltitle" style="text-align: center; padding-top: 10px;">
 	<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
-		블랙리스트 관리
+		모임 신고 관리
 	</h1>
 </div>
 
@@ -90,36 +91,26 @@ $(function() {
 <div id="result" class="admin1">
 <table class="table table table-hover">
 <tr class="table-secondary">
-	<th>회원번호</th>
-	<th>아이디</th>
-	<th>이름</th>
-	<th>등급</th>
-	<th>상태</th>
-	<th>신고 누적수</th>
-	<th>가입일</th>
-	<th>관리</th>
+	<th>글번호</th>
+	<th>신고자 아이디</th>
+	<th>신고자 이름</th>
+	<th>제목</th>
+	<th>신고분류</th>
+	<th>처리상태</th>
+	<th>작성일</th>
 </tr>
-<c:forEach var="users" items="${users }">
+<c:forEach var="report" items="${reportB }">
 <tr>
-	<th>${users.userno }</th>
-	<th>${users.userId }</th>
-	<th>${users.userName }</th>
+	<th>${report.REPORTNO }</th>
+	<th>${report.USER_ID }</th>
+	<th>${report.USER_NAME }</th>
+	<th><a href="./view?reportno=${report.REPORTNO }">${report.TITLE }</a></th>
+	<th>${report.REPORT_OPTION }</th>
 	<th><c:choose>
-		<c:when test="${users.status eq 'blacklist'}">블랙리스트</c:when>
-		<c:when test="${users.status eq	'block'}">정지</c:when>
-		<c:when test="${users.status eq 'active'}">활동중</c:when>
-		<c:when test="${users.status eq 'unactive'}">휴먼</c:when>
-		<c:when test="${users.status eq 'leave'}">탈퇴</c:when>
-	</c:choose> </th>
-	<th><c:choose>
-		<c:when test="${users.grade eq '1'}">차가움</c:when>
-		<c:when test="${users.grade eq	'2'}">보통</c:when>
-		<c:when test="${users.grade eq '3'}">따듯함</c:when>
+		<c:when test="${report.STATUS eq 'done'}"> 승인</c:when>
+		<c:when test="${report.STATUS eq 'unprocessed'}">미승인</c:when>
 	</c:choose>  </th>
-	<th>${users.warnCount }</th>
-	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
-	<th><a href="./update?userno=${users.userno }&curPage=${paging.curPage}"><button class="btn btn-secondary">블랙리스트</button></a>
-	<a href="./stop?userno=${users.userno }&curPage=${paging.curPage}"><button class="btn btn-secondary">회원정지</button></a></th>
+	<th>${report.WRITE_DATE }</th>
 </tr>
 </c:forEach>
 </table>
@@ -136,21 +127,3 @@ $(function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
- 
- 

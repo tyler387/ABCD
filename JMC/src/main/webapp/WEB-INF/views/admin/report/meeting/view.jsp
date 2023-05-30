@@ -1,4 +1,5 @@
 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -42,27 +43,24 @@ $("#delete_btn").click(function(){
 <body>
 <div id="Alltitle" style="text-align: center; padding-top: 10px;">
 	<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
-		신고 게시글 상세조회
+		모임 신고 상세조회
 	</h1>
 </div>
 <hr>
 
 <div  class="update" style ="width: 600px; margin: 0 auto;">
 
-<c:forEach var="report" items="${reportView }">
-
+<c:forEach var="report" items="${meetingView }">
 	신고자 : ${report.USER_ID } <br>
 	신고자 아이디 : ${report.USER_NAME } <br>
 	작성일 : ${report.WRITE_DATE } <br>
 	신고글 제목 : ${report.TITLE } <br>
 	피신고자 이름 : ${report.R_USER_ID }<br> 
-	게시글 : <a href="asdsaadasdasdadsdsaadssaddsasad?boarno=${reprot.BOARDNO}"><button>바로가기</button></a><br>
 	피신고자 아이디 : ${report.R_USER_NAME }<br> 
 	신고분류 : ${report.REPORT_OPTION }<br>
 	내용 : ${report.CONTENT} <br>
-
+	
 <br><Br><br>
-<a href="<%=request.getContextPath() %>/admin/report/post/boarddelete?boardno=${report.BOARDNO}"><button id="delete_btn">게시글 삭제</button></a>
 <a href="<%=request.getContextPath() %>/admin/report/post/state?userno=${report.USERNO}&type=approval&reportno=${report.REPORTNO}"><button id="approval_btn">승인</button></a>
 <a href="<%=request.getContextPath() %>/admin/report/post/state?reportno=${report.REPORTNO}&type=cancel"><button id="cancel_btn">반려</button></a>
 <button>취소</button>	
@@ -70,6 +68,23 @@ $("#delete_btn").click(function(){
 
  </div>
 </body>
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

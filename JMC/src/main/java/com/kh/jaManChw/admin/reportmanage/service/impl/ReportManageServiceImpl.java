@@ -72,4 +72,15 @@ public class ReportManageServiceImpl implements ReportManageService {
 		
 	}
 	
+	@Override
+	public List<Map<String, Object>> reportMeetingPage(Paging paging) {
+		
+		return reportManageDao.selectReportMeeting(paging);
+	}
+	
+	@Override
+	public List<Map<String, Object>> getReportPostMeeting(String reportno) {
+		return reportManageDao.selectReportMeetingView(reportno);
+	}
+	
 }

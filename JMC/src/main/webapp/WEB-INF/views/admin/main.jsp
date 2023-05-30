@@ -82,11 +82,11 @@ a:visited {
 	
 	
 	<h2 style = "padding-top : 50px;">회원관리</h2>
-	<p><a href="<%=request.getContextPath() %>/admin/user/mg/main">회원 정보 수정</a><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/user/mg/list">회원 정보 수정</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/user/black/list">블랙리스트 관리</a><br><br></p>
 	<h2>신고관리</h2>
 	<p><a href="<%=request.getContextPath() %>/admin/report/post/list">신고글 확인</a><br></p>
-	<p><a href="<%=request.getContextPath() %>/admin/report/post/meeting">미팅 신고 확인</a><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/report/meeting/list">모임 신고 확인</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/report/user/list">신고 계정 확인</a><br><br></p>
 	<h2>판매관리</h2>
 	<p><a href="./board/list?boardOption=event">상품 등록</a><br></p>
@@ -98,4 +98,4 @@ a:visited {
 	<p><a href="./board/list?boardOption=event">Q & A 관리</a><br><br></p>
 	
 	</div>
-	<div class="right">
+<div class="right">

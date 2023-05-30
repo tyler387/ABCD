@@ -36,7 +36,7 @@
         box-sizing: border-box;
          border: 1px solid #000;
          background-color: #efeeee;
-         height: 850px;
+         height: 800px;
     } 
     div.right {
         width: 85%;
@@ -47,7 +47,7 @@
     border-bottom-style: solid;
     border-right-style: solid;
      border-width: 1px;
-     height: 850px;
+     height: 800px;
     }
     h2{
     padding-left : 50px;
@@ -70,15 +70,15 @@
     }
     
   	</style>
-</head>
+</head> 
 <body>
-<h1>관리자 메인 페이지</h1>
+<h1><a href="/admin/main"  style = "padding-top : 20px; padding-left : 30px; width: 400px;" >관리자 메인 페이지</a></h1>
 <br>
 <div class="admin">
 	<div class="left">
 	
 	
-	<h2 style = "padding-top : 30px">회원관리</h2>
+	<h2 style = "padding-top : 50px;">회원관리</h2>
 	<p><a href="<%=request.getContextPath() %>/admin/user/mg/main">회원 정보 수정</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/user/black/list">블랙리스트 관리</a><br><br></p>
 	<h2>신고관리</h2>
@@ -96,7 +96,7 @@
 	
 	</div>
 	<div class="right">
-	<c:import url="./list.jsp"></c:import>
+	<c:import url="./list.jsp"/>
 	</div>
 </div>
 </body>

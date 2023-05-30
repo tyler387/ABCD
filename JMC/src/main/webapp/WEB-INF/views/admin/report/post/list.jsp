@@ -57,7 +57,6 @@ $(function() {
 </head>
 <body>
 <h1>신고 게시글 관리 페이지</h1>
-
 <form action="./filter" method="post">
 <select name ="filter">
    <option value = "user_id" selected>아이디</option>

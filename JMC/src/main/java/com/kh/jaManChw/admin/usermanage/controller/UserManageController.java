@@ -29,8 +29,8 @@ public class UserManageController {
 	
 	@Autowired UserManageService userManageService;
 	
-//	@GetMapping("/mg/list")
-	@GetMapping("/mg/main")
+//	@GetMapping("/mg/main")
+	@GetMapping("/mg/list")
 	public void user(
 			Model model,
 			String curPage

@@ -60,8 +60,8 @@ mt : ${boardOption}
 	<td>${bl.TITLE}</td>
 	<td>${bl.WRITE_DATE}</td>
 	<td> 
-		<button onclick="location.href='./update?boardOption=${boardOption}&adminBoardno=${bl.ADMIN_BOARDNO}'">수정</button>
-		<button onclick="location.href='./delete?boardOption=${boardOption}&adminBoardno=${bl.ADMIN_BOARDNO}'">삭제</button>
+		<button onclick="location.href='./update?boardOption=${boardOption}&adminBoardno=${bl.ADMIN_BOARDNO}&curPage=${paging.curPage}'">수정</button>
+		<button onclick="location.href='./delete?boardOption=${boardOption}&adminBoardno=${bl.ADMIN_BOARDNO}&curPage=${paging.curPage}'">삭제</button>
 <%-- 		<button class="btnDelete" data-boardno="${bl.ADMIN_BOARDNO}">삭제</button> --%>
 	</td>
 </tr>	
@@ -74,7 +74,7 @@ mt : ${boardOption}
 </div>
 
 <div>
-<a href="./noticeWrite"><button>글작성</button></a>
+<a href="./write?curPage=${paging.curPage}"><button>글작성</button></a>
 </div>
 </body>
 </html>

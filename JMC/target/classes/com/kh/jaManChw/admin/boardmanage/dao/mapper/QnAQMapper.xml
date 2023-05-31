@@ -15,6 +15,7 @@
       			SELECT q.questionno, u.user_id userId, q.q_title qTitle, q.q_status qStatus, q.write_date writeDate, a.answerno FROM QnA_Q q, users u, QnA_A a
 		        WHERE 1 = 1
 		        AND q.userno = u.userno
+                AND a.a_status(+) = 'undelete'
                 AND a.questionno(+) = q.questionno
 		        ORDER BY questionno DESC
 		    )B
@@ -22,5 +23,39 @@
 		WHERE 1= 1
 		    AND rnum BETWEEN ${startno} AND ${endno}
 	</select>
+	
+	<select id="selectCntQnAQFilterAll" resultType="int" parameterType="map" >
 
+        SELECT count(*) FROM QnA_Q q, users u, QnA_A a
+        WHERE 1 = 1
+        	AND q.userno = u.userno
+        	AND q.questionno = a.questionno(+)
+			AND upper(${filter}) Like '%' || upper(#{content}) || '%'
+        ORDER BY q.questionno DESC
+	</select>
+
+	<select id="selectQnAQByFilter" resultType="map" parameterType="map">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+      			SELECT q.questionno, u.user_id userId, q.q_title qTitle, q.q_status qStatus, q.write_date writeDate, a.answerno FROM QnA_Q q, users u, QnA_A a
+		        WHERE 1 = 1
+		        AND q.userno = u.userno
+                AND a.questionno(+) = q.questionno
+                AND upper(${filter}) Like '%' || upper(#{content}) || '%'
+		        ORDER BY q.questionno DESC
+		    )B
+		)
+		WHERE 1= 1
+		    AND rnum BETWEEN ${paging.startno} AND ${paging.endno}
+	</select>
+	
+	<select id="selectQnAQDetail" resultType="map" parameterType="int">
+      			SELECT q.questionno, u.user_id userId, q.q_title qTitle, q.q_content qContent, q.q_status qStatus, q.write_date writeDate FROM QnA_Q q, users u
+		        WHERE 1 = 1
+		        AND q.userno = u.userno
+		        AND questionno = #{questionno}
+	</select>
+	<update id="updateQnAQStatus" parameterType="QnAA">
+		UPDATE QnA_Q SET q_Status = 'unprocessed' WHERE questionno = #{questionno}
+	</update>
 </mapper>

@@ -83,7 +83,7 @@ $(function() {
 </div>
 
 <!-- <form action="./filter" method="post"> -->
-<p class="text-end" style="padding-right: 50px; padding-top: 15px;">
+<div class="text-end" style="padding-right: 50px; padding-top: 15px; margin-bottom:15px;">
 <select name ="filter" id="filter">
    <option value = "user_id" selected>아이디</option>
    <option value = "user_name">이름</option>
@@ -92,7 +92,7 @@ $(function() {
 
 검색 : <input type="text" name="content" id="content">
 <button id="searchBtn" type="button" class="btn btn-secondary btn-sm">검색하기</button>
-</p> 
+</div> 
 <div id="result" class="admin1">
 <table class="table table table-hover">
 <tr class="table-secondary">

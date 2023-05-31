@@ -59,7 +59,12 @@ $(function() {
 				console.log("error입니다스!")
 			}
 		})
-	}	
+	}
+	
+	$("#btnCancel").click(function() {
+		
+		history.go(-1)
+	})
 })
 
 </script>
@@ -87,6 +92,8 @@ $(function() {
 
 <div>
 <form action="./write" method="post" enctype="multipart/form-data">
+
+	<input type="hidden" id="curPage" name="curPage" value="${curPage}">
 	
 	<label>제목</label>
 	<input type="text" id="title" name="title">
@@ -101,13 +108,9 @@ $(function() {
 	<input type="file" id="file" name="file" multiple="multiple">
 	<br>
 	<button>전송</button>
+	<button id="btnCancel" type="button">작성취소</button>
 </form>
 </div>
-
-<div>
-<a href="./list"><button>작성취소</button></a>
-</div>
-
 
 </body>
 </html>

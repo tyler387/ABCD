@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <script type="text/javascript">
 $(function() {
@@ -51,6 +52,21 @@ $("#delete_btn").click(function(){
 
 <c:forEach var="report" items="${reportView }">
 
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">제목 : ${report.TITLE }</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" 
+  value="신고자 : ${report.USER_ID} 신고자 아이디 : ${report.USER_NAME}
+   작성일 : <fmt:formatDate value='${report.WRITE_DATE }' pattern ='yyyy-MM-dd' /> 글번호 : ${report.REPORTNO }" disabled readonly>
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div> 
+<div class="mb-3"> 
+  <label for="exampleFormControlTextarea1" class="form-label">신고 게시글 및 유저 정보 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  신고 분류 : ${report.REPORT_OPTION }</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div> 
+${reprot.REPORTNO }${reprot.REPORTNO }${empty reprot.REPORTNO }
 	신고자 : ${report.USER_ID } <br>
 	신고자 아이디 : ${report.USER_NAME } <br>
 	작성일 : ${report.WRITE_DATE } <br>

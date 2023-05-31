@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM (
 		    SELECT rownum rnum, B.* FROM (
 		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
-		            WHERE R.userno = U.userno and R.report_type = 'post'  and R.r_userno = Q.userno
+		            WHERE R.userno = U.userno and R.report_type = 'board'  and R.r_userno = Q.userno
 		            ORDER BY R.userno DESC
 		        )B
 		    )
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectReportPostView" resultType="hashMap" parameterType="String">
       SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
-      WHERE R.reportno = #{reportno} and R.report_type = 'post' and R.userno = U.userno and R.r_userno = Q.userno
+      WHERE R.reportno = #{reportno} and R.report_type = 'board' and R.userno = U.userno and R.r_userno = Q.userno
 	</select>
 
 	<select id="selectUserPost" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
@@ -69,5 +69,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE reportno = ${reportno}
 	</if>
 	</update>
+		
+	<select id="selectReportMeeting" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
+		SELECT * FROM (
+		    SELECT rownum rnum, B.* FROM (
+		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+		            WHERE R.userno = U.userno and R.report_type = 'meeting'  and R.r_userno = Q.userno
+		            ORDER BY R.userno DESC
+		        )B
+		    )
+		WHERE rnum BETWEEN #{startno} AND #{endno}
+	</select>
+	
+	<select id="selectReportMeetingView" resultType="hashMap" parameterType="String">
+      SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+      WHERE R.reportno = #{reportno} and R.report_type = 'meeting' and R.userno = U.userno and R.r_userno = Q.userno
+	</select>
+	
 	
 </mapper>

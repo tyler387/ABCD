@@ -1,18 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-          
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<!-- jQuery 2.2.4 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
 <script type="text/javascript">
 $(function() {
 $("#approval_btn").click(function(){
@@ -44,13 +36,37 @@ $("#delete_btn").click(function(){
 	});
 });
 </script>
-</head>
+
+<c:import url="../../main.jsp"></c:import>
+
+
 <body>
-<H1>신고 게시글 상세조회</H1>
+<div id="Alltitle" style="text-align: center; padding-top: 10px;">
+	<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
+		신고 게시글 상세조회
+	</h1>
+</div>
 <hr>
-게시글 제목 및 게시글 내용<br>
+
+<div  class="update" style ="width: 600px; margin: 0 auto;">
 
 <c:forEach var="report" items="${reportView }">
+
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">제목 : ${report.TITLE }</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" 
+  value="신고자 : ${report.USER_ID} 신고자 아이디 : ${report.USER_NAME}
+   작성일 : <fmt:formatDate value='${report.WRITE_DATE }' pattern ='yyyy-MM-dd' /> 글번호 : ${report.REPORTNO }" disabled readonly>
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div> 
+<div class="mb-3"> 
+  <label for="exampleFormControlTextarea1" class="form-label">신고 게시글 및 유저 정보 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  신고 분류 : ${report.REPORT_OPTION }</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div> 
+${reprot.REPORTNO }${reprot.REPORTNO }${empty reprot.REPORTNO }
 	신고자 : ${report.USER_ID } <br>
 	신고자 아이디 : ${report.USER_NAME } <br>
 	작성일 : ${report.WRITE_DATE } <br>
@@ -66,13 +82,11 @@ $("#delete_btn").click(function(){
 <a href="<%=request.getContextPath() %>/admin/report/post/state?userno=${report.USERNO}&type=approval&reportno=${report.REPORTNO}"><button id="approval_btn">승인</button></a>
 <a href="<%=request.getContextPath() %>/admin/report/post/state?reportno=${report.REPORTNO}&type=cancel"><button id="cancel_btn">반려</button></a>
 <button>취소</button>	
-
 </c:forEach>
-<br><Br><br>
-<a href="<%=request.getContextPath() %>/admin/report/post/list"><button>신고 게시글 페이지</button></a>
-<a href="<%=request.getContextPath() %>/admin/report/user/list"><button>신고 계정 페이지</button></a>
-<a href="<%=request.getContextPath() %>/admin/user/black/list"><button>블랙리스트 페이지</button></a>
-<a href="<%=request.getContextPath() %>/admin/user/mg/list"><button>유저수정 페이지</button></a>
+
+ </div>
+</body>
+
+
 
 </body>
-</html>

@@ -33,7 +33,7 @@ public class ReportManageController {
 			) {
 		logger.info("post list");
 		String ccurpage = curPage;
-		String type = "post";
+		String type = "board";
 		Paging paging = reportManageService.getpaging(ccurpage, type);
 		logger.info("{}",paging);
 		List<Map<String, Object>> reportB = reportManageService.reportPostPage(paging);
@@ -106,5 +106,29 @@ public class ReportManageController {
 		
 	}
 	
+	@RequestMapping("/meeting/list")
+	public void ReportMeetingList(
+			Model model,
+			String curPage
+			) {
+		logger.info("post list");
+		String ccurpage = curPage;
+		String type = "meeting";
+		Paging paging = reportManageService.getpaging(ccurpage, type);
+		logger.info("{}",paging);
+		List<Map<String, Object>> reportB = reportManageService.reportMeetingPage(paging);
+		logger.info("report B : {}", reportB);
+		model.addAttribute("reportB", reportB);
+		model.addAttribute("paging", paging);
+	}
+	@RequestMapping("/meeting/view")
+	public void ReportMeetingView(Model model, @RequestParam String reportno) {
+		logger.info("boardno : {}", reportno);
+		
+		List<Map<String, Object>> meetingView = reportManageService.getReportPostMeeting(reportno);
+		logger.info("boardno : {}", meetingView);
+		
+		model.addAttribute("meetingView", meetingView);
+	}
 	
 }

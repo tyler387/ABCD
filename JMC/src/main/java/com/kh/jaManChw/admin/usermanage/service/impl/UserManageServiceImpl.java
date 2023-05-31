@@ -94,15 +94,21 @@ public class UserManageServiceImpl implements UserManageService {
 	}
 	
 	@Override
-	public void reviseUserUpdate(int userno) {
+	public void reviseUserBlackUpdate(int userno) {
 		
-		userManageDao.updateUserMgUpdate(userno);
+		userManageDao.updateUserBlackUpdate(userno);
 	}
 	
 	@Override
 	public void reviseUserBlackStop(int userno) {
-		userManageDao.updateUserMgStop(userno);
+		userManageDao.updateUserBlackStop(userno);
 		
+	}
+
+	@Override
+	public void reviseUserMgUpdate(Map<String, Object> map) {
+	
+		userManageDao.updateUserMgUpdate(map);
 	}
 	
 

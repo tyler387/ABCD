@@ -5,12 +5,20 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.jaManChw.chat.dao.face.ChatDao">
-	<insert id="insertMessage" parameterType="com.kh.jaManChw.dto.ChatMessage">
-		insert into chat_message values(chat_message_seq.nextval,#{chatno},1,#{message},sysdate)
-	</insert>
+<!-- 웹소켓만 활용했을 때 사용하던 mapper -->
+<!-- 	<insert id="insertMessage" parameterType="com.kh.jaManChw.dto.ChatMessage"> -->
+<!-- 		insert into chat_message values(chat_message_seq.nextval,#{chatno},1,#{message},sysdate) -->
+<!-- 	</insert> -->
 	<select id="selectAllChatno" parameterType="com.kh.jaManChw.dto.ChatUser" resultType="com.kh.jaManChw.dto.ChatRoom">
 		SELECT chatno FROM CHAT_USER WHERE userno = #{userno}
 	</select>
 	
+	<select id="selectAllMessage" parameterType="int" resultType="com.kh.jaManChw.dto.ChatMessage">
+		SELECT * FROM chat_message WHERE chatno = #{chatno}	order by sendtime asc
+	</select>
+	
+	<insert id="insertMyMessage" parameterType="com.kh.jaManChw.dto.ChatMessage">
+		INSERT INTO chat_message values(chat_message_seq.nextval,#{chatno},#{message},sysdate,#{sendId})
+	</insert>
 	
 </mapper>

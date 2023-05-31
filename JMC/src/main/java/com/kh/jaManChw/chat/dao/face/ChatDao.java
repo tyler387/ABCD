@@ -12,4 +12,8 @@ public interface ChatDao {
 
 	public List<ChatRoom> selectAllChatno(ChatUser chatUser);
 
+	public List<ChatMessage> selectAllMessage(int chatno);
+
+	public void insertMyMessage(ChatMessage message);
+
 }

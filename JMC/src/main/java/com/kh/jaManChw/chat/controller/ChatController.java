@@ -23,17 +23,34 @@ public class ChatController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	
+	//채팅방에 입장하는 컨트롤러
 	@RequestMapping("/chat/chatroom")
 	public String chatRoom(String roomid,Model model, HttpSession session) {
 		// roomid가 없을 경우 list로 redirect 해야한다
-		if(roomid==null) {
+		if(roomid==null) return "redirect:/chat/chatroomlist";
+		
+		int roomno = Integer.parseInt(roomid);
+		
+		if(session.getAttribute("userId")==null) {
 			return "redirect:/chat/chatroomlist";
 		}
 		
+		// DB에 참여한 roomid를 가져와 비교해보고 있으면 chatroom으로 !
+		List<ChatRoom> list = chatService.getChatRoomAll(session);
+		for(ChatRoom cr : list) {
+			if(cr.getChatno()==roomno) {
+				model.addAttribute("roomid",roomid);
+				return "/chat/chatroom";
+			}
+		}
 		
-		model.addAttribute("roomid",roomid);
+		// DB에 참여한 roomid가 없을경우 리다이렉트
+		// alert를 띄어주는게 좋을까!?
+	
+//		model.addAttribute("roomid",roomid);
 		
-		return "/chat/chatroom";
+		return "redirect:/chat/chatroomlist";
 	}
 	
 	@RequestMapping("/chat/chatroomlist")
@@ -48,7 +65,7 @@ public class ChatController {
 		
 		
 		List<ChatRoom> list = chatService.getChatRoomAll(session);
-		logger.info("{}",list);
+//		logger.info("{}",list);
 		model.addAttribute("list", list);
 		return "/chat/chatroomlist";
 		

@@ -37,4 +37,16 @@ public class ChatServiceImpl implements ChatService {
 		return chatDao.selectAllChatno(chatUser);
 	}
 
+	@Override
+	public List<ChatMessage> getHistory(int chatno) {
+		
+		return chatDao.selectAllMessage(chatno);
+	}
+
+	@Override
+	public void insertMessage(ChatMessage message) {
+		
+		chatDao.insertMyMessage(message);
+	}
+
 }

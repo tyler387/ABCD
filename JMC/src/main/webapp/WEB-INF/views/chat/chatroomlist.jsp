@@ -21,7 +21,7 @@
 </c:when>
 <c:when test="${sessionScope.userId ne null }">
 <c:forEach var="list" items="${list }">
-<a href="./chatroom?roomid=${list.chatno }"></a>
+<a href="./chatroom?roomid=${list.chatno }">채팅방</a>
 </c:forEach>
 </c:when>
 </c:choose>

@@ -77,7 +77,6 @@
 	
 <!--=================================================================================================================-->
 	
-	<beans:bean id="ChatHendler" class="com.kh.jaManChw.chat.hendler.ChatHendler"></beans:bean>
 	<beans:bean id="ChatConfig" class="com.kh.jaManChw.chat.config.ChatConfig"></beans:bean>
 	
 </beans:beans>

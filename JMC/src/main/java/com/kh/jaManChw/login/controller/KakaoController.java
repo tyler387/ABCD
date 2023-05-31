@@ -8,12 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.login.service.face.KakaoService;
-import com.kh.jaManChw.login.service.face.UsersService;
 
 @Controller
 public class KakaoController {
@@ -34,17 +33,22 @@ public class KakaoController {
         // 해쉬맵을 사용해서 유저의 정보를 가져옴 => access_Token 이용해서 가져올 수 있다.
         // 실제 구현할 때는 
         // 이메일(account_email) 가져와야함.
-        HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+        Users userInfo = kakaoService.getUserInfo(access_Token);
+      
+        session.setAttribute("userno", userInfo.getUserno());
         
         logger.info("loginController :{}",userInfo);
-        logger.info("userid: {}", userInfo.get("email"));
+        logger.info("email: {}", userInfo.getEmail());
+        logger.info("userid: {}", userInfo.getUserId());
+        logger.info("nickname: {}", userInfo.getUserNick());
         
         
         //  클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-        if (userInfo.get("email") != null) {
-        	session.setAttribute("userId", userInfo.get("email"));
-            session.setAttribute("access_Token", access_Token);
-        }
+//        if (userInfo.getEmail() != null) {
+//        	session.setAttribute("email", userInfo.getEmail());
+//            session.setAttribute("access_Token", access_Token);
+//            session.setAttribute("userno", userInfo.getUserId());
+//        }
         return "redirect:/login/main";
     }
 

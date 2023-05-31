@@ -2,6 +2,8 @@ package com.kh.jaManChw.login.service.face;
 
 import java.util.HashMap;
 
+import com.kh.jaManChw.dto.Users;
+
 public interface KakaoService {
 	
 	/**
@@ -16,7 +18,7 @@ public interface KakaoService {
 	 * @param access_Token
 	 * @return userInfo
 	 */
-	public HashMap<String, Object> getUserInfo(String access_Token);
+	public Users getUserInfo(String access_Token);
 
 	/**
 	 * 카카오 로그인 로그아웃(세션 지우기)

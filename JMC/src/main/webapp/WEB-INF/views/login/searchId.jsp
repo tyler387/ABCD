@@ -6,10 +6,11 @@
 <h1>아이디 찾기</h1>
 
 <p>등록된 이메일로 아이디 찾기</p>
-<form action="/login/searchId" method="post" onsubmit="return submitCheck();">
+<!-- <form action="/login/searchId" method="post" onsubmit="return submitCheck();"> -->
 <div>
 	<label for="userName">이름</label>
 	<input type="text" id="userName" name="userName">
+	<span id="msg"></span>
 </div>
 
 <div class="email-group">
@@ -31,9 +32,13 @@
 	</div>
 	<a href="/login/searchResultId" id="submit"><button>다음</button></a>
 </div>
-</form>
+<!-- </form> -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
+
+
+
+
 
 //이메일 인증
 var code = ""; // 인증번호 저장을 위한 코드
@@ -85,7 +90,7 @@ $('#email_checkbtn').click(function() {
 
 
 // 인증번호가 다르면 sumit 안되게
-/* $('#submit').click(function submitCheck() {
+ $('#submit').click(function submitCheck() {
 	if(!isCertification){
 		alert('인증이 완료되지 않았습니다.');
 		return false;
@@ -93,7 +98,7 @@ $('#email_checkbtn').click(function() {
 		return true;
 	}
 })  
- */
+
 </script>
 
 <c:import url="../layout/footer.jsp" />

@@ -120,7 +120,7 @@ public class UserController {
 		
 		if(result==null) {
 			logger.info("조회된 이름 없음");
-			return "/login/login";
+			return "/login/searchId";
 		}else {
 			logger.info("조회된 이름 있음");
 			model.addAttribute("userName",result.getUserName() );
@@ -146,7 +146,7 @@ public class UserController {
 		if(res==null) {
 			logger.info("조회된 아이디 없음");
 			session.invalidate();	
-			return "/login/login";
+			return "/login/searchPw";
 		}else {
 			logger.info("조회된 아이디 있음");
 //			model.addAttribute("userId",res.getUserId() );

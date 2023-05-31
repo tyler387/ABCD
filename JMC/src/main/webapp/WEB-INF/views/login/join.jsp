@@ -110,7 +110,7 @@ form{
 </head>
 <body>
 <div id="join_continner">
-<form action="/login/join" method="post" onsubmit="return submitCheck();"> 
+<!-- <form action="/login/join" method="post" onsubmit="return submitCheck();">  -->
 <h1 style="font-size:63px;">JAMANCHO</h1> 
 <!-- <div class=""> -->
 <div class="box1">
@@ -224,12 +224,18 @@ form{
 <a href="/login/login"><button class="btn" id="submit">가입하기</button></a><br>
 <!-- </div> -->
 
-</form> 
+<!-- </form>  -->
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+
+
+
+
+
+
  function idcheck() {
 		
 		var userId = $('#userId').val();
@@ -240,9 +246,12 @@ form{
 		    dataType : 'json',       // 데이터 타입 (html, xml, json, text 등등)
 		    data : {userId:userId} , // 보낼 데이터 (Object , String, Array)
 		    success : function(res) { // 결과 성공 콜백함수
-		        if(res == 1){
+		        if(res > 0){
 		        	$('#id_msg').html('이미 사용중인 아이디입니다.');
 		        	$('#id_msg').css('color,#dc3545');
+		        }else if(res == 0){
+		        	$('#id_msg').html('아이디를 적어주세요');
+		        	$('#id_msg').css('color,#2fb380');
 		        }else{
 		        	$('#id_msg').html('사용 가능한 아이디입니다.');
 		        	$('#id_msg').css('color,#2fb380');
@@ -343,8 +352,8 @@ form{
 				$('#email_checkbtn').attr('disabled',true);
 				$('#userEamil1').attr('readonly',true);
 				$('#userEamil2').attr('readonly',true);
-				/* $('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-		        $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect'); */
+			    $('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+		        $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect'); 
 		       
 			}else{
 				$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');

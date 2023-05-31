@@ -6,7 +6,7 @@
 <h1>비밀번호 찾기</h1>
 
 
-<form action="/login/searchPw" method="post" onsubmit="return submitCheck();">
+<!--  <form action="/login/searchPw" method="post" onsubmit="return submitCheck();">  -->
 <div>
 	<label for="userId">아이디</label>
 	<input type="text" id="userId" name="userId">
@@ -24,14 +24,14 @@
 		</select>
 		<br>
 		<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-		<button type="button" id="email_checkbtn" name="email_checkbtn" id="submit">본인인증</button>
+		<button type="button" id="email_checkbtn" name="email_checkbtn">본인인증</button>
 	</div>
 	<div>	
 		<span id="mail-check-warn"></span>
 	</div>
 </div>
-	<a href="/login/searchResultPw"><button>다음</button></a>
-</form>
+	<a href="/login/searchResultPw"><button id="submit">다음</button></a>
+<!--  </form>  -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
@@ -85,7 +85,7 @@ $('#email_checkbtn').click(function() {
 
 
 // 인증번호가 다르면 sumit 안되게
-/* $('#submit').click(function submitCheck() {
+ $('#submit').click(function submitCheck() {
 	if(!isCertification){
 		alert('인증이 완료되지 않았습니다.');
 		return false;
@@ -93,7 +93,7 @@ $('#email_checkbtn').click(function() {
 		return true;
 	}
 })  
- */
+
 </script>
 
 <c:import url="../layout/footer.jsp" />

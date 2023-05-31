@@ -11,16 +11,21 @@ import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.login.dao.face.KakaoDao;
 import com.kh.jaManChw.login.service.face.KakaoService;
 
 @Service
 public class KakaoServiceImpl implements KakaoService{
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired KakaoDao kakaoDao;
 	
 	// accessToken 가져오기
 	@Override
@@ -86,22 +91,26 @@ public class KakaoServiceImpl implements KakaoService{
 
 	// 가져온 accessToken으로 유저 정보 가져오기
 	@Override
-	public HashMap<String, Object> getUserInfo(String access_Token) {
-	//   요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+	public Users getUserInfo(String access_Token) {
+		
+			//요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		    HashMap<String, Object> userInfo = new HashMap<>();
 		    String reqURL = "https://kapi.kakao.com/v2/user/me";
+		    
+		    
 		    try {
 		        URL url = new URL(reqURL);
 		        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		        conn.setRequestMethod("POST");
 		        
-		        //    요청에 필요한 Header에 포함될 내용
+		        // 요청에 필요한 Header에 포함될 내용
 		        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 		        
+		        // 키값, 속성 적용
 		        int responseCode = conn.getResponseCode();
 		        logger.info("Service responseCode : {}", responseCode);
 		      
-		        
+		        //버퍼 사용해서 읽어올 것들
 		        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		        
 		        String line = "";
@@ -111,27 +120,54 @@ public class KakaoServiceImpl implements KakaoService{
 		            result += line;
 		        }
 		        logger.info("response body : {}",result);
+		        logger.info("여기까진가-2?");
 		        
 		        
 		        // 아래 두 코드는 이제 사용 안하는 코드 - 정적메소드로 처리해야함
 		        //JsonParser parser = new JsonParser();
 		        //JsonElement element = parser.parse(result);
+		        // 읽어온 데이터들 꺼내오기
+//		        logger.info("여기까진가-1?");
 		        JsonElement element = JsonParser.parseString(result);
+//		        logger.info("여기까진가0?");
 		        
+		        String idJS = element.getAsJsonObject().get("id").getAsString();
+//		        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+//		        logger.info("여기까진가1? :{}", idJS);
 		        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-		        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+//		        logger.info("여기까진가2?");
 		        
+//		        String id = idJS.getAsJsonObject().getAsString();
+//		        String id = kakao_account.getAsJsonObject().get("id").getAsString();
 		        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-		        String email = kakao_account.getAsJsonObject().get("email").getAsString();
+//		        logger.info("여기까진가2?");
+//		        String email = kakao_account.getAsJsonObject().get("email").getAsString();
 		        
-		        userInfo.put("nickname", nickname);
-		        userInfo.put("email", email);
+		        logger.info("socialId : {}",idJS);
+		        
+		        logger.info("여기까진가2?");
+		        userInfo.put("socialId", idJS);
+		        userInfo.put("userNick", nickname);
+//		        userInfo.put("email", email);
+		        logger.info("userNick:{}",userInfo);
 		        
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
 		    
-		    return userInfo;
+		    // 카카오 정보 유무 확인
+		    Users KakaoInfo = kakaoDao.findKakaoInfo(userInfo);
+		    logger.info("KakaoInfo : {}",KakaoInfo);
+		    
+		    if(KakaoInfo == null) {
+		    	// kakaoinfo 가 없으면 insert 하고 find카카오에 저장
+		    	kakaoDao.insertKakaoInfo(userInfo);
+		    	return kakaoDao.findKakaoInfo(userInfo);
+		    }else {
+		    	return KakaoInfo;
+		    }
+		        
+		   
 	}
 	// 카카오 로그인 로그아웃 하기
 	@Override

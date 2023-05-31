@@ -2,6 +2,8 @@ package com.kh.jaManChw.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Users {
 
 	private int userno;
@@ -9,8 +11,9 @@ public class Users {
 	private String userPw;
 	private String userName;
 	private String userNick;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birth;
-	private String gentder;
+	private String gender;
 	private String email;
 	private String phone;
 	private String addr1;
@@ -22,12 +25,13 @@ public class Users {
 	private String status;
 	private String role;
 	private String platFormOption;
+	private Date joinDate;
 	
 	public Users() {}
 
-	public Users(int userno, String userId, String userPw, String userName, String userNick, Date birth, String gentder,
+	public Users(int userno, String userId, String userPw, String userName, String userNick, Date birth, String gender,
 			String email, String phone, String addr1, String addr2, String addr3, String grade, int warnCount,
-			String profileImgUrl, String status, String role, String platFormOption) {
+			String profileImgUrl, String status, String role, String platFormOption, Date joinDate) {
 		super();
 		this.userno = userno;
 		this.userId = userId;
@@ -35,7 +39,7 @@ public class Users {
 		this.userName = userName;
 		this.userNick = userNick;
 		this.birth = birth;
-		this.gentder = gentder;
+		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
 		this.addr1 = addr1;
@@ -47,12 +51,13 @@ public class Users {
 		this.status = status;
 		this.role = role;
 		this.platFormOption = platFormOption;
+		this.joinDate = joinDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Users [userno=" + userno + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
-				+ ", userNick=" + userNick + ", birth=" + birth + ", gentder=" + gentder + ", email=" + email
+				+ ", userNick=" + userNick + ", birth=" + birth + ", gender=" + gender + ", email=" + email
 				+ ", phone=" + phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
 				+ ", warnCount=" + warnCount + ", profileImgUrl=" + profileImgUrl + ", status=" + status + ", role="
 				+ role + ", platFormOption=" + platFormOption + "]";
@@ -106,12 +111,12 @@ public class Users {
 		this.birth = birth;
 	}
 
-	public String getGentder() {
-		return gentder;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setGentder(String gentder) {
-		this.gentder = gentder;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getEmail() {
@@ -201,5 +206,15 @@ public class Users {
 	public void setPlatFormOption(String platFormOption) {
 		this.platFormOption = platFormOption;
 	}
+
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+	
+	
 	
 }

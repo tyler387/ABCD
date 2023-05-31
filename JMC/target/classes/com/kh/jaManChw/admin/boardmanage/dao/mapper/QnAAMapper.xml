@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.jaManChw.admin.boardmanage.dao.face.QnAADao">
+	
+	<insert id="insertQnAA" parameterType="QnAA">
+		INSERT INTO QnA_A(answerno, questionno, userno, a_content)
+		VALUES(QnA_A_seq.nextval, #{questionno}, #{userno}, #{aContent})
+		
+	</insert>
+	
+	<update id="upadateQnAQStatus" parameterType="QnAA">
+		UPDATE QnA_Q SET q_status = 'done' WHERE questionno = #{questionno}
+	</update>
+	
+	<select id="selectQnAADetail" resultType="map" parameterType="QnAA">
+    	SELECT answerno, a.a_content aContent, u.userno FROM QnA_A a, users u
+        WHERE 1 = 1
+        AND a.userno = u.userno
+        AND answerno = #{answerno}
+	</select>
+	<update id="updateQnAA" parameterType="QnAA">
+		UPDATE QnA_A SET a_Content = #{aContent} WHERE answerno = #{answerno}
+	</update>
+	<update id="updateQnAAStatus" parameterType="QnAA">
+		UPDATE QnA_A SET a_Status = 'delete' WHERE answerno = #{answerno}
+	</update>
+</mapper>

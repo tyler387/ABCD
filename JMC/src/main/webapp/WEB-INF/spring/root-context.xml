@@ -3,6 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
@@ -18,11 +20,46 @@
 		
 		<property name="mapperLocations">
 			<array>
-				<value>classpath:/**/**/**/dao/**/*Mapper.xml</value>
+				<value>classpath:/**/dao/**/*Mapper.xml</value>
 			</array>
 		</property>
-	
+		
+      <property name="configuration">
+         <bean class="org.apache.ibatis.session.Configuration">
+            <property name="mapUnderscoreToCamelCase" value="true"/>
+            <property name="jdbcTypeForNull" value="NULL"/>
+         </bean>	       
+      </property>
+      
+      <!--  Mybatis-config.xml없이 typeAliases추가하는법 - 아래는 패키지의 경우 -->
+      <!-- <property name="typeAliasesPackage" value="web.dto, web.util"/> -->
+      <property name="typeAliasesPackage"  value="com.kh.jaManChw.dto, com.kh.jaManChw.util"/>
 	</bean>
+	
+	<!-- 이메일 인증 관련 빈 등록 : 메일 보내기 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="projectemailauth@gmail.com" />
+      <property name="password" value="tabwtxahjzvkguqt" />
+      <property name="javaMailProperties">
+         <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- gmail의 경우 보안문제 업데이트로 인해 SSLSocketFactory를 추가해야 smtp 사용 가능. -->
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+            </props>
+      </property>
+      
+   </bean>
+	
+	
+	
+	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.kh.jaManChw.**.dao"></property>
 	</bean>
@@ -30,3 +67,5 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 </beans>
+
+

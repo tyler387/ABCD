@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,20 +133,27 @@ a {
 <body>
 <div id="header">
 <header>
-	<a href="#">로그인</a>
-	<a href="#">로그아웃</a>
+<c:if test="${role eq 'admin'}">
+	<a href="/admin/main">관리자페이지</a>
+</c:if>
+<c:if test="${userId eq null}">
+	<a href="/login/login">로그인</a>
+</c:if>	
+<c:if test="${userId ne null}">
+	<a href="/login/logout">로그아웃</a>
 	<a href="#">마이페이지</a>
 	<a href="#">알람</a>
+</c:if>
 </header>
 
 <div id="menu">
   <ul class="main1">
-    <li style="border: none;"><a href="#">JAMANCHO</a>
+    <li style="border: none;"><a href="/login/main">JAMANCHO</a>
     </li>
     <li><a href="#">회사소개</a></li>
     <li style="border: none;"><a href="#">모임</a>
        <ul class="main2">
-        <li><a href="#">모임 등록</a></li>
+        <li><a href="/meeting/form">모임 등록</a></li>
         <li><a href="#">모임 신청</a></li>
       </ul>
     </li>

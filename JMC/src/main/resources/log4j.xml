@@ -32,6 +32,18 @@
 	<logger name="com.kh.jaManChw">
 		<level value="trace" />
 	</logger>
+	
+	<!-- aop.LogAspect (프로젝트 내부 로거 수행) -->	
+	<logger name="com.kh.jaManChw.aop">
+		<level value="info" />
+	</logger>
+	<!-- 관리자-게시판 관리 -->	
+	<logger name="com.kh.jaManChw.admin.boardmanage.dao">
+		<level value="trace" />
+	</logger>
+	<logger name="com.kh.jaManChw.admin.boardmanage.service">
+		<level value="info" />
+	</logger>
 
 	<!-- 관리자 메인페이지 -->
 	<logger name="com.kh.jaManChw.admin.main">
@@ -42,7 +54,6 @@
 	<logger name="com.kh.jaManChw.admin.usermanage">
 		<level value="info" />
 	</logger>
-	
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

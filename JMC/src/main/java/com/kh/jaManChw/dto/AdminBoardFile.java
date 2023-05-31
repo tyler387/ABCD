@@ -4,26 +4,26 @@ public class AdminBoardFile {
 
 	private int adminFileno;
 	private int adminBoardno;
-	private String abfOriginName;
-	private String abfStoredName;
+	private String abf_origin_name;
+	private String abf_stored_name;
 	private double filesize;
 	
 	public AdminBoardFile() {}
 
-	public AdminBoardFile(int adminFileno, int adminBoardno, String abfOriginName, String abfStoredName,
+	public AdminBoardFile(int adminFileno, int adminBoardno, String abf_origin_name, String abf_stored_name,
 			double filesize) {
 		super();
 		this.adminFileno = adminFileno;
 		this.adminBoardno = adminBoardno;
-		this.abfOriginName = abfOriginName;
-		this.abfStoredName = abfStoredName;
+		this.abf_origin_name = abf_origin_name;
+		this.abf_stored_name = abf_stored_name;
 		this.filesize = filesize;
 	}
 
 	@Override
 	public String toString() {
-		return "AdminBoardFile [adminFileno=" + adminFileno + ", adminBoardno=" + adminBoardno + ", abfOriginName="
-				+ abfOriginName + ", abfStoredName=" + abfStoredName + ", filesize=" + filesize + "]";
+		return "AdminBoardFile [adminFileno=" + adminFileno + ", adminBoardno=" + adminBoardno + ", abf_origin_name="
+				+ abf_origin_name + ", abf_stored_name=" + abf_stored_name + ", filesize=" + filesize + "]";
 	}
 
 	public int getAdminFileno() {
@@ -42,20 +42,20 @@ public class AdminBoardFile {
 		this.adminBoardno = adminBoardno;
 	}
 
-	public String getAbfOriginName() {
-		return abfOriginName;
+	public String getAbf_origin_name() {
+		return abf_origin_name;
 	}
 
-	public void setAbfOriginName(String abfOriginName) {
-		this.abfOriginName = abfOriginName;
+	public void setAbf_origin_name(String abf_origin_name) {
+		this.abf_origin_name = abf_origin_name;
 	}
 
-	public String getAbfStoredName() {
-		return abfStoredName;
+	public String getAbf_stored_name() {
+		return abf_stored_name;
 	}
 
-	public void setAbfStoredName(String abfStoredName) {
-		this.abfStoredName = abfStoredName;
+	public void setAbf_stored_name(String abf_stored_name) {
+		this.abf_stored_name = abf_stored_name;
 	}
 
 	public double getFilesize() {
@@ -65,6 +65,8 @@ public class AdminBoardFile {
 	public void setFilesize(double filesize) {
 		this.filesize = filesize;
 	}
+
+
 	
 }
 	

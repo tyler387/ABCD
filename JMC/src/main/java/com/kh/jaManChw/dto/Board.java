@@ -7,20 +7,20 @@ public class Board {
 	private int boardno;
 	private int boardOptionno;
 	private int userno;
-	private String cotent;
+	private String content;
 	private String status;
 	private Date writeDate;
 	private Date updateDate;
 	
 	public Board() {}
 
-	public Board(int boardno, int boardOptionno, int userno, String cotent, String status, Date writeDate,
+	public Board(int boardno, int boardOptionno, int userno, String content, String status, Date writeDate,
 			Date updateDate) {
 		super();
 		this.boardno = boardno;
 		this.boardOptionno = boardOptionno;
 		this.userno = userno;
-		this.cotent = cotent;
+		this.content = content;
 		this.status = status;
 		this.writeDate = writeDate;
 		this.updateDate = updateDate;
@@ -28,8 +28,8 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardno=" + boardno + ", boardOptionno=" + boardOptionno + ", userno=" + userno + ", cotent="
-				+ cotent + ", status=" + status + ", writeDate=" + writeDate + ", updateDate=" + updateDate + "]";
+		return "Board [boardno=" + boardno + ", boardOptionno=" + boardOptionno + ", userno=" + userno + ", content="
+				+ content + ", status=" + status + ", writeDate=" + writeDate + ", updateDate=" + updateDate + "]";
 	}
 
 	public int getBoardno() {
@@ -56,12 +56,12 @@ public class Board {
 		this.userno = userno;
 	}
 
-	public String getCotent() {
-		return cotent;
+	public String getcontent() {
+		return content;
 	}
 
-	public void setCotent(String cotent) {
-		this.cotent = cotent;
+	public void setcontent(String content) {
+		this.content = content;
 	}
 
 	public String getStatus() {

@@ -136,10 +136,10 @@ a {
 <c:if test="${role eq 'admin'}">
 	<a href="/admin/main">관리자페이지</a>
 </c:if>
-<c:if test="${userId eq null}">
+<c:if test="${userno eq null}">
 	<a href="/login/login">로그인</a>
 </c:if>	
-<c:if test="${userId ne null}">
+<c:if test="${userno ne null}">
 	<a href="/login/logout">로그아웃</a>
 	<a href="#">마이페이지</a>
 	<a href="#">알람</a>

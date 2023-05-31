@@ -6,7 +6,7 @@
 
 
 <div>아이디 찾기</div>
-
+<form action="/login/searchResultId" method="post">
 <c:choose>
 	<c:when test="${empty userId }">
 	 <p>조회된 아이디가 없습니다</p>
@@ -16,7 +16,7 @@
 	</c:otherwise>
 
 </c:choose>
-
+</form>
 <div>
 	<a href="./login">로그인</a>
 	<a href="./searchPw">비밀번호 찾기</a>

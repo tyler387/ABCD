@@ -6,7 +6,7 @@
 <h1>아이디 찾기</h1>
 
 <p>등록된 이메일로 아이디 찾기</p>
-<form action="/login/searchResultId" method="post" onsubmit="return submitCheck();">
+<form action="/login/searchId" method="post" onsubmit="return submitCheck();">
 <div>
 	<label for="userName">이름</label>
 	<input type="text" id="userName" name="userName">

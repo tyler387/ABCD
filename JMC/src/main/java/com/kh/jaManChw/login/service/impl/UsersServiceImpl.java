@@ -56,9 +56,29 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
+	public Users searchName(Users users) {
+		return usersDao.selectUserNameByUserId(users);
+	}
+
+	@Override
+	public int searchCntId(Users users) {
+		return usersDao.selectcheckCntByUserId(users);
+	}
+
+	@Override
+	public int modifyPw(Users users) {
+		
+		return usersDao.updateByUserPw(users);		
+	}
+
+	@Override
 	public Users searchId(Users users) {
 		return usersDao.selectIdByUserNameEmail(users);
 	}
+
+	
+
+	 
 
 	
 

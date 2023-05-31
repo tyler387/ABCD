@@ -23,7 +23,7 @@ public interface UsersDao {
 	/**
 	 * 중복 아이디 검사
 	 * @param users
-	 * @return
+	 * @return 
 	 */
 	public int selectCntByUserId(String userId);
 	/**
@@ -38,7 +38,36 @@ public interface UsersDao {
 	 */
 	public Users selectuserByUserId(Users users);
 
+	/**
+	 * 이름과 이메일로 아이디 조회하기
+	 * @param users
+	 * @return userId
+	 */
 	public Users selectIdByUserNameEmail(Users users);
+
+	/**
+	 * 이름과 이메일로 아이디 조회하기
+	 * @param users
+	 * @return userId
+	 */
+	public int selectcheckCntByUserId(Users users);
+	
+	/**
+	 * 아이디로 유저 이름 조회하기
+	 * @param users
+	 * @return userName
+	 */
+	public Users selectUserNameByUserId(Users users);
+
+	/**
+	 * 비밀번호 재설정
+	 * @param users
+	 * @return 
+	 */
+	public int updateByUserPw(Users users);
+
+
+	
 
 	
 

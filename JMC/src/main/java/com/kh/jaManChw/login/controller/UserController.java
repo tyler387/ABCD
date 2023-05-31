@@ -1,5 +1,6 @@
 package com.kh.jaManChw.login.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -91,6 +92,7 @@ public class UserController {
 		return "redirect:/login/main";
 	} // userJoin() end
 	
+
 	@RequestMapping("/login/idcheck")
 	@ResponseBody
 	public int idCheck(@RequestParam("userId") String userId) {
@@ -103,46 +105,75 @@ public class UserController {
 		}
 		return res;
 	} // idchdck() end
+
+	
 	
 	// 아이디찾기 페이지 이동
 	@GetMapping("/login/searchId")
 	public void searchIdPage() {}
 	
+	// 이메일로 아이디 찾기
+	@PostMapping("/login/searchId")
+	public String findIdByemail(Users users,Model model,HttpSession session) {
+		
+		Users result = usersService.searchName(users);
+		
+		if(result==null) {
+			logger.info("조회된 이름 없음");
+			return "/login/login";
+		}else {
+			logger.info("조회된 이름 있음");
+			model.addAttribute("userName",result.getUserName() );
+			model.addAttribute("userId",result.getUserId() );
+			session.setAttribute("userno", result.getUserno());
+		}
+		return "/login/searchResultId";
+	} // findIdByemail() end
+	
 	// 찾은 아이디 보여주는 페이지 이동
 	@GetMapping("/login/searchResultId")
 	public void searchResultIdPage() {}
 	
-	// 이메일로 아이디 찾기
-	@PostMapping("/login/searchResultId")
-	public String findIdByemail(Users users,Model model) {
-		
-		Users res = usersService.searchId(users);
-		
-		if(res==null) {
-			logger.info("조회된 아이디 없음");
-			return "/login/searchId";
-		}else {
-			logger.info("조회된 아이디 있음");
-			model.addAttribute("userId",res.getUserId() );
-		}
-		return "/login/searchResultId";
-	} // findIdByemail() end
 	
 	// 비밀번호 찾기 페이지
 	@GetMapping("/login/searchPw")
 	public void searchPwPage() {}
 	
+	@PostMapping("/login/searchPw")		
+	public String searchPw(Users users,HttpSession session) {
+		Users res = usersService.searchId(users);
+		
+		if(res==null) {
+			logger.info("조회된 아이디 없음");
+			session.invalidate();	
+			return "/login/login";
+		}else {
+			logger.info("조회된 아이디 있음");
+//			model.addAttribute("userId",res.getUserId() );
+			session.setAttribute("userno", res.getUserno());
+		}
+		return "/login/searchResultPw";
+	}
+	
+
 	// 찾는 비밀번호 페이지
 	@GetMapping("/login/searchResultPw")
 	public void searchResultPwPage() {}
 	
-	// 아이디 조회 후 비밀번호 수정
+	// 비밀번호 재설정
 	@PostMapping("/login/searchResultPw")
-	public void searchPw() {
-		
-		
+	public String searchResultPw(Users users,HttpSession session) {
+
+		int result = usersService.modifyPw(users);
+		if(result>0) {
+			logger.info("비밀번호 변경 성공");	
+			return "/login/login";
+		}
+		else {		
+			logger.info("비밀번호 변경 실패");
+			session.invalidate();			
+			return "/login/searchPw";
+		}
 	}
-	
-	
 	
 } //userController() end 

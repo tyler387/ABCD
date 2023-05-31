@@ -2,6 +2,10 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!--  ㄴ위 DTD는 문서 양식에 대한 내용임, 실제 사용에 대한것은 라이브러리가 처리하기 떄문에 
+	처리자체에 문제가 없는 경우는 해당 .xml을 실행시키는 라이브러리가 알아서 처리를 해주는 것임
+	DTD가 없으면 ctrl+space를 사용할 경우 자동완성이 되지 않는다는 단점이 있음
+	또한 라이브러리마다 DTD를 명시하지 않을때 처리해주지 않는 경우도 있다고함 -->
 
 <mapper namespace="com.kh.jaManChw.admin.boardmanage.dao.face.AdminBoardDao">
 
@@ -13,13 +17,48 @@
 	<select id="selectAdminBoardAllByBoardOption" resultType="map" parameterType="map">
 		SELECT * FROM(
 		    SELECT rownum rnum, B.* FROM(
-		        SELECT * FROM admin_board
+      			SELECT ab.*, u.user_id FROM admin_board ab, users u
 		        WHERE ab_option = #{boardOption}
-		        ORDER BY admin_boardno
+		        AND ab.userno = u.userno
+		        AND ab.ab_status = 'undelete'
+		        ORDER BY admin_boardno DESC
 		    )B
 		)
 		WHERE 1= 1
 		    AND rnum BETWEEN ${paging.startno} AND ${paging.endno}
 	</select>
 
+	<select id="selectCreateAdminBoardno" resultType="int">
+		SELECT admin_board_seq.nextVal FROM dual
+	</select>
+	
+	<insert id="insertAdminBoard" parameterType="AdminBoard">
+		INSERT INTO admin_board (admin_Boardno, userno, title, content, ab_option)
+		VALUES(#{adminBoardno}, #{userno}, #{title}, #{content}, #{abOption})
+	</insert>
+
+	<insert id="insertAdminBoardFile" parameterType="AdminBoardFile">
+		INSERT INTO admin_board_file(admin_fileno, admin_boardno, abf_origin_name, abf_stored_name, filesize)
+		VALUES(admin_board_file_seq.nextval, ${adminBoardno}, #{abf_origin_name}, #{abf_stored_name}, ${filesize})
+	</insert>
+	
+	<select id="selectAdminBoardDetail" resultType="AdminBoard" parameterType="AdminBoard">
+		SELECT * FROM admin_board
+		WHERE 1 = 1
+		AND admin_boardno = ${adminBoardno}
+	</select>
+	
+	<update id="updateAdminBoard" parameterType="AdminBoard">
+		UPDATE admin_board SET 
+			title = #{title}, 
+			content = #{content},
+			last_update_date = current_timestamp
+		WHERE admin_boardno = #{adminBoardno}
+	</update>
+	
+	<update id="updateAdminBoarStatus" parameterType="int">
+		UPDATE admin_board SET
+			ab_status = 'delete'
+		WHERE admin_boardno = #{admonBoardno}
+	</update>
 </mapper>

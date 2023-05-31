@@ -10,7 +10,8 @@
 <h1>관리자 메인 페이지</h1>
 <hr>
 
-<a href="./board/list?boardOption=notice"><button>공지사항</button></a>
-<a href="./board/list?boardOption=event"><button>이벤트</button></a>
+<a href="./main/boardCategory?boardOption=notice"><button>공지사항 관리</button></a>
+<a href="./main/boardCategory?boardOption=event"><button>이벤트 관리</button></a>
+<a href="./qna/list"><button>Q&A 관리</button></a>
 </body>
 </html>

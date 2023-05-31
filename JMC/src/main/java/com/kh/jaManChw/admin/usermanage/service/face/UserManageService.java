@@ -57,13 +57,20 @@ public interface UserManageService {
 	 * 회원 블랙리스트 설정
 	 * @param userno
 	 */
-	public void reviseUserUpdate(int userno);
+	public void reviseUserBlackUpdate(int userno);
 
 	/** 
 	 * 회원 정지 설정
 	 * @param userno
 	 */
 	public void reviseUserBlackStop(int userno);
+
+	/**
+	 * 해당 유저 정보 수정
+	 * 
+	 * @param hashmap
+	 */
+	public void reviseUserMgUpdate(Map<String, Object> map);
 	
 
 }

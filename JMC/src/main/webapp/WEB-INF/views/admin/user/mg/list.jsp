@@ -64,6 +64,11 @@ $(function() {
 	
 	console.log("filter: ", filter)
 	console.log("content: ", content)
+	
+	$("#deletebtn").click(function(){
+		   location.reload();
+			console.log("content: ", content)
+	})
 })
 </script>
 
@@ -118,7 +123,7 @@ $(function() {
 	<th>${users.phone }</th>
 	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
 	<th><a href="./update?userno=${users.userno }"><button type="button" class="btn btn-secondary">수정</button></a>
-	<a href="./withdraw?userno=${users.userno }"><button type="button" class="btn btn-secondary">탈퇴</button></a></th>
+	<a href="./withdraw?userno=${users.userno }&curPage=${paging.curPage}"><button type="button" class="btn btn-secondary" id = "deletebtn" onClick="window.location.reload()">탈퇴</button></a></th>
 </tr>
 </c:forEach>
 </table>

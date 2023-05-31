@@ -141,18 +141,19 @@ public class UserManageController {
 		
 	}
 	@PostMapping("/mg/update")
-	public String UserMgUpdate2(@RequestParam HashMap<String, String> hashmap) {		
+	public String UserMgUpdate2(@RequestParam Map<String, Object> map) {		
 		logger.info("post update 들어옴");
-		logger.info("수정될 유저 정보{}", hashmap);
-		
-//		userManageService.reviseUserMgUpdate(users);
-		return "redirect:/admin/user/mg/list";
+		logger.info("수정될 유저 정보{}", map);
+		String curPage = (String) map.get("curPage");
+		logger.info("페이지정보{}: ", curPage);
+		userManageService.reviseUserMgUpdate(map);
+		return "redirect:/admin/user/mg/list?curPage="+curPage;
 	}
 	@RequestMapping("/mg/withdraw")
-	public String UserMgWithdraw(int userno) {
+	public String UserMgWithdraw(int userno, String curPage) {
 		
 		userManageService.reviseUserMgWithdraw(userno);
-		return "redirect:/admin/user/mg/list";
+		return "redirect:/admin/user/mg/list?curPage="+curPage;
 	}
 	
 	@GetMapping("/black/list")
@@ -191,7 +192,7 @@ public class UserManageController {
 	@RequestMapping("/black/update")
 	public String BlackUpdate(int userno, String curPage) {
 		logger.info("유저번호 입력 받은 거 : {}", userno);
-		userManageService.reviseUserUpdate(userno);
+		userManageService.reviseUserBlackUpdate(userno);
 		
 		return "redirect:/admin/user/black/list";
 	}

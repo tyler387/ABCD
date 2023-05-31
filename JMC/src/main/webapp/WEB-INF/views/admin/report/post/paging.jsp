@@ -15,17 +15,16 @@
 </style>
 
 <div class="page">
-<ul class="pagination">
-
+<ul class="pagination justify-content-center">
 <%--===========================Go to First=============================--%>
 <%-- 첫 페이지로 이동 --%>
 <c:if test="${paging.curPage ne 1}">
-	<li><a href="./list">첫 페이지</a></li>
+	<li class ="page-item"><a href="./list">첫 페이지</a></li>
 </c:if>
 
 <%-- 현재 페이지가 1이라면 첫 페이지로 이동하는 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage eq 1}">
-	<li class="disabled"><a>첫 페이지</a></li>
+	<li class="page-item disabled"><a>첫 페이지</a></li>
 </c:if>
 <%--====================================================================--%>
 

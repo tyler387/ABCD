@@ -28,9 +28,12 @@
          <bean class="org.apache.ibatis.session.Configuration">
             <property name="mapUnderscoreToCamelCase" value="true"/>
             <property name="jdbcTypeForNull" value="NULL"/>
-         </bean>
+         </bean>	       
       </property>
-	
+      
+      <!--  Mybatis-config.xml없이 typeAliases추가하는법 - 아래는 패키지의 경우 -->
+      <!-- <property name="typeAliasesPackage" value="web.dto, web.util"/> -->
+      <property name="typeAliasesPackage"  value="com.kh.jaManChw.dto, com.kh.jaManChw.util"/>
 	</bean>
 	
 	<!-- 이메일 인증 관련 빈 등록 : 메일 보내기 -->

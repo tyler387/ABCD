@@ -57,10 +57,10 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [userno=" + userno + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
-				+ ", userNick=" + userNick + ", birth=" + birth + ", gender=" + gender + ", email=" + email + ", phone="
-				+ phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
+				+ ", userNick=" + userNick + ", birth=" + birth + ", gender=" + gender + ", email=" + email
+				+ ", phone=" + phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
 				+ ", warnCount=" + warnCount + ", profileImgUrl=" + profileImgUrl + ", status=" + status + ", role="
-				+ role + ", platFormOption=" + platFormOption + ", joinDate=" + joinDate + "]";
+				+ role + ", platFormOption=" + platFormOption + "]";
 	}
 
 	public int getUserno() {
@@ -214,7 +214,6 @@ public class Users {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-	
 	
 	
 	

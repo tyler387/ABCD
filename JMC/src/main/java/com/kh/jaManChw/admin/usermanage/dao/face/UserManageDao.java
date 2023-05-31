@@ -11,8 +11,20 @@ public interface UserManageDao {
 
 	public List<Users> selectUserMgPage(Paging paging);
 
-	public List<Users> selectUserMgFiltering(Map<String, String> map);
+	public List<Users> selectUserMgFiltering(Map<String, Object> map);
 
 	public int selectCntAll();
 
+
+	public Users getUserdata(int userno);
+
+	public void deleteUserMgWithdraw(int userno);
+
+	public int selectFilterCntAll(Map<String, Object> map);
+
+	public void updateUserMgUpdate(int userno);
+
+	public void updateUserMgStop(int userno);
+
+	
 }

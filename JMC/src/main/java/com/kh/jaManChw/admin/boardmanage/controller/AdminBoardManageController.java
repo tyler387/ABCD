@@ -27,7 +27,7 @@ import com.kh.jaManChw.dto.QnAA;
 import com.kh.jaManChw.util.Paging;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/board")
 public class AdminBoardManageController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -38,7 +38,7 @@ public class AdminBoardManageController {
 	
 	
 	//관리자 게시글 관리 페이지로 이동
-	@GetMapping("/board/list")
+	@GetMapping("/boardview/list")
 	public void adminBoardPage(
 				String curPage,
 				@SessionAttribute(name ="boardOption") String boardOption,
@@ -56,14 +56,14 @@ public class AdminBoardManageController {
 	}
 	
 	//관리자 게시글 등록 페이지로 이동
-	@GetMapping("/board/write")
+	@GetMapping("/boardview/write")
 	public void adminBoardWritePage() {
 		
 	}
 	
 
 	//관리자 게시글 내용 파일 저장
-	@PostMapping(value ="/board/writeFileupload" , produces = "application/json; charset=utf8")
+	@PostMapping(value ="/boardview/writeFileupload" , produces = "application/json; charset=utf8")
 	public @ResponseBody JSONObject adminBoardContentFileupload(
 //			@RequestParam("files") MultipartFile multipartFile
 			@RequestParam("file") MultipartFile multipartFile
@@ -78,7 +78,7 @@ public class AdminBoardManageController {
 	}
 	
 	//관리자 게시글 등록
-	@PostMapping(value = "/board/write",  produces = "application/json; charset=utf8")
+	@PostMapping(value = "/boardview/write",  produces = "application/json; charset=utf8")
 	public String adminBoardWrite(
 			
 			String curPage,
@@ -102,7 +102,7 @@ public class AdminBoardManageController {
 		return "redirect:./list";
 	}
 	
-	@GetMapping("/board/update")
+	@GetMapping("/boardview/update")
 	public void adminBoardRevisePage(
 			String curPage,
 			HttpSession session,
@@ -134,7 +134,7 @@ public class AdminBoardManageController {
 		
 	}
 	
-	@PostMapping("/board/update")
+	@PostMapping("/boardview/update")
 	public String adminBoardRevise(
 			String curPage,
 			HttpSession session,
@@ -149,7 +149,7 @@ public class AdminBoardManageController {
 		return "redirect:./list?curPage="+curPage;
 	}
 	
-	@RequestMapping("/board/delete")
+	@RequestMapping("/boardview/delete")
 	public String adminBoardErase(
 			String curPage,
 			int adminBoardno
@@ -196,7 +196,7 @@ public class AdminBoardManageController {
 		model.addAttribute("qnAQList", filterAndPagingList);
 		model.addAttribute("paging", paging );
 		
-		return "admin/qna/filter";
+		return "admin/board/qna/filter";
 	}
 	
 	@GetMapping("qna/write")

@@ -73,7 +73,11 @@ $(function() {
 				console.log("error입니다스!")
 			}
 		})
-	}	
+	}
+	
+	$("#btnCancel").click(function() {
+		history.go(-1)
+	})
 })
 
 </script>
@@ -95,6 +99,7 @@ $(function() {
 <form action="./update" method="post" enctype="multipart/form-data">
 	
 	<input type="hidden" id="adminBoardno" name="adminBoardno" value="${detail.adminBoardno}">
+	<input type="hidden" id="curPage" name="curPage" value="${curPage}">
 	
 	<label>제목</label>
 	<input type="text" id="title" name="title" value="${detail.title}">
@@ -108,7 +113,8 @@ $(function() {
 	<label>첨부파일</label>
 	<input type="file" id="file" name="file" multiple="multiple">
 	<br>
-	<button>전송</button>
+	<button>수정</button>
+	<button type="button" id="btnCalcel">취소</button>
 </form>
 </div>
 

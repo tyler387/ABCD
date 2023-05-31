@@ -15,6 +15,12 @@ public class AdminMainController {
 	
 	
 	@RequestMapping("/main2")
+	public void adminmain2() {
+		logger.info("어드민 메인 접속");
+	}
+	
+
+	@RequestMapping("/main")
 	public void adminmain() {
 		logger.info("어드민 메인 접속");
 	}
@@ -24,6 +30,6 @@ public class AdminMainController {
 	public String adminBoardOptionSession(HttpSession session, String boardOption) {
 		session.setAttribute("boardOption", boardOption);
 		
-		return "redirect:../../../board/list";
+		return "redirect:../board/list";
 	}
 }

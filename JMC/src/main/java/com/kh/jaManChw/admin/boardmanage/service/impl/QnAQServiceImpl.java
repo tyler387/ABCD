@@ -35,4 +35,29 @@ public class QnAQServiceImpl implements QnAQService {
 
 		return qnAQDao.selectQnAQAll(paging);
 	}
+	
+	@Override
+	public Paging getQnAPaging(Map<String, Object> filterAndPagingMap) {
+
+		int filterQnACurPage = 1;
+		
+		return new Paging(filterQnACurPage,qnAQDao.selectCntQnAQFilterAll(filterAndPagingMap));
+	}
+	
+	@Override
+	public List<Map<String, Object>> showQnAQListByFilter(Map<String, Object> filterAndPagingMap, Paging paging) {
+
+		logger.info("filterMap k: {}",filterAndPagingMap.get("filter"));
+		logger.info("filterMap v: {}",filterAndPagingMap.get("content"));
+		
+		filterAndPagingMap.put("paging", paging);
+		
+		return qnAQDao.selectQnAQByFilter(filterAndPagingMap);
+	}
+	
+	@Override
+	public Map<String, String> showQnAQDetail(int questionno) {
+
+		return qnAQDao.selectQnAQDetail(questionno);
+	}
 }

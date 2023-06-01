@@ -79,6 +79,24 @@ public class ReportManageController {
 		return "redirect:/admin/report/post/list";
 	}
 	
+	@RequestMapping("/user/state")
+	public String ReportUserState(@RequestParam Map<String, Object> map) {
+		logger.info("승인, 반려 타입 {}", map);
+		reportManageService.reviseReportPostSate(map);
+		
+		return "redirect:/admin/report/user/list";
+	}
+	
+	@RequestMapping("/post/boarddelete")
+	public String ReportPostBoardDelete(@RequestParam Map<String, Object> map) {
+		logger.info("게시글 삭제 하게 받아온 값들 : {}", map);
+		
+		reportManageService.eraseReportPost(map);
+		
+		return "redirect:/admin/report/post/list";
+		}
+	
+	
 	@RequestMapping("/user/list")
 	public void ReportUserList(
 			Model model,
@@ -121,7 +139,7 @@ public class ReportManageController {
 		model.addAttribute("reportB", reportB);
 		model.addAttribute("paging", paging);
 	}
-	@RequestMapping("/meeting/view")
+	@RequestMapping("/meeting/meetingview")
 	public void ReportMeetingView(Model model, @RequestParam String reportno) {
 		logger.info("boardno : {}", reportno);
 		
@@ -131,4 +149,20 @@ public class ReportManageController {
 		model.addAttribute("meetingView", meetingView);
 	}
 	
+	@RequestMapping("/meeting/meetingdelete")
+	public String ReportMeetingDelete(@RequestParam Map<String, Object> map) {
+		logger.info("게시글 삭제 하게 받아온 값들 : {}", map);
+		
+		reportManageService.eraseReportMeeting(map);
+		
+		return "redirect:/admin/report/meeting/list";
+	}
+	
+	@RequestMapping("/meeting/state")
+	public String ReportMeetingState(@RequestParam Map<String, Object> map) {
+		logger.info("승인, 반려 타입 {}", map);
+		reportManageService.reviseReportMeetingState(map);
+		
+		return "redirect:/admin/report/meeting/list";
+	}
 }

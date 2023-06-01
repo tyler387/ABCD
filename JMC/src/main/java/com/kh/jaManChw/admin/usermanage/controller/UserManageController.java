@@ -39,9 +39,9 @@ public class UserManageController {
 		String ccurpage = curPage;
 		Paging paging = userManageService.getpaging(ccurpage);
 		logger.info("{}",paging);
-		List<Users> users = userManageService.UserMgPage(paging);
-		logger.info("{}", users);
-		model.addAttribute("users", users);
+		List<Users> userfilter = userManageService.UserMgPage(paging);
+		logger.info("{}", userfilter);
+		model.addAttribute("userfilter", userfilter);
 		model.addAttribute("paging", paging);
 	}
 	
@@ -109,9 +109,30 @@ public class UserManageController {
 //	}
 	
 //	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
+//	@RequestMapping("/mg/filter1")
+//	public String userfiltering2(
+//			Model model, String curPage,
+//			@RequestParam Map<String, Object> map
+//			) {
+//		logger.info("filter1 에이잭스 출력 : {}", map);
+//		String ccurpage = curPage;
+//		Paging paging = userManageService.getFilterPaging(curPage, map);
+//		logger.info("페이징 {}", paging);
+//		map.put("paging", paging);
+//		List<Users> userfilter = userManageService.getUserMgFiltering(map);
+//		logger.info("{}", userfilter);
+//		model.addAttribute("userfilter", userfilter);
+//		model.addAttribute("paging", paging);
+//		logger.info("모델값 {}", model);
+////		return "/admin/user/mg/filter";
+//	}
+//	
+//	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
+	@ResponseBody
 	@RequestMapping("/mg/filter1")
-	public String userfiltering2(
-			Model model, String curPage,
+	public ModelAndView userfiltering2(
+			ModelAndView mav,
+			String curPage,
 			@RequestParam Map<String, Object> map
 			) {
 		logger.info("filter1 에이잭스 출력 : {}", map);
@@ -121,10 +142,12 @@ public class UserManageController {
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
-		model.addAttribute("userfilter", userfilter);
-		model.addAttribute("paging", paging);
-		logger.info("모델값 {}", model);
-		return "/admin/user/mg/filter";
+		
+	      mav.addObject("userfilter", userfilter);
+	      mav.addObject("paging", paging);
+	      
+	      mav.setViewName("/admin/user/mg/list");
+	 	return mav;
 	}
 	
 	

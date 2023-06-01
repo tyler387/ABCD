@@ -76,6 +76,26 @@ public interface ReportManageService {
 	 * @return
 	 */
 	public List<Map<String, Object>> getReportPostMeeting(String reportno);
+	
+	/**
+	 * 신고글 관련 보드에 작성된 게시글 삭제
+	 * @param map
+	 */
+	public void eraseReportPost(Map<String, Object> map);
+	
+	/**
+	 * 미팅 신고글 반려, 승인 처리
+	 * 
+	 * @param map
+	 */
+	public void reviseReportMeetingState(Map<String, Object> map);
+	
+	/**
+	 * 미팅 신고글을 통해 미팅 상태 삭제 처리
+	 * 
+	 * @param map
+	 */
+	public void eraseReportMeeting(Map<String, Object> map);
 
 
 }

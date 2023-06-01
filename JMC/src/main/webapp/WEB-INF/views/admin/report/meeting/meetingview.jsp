@@ -1,4 +1,5 @@
 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -37,21 +38,20 @@ $("#delete_btn").click(function(){
 });
 </script>
 
-
 <c:import url="../../main.jsp"></c:import>
 
 
 <body>
 <div id="Alltitle" style="text-align: center; padding-top: 10px;">
 	<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
-		신고 게시글 상세조회
+		모임 신고 상세조회
 	</h1>
 </div>
 <hr>
 
-<div style ="width: 600px; margin: 0 auto; padding-top : 80px;">
+<div  class="update" style ="width: 600px; margin: 0 auto; padding-top : 80px;">
 
-<c:forEach var="report" items="${reportView }">
+<c:forEach var="report" items="${meetingView }">
 
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">제목 : ${report.TITLE }</label>
@@ -70,13 +70,13 @@ $("#delete_btn").click(function(){
 </div>
 <div class="d-flex justify-content-between" style ="width: 400px; margin: 0 auto;">
 		<div class="border">
-	<a href="<%=request.getContextPath() %>/admin/report/post/boarddelete?boardno=${report.BOARDNO}"><button id="delete_btn"  class="btn btn-secondary">게시글 삭제</button></a>
+	<a href="<%=request.getContextPath() %>/admin/report/meeting/meetingdelete?meetingno=${report.MEETINGNO}"><button id="delete_btn"  class="btn btn-secondary">모임 삭제</button></a>
 		</div>
 		<div class="border">
-	<a href="<%=request.getContextPath() %>/admin/report/post/state?ruserno=${report.R_USERNO }&type=approval&reportno=${report.REPORTNO }"><button id="approval_btn"  class="btn btn-secondary">승인</button></a>
+	<a href="<%=request.getContextPath() %>/admin/report/meeting/state?ruserno=${report.R_USERNO }&type=approval&reportno=${report.REPORTNO }"><button id="approval_btn"  class="btn btn-secondary">승인</button></a>
 		</div>
 		<div class="border">
-	<a href="<%=request.getContextPath() %>/admin/report/post/state?reportno=${report.REPORTNO }&type=cancel"><button id="cancel_btn"  class="btn btn-secondary">반려</button></a>
+	<a href="<%=request.getContextPath() %>/admin/report/meeting/state?reportno=${report.REPORTNO }&type=cancel"><button id="cancel_btn"  class="btn btn-secondary">반려</button></a>
 		</div>
 		<div class="border">
 	<a href= "javascript:history.back();"><button  class="btn btn-secondary">취소</button></a>
@@ -84,6 +84,5 @@ $("#delete_btn").click(function(){
 </div>
 </c:forEach>
  </div>
-
-
 </body>
+

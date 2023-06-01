@@ -104,7 +104,7 @@ $(function() {
 	<th>${report.REPORTNO }</th>
 	<th>${report.USER_ID }</th>
 	<th>${report.USER_NAME }</th>
-	<th><a href="./view?reportno=${report.REPORTNO }">${report.TITLE }</a></th>
+	<th><a href="./meetingview?reportno=${report.REPORTNO }">${report.TITLE }</a></th>
 	<th>${report.REPORT_OPTION }</th>
 	<th><c:choose>
 		<c:when test="${report.STATUS eq 'done'}"> 승인</c:when>

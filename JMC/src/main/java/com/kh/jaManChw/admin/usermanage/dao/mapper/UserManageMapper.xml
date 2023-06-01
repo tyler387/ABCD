@@ -27,7 +27,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUserMgFiltering" resultType="com.kh.jaManChw.dto.Users"  parameterType="map">
 		SELECT * FROM (
 		SELECT rownum rnum, B.* FROM (
-		select * FROM users WHERE ${filter} = #{content}
+		select * FROM users
+		<if test="content != null and !''.equals(content)">
+		WHERE ${filter} = #{content}
+		</if> 
 		ORDER BY userno DESC
 		) B
 		)users
@@ -44,7 +47,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectFilterCntAll" resultType="int" parameterType="map">
-		select count(*) FROM users WHERE ${filter} = #{content}
+		select count(*) FROM users
+		<if test="content != null and !''.equals(content)"> 
+		WHERE ${filter} = #{content}
+		</if>
 	</select>
 	
 	<update id="updateUserBlackUpdate" parameterType="int">

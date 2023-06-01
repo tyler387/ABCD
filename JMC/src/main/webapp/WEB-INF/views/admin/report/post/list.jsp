@@ -117,7 +117,7 @@ $(function() {
 </table>
 <br>
 <div>
-<c:import url="./paging.jsp" />
+<c:import url="./filterpaging.jsp" />
 </div>
 </div>
 </div>

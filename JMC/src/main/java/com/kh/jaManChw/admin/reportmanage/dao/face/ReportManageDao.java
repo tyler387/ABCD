@@ -27,5 +27,11 @@ public interface ReportManageDao {
 
 	public List<Map<String, Object>> selectReportMeetingView(String reportno);
 
+	public void deleteReportPostBoard(Map<String, Object> map);
+
+	public void updateReportMeeting(Map<String, Object> map);
+
+	public void deleteReportMeeting(Map<String, Object> map);
+
 
 }

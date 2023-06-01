@@ -82,5 +82,21 @@ public class ReportManageServiceImpl implements ReportManageService {
 	public List<Map<String, Object>> getReportPostMeeting(String reportno) {
 		return reportManageDao.selectReportMeetingView(reportno);
 	}
+	@Override
+	public void eraseReportPost(Map<String, Object> map) {
+		reportManageDao.deleteReportPostBoard(map);
+	}
+	
+	@Override
+	public void reviseReportMeetingState(Map<String, Object> map) {
+		
+		reportManageDao.updateReportMeeting(map);
+	}
+	
+	@Override
+	public void eraseReportMeeting(Map<String, Object> map) {
+		reportManageDao.deleteReportMeeting(map);
+	}
+	
 	
 }

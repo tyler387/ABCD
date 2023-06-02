@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>header</title>
+<title>JAMANCHU</title>
 <style type="text/css">
 
 header{
@@ -97,7 +97,7 @@ a {
 #header .main2>li:hover .main3 {
   left: 100%;
 }
-#header .main2>li a, {
+#header .main2>li a {
   border-radius: 10px;
   margin: 10px;
 }
@@ -131,19 +131,29 @@ a {
 </head>
 
 <body>
+
 <div id="header">
 <header>
 <c:if test="${role eq 'admin'}">
 	<a href="/admin/main">관리자페이지</a>
 </c:if>
-<c:if test="${userno eq null}">
-	<a href="/login/login">로그인</a>
-</c:if>	
-<c:if test="${userno ne null}">
+<%-- <c:if test="${empty login}"> --%>
+<!-- 	<a href="/login/login">로그인</a> -->
+<%-- </c:if>	 --%>
+<c:if test="${not empty login}">
 	<a href="/login/logout">로그아웃</a>
 	<a href="#">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
+<c:if test="${empty socialId and empty login}">
+	<a href="/login/login">로그인</a>
+</c:if>	
+<c:if test="${not empty socialId}">
+	<a href="/login/logout">로그아웃</a>
+	<a href="#">마이페이지</a>
+	<a href="#">알람</a>
+</c:if>
+
 </header>
 
 <div id="menu">

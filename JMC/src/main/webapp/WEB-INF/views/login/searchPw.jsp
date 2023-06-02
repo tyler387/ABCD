@@ -3,17 +3,97 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp" />
-<h1>비밀번호 찾기</h1>
+
+<style type="text/css">
+
+.container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+.namebox{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 120px;
+}
+
+form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	margin-top: 59px;	
+	padding-bottom: 280px;
+
+	
+	
+}
+
+label{
+	font-size: 24px;
+	font-weight: bold;
+}
+
+input[type=text]{
+	 height:28px;
+     width:320px;
+     border-radius: 4px;
+     font-size: 20px; 
+     outline: none; 
+}
+
+input#userEmail1{
+	margin-bottom: 10px;
+}
+
+div.inputPw{
+	padding-bottom: 30px;
+}
+
+select{
+	 height:28px;
+     width:200px;
+     border-radius: 4px;
+     font-size: 20px; 
+     outline: none; 
+
+}
+
+div.nextBtn{
+	padding-top: 20px;
+}
+button#nextbtn.btn{
+    height: 30px;
+    width: 88px;
+
+}
+
+</style>
 
 
-<!--  <form action="/login/searchPw" method="post" onsubmit="return submitCheck();">  -->
-<div>
-	<label for="userId">아이디</label>
-	<input type="text" id="userId" name="userId">
-</div>
+<div class="container">
+
+	<div class="namebox">
+		<h1 style="font-size: 35px;">비밀번호 찾기</h1>
+	</div>
+
+
+  <form action="/login/searchPw" method="post" onsubmit="return submitCheck();"> 
+	<div class="inputPw">
+		<label for="userId">아이디</label>
+		<div>	
+			<input type="text" id="userId" name="userId">
+			<span id="msg"></span>
+		</div>
+	</div>
 
 <div class="email-group">
 	<label>이메일</label>
+	
 	<div class="input-group">
 		<input type="text" name="email" id="userEmail1">
 		<select name="email" id="userEmail2">
@@ -22,16 +102,22 @@
 			<option>@daum.net</option>
 			<option>@hanmail.com</option>
 		</select>
-		<br>
-		<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-		<button type="button" id="email_checkbtn" name="email_checkbtn">본인인증</button>
+		
+		<div>
+			<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
+			<button type="button" id="email_checkbtn" name="email_checkbtn">본인인증</button>
+		</div>
 	</div>
-	<div>	
-		<span id="mail-check-warn"></span>
-	</div>
-</div>
-	<a href="/login/searchResultPw"><button id="submit">다음</button></a>
-<!--  </form>  -->
+		
+<!-- 		<a href="/login/searchResultPw"> -->
+		<div><span id="mail-check-warn"></span></div>
+		
+		<div class="nextBtn">
+			<button class="btn" id="nextbtn">다음</button>
+		</div>
+	</div>	
+</form> 
+</div> 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
@@ -85,14 +171,14 @@ $('#email_checkbtn').click(function() {
 
 
 // 인증번호가 다르면 sumit 안되게
- $('#submit').click(function submitCheck() {
-	if(!isCertification){
-		alert('인증이 완료되지 않았습니다.');
-		return false;
-	}else{
-		return true;
-	}
-})  
+//  $('#nextbtn').click(function submitCheck() {
+// 	if(!isCertification){
+// 		alert('인증이 완료되지 않았습니다.');
+// 		return false;
+// 	}else{
+// 		return true;
+// 	}
+// })  
 
 </script>
 

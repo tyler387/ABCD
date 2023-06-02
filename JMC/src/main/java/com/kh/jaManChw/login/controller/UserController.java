@@ -1,6 +1,5 @@
 package com.kh.jaManChw.login.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -33,7 +32,7 @@ public class UserController {
 
 	// 로그인 - true or false
 	@PostMapping("/login/login")
-	public String userlogin(HttpSession session, Users users) {
+	public String userlogin(HttpSession session, Users users,Model model) {
 		logger.info("{}", users);
 
 		// 로그인 인증
@@ -41,6 +40,7 @@ public class UserController {
 		
 		Users info = usersService.getuserInfo(users);
 		
+		model.addAttribute("info",info);
 
 		if (isLogin) {
 			logger.info("userlogin() - 로그인 성공");
@@ -50,7 +50,9 @@ public class UserController {
 			session.setAttribute("userno", info.getUserno());
 			session.setAttribute("userId", info.getUserId());
 			session.setAttribute("role", info.getRole());
+			session.setAttribute("social",info.getSocialId());
 			
+			logger.info("social:{}",info.getSocialId());
 			logger.info("userno : {}",info.getUserno());
 			logger.info("userrole : {}",info.getRole());
 
@@ -63,7 +65,7 @@ public class UserController {
 			session.invalidate();
 
 			// 로그인실패시 로그인 페이지로 리다이렉트
-			return "redirect:/login/login";
+			return "/login/login";
 		} // if(isLogin)문 end
 	} // userlogin() end
 
@@ -93,6 +95,25 @@ public class UserController {
 	} // userJoin() end
 	
 
+//	@RequestMapping("/login/idcheck")
+//	@ResponseBody
+//	public String idCheck(@RequestParam("userId") String userId) {
+//		
+//		logger.info("idcheck()-실행");
+//		
+//		int res = usersService.IdCheck(userId);
+//		
+//		if(res!=0) {
+//			logger.info("join() - 중복아이디있음");
+//			return "fail";
+//		}else {
+//			logger.info("join() - 중복아이디 없음");	
+//			return "true";
+//		}
+//	
+//		
+//	} // idchdck() end
+	
 	@RequestMapping("/login/idcheck")
 	@ResponseBody
 	public int idCheck(@RequestParam("userId") String userId) {
@@ -120,9 +141,10 @@ public class UserController {
 		
 		if(result==null) {
 			logger.info("조회된 이름 없음");
-			return "/login/searchId";
+			return "/login/searchResultId";
 		}else {
 			logger.info("조회된 이름 있음");
+			model.addAttribute("result", result);
 			model.addAttribute("userName",result.getUserName() );
 			model.addAttribute("userId",result.getUserId() );
 			session.setAttribute("userno", result.getUserno());
@@ -140,7 +162,7 @@ public class UserController {
 	public void searchPwPage() {}
 	
 	@PostMapping("/login/searchPw")		
-	public String searchPw(Users users,HttpSession session) {
+	public String searchPw(Users users,Model model,HttpSession session) {
 		Users res = usersService.searchId(users);
 		
 		if(res==null) {
@@ -149,7 +171,8 @@ public class UserController {
 			return "/login/searchPw";
 		}else {
 			logger.info("조회된 아이디 있음");
-//			model.addAttribute("userId",res.getUserId() );
+			model.addAttribute("res", res);
+			model.addAttribute("userId",res.getUserId() );
 			session.setAttribute("userno", res.getUserno());
 		}
 		return "/login/searchResultPw";
@@ -164,6 +187,7 @@ public class UserController {
 	@PostMapping("/login/searchResultPw")
 	public String searchResultPw(Users users,HttpSession session) {
 
+		
 		int result = usersService.modifyPw(users);
 		if(result>0) {
 			logger.info("비밀번호 변경 성공");	

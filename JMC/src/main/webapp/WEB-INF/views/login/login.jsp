@@ -7,12 +7,21 @@
 
 <style type="text/css">
 
- form{
-  display: grid;
-  place-items: center;
+.container{
+  display: flex;
+  justify-content : center;
+  flex-direction:column; 
+  align-items: center; 
+}
+
+form{
+  display: flex;
+  justify-content : center;
+  flex-direction:column; 
+  align-items: center; 
+/*   text-align:center; */
   min-height: 60vh;
   padding-top: 60px;
-  padding-bottom: 100px;
 
 }
 
@@ -23,15 +32,30 @@ input[type=text],[type=password]{
      border-radius: 4px;
      font-size: 20px; 
      outline: none; 
+  
 }
 
+.IDinput_box{
+	padding-bottom: 10px;
+}
 
-.input_box{
+.idcheck_box{
 	font-size: 20px;
-	text-align: left;
+	padding-top: 10px;
+	
 }
 
-.btn {
+.input #saveId{
+	width: 20px;
+	height: 25px;
+	padding-bottom: 20px;
+}
+
+div.idcheck_box{
+	padding-bottom: 20px;
+}
+
+button[type=button] {
 	border: 2px solid #333 ;
 	background-color: #333;
 	border-radius : 7px;
@@ -42,10 +66,11 @@ input[type=text],[type=password]{
 	font-weight : bold;
 	display: block;
 	margin: auto;
+	cursor: pointer;
 }
 
 .loginBtn{
-	padding-top: 10px;
+	padding-bottom: 300px;
 }
 .forget a{
 	text-decoration-line: none;	
@@ -56,57 +81,84 @@ input[type=text],[type=password]{
 .kakaobtn img{
 	width: 400px;
 	height: 50px;
-	padding-bottom: 30px;
+	padding-bottom: 300px;
+	cursor: pointer;
 }
 
 </style>
 
 <div class="container">
-<form action="/login/login" method="post">
+ <form action="/login/login" method="post">
 
 	<div>
 		<h1 style="font-size: 68px;">Login</h1>
 	</div>
 	
 	<div class="input_box">
+	<div class="IDinput_box">
 		<label for="userId"></label>
-		<input type="text" name="userId" id="userId" placeholder=" ID"><br>
+		<input type="text" name="userId" id="userId" placeholder=" ID">
+		<div><span id="idMSG"></span></div>
 	</div>
 
-	<div class="input_box">
+	<div class="PWinput_box">
 		<label for="userPw"></label>
-		<input type="password" name="userPw" id="userPw"placeholder=" PASSWORD"><br>
+		<input type="password" name="userPw" id="userPw" placeholder=" PASSWORD">
+		<div><span id="pwMSG"></span></div>
 	</div>
 	
-	<div class="input_box">
+	<div class="idcheck_box">
 		<label for="saveId"></label>
-		<input type="checkbox" name="saveId" id="saveId">아이디 저장
+		<input type="checkbox" name="saveId" id="saveId"> 아이디 저장
+	</div>
 	</div>
 	
-	<br>
 	
-	<div class="forget">
-		<a href="/login/searchId" id="findId">아이디 찾기</a> | <a href="/login/searchPw">비밀번호 찾기</a> | <a href="/login/join">회원가입</a>
-		
+	<div class="loginbtn">
+		<button type="button" id="loginBtn" onclick="submit()">Login</button><br>
+	</div>
+	
+	<div class="forget" style="margin-bottom: 10px;">
+		<a href="/login/searchId" id="findId">아이디 찾기</a> | <a href="/login/searchPw">비밀번호 찾기</a> | <a href="/login/join">회원가입</a>		
 	</div>
 	<br>
 
-	<div class="loginbtn">
-		<button class="btn">Login</button><br>
-	</div>
+<div style="width: 400px; margin-top: 5px; margin-bottom: 20px;">
+	<hr>
+</div>		
+ </form>
 	
 	<div class="kakaobtn">
  		<a href="https://kauth.kakao.com/oauth/authorize?client_id=e711b32da569918789a178e0f371949d&redirect_uri=http://localhost:8888/oauth/kakao&response_type=code">
             <img src="/resources/image/kakao_login_medium_wide.png">
         </a>
 	</div>
-</form>
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
+
+
+   // 이거 클릭 블러 처리해서 수정해보기
+	function submit() {	
+		var userId = $('#userId').val();
+		var userPw = $('#userPw').val();
+	
+		if(userId === ''){
+			alert('아이디를 입력해 주세요');
+			console.log("아이디 입력해!");
+			
+		}else if(userPw === ''){
+			alert('비밀번호를 입력해 주세요');
+			console.log("비밀번호 입력해!");
+		}
+	}
+		
+
 	$(document).ready(function() {
+		
+		
 		
 		//저장된 쿠키값을 id에 저장해준다. 쿠키값이 없으면 공백처리된다.
 		var userLoginId = getCookie('userLoginId');
@@ -141,6 +193,7 @@ input[type=text],[type=password]{
 	        }
 	    });
 		
+		// 쿠키 관련된 자바스크립트
 		function setCookie(cookieName, value, exdays){
 		    var exdate = new Date();
 		    exdate.setDate(exdate.getDate() + exdays);
@@ -170,9 +223,9 @@ input[type=text],[type=password]{
 		
 	});
 	
-/* 	$('#findId').click(function() {
-		
-	} */
+ 	
+ 		
+	
 
 
 </script>

@@ -49,13 +49,13 @@
   
       <update id="updateByUserPw"  parameterType="com.kh.jaManChw.dto.Users">
 		UPDATE USERS SET USER_PW=#{userPw}  
-		WHERE USERno=#{userno}
+		WHERE USERNO=#{userno}
       </update>
       
       <select id="selectUserNameByUserId" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
 	  	SELECT USER_Id
 	  	FROM USERS
-	  	WHERE EMAIL=#{email} and USER_Name=#{userName}
+	  	WHERE USER_Name=#{userName}
 	  </select>
 	  
   

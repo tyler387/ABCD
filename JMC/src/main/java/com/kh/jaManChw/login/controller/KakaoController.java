@@ -1,28 +1,28 @@
 package com.kh.jaManChw.login.controller;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.login.service.face.KakaoService;
 
+
 @Controller
 public class KakaoController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired KakaoService kakaoService; 
+	@Autowired KakaoService kakaoService;
 	
 	@RequestMapping("/oauth/kakao")
-    public String login(@RequestParam("code") String code, HttpSession session) {
+    public String login(@RequestParam("code") String code, HttpSession session,Model model) {
     	
     	// accessToken : 사용자 인증과 카카오 api 호출 권한부여 : 6시간 만료
     	// 사용자에 대한 정보가 담겨있다.
@@ -35,35 +35,40 @@ public class KakaoController {
         // 이메일(account_email) 가져와야함.
         Users userInfo = kakaoService.getUserInfo(access_Token);
       
+        
+        session.setAttribute("access_Token", access_Token);
+        session.setAttribute("socialId", userInfo.getSocialId());
+        session.setAttribute("userNick", userInfo.getUserNick());
         session.setAttribute("userno", userInfo.getUserno());
         
         logger.info("loginController :{}",userInfo);
-        logger.info("email: {}", userInfo.getEmail());
-        logger.info("userid: {}", userInfo.getUserId());
         logger.info("nickname: {}", userInfo.getUserNick());
         
+        model.addAttribute("userInfo",userInfo);
+        logger.info("model:{}",model);
         
         //  클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-//        if (userInfo.getEmail() != null) {
-//        	session.setAttribute("email", userInfo.getEmail());
-//            session.setAttribute("access_Token", access_Token);
-//            session.setAttribute("userno", userInfo.getUserId());
-//        }
+        if (userInfo.getEmail() != null) {
+        	session.setAttribute("email", userInfo.getEmail());
+            session.setAttribute("access_Token", access_Token);
+            session.setAttribute("userno", userInfo.getUserId());
+        }
         return "redirect:/login/main";
     }
 
 	// 발급받은 토큰을 만료시켜 로그아웃 시킨다
 	// 리턴은 메인페이지로
-    @RequestMapping("/login/logout")
-    public String logout(HttpSession session) {
-    	kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
-        session.removeAttribute("access_Token");
-        session.removeAttribute("userId");
-        
-        // 세션 삭제
-     	session.invalidate();
-        logger.info("logout() - 로그아웃 성공");
-        return "redirect:/login/main";
-    }
+	 @RequestMapping("/login/logout")
+	    public String logout(HttpSession session) {
+	    	kakaoService.kakaoLogout((String)session.getAttribute("access_Token"));
+	        session.removeAttribute("access_Token");
+	        session.removeAttribute("userId");
+	        
+	        // 세션 삭제
+	     	session.invalidate();
+	        logger.info("logout() - 로그아웃 성공");
+	        return "redirect:/login/main";
+	    }
+
 
 }

@@ -161,6 +161,7 @@ public class KakaoServiceImpl implements KakaoService{
 		    
 		    if(KakaoInfo == null) {
 		    	// kakaoinfo 가 없으면 insert 하고 find카카오에 저장
+		    	
 		    	kakaoDao.insertKakaoInfo(userInfo);
 		    	return kakaoDao.findKakaoInfo(userInfo);
 		    }else {

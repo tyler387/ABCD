@@ -52,6 +52,7 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public int IdCheck(String userId) {
+				
 		return usersDao.selectCntByUserId(userId);
 	}
 

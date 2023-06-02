@@ -29,9 +29,10 @@ header a{
 *{
   list-style: none;
 }
+
 a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 #header #menu{
@@ -102,16 +103,11 @@ a {
   margin: 10px;
 }
 
-.footer html, body {
-   height: 100%;
-   padding: 0px;
-   margin: 0px;
- }
 
-.footer header {
-   height: 60px;
-   background-color: #e9eaed;
-}
+/* .footer header { */
+/*    height: 60px; */
+/*    background-color: #e9eaed; */
+/* } */
 
  #wrap {
   min-height: calc(100% - 120px);
@@ -124,6 +120,7 @@ a {
    text-align: center;
    padding-top: 70px;
    color: white;
+   width: 1910px;
  }
 
 
@@ -131,6 +128,7 @@ a {
 </head>
 
 <body>
+<div id="allHeader">
 <div id="header">
 <header>
 <c:if test="${role eq 'admin'}">
@@ -157,10 +155,10 @@ a {
         <li><a href="#">모임 신청</a></li>
       </ul>
     </li>
-    <li><a href="#">커뮤니티</a></li>
+    <li><a href="/board/allFile">커뮤니티</a></li>
     <li><a href="#">스토어</a></li>
     <li><a href="#">고객센터</a></li>
     </ul>
 </div>
 </div>
-
+</div>

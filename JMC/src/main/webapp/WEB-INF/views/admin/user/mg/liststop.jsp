@@ -57,7 +57,7 @@ $(function() {
 			$("#searchBtn").click();
 		}
 	})
-	
+		
 	$("#searchBtn").click(function() {
 		
 		filter = $("#filter").val();

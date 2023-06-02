@@ -65,7 +65,10 @@ a {
 a:visited {
 	color : black;
 }
-   
+ 
+.right{
+	overflow-y:scroll;
+}  
 </style>
 <style type="text/css">
  *{

@@ -5,22 +5,24 @@ public class ItemOption {
 	private int itemOptionno;
 	private int itemno;
 	private String optionContent;
+	private int optionCount;
 	private double extraCharge;
 	
 	public ItemOption() {}
 
-	public ItemOption(int itemOptionno, int itemno, String optionContent, double extraCharge) {
+	public ItemOption(int itemOptionno, int itemno, String optionContent, int optionCount, double extraCharge) {
 		super();
 		this.itemOptionno = itemOptionno;
 		this.itemno = itemno;
 		this.optionContent = optionContent;
+		this.optionCount = optionCount;
 		this.extraCharge = extraCharge;
 	}
 
 	@Override
 	public String toString() {
 		return "ItemOption [itemOptionno=" + itemOptionno + ", itemno=" + itemno + ", optionContent=" + optionContent
-				+ ", extraCharge=" + extraCharge + "]";
+				+ ", optionCount=" + optionCount + ", extraCharge=" + extraCharge + "]";
 	}
 
 	public int getItemOptionno() {
@@ -47,6 +49,14 @@ public class ItemOption {
 		this.optionContent = optionContent;
 	}
 
+	public int getOptionCount() {
+		return optionCount;
+	}
+
+	public void setOptionCount(int optionCount) {
+		this.optionCount = optionCount;
+	}
+
 	public double getExtraCharge() {
 		return extraCharge;
 	}
@@ -54,6 +64,5 @@ public class ItemOption {
 	public void setExtraCharge(double extraCharge) {
 		this.extraCharge = extraCharge;
 	}
-	
-	
+
 }

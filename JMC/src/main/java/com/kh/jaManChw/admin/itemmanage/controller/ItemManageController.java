@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAAService;
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
@@ -42,14 +46,16 @@ public class ItemManageController {
 		//추가되는 메서드 - 관리자가 한명만 존재한다는 가정하게 사용...userno가 필요가 없어짐
 //		itemParam = itemService.mergeParamSession(itemParam, session);
 		
-		//item, item_option, item_file의 write가 한번에 진행되어야 함 
+		//item, item_option, item_file의 write가 한번에 진행되어야 함
+		//생각해보니 파일의 첨부가 필요하지 않아보임...;;
 		itemService.writeItem(itemParam);
 	}
 	
 	@GetMapping("/itemview/list")
 	public void itemReviseErasePage(
 			Model model,
-			String curPage
+			String curPage,
+			Map<String, String> itemParam
 			) {
 		
 		//추가되는 메서드 - 페이징을 하는 메서드
@@ -63,6 +69,7 @@ public class ItemManageController {
 			Map<String, String> filterMap,
 			Model model
 			){
+		
 		List<Map<String, Object>> filterItemList = itemService.showItemListByFilter(itemService.getItemFilterPaging(filterMap), filterMap);
 	}
 	
@@ -100,6 +107,35 @@ public class ItemManageController {
 	
 	//--------------------------- 아이템 등록/수정/삭제 끝---------------------------------
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//--------------------------- 아이템 문의 답변 등록/수정/삭제 끝---------------------------------
+	
 	@GetMapping("/itemqna/list")
 	public void itemQnAPage(
 			String curPage,
@@ -125,6 +161,21 @@ public class ItemManageController {
 			) {
 		model.addAttribute("qnAQDetail",itemQnAQService.showItemQnAQDetail(itemQnano));
 		model.addAttribute("userno",(Integer)session.getAttribute("userno"));
+	}
+	
+	//판매 상품 신규 등록 시 내용글중 파일을 저장한다 - summernote
+	@PostMapping(value ="/itemview/writeFileupload" , produces = "application/json; charset=utf8")
+	public @ResponseBody JSONObject adminBoardContentFileupload(
+//			@RequestParam("files") MultipartFile multipartFile
+			@RequestParam("file") MultipartFile multipartFile
+			) {
+
+		JSONObject jo = adminBoardService.manageFile(multipartFile);
+		
+		logger.info(jo.toString());
+		
+		//*** 응답으로 image url 필요 [ex. /upload/저장파일명]
+		return jo; 
 	}
 	
 	@PostMapping("/itemqna/write")

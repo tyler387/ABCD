@@ -144,12 +144,16 @@ public class AdminBoardManageController {
 		
 		logger.info("POST adminBoardParam: {}", adminBoardParam);
 		logger.info("POST adminBoardParam boardOption: {}", session.getAttribute("boardOption"));
-		
+		logger.info("어디가 에러지?");
 		//session에 담겨 있는 userno을 DTO에 삽입한다 - 추후 Service에서 삽입하는 형태로 수정예정!
+		logger.info("어디가 에러지?1");
 		adminBoardParam.setUserno((Integer)session.getAttribute("userno"));
+		logger.info("어디가 에러지?2");
 		
+		logger.info("어디가 에러지?3");
 		adminBoardService.reviseAdminBoard(adminBoardParam);
 		
+		logger.info("어디가 에러지?4");
 		return "redirect:./list?curPage="+curPage;
 	}
 	

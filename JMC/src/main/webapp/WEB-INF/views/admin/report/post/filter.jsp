@@ -76,4 +76,4 @@ table, td, th {
 <a href="<%=request.getContextPath() %>/admin/report/user/list"><button>신고 계정 페이지</button></a>
 <a href="<%=request.getContextPath() %>/admin/user/black/list"><button>블랙리스트 페이지</button></a>
 <a href="<%=request.getContextPath() %>/admin/user/mg/list"><button>유저수정 페이지</button></a>
-<c:import url="./filterpaging.jsp" />
+<c:import url="./paging.jsp" />

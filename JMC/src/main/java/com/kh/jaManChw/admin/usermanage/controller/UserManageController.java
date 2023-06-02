@@ -43,6 +43,7 @@ public class UserManageController {
 		logger.info("{}", userfilter);
 		model.addAttribute("userfilter", userfilter);
 		model.addAttribute("paging", paging);
+		model.addAttribute("pagetype", "list");
 	}
 	
 	
@@ -76,12 +77,18 @@ public class UserManageController {
 			Model model, String curPage,
 			@RequestParam Map<String, Object> map
 			) {
+		logger.info("filter1 에이잭스 출력 : {}", map);
 		String ccurpage = curPage;
-		Paging paging = userManageService.getpaging(ccurpage);
+		Paging paging = userManageService.getFilterPaging(curPage, map);
+		logger.info("페이징 {}", paging);
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
 		model.addAttribute("userfilter", userfilter);
+		model.addAttribute("paging", paging);
+		model.addAttribute("pagetype", "filter");
+		model.addAttribute("map", map);
+		
 	}
 	
 //	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
@@ -205,7 +212,7 @@ public class UserManageController {
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
-		model.addAttribute("userfilter", userfilter);
+		model.addAttribute("users", userfilter);
 		model.addAttribute("paging", paging);
 		
 		return "/admin/user/black/filter";

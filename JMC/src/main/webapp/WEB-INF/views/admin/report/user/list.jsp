@@ -33,41 +33,6 @@ div.admin1 {
 
 </style>
 
-
-
-<script type="text/javascript">
-$(function() {
-	
-	var filter = 0 ; 
-	var content = 0 ;
-	
-	$("#searchBtn").click(function() {
-		
-		filter = $("#filter").val();
-		content = $("#content").val();
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content}
-// 			, data:  {filter : $("#filter").val(), content : $("#content").val()}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공")
-				$("#result").html(res)
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-	})
-	
-	console.log("filter: ", filter)
-	console.log("content: ", content)
-})
-</script>
-
-
 <c:import url="../../main.jsp"></c:import>
 
 
@@ -77,17 +42,19 @@ $(function() {
 	</h1>
 </div>
 
-<!-- <form action="./filter" method="post"> -->
-<p class="text-end" style="padding-right: 50px; padding-top: 15px;">
-<select name ="filter" id="filter">
-   <option value = "user_id" selected>아이디</option>
-   <option value = "user_name">이름</option>
-   <option value = "grade">등급</option>
-</select>
+<div class="text-end" style="padding-right: 50px; padding-top: 15px; margin-bottom:15px;">
+<form action="./filter" method="post">
+		<select name ="filter" id="filter">
+		   <option value = "user_id" selected>아이디</option>
+		   <option value = "user_name">이름</option>
+		   <option value = "grade">등급</option>
+		</select>
+		
+		검색 : <input type="text" name="content" id="content">
+		<button id="searchBtn" type="submit" class="btn btn-secondary btn-sm">검색하기</button>
+</form>
+</div> 
 
-검색 : <input type="text" name="content" id="content">
-<button id="searchBtn" type="button" class="btn btn-secondary btn-sm">검색하기</button>
-</p> 
 <div id="result" class="admin1">
 <table class="table table table-hover">
 <tr class="table-secondary">

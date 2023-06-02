@@ -58,8 +58,8 @@ $("#delete_btn").click(function(){
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  disabled readonly style="resize: none; height: 62px;">신고자 : ${report.USER_ID}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 신고자 아이디 : ${report.USER_NAME}&#010;작성일 : <fmt:formatDate value='${report.WRITE_DATE }' pattern ='yyyy-MM-dd' />  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;글번호 : ${report.REPORTNO }</textarea>
 </div>
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">신고 게시글 및 유저 정보 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  신고 분류 : ${report.REPORT_OPTION }</label>
-  <div>신고글 주소 : <a href="asdsaadasdasdadsdsaadssaddsasad?boarno=${report.REPORTNO }">${report.REPORTNO }</a></div>
+  <label for="exampleFormControlInput1" class="form-label">신고 모임 및 유저 정보 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  신고 분류 : ${report.REPORT_OPTION }</label>
+  <div>모임 신고 주소 : <a href="asdsaadasdasdadsdsaadssaddsasad?boarno=${report.REPORTNO }">${report.REPORTNO }</a></div>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  disabled readonly style="resize: none; height: 62px;">이름 : ${report.R_USER_NAME }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  아이디 : ${report.R_USER_ID } &#010;주소 : 추후 수정 예정</textarea>
 </div>   
 <div class="mb-3">   

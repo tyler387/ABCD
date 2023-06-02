@@ -58,270 +58,44 @@ $(function() {
 		}
 	})
 	
-	$("#searchBtn").click(function() {
+// 			 if (confirm("정말 삭제하시겠습니까??") == true){ 
+// 			     document.removefrm.submit();
+// 			 }else{   //취소
+// 			     return false;
+// 			 }
+// 	})
+}
+// 	$("#searchBtn").click(function() {
 		
-		filter = $("#filter").val();
-		content = $("#content").val();
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-				
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-	})
-
-	
-// 	$(document).on("click",  ".number", function() {
-	$(".number").click(function() {
-		
-		curPage = $(this).html();
-		console.log("페이징 넘버", curPage)
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content, curPage : curPage}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공 , 페이징 숫자버튼")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-				
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
-
-// 	$(document).on("click", ".first", function() {
-	$(".first").click(function() {	
-	
-		curPage = 1
-		
-		console.log(" 페이징 첫페이지 및 curpage", curPage)
-		
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content, curPage : curPage}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공, 페이징 첫페이지")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
-	
-// 	$(document).on("click", ".beforelist", function() {
-	$(".beforelist").click(function() {	
-		curPage = startPage-pageCount;
-		
-		console.log(" 이전 페이지리스트 및 curpage", curPage)
-		
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content, curPage : curPage}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공, 페이징 첫페이지")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
-	
-// 	$(document).on("click", ".before", function() {
-		$(".before").click(function() {	
-		
-		curPageBack = curPage - 1;
-		
-		console.log("현재페이지", ${paging.curPage })
-		console.log(" 이전 페이지 및 curpage", curPage)
-		
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content, curPage : curPageBack}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공, 페이징 첫페이지")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
-	
-
-// 	$(document).on("click", ".next", function() {
-	$(".next").click(function() {
-
-		curPage = curPage + 1;
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content, curPage : curPage}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공, 페이징 첫페이지")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
-	
-	
-	
-// 	$(document).on("click", ".nextlist", function() {
-		$(".nextlist").click(function() {
-
-			curPage = startPage+pageCount;
-		
-		console.log("현재페이지", ${paging.curPage })
-		console.log(" 이전 페이지 및 curpage", curPage)
-		
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content, curPage : curPage}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공, 페이징 첫페이지")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
-	
-
-// 	$(document).on("click", ".end", function() {
-	$(".end").click(function() {
-
-		curPage = totalPage;
-		
-		console.log("엔드페이지", curPage);
-		
-		$.ajax({
-			type: "post"
-			, url: "./filter1"
-			, data:  {filter : filter, content : content, curPage : curPage}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공, 페이징 첫페이지")
-				$("#resultt").html(res)
-				filter = $("#filter").val();
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		})
-		
-	})
-
-})
-	 
-
-// 	$(document).on("click", ".end", function() {
-
-// 		curPageBack = totalPage;
-		
-// 		console.log("현재페이지", ${paging.curPage })
-// 		console.log(" 이전 페이지 및 curpage", curPage)
-		
+// 		filter = $("#filter").val();
+// 		content = $("#content").val();
 		
 // 		$.ajax({
 // 			type: "post"
 // 			, url: "./filter1"
-// 			, data:  {filter : filter, content : content, curPage : curPageBack}
+// 			, data:  {filter : filter, content : content}
 // 			, dataType: "html" 
 // 			, success: function( res ) {
-// 				console.log("AJAX 성공, 페이징 첫페이지")
-// 				$("#result").html(res)
+// 				console.log("AJAX 성공")
+// 				$("#resultt").html(res)
 // 				filter = $("#filter").val();
-// 				curPage -= 1;
+				
 // 			}
 // 			, error: function() {
 // 				console.log("AJAX 실패")
 // 			}
 // 		})
-		
 // 	})
-		
-// 		$(".clicker").click(function() {
-// 			console.log("dkdkdkdk")
-// 		})
-		
-// 		$(".clicker").click(function() {
-			
-// 			curPage = $(this).html()
-			
-// 			console.log("뭐지?", curPage)
-			
-			
-// 			$.ajax({
-// 				type: "post"
-// 				, url: "./filter1"
-// 				, data:  {filter : filter, content : content, curPage: 3 }
-// 				, dataType: "html" 
-// 				, success: function( res ) {
-// 					console.log("AJAX 성공")
-// 					$("#result").html(res)
-// 					filter = $("#filter").val();
-// 				}
-// 				, error: function() {
-// 					console.log("AJAX 실패")
-// 				}
-// 			})
-			
-// 		})
-		
-		
-		//a 태그 살리면서 AJAX 넣는 방법 - 아직 고민중, 미구현
-	// 	if(content != null && !cotent.equasl("")){
-	// 		a태그 속성지우기 
-			
-	// 		ajax 클릭 이벤트 삽입
-	// 	}
-		
-</script>
+
+// $("#deletebtn").click(function(){
+// 			 if (confirm("정말 삭제하시겠습니까??") == true){ 
+// 			     document.removefrm.submit();
+// 				   location.reload();
+// 			 }else{   //취소
+// 			     return false;
+// 			 }
+// 			console.log("content: ", content)
+// 	})
 <div id="resultt">
 	<c:import url="../../main.jsp"></c:import>
 	
@@ -331,16 +105,17 @@ $(function() {
 			유저 수정 페이지
 		</h1>
 	</div>
-	<!-- <form action="./filter" method="post"> -->
 <div class="text-end" style="padding-right: 50px; padding-top: 15px; margin-bottom:15px;">
-	<select name ="filter" id="filter">
-	   <option value = "user_id" selected>아이디</option>
-	   <option value = "user_name">이름</option>
-	   <option value = "grade">등급</option>
-	</select>
-	
-	검색 : <input type="text" name="content" id="content">
-	<button id="searchBtn" type="button" class="btn btn-secondary btn-sm">검색하기</button>
+<form action="./filter" method="post">
+		<select name ="filter" id="filter">
+		   <option value = "user_id" selected>아이디</option>
+		   <option value = "user_name">이름</option>
+		   <option value = "grade">등급</option>
+		</select>
+		
+		검색 : <input type="text" name="content" id="content">
+		<button id="searchBtn" type="submit" class="btn btn-secondary btn-sm">검색하기</button>
+</form>
 </div> 
 	
 <div id="result" class="admin1">
@@ -374,14 +149,14 @@ $(function() {
 	<th>${users.phone }</th>
 	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
 	<th><a href="./update?userno=${users.userno }"><button type="button" class="btn btn-secondary">수정</button></a>
-	<a href="./withdraw?userno=${users.userno }&curPage=${paging.curPage}"><button type="button" class="btn btn-secondary" id = "deletebtn" onClick="window.location.reload()">탈퇴</button></a></th>
+	<a href="./withdraw?userno=${users.userno }&curPage=${paging.curPage}"><button type="button" class="btn btn-secondary" id ="deletebtn" onClick="window.location.reload()">탈퇴</button></a></th>
 </tr>
 </c:forEach>
 </table>
 
 
 <div id="pagingDivTag">
-<c:import url="../../filterpaging.jsp" />
+<c:import url="./paging.jsp" />
 </div>
 
 </div>	

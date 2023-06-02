@@ -117,6 +117,7 @@ public class AdminBoardManageController {
 		
 		//보드넘버를 통해 해당 게시글을 조회한다
 		//	ㄴ모델값으로 보내기 위한 정보, 접근한 사용자가 적절한 접근을 하고 있는지 확인
+		// 접근 관련해선 아직 미완!
 		AdminBoard detailAdminBoard = adminBoardService.showAdminBoardDetail(adminBoardParam);
 		
 		//로그인 기능시 생성될 userno, 임의로 세션에 삽입해서 Test한다
@@ -143,6 +144,9 @@ public class AdminBoardManageController {
 		
 		logger.info("POST adminBoardParam: {}", adminBoardParam);
 		logger.info("POST adminBoardParam boardOption: {}", session.getAttribute("boardOption"));
+		
+		//session에 담겨 있는 userno을 DTO에 삽입한다 - 추후 Service에서 삽입하는 형태로 수정예정!
+		adminBoardParam.setUserno((Integer)session.getAttribute("userno"));
 		
 		adminBoardService.reviseAdminBoard(adminBoardParam);
 		
@@ -220,7 +224,7 @@ public class AdminBoardManageController {
 			Model model
 			) {
 		//임시로 유저정보 삽입
-		session.setAttribute("userno", 99);
+//		session.setAttribute("userno", 99);
 		
 		qnAAService.writeQnAA(qnAAService.getCompleteParam(session, qnAAParam));
 		

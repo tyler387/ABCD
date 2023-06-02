@@ -128,11 +128,11 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		//adminBoardParam에 입력 받은 정보 외에 부족한 정보를 추가
 		//로그인 기능을 통해서 session에 userno를 추가되면서 추가될 코드
 		//현재 미구현
-//		adminBoardParam.setUserno((Integer)session.getAttribute("userno"));
+		adminBoardParam.setUserno((Integer)session.getAttribute("userno"));
 		adminBoardParam.setAbOption(String.valueOf(session.getAttribute("boardOption")));
 		
 		//임시로 userno저장 - 세션에서 값 받아오면 삭제해야함!
-		adminBoardParam.setUserno(5);
+//		adminBoardParam.setUserno(5);
 
 		//파일 업로드 이전에 게시글이 작성되어야함
 		adminBoardDao.insertAdminBoard(adminBoardParam);

@@ -45,4 +45,4 @@
 
 </table>
 
-<c:import url="../../layout/paging.jsp"/>
+<c:import url="../../../layout/paging.jsp"/>

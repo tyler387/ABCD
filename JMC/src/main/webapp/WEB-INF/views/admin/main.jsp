@@ -71,7 +71,14 @@ a:visited {
  *{
  font-family: 'Noto Sans KR', sans-serif;
  }
-    
+.innerTitle {
+	margin: 0 auto;
+	border-radius: 30px; 
+	background-color : #03a9f46e; 
+	width: 600px;  
+	text-align: center; 
+	padding-bottom: 5px;
+}
 </style>
 </head> 
 <body>
@@ -89,13 +96,13 @@ a:visited {
 	<p><a href="<%=request.getContextPath() %>/admin/report/meeting/list">모임 신고 확인</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/report/user/list">신고 계정 확인</a><br><br></p>
 	<h2>판매관리</h2>
-	<p><a href="./board/list?boardOption=event">상품 등록</a><br></p>
-	<p><a href="./board/list?boardOption=event">상품 삭제/수정</a><br></p>
-	<p><a href="./board/list?boardOption=event">상품 문의</a><br><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/item/itemview/write">상품 등록</a><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/item/itemview/list">상품 삭제/수정</a><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/board/itemqna/list">상품 문의</a><br><br></p>
 	<h2>고객센터관리</h2>
-	<p><a href="./board/list?boardOption=event">공지사항 관리</a><br></p>
-	<p><a href="./board/list?boardOption=event">이벤트 관리</a><br></p>
-	<p><a href="./board/list?boardOption=event">Q & A 관리</a><br><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/main/boardCategory?boardOption=notice">공지사항 관리</a><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/main/boardCategory?boardOption=event">이벤트 관리</a><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/board/qna/list">Q & A 관리</a><br><br></p>
 	
 	</div>
 <div class="right">

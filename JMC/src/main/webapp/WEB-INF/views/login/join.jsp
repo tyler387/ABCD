@@ -163,7 +163,7 @@ input#email_checknumber{
 <body>
 <div id="continner">
 
-<form action="/login/join" method="post" onsubmit="return submitCheck();"> 
+<form action="/login/join" method="post"> 
 <h1 style="font-size:63px;">JAMANCHU</h1> 
 
 <div class="box1">
@@ -190,6 +190,9 @@ input#email_checknumber{
 	<div class="box2">
 		<input type="password" name="userPw" id="userPw">
 	</div>
+	<div class="msgbox">
+		<span id="pw_msg" style="font-size: 17px;"></span>	
+	</div>	
 	
 </div>
 
@@ -202,6 +205,10 @@ input#email_checknumber{
 		<input type="password" name="userPw_chk" id="userPw_chk">
 	</div>
 	
+	<div class="msgbox">
+		<span id="pwchk_msg" style="font-size: 17px;"></span>	
+	</div>	
+	
 </div>
 
 
@@ -212,6 +219,9 @@ input#email_checknumber{
 	<div class="box2">
 		<input type="text" name="userName" id="userName">
 	</div>
+	<div class="msgbox">
+		<span id="name_msg" style="font-size: 17px;"></span>	
+	</div>	
 	
 </div>
 
@@ -235,6 +245,9 @@ input#email_checknumber{
 		<input type="radio" id="select" name="gender" value="M"><label for="select">남자</label>	
 		<input type="radio" id="select2" name="gender" value="F"><label for="select2">여자</label>
 	</div>
+	<div class="msgbox">
+		<span id="genderMsg" style="font-size: 17px;"></span>	
+	</div>	
 	
 </div>
 
@@ -252,6 +265,9 @@ input#email_checknumber{
 				<option>@hanmail.com</option>
 			</select>
 			</div>
+			<div class="msgbox">
+				<span id="emailMsg" style="font-size: 17px;"></span>	
+			</div>	
 			<div class="box3">
 				<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
 				<button type="button" id="emailbtn" name="emailbtn">본인인증</button>
@@ -278,6 +294,9 @@ input#email_checknumber{
 			</select>
 		<input type="tel" name="phone" id="phone">
 	</div>
+		<div class="msgbox">
+		<span id="phoneMsg" style="font-size: 17px;"></span>	
+	</div>	
 	
 </div>
 
@@ -310,6 +329,126 @@ input#email_checknumber{
 <script type="text/javascript">
 
 
+$(document).ready(function(){
+
+	// FIXME: 필요 스크립트 전개 영역
+    let checkID = RegExp(/^[a-zA-Z0-9]{6,20}$/);
+    let checkPW = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/);
+    let checkName = RegExp(/^[가-힣]|[A-Z]|[a-z]$/);
+    let checkPhone = RegExp(/^\d{3}\d{3,4}\d{4}$/);        
+    let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
+         
+    
+
+	$('#userId').blur(function() {
+		var userId = $('#userId').val();
+	
+		if(userId === ''){
+			$('#id_msg').html('아이디를 입력해 주세요');	
+			$('#id_msg').css('color','red');
+// 			$("#userId").focus();
+			return false;
+			
+		}else if(!checkID.test(userId)) {
+			$('#id_msg').html("대소문자,숫자를 포함한 6자리~20자리로 입력해주세요.");
+			$('#id_msg').css('color','red');
+//             $("#userId").focus();                
+            return false;
+            
+        }else if(checkID.test(userId)) {
+        	$('#id_msg').html("사용가능한 아이디입니다.")
+        	$('#id_msg').css("color", "#3f8ef7");                           
+//         	$("#userPw").focus();
+        	return true;
+        }
+    }); //$('#userId').blur end
+		
+	$('#userPw').blur(function() {
+		var userPw = $('#userPw').val();
+	
+		if(userPw === ''){	
+			$('#pw_msg').html('비밀번호를 입력해 주세요');
+			$('#pw_msg').css('color','red');
+// 			$("#userPw").focus();
+			return false;
+		}else if(!checkPW.test(userPw)){
+			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
+			$('#pw_msg').css('color','red');
+// 			$("#userPw").focus();
+			return false;
+			
+		}else if(checkPW.test(userPw)){
+			$('#pw_msg').html("사용가능한 비밀번호입니다.")
+        	$('#pw_msg').css("color", "#3f8ef7");                           
+//         	$("#userPw_chk").focus();
+        	return true;
+		}
+	}) //$('#userPw').blur ed
+	
+	$('#userPw_chk').blur(function() {
+		var userPw = $('#userPw').val();
+		var userPwChk = $('#userPw_chk').val();
+	
+		if(userPw != userPwChk){	
+			$('#pwchk_msg').html('비밀번호가 일치하지 않습니다.');
+			$('#pwchk_msg').css('color','red');
+// 			$("#userPw_chk").focus();
+			return false;
+		
+		}else if(userPw === userPwChk){
+			$('#pwchk_msg').html('비밀번호가 일치합니다');
+			$('#pwchk_msg').css('color','#3f8ef7');
+// 			$("#userName").focus();
+			return true;			
+		}
+	}) //$('#userPw_chk').blur ed
+	
+	
+	$('#userName').blur(function() {
+		var userName = $('#userName').val();
+	
+		if(userName === ''){	
+			$('#name_msg').html('이름을 입력해 주세요');
+			$('#name_msg').css('color','red');
+// 			$("#userName").focus();
+			return false;
+		}else if(!checkName.test(userName)){
+			$('#name_msg').html('옳지않은 형식입니다.');
+			$('#name_msg').css('color','red');
+// 			$("#userPw").focus();
+			return false;
+			
+		}else if(checkName.test(userName)){  
+			$('#name_msg').html('');
+ 			$('#name_msg').css('color','#3f8ef7');
+//         	$("#birth").focus();
+        	return true;
+		}
+	}) //$('#userName').blur ed
+	
+	$('#phone').blur(function() {
+		var phone = $('#phone').val();
+	
+		if(phone === ''){	
+			$('#phoneMsg').html('핸드폰 번호를 입력해주세요');
+			$('#phoneMsg').css('color','red');
+			return false;
+			
+		}else if(!checkPhone.test(phone)){
+			$('#phoneMsg').html('옳지않은 형식입니다.');
+			$('#phoneMsg').css('color','red');
+			return false;
+			
+		}else if(checkPhone.test(phone)){  
+			$('#phoneMsg').html('');
+ 			$('#phoneMsg').css('color','#3f8ef7');
+        	return true;
+		}
+	}) //$('#phone').blur ed
+
+})//$(document).ready ed
+
+
  function idcheck() {	
 	var userId = $('#userId').val();
 	$.ajax({
@@ -321,9 +460,6 @@ input#email_checknumber{
 	        if(res > 0){
 	        	$('#id_msg').html('이미 사용중인 아이디입니다.');
 	        	$('#id_msg').css('color','red');
-	        }else{
-	        	$('#id_msg').html('사용 가능한 아이디입니다.');
-	        	$('#id_msg').css('color','#2fb380');
 	        }
 	    	console.log(res);
 	    },
@@ -431,7 +567,7 @@ function findAddress() {
 
 
 	// 인증번호가 다르면 sumit 안되게
-	$('#submit').click(function submitCheck() {
+	$('#submit').click(function() {
 		if(!isCertification){
 			alert('인증이 완료되지 않았습니다.');
 			return false;

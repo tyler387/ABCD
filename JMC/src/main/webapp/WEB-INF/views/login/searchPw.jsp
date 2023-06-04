@@ -82,12 +82,14 @@ button#nextbtn.btn{
 	</div>
 
 
-  <form action="/login/searchPw" method="post" onsubmit="return submitCheck();"> 
+  <form action="/login/searchPw" method="post" > 
 	<div class="inputPw">
 		<label for="userId">아이디</label>
 		<div>	
 			<input type="text" id="userId" name="userId">
-			<span id="msg"></span>
+		</div>
+		<div>
+			<span id="IdMsg"></span>
 		</div>
 	</div>
 
@@ -120,6 +122,23 @@ button#nextbtn.btn{
 </div> 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
+
+$('#userId').blur(function() {
+	var userId = $('#userId').val();
+
+	if(userId === ''){	
+		$('#IdMsg').html('아이디를 입력해 주세요');
+		$('#IdMsg').css('color','red');
+//			$("#userName").focus();
+		return false;
+	}else{  
+		$('#IdMsg').html('');
+		$('#IdMsg').css('color','#3f8ef7');
+//     	$("#birth").focus();
+    	return true;
+	}
+}) //$('#userName').blur ed
+
 
 //이메일 인증
 var code = ""; // 인증번호 저장을 위한 코드
@@ -170,15 +189,15 @@ $('#email_checkbtn').click(function() {
 })  
 
 
-// 인증번호가 다르면 sumit 안되게
-//  $('#nextbtn').click(function submitCheck() {
-// 	if(!isCertification){
-// 		alert('인증이 완료되지 않았습니다.');
-// 		return false;
-// 	}else{
-// 		return true;
-// 	}
-// })  
+//인증번호가 다르면 sumit 안되게
+ $('#nextbtn').click(function() {
+	if(!isCertification){
+		alert('인증이 완료되지 않았습니다.');
+		return false;
+	}else{
+		return true;
+	}
+})  
 
 </script>
 

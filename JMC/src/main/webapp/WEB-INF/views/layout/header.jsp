@@ -142,7 +142,7 @@ a {
 <%-- </c:if>	 --%>
 <c:if test="${not empty login}">
 	<a href="/login/logout">로그아웃</a>
-	<a href="#">마이페이지</a>
+	<a href="/mypage/main">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
 <c:if test="${empty socialId and empty login}">
@@ -150,7 +150,7 @@ a {
 </c:if>	
 <c:if test="${not empty socialId}">
 	<a href="/login/logout">로그아웃</a>
-	<a href="#">마이페이지</a>
+	<a href="/mypage/main">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
 

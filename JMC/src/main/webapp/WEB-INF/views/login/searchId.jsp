@@ -87,7 +87,9 @@ button#nextbtn.btn{
 			<label for="userName">이름</label>
 			<div>
 				<input type="text" id="userName" name="userName">
-				<span id="msg"></span>
+			</div>
+			<div>
+				<span id="name_msg"></span>
 			</div>
 		</div>
 
@@ -121,7 +123,21 @@ button#nextbtn.btn{
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
+$('#userName').blur(function() {
+	var userName = $('#userName').val();
 
+	if(userName === ''){	
+		$('#name_msg').html('이름을 입력해 주세요');
+		$('#name_msg').css('color','red');
+//			$("#userName").focus();
+		return false;
+	}else{  
+		$('#name_msg').html('');
+		$('#name_msg').css('color','#3f8ef7');
+//     	$("#birth").focus();
+    	return true;
+	}
+}) //$('#userName').blur ed
 
 
 
@@ -174,15 +190,15 @@ $('#email_checkbtn').click(function() {
 })  
 
 
-// // 인증번호가 다르면 sumit 안되게
-//  $('#nextbtn').click(function submitCheck() {
-// 	if(!isCertification){
-// 		alert('인증이 완료되지 않았습니다.');
-// 		return false;
-// 	}else{
-// 		return true;
-// 	}
-// })  
+// 인증번호가 다르면 sumit 안되게
+ $('#nextbtn').click(function submitCheck() {
+	if(!isCertification){
+		alert('인증이 완료되지 않았습니다.');
+		return false;
+	}else{
+		return true;
+	}
+})  
 
 </script>
 

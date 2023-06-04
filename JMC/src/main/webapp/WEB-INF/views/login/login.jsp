@@ -139,26 +139,31 @@ button[type=button] {
 <script type="text/javascript">
 
 
+$('#userId').blur(function() {
+	var userId = $('#userId').val();
 
-   // 이거 클릭 블러 처리해서 수정해보기
-	function submit() {	
-		var userId = $('#userId').val();
-		var userPw = $('#userPw').val();
-	
-		if(userId === ''){
-			alert('아이디를 입력해 주세요');
-			console.log("아이디 입력해!");
-			
-		}else if(userPw === ''){
-			alert('비밀번호를 입력해 주세요');
-			console.log("비밀번호 입력해!");
-		}
+	if(userId === ''){
+		alert('아이디를 입력해 주세요');
+		
+		return false;
 	}
+	return true;
+})
+
+$('#userPw').blur(function() {
+	var userPw = $('#userPw').val();
+
+	if(userPw === ''){	
+		alert('비밀번호를 입력해 주세요');
+	
+		return false;
+	}
+	return true;
+})
+
 		
 
 	$(document).ready(function() {
-		
-		
 		
 		//저장된 쿠키값을 id에 저장해준다. 쿠키값이 없으면 공백처리된다.
 		var userLoginId = getCookie('userLoginId');

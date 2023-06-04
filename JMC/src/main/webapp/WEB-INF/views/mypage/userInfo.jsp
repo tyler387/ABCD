@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp" />
-<h1>신규 개발 페이지</h1>
+<h1>마이페이지</h1>
 
 a<br>
 a<br>

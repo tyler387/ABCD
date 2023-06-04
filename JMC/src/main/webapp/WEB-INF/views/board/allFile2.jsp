@@ -106,10 +106,10 @@ input {
 $(function(){
 	
 	$("#test2").css("display","none")
-	
+	console.log($("#test2").css("display"))
 
 	
-	//.button 가 클릭 됐을 때 console로 찍어보기
+	//댓글 버튼을 클릭 했을 때 댓글창 열어 주기
 	$(".button").click(function(){
 	
 		    console.log("#ajax cContent click")
@@ -127,7 +127,7 @@ $(function(){
 		         , dataType: "html"
 		         , success: function(res){
 		            console.log("AJAX 성공")
-		          	 console.log(res)
+		          	// console.log(res)
 		            $("#test2").children().remove()
 		            $("#test2").append(res)
 		          //#test2는 클릭을 해야지만 나오는 녀석
@@ -151,27 +151,28 @@ $(function(){
 	
 	//글쓰기 버튼을 눌렀을 때, 글 쓰기 페이지 띄우는 AJAX
 	$("#write2").css("display","none")
+	console.log($("#write2").css("display"))
+	
 	$("#write").click(function(){
 		
-		$("#write2").show()
-		$("#write").hide()
+		if($("#write2").css("display")=="none"){
+		$("#write2").css("display", "block")
+		}else{
+		$("#write2").css("display","none")
+		}
+
+		//$("#write").hide()
+		
+		//클릭 했을 때의 css("display")상태, none or block
+		console.log($("#write2").css("display"))	
 		console.log("글 쓰기 버튼 자알 눌림")
 		var boardOptionno =  ${map.BOARD_OPTIONNO}
 		console.log("옵션 번호 가지고 와?", boardOptionno)
 		
-		 $.ajax({
-		         type: "get"
-		         , url: "/board/write"
-		         , data: {boardOptionno : boardOptionno}
-		         , dataType: "html"
-		         , success: function(res){
-		            console.log("AJAX 성공")
-		         }
-		         , error: function(){
-		            console.log("AJAX 실패")   
-		         }
+		 
+
+
 	})
-})
 	
 	//좋아요 누르면 하트색깔 바꾸고, 좋아요 카운트 수 올리기
 	$(".like").click(function(){

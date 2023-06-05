@@ -26,11 +26,11 @@ $(function() {
 		
 		var addOption = "<div class='OptionDiv'>";
 		addOption += "<label>옵션설명:</label>";
-		addOption += "<input type='text' class='option' name='0ptionContent' style='margin-top:5px;'>";
+		addOption += "<input type='text' class='option' name='OptionContent' style='margin-top:5px;'>";
 		addOption += "<label>추가 금액:</label>";
-		addOption += "<input type='text' class='option' name='extraCharge' style='margin-top:5px;'>";
+		addOption += "<input type='text' class='option mustNum' name='extraCharge' style='margin-top:5px;'>";
 		addOption += "<label>옵션 상품 갯수:</label>";
-		addOption += "<input type='text' class='option' name='extraCharge' style='margin-top:5px;'>";
+		addOption += "<input type='text' class='option mustNum' name='optionCount' style='margin-top:5px;'>";
 		addOption += "<img class='image' alt='delpic' src='/resources/image/optionDelete.png' style='width:20px;'>";
 		addOption += "<br>";
 		addOption += "</div>";
@@ -38,19 +38,30 @@ $(function() {
 		$("#addedOption").append(addOption)
 	})
 	
+	//생성된 옵션의 우측의 삭제 버튼 클릭시 옵션이 삭제되도록 하는 이벤트 리스너 
 	$("#addedOption").on("click", ".image", function(){
 		console.log(this);
 		$(this).parent().remove();
 		
 	})
+
+
+	//동적으로 생성되는 옵션에 가격, 수량에 숫자만 입력되도록 하는 이벤트 리스너
+	//정규식, replace함수 사용
+	$("#addedOption").on("change", ".mustNum", function() {
+// 		console.log("이벤트는 걸렷나요?")
+		this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+	})
 	
-	$("#allItemCount").keydown(function(e) {		
+	
+	//가격과 전체 수량에 숫자만 입력되도록 하는 이벤트 리스너
+	//정규식, replace함수 사용
+	$(".mustNum").change(function() {		
 		
-		if (e.keyCode>= 0 && e.keyCode<=9) {
-			return true
-		}
+		this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 		
 	})
+	
 	
 		//div#content에 에디터 적용하기
 	$("#summernote").summernote({
@@ -176,28 +187,35 @@ $(function() {
 </style>
 
 <div id="itemWriteForm">
-<form action="write" method="post" enctype="mutipart/form-data">
+<form action="write" method="post" enctype="multipart/form-data">
 
 <a><h1>판매 상품 신규 등록</h1></a>
 
-
-
 <span>상품 기본 정보</span>
 <div id="itemWriteInput">
+<div>
+<label>상품분류</label>
+<select name="itemType">
+	<option value="cockIngredient">칵테일 재료</option>
+	<option value="cockTool">칵테일 도구</option>
+	<option value="cockGlass">칵테일 잔</option>
+	<option value="whiskeyTool">위스키 물품</option>
+	<option value="wineTool">와인 물품</option>
+</select> <br>
+</div>
 <div>
 <label>상품명</label>
 <input type="text" id="itemTitle" name="itemTitle"><br>
 </div>
 <div>
 <label>가격 입력</label>
-<input type="text" id="itemPrice" name="itemPrice"><br>
+<input type="text" id="itemPrice" name="itemPrice" class="mustNum"><br>
 </div>
 <div>
 <label>재고 설정</label>
-<input type="text" id="allItemCount" name="allItemCount"><br>
+<input type="text" id="allItemCount" name="allItemCount" class="mustNum"><br>
 </div>
 <div>
-<label>상품 옵션 추가</label>
 <label>상품 옵션 추가</label>
 <img id="btnOption" alt="optionAddIcon" src="/resources/image/optionAddIcon.png" style="width:15px">
 <div id="addedOption">

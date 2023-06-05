@@ -39,16 +39,20 @@ public class ItemManageController {
 	
 	@PostMapping("/itemview/write")
 	public void itemWrite(
-			Map<String,String> itemParam
+			@RequestParam Map<String,String> itemParam,
+			MultipartFile file
 //			,HttpSession session
 			) {
 
 		//추가되는 메서드 - 관리자가 한명만 존재한다는 가정하게 사용...userno가 필요가 없어짐
 //		itemParam = itemService.mergeParamSession(itemParam, session);
+
+		//매개변수 정보 확인
+		logger.info("itemParam1: {}", itemParam);
 		
 		//item, item_option, item_file의 write가 한번에 진행되어야 함
 		//생각해보니 파일의 첨부가 필요하지 않아보임...;;
-		itemService.writeItem(itemParam);
+		itemService.writeItem(itemParam, file);
 	}
 	
 	@GetMapping("/itemview/list")

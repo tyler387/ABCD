@@ -3,6 +3,27 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="com.kh.jaManChw.itemmanage.dao.face.ItemDao">
+<mapper namespace="com.kh.jaManChw.admin.itemmanage.dao.face.ItemDao">
 
+	<select id="getItemno" resultType="int">
+		SELECT item_seq.nextval FROM dual
+	</select>
+	
+<!-- ItemOption 넣다가 실패함 여기부터 시작 -->	
+	
+	<insert id="insertItem" parameterType="Item">
+		INSERT INTO item(itemno, item_title, item_content, item_price, item_type, all_item_count)
+		VALUES(#{itemno}, #{itemTitle}, #{itemContent}, #{itemPrice}, #{itemType}, #{allItemCount})
+	</insert>
+	
+	<insert id="insertItemOption" parameterType="ItemOption">
+		INSERT INTO item_option(item_optionno, itemno, option_count, extra_charge)
+		VALUES(item_option_seq.nextval, #{itemno}, #{optionCount}, #{extraCharge})
+	</insert>
+	
+	<insert id="insertItemFile" parameterType="ItemFile">
+		INSERT INTO item_file(item_view_fileno, itemno, i_origin_name, i_stored_name, filesize)
+		VALUES(item_file_seq.nextval, #{itemno}, #{iOriginName}, #{iStoredName}, #{filesize})
+	</insert>
+	
 </mapper>

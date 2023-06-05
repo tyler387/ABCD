@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.jaManChw.util.Paging;
 
 public interface ItemService {
@@ -13,8 +15,9 @@ public interface ItemService {
 	 * 입력받은 판매글 정보를 가져와 DB에 저장한다
 	 * 
 	 * @param itemParam - 입력받은 판매글 정보를 가져올 DTO 객체
+	 * @param file - 파일을 저장할 변수
 	 */
-	public void writeItem(Map<String, String> itemParam);
+	public void writeItem(Map<String, String> itemParam, MultipartFile file);
 
 	/**
 	 * 현재 페이지를 입력받아 전체 판매글을 페이징 하는 객체를 반환한다

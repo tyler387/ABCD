@@ -3,6 +3,9 @@ package com.kh.jaManChw.board.service.face;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.kh.jaManChw.dto.BoardComment;
 import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.util.Paging;
@@ -64,6 +67,15 @@ public interface BoardService {
 	 * @return
 	 */
 	public List<Map<String, Object>> showCateAllFile(Paging paging, int boardOptionno);
+
+	/**
+	 * 작성한 글과 사진들을 DB에 insert한다.
+	 * @param boardWrite   작성된 글
+	 * @param file          첨부한 파일
+	 */
+	public void writeBoard(String boardWrite, List<MultipartFile> file);
+
+	public void writeBoard(MultipartHttpServletRequest request);
 	
 	
 

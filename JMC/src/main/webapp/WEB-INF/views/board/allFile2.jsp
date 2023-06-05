@@ -8,8 +8,8 @@
 
 <div id="right">
 <div class="search">
-  <input type="text" placeholder="검색어를 입력하세요">
-  <img id="search2" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+  <input type="text" id="searchWrite" placeholder="검색어를 입력하세요">
+ <img id="btn_Search" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
 </div>
 <div id="write" class="write">
 자유롭게 글을 작성하세요 <span>&#128196;</span><br><br>
@@ -58,7 +58,7 @@ input {
 	height: 45px;
 }
 
-#search2 {
+#btn_Search {
   position : relative;
   width: 30px;
   bottom: 37px;
@@ -208,7 +208,15 @@ $(function(){
 // 					$("#test2").hide()
 // 				}
 	})
-		
+	
+// 	//검색어에 따른 결과 받기 위한 ajax
+	 $("#btn_Search").click(function() {
+		 console.log("돋보기 버튼 클릭 됨")
+		 var searchData = $('#searchWrite').val()
+		 console.log("검색 값 :", searchData)
+		 
+
+	      });
 
 })
 </script>

@@ -84,6 +84,9 @@
 		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
 		
 	</select>
-
+	<insert id="insertBoardFile" parameterType="BoardFile">
+		INSERT INTO BOARD_File
+		VALUES ()
+	</insert>
   
   </mapper>

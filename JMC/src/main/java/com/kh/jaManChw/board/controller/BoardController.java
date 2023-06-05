@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.jaManChw.board.service.face.BoardService;
+import com.kh.jaManChw.dto.Board;
 import com.kh.jaManChw.dto.BoardComment;
 import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.util.Paging;
@@ -277,18 +283,44 @@ public class BoardController {
 			return firstFileno;
 		}
 		
-		@ResponseBody
 		@GetMapping("/write")
-		public ModelAndView boardWrite(int boardOptionno, ModelAndView mav) {
+		public ModelAndView boardWrite(ModelAndView mav) {
 			
 			logger.info("boardWrite컨트롤러!");
 			
-			mav.addObject("boardOptionno", boardOptionno);
+//			mav.addObject("boardO	ptionno", boardOptionno);
 			mav.setViewName("/board/write");		
 			
 			return mav;
 			
 		}
+		
+		
+		//MeSSION
+		//1. 보드 옵션NO가지고 오게 하기
+		
+//		//게시글 작성 + 이미지 첨부 값 가지고 오기
+//		@PostMapping("/write")
+//		public void boardWrite(String cateData, String boardWrite, @RequestParam(value = "file") List<MultipartFile> file) {
+//			//카테고리 값은 도대체 어떻게 가지고 오는 가...
+//		    logger.info("카테고리 값: {}", cateData);
+//		    logger.info("글 작성 내용: {}", boardWrite);
+//		    logger.info("파일 첨부 값: {}", file);
+//	
+//		    boardService.writeBoard(boardWrite, file);
+//		    
+//		}
+		//게시글 작성 + 이미지 첨부 값 가지고 오기
+		@PostMapping("/write")
+		public void boardWrite(MultipartHttpServletRequest request) {
+			
+			boardService.writeBoard(request);
+			
+		}
+
+		
+		
+		
 		
 		
 		

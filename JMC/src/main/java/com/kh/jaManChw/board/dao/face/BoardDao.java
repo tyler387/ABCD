@@ -3,6 +3,7 @@ package com.kh.jaManChw.board.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.jaManChw.dto.Board;
 import com.kh.jaManChw.dto.BoardComment;
 import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.util.Paging;
@@ -62,5 +63,9 @@ public interface BoardDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> selectCateAllFile(Map<String, Object> pagingAndBoardOptionno);
+
+	public void insertBoardFile(BoardFile boardFile);
+
+	public void insertBoard(Board board);
 
 }

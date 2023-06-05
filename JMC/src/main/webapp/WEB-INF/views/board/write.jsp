@@ -5,9 +5,20 @@
 
 
 
+<form id="uploadFile"  enctype="multipart/form-data">
+<select id="category">
+  	<option value="none">=== 선택 ===</option>
+	<option value ="11">모임후기</option>
+	<option value ="12">술자랑 & 구입기</option>
+	<option value ="13">위스키 시음기</option>
+	<option value ="14">바 정보 & 방문기</option>
+	<option value ="15">나만의 칵테일</option>
+</select>
 
 
-<input type="text" placeholder="입력하세요!" id="boardWrite" style="width:300px;height:300px; font-size:12px;">
+
+<input type="text" placeholder="입력하세요!" id="boardWrite" name="boardWrite" style="width:300px;height:300px; font-size:12px;">
+
 
 <div class="img-wrap" style="cursor:pointer;">	
 		<img alt="picUpIcon" src="/resources/image/fileuploadIcon.png" style="width:50px;">
@@ -16,10 +27,9 @@
 	
 	</div>
 	<br>
-	<form id="uploadFile" enctype="multipart/form-data">
 	<input type="file" id="file" name="file" multiple="multiple" class="form-control rounded-bottom d-none">
 	<br>
-	<button id="boardContent">등록</button>
+	<button type ="button" id="boardContent">등록</button>
 	</form>
 
 
@@ -71,48 +81,44 @@ $(function() {
 			
 		}
 	})
-	
-	function upload() {
-		imageInput = $("#file")[0]
+	$("#boardContent").click(function(){
+		let formData = new FormData($("#uploadFile")[0])
 		
-		if (image.files.length === 0) {
-			alert("파일 선택은 필수입니다")
-			return;
-		}
+// 		formData.append("file", $("#file")[0].files[0])
 		
-		formData = new FormData();
-		formData.append("image", imageInput.files[0]);
+// 		console.log(formData)
+		
+// 		alert(JSON.stringify(formData ))
+
+ 		var cateData = $('#category').val()
+		 console.log("boardContent click!!")
+		 
 		
 		$.ajax({
-			type:"post",
-			url:"",
-			data: formData,
-			processData:false,
-			contentType: false,
-			success: function (res) {
-				console.log("AJAX요청 성공")
-				
-			}
-			,error: function () {
-				console.log("AJAX요청 실패")
-			}
+			  type: "post",
+			    url: "/board/write",
+			    processData: false,
+			    contentType: false,
+			    enctype : 'multipart/form-data',
+// 			    data: {file : formData },
+			    data: formData,
+			    success: function(res) {
+
+			        console.log("AJAX 성공");
+		            $("#write2").remove()
+		     	   
+			    },
+			    error: function() {
+			        console.log("AJAX 실패");
+			    }
 		})
-	}
-	
-	
-	
-	$("#boardContent").click(function(){
-		 console.log("boardContent click!!")
-		var data = $('#boardWrite').val()
-			console.log(data)
-		var pic = $(".uploadedPic").val()
-		console.log(pic)
+				 $("#write").append()
+			    	
 	})
+	
+	
 
 })
-
-
-
 
 
 </script>

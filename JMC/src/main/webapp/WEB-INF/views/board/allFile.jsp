@@ -41,7 +41,7 @@ height: 300px;
 		<li class = "cate" value='12'>술자랑 & 구입기</li>
 		<li class = "cate" value='13'>위스키 시음기</li>
 		<li class = "cate" value='14'>바 정보 & 방문기</li>
-		<li class = "cate" value='15'>나만이 칵테일</li>
+		<li class = "cate" value='15'>나만의 칵테일</li>
 	</ul>
 </nav>
 
@@ -206,10 +206,7 @@ $.ajax({
 			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 			,success: function(res1){
 				console.log("AJAX 성공")
-				console.log("!!!!!"+res1)
-				console.log("범인색출1"+res1.CONTENT)
-				console.log("범인색출2"+res1.COCOUNT)
-				console.log("범인색출3"+res1.LIKECOUNT)
+
 				
 				$("#article > img").attr("src", "/upload/"+res1.STORED_NAME)
 				$("#article > #content22").html(res1.CONTENT)

@@ -1,6 +1,9 @@
 package com.kh.jaManChw.meeting.dao.face;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.Meeting;
@@ -33,6 +36,27 @@ public interface MeetingDao {
 	public void insertJoinMeeting(Applicant applicant);
 
 	public int selectUserNo(int userno);
+
+	public void insertMeetingFriend(Applicant applicant);
+
+	public void insertMeetingUser(Applicant leader);
+	
+	public List<Meeting> selectMeetingByDate(String result);
+
+	public int selectMeetingListCount(Meeting meeting);
+
+	public List<Meeting> selectMeetingListByMname(String search);
+
+	public List<Meeting> selectMeetingListByFilter(Map<String, Object> map);
+
+	public List<Meeting> selectMeetingListByMap(@Param("mapData") String mapData, @Param("mapData1")String mapData1);
+	
+	
+	
+	
+
+	
+	
 	
 	
 	

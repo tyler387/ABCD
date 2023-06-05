@@ -6,18 +6,19 @@
 <c:import url="../layout/header.jsp" />
 
 
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
 
-// 	if(document.getElementById("smoke").checked){
-// 		document.getElementById("smokehidden").disabled = true;
-// 	}
+<!-- // 	if(document.getElementById("smoke").checked){ -->
+<!-- // 		document.getElementById("smokehidden").disabled = true; -->
+<!-- // 	} -->
 	
-// 	if(document.getElementById("friend").checked){
-// 		document.getElementById("friendhidden").disabled = true;
-// 	}
+<!-- // 	if(document.getElementById("friend").checked){ -->
+<!-- // 		document.getElementById("friendhidden").disabled = true; -->
+<!-- // 	} -->
 	
+
+<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -77,16 +78,45 @@
 
 	}
  .meeting {
-	background-color: #E2E2E2;
 	height: 700px;
 	width: 600px;
 	margin: 0 auto;
 	}
  
 
-
+  .meetingform {
+  	 border-radius: 20px;
+ 	 box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
+  
+   }
  
- 
+   .meetingpre {
+   	 border-radius: 20px;
+ 	 box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);  
+   }
+   
+   .meetingbtn {
+   	 height: 50px;
+  	 width: 300px;
+  	 border-radius: 20px;
+  	 background: orange;	
+  	 color: #fff;
+   
+   }
+   
+   .btndiv {
+   	 text-align:center;
+   	
+   }
+ 	h1 {
+	 text-align: center; 	
+ 	
+ 	}
+ 	.meetingbtn:hover {
+ 	
+ 	  background-color: #ffcca8;
+ 	}
+ 	
  </style>
 
 
@@ -96,16 +126,17 @@
 	
 	<div class="meeting"> 
 	
-	<h4>모임의 정보를 등록해 주세요</h4>
 	
 	
 	<form action="/meeting/form" method="post">
 	
+	<div class="meetingform">
+	<h4>모임의 정보를 등록해 주세요</h4>
 	<label>모임 명<input type="text" id="mname" name="mname" placeholder="모임 이름"></label><br>
 	<label>모임 지역
 	<input type="text" id="sample6_postcode" name="loc"  placeholder="우편번호">
 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" id="sample6_address" name="loc1" placeholder="주소"><br>
+	<input type="text" id="sample6_address" name="loc1" placeholder="도로명주소"><br>
 	<input type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목">
 	<input type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></label><br><br>
 	<label>모임 날짜<input type="datetime-local" id="meetingDate" name="meetingDate"></label><br><br>
@@ -115,16 +146,17 @@
 	
 	
 	<label>친구 목록</label>
-	<select>
+	<select name="friendlist">
 	<c:forEach var = "friendlist" items="${friendList }">
-	<option value="${ friend_userno}">${friendlist.userName }</option>
+	<option value="${ friendlist.userno}">${friendlist.userName }</option>
 	
 	</c:forEach>
 	</select>
 	
-	<hr class="my-hr2">
    
+	</div>	
 	
+	<div class="meetingpre">
 	<h4>선호하는 친구 타입(선택)</h4>
 	
 	성별<br>
@@ -146,10 +178,13 @@
 <!-- 				<input type="hidden" id="friendhidden" name="friend" value="no"> -->
 	
 	
-	<button>등록</button>
+	
+	</div>
+	
+	<br><br>
+	<div class="btndiv"><button class="meetingbtn">등록하기</button></div>
 	
 	</form>		
-	<a href="/mainpage/page"><button>취소</button></a>	
 	
 	</div><br><br><br><br>
 

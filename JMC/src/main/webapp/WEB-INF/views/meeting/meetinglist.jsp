@@ -3,29 +3,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="../layout/header.jsp" />
 
-<style type="text/css">
-
-
-
-.yellow{
-  background-color:#f5f5dc;
-  width:300px;
-  height:100px;
-  margin-bottom:5px;
-  	
-}
-
-</style>
-
-<h1>모임 신청</h1>
-
-<button>캘린더</button>
-<button>지도</button><br>
+<div class="meetinglist">
+<h1>모임 목록</h1>
 <c:forEach var = "meeting" items="${meetinglist }">
+<div class="skyblue" onclick="location.href='/meeting/view?meetingno=${meeting.meetingno}'">
 
-<div class="yellow" onclick="location.href='/meeting/view?meetingno=${meeting.meetingno}'">
 <table>
 
 <tr>
@@ -43,8 +26,13 @@
 
 
 </table>
+<br>
 </div>
 </c:forEach>
+</div>
+</div>
 
 
-<c:import url="../layout/footer.jsp" />
+
+
+

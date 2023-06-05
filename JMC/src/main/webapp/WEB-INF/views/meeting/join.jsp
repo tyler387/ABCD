@@ -37,7 +37,6 @@
 	<button onclick="fn_join()">모임 신청</button>
 	
 	</form>
-	<button> 모임 취소</button>
 	
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.kh.jaManChw.meeting.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 @Autowired MeetingDao meetingDao;	
 	
 	@Override
-	public void inputMeeting(Meeting meeting, Preference preference) {
+	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant, Applicant leader) {
 		
 		
 		int meetingno = meetingDao.selectMeetingno();
@@ -40,6 +41,13 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		meetingDao.insertPreference(preference);
 		
+		applicant.setMeetingno(meetingno);
+		
+		meetingDao.insertMeetingFriend( applicant);
+		
+		leader.setMeetingno(meetingno);
+		
+		meetingDao.insertMeetingUser(leader);
 	}
 	
 	@Override
@@ -61,6 +69,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		return meetingDao.selectMeetinglistAll();
 	}
+	
+	
 	
 	@Override
 		public Meeting detailMeeting(Meeting meeting) {
@@ -104,5 +114,37 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			meetingDao.insertJoinMeeting(applicant);
 			
 		}
+
+	@Override
+	public List<Meeting> getMeetingByDate(String result) {
+
+		
+		return meetingDao.selectMeetingByDate(result);
+	}
+
+	@Override
+	public int getMeetinglistcount(Meeting meeting) {
+		
+		return meetingDao.selectMeetingListCount(meeting);
+	}
 	
+	
+	@Override
+		public List<Meeting> meetingsearch(String search) {
+		
+			return meetingDao.selectMeetingListByMname(search);
+		}
+	
+	@Override
+		public List<Meeting> meetingFilter(Map<String, Object> map) {
+		
+			return meetingDao.selectMeetingListByFilter(map);
+		}
+	
+	@Override
+		public List<Meeting> getMeetingByMap(String mapData, String mapData1) {
+		
+			return meetingDao.selectMeetingListByMap(mapData,mapData1);
+		}
+
 }

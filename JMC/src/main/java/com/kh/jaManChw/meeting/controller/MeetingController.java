@@ -1,7 +1,13 @@
 package com.kh.jaManChw.meeting.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.FriendList;
@@ -39,6 +46,16 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("/meeting/form [GET]");
 		
+		String url = "";
+		
+		if((session.getAttribute("login")==null)) {
+			
+			return "redirect: /login/login";
+			
+		} else {  
+			
+			url = "/meeting/form";
+		}
 		int userno = (int)session.getAttribute("userno");
 		meeting.setUserno(meetingService.getUserno(userno));
 		
@@ -51,91 +68,241 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 		//모델에 모임 작성 폼에 가져올 친구 목록 담아주기 
 		model.addAttribute("friendList", friendList);
-		String url = "";
 		
 		//로그인 세션 처리 
-		if((session.getAttribute("login")==null)) {
-			
-			url = "redirect: /login/login";
-			
-		} else {  
-			
-			url = "/meeting/form";
-		}
 		return url;
 	}
 	
 	//모임 작성 폼에 적은 모임 등록
 	@PostMapping("/meeting/form")
-	public String meetingWrite(Meeting meeting , @RequestParam(required = false) Preference preference, HttpSession session ) {
+	public String meetingWrite(Meeting meeting , Preference preference, HttpSession session
+	,@RequestParam( name = "friendlist") int friendlist) {
 		
+		
+		//int friends = Integer.parseInt(friend);
+		logger.info("testest{}",friendlist);
 		logger.info("/meeting/form [POST]");
-		
+		logger.info("check!!!!!!!!!!!{}" , preference);
 		//알림기능 추가개발예정 
 		
-		//선호하는 타입에 null이들어가면 preference 객체를 새로 생성  
-		if(preference == null) {
-			preference = new Preference();
-		}
+//		선호하는 타입에 null이들어가면 preference 객체를 새로 생성  
+//		if(preference == null) {
+//		preference = new Preference();
+//		}
+		
+		
+//		선호하는 타입에 null이들어가면 preference 객체를 새로 생성  
 		
 		int userno = (int)session.getAttribute("userno");
 		System.out.println(userno);
 		meeting.setUserno(meetingService.getUserno(userno));
 		
+		//모임 개설자 정보 가져와서 넣어주기  
+		Applicant leader = new Applicant(); 
 		
-		meetingService.inputMeeting(meeting , preference);
+		leader.setUserno(userno);
+		
+		//친구초대로 초대한 사람 정보 가져와서 넣어주기 
+		Applicant applicant = new Applicant();
+		
+		applicant.setUserno(friendlist);
+		
+		logger.info("!!!!!!!!!!!!1{}" , preference);
+		
+		meetingService.inputMeeting(meeting , preference, applicant, leader);
+		
+		
 		
 		logger.info("{}" , preference);
 		
 		logger.info("{}" , meeting);
 		
-		return "redirect: /meeting/meetinglist";
+		return "redirect: /meeting/meetingcal";
 	}
 	
-	@GetMapping("/meeting/meetinglist")
-	public void allMeetingList(Model model ) {
+	//달력으로 모든 모임 조회 
+	@GetMapping("/meeting/meetingcal")
+	public void allMeetingListByCal(Model model , Meeting meeting ) {
 		
-		logger.info("/meeting/meetinglist [GET]" );
+		logger.info("/meeting/meetingcal [GET]" );
 		
 		List<Meeting> meetinglist = meetingService.getMeetinglistAll();
 		
+		int meetingcount = meetingService.getMeetinglistcount(meeting);
+		
+		logger.info("count{}" , meetingcount);
+		
 		model.addAttribute("meetinglist" , meetinglist);
+		model.addAttribute("meetingcount", meetingcount);
 		
 	}
 	
+	//지도로 모든 모임 조회 
+	@GetMapping("/meeting/meetingmap")
+	public void allMeetingListByMap(Model model, Meeting meeting) {
+		
+		logger.info("/meeting/meetingmap [GET]" );
+		
+		List<Meeting> meetinglist = meetingService.getMeetinglistAll();
+		
+		logger.info("{}" , meetinglist);
+		
+		model.addAttribute("meetinglist", meetinglist);
+		
+	}
+	
+	
+	//지도에서 선택해서 AJAX로 선택한 날짜의 모임만 조회 
+	@GetMapping("/meeting/meetingmapajax")
+	public String Meetingmap(Meeting meeting,@RequestParam String mapData, String mapData1, Model model) {
+		
+		logger.info("mapdata{}",mapData);
+		logger.info("mapdata1{}",mapData1);
+		String result = "";
+
+		mapData1 = mapData1.replaceAll("\"", "");
+			
+	
+		mapData = mapData.replaceAll("\"", "");
+
+		logger.info("map!!!{}" , mapData);
+		logger.info("map!!!{}" , meeting);
+		
+		List<Meeting> maplist = meetingService.getMeetingByMap(mapData,mapData1);
+		
+		//우리의 노력
+//		mapData = new HashMap<String, Object>();
+//		map.put(loc, coords_x);
+		
+		model.addAttribute("meetinglist" , maplist);
+		
+		return "meeting/meetinglist";
+	}
+	
+	//달력에서 선택해서 AJAX로 선택한 날짜의 모임만 조회 
+	@GetMapping("/meeting/meetinglist")
+	public String Meetingcal(Meeting meeting, String data, String data1, String data2, Model model) {
+		
+		if(data1.length()==1) {
+			data1 = "0"+data1;
+		}
+		
+		if(data2.length()==1) {
+			data2 = "0"+data2;
+		}
+		
+		String result = data + "-" + data1 + "-" + data2;
+		
+		logger.info("meeting{}" , meeting);
+		logger.info("date{}" , result);
+		
+//		Date date = null;
+//		SimpleDateFormat simple = new SimpleDateFormat("yyyy/MM/dd");
+//		try {
+//			date = simple.parse(result);
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+
+		List<Meeting> list = meetingService.getMeetingByDate(result);
+//		List<Meeting> list = meetingService.getMeetingByDate(date);
+		
+		logger.info("list !!{}",list);
+		
+		//		if(meeting.getMeetingDate())
+		
+		model.addAttribute("meetinglist", list);
+		
+		return "meeting/meetinglist";
+	}
+	
+	//모임 필터
+	@GetMapping("/meeting/meetingfilter")
+	public String meetingFilter(String fee, String headcount, Meeting meeting, Model model) {
+		
+		logger.info("fee!!{}", fee);
+		logger.info("headCount!!{}", headcount);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("fee", fee);
+			map.put("headCount" , headcount);
+	
+			
+		logger.info("map!!{}" , map);
+		
+		List<Meeting> meetingfilter = meetingService.meetingFilter(map);
+		
+		model.addAttribute("meetinglist", meetingfilter);
+		
+		return "/meeting/meetinglist";
+	}
+	
+	//모임 검색하기
+	@GetMapping("/meeting/meetingsearch")
+	public String meetingSearch(Meeting meeting, String search, Model model) {
+		
+		logger.info("search{}", search);
+		
+		List<Meeting> searchlist = meetingService.meetingsearch(search);
+
+		model.addAttribute("meetinglist",searchlist);
+		return "/meeting/meetinglist";
+	}
+	
+	
+	//모임 상세보기 조회 
 	@GetMapping("/meeting/view")
-	public void meetingDetail(Model model, Meeting meeting) {
+	public String meetingDetail(HttpSession session , Model model, Meeting meeting) {
 		
 		logger.info("/meeting/view [GET]");
+		
+		String url = "";
+		
+		if((session.getAttribute("login")==null)) {
+			
+			return "redirect: /login/login";
+			
+		} else {  
+			
+			url = "/meeting/view";
+		}
+		
 		
 		Meeting viewmeeting = meetingService.detailMeeting(meeting);
 		List<Users> applicantnick = meetingService.getUserNickAll(meeting);
 		
 		logger.info("{}" , viewmeeting);
 		logger.info("{}!!!!", applicantnick);
-
+		
+		
 		model.addAttribute("viewmeeting", viewmeeting);
 		model.addAttribute("applicantnick", applicantnick);
 		
 		
+		
+		return url;
 	}
 	
-	@GetMapping("/meeting/report")
-	public String reportForm(Model model, Meeting viewMeeting) {
-		
-		logger.info("/meeting/report [GET]");
-		
-		model.addAttribute("viewmeeting" ,  viewMeeting);
-		
-		return "/meeting/report";
-	}
+	//선택한 모임의 신고창 조회 모달창 써서 필요X
+//	@GetMapping("/meeting/report")
+//	public String reportForm(Model model, Meeting viewMeeting) {
+//		
+//		logger.info("/meeting/report [GET]");
+//		
+//		model.addAttribute("viewmeeting" ,  viewMeeting);
+//		
+//		return "/meeting/report";
+//	}
 	
-	
+	//선택한 모임 신고하기  
 	@PostMapping("/meeting/report")
-	public void reportInput( ReportMeeting reportMeeting, HttpSession session) {
+	public String reportInput( ReportMeeting reportMeeting, HttpSession session) {
 		
 		logger.info("/meeting/report [POST]");
 		
+		int meetingno = reportMeeting.getMeetingno();
 		int userno = (int)session.getAttribute("userno");
 		System.out.println(userno);
 		reportMeeting.setUserno(meetingService.getUserno(userno));
@@ -143,9 +310,10 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		meetingService.inputReportMeeting(reportMeeting);
 		
-		
+		return "redirect: /meeting/view?meetingno="+ meetingno;
 	}
 	
+	//선택한 모임의 참여자 정보 조회하기 
 	@GetMapping("/meeting/applicant")
 	public void meetingApplicant(Users users , Applicant applicant , Model model) {
 		
@@ -161,27 +329,32 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	}
 	
 	
+	//선택한 모임의 참여 신청창 조회 모달창써서 필요X
+//	@GetMapping("/meeting/join")
+//	public void joinMeetingComment(Meeting viewmeeting, Model model, HttpSession session ,Users users) {
+//		
+//		logger.info("/meeting/join [GET]");
+//		
+//		model.addAttribute("viewmeeting" , viewmeeting);
+//		
+//		
+//	}
 	
-	@GetMapping("/meeting/join")
-	public void joinMeetingComment(Meeting viewmeeting, Model model, HttpSession session ,Users users) {
-		
-		logger.info("/meeting/join [GET]");
-		
-		model.addAttribute("viewmeeting" , viewmeeting);
-		
-		
-	}
 	
+	//선택한 모임에 참여하기 
 	@PostMapping("/meeting/join")
-	public void meetingJoinInput(HttpSession session, Model model , Applicant applicant) {
+	public String meetingJoinInput(HttpSession session, Model model , Applicant applicant) {
 		
 		logger.info("/meeting/join [POST]");
 		
+		int meetingno = applicant.getMeetingno();
 		int userno = (int)session.getAttribute("userno");
 		applicant.setUserno(meetingService.getUserno(userno));
 		
 		meetingService.inputJoinMeeting(applicant);
 		
+		
+		return "redirect: /meeting/view?meetingno="+ meetingno;
 	}
 	
 	

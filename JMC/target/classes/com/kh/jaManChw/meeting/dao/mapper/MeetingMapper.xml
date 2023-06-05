@@ -16,21 +16,27 @@
 
 <insert id="insertMeeting" parameterType="com.kh.jaManChw.dto.Meeting">
 
-	INSERT INTO MEETING VALUES( #{meetingno} , #{userno} , #{mname} , #{loc}, #{loc1}, #{loc2}, #{loc3} , #{meetingDate} , #{fee}, 
-	#{introduce}, #{headCount}, 'active' )
+	INSERT INTO MEETING VALUES( #{meetingno} , #{userno} , #{mname} , #{loc}, #{loc1}, #{loc2}, #{loc3} , #{meetingDate} 
+	, #{fee}, #{introduce}, #{headCount}, 'active' )
 
 </insert>
 
 
-<insert id="insertPreference" parameterType="com.kh.jaManChw.dto.Meeting">
-
+<insert id="insertPreference" parameterType="com.kh.jaManChw.dto.Preference">
 	INSERT INTO PREFERENCE VALUES( preference_seq.nextval , #{meetingno}, #{gender}, #{minage}, #{maxage} , #{smoke} , #{friend} )
+</insert>
 
+<insert id="insertMeetingFriend" parameterType="com.kh.jaManChw.dto.Applicant">
+	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , 'hi', 'yes' , 1)
+</insert>	
+
+<insert id="insertMeetingUser" parameterType="com.kh.jaManChw.dto.Applicant">
+	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , 'hi', 'yes' , 1)
 </insert>
 
 <select id="selectFriendListAll" resultType="com.kh.jaManChw.dto.Users" parameterType="int">
 
-	select user_name, friend_userno
+	select user_name, friend_userno as userno
 	from friend_list
     inner join users
     on friend_list.friend_userno = users.userno
@@ -99,6 +105,31 @@
 	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'yes' , 1)
 	
 </insert>
+<select id="selectMeetingByDate" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
+	SELECT * FROM meeting where trunc(meeting_date) = to_date(#{result}, 'yyyy/mm/dd')
+</select>
+
+<select id="selectMeetingListCount" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int">
+
+select count(*) from meeting
+	
+</select>
+
+<select id="selectMeetingListByMname" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
+	SELECT * FROM meeting where mname=#{search}
+</select>
+
+<select id="selectMeetingListByFilter" parameterType="Map" resultType="com.kh.jaManChw.dto.Meeting">
+
+	select * from meeting where fee &lt; #{fee} and head_count &lt; #{headCount}
+	
+</select>
+
+<select id="selectMeetingListByMap" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
+
+	select * from meeting where loc1 in(#{mapData} , #{mapData1})
+
+</select>
 
 
 </mapper>

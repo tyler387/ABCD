@@ -1,6 +1,7 @@
 package com.kh.jaManChw.meeting.service.face;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.FriendList;
@@ -13,7 +14,7 @@ public interface MeetingService {
 	
 	public List<Users> selectFriendListAll(int userno);
 
-	public void inputMeeting(Meeting meeting , Preference preference);
+	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant, Applicant leader);
 
 	public int getUserno(int userno);
 	
@@ -30,6 +31,24 @@ public interface MeetingService {
 	public Users getMeetingApplicantUser(Users users);
 
 	public void inputJoinMeeting(Applicant applicant);
+
+	public List<Meeting> getMeetingByDate(String result);
+
+	public int getMeetinglistcount(Meeting meeting);
+
+	public List<Meeting> meetingsearch(String search);
+
+	public List<Meeting> meetingFilter(Map<String, Object> map);
+
+	public List<Meeting> getMeetingByMap(String mapData, String mapData1);
+	
+	
+
+	
+
+	
+
+	
 	
 	
 	

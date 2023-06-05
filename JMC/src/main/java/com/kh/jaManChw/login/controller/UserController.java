@@ -40,14 +40,17 @@ public class UserController {
 		
 		Users info = usersService.getuserInfo(users);
 		
-		model.addAttribute("info",info);
 
 		if (isLogin) {
 			logger.info("userlogin() - 로그인 성공");
+			model.addAttribute("info",info);
 			
 			// 세션에 파라미터 값 저장
 			session.setAttribute("login", isLogin);
 			session.setAttribute("userno", info.getUserno());
+			session.setAttribute("userNick", info.getUserNick());
+			session.setAttribute("email", info.getEmail());
+			session.setAttribute("grade", info.getGrade());
 			session.setAttribute("userId", info.getUserId());
 			session.setAttribute("role", info.getRole());
 			session.setAttribute("social",info.getSocialId());
@@ -89,6 +92,8 @@ public class UserController {
 		
 		//회원가입 메소드 호출
 		usersService.join(users);
+		
+		
 		logger.info("회원가입 성공");
 
 		return "redirect:/login/main";

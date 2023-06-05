@@ -14,11 +14,14 @@ header{
   backdrop-filter: blur(30px);
   background: black;
   color: white;
-  padding-left: 120px; 
-  padding-right: 40px; 
-  display: flex; 
+/*   padding-left: 120px;  */
+/*   padding-right: 40px;  */
+  display:flex;; 
   justify-content: flex-end;
   align-items: center;
+/*   width: 100%; */
+  
+
 }
 
 header a{
@@ -77,7 +80,7 @@ a {
   font-weight: bold;
 }
 #header .main2 {
-  width:110%;
+  width:100%;
   position: absolute;
   top: 50px;
   left: -9999px;
@@ -106,6 +109,7 @@ a {
    height: 100%;
    padding: 0px;
    margin: 0px;
+ 
  }
 
 .footer header {
@@ -124,6 +128,8 @@ a {
    text-align: center;
    padding-top: 70px;
    color: white;
+    position: absolute; 
+    width:100%;
  }
 
 

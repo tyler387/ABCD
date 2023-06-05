@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <html lang="en">
 <head>
     <!-- jQuery -->
@@ -22,15 +26,16 @@
 
         function requestPay() {
             IMP.request_pay({
-                pg: "kakaopay",
+                pg: "uplus",
                 pay_method: "card",
                 merchant_uid: '자만추_' + new Date().getTime(),
                 name: "dddd",
                 amount: 100,  // 추후 장바구니 값 구현해야함 
                 buyer_tel: "01054906413",
-                m_redirect_url: "http://localhost:8888/payment/end" // 안되는 이유 모르겠음 
+                m_redirect_url: 'http://localhost:8888/payment/end'
+//                 m_redirect_url: "http://localhost:8888/payment/end" // 안되는 이유 모르겠음 
             }, function (rsp) { // callback
-                if (rsp.success) {
+                if (rsp.success) { 
                     console.log(rsp);
             		$.ajax({
         			type: "post"

@@ -55,8 +55,9 @@
 }
 
 .meetingall{ 
+ margin: 0 auto;
  display: flex; 
- flext-direction: column;
+ flex-direction: row;
  align-items: flex-start;
  height: 1000px;
  
@@ -82,6 +83,7 @@
   }
 
 .meetingcal{
+  mergin-right: 10px;
   height: 800px;
   width: 1000px;	
   margin: 0 auto;
@@ -113,6 +115,15 @@
 
 .fc-event-title-container{
 	background-color: skyblue;
+}
+
+.meetinglist1 {
+  margin: 0 auto;
+  width: 310px;
+  height: 850px;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px 0 rgba(100, 100, 100, 0.16), 0 2px 17px 0 rgba(200, 200, 200, 0.2);
+  overflow: scroll;
 }
 
 
@@ -159,10 +170,11 @@
 
 </div>
 
-<div> 
+<div>
+전체 : ${meetingcount}개<br>
 <button class="filter">필터</button><br>
 <input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>
-<div class="meetinglist1">
+<div class="meetinglist1" style="flex: 1; width: 310px;">
 <c:import url="/WEB-INF/views/meeting/meetinglist.jsp"/>
 </div>
 </div>

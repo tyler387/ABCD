@@ -126,8 +126,10 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("/meeting/meetingcal [GET]" );
 		
+		//전체 모임 목록 가져오기 
 		List<Meeting> meetinglist = meetingService.getMeetinglistAll();
 		
+		//전체 모임 개수 가져오기 
 		int meetingcount = meetingService.getMeetinglistcount(meeting);
 		
 		logger.info("count{}" , meetingcount);
@@ -143,6 +145,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("/meeting/meetingmap [GET]" );
 		
+		//전체 모임 목록 가져오기 
 		List<Meeting> meetinglist = meetingService.getMeetinglistAll();
 		
 		logger.info("{}" , meetinglist);
@@ -168,6 +171,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("map!!!{}" , mapData);
 		logger.info("map!!!{}" , meeting);
 		
+		//
 		List<Meeting> maplist = meetingService.getMeetingByMap(mapData,mapData1);
 		
 		//우리의 노력
@@ -217,6 +221,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		return "meeting/meetinglist";
 	}
+	
+	
 	
 	//모임 필터
 	@GetMapping("/meeting/meetingfilter")
@@ -302,12 +308,15 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("/meeting/report [POST]");
 		
+		//신고할 모임의 meetingno 가져오기 
 		int meetingno = reportMeeting.getMeetingno();
+		//세션에서 신고하는 사람의 userno 가져오기 
 		int userno = (int)session.getAttribute("userno");
 		System.out.println(userno);
+	
 		reportMeeting.setUserno(meetingService.getUserno(userno));
 		
-		
+		//reportmeeting에 신고 추가하기  
 		meetingService.inputReportMeeting(reportMeeting);
 		
 		return "redirect: /meeting/view?meetingno="+ meetingno;

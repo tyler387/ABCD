@@ -150,6 +150,7 @@
 
 
 <div> 
+	전체 : ${meetingcount}개<br>
 	<button class="filter">필터</button><br>
 	<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>
 	<div class="meetinglist1">

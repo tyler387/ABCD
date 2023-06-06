@@ -17,7 +17,7 @@
 <insert id="insertMeeting" parameterType="com.kh.jaManChw.dto.Meeting">
 
 	INSERT INTO MEETING VALUES( #{meetingno} , #{userno} , #{mname} , #{loc}, #{loc1}, #{loc2}, #{loc3} , #{meetingDate} 
-	, #{fee}, #{introduce}, #{headCount}, 'active' )
+	, #{fee}, #{introduce}, #{headCount},  'active', default )
 
 </insert>
 

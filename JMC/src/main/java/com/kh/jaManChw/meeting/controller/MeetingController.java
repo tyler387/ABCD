@@ -85,10 +85,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("check!!!!!!!!!!!{}" , preference);
 		//알림기능 추가개발예정 
 		
-//		선호하는 타입에 null이들어가면 preference 객체를 새로 생성  
-//		if(preference == null) {
-//		preference = new Preference();
-//		}
+
 		
 		
 //		선호하는 타입에 null이들어가면 preference 객체를 새로 생성  
@@ -106,6 +103,11 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		Applicant applicant = new Applicant();
 		
 		applicant.setUserno(friendlist);
+		
+		// preference값이 null인 경우에만 새로운 Prefrence 객체 생성 
+		if(preference == null) {
+			preference = new Preference();
+		}
 		
 		logger.info("!!!!!!!!!!!!1{}" , preference);
 		

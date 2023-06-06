@@ -3,6 +3,47 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kh.jaManChw.itemmanage.dao.face.ItemQnAQDao">
+<mapper namespace="com.kh.jaManChw.admin.itemmanage.dao.face.ItemQnAQDao">
 
+	<select id="selectCntAllQnAQ" resultType="int">
+		SELECT count(*) FROM QnA_Q
+	</select>
+
+	<select id="selectItemQnAQAll" resultType="map" parameterType="Paging">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM (
+		        SELECT iqq.*, user_id, user_name, iqa.mgr_itemno
+		        FROM item_QnA_Q iqq, USERS u, item_QnA_A iqa
+		        WHERE 1 = 1
+		            AND iqq.userno = u.userno
+		            AND iqq.item_qnano = iqa.item_qnano(+)
+		        ORDER BY iqq.item_qnano DESC
+		    )B
+		)
+		WHERE rnum BETWEEN #{startno} AND #{endno}
+	</select>
+	
+	<select id="selectCntFilterQnAQ" resultType="int" parameterType="map">
+		SELECT count(*) FROM QnA_Q
+		<if test="filter.content != null and !''.equals(filter.content)">
+		WHERE upper(${filter.filter}) LIKE '%' || upper(#{filter.content}) || '%'
+		</if>
+	</select>
+	
+	<select id="selectItemQnAQListByFilter" resultType="map" parameterType="map">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM (
+		        SELECT iqq.*, user_id, user_name, iqa.mgr_itemno
+		        FROM item_QnA_Q iqq, USERS u, item_QnA_A iqa
+		        WHERE 1 = 1
+		            AND iqq.userno = u.userno
+		            <if test="filter.content != null and !''.equals(filter.content)">
+		            AND upper(${filter.filter}) LIKE '%' || upper(#{filter.content}) || '%'
+		            </if>
+		            AND iqq.item_qnano = iqa.item_qnano(+)
+		        ORDER BY iqq.item_qnano DESC
+		    )B
+		)
+		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
+	</select>	
 </mapper>

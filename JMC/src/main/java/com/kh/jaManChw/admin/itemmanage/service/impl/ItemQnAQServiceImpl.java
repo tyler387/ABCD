@@ -1,5 +1,6 @@
 package com.kh.jaManChw.admin.itemmanage.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,26 +23,43 @@ public class ItemQnAQServiceImpl implements ItemQnAQService{
 	
 	@Override
 	public Paging getItemQnAQPaging(String curPage) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int itemQnAQCurPage = 0;
+		
+		if (curPage != null && !"".equals(curPage)) {
+			itemQnAQCurPage = Integer.parseInt(curPage);
+		}
+		
+		return new Paging(itemQnAQCurPage, itemQnAQDao.selectCntAllQnAQ());
 	}
 	
 	@Override
 	public List<Map<String, Object>> showItemQnAQList(Paging itemQnAQPaging) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemQnAQDao.selectItemQnAQAll(itemQnAQPaging);
 	}
 	
 	@Override
-	public Paging getItemQnAQFilterPaging(Map<String, String> filterMap) {
-		// TODO Auto-generated method stub
-		return null;
+	public Paging getItemQnAQFilterPaging(Map<String, String> filterMap, String curPage) {
+
+		int itemQnAQCurPage = 0;
+		
+		if (curPage != null && !"".equals(curPage)) {
+			itemQnAQCurPage = Integer.parseInt(curPage);
+		}
+		
+		return new Paging(itemQnAQCurPage, itemQnAQDao.selectCntFilterQnAQ(filterMap));
 	}
 	
 	@Override
 	public List<Map<String, Object>> showItemQnAQListByFilter(Paging paging, Map<String, String> filterMap) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//필터링 맵과 페이징 객체를 같이 가져가기 위한 맵 선언
+		Map<String, Object> fpMap = new HashMap<>();
+		
+		fpMap.put("paging", paging);
+		fpMap.put("filter", filterMap);
+		
+		return itemQnAQDao.selectItemQnAQListByFilter(fpMap);
 	}
 	
 	@Override

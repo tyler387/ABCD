@@ -28,9 +28,10 @@ public interface ItemQnAQService {
 	 * 필터링된 상품 문의에 대한 페이징 하는 객체를 생성해 반환한다 
 	 * 
 	 * @param filterMap - 필터링 조건을 가진 맵
+	 * @param curPage - 현재 페이지
 	 * @return 필터링된 상품 문의글에 대한 객체
 	 */
-	public Paging getItemQnAQFilterPaging(Map<String, String> filterMap);
+	public Paging getItemQnAQFilterPaging(Map<String, String> filterMap, String curPage);
 
 	/**
 	 * 필터링 후 페이징한 상품 문의글 리스트를 조회하여 반환한다

@@ -101,7 +101,7 @@ a:visited {
 	<h2>판매관리</h2>
 	<p><a href="<%=request.getContextPath() %>/admin/item/itemview/write">상품 등록</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/item/itemview/list">상품 삭제/수정</a><br></p>
-	<p><a href="<%=request.getContextPath() %>/admin/board/itemqna/list">상품 문의</a><br><br></p>
+	<p><a href="<%=request.getContextPath() %>/admin/item/itemqna/list">상품 문의</a><br><br></p>
 	<h2>고객센터관리</h2>
 	<p><a href="<%=request.getContextPath() %>/admin/main/boardCategory?boardOption=notice">공지사항 관리</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/main/boardCategory?boardOption=event">이벤트 관리</a><br></p>

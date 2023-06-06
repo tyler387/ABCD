@@ -20,13 +20,13 @@ public class ItemQnAAServiceImpl implements ItemQnAAService {
 	
 	@Override
 	public void writeItemQnAA(QnAA qnAAParam) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	@Override
 	public Map<String, Map<String, Object>> reviseItemQnAQ(QnAA qnAAParam) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 	

@@ -2,6 +2,7 @@ package com.kh.jaManChw.admin.itemmanage.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired private ServletContext context;
 	
 	@Override
-	public void writeItem(Map<String, String> itemParam, MultipartFile file) {
+	public int writeItem(Map<String, String> itemParam, MultipartFile file) {
 
 		
 		//itemno 생성
@@ -72,7 +73,7 @@ public class ItemServiceImpl implements ItemService{
 		itemFile.setItemno(itemno);
 		
 		if(file.getSize()<=0) {
-			return;
+			return 0;
 		}
 		
 		String storedPath = context.getRealPath("itemfile");
@@ -108,35 +109,63 @@ public class ItemServiceImpl implements ItemService{
 		logger.info("itemFile: {}",itemFile);
 		
 		
+		return itemno;
 	}
 	
 	@Override
 	public Paging getItemPaging(String curPage) {
-		// TODO Auto-generated method stub
-		return null;
+
+		int itemCurPage = 0;
+		
+		if (curPage != null && !"".equals(curPage)) {
+			itemCurPage = Integer.parseInt(curPage);
+		}
+		
+		return new Paging(itemCurPage, itemDao.selectCntAllItem());
 	}
 	
 	@Override
-	public List<Map<String, Object>> shewItemListAll(Paging paging) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String, Object>> showItemListAll(Paging paging) {
+		return itemDao.selectItemAll(paging);
 	}
 	
 	@Override
-	public Paging getItemFilterPaging(Map<String, String> filterMap) {
-		// TODO Auto-generated method stub
-		return null;
+	public Paging getItemFilterPaging(Map<String, String> filterMap, String curPage) {
+		
+		int itemCurPage = 0;
+		
+		if (curPage != null && !"".equals(curPage)) {
+			itemCurPage = Integer.parseInt(curPage);
+		}
+		
+		logger.info("filterMap:{}", filterMap);
+		
+		return new Paging(itemCurPage, itemDao.selectCntFilterItem(filterMap));
 	}
 	
 	@Override
 	public List<Map<String, Object>> showItemListByFilter(Paging itemFilterPaging, Map<String, String> filterMap) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//필터링 맵과 페이징 객체를 같이 가져가기 위한 맵 선언
+		Map<String, Object> fpMap = new HashMap<>();
+		
+		fpMap.put("paging", itemFilterPaging);
+		fpMap.put("filter", filterMap);
+		
+		return itemDao.selectItemByFilter(fpMap);
 	}
 	
 	@Override
 	public void showItemDetail(int itemno) {
-		// TODO Auto-generated method stub
+
+		//itemno를 통해  item, itemOption, itemFile테이블을 조회한다 
+		//itemOption가 itemFile은 Detail이라도 하더라도 다수의 row가 존재할수 있기에
+		//join하기엔 적합하지 않다고 판단이 되나, 분리하여 반환하는 경우는 
+		//반환값이 여러개가 존재하게 하거나 List로 담아서 반환하는데 
+		//List내부에서 item을 어느 map에 담은지 확인이 불가능하기에
+		//모든 맵에 item의 정보를 가지고 있으나 그중 하나만 사용하고 
+		//List는 option과 file을 위해서 만사용하는 방법을 사용하려고 한다
+		List<Map<String, Object>> itemDetailList = itemDao.selectItemDetail(itemno);
 		
 	}
 	

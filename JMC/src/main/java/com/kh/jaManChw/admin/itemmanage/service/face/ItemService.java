@@ -16,8 +16,9 @@ public interface ItemService {
 	 * 
 	 * @param itemParam - 입력받은 판매글 정보를 가져올 DTO 객체
 	 * @param file - 파일을 저장할 변수
+	 * @return 등록한 판매 상품 번호
 	 */
-	public void writeItem(Map<String, String> itemParam, MultipartFile file);
+	public int writeItem(Map<String, String> itemParam, MultipartFile file);
 
 	/**
 	 * 현재 페이지를 입력받아 전체 판매글을 페이징 하는 객체를 반환한다
@@ -28,20 +29,21 @@ public interface ItemService {
 	public Paging getItemPaging(String curPage);
 
 	/**
-	 * 전체 판매글을 페이징하여 반환한다
+	 * 수정, 삭제 페이지에 보여질 전체 판매글을 페이징하여 반환한다
 	 * 
 	 * @param paging - 판매글을 페이지네이션할 페이징 객체
-	 * @return 
+	 * @return 패이징된 전체 판매글
 	 */
-	public List<Map<String, Object>> shewItemListAll(Paging paging);
+	public List<Map<String, Object>> showItemListAll(Paging paging);
 
 	/**
 	 * 필터링한 결과에 대한 페이징을 할 페이징 객체를 생성한다
 	 * 
 	 * @param filterMap - 필터링에 대한 페이징을 하기 위한 필터링 값 
+	 * @param curPage - 현재 페이지
 	 * @return 생성된 페이징 객체
 	 */
-	public Paging getItemFilterPaging(Map<String, String> filterMap);
+	public Paging getItemFilterPaging(Map<String, String> filterMap, String curPage);
 
 	/**
 	 * 필터링값과 페이징객체를 통해 필터링된 판매글의 전체 리스트를 반환한다

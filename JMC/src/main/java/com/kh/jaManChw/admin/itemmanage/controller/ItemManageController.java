@@ -21,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAAService;
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemService;
+import com.kh.jaManChw.dto.ItemOption;
 import com.kh.jaManChw.dto.QnAA;
+import com.kh.jaManChw.util.Paging;
 
 @Controller
 @RequestMapping("/admin/item")
@@ -37,11 +39,15 @@ public class ItemManageController {
 	public void itemWritePage() {
 	}
 	
+	// 옵션을 여러개를 받을때 리스트로 받게 될텐데 파라미터를 별개로 옵션을 리스트로 받을 방법이 생각나지 않음..
+	
 	@PostMapping("/itemview/write")
-	public void itemWrite(
-			@RequestParam Map<String,String> itemParam,
-			MultipartFile file
+	public String itemWrite(
+			@RequestParam Map<String,String> itemParam
+			,@RequestParam(name = {"OptionContent","extraCharge", "optionCount"}) List<ItemOption> itemOptionParam
+			, MultipartFile file
 //			,HttpSession session
+			,Model model
 			) {
 
 		//추가되는 메서드 - 관리자가 한명만 존재한다는 가정하게 사용...userno가 필요가 없어짐
@@ -49,32 +55,64 @@ public class ItemManageController {
 
 		//매개변수 정보 확인
 		logger.info("itemParam1: {}", itemParam);
+		logger.info("itemOptionParam2: {}", itemOptionParam);
 		
 		//item, item_option, item_file의 write가 한번에 진행되어야 함
 		//생각해보니 파일의 첨부가 필요하지 않아보임...;;
-		itemService.writeItem(itemParam, file);
+		int registeredItemno = itemService.writeItem(itemParam, file);
+		
+		if (registeredItemno != 0) {
+			model.addAttribute("reqisteredItemno", registeredItemno);
+		}
+
+		//view로 보여줄 판매 상품 번호
+		logger.info("itemno: {}", registeredItemno);
+		
+		return "admin/item/itemview/successwritepage";
+	}
+	
+	@PostMapping("/itemview/successwritepage")
+	public void registerSuccessPage() {
+		
 	}
 	
 	@GetMapping("/itemview/list")
-	public void itemReviseErasePage(
+	public String itemReviseErasePage(
 			Model model,
 			String curPage,
-			Map<String, String> itemParam
+			@RequestParam Map<String, String> itemParam
 			) {
 		
-		//추가되는 메서드 - 페이징을 하는 메서드
-//		Paging paging = itemService.getItemPaging(curPage);
+		//추가되는 메서드 - 페이징을 하는 메서드 - 아래 메서드에서 한번에 호출해서 사용
+		Paging paging = itemService.getItemPaging(curPage);
 		
-		List<Map<String, Object>> itemList = itemService.shewItemListAll(itemService.getItemPaging(curPage));
+		List<Map<String, Object>> itemList = itemService.showItemListAll(paging);
+		logger.info("itemList: {}", itemList);
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("itemList", itemList);
+		
+		return "admin/item/itemview/list";
 	}
 
 	@PostMapping("/itemview/filter")
-	public void itemFilter(
-			Map<String, String> filterMap,
-			Model model
+	public String itemFilter(
+			@RequestParam Map<String, String> filterMap
+			, Model model
+			,String curPage
 			){
 		
-		List<Map<String, Object>> filterItemList = itemService.showItemListByFilter(itemService.getItemFilterPaging(filterMap), filterMap);
+		logger.info("filterMap: {}", filterMap);
+		
+		Paging filterPaging = itemService.getItemFilterPaging(filterMap, curPage);
+		
+		List<Map<String, Object>> filterItemList = itemService.showItemListByFilter(filterPaging , filterMap);
+	
+		model.addAttribute("paging", filterPaging);
+		model.addAttribute("itemList", filterItemList);
+		
+		//forward, redirect를 하지 않고 jsp의 위치로만 사용하면 재사용 쌉가능;
+		return "admin/item/itemview/list";
 	}
 	
 	
@@ -138,23 +176,35 @@ public class ItemManageController {
 	
 	
 	
-	//--------------------------- 아이템 문의 답변 등록/수정/삭제 끝---------------------------------
+	//--------------------------- 아이템 문의 답변 등록/수정/삭제 ---------------------------------
 	
 	@GetMapping("/itemqna/list")
 	public void itemQnAPage(
 			String curPage,
 			Model model
 			) {
+		
+		Paging paging = itemQnAQService.getItemQnAQPaging(curPage);
+		
 		List<Map<String, Object>> itemQnAQList = itemQnAQService.showItemQnAQList(itemQnAQService.getItemQnAQPaging(curPage));
+		
+		model.addAttribute("itemQnAQList", itemQnAQList);
+		model.addAttribute("paging", paging);
 	}
 	
 	@PostMapping("/itemqna/filter")
 	public void itemQnAQFilter(
 			Map<String, String> filterMap
 			,Model model
+			,String curPage
 			){
 		
-		List<Map<String, Object>> filterdItemQnAQList =itemQnAQService.showItemQnAQListByFilter(itemQnAQService.getItemQnAQFilterPaging(filterMap), filterMap);
+		Paging paging = itemQnAQService.getItemQnAQFilterPaging(filterMap, curPage);
+		
+		List<Map<String, Object>> filteredItemQnAQList =itemQnAQService.showItemQnAQListByFilter(paging, filterMap);
+
+		model.addAttribute("itemQnAQList", filteredItemQnAQList);
+		model.addAttribute("paging", paging);
 	}
 	
 	@GetMapping("/itemqna/write")
@@ -174,12 +224,13 @@ public class ItemManageController {
 			@RequestParam("file") MultipartFile multipartFile
 			) {
 
-		JSONObject jo = adminBoardService.manageFile(multipartFile);
+//		JSONObject jo = adminBoardService.manageFile(multipartFile);
 		
-		logger.info(jo.toString());
+//		logger.info(jo.toString());
 		
 		//*** 응답으로 image url 필요 [ex. /upload/저장파일명]
-		return jo; 
+//		return jo; 
+		return null; 
 	}
 	
 	@PostMapping("/itemqna/write")

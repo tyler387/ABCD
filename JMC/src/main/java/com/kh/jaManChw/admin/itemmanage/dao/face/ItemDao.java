@@ -1,8 +1,12 @@
 package com.kh.jaManChw.admin.itemmanage.dao.face;
 
+import java.util.List;
+import java.util.Map;
+
 import com.kh.jaManChw.dto.Item;
 import com.kh.jaManChw.dto.ItemFile;
 import com.kh.jaManChw.dto.ItemOption;
+import com.kh.jaManChw.util.Paging;
 
 public interface ItemDao {
 
@@ -33,5 +37,44 @@ public interface ItemDao {
 	 * @param itemFile - 판매 상품의 대표 사진 정보
 	 */
 	public void insertItemFile(ItemFile itemFile);
+
+	/**
+	 * 전체 판매 게시글의 갯수를 조회한다
+	 * 
+	 * @return - 전페 판매 게시글의 수 
+	 */
+	public int selectCntAllItem();
+
+	/**
+	 * 수정, 삭제 페이지에 보여질 전체 판매글을 페이징하여 반환한다
+	 * 
+	 * @param paging - 판매글을 페이지네이션할 페이징 객체
+	 * @return 패이징된 전체 판매글
+	 */
+	public List<Map<String, Object>> selectItemAll(Paging paging);
+
+	/**
+	 * 검색을 통해 필터링된 판매글의 갯수를 조회한다
+	 * 
+	 * @param filterMap - 입력한 필터링 조건
+	 * @return 필터링된 판매글의 수 
+	 */
+	public int selectCntFilterItem(Map<String, String> filterMap);
+
+	/**
+	 * 검색을 통해 필터링된 전체 판매글을 페이징하여 반환한다
+	 * 
+	 * @param fpMap - 페이징 객체와 필터링 맵을 가져올 맵객체
+	 * @return 필터링된 판매글을 페이징한 리스트
+	 */
+	public List<Map<String, Object>> selectItemByFilter(Map<String, Object> fpMap);
+
+	/**
+	 * itemno를 통해  item, itemOption, itemFile테이블을 조회한다 
+	 * 
+	 * @param itemno - 판매 상품 번호
+	 * @return 상품의 상세 정보
+	 */
+	public List<Map<String, Object>> selectItemDetail(int itemno);
 
 }

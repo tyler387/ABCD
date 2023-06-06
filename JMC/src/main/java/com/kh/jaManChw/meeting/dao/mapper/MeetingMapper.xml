@@ -67,6 +67,12 @@
 
 </select>
 
+<update id="updatehit" parameterType="com.kh.jaManChw.dto.Meeting">
+	
+	UPDATE MEETING SET HIT = HIT + 1 WHERE meetingno = #{meetingno} 
+
+</update>
+
 <insert id="insertReportMeeting" parameterType="com.kh.jaManChw.dto.ReportMeeting">
 
 	INSERT INTO report_meeting values(report_meeting_seq.nextval , #{meetingno} , #{userno} , #{rmTitle}, #{rmContent}, 'processed' , #{rmOption}, default )

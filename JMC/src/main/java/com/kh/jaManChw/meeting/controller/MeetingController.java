@@ -148,9 +148,12 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		//전체 모임 목록 가져오기 
 		List<Meeting> meetinglist = meetingService.getMeetinglistAll();
 		
+		int meetingcount = meetingService.getMeetinglistcount(meeting);
+		
 		logger.info("{}" , meetinglist);
 		
 		model.addAttribute("meetinglist", meetinglist);
+		model.addAttribute("meetingcount", meetingcount);
 		
 	}
 	
@@ -161,17 +164,15 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("mapdata{}",mapData);
 		logger.info("mapdata1{}",mapData1);
-		String result = "";
-
+		
 		mapData1 = mapData1.replaceAll("\"", "");
 			
-	
 		mapData = mapData.replaceAll("\"", "");
 
 		logger.info("map!!!{}" , mapData);
 		logger.info("map!!!{}" , meeting);
 		
-		//
+		//지도에 찍히는 위치에 해당하는 모임 정보 가져오기 
 		List<Meeting> maplist = meetingService.getMeetingByMap(mapData,mapData1);
 		
 		//우리의 노력
@@ -266,6 +267,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		String url = "";
 		
+		//로그인 세션 검사
 		if((session.getAttribute("login")==null)) {
 			
 			return "redirect: /login/login";

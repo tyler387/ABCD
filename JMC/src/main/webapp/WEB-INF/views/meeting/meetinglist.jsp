@@ -13,8 +13,9 @@
 
 <tr>
 <th>모임 이름</th>
-<th>총 모임 인원</th>
+<th>모임 인원</th>
 <th>참가비</th>
+<th>조회수</th>
 </tr>
 
 
@@ -22,6 +23,7 @@
 <td>${meeting.mname}</td>
 <td>${meeting.headCount}</td>
 <td>${meeting.fee}</td>
+<td>${meeting.hit}</td>
 </tr>
 
 

@@ -75,6 +75,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	@Override
 		public Meeting detailMeeting(Meeting meeting) {
 		
+		meetingDao.updatehit(meeting);
 		
 		return meetingDao.selectMeeting(meeting);
 	}

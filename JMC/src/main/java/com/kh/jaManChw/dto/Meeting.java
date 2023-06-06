@@ -19,6 +19,7 @@ public class Meeting {
 	private String introduce;
 	private int headCount;
 	private String status;
+	private int hit;
 	
 	
 	public Meeting() {}
@@ -28,7 +29,8 @@ public class Meeting {
 	public String toString() {
 		return "Meeting [meetingno=" + meetingno + ", userno=" + userno + ", mname=" + mname + ", loc=" + loc
 				+ ", loc1=" + loc1 + ", loc2=" + loc2 + ", loc3=" + loc3 + ", meetingDate=" + meetingDate + ", fee="
-				+ fee + ", introduce=" + introduce + ", headCount=" + headCount + ", status=" + status + "]";
+				+ fee + ", introduce=" + introduce + ", headCount=" + headCount + ", status=" + status + ", hit=" + hit
+				+ "]";
 	}
 
 
@@ -152,8 +154,18 @@ public class Meeting {
 	}
 
 
+	public int getHit() {
+		return hit;
+	}
+
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
+
 	public Meeting(int meetingno, int userno, String mname, String loc, String loc1, String loc2, String loc3,
-			Date meetingDate, double fee, String introduce, int headCount, String status) {
+			Date meetingDate, double fee, String introduce, int headCount, String status, int hit) {
 		super();
 		this.meetingno = meetingno;
 		this.userno = userno;
@@ -167,9 +179,11 @@ public class Meeting {
 		this.introduce = introduce;
 		this.headCount = headCount;
 		this.status = status;
+		this.hit = hit;
 	}
 
 
+	
 	
 	
 	

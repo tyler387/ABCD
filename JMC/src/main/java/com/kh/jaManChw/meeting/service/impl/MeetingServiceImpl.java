@@ -35,6 +35,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		meeting.setMeetingno(meetingno);
 		
+		
+		
 		meetingDao.insertMeeting(meeting);
 		
 		preference.setMeetingno(meetingno);
@@ -148,4 +150,10 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			return meetingDao.selectMeetingListByMap(mapData,mapData1);
 		}
 
+	@Override
+		public int getMeetinglistcountnow(Meeting meeting) {
+		
+			return meetingDao.selectMeetingListCountnow(meeting);
+		}
+	
 }

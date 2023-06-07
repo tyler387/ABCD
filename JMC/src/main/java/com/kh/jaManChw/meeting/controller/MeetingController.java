@@ -134,10 +134,13 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		//전체 모임 개수 가져오기 
 		int meetingcount = meetingService.getMeetinglistcount(meeting);
 		
+		//모집중인 모임 개수 가져오기 
+		int meetingcountnow = meetingService.getMeetinglistcountnow(meeting);
 		logger.info("count{}" , meetingcount);
 		
 		model.addAttribute("meetinglist" , meetinglist);
 		model.addAttribute("meetingcount", meetingcount);
+		model.addAttribute("meetingcountnow" , meetingcountnow);
 		
 	}
 	
@@ -152,10 +155,12 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		int meetingcount = meetingService.getMeetinglistcount(meeting);
 		
+		int meetingcountnow = meetingService.getMeetinglistcountnow(meeting);
 		logger.info("{}" , meetinglist);
 		
 		model.addAttribute("meetinglist", meetinglist);
 		model.addAttribute("meetingcount", meetingcount);
+		model.addAttribute("meetingcountnow", meetingcountnow);
 		
 	}
 	

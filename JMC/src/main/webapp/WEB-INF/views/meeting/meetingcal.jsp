@@ -17,6 +17,17 @@
 
 <style type="text/css">
 
+.join {
+
+
+}
+
+.meetingbar {
+
+	width: 1550px;
+	text-align: right;
+
+}
 .modal {
 	position: absolute;
 	top: 0;
@@ -59,6 +70,7 @@
  display: flex; 
  flex-direction: row;
  align-items: flex-start;
+ width: 1300px;
  height: 1000px;
  
 
@@ -83,10 +95,10 @@
   }
 
 .meetingcal{
-  mergin-right: 10px;
+  
+  margin-right: 30px;
   height: 800px;
   width: 1000px;	
-  margin: 0 auto;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   z-index: 1000;
@@ -154,13 +166,18 @@
 </div>
 
 
-
+<div class="join">
 
 <div class="selectbtn">
 <button class="selectbtncal">캘린더</button>
 <button class="selectbtnmap" onclick="location.href='/meeting/meetingmap'">지도</button><br>
 </div>
 
+
+<div class="meetingbar">
+<button class="filter">필터</button>
+<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>		
+</div><br>
 
 
 <div class= "meetingall">
@@ -171,14 +188,12 @@
 </div>
 
 <div>
-전체 : ${meetingcount}개<br>
-<button class="filter">필터</button><br>
-<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>
+<h4>전체 : ${meetingcount}개 / 현재: ${meetingcountnow }개 모집 중</h4><br>
 <div class="meetinglist1" style="flex: 1; width: 310px;">
 <c:import url="/WEB-INF/views/meeting/meetinglist.jsp"/>
 </div>
 </div>
-
+</div>
 
 
 

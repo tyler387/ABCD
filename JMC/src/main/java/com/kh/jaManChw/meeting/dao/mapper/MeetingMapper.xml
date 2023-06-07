@@ -27,11 +27,11 @@
 </insert>
 
 <insert id="insertMeetingFriend" parameterType="com.kh.jaManChw.dto.Applicant">
-	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , 'hi', 'yes' , 1)
+	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , default , 'yes' , 1)
 </insert>	
 
 <insert id="insertMeetingUser" parameterType="com.kh.jaManChw.dto.Applicant">
-	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , 'hi', 'yes' , 1)
+	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , default, 'yes' , 1)
 </insert>
 
 <select id="selectFriendListAll" resultType="com.kh.jaManChw.dto.Users" parameterType="int">
@@ -119,6 +119,12 @@
 
 select count(*) from meeting
 	
+</select>
+
+<select id="selectMeetingListCountnow" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int">
+
+select count(*) from meeting where status = 'active'
+
 </select>
 
 <select id="selectMeetingListByMname" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">

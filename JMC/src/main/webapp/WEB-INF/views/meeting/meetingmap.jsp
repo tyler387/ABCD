@@ -150,7 +150,7 @@
 
 
 <div> 
-	전체 : ${meetingcount}개<br>
+	전체 : ${meetingcount}개 / 현재: ${meetingcountnow }개 모집 중<br>
 	<button class="filter">필터</button><br>
 	<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>
 	<div class="meetinglist1">

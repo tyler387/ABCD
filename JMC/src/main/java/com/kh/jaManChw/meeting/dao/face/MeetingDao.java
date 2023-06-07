@@ -47,11 +47,15 @@ public interface MeetingDao {
 
 	public int selectMeetingListCount(Meeting meeting);
 
+	public int selectMeetingListCountnow(Meeting meeting);
+	
 	public List<Meeting> selectMeetingListByMname(String search);
 
 	public List<Meeting> selectMeetingListByFilter(Map<String, Object> map);
 
 	public List<Meeting> selectMeetingListByMap(@Param("mapData") String mapData, @Param("mapData1")String mapData1);
+
+	
 
 	
 	

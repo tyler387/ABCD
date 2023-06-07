@@ -41,6 +41,9 @@ public interface MeetingService {
 	public List<Meeting> meetingFilter(Map<String, Object> map);
 
 	public List<Meeting> getMeetingByMap(String mapData, String mapData1);
+
+	public int getMeetinglistcountnow(Meeting meeting);
+	
 	
 	
 

@@ -12,6 +12,45 @@
 
 <style>
 
+
+.btn-open-popup{
+  text-align: right;
+  position
+}
+
+.btn-open-popup2{
+  height: 50px;
+  width: 300px;
+  border-radius: 20px; 
+  background: orange;
+  color: #fff;
+  text-align : center;
+  position: absolute;
+  top: 80%;
+  left: 100;
+
+}
+
+.btn-join{
+	text-align : center;
+	position: absolute;
+	top: 80%;
+	left: 210;
+}
+.meetinginfo{
+	position: relative;
+	top: 3%;
+	left: 70%;
+}
+
+.meetinginfo2{
+	border-radius: 20px;
+	border : 1px solid black;
+	width: 500px;
+	height: 300px;
+
+}
+
 .nicknamebox{
   background-color:#99ccff;
   width:250px;
@@ -121,13 +160,12 @@
 </div>
 
 
+<br><br>
+
 <div>
-
-	<h1>모임 상세</h1>
-
 	<button class="btn-open-popup">신고하기</button>
-	<button class="btn-open-popup2">모임 신청</button>
 </div>
+
 
 
       
@@ -154,26 +192,50 @@
 
 <!-- <a onclick="reportpopup();"><button>신고하기</button></a> -->
 
+<hr>
+<div class = "meetinginfo">
+
+
+<h2>모집 정보</h2>
+
+<div class = "meetinginfo2">
 <table>
 	<tr>
-		<th>모임 이름</th>
-		<th>총 모임 인원</th>
+		<th>모임 위치</th>
+		<td>${viewmeeting.loc1}</td>
+	</tr>
+	
+	<tr>	
+		<th>모임 일시</th>
+		<td>${viewmeeting.meetingDate }</td>
+	</tr>
+	<tr>	
+		<th>모집 인원</th>
+		<td>${viewmeeting.headCount}</td>
+	</tr>
+	<tr>	
 		<th>참가비</th>
+		<td>${viewmeeting.fee }원</td>
+	</tr>
+	<tr>	
 		<th>모임 소개</th>
-		<th>모임 시간</th>
+		<td>${viewmeeting.introduce }</td>
+	</tr>
+	<tr>		
 		<th>추가 태그</th>
 	</tr>
 
-	<tr>
-		<td>${viewmeeting.mname}</td>
-		<td>${viewmeeting.headCount}</td>
-		<td>${viewmeeting.fee }</td>
-		<td>${viewmeeting.introduce }</td>
-		<td>${viewmeeting.meetingDate }</td>
 
-	</tr>
 
 </table>
+	
+	<button class="btn-open-popup2">모임 신청</button>
+
+</div>
+
+
+</div>
+
 
 <%-- <a onclick="window.open('/meeting/join?meetingno=${viewmeeting.meetingno}')"> --%>
 <!-- <button>모임 신청</button></a> -->
@@ -182,8 +244,8 @@
 <c:forEach var="applicantnick" items="${applicantnick }">
 
 	<!-- <table onclick="applicantpopup();"> -->
-	<a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
 	<div class=nicknamebox >
+	<a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
 	<table>
 		<tr>
 			<th>닉네임</th>
@@ -195,8 +257,8 @@
 		</tr>
 
 	</table>
-	</div>
 	</a>
+	</div>
 </c:forEach>
 
 <script>

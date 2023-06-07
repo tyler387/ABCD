@@ -114,10 +114,15 @@
 	
 	추가 태그<br>
 	
-	<label>비흡연<input type="checkbox" id="smoke" name="smoke" value="no"></label>
-				<input type="hidden" id="smokehidden" name="smoke" value="yes">
-	<label>동반자가능<input type="checkbox" id="friend" name="friend" value="yes"></label><br><br>
-				<input type="hidden" id="friendhidden" name="friend" value="no">
+	<label>흡연 여부:</label>
+	<label>가능<input type="radio" id="smokeyes" name="smoke" value="yes" checked="checked"></label>
+	<label>불가능<input type="radio" id="smokeno" name="smoke" value="no"></label>
+	
+	<br><br>
+	
+	<label>동반자 여부:</label>
+	<label>가능<input type="radio" id="friendyes" name="friend" value="yes" checked="checked"></label>
+	<label>불가능<input type="radio" id="friendno" name="friend" value="no"></label>
 	
 	
 	

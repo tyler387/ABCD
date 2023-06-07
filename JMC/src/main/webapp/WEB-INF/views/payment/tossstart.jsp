@@ -14,8 +14,6 @@
   <!-- 결제하기 버튼 -->
   <button id="payment-button">결제하기</button>
   <script>
-   
-  
 	const clientKey = 'test_ck_4vZnjEJeQVxpqRELbWqVPmOoBN0k'
     const customerKey = "rNodXBSE7vXPAX54LsEgx" // 내 상점의 고객을 식별하는 고유한 키
     // 커스텀키는 유저 번호가 들어가야함
@@ -51,4 +49,6 @@
       })
     })
   </script>
+  
+  <input type="hidden" value="abcd">
 </body>

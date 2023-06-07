@@ -11,8 +11,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Encoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.jaManChw.dto.Payment;
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.payment.dao.face.PaymentDao;
 import com.kh.jaManChw.payment.service.face.PaymentService;
 
@@ -118,5 +121,20 @@ public class PaymentServiceImpl implements PaymentService {
 		return jsonObject;
 	}
 
+	@Override
+	public List<ShoppingBasket> getParamList(int[] sbItemcount, int[] basketno) {
+
+		List<ShoppingBasket> sbList = new ArrayList<>();
+		for (int i = 0 ; i < basketno.length; i++) {
+			ShoppingBasket shoppingBasket = new ShoppingBasket();
+			
+			shoppingBasket.setBasketno(basketno[i]);
+			shoppingBasket.setSbItemCount(sbItemcount[i]);
+			
+			sbList.add(shoppingBasket);
+		}
+		
+		return sbList;
+	}
 
 }

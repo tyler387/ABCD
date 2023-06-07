@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace ="com.kh.jaManChw.store.dao.face.StroeDao">
+	
+	<select id="selectAllShoppingbasketList" parameterType="int" resultType="map">
+		select S.*, I.ITEM_TITLE,I.item_price FROM shopping_basket S, item I where S.userno = ${userno} and S.itemno = I.itemno
+	</select>
+
+</mapper>

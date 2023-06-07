@@ -73,7 +73,7 @@ public class UserManageController {
 	}
 	
 	@RequestMapping("/mg/filter")
-	public void userfiltering(
+	public String userfiltering(
 			Model model, String curPage,
 			@RequestParam Map<String, Object> map
 			) {
@@ -89,6 +89,7 @@ public class UserManageController {
 		model.addAttribute("pagetype", "filter");
 		model.addAttribute("map", map);
 		
+		return "admin/user/mg/list";
 	}
 	
 //	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })

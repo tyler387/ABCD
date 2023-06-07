@@ -156,7 +156,7 @@ $(function() {
 
 
 <div id="pagingDivTag">
-<c:import url="./paging.jsp" />
+<c:import url="../../../layout/paging.jsp" />
 </div>
 
 </div>	

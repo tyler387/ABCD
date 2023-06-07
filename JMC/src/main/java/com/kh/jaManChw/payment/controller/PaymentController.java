@@ -12,6 +12,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.List;
 import java.util.Base64.Encoder;
 import java.util.Map;
 
@@ -24,10 +25,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.payment.service.face.PaymentService;
+
 
 @RequestMapping("/payment")
 @Controller
@@ -67,8 +72,15 @@ public class PaymentController {
 	}
 	
 	@RequestMapping("/main")
-	public void PaymentMain() {
-
+	public void PaymentMain(
+//			@RequestParam Map<String, String> map
+			int[] sbItemcount, int[] basketno
+			) {
+		logger.info("결제할 상품들 출력{}");
+		
+		List<ShoppingBasket> sbList = paymentService.getParamList(sbItemcount, basketno);
+		
+		logger.info("결제할 상품들 출력{}", sbList);
 	}
 	
 
@@ -82,5 +94,21 @@ public class PaymentController {
 		logger.info("{}", jsonObject.get("orderId"));
 		
 		 return "redirect:/payment/end";
+	}
+	
+	@RequestMapping("/shoppingBasketList")
+	public ModelAndView SbUpdate(int basketno, int sbItemCount, ModelAndView mav) {
+		
+//	      mav.addObject("basketno", basketno);
+	      logger.info("바스켓 넘버 {} --- {}",basketno, sbItemCount);
+	      logger.info("상품수량 갯수 {}", sbItemCount);
+		
+	      //모델값 지정	-> 응답 데이터 JSON 변환
+//		mav.addObject();
+		
+		//뷰네임 지정	-> jsonView 적용
+		mav.setViewName("/store/shoppingBasketList.jsp");
+	      
+	      return mav;
 	}
 }

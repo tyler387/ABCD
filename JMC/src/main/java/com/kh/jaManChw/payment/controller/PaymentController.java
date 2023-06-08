@@ -53,8 +53,18 @@ public class PaymentController {
 		
 	}
 	
+//	@RequestMapping("/end")
+//	public void PaymentEnd(HttpServletRequest request,
+////			String val, String bbb,
+//			@RequestParam Map<String, String> map) {
+//		logger.info("여기는 결제가 끝난 시점");
+//		logger.info("bbb = {}", map);
+//		logger.info("request = {}", map);
+//		logger.info("여기는 결제가 끝난 시점");
+//	}
 	@RequestMapping("/end")
 	public void PaymentEnd() {
+
 	}
 	
 	@RequestMapping("/fail")
@@ -85,15 +95,24 @@ public class PaymentController {
 	
 
 	@RequestMapping("/abc")
-	public String abc(HttpServletRequest request) {
+	public String abc(HttpServletRequest request,
+//			String val, String bbb,
+			@RequestParam Map<String, String> map) {
+		logger.info("{}", request.getAttribute("val"));
+//		logger.info("val = {}", val);
+//		logger.info("bbb = {}", bbb);
+		logger.info("bbb = {}", map);
 		
 		JSONObject jsonObject = paymentService.paymentInfo(request);
+		
+		map.put("asdada", "asdasdasda");
 		
 		//paymentKey 이걸로 주문 취소 등 해야함
 		logger.info("{}", jsonObject);
 		logger.info("{}", jsonObject.get("orderId"));
 		
 		 return "redirect:/payment/end";
+//		 return "forward:/payment/end";
 	}
 	
 	@RequestMapping("/shoppingBasketList")

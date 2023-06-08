@@ -38,7 +38,7 @@ div.admin1 {
 <h1 class="innerTitle">판매 물품 정보 수정/삭제</h1>
 
 </div>
-<form action="./filter" method="post">
+<form action="./filter" method="get">
 <div class="input-group mb-12 ms-auto  justify-content-end"
 	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 600px;">
 	<select class=" form-select " name="filter" id="filter"
@@ -91,7 +91,7 @@ div.admin1 {
 
 </table>
 
-<c:import url="../../../layout/paging.jsp"/>
+<c:import url="../../paging.jsp"/>
 
 </div>
 

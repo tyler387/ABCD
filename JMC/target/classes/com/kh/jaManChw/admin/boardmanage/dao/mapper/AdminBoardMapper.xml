@@ -11,7 +11,9 @@
 
 	<select id="selectAllCnt" resultType="int" parameterType="String">
 		SELECT count(*) FROM admin_board
-		WHERE ab_option = #{boardOption}
+		WHERE 1 = 1 
+			AND ab_option = #{boardOption}
+			AND ab_status != 'delete'
 	</select>
 
 	<select id="selectAdminBoardAllByBoardOption" resultType="map" parameterType="map">

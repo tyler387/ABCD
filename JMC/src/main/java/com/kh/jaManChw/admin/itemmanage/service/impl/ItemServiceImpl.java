@@ -2,13 +2,16 @@ package com.kh.jaManChw.admin.itemmanage.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +34,62 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired private ServletContext context;
 	
 	@Override
-	public int writeItem(Map<String, String> itemParam, MultipartFile file) {
+	public List<ItemOption> getItemOptionParam(String[] optionContent, int[] optionCount, int[] extraCharge) {
+
+		if (optionContent != null && optionCount != null && extraCharge != null) {
+			
+			List<ItemOption> itemParamMap = new ArrayList<>();
+			for (int i = 0; i< optionContent.length; i++) {
+				ItemOption itemOption = new ItemOption();
+				itemOption.setOptionContent(optionContent[i]);
+				itemOption.setOptionCount(optionCount[i]);
+				itemOption.setExtraCharge(extraCharge[i]);
+				
+				itemParamMap.add(itemOption);
+			}
+		
+			return itemParamMap;
+		}
+		return null;
+	}
+	
+	@Override
+	public JSONObject itemContentPic(MultipartFile file) {
+
+		JSONObject jsonObject = new JSONObject();
+		
+		if(file.getSize()<=0) {
+			return null;
+		}
+		
+		File storedFolder = new File(context.getRealPath("itemContentFile"));
+		storedFolder.mkdir();
+		
+		File dest = null;
+		String storedFileName = null;
+		
+		do {
+			storedFileName = UUID.randomUUID().toString().split("-")[4]+UUID.randomUUID().toString().split("-")[0];
+			dest = new File(storedFolder, storedFileName);
+		} while (dest.exists());
+		
+		try {
+			file.transferTo(dest);
+			
+			jsonObject.put("url", "/"+ "itemContentFile" +"/"+storedFileName);
+			jsonObject.put("responseCode", "success");
+			
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			jsonObject.put("responseCode", "error");
+			e.printStackTrace();
+		}
+		
+		return jsonObject;
+	}
+	
+	@Override
+	public int writeItem(Item itemParam, List<ItemOption> itemOptionParam , MultipartFile[] file) {
 
 		
 		//itemno 생성
@@ -43,69 +101,76 @@ public class ItemServiceImpl implements ItemService{
 		// 1. item DTO
 		Item item = new Item();
 		item.setItemno(itemno);
-		item.setItemTitle(itemParam.get("itemTitle"));
-		item.setAllItemCount(Integer.parseInt(itemParam.get("allItemCount")));
-		item.setItemType(itemParam.get("itemType"));
-		item.setItemPrice(Integer.parseInt(itemParam.get("itemPrice")));
-		item.setItemContent(itemParam.get("itemContent"));		
+		item.setItemTitle(itemParam.getItemTitle());
+		item.setAllItemCount(itemParam.getAllItemCount());
+		item.setItemType(itemParam.getItemType());
+		item.setItemStatus(itemParam.getItemStatus());
+		item.setItemPrice(itemParam.getItemPrice());
+		item.setItemContent(itemParam.getItemContent());		
 		
 		//item DTO에 담긴 정보를 DB의 item테이블에 저장한다
 		itemDao.insertItem(item);
-		
-		ItemOption itemOption = null;
-		
-		// 2. itemOption DTO - 만약 옵션값을 넣는다면...
-		if (itemParam.get("OptionContent")!=null && !"".equals(itemParam.get("OptionContent"))) {
-			itemOption = new ItemOption();
-			itemOption.setItemno(itemno);
-			itemOption.setOptionContent(itemParam.get("OptionContent"));
-			itemOption.setOptionCount(Integer.parseInt(itemParam.get("optionCount")));
-			itemOption.setExtraCharge(Integer.parseInt(itemParam.get("extraCharge")));
-		}
-		
-		//itemOption이 있는 경우는 itemOption DTO에 담긴 정보를 DB의 item테이블에 저장한다
-		if (itemOption != null) {
-			itemDao.insertItemOption(itemOption);
+
+		for(ItemOption io : itemOptionParam) {
+			
+			// 2. itemOption DTO - 만약 옵션값을 넣는다면...
+			if (itemOptionParam !=null) {
+				io.setItemno(itemno);
+//			itemOption.setOptionContent(itemParam.get("OptionContent"));
+//			itemOption.setOptionCount(Integer.parseInt(itemParam.get("optionCount")));
+//			itemOption.setExtraCharge(Integer.parseInt(itemParam.get("extraCharge")));
+			}
+			
+			//itemOption이 있는 경우는 itemOption DTO에 담긴 정보를 DB의 item테이블에 저장한다
+			if (itemOptionParam != null) {
+				itemDao.insertItemOption(io);
+			}
 		}
 		
 		// 3. itemFile DTO
 		ItemFile itemFile = new ItemFile();
 		itemFile.setItemno(itemno);
 		
-		if(file.getSize()<=0) {
-			return 0;
+		for (MultipartFile mf : file) {
+			if(mf.getSize()<=0) {
+				return 0;
+			}
 		}
 		
-		String storedPath = context.getRealPath("itemfile");
-		File storedFolder = new File(storedPath);
-		storedFolder.mkdir();
-		
-		File dest = null;
-		String storedFileName = null;
-		
-		do {
-			storedFileName = UUID.randomUUID().toString().split("-")[4]+UUID.randomUUID().toString().split("-")[0];
-			dest = new File(storedFolder, storedFileName);
-		}while(dest.exists());
+		for (MultipartFile mfile : file) {
 			
-
+			String storedPath = context.getRealPath("itemfile");
+			File storedFolder = new File(storedPath);
+			storedFolder.mkdir();
 			
-		try {
-			file.transferTo(dest);
-		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			File dest = null;
+			String storedFileName = null;
+			
+			do {
+				storedFileName = UUID.randomUUID().toString().split("-")[4]+UUID.randomUUID().toString().split("-")[0];
+				dest = new File(storedFolder, storedFileName);
+			}while(dest.exists());
+			
+			
+			
+			try {
+				mfile.transferTo(dest);
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			itemFile.setiOriginName(mfile.getOriginalFilename());
+			itemFile.setiStoredName(storedFileName);
+			itemFile.setFilesize(mfile.getSize());
+			
+			//item DTO에 담긴 정보를 DB의 item테이블에 저장한다
+			itemDao.insertItemFile(itemFile);
+			
 		}
-		
-		itemFile.setiOriginName(file.getOriginalFilename());
-		itemFile.setiStoredName(storedFileName);
-		itemFile.setFilesize(file.getSize());
-		
-		//item DTO에 담긴 정보를 DB의 item테이블에 저장한다
-		itemDao.insertItemFile(itemFile);
 		
 		logger.info("item: {}",item);
-		logger.info("itemOption: {}",itemOption);
+		logger.info("itemOption: {}",itemOptionParam);
 		logger.info("itemFile: {}",itemFile);
 		
 		
@@ -156,7 +221,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public void showItemDetail(int itemno) {
+	public Map<String, Object> showItemDetail(int itemno) {
 
 		//itemno를 통해  item, itemOption, itemFile테이블을 조회한다 
 		//itemOption가 itemFile은 Detail이라도 하더라도 다수의 row가 존재할수 있기에
@@ -165,19 +230,122 @@ public class ItemServiceImpl implements ItemService{
 		//List내부에서 item을 어느 map에 담은지 확인이 불가능하기에
 		//모든 맵에 item의 정보를 가지고 있으나 그중 하나만 사용하고 
 		//List는 option과 file을 위해서 만사용하는 방법을 사용하려고 한다
-		List<Map<String, Object>> itemDetailList = itemDao.selectItemDetail(itemno);
+		
+		//다시 조정..! 각자에 맞는 List<DTO>를 맵으로 넣자!
+		List<ItemOption> itemOptionDetailList = itemDao.selectItemOptionDetail(itemno);
+		List<ItemFile> itemFileDetailList = itemDao.selectItemFileDetail(itemno);
+		Item itemDetail = itemDao.selectItemDetail(itemno);
+		
+		Map<String, Object> allDetailMap = new HashMap<>();
+		
+		allDetailMap.put("itemDetail", itemDetail);
+		allDetailMap.put("itemOptionDetail", itemOptionDetailList);
+		allDetailMap.put("itemFileDetail", itemFileDetailList);
+		
+		return allDetailMap;
 		
 	}
 	
 	@Override
-	public void reviseItem(Map<String, String> itemParam) {
-		// TODO Auto-generated method stub
+	public void reviseItem(Item itemParam, List<ItemOption> itemOptionParam, MultipartFile[] itemFileParam) {
 		
+		//item 테이블을 수정한다
+		itemDao.updateItem(itemParam);
+		
+		//itemOption 테이블을 수정한다 - itemno는 item DTO에서 가져와서 사용한다
+		if (itemOptionParam != null) {
+
+			//1. 기존의 itemOption정보를 삭제한다
+			itemDao.deleteItemOption(itemParam.getItemno());
+			
+			for(ItemOption io : itemOptionParam) {
+				io.setItemno(itemParam.getItemno());
+				itemDao.insertItemOption(io);
+			}
+		}
+		
+		//itemFile 테이블을 수정한다 - itemno는 item DTO에서 가져와서 사용한다
+
+		//파일이 존재하는지 확인
+		logger.info("파일이 존재하는가? : {}", itemFileParam != null);
+		
+		
+		if (itemFileParam != null) {
+			//1. itemFile에 파일이 담겨있다면 item DTO의 itemno를 통해 
+			//	 기존 파일의 저장된 이름을 가져온다
+			List<ItemFile> itemFileInfo = itemDao.selectItemFileDetail(itemParam.getItemno());
+		
+			//2. itemFile에 파일이 담겨있다면 기존의 파일을 삭제한다
+		
+			//해당 파일의 실제 경로를 찾아 파일 객체를 생성한다
+			File storedFile =  null;
+			
+			
+			//파일객체를 통해서 iStoredName과 동일한 파일들을 삭제한다
+			for (ItemFile ifile : itemFileInfo) {
+				storedFile = new File(context.getRealPath("itemfile/")+ifile.getiStoredName());
+				storedFile.delete();
+			}
+
+			//3. itemFile에 파일이 담겨 있다면 기존의 파일의 정보를 DB에서 삭제한다.
+			itemDao.deleteItemFile(itemParam.getItemno());
+			
+			
+			//4. 새롭게 추가된 File을 저장한다
+			for(MultipartFile mfile : itemFileParam) {
+				
+				if (mfile.getSize()<=0) {
+					return;
+				}
+				
+				File storedFolder = new File(context.getRealPath("itemfile"));
+				storedFolder.mkdir();
+				
+				File dest = null;
+				String newStoredFile = null;
+				
+				do {
+					newStoredFile = UUID.randomUUID().toString().split("-")[4]+UUID.randomUUID().toString().split("-")[0];
+					
+					dest = new File(storedFolder, newStoredFile);
+				} while (dest.exists());
+				
+				try {
+					logger.info("도착했나?");
+					logger.info("도착했다면 mfile은 뭐제?: {}", mfile);
+					mfile.transferTo(dest);
+					
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+				
+				//5. 새롭게 저장된 file의 정보를 저장한다
+				ItemFile itemFile = new ItemFile();
+				itemFile.setItemno(itemParam.getItemno());
+				itemFile.setiOriginName(mfile.getOriginalFilename());
+				itemFile.setiStoredName(newStoredFile);
+				itemFile.setFilesize(mfile.getSize());
+				
+				itemDao.insertItemFile(itemFile);
+				
+			}
+		}
 	}
 	
 	@Override
 	public void eraseItem(int itemno) {
-		// TODO Auto-generated method stub
+		logger.info("제거하라!");
 		
+		//update로 상태를 변경하려고 했는데 상태라는게 DB항목에 전혀 없네..
+		//일단 그냥 delete로 해야할것 같음!!
+		
+		//1. itemOption 테이블에 상품 정보 제거
+		itemDao.deleteItemOption(itemno);
+		
+		//2. itemFile 테이블에 상품 정보 제거
+		itemDao.deleteItemFile(itemno);
+		
+		//3. item 테이블에 상품 정보 제거
+		itemDao.deleteItem(itemno);
 	}
 }

@@ -3,22 +3,34 @@ package com.kh.jaManChw.admin.itemmanage.service.face;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
+import org.json.simple.JSONObject;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.Item;
+import com.kh.jaManChw.dto.ItemOption;
 import com.kh.jaManChw.util.Paging;
 
 public interface ItemService {
 
 	/**
+	 * 판매글에 대한 옵션을 DTO로 추가하여 반환한다
+	 * 
+	 * @param optionContent - 옵션의 내용을 담아오는 배열
+	 * @param optionCount - 해당 옵션의 재고수를 담아오는 배열
+	 * @param extraCharge - 해당 옵션의 추가 가격을 담아오는 배열
+	 * @return - 판매글에 대한 옵션 리스트
+	 */
+	public List<ItemOption> getItemOptionParam(String[] optionContent, int[] optionCount, int[] extraCharge);
+	
+	/**
 	 * 입력받은 판매글 정보를 가져와 DB에 저장한다
 	 * 
 	 * @param itemParam - 입력받은 판매글 정보를 가져올 DTO 객체
+	 * @param itemOptionParam - 입력받은 상품 옵션 정보를 가져올 List
 	 * @param file - 파일을 저장할 변수
 	 * @return 등록한 판매 상품 번호
 	 */
-	public int writeItem(Map<String, String> itemParam, MultipartFile file);
+	public int writeItem(Item itemParam, List<ItemOption> itemOptionParam , MultipartFile[] file);
 
 	/**
 	 * 현재 페이지를 입력받아 전체 판매글을 페이징 하는 객체를 반환한다
@@ -59,16 +71,18 @@ public interface ItemService {
 	 * 
 	 * @param itemno - 판매글 번호
 	 */
-	public void showItemDetail(int itemno);
+	public Map<String, Object> showItemDetail(int itemno);
 
 	/**
 	 * 판매글 번호를 통해 판매글, 판매옵션, 판매 사진의 정보를 변경한다
 	 * 수정된 판매글 정보를 가지 
 	 * 
 	 * @param itemParam - 판매글 정보
+	 * @param itemOptionParam - 상품 옵션 정보
+	 * @param file - 파일 정보
 	 * 
 	 */
-	public void reviseItem(Map<String, String> itemParam);
+	public void reviseItem(Item itemParam, List<ItemOption> itemOptionParam, MultipartFile[] itemFileParam);
 
 	/**
 	 * 판매글 번호를 통해 판매글, 판매 옵션, 판매 사진의 정보를 삭제한다
@@ -76,6 +90,17 @@ public interface ItemService {
 	 * @param itemno - 판매글 번호
 	 */
 	public void eraseItem(int itemno);
+
+	/**
+	 * 판매 상품의 상세 정보에 삽입된 사진을 저장하고
+	 * 사진을 url형태로 반환한다
+	 * 
+	 * @param file 상세 정보에 삽입된 사진
+	 * @return
+	 */
+	public JSONObject itemContentPic(MultipartFile file);
+
+
 
 
 }

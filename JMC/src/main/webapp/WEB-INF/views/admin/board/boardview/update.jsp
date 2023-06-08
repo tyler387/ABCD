@@ -47,9 +47,8 @@ $(function() {
 						}
 					}
 				}
-			});
+	});
 	
-	$(".note-editable").html('${detail.content}');
 	
 	function sendFile(file, el) {
 		console.log("el {}", el);
@@ -108,7 +107,7 @@ $(function() {
 <div class="input-group mb-3 rounded-3">
 	<label for="summernote" class="input-group-text rounded-top" style="width: 800px;" >내용</label>
 	<div id="summernoteDiv">
-	<textarea id="summernote" name="content" class="form-control" ></textarea>
+	<textarea id="summernote" name="content" class="form-control" >${detail.content}</textarea>
 	</div>
 	<br>
 	<input type="file" id="file" name="file" multiple="multiple" class="form-control rounded-bottom">

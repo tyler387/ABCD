@@ -3,6 +3,8 @@ package com.kh.jaManChw.admin.itemmanage.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.jaManChw.dto.ItemQnAA;
+import com.kh.jaManChw.dto.QnAQ;
 import com.kh.jaManChw.util.Paging;
 
 public interface ItemQnAQDao {
@@ -38,5 +40,27 @@ public interface ItemQnAQDao {
 	 * @return - 필터링후 페이징한 판매 문의글 
 	 */
 	public List<Map<String, Object>> selectItemQnAQListByFilter(Map<String, Object> fpMap);
+
+	/**
+	 * 상품 문의 번호를 통해 상문 문의 상세 정보를 조회한다
+	 * 
+	 * @param itemQnano - 상품 문의 번호
+	 * @return 상품 상세 정보
+	 */
+	public Map<String, Object> selectItemQnAQDetail(int itemQnano);
+
+	/**
+	 * 상품 문의에 답변을 하면 ITEM_QnA_Q의 상태가 "done"으로 변경된다
+	 * 
+	 * @param itemQnAAParam - 상품 문의 번호를 담은 DTO객체
+	 */
+	public void updateItemQnAQ(ItemQnAA itemQnAAParam);
+
+	/**
+	 * 상품 문의 답변을 삭제 하면 해당 상품 문의의 상태가 "unprocessed"으로 변경된다
+	 * 
+	 * @param itemQnAAParam - 상품 문의 번호를 담은 DTO객체
+	 */
+	public void updateItemQnAQUnprocessed(ItemQnAA itemQnAAParam);
 
 }

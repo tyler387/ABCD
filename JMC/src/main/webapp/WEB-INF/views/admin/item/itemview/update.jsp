@@ -140,6 +140,12 @@ $(function() {
 		
 		}
 	})
+	
+	var content = '${allItemDetail.itemDetail.itemContent}'
+	
+	console.log("컨텐츠 확인: ",content);
+	
+	$(".note-editable").html(content);
 })
 </script>
 
@@ -187,48 +193,131 @@ $(function() {
 </style>
 
 <div id="itemWriteForm">
-<form action="write" method="post" enctype="multipart/form-data">
+<form action="./update" method="post" enctype="multipart/form-data">
 
 <a><h1>판매 상품 신규 등록</h1></a>
 
 <span>상품 기본 정보</span>
 <div id="itemWriteInput">
 <div>
-<label>상품분류</label>
+<label>상품분류</label> 
 <select name="itemType">
-	<option value="칵테일 재료">칵테일 재료</option>
-	<option value="칵테일 도구">칵테일 도구</option>
-	<option value="칵테일 잔">칵테일 잔</option>
-	<option value="위스키 물품">위스키 물품</option>
-	<option value="와인 물품">와인 물품</option>
-</select> <br>
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemType eq '칵테일 재료'}">
+			<option value="칵테일 재료" selected="selected">칵테일 재료</option>
+		</c:when>
+		<c:otherwise>
+			<option value="칵테일 재료">칵테일 재료</option>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemType eq '칵테일 도구'}">
+			<option value="칵테일 도구" selected="selected">칵테일 도구</option>
+		</c:when>
+		<c:otherwise>
+			<option value="칵테일 도구">칵테일 도구</option>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemType eq '칵테일 잔'}">
+			<option value="칵테일 잔" selected="selected">칵테일 잔</option>
+		</c:when>
+		<c:otherwise>
+			<option value="칵테일 잔">칵테일 잔</option>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemType eq '위스키 물품'}">
+			<option value="위스키 물품" selected="selected">위스키 물품</option>
+		</c:when>
+		<c:otherwise>
+			<option value="위스키 물품">위스키 물품</option>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemType eq '와인 물품'}">
+			<option value="와인 물품" selected="selected">와인 물품</option>
+		</c:when>
+		<c:otherwise>
+			<option value="와인 물품">와인 물품</option>
+		</c:otherwise>
+	</c:choose>
+</select>
+<select name="itemStatus">
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemStatus eq 'sale'}">
+			<option value="sale" selected="selected">판매</option>
+		</c:when>
+		<c:otherwise>
+			<option value="sale">판매</option>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemStatus eq 'sold_out'}">
+			<option value="sold_out" selected="selected">매진</option>
+		</c:when>
+		<c:otherwise>
+			<option value="sold_out">매진</option>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${allItemDetail.itemDetail.itemStatus eq 'stop_selling'}">
+			<option value="stop_selling" selected="selected">판매 중지</option>
+		</c:when>
+		<c:otherwise>
+			<option value="stop_selling">판매 중지</option>
+		</c:otherwise>
+	</c:choose>
+</select>
+<br>
 </div>
 <div>
+
+<%-- 상품 번호 --%>
+<input type="hidden" id="itemno" name="itemno" value="${allItemDetail.itemDetail.itemno}"><br>
+<%-- 현재 페이지 --%>
+<input type="hidden" id="curPage" name="curPage" value="${curPage}"><br>
+
 <label>상품명</label>
-<input type="text" id="itemTitle" name="itemTitle"><br>
+<input type="text" id="itemTitle" name="itemTitle" value="${allItemDetail.itemDetail.itemTitle}"><br>
 </div>
 <div>
 <label>가격 입력</label>
-<input type="text" id="itemPrice" name="itemPrice" class="mustNum"><br>
+<input type="text" id="itemPrice" name="itemPrice" class="mustNum" value="${allItemDetail.itemDetail.itemPrice}"><br>
 </div>
 <div>
 <label>재고 설정</label>
-<input type="text" id="allItemCount" name="allItemCount" class="mustNum"><br>
+<input type="text" id="allItemCount" name="allItemCount" class="mustNum" value="${allItemDetail.itemDetail.allItemCount}"><br>
 </div>
 <div>
 <label>상품 옵션 추가</label>
 <img id="btnOption" alt="optionAddIcon" src="/resources/image/optionAddIcon.png" style="width:15px">
 <div id="addedOption">
+	<c:forEach var="io" items="${allItemDetail.itemOptionDetail}">
+	<div class='OptionDiv'>
+		<label>옵션설명:</label>
+		<input type='text' class='option' name='optionContent' value="${io.optionContent}" style='margin-top:5px;'>
+		<label>추가 금액:</label>
+		<input type='text' class='option mustNum' name='extraCharge' value="${io.extraCharge}" style='margin-top:5px;'>
+		<label>옵션 상품 갯수:</label>
+		<input type='text' class='option mustNum' name='optionCount' value="${io.optionCount}" style='margin-top:5px;'>
+		<img class='image' alt='delpic' src='/resources/image/optionDelete.png' style='width:20px;'>
+		<br>
+	</div>
+	</c:forEach>
 </div>
 </div>
 <div>
 	<label>상품 메인 이미지</label>
 </div>
 <div class="all-file-wrap">
-	<div class="img-wrap">	
+	<div class="img-wrap">
 		<img class="picUpIcon" alt="picUpIcon" src="/resources/image/fileuploadIcon.png" style="width:50px;height:50px;">
 	</div>
 	<div class="uploadedPic">
+		<c:forEach var="ifile" items="${allItemDetail.itemFileDetail}">
+			<img src="/itemfile/${ifile.iStoredName}" style="width:100px;height:100px">
+		</c:forEach>
 	</div>
 	<input type="file" id="file" name="file" multiple="multiple" class="form-control rounded-bottom d-none">
 </div>
@@ -236,7 +325,8 @@ $(function() {
 <label>상품 내용 입력</label>
 <textarea id="summernote" name="itemContent"></textarea><br>
 <hr>
-<button>상품 등록</button>
+<button>상품 수정</button>
+<button type="button" onclick="history.go(-1)">수정 취소</button>
 </div>
 
 </form>

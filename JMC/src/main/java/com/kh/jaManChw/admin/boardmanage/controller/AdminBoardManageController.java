@@ -187,7 +187,7 @@ public class AdminBoardManageController {
 		model.addAttribute("paging",paging);
 	}
 	
-	@PostMapping("qna/filter")
+	@GetMapping("qna/filter")
 	public String qnAQFilter(
 			@RequestParam Map<String, Object> filterAndPagingMap,
 			Model model
@@ -201,6 +201,8 @@ public class AdminBoardManageController {
 		
 		logger.info("filterL : {}", filterAndPagingList);
 		
+		model.addAttribute("filterList", true);
+		model.addAttribute("filter", filterAndPagingMap);
 		model.addAttribute("qnAQList", filterAndPagingList);
 		model.addAttribute("paging", paging );
 		

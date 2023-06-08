@@ -63,9 +63,8 @@ public class ItemQnAQServiceImpl implements ItemQnAQService{
 	}
 	
 	@Override
-	public QnAQ showItemQnAQDetail(int itemQnano) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> showItemQnAQDetail(int itemQnano) {
+		return itemQnAQDao.selectItemQnAQDetail(itemQnano);
 	}
 	
 	

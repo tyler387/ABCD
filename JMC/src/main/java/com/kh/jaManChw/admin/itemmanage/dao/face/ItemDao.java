@@ -70,11 +70,60 @@ public interface ItemDao {
 	public List<Map<String, Object>> selectItemByFilter(Map<String, Object> fpMap);
 
 	/**
-	 * itemno를 통해  item, itemOption, itemFile테이블을 조회한다 
+	 * itemno를 통해 itemOption테이블을 조회한다 
 	 * 
 	 * @param itemno - 판매 상품 번호
-	 * @return 상품의 상세 정보
+	 * @return 상품 옵션의 상세 정보
 	 */
-	public List<Map<String, Object>> selectItemDetail(int itemno);
+	public List<ItemOption> selectItemOptionDetail(int itemno);
+
+	/**
+	 * itemno를 통해 item테이블을 조회한다 
+	 * 
+	 * @param itemno - 판매 상품 번호
+	 * @return 상품 파일의 상세 정보
+	 */
+	public List<ItemFile> selectItemFileDetail(int itemno);
+
+	/**
+	 * itemno를 통해 item테이블을 조회한다 
+	 * 
+	 * @param - 판매 상품 번호
+	 * @return 상품 파일의 상세 정보
+	 */
+	public Item selectItemDetail(int itemno);
+
+	/**
+	 * item DTO를 통해 item테이블의 정보를 수정한다
+	 * 
+	 * @param itemParam - 수정할 정보를 가져올 item DTO
+	 */
+	public void updateItem(Item itemParam);
+
+	/**
+	 * itemno를 통해 itemOption의 정보를 DB에서 삭제한다
+	 * 
+	 * @param itemno - 판매 상품 정보
+	 */
+	public void deleteItemOption(int itemno);
+
+	/**
+	 * itemno를 통해 DB에 itemFile의 정보를 DB에서 삭제한다
+	 * 
+	 * @param itemno - 판매 상품 번호
+	 */
+	public void deleteItemFile(int itemno);
+
+	/**
+	 * itemno를 통해 DB에 판매 상품 삭제
+	 * 
+	 * @param itemno - 판매 상품 번호
+	 */
+	public void deleteItem(int itemno);
+
+
+	
+
+
 
 }

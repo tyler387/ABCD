@@ -38,6 +38,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		
 		//현재 페이지 보정
 		int thisCurPage = 0;
+		logger.info("현재 페이지스1:{}", curPage);
 		if(curPage != null && !"".equals(curPage)) {
 			thisCurPage = Integer.parseInt(curPage);
 		}

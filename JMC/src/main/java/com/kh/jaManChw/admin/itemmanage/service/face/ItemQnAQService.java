@@ -49,6 +49,6 @@ public interface ItemQnAQService {
 	 * @param itemQnano 상품을 조회할  상품 번호
 	 * @return 상세 상품 정보
 	 */
-	public QnAQ showItemQnAQDetail(int itemQnano);
+	public Map<String, Object> showItemQnAQDetail(int itemQnano);
 
 }

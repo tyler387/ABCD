@@ -44,24 +44,30 @@ td.content div{
 <table class="table table-bordered">
 			<tr>
 				<th class="table-info">문의 번호</th>
-				<td>${qnAQDetail.QUESTIONNO}</td>
-				<th class="">문의 작성일</th>
-				<td>${qnAQDetail.WRITEDATE}</td>
+				<td>${qnAQDetail.ITEM_QNANO}</td>
+				<th class="table-info">문의 작성일</th>
+				<td>${qnAQDetail.WRITE_DATE}</td>
 			</tr>
 			<tr>
-				<th class="">문의 회원</th>
-				<td colspan="3">${qnAQDetail.USERID}</td>
+				<th class="table-info">문의자 아이디</th>
+				<td >${qnAQDetail.USER_ID}</td>
+				<th class="table-info">문의자 이름</th>
+				<td >${qnAQDetail.USER_NAME}</td>
 			</tr>
 			<tr>
-				<th class="">문의 제목</th>
-				<td colspan="3">${qnAQDetail.QTITLE}</td>
+				<th class="table-info">문의 상품명</th>
+				<td colspan="3">${qnAQDetail.ITEM_TITLE}</td>
 			</tr>
 			<tr>
-				<th class="" colspan="4">문의 내용</th>
+				<th class="table-info">문의 제목</th>
+				<td colspan="3">${qnAQDetail.IQ_TITLE}</td>
+			</tr>
+			<tr>
+				<th class="table-info" colspan="4">문의 내용</th>
 				
 			</tr>
 			<tr>
-				<td class="content" colspan="4"><div>${qnAQDetail.QCONTENT}</div></td>
+				<td class="content" colspan="4"><div>${qnAQDetail.IQ_CONTENT}</div></td>
 			</tr>
 		</table>
 </div>
@@ -70,16 +76,17 @@ td.content div{
 
 <div id="answerForm">
 <form action="./write" method="post">
-<input type="hidden" name="questionno" value="${qnAQDetail.QUESTIONNO}">
+<input type="hidden" name="itemQnano" value="${qnAQDetail.ITEM_QNANO}">
 <input type="hidden" name="curPage" value="${curPage}">
 <div class="input-group mb-3" style="">
 <label class="input-group-text">답변 내용</label>
-<textarea id="aContent" name="aContent" placeholder="답변을 작성하시오" class="form-control"></textarea>
+<textarea id="iaContent" name="iaContent" placeholder="답변을 작성하시오" class="form-control"></textarea>
 </div>
 <button class="btn btn-secondary">답변등록</button>
 <button type="button" id="btnCalcel" class="btn btn-secondary">취소</button>
 </form>
 </div>
+
 </div>
 </div>
 </div>

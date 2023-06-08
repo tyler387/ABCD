@@ -4,46 +4,7 @@
 
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	
-	$("#searchBtn").click(function() {
-		
-		 $.ajax({
-		type: "post"
-		, url: "./filter"
-		, data:  {filter : $("#filter").val(), content : $("#content").val()}
-		, dataType: "html" 
-		, success: function( res ) {
-			console.log("AJAX 성공")
-			$("#qnAList").html(res)
-		}
-		, error: function() {
-			console.log("AJAX 실패")
-		}
-	})
-	
-	//AJAX로 구현하려 고민중... 안하는게 좋을것 같음..
-// 	$("#btnDelete").click(function() {
-		
-// 		 $.ajax({
-// 				type: "post"
-// 				, url: "./delete"
-// 				, data:  {answerno: $(this).attr("data-answerno"), curPage:}
-// 				, dataType: "html" 
-// 				, success: function( res ) {
-// 					console.log("AJAX 성공")
-// 					$("#qnAList").html(res)
-// 				}
-// 				, error: function() {
-// 					console.log("AJAX 실패")
-// 				}
-		
-// 		})
-// 	})
-	
-})
-</script>
+
 
 <c:import url="../../main.jsp"/>
 
@@ -81,7 +42,7 @@ div.admin1 {
 <h1 class="innerTitle">QnA 관리</h1>
 </div>
 
-
+<form action="./filter" method="get">
 <div class="input-group mb-12 ms-auto  justify-content-end"
 	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 600px;">
 	<select class=" form-select " name="filter" id="filter"
@@ -93,7 +54,7 @@ div.admin1 {
 		type="text" name="content" id="content">
 	<button id="searchBtn" class="btn btn-secondary">검색하기</button>
 </div>
-
+</form>
 
 <div id="list" class="admin1">
 <div id="qnAList">
@@ -139,7 +100,7 @@ div.admin1 {
 
 </table>
 
-<c:import url="../../../layout/paging.jsp"/>
+<c:import url="../../paging.jsp"/>
 
 </div>
 </div>

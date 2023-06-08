@@ -26,7 +26,7 @@ $(function() {
 		
 		var addOption = "<div class='OptionDiv'>";
 		addOption += "<label>옵션설명:</label>";
-		addOption += "<input type='text' class='option' name='OptionContent' style='margin-top:5px;'>";
+		addOption += "<input type='text' class='option' name='optionContent' style='margin-top:5px;'>";
 		addOption += "<label>추가 금액:</label>";
 		addOption += "<input type='text' class='option mustNum' name='extraCharge' style='margin-top:5px;'>";
 		addOption += "<label>옵션 상품 갯수:</label>";
@@ -187,7 +187,7 @@ $(function() {
 </style>
 
 <div id="itemWriteForm">
-<form action="write" method="post" enctype="multipart/form-data">
+<form action="./write" method="post" enctype="multipart/form-data">
 
 <a><h1>판매 상품 신규 등록</h1></a>
 
@@ -201,7 +201,13 @@ $(function() {
 	<option value="칵테일 잔">칵테일 잔</option>
 	<option value="위스키 물품">위스키 물품</option>
 	<option value="와인 물품">와인 물품</option>
-</select> <br>
+</select>
+<select name="itemStatus">
+	<option value="sale">판매</option>
+	<option value="sold_out">매진</option>
+	<option value="stop_selling">판매 중지</option>
+</select>
+<br>
 </div>
 <div>
 <label>상품명</label>

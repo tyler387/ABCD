@@ -12,11 +12,11 @@ header{
   position: sticky;
   top: 0;
   backdrop-filter: blur(30px);
-  background: black;
+  background: #371e06;
   color: white;
 /*   padding-left: 120px;  */
 /*   padding-right: 40px;  */
-  display:flex;; 
+  display:flex; 
   justify-content: flex-end;
   align-items: center;
 /*   width: 100%; */
@@ -38,12 +38,13 @@ a {
 }
 
 #header #menu{
-  position:relative; 
+/*   position:relative;  */
   /* z-index: 99;  */
   padding-top : 12px;
   background-color: white;
   height: 50px;
   text-align: center;
+  margin-left: 130px;
 }
 
 #header [class*="main"] {
@@ -53,7 +54,7 @@ a {
 
 #header [class*="main"] ul {
   border-radius: 5px 5px 5px 5px;
-  border: 1px solid black;
+  border: 1px solid #371e06;
 }
 #header .main1{
   padding-left: 0px;
@@ -88,18 +89,16 @@ a {
   padding: 0px;
 }
 #header .main1>li:hover {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #371e06;
 }
 #header .main2 li:hover {
-  border-left: 5px solid black;
+  border-left: 5px solid #371e06;
 }
 
 #header .main2>li {
   position: relative;
 }
-#header .main2>li:hover .main3 {
-  left: 100%;
-}
+
 #header .main2>li a {
   border-radius: 10px;
   margin: 10px;
@@ -112,10 +111,10 @@ a {
  
  }
 
-.footer header {
-   height: 60px;
-   background-color: #e9eaed;
-}
+/* .footer header { */
+/*    height: 60px; */
+/*    background-color: #371e06; */
+/* } */
 
  #wrap {
   min-height: calc(100% - 120px);
@@ -124,12 +123,12 @@ a {
 
  .footer {
    height: 300px;
-   background-color: black;
+   background-color: #371e06;
    text-align: center;
    padding-top: 70px;
    color: white;
-    position: absolute; 
-    width:100%;
+   position: absolute; 
+   width:100%;
  }
 
 
@@ -164,8 +163,7 @@ a {
 
 <div id="menu">
   <ul class="main1">
-    <li style="border: none;"><a href="/login/main">JAMANCHU</a>
-    </li>
+    <li style="border: none;"><a href="/login/main">JAMANCHU</a></li>
     <li><a href="#">회사소개</a></li>
     <li style="border: none;"><a href="#">모임</a>
        <ul class="main2">

@@ -30,11 +30,13 @@ form{
 input{
 	width: 400px;
 	height: 25px;
+	border: 0;
+    border: 1px #371e06 solid;
 }
 
 input[type=button]{
-	border: 1px solid #333;
-    background-color: #333;
+	border: 1px solid #371e06;
+    background-color: #371e06;
     border-radius: 7px;
     color: #fff;
     width: 150px;
@@ -82,8 +84,8 @@ input#userId{
 }
 
 button[type=button]{
-	border: 1px solid #333;
-    background-color: #333;
+	border: 1px solid #371e06;
+    background-color: #371e06;
     border-radius: 7px;
     color: #fff;
     width: 78px;
@@ -101,8 +103,8 @@ input#email_checknumber{
 }
 
 .btn{
-	border: 1px solid #333;
-    background-color: #333;
+	border: 1px solid #371e06;
+    background-color: #371e06;
     border-radius: 7px;
     color: #fff;
     width: 390px;
@@ -137,24 +139,36 @@ input#email_checknumber{
 	cursor: pointer;
 	height: 30px;
 	width: 173px;
-	border: 1px solid #333;
+	border: 1px solid #371e06;
 	line-height:  24px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 22px;
 }
 .select input[type=radio]+lable{
-	background-color: #fff;
+	background-color: #371e06;
 	color :#333;
 }
 .select input[type=radio]:checked+label{
-	background-color: #333;
+	background-color: #371e06;
 	color: #fff;
 }
 
 
+.box2 input:focus{
+   border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
+}
+.box1 input:focus+label{
+ 	color: #371e06;
+}
 
-
+.box3 input:focus{
+   border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
+}
 
 
 
@@ -397,7 +411,10 @@ $(document).ready(function(){
 			$('#pwchk_msg').css('color','red');
 // 			$("#userPw_chk").focus();
 			return false;
-		
+		}else if(userPwChk == ''){
+			$('#pwchk_msg').html('비밀번호를 입력해주세요.');
+			$('#pwchk_msg').css('color','red');
+			return false;
 		}else if(userPw === userPwChk){
 			$('#pwchk_msg').html('비밀번호가 일치합니다');
 			$('#pwchk_msg').css('color','#3f8ef7');

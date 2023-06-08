@@ -32,7 +32,7 @@
 	  
 	  <insert id="insertUsers" parameterType="com.kh.jaManChw.dto.Users">
 	  	INSERT INTO USERS(USERNO,USER_ID,USER_PW,USER_NICK,USER_NAME,BIRTH,GENDER,EMAIL,PHONE,ADDR1,ADDR2,ADDR3,GRADE,WARN_COUNT,PROFIL_IMG_URL,STATUS,ROLE,PLATFORM_OPTION,JOIN_DATE,SOCIAL_NUM)
-	  	VALUES (USERS_SEQ.NEXTVAL,#{userId},#{userPw},#{userId},#{userName},#{birth},#{gender},#{email},#{phone},#{addr1},#{addr2},#{addr3},DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,sysdate,#{socialId}) 
+	  	VALUES (USERS_SEQ.NEXTVAL,#{userId},#{userPw},#{userId},#{userName},#{birth},#{gender},#{email},#{phone},#{addr1},#{addr2},#{addr3},DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,sysdate,#{socialNum}) 
 	  </insert>
 	  
 	  <select id="selectIdByUserNameEmail" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">

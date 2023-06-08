@@ -14,7 +14,7 @@
   align-items: center; 
 }
 
-form{
+.form{
   display: flex;
   justify-content : center;
   flex-direction:column; 
@@ -56,8 +56,8 @@ div.idcheck_box{
 }
 
 button[type=button] {
-	border: 2px solid #333 ;
-	background-color: #333;
+	border: 2px solid #371e06 ;
+	background-color:#371e06;
 	border-radius : 7px;
 	color: #fff;
 	width: 400px;
@@ -85,10 +85,15 @@ button[type=button] {
 	cursor: pointer;
 }
 
+.input_box input:focus{
+   border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
+}
 </style>
 
 <div class="container">
- <form action="/login/login" method="post">
+ <form action="/login/login" method="post" class="form">
 
 	<div>
 		<h1 style="font-size: 68px;">Login</h1>

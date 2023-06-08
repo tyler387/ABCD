@@ -146,7 +146,7 @@ $(document).ready(function(){
 	var code = ""; // 인증번호 저장을 위한 코드
 	var isCertification = false; // 인증 여부 변수
 
-	$('#emailbtn').click(function() {
+	$('#email_checkbtn').click(function() {
 		const email = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
 		console.log('완성된 이메일: ' + email); // 이메일 오는지 확인
 		

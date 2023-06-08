@@ -6,24 +6,29 @@
 <style type="text/css">
 
  div.row {
-        display: flex;
-        margin-top: 200px;
-        margin-left: 150px;
-        margin-bottom: 300px;       
+  display: flex;
+  margin-top: 200px;
+  margin-left: 230px;
+  margin-bottom: 300px;       
 }
 div.left {
   width: 300px;
   float: left;
   box-sizing: border-box;
-  background: #d1d1d1;
+  border: 3px #371e06 groove;
+  border-radius: 10px 10px 10px 10px;
+/*   background: #d1d1d1; */
   margin-right: 30px;
+  height: 800px;
 }
 
 div.right {
   width: 70%;
   float: right;
   box-sizing: border-box;
-  background: #ece6cc;
+  border: 3px #371e06 groove;
+  border-radius: 10px 10px 10px 10px;
+/*   background: #ece6cc; */
   margin-right: 150px;
   padding-left: 15px;
   padding-top: 10px;
@@ -51,6 +56,36 @@ img{
 	font-size: 22px;
 	
 }
+.list1{
+	padding-bottom: 15px;
+}
+.list2{
+	padding-bottom: 13px;
+}
+
+.dropdown{
+	display: inline-block;
+	margin: 0;
+	pause: 0;
+	position: relative;
+}
+.dropdown .list2 {
+	display: none;
+/* 	position: absolute; */
+	left: 60px;
+	top: 20px;
+}
+.dropdown .list1:hover>.list2 {
+	display: block;
+}
+
+.list3{
+	padding-bottom: 13px;
+}
+.list3:hover{
+	border-left: 5px solid #371e06;
+	padding-left: 5px;
+}
 
 </style>
  <div class="row">
@@ -66,33 +101,32 @@ img{
   	</div>
   
   <div class="userMenu">
-  <ul>
-  <li><a class="home"></a></li>
+  <ul class="dropdown">
 
-  <li><a href="/mypage/main">My</a></li>
+  <li class="list1"><a href="/mypage/main">My</a>
   
   	<ul class="list2">
-  		<li><a href="/mypage/profileMain">프로필수정</a></li>
-  		<li><a href="/mypage/userInfo">회원 정보</a></li>
+  		<li class="list3"><a href="/mypage/profileMain">프로필수정</a></li>
+  		<li class="list3"><a href="/mypage/userInfo">회원 정보</a></li>
   	</ul>
-  	
-  <li><a href="#">모임</a></li>
+  </li>
+  <li class="list1"><a href="#">모임</a>
   
   	<ul class="list2">
-  		<li><a href="#">모임 현황</a></li>
-  		<li><a href="#">종료된 모임</a></li>
+  		<li class="list3"><a href="#">모임 현황</a></li>
+  		<li class="list3"><a href="#">종료된 모임</a></li>
   	</ul>
-  	
-  <li><a href="#">구매</a></li>
+  </li>	
+  <li class="list1"><a href="#">구매</a>
   
   	<ul class="list2">
-  		<li><a href="#">장바구니</a></li>
-  		<li><a href="#">결제 내역</a></li>
+  		<li class="list3"><a href="#">장바구니</a></li>
+  		<li class="list3"><a href="#">결제 내역</a></li>
   	</ul>
-  	
-  <li><a href="/mypage/friendList">친구</a></li>
-  <li><a href="#">커뮤니티</a></li>
-  <li><a href="#">공지사항</a></li>
+  	</li>
+  <li class="list1"><a href="/mypage/friendList">친구</a></li>
+  <li class="list1"><a href="#">커뮤니티</a></li>
+  <li class="list1"><a href="#">공지사항</a></li>
  
 </ul>
 </div>

@@ -140,12 +140,8 @@ $(function() {
 		
 		}
 	})
+
 	
-	var content = '${allItemDetail.itemDetail.itemContent}'
-	
-	console.log("컨텐츠 확인: ",content);
-	
-	$(".note-editable").html(content);
 })
 </script>
 
@@ -323,7 +319,7 @@ $(function() {
 </div>
 <hr>
 <label>상품 내용 입력</label>
-<textarea id="summernote" name="itemContent"></textarea><br>
+<textarea id="summernote" name="itemContent">${allItemDetail.itemDetail.itemContent}</textarea><br>
 <hr>
 <button>상품 수정</button>
 <button type="button" onclick="history.go(-1)">수정 취소</button>

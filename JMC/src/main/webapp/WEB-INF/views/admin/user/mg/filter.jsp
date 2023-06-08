@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    pageEncoding="UTF-8"%>
 	   
 
@@ -108,15 +107,6 @@ $(function() {
 	
 <table class="table table table-hover">
 <tr class="table-secondary">
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div>
-<table>
-<tr>
->>>>>>> branch 'adminbranch' of https://github.com/JaManChw/JMC
 	<th>아이디</th>
 	<th>상태</th>
 	<th>이름</th>

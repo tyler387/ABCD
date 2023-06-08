@@ -1,43 +1,10 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-	    pageEncoding="UTF-8"%>
-	   
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+   
 
-<<<<<<< HEAD
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-	
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	
-	
-	<style>
-	table {
-	    margin-left:auto; 
-	    margin-right:auto;
-	}
-	
-	table, td, th {
-	    border-collapse : collapse;
-	    text-align: center; 
-	}
-	
-	div.admin1 {
-	        height: 650x;
-	      	padding-left: 60px;
-	    width: 98%;
-	        
-	}
-	
-	
-	</style>
-	
-	
-	
-	 
-	 
-=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -61,22 +28,15 @@ div.admin1 {
     width: 98%;
         
 }
-.innerTitle {
-	margin: 0 auto;
-	border-radius: 30px; 
-	background-color : #03a9f46e; 
-	width: 600px;  
-	text-align: center; 
-	padding-bottom: 5px;
-}
+
 
 </style>
 
 
 
+ 
+	 
 
-
->>>>>>> branch 'adminbranch' of https://github.com/JaManChw/JMC
 <script type="text/javascript">
  
  	var curPage = ${paging.curPage};
@@ -89,23 +49,23 @@ div.admin1 {
  	var startno = ${paging.startno};
  	var endno = ${paging.endno};
  	
-var filter = null ; 
-var content = null ;
-$(function() {
-	$("#content").keydown(function(e) {
-// 		console.log(e);
-		if(e.keyCode == 13){
-			$("#searchBtn").click();
-		}
-	})
-	
-// 			 if (confirm("정말 삭제하시겠습니까??") == true){ 
-// 			     document.removefrm.submit();
-// 			 }else{   //취소
-// 			     return false;
-// 			 }
-// 	})
-}
+	var filter = null ; 
+	var content = null ;
+	$(function() {
+		$("#content").keydown(function(e) {
+	// 		console.log(e);
+			if(e.keyCode == 13){
+				$("#searchBtn").click();
+			}
+		})
+		
+	// 			 if (confirm("정말 삭제하시겠습니까??") == true){ 
+	// 			     document.removefrm.submit();
+	// 			 }else{   //취소
+	// 			     return false;
+	// 			 }
+	// 	})
+	}
 // 	$("#searchBtn").click(function() {
 		
 // 		filter = $("#filter").val();
@@ -140,33 +100,14 @@ $(function() {
 <div id="resultt">
 	<c:import url="../../main.jsp"></c:import>
 	
-<<<<<<< HEAD
+	
 	
 	<div id="Alltitle" style="text-align: center; padding-top: 10px;">
 		<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
 			유저 수정 페이지
 		</h1>
 	</div>
-=======
-	$("#deletebtn").click(function(){
-		   location.reload();
-			console.log("content: ", content)
-	})
-})
-</script>
 
-
-<c:import url="../../main.jsp"></c:import>
-
-
-<div id="Alltitle" style="text-align: center; padding-top: 10px;">
-	<h1 class="innerTitle">
-		유저 수정 페이지
-	</h1>
-</div>
-
-<!-- <form action="./filter" method="post"> -->
->>>>>>> branch 'adminbranch' of https://github.com/JaManChw/JMC
 <div class="text-end" style="padding-right: 50px; padding-top: 15px; margin-bottom:15px;">
 <form action="./filter" method="post">
 		<select name ="filter" id="filter">

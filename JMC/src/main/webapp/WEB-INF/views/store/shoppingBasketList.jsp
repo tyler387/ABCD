@@ -20,19 +20,24 @@
 <form method="post" action="/payment/main">
 <table class="table table table-hover">
 <tr class="table-secondary">
+	<th>인덱스</th>
 	<th>상품이름</th>
 	<th>갯수</th>
 	<th>가격</th>
 	<th>관리</th>
 </tr>	
-<c:forEach var="list" items="${list }">
-<input type="hidden" value="${list.BASKETNO }" id="bkno" name="basketno">
+<c:forEach var="list" items="${list}" varStatus="status" >
+<input type="hidden" value="${list.BASKETNO }" id="bk	no" name="basketno">
 <tr>
+	<th><input type="checkbox" name="color" value="blue"><c:out value="${status.index}" /></th> 
 	<th>${list.ITEM_TITLE }</th>
-	<th><input type="text" value="${list.SB_ITEM_COUNT }" name="sbItemcount">${list.SB_ITEM_COUNT }</th>
+	<th>
+		<input type="text" value="${list.SB_ITEM_COUNT}" name="sbItemCount" class="sbItemCount">
+		<input type="hidden" value="${list.BASKETNO }" name="basketno" class="basketno" >${list.SB_ITEM_COUNT }
+		<button type="button" class="btn btn-secondary bkupdateBtn"  data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">수정</button>
+	</th>
 	<th>${list.ITEM_PRICE * list.SB_ITEM_COUNT }</th>
-	<th><button type="button" class="btn btn-secondary" value="${list.BASKETNO }" id="bkupdate">수정</button>
-	<button type="button" class="btn btn-secondary" id ="deletebtn" onClick="window.location.reload()">삭제</button></th>
+	<th><button type="button" class="btn btn-secondary" class ="deletebtn" onClick="window.location.reload()">삭제</button></th>
 </tr>
 </c:forEach> 
 </table>

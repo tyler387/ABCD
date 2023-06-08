@@ -73,7 +73,7 @@ public class PaymentController {
 	
 	@RequestMapping("/main")
 	public void PaymentMain(
-//			@RequestParam Map<String, String> map
+//			@RequestParam Map<String, String> map,
 			int[] sbItemcount, int[] basketno
 			) {
 		logger.info("결제할 상품들 출력{}");

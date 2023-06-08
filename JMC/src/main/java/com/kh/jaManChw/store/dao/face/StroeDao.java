@@ -7,4 +7,6 @@ public interface StroeDao {
 
 	List<Map<String, String>> selectAllShoppingbasketList(int userno);
 
+	void updateSbUpdate(Map<String, String> map);
+
 }

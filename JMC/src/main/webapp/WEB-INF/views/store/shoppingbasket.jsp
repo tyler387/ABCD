@@ -17,48 +17,54 @@
 <script type="text/javascript">
 $(function() {
 
-	$("#bknolist").click(function() {
+// 	$("#bknolist").click(function() {
 		
 
-		})
+// 		})
 	
 })
 </script>
 <script type="text/javascript">
-function deletingBook(bookname){
-	var sbItemcount = 
+// function deletingBook(bookname){
+// 	var sbItemcount = 
 	
-    }
+//     }
 
 </script>
 <script type="text/javascript">
 
 $(function(){
 	
+	$(".sbItemCount").blur(function () {
+		
+		console.log("이건뭘까: ", $(this))
+
+		$(this).siblings(".bkupdateBtn").attr("data-sbItemcount", $(this).val())
+		
+	})
 	
-// 	$("#bkupdateBtn").click(function() {
-// 		let myform = document.getElementById('testForm');
-// 		formData = new FormData(myform);
-// 		basketno = formData.get('basketno');
-// 		sbItemCount = formData.get('sbItemcount');
-// // 		basketno = $("#bkupdate").val();
-// 		console.log(basketno);
-// 		console.log(sbItemCount);
-// 		$.ajax({
-// 			type: "post"
-// 			, url: "./shoppingBasketList"
-// 			, data:  {basketno : basketno, sbItemCount: sbItemCount}
-// 			, dataType: "html" 
-// 			, success: function( res ) {
-// 				console.log("AJAX 성공")
-// 				$("#result").html(res)
+	$(".bkupdateBtn").click(function() {
+		var basketno = $(this).attr("data-basketno");
+		var sbItemCount = $(this).attr("data-sbItemcount");
+		
+		console.log("범인1:", basketno)
+		console.log("범인2:", sbItemCount)
+		
+		$.ajax({
+			type: "post"
+			, url: "./shoppingBasketList"
+			, data:  {basketno : basketno, sbItemCount: sbItemCount}
+			, dataType: "html" 
+			, success: function( res ) {
+				console.log("AJAX 성공")
+				$("#result").html(res)
 				
-// 			}
-// 			, error: function() {
-// 				console.log("AJAX 실패")
-// 			}
-// 		})
-// 	})
+			}
+			, error: function() {
+				console.log("AJAX 실패")
+			}
+		})
+	})
 	
 	
 
@@ -97,18 +103,18 @@ $(function(){
 	<th>가격</th>
 	<th>관리</th>
 </tr>	
-<c:forEach var="list" items="${list }" varStatus="status" >
-<input type="hidden" value="${list.BASKETNO }" id="bkno" name="basketno">
+<c:forEach var="list" items="${list}" varStatus="status" >
+<input type="hidden" value="${list.BASKETNO }" id="bk	no" name="basketno">
 <tr>
-	<th><c:out value="${status.index}" /></th> 
+	<th><input type="checkbox" name="color" value="blue"><c:out value="${status.index}" /></th> 
 	<th>${list.ITEM_TITLE }</th>
 	<th>
-		<input type="text" value="${list.SB_ITEM_COUNT }" name="sbItemcount">
-		<input type="hidden" value="${list.BASKETNO }" name="basketno">${list.SB_ITEM_COUNT }
-		<button type="button" class="btn btn-secondary" id="bkupdateBtn">수정</button>
+		<input type="text" value="${list.SB_ITEM_COUNT}" name="sbItemCount" class="sbItemCount">
+		<input type="hidden" value="${list.BASKETNO }" name="basketno" class="basketno" >${list.SB_ITEM_COUNT }
+		<button type="button" class="btn btn-secondary bkupdateBtn"  data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">수정</button>
 	</th>
 	<th>${list.ITEM_PRICE * list.SB_ITEM_COUNT }</th>
-	<th><button type="button" class="btn btn-secondary" id ="deletebtn" onClick="window.location.reload()">삭제</button></th>
+	<th><button type="button" class="btn btn-secondary" class ="deletebtn" onClick="window.location.reload()">삭제</button></th>
 </tr>
 </c:forEach> 
 </table>

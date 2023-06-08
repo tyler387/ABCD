@@ -12,5 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllShoppingbasketList" parameterType="int" resultType="map">
 		select S.*, I.ITEM_TITLE,I.item_price FROM shopping_basket S, item I where S.userno = ${userno} and S.itemno = I.itemno
 	</select>
+	
+<!-- 	유저 번호 넣어야함	 -->
+	<select id="updateSbUpdate"  resultType="map">
+		UPDATE shopping_basket SET SB_ITEM_COUNT = ${sbItemCount} where basketno = ${basketno}
+	</select>
 
 </mapper>

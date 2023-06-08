@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaManChw.store.service.face.StroeService;
@@ -44,15 +45,17 @@ public class StroeController {
 	}
 	
 	@RequestMapping("/shoppingBasketList")
-	public ModelAndView SbUpdate(int basketno, int sbItemCount, ModelAndView mav) {
+	public ModelAndView SbUpdate(
+			@RequestParam Map<String, String> map, 
+			ModelAndView mav) {
 		
-//	      mav.addObject("basketno", basketno);
-	      logger.info("바스켓 넘버 {} --- {}",basketno, sbItemCount);
-	      logger.info("상품수량 갯수 {}", sbItemCount);
+			int userno = 256;
+	      logger.info("상품수량 갯수 {}", map);
 		
-	      //모델값 지정	-> 응답 데이터 JSON 변환
-//		mav.addObject();
-		
+	      stroeService.SbUpdate(map);
+	      //유저 번호 받아야함
+	      List<Map<String, String>> list = stroeService.getShoppingbasketList(userno);
+	      mav.addObject("list", list);
 		//뷰네임 지정	-> jsonView 적용
 		mav.setViewName("/store/shoppingBasketList");
 	      

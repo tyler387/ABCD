@@ -12,5 +12,12 @@ public interface StroeService {
 	 * @return 
 	 */
 	List<Map<String, String>> getShoppingbasketList(int userno);
+	
+	/**
+	 * 수정된 수량 숫자와 장바구니번호를 받아서 수정
+	 * 
+	 * @param map
+	 */
+	void SbUpdate(Map<String, String> map);
 
 }

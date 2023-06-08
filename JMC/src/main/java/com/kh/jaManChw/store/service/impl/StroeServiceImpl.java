@@ -27,6 +27,13 @@ public class StroeServiceImpl implements StroeService {
 		return stroeDao.selectAllShoppingbasketList(userno);
 		
 	}
+
+	@Override
+	public void SbUpdate(Map<String, String> map) {
+		
+		stroeDao.updateSbUpdate(map);
+		
+	}
 	
 	
 	

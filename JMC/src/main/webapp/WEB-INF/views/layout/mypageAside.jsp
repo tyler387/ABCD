@@ -58,7 +58,7 @@ img{
   
   <div class='profile'>
   	<div>
-  		<a href="#"><img src="/resources/image/keszthelyi-timi-ezUDjYy17EA-unsplash.jpg"></a> 
+  		<a href="/mypage/profileMain"><img src="/userProfile/${profileStoredName}"></a> 
   	</div>
   </div>
   	<div class="userInfo">
@@ -72,7 +72,7 @@ img{
   <li><a href="/mypage/main">My</a></li>
   
   	<ul class="list2">
-  		<li><a href="/mypage/profile">프로필수정</a></li>
+  		<li><a href="/mypage/profileMain">프로필수정</a></li>
   		<li><a href="/mypage/userInfo">회원 정보</a></li>
   	</ul>
   	

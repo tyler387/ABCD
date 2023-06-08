@@ -7,14 +7,14 @@
     <mapper namespace="com.kh.jaManChw.login.dao.face.KakaoDao">
      
      <select id="findKakaoInfo" resultType="com.kh.jaManChw.dto.Users" parameterType="java.util.HashMap">
-     	SELECT * 
+     	SELECT USERNO,USER_ID,USER_PW,USER_NICK,USER_NAME,BIRTH,GENDER,EMAIL,PHONE,ADDR1,ADDR2,ADDR3,GRADE,WARN_COUNT,PROFIL_IMG_URL,STATUS,ROLE,PLATFORM_OPTION,JOIN_DATE,SOCIAL_NUM
      	FROM USERS
-     	WHERE SOCIAL_NUM=#{socialId} and USER_NICK=#{userNick}    
+     	WHERE SOCIAL_NUM=#{socialNum} and USER_NICK=#{userNick}    
      </select>
      
     <insert id="insertKakaoInfo" parameterType="java.util.HashMap">
 	  	INSERT INTO USERS(USERNO,USER_ID,USER_PW,USER_NICK,USER_NAME,BIRTH,GENDER,EMAIL,PHONE,ADDR1,ADDR2,ADDR3,GRADE,WARN_COUNT,PROFIL_IMG_URL,STATUS,ROLE,PLATFORM_OPTION,JOIN_DATE,SOCIAL_NUM)
-	  	VALUES (USERS_SEQ.NEXTVAL,#{socialId},#{socialId},#{userNick},#{userNick},SYSDate,'default','default','default','default','default','default',DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,sysdate,#{socialId}) 
+	  	VALUES (USERS_SEQ.NEXTVAL,#{socialNum},#{socialNum},#{userNick},#{userNick},SYSDate,'default','default','default','default','default','default',DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,sysdate,#{socialNum}) 
 	 </insert>
     
     </mapper>

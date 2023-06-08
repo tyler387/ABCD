@@ -32,4 +32,26 @@ public interface MypageDao {
 	 */
 	public void insertFile(ProfileFile filetest);
 
+	/**
+	 * 유저의 프로필 사진 수정하기
+	 * @param profile
+	 * @param users 
+	 */
+	public void updateProfile(Users users);
+
+	/**
+	 * 프로필 정보 조회
+	 * @param profileFile
+	 * @return
+	 */
+	public ProfileFile selectfileInfo(ProfileFile profileFile);
+
+	/**
+	 * 프로필 사진 삭제
+	 * @param profileFile
+	 */
+	public void deleteProfileName(ProfileFile profileFile);
+
+
+
 }

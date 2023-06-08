@@ -22,7 +22,7 @@
         		<label for="my">내정보</label>
         		<div style="width:50px;"><hr></div>
         		
-        		<div class="img"><img src="/resources/image/keszthelyi-timi-ezUDjYy17EA-unsplash.jpg"></div>
+        		<div class="img"><img src="/userProfile/${profileStoredName}"></div>
         		
         		<div>
 	        		<div>아이디 : ${userId }</div>

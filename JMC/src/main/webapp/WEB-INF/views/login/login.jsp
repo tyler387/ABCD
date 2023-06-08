@@ -160,7 +160,6 @@ $('#userPw').blur(function() {
 	}
 	return true;
 })
-
 		
 
 	$(document).ready(function() {

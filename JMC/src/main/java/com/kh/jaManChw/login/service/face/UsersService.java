@@ -61,6 +61,20 @@ public interface UsersService {
 	 */
 	public Users searchId(Users users);
 
+	/**
+	 * 블랙리스트 유저로그인 
+	 * @param users
+	 * @return true : 로그인 차단 
+	 */
+	public boolean blackLogin(Users users);
+
+	/**
+	 * 탈퇴 유저 로그인
+	 * @param users
+	 * @return true : 로그인 차단
+	 */
+	public boolean leaveLogin(Users users);
+
 
 	
 

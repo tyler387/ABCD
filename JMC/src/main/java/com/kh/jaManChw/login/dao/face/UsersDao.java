@@ -66,6 +66,22 @@ public interface UsersDao {
 	 */
 	public int updateByUserPw(Users users);
 
+	/**
+	 * userid로 유저 블랙리스트 조회
+	 * @param users
+	 * @return 블랙리스트 유저
+	 */
+	public int selectStatusbyUserId(Users users);
+
+	/**
+	 * userId로 탈퇴유저 조회
+	 * @param users
+	 * @return 탈퇴유저
+	 */
+	public int selectLeaveUserByUserId(Users users);
+	
+
+
 
 	
 

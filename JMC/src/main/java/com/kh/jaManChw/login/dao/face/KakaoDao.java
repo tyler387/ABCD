@@ -2,7 +2,6 @@ package com.kh.jaManChw.login.dao.face;
 
 import java.util.HashMap;
 
-import org.springframework.stereotype.Repository;
 
 import com.kh.jaManChw.dto.Users;
 

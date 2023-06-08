@@ -131,7 +131,7 @@ public class KakaoServiceImpl implements KakaoService{
 		        JsonElement element = JsonParser.parseString(result);
 //		        logger.info("여기까진가0?");
 		        
-		        String idJS = element.getAsJsonObject().get("id").getAsString();
+		        String socialNum = element.getAsJsonObject().get("id").getAsString();
 //		        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 //		        logger.info("여기까진가1? :{}", idJS);
 		        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
@@ -143,10 +143,10 @@ public class KakaoServiceImpl implements KakaoService{
 //		        logger.info("여기까진가2?");
 //		        String email = kakao_account.getAsJsonObject().get("email").getAsString();
 		        
-		        logger.info("socialId : {}",idJS);
+		        logger.info("socialId : {}",socialNum);
 		        
 		        logger.info("여기까진가2?");
-		        userInfo.put("socialId", idJS);
+		        userInfo.put("socialNum", socialNum);
 		        userInfo.put("userNick", nickname);
 //		        userInfo.put("email", email);
 		        logger.info("userNick:{}",userInfo);
@@ -164,10 +164,9 @@ public class KakaoServiceImpl implements KakaoService{
 		    	
 		    	kakaoDao.insertKakaoInfo(userInfo);
 		    	return kakaoDao.findKakaoInfo(userInfo);
-		    }else {
-		    	return KakaoInfo;
 		    }
 		        
+		    return KakaoInfo;
 		   
 	}
 	// 카카오 로그인 로그아웃 하기

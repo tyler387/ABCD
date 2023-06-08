@@ -77,6 +77,39 @@ public class UsersServiceImpl implements UsersService {
 		return usersDao.selectIdByUserNameEmail(users);
 	}
 
+	@Override
+	public boolean blackLogin(Users users) {
+		
+		int status = usersDao.selectStatusbyUserId(users);
+		
+		
+		if(status>0) {
+			logger.info("status:{}",status);
+			logger.info("당신은 블랙리스트! 로그인 불가");
+			return true;
+		}else {
+			logger.info("관리자에게 문의바람");
+			return false;
+		}
+		
+		
+	}
+
+	@Override
+	public boolean leaveLogin(Users users) {
+		
+		int leave = usersDao.selectLeaveUserByUserId(users);
+		
+		if(leave>0) {
+			logger.info("당신은 탈퇴유저");
+			return true;
+		}else {
+			logger.info("관리자에게 문의바람");
+			return false;
+		}
+		
+	}
+
 	
 
 	 

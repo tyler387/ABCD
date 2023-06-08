@@ -151,10 +151,10 @@ a {
 	<a href="/mypage/main">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
-<c:if test="${empty socialId and empty login}">
+<c:if test="${empty socialNum and empty login}">
 	<a href="/login/login">로그인</a>
 </c:if>	
-<c:if test="${not empty socialId}">
+<c:if test="${not empty socialNum}">
 	<a href="/login/logout">로그아웃</a>
 	<a href="/mypage/main">마이페이지</a>
 	<a href="#">알람</a>

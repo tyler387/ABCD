@@ -23,9 +23,21 @@
 	  </update>
 	  
 	  <insert id="insertFile"  parameterType="com.kh.jaManChw.dto.ProfileFile">
-	  	INSERT INTO PROFILE_FILE(PROFILENO,USERNO,PROFILE_ORIGIN_NAME,PROFILE_STORED_NAME,PROFILESIZE)
-	    VALUES (PROFILE_FILE_SEQ,USERNO=#{userno},PROFILE_ORIGIN_NAME=#{profileOriginName},PROFILE_STORED_NAME=#{profileStoredName},PROFILESIZE=#{profilesize})
+	  	INSERT INTO PROFILE_FILE(PROFILENO, USERNO, PROFILE_ORIGIN_NAME, PROFILE_STORED_NAME, PROFILESIZE)
+	  	VALUES (PROFILE_FILE_SEQ.NEXTVAL,#{userno},#{profileOriginName},#{profileStoredName},#{profilesize})
 	  </insert>
+	  
+	  
+	  <select id="selectfileInfo" resultType="com.kh.jaManChw.dto.ProfileFile" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  	SELECT *
+	  	FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </select>
+	  
+	  <delete id="deleteProfileName" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  	DELETE FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </delete>
 
 
   </mapper>

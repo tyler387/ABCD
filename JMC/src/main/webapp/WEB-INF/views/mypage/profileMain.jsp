@@ -7,9 +7,19 @@
 
   </div>
       <div class="right">
-        <div><h1>친구 목록</h1></div>
-        <div style="width:150px;"><hr></div>
-        <div>총 친구 수</div>
+        <div class='profile'>
+		  	<div>
+		  		<img src="/userProfile/${profileStoredName}">
+		  	</div>
+	  	</div>
+	  	
+	  		<div>
+	  			<a href="/mypage/profile"><button>프로필 수정</button></a>
+	  		</div>
+	  		
+	  		<div>
+	  			<a href="/mypage/remove"><button>프로필 삭제</button></a>
+	  		</div>
       </div>
     </div>
 

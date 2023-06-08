@@ -37,7 +37,7 @@ public class KakaoController {
       
         
         session.setAttribute("access_Token", access_Token);
-        session.setAttribute("socialId", userInfo.getSocialId());
+        session.setAttribute("socialNum", userInfo.getSocialNum());
         session.setAttribute("userNick", userInfo.getUserNick());
         session.setAttribute("userno", userInfo.getUserno());
         
@@ -47,11 +47,9 @@ public class KakaoController {
         model.addAttribute("userInfo",userInfo);
         logger.info("model:{}",model);
         
-        //  클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+        //  클라이언트의 이메일이 존재할 때 세션에 해당 토큰 등록
         if (userInfo.getEmail() != null) {
-        	session.setAttribute("email", userInfo.getEmail());
             session.setAttribute("access_Token", access_Token);
-            session.setAttribute("userno", userInfo.getUserId());
         }
         return "redirect:/login/main";
     }

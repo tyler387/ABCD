@@ -7,22 +7,17 @@
 
   </div>
       <div class="right">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="/mypage/profile" method="post" enctype="multipart/form-data">
         
-        <div class='profile'>
-		  	<div>
-		  		<img src="#">
-		  	</div>
-	  	</div>
+      
+		<div class='profile'><img src="/userProfile/${profileStoredName}"></div>
+	 
         
-        <input type="file" id="profile" name="profile">
-        
-        <div>
-	        <a href="#"><button>업로드</button></a>
-    	    <a href="#"><button>취소</button></a>
-        </div>
+        <input type="file" id="file" name="file">
+       <input type="hidden" name="userno" id="userno" value="${userno}">  
+	    <button>프로필 수정</button>
+<!--     	    <a href="/mypage/main"><button type="button">취소</button></a> -->
         </form>
       </div>
     </div>
-
 <c:import url="../layout/footer.jsp" />

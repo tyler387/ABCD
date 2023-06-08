@@ -1,9 +1,15 @@
 package com.kh.jaManChw.mypage.service.face;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.util.Paging;
 
 public interface MypageService {
 
@@ -33,7 +39,30 @@ public interface MypageService {
 	 * @param file
 	 * @param profileFile
 	 */
-	public void profileSave(MultipartFile file, ProfileFile profileFile);
+	public void profileSave(MultipartFile file,HttpSession session,ProfileFile profileFile);
+
+
+
+	/**
+	 * 파일 정보 조회
+	 * @param profileFile
+	 * @return fileInfo
+	 */
+	public ProfileFile fileInfo(ProfileFile profileFile,Model model);
+
+	/**
+	 *  프로필사진 삭제
+	 * @param profileFile
+	 */
+	public void removeProfile(ProfileFile profileFile);
+
+
+
+
+
+
+
+	
 	
 
 }

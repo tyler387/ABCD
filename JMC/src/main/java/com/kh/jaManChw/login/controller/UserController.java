@@ -34,6 +34,26 @@ public class UserController {
 	@PostMapping("/login/login")
 	public String userlogin(HttpSession session, Users users,Model model) {
 		logger.info("{}", users);
+		
+		//탈퇴 유저 로그인 방지
+		boolean leaveUser = usersService.leaveLogin(users);
+		
+		if(leaveUser) {
+			
+			// 세션 삭제
+			session.invalidate();
+			return "redirect:/login/main";
+		}
+		
+		//블랙리스트 유저 로그인 방지
+		boolean blackList = usersService.blackLogin(users);
+		
+		if(blackList) {
+			
+			// 세션 삭제
+			session.removeAttribute("userno");
+			return "redirect:/login/main";
+		}
 
 		// 로그인 인증
 		boolean isLogin = usersService.login(users);	
@@ -50,12 +70,12 @@ public class UserController {
 			session.setAttribute("userno", info.getUserno());
 			session.setAttribute("userNick", info.getUserNick());
 			session.setAttribute("email", info.getEmail());
-			session.setAttribute("grade", info.getGrade());
 			session.setAttribute("userId", info.getUserId());
 			session.setAttribute("role", info.getRole());
-			session.setAttribute("social",info.getSocialId());
+			session.setAttribute("social",info.getSocialNum());
+			session.setAttribute("status", info.getStatus());
 			
-			logger.info("social:{}",info.getSocialId());
+			logger.info("social:{}",info.getSocialNum());
 			logger.info("userno : {}",info.getUserno());
 			logger.info("userrole : {}",info.getRole());
 
@@ -69,7 +89,7 @@ public class UserController {
 
 			// 로그인실패시 로그인 페이지로 리다이렉트
 			return "/login/login";
-		} // if(isLogin)문 end
+		} // if(isLogin)문 end		
 	} // userlogin() end
 
 //	@RequestMapping("/login/logout")

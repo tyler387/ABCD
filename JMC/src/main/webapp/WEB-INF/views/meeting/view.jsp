@@ -13,6 +13,8 @@
 <style>
 
 
+
+
 .btn-open-popup{
   text-align: right;
   position
@@ -50,6 +52,17 @@
 	height: 300px;
 
 }
+
+
+
+.nicknameboxleader{
+  background-color:#99ccff;
+  width:250px;
+  height:100px;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
+  
+  }
 
 .nicknamebox{
   background-color:#99ccff;
@@ -241,14 +254,37 @@
 <!-- <button>모임 신청</button></a> -->
 
 
-<c:forEach var="applicantnick" items="${applicantnick }">
-
-	<!-- <table onclick="applicantpopup();"> -->
-	<div class=nicknamebox >
-	<a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
+<h1>모집자</h1>
+<div class=nicknameboxleader>
+	<a onclick="window.open('/meeting/applicant?userno=${applicantnick1.userno}&meetingno=${viewmeeting.meetingno}' )">
 	<table>
 		<tr>
-			<th>닉네임</th>
+			<th>모집자 닉네임</th>
+		</tr>
+
+		<tr>
+			<td>${applicantnick1.userNick}</td>
+
+		</tr>
+
+	</table>
+
+</a>
+</div>
+
+<h1>참가자</h1>
+<c:forEach var="applicantnick" items="${applicantnick }">
+	
+	<!-- <table onclick="applicantpopup();"> -->
+
+	
+	<div class=nicknamebox >
+	<a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
+	
+	
+	<table>
+		<tr>
+			<th>참가자 닉네임</th>
 		</tr>
 
 		<tr>

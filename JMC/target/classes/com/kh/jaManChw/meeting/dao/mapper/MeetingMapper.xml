@@ -27,11 +27,11 @@
 </insert>
 
 <insert id="insertMeetingFriend" parameterType="com.kh.jaManChw.dto.Applicant">
-	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , default , 'yes' , 1)
+	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , default , 'yes' , 1, 'no')
 </insert>	
 
 <insert id="insertMeetingUser" parameterType="com.kh.jaManChw.dto.Applicant">
-	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , default, 'yes' , 1)
+	INSERT INTO APPLICANT VALUES( #{meetingno}, #{userno} , default, 'yes' , 1 , 'yes')
 </insert>
 
 <select id="selectFriendListAll" resultType="com.kh.jaManChw.dto.Users" parameterType="int">
@@ -85,9 +85,18 @@
 	select *
     from users inner join applicant 
     on applicant.userno = users.userno 
-    where applicant.meetingno = #{meetingno}
+    where applicant.meetingno = #{meetingno} and leader = 'no'
 
 	
+</select>
+
+<select id="selectMeetingApplicantLeader" resultType = "com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Meeting">
+	
+	select *
+    from users inner join applicant 
+    on applicant.userno = users.userno 
+    where applicant.meetingno = #{meetingno} and leader = 'yes'
+
 </select>
 
 
@@ -108,7 +117,7 @@
 
 <insert id = "insertJoinMeeting" parameterType="com.kh.jaManChw.dto.Applicant">
 	
-	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'yes' , 1)
+	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'yes' , 1, 'no')
 	
 </insert>
 <select id="selectMeetingByDate" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">

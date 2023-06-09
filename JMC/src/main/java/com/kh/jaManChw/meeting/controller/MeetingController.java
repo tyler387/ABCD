@@ -287,6 +287,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		Meeting viewmeeting = meetingService.detailMeeting(meeting);
 		List<Users> applicantnick = meetingService.getUserNickAll(meeting);
+		Users applicantnick1 = meetingService.getUserNickLeader(meeting);
+		
 		
 		logger.info("{}" , viewmeeting);
 		logger.info("{}!!!!", applicantnick);
@@ -294,6 +296,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		model.addAttribute("viewmeeting", viewmeeting);
 		model.addAttribute("applicantnick", applicantnick);
+		model.addAttribute("applicantnick1", applicantnick1);
 		
 		
 		

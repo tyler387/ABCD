@@ -24,6 +24,8 @@ public interface MeetingService {
 
 	public List<Users> getUserNickAll(Meeting meeting);
 
+	public Users getUserNickLeader(Meeting meeting);
+	
 	public void inputReportMeeting(ReportMeeting reportMeeting);
 
 	public Applicant getMeetingApplicant(Applicant applicant);
@@ -43,6 +45,9 @@ public interface MeetingService {
 	public List<Meeting> getMeetingByMap(String mapData, String mapData1);
 
 	public int getMeetinglistcountnow(Meeting meeting);
+
+	
+	
 	
 	
 	

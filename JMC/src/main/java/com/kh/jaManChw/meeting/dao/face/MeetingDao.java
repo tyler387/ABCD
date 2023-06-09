@@ -31,6 +31,8 @@ public interface MeetingDao {
 
 	public List<Users> selectUserNickAll(Meeting meeting);
 	
+	public Users selectMeetingApplicantLeader(Meeting meeting);
+	
 	public Applicant selectMeetingApplicant(Applicant applicant);
 
 	public Users selectMeetingApplicantUser(Users users);
@@ -54,6 +56,8 @@ public interface MeetingDao {
 	public List<Meeting> selectMeetingListByFilter(Map<String, Object> map);
 
 	public List<Meeting> selectMeetingListByMap(@Param("mapData") String mapData, @Param("mapData1")String mapData1);
+
+	
 
 	
 

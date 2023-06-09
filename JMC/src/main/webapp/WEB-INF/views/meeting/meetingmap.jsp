@@ -11,6 +11,15 @@
 
 <style type="text/css">
 
+
+.meetingbar {
+
+	width: 1550px;
+	text-align: right;
+
+}
+
+
 .modal {
 	position: absolute;
 	top: 0;
@@ -47,9 +56,11 @@
 }
 
 .meetingall{ 
+ margin: 0 auto;
  display: flex; 
  flext-direction: column;
  align-items: flex-start;
+ width: 1300px;
  height: 1000px;
  
 
@@ -76,7 +87,7 @@
 .meetingmap{
   height: 800px;
   width: 1000px;	
-  margin: 0 auto;
+  margin-right: 30px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
 }
@@ -139,20 +150,24 @@
 		<button class="selectbtnmap">지도</button><br>
 	</div>
 
+<div class="meetingbar">
+<button class="filter">필터</button>
+<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>		
+</div><br>
+	
 	<div class= "meetingall">
-		<div class="meetingmap">
-		<div id="map" style="width:1000px;height:800px;"></div>
-	</div>
+		<div class= "meetingmap" id="map" style="width:1000px;height:800px;"></div>
 	
 
 
 
 
 
-<div> 
-	전체 : ${meetingcount}개 / 현재: ${meetingcountnow }개 모집 중<br>
-	<button class="filter">필터</button><br>
-	<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>
+	
+
+	
+	<div>	
+	<h4>전체 : ${meetingcount}개 / 현재: ${meetingcountnow }개 모집 중</h4><br>
 	<div class="meetinglist1">
 		<c:import url="/WEB-INF/views/meeting/meetinglist.jsp"/>
 	</div>

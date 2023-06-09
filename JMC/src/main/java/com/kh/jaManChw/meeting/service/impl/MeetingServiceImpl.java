@@ -97,6 +97,11 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		return meetingDao.selectUserNickAll(meeting);
 	}
 	
+	@Override
+	public Users getUserNickLeader(Meeting meeting) {
+		
+		return meetingDao.selectMeetingApplicantLeader(meeting);
+	}
 	
 	@Override
 		public Applicant getMeetingApplicant(Applicant applicant) {
@@ -110,6 +115,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 			return meetingDao.selectMeetingApplicantUser(users);
 		}
+	
 	
 	@Override
 		public void inputJoinMeeting(Applicant applicant) {
@@ -155,5 +161,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 			return meetingDao.selectMeetingListCountnow(meeting);
 		}
+	
+	
 	
 }

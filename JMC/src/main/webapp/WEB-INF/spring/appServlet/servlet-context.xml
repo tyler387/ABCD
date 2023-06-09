@@ -40,6 +40,7 @@
 	<resources mapping="/itemContentFile/**" location="/itemContentFile/" />
 	<resources mapping="/itemfile/**" location="/itemfile/" />
 	<resources mapping="/userProfile/**" location="/userProfile/" />
+		<resources mapping="/boardFileUpload/**" location="/boardFileUpload/" />
 <!--=================================================================================================================-->
 
 
@@ -91,7 +92,6 @@
 	 com.kh.jaManChw.aop" />
 	
 <!--=================================================================================================================-->
-	
-	<beans:bean id="ChatConfig" class="com.kh.jaManChw.chat.config.ChatConfig"></beans:bean>
+
 	
 </beans:beans>

@@ -6,35 +6,69 @@
   
   <mapper namespace="com.kh.jaManChw.login.dao.face.UsersDao">
   
-  <select id="selectCntByUserIdPw" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
-  	SELECT count(*)
-  	FROM USERS
-  	WHERE USER_ID=#{userId} AND USER_PW=#{userPw}
-  </select>
+	  <select id="selectCntByUserIdPw" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT count(*)
+	  	FROM USERS
+	  	WHERE USER_ID=#{userId} AND USER_PW=#{userPw}
+	  </select>
+	  
+	  <select id="selectuserByUserId" resultType="com.kh.jaManChw.dto.Users" parameterType="string">
+	  	SELECT * 
+	  	FROM USERS 
+	  	WHERE USER_ID=#{userId} 
+	  </select>
+	  
+	  <select id="selectroleByuseridpw" resultType="String" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT ROLE
+	  	FROM USERS
+	  	WHERE USER_ID=#{userId} AND USER_PW=#{userPw}
+	  </select>
+	  
+	  <select id="selectCntByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT count(*)
+	  	FROM USERS
+	  	WHERE USER_ID=#{userId}
+	  </select>
+	  
+	  <insert id="insertUsers" parameterType="com.kh.jaManChw.dto.Users">
+	  	INSERT INTO USERS(USERNO,USER_ID,USER_PW,USER_NICK,USER_NAME,BIRTH,GENDER,EMAIL,PHONE,ADDR1,ADDR2,ADDR3,GRADE,WARN_COUNT,PROFIL_IMG_URL,STATUS,ROLE,PLATFORM_OPTION,JOIN_DATE,SOCIAL_NUM)
+	  	VALUES (USERS_SEQ.NEXTVAL,#{userId},#{userPw},#{userId},#{userName},#{birth},#{gender},#{email},#{phone},#{addr1},#{addr2},#{addr3},DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,sysdate,#{socialNum}) 
+	  </insert>
+	  
+	  <select id="selectIdByUserNameEmail" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT USERno
+	  	FROM USERS
+	  	WHERE EMAIL=#{email} and USER_ID=#{userId}
+	  </select>
+	  
+	  <select id="selectcheckCntByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT count(*)
+	  	FROM USERS
+	  	WHERE USER_ID=#{userId}
+	  </select>
   
-  <select id="selectuserByUserId" resultType="com.kh.jaManChw.dto.Users" parameterType="string">
-  	SELECT * 
-  	FROM USERS 
-  	WHERE USER_ID=#{userId} 
-  </select>
-  
-  <select id="selectByuserRole" resultType="String" parameterType="com.kh.jaManChw.dto.Users">
-  	SELECT ROLE
-  	FROM USERS
-  	WHERE USER_ID=#{userId} AND USER_PW=#{userPw}
-  </select>
-  
-  <select id="selectCntByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
-  	SELECT count(*)
-  	FROM USERS
-  	WHERE USER_ID=#{userId}
-  
-  </select>
-  
-  <insert id="insertUsers" parameterType="com.kh.jaManChw.dto.Users">
-  	INSERT INTO USERS(USERNO,USER_ID,USER_PW,USER_NICK,USER_NAME,BIRTH,GENDER,EMAIL,PHONE,ADDR1,ADDR2,ADDR3,GRADE,WARN_COUNT,PROFIL_IMG_URL,STATUS,ROLE,PLATFORM_OPTION)
-  	VALUES (USERS_SEQ.NEXTVAL,#{userId},#{userPw},#{userId},'NICK',#{birth},#{gender},#{email},#{phone},#{addr1},#{addr2},#{addr3},1,0,'url',DEFAULT,DEFAULT,'origin') 
-  </insert>
-  
+      <update id="updateByUserPw"  parameterType="com.kh.jaManChw.dto.Users">
+		UPDATE USERS SET USER_PW=#{userPw}  
+		WHERE USERNO=#{userno}
+      </update>
+      
+      <select id="selectUserNameByUserId" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT USER_Id
+	  	FROM USERS
+	  	WHERE USER_Name=#{userName}
+	  </select>
+	  
+	  <select id="selectStatusbyUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT count(*)
+	  	FROM USERS
+	  	WHERE STATUS='blacklist' and USER_Id=#{userId}	  
+	  </select>
+	  
+	   <select id="selectLeaveUserByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT count(*)
+	  	FROM USERS
+	  	WHERE STATUS='leave' and USER_Id=#{userId}	  
+	  </select>
+	  
   
   </mapper>

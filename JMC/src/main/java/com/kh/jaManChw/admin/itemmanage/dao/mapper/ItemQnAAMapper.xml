@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.kh.jaManChw.admin.itemmanage.dao.face.ItemQnAADao">
+
+	<insert id="insertItemQnAA" parameterType="ItemQnAA">
+		INSERT INTO item_QnA_A(
+			mgr_itemno,
+			item_qnano,
+			userno,
+			ia_content
+		)
+		VALUES(
+			item_qna_a_seq.nextval,
+			#{itemQnano},
+			#{userno},
+			#{iaContent}
+		)
+	</insert>
+
+	<select id="selectItemQnAADetail" resultType="map" parameterType="int">
+		SELECT 
+			mgr_itemno,
+			iqa.userno,
+			user_name,
+			item_Qnano,
+			ia_content,
+			ia_write_date
+		FROM
+			Item_QnA_A iqa,
+			Users u
+		WHERE 1 = 1
+			AND iqa.userno = u.userno
+			AND mgr_itemno = #{mgrItemno}
+			
+	</select>
+	
+	<update id="updateItemQnAA" parameterType="ItemQnAA">
+		UPDATE
+			Item_QnA_A
+		SET
+			ia_content = #{iaContent}
+		WHERE
+			mgr_itemno = #{mgrItemno}
+	</update>
+	
+	<update id="updateItemQnAAStatus" parameterType="int">
+		UPDATE 
+			Item_QnA_A
+		SET
+			ia_Status = 'delete'
+		WHERE
+			mgr_itemno = #{mgrItemno}
+	</update>
+</mapper>

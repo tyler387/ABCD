@@ -14,6 +14,7 @@ public class Paging {
 	private int startno;
 	private int endno;
 	
+	
 	public Paging() {}
 
 	public Paging(int curPage, int totalCount) {
@@ -55,7 +56,7 @@ public class Paging {
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", totalPage=" + totalPage + ", listCount="
 				+ listCount + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startno=" + startno + ", endno=" + endno + "]";
+				+ ", startno=" + startno + ", endno=" + endno +"]";
 	}
 
 	public int getCurPage() {
@@ -130,5 +131,6 @@ public class Paging {
 		this.endno = endno;
 	}
 	
+
 	
 }

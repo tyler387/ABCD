@@ -92,6 +92,6 @@
 	 com.kh.jaManChw.aop" />
 	
 <!--=================================================================================================================-->
-
+	<beans:bean id="ChatConfig" class="com.kh.jaManChw.chat.config.ChatConfig"></beans:bean>
 	
 </beans:beans>

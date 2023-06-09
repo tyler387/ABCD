@@ -35,14 +35,17 @@ table, td, th {
 <h1>신고 게시글 관리 페이지</h1>
 
 <form action="./filter" method="post">
-<select name ="filter">
-   <option value = "user_id" selected>아이디</option>
-   <option value = "user_name">이름</option>
-   <option value = "grade">등급</option>
-</select>
-
-검색 : <input type="text" name="content">
-<button>검색하기</button>
+<div class="input-group mb-12 ms-auto  justify-content-end"
+	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 600px;">
+		<select name ="filter" id="filter" class=" form-select" style="width: 100px;">
+		   <option value = "user_id" selected>아이디</option>
+		   <option value = "user_name">이름</option>
+		   <option value = "grade">등급</option>
+		</select>
+		<label for="content" class="input-group-text">검색 </label>
+		<input type="text" name="content" id="content">
+		<button id="searchBtn" type="submit" class="btn btn-secondary btn-sm">검색하기</button>
+</div> 
 </form>
 <table>
 <tr>

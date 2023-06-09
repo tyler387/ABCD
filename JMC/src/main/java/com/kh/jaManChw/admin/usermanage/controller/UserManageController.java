@@ -92,50 +92,6 @@ public class UserManageController {
 		return "admin/user/mg/list";
 	}
 	
-//	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
-//	public @ResponseBody ModelAndView userfiltering2(
-//			ModelAndView mav, String curPage,
-//			@RequestParam Map<String, Object> map
-//			) {
-//		logger.info("filter1 에이잭스 출력 : {}", map);
-//		String ccurpage = curPage;
-//		logger.info("11111111");
-//		Paging paging = userManageService.getpaging(ccurpage);
-//		logger.info("2222222222");
-//		map.put("paging", paging);
-//		logger.info("3333333333333");
-//		List<Users> userfilter = userManageService.getUserMgFiltering(map);
-//		logger.info("444444444444444444");
-//		//모델값 지정	-> 응답 데이터 JSON 변환
-//		mav.addObject("userfilter", userfilter);
-//		mav.addObject("paging", paging);
-//		logger.info("mav 내용 {}", mav);
-//		//뷰네임 지정	-> jsonView 적용
-//		mav.setViewName("jsonView");
-//		
-//		return mav; 
-//	}
-	
-//	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
-//	@RequestMapping("/mg/filter1")
-//	public String userfiltering2(
-//			Model model, String curPage,
-//			@RequestParam Map<String, Object> map
-//			) {
-//		logger.info("filter1 에이잭스 출력 : {}", map);
-//		String ccurpage = curPage;
-//		Paging paging = userManageService.getFilterPaging(curPage, map);
-//		logger.info("페이징 {}", paging);
-//		map.put("paging", paging);
-//		List<Users> userfilter = userManageService.getUserMgFiltering(map);
-//		logger.info("{}", userfilter);
-//		model.addAttribute("userfilter", userfilter);
-//		model.addAttribute("paging", paging);
-//		logger.info("모델값 {}", model);
-////		return "/admin/user/mg/filter";
-//	}
-//	
-//	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
 	@ResponseBody
 	@RequestMapping("/mg/filter1")
 	public ModelAndView userfiltering2(

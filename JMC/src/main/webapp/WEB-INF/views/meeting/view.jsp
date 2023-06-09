@@ -6,7 +6,7 @@
 
 
 <c:import url="../layout/header.jsp" />
-
+<c:import url="../chat/chatbutton.jsp"></c:import>
 
 
 

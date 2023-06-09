@@ -21,14 +21,14 @@ function back(){
 #listAll{
 	width: 100%;
 	height: 80px;
-	border : 1px solid orange;
+	border : 1px solid #8D7B68;
 	text-align: center;
 	margin-top: 15px;
 	border-radius: 10px;
 	
 }
 #listAll:hover{
-border: 3px solid orange;
+background-color :    #8D7B68;
     border-radius: 10px;
 }
 }
@@ -42,7 +42,7 @@ body{
 }
  a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
- a:hover {  color: black; text-decoration: none;}
+ a:hover {  color: white; text-decoration: none; font-weight: 700;}
  a{
      display: flex;
     /* padding: 30px; */

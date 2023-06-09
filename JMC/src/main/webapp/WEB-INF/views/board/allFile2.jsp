@@ -255,8 +255,20 @@ $(function(){
 // 				}
 	})
 
+	
+	
+
 	//====================================================================================================================
 // 	//검색어에 따른 결과 받기 위한 ajax
+
+	//엔터로 해도 작동 시키기
+	$("#searchWrite").keydown(function(e) {
+		if(e.keyCode == 13){
+			$("#btn_Search").click();
+		}
+	})
+	
+	//마우스로 클릭시 작동 시키기
 	 $("#btn_Search").click(function() {
 		 console.log("돋보기 버튼 클릭 됨")
 		 var searchData = $('#searchWrite').val()

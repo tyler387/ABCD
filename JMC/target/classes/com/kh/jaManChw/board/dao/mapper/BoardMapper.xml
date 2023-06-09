@@ -23,7 +23,6 @@
 	</select>
 	
 	<select id="selectAllDetail" parameterType="int" resultType="map">
-
 		SELECT b.*, bf.stored_name , bcCo.cnt CoCount, bcL.cnt likeCount
 		FROM 
 		    board b,  
@@ -44,7 +43,6 @@
 		    AND bf.boardno = b.boardno
 		    AND b.boardno = #{BOARDNO}
 		ORDER BY b.boardno
-
 	</select>
 	
 	<select id="showAllComment" resultType="BoardComment" parameterType="int">

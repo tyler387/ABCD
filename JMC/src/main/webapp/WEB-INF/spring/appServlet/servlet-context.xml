@@ -40,7 +40,7 @@
 	<resources mapping="/itemContentFile/**" location="/itemContentFile/" />
 	<resources mapping="/itemfile/**" location="/itemfile/" />
 	<resources mapping="/userProfile/**" location="/userProfile/" />
-		<resources mapping="/boardFileUpload/**" location="/boardFileUpload/" />
+	<resources mapping="/boardFileUpload/**" location="/boardFileUpload/" />
 <!--=================================================================================================================-->
 
 

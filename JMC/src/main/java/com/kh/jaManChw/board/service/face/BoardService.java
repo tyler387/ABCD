@@ -99,6 +99,8 @@ public interface BoardService {
 
 	public int chkReco(int boardno, int userno);
 
+	
+
 
 
 	

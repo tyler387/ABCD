@@ -76,7 +76,7 @@ public class BoardController {
 				chkreco = boardService.chkReco(boardno,userno);
 			}
 			map = boardService.showAllDetail(boardno);
-			logger.info("map : {}" , map);
+			logger.info("map의 정보는 뭘까용ㅇㅇㅇㅇㅇㅇ : {}" , map);
 			model.addAttribute("map", map);
 			model.addAttribute("chkReco",chkreco);
 		}
@@ -90,12 +90,12 @@ public class BoardController {
 			if(session.getAttribute("userno")==null) {
 				chkreco = 0;
 			}else {
-				int userno = (int)session.getAttribute("userno");
-				chkreco = boardService.chkReco(boardno,userno);
+				int abc = (int)session.getAttribute("userno");
+				chkreco = boardService.chkReco(boardno,abc);
 			}
+			
 			Map<String, Object> map  = new HashMap<>();
 			map = boardService.showAllDetail(boardno);
-			
 			logger.info("map값 : {}", map);
 			mav.addObject("chkReco",chkreco);
 			mav.addObject("map",map);

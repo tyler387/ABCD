@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp" />
-
+<c:import url="../chat/chatbutton.jsp"></c:import>
 <style type="text/css">
 
 

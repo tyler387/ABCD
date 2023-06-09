@@ -225,7 +225,7 @@ body{
 #chatName{
 	width:100%;
 	height:10%;
-	background-color : black;
+	background-color : #8D7B68;
 	color : white;
 	display : flex;
 	justify-content: center;
@@ -233,12 +233,12 @@ body{
 	overflow: hidden;
 }
 #chat{
-	width : 100%;
-	height : 65%;
-	overflow: auto;
-	border: 1px solid black;
+	width: 100%;
+    height: 65%;
+    overflow: auto;
+    border: 1px solid #8D7B68;
     border-radius: 0 0 30px 30px;
-	
+    border-top: 0;
 }
 #chatAll{
 	width: 100%;
@@ -268,7 +268,7 @@ body{
 	margin-bottom:10px;
 	margin-top: 5px;
     font-size: 15px;
-    font-weight: 800;
+    font-weight: 400;
 }
 .myMessage{
 	display: inline-block;
@@ -276,10 +276,10 @@ body{
 	padding: 7px 15px;
 	margin-bottom:10px;
 	margin-top: 5px;
-	background-color : black;
+	background-color : #8D7B68;
 	color : #fff;	
     font-size: 15px;
-    font-weight: 800;
+    font-weight: 400;
 }
 .yourName{
 	font-size: 15px;
@@ -290,7 +290,7 @@ body{
 	display: block;
 }
 #chatName{
-	border : 1px solid black;
+	border : 1px solid #8D7B68;
     border-radius: 30px 30px 0 0;
 }
 #chatmessage{
@@ -302,13 +302,15 @@ body{
     padding-top: 30px;
     padding-bottom: 30px;
     font-size : 15px;
+    border: 1px solid #8D7B68;
 }
 #send{
     height: 30px;
-    background-color: black;
+    background-color: #8D7B68;
     border: none;
     width: 50px;
     color: white;
+    margin-top: 5px;
 }
 </style>
 </head>
@@ -339,7 +341,7 @@ body{
 </div>
 <!-- </div> -->
 <div id="inputMessage">
-<textarea style="width: 99%; height: 55px;resize: none;" name="chatmessage" id="chatmessage" placeholder="채팅을 입력하세요"></textarea><br>
+<textarea style="width: 99%; height: 55px;resize: none; outline-color : #8D7B68;" name="chatmessage" id="chatmessage" placeholder="채팅을 입력하세요"></textarea><br>
 <div class="sendbutton">
 <button id="send" onclick="sendmessage()">전송</button>
 

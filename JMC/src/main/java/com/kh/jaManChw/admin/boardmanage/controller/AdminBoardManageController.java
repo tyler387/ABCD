@@ -27,7 +27,7 @@ import com.kh.jaManChw.dto.QnAA;
 import com.kh.jaManChw.util.Paging;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/board")
 public class AdminBoardManageController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -38,7 +38,7 @@ public class AdminBoardManageController {
 	
 	
 	//관리자 게시글 관리 페이지로 이동
-	@GetMapping("/board/list")
+	@GetMapping("/boardview/list")
 	public void adminBoardPage(
 				String curPage,
 				@SessionAttribute(name ="boardOption") String boardOption,
@@ -56,14 +56,14 @@ public class AdminBoardManageController {
 	}
 	
 	//관리자 게시글 등록 페이지로 이동
-	@GetMapping("/board/write")
+	@GetMapping("/boardview/write")
 	public void adminBoardWritePage() {
 		
 	}
 	
 
 	//관리자 게시글 내용 파일 저장
-	@PostMapping(value ="/board/writeFileupload" , produces = "application/json; charset=utf8")
+	@PostMapping(value ="/boardview/writeFileupload" , produces = "application/json; charset=utf8")
 	public @ResponseBody JSONObject adminBoardContentFileupload(
 //			@RequestParam("files") MultipartFile multipartFile
 			@RequestParam("file") MultipartFile multipartFile
@@ -78,7 +78,7 @@ public class AdminBoardManageController {
 	}
 	
 	//관리자 게시글 등록
-	@PostMapping(value = "/board/write",  produces = "application/json; charset=utf8")
+	@PostMapping(value = "/boardview/write",  produces = "application/json; charset=utf8")
 	public String adminBoardWrite(
 			
 			String curPage,
@@ -102,7 +102,7 @@ public class AdminBoardManageController {
 		return "redirect:./list";
 	}
 	
-	@GetMapping("/board/update")
+	@GetMapping("/boardview/update")
 	public void adminBoardRevisePage(
 			String curPage,
 			HttpSession session,
@@ -117,6 +117,7 @@ public class AdminBoardManageController {
 		
 		//보드넘버를 통해 해당 게시글을 조회한다
 		//	ㄴ모델값으로 보내기 위한 정보, 접근한 사용자가 적절한 접근을 하고 있는지 확인
+		// 접근 관련해선 아직 미완!
 		AdminBoard detailAdminBoard = adminBoardService.showAdminBoardDetail(adminBoardParam);
 		
 		//로그인 기능시 생성될 userno, 임의로 세션에 삽입해서 Test한다
@@ -134,7 +135,7 @@ public class AdminBoardManageController {
 		
 	}
 	
-	@PostMapping("/board/update")
+	@PostMapping("/boardview/update")
 	public String adminBoardRevise(
 			String curPage,
 			HttpSession session,
@@ -143,13 +144,20 @@ public class AdminBoardManageController {
 		
 		logger.info("POST adminBoardParam: {}", adminBoardParam);
 		logger.info("POST adminBoardParam boardOption: {}", session.getAttribute("boardOption"));
+		logger.info("어디가 에러지?");
+		//session에 담겨 있는 userno을 DTO에 삽입한다 - 추후 Service에서 삽입하는 형태로 수정예정!
+		logger.info("어디가 에러지?1");
+		adminBoardParam.setUserno((Integer)session.getAttribute("userno"));
+		logger.info("어디가 에러지?2");
 		
+		logger.info("어디가 에러지?3");
 		adminBoardService.reviseAdminBoard(adminBoardParam);
 		
+		logger.info("어디가 에러지?4");
 		return "redirect:./list?curPage="+curPage;
 	}
 	
-	@RequestMapping("/board/delete")
+	@RequestMapping("/boardview/delete")
 	public String adminBoardErase(
 			String curPage,
 			int adminBoardno
@@ -179,7 +187,7 @@ public class AdminBoardManageController {
 		model.addAttribute("paging",paging);
 	}
 	
-	@PostMapping("qna/filter")
+	@GetMapping("qna/filter")
 	public String qnAQFilter(
 			@RequestParam Map<String, Object> filterAndPagingMap,
 			Model model
@@ -193,10 +201,12 @@ public class AdminBoardManageController {
 		
 		logger.info("filterL : {}", filterAndPagingList);
 		
+		model.addAttribute("filterList", true);
+		model.addAttribute("filter", filterAndPagingMap);
 		model.addAttribute("qnAQList", filterAndPagingList);
 		model.addAttribute("paging", paging );
 		
-		return "admin/qna/filter";
+		return "admin/board/qna/filter";
 	}
 	
 	@GetMapping("qna/write")
@@ -220,7 +230,7 @@ public class AdminBoardManageController {
 			Model model
 			) {
 		//임시로 유저정보 삽입
-		session.setAttribute("userno", 99);
+//		session.setAttribute("userno", 99);
 		
 		qnAAService.writeQnAA(qnAAService.getCompleteParam(session, qnAAParam));
 		

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +90,7 @@
 	<p><a href="./board/list?boardOption=event">상품 삭제/수정</a><br></p>
 	<p><a href="./board/list?boardOption=event">상품 문의</a><br><br></p>
 	<h2>고객센터관리</h2>
-	<p><a href="<%=request.getContextPath() %>/admin/main/boardCategory?boardOption=notice">공지사항 관리</a><br></p>
+	<p><a href="../../main/boardCategory?boardOption=notice">공지사항 관리</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/main/boardCategory?boardOption=event">이벤트 관리</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/qna/list">Q & A 관리</a><br><br></p>
 	

@@ -22,9 +22,11 @@ public interface UserManageDao {
 
 	public int selectFilterCntAll(Map<String, Object> map);
 
-	public void updateUserMgUpdate(int userno);
+	public void updateUserBlackUpdate(int userno);
 
-	public void updateUserMgStop(int userno);
+	public void updateUserBlackStop(int userno);
+
+	public void updateUserMgUpdate(Map<String, Object> map);
 
 	
 }

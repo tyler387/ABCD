@@ -132,6 +132,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 
+	@Override
+	public int findcntInfo(ProfileFile profileFile) {
+		return mypageDao.selectCntProfile(profileFile);
+	}
+
+
 
 
 

@@ -8,13 +8,13 @@
   </div>
       <div class="right">
         <form action="/mypage/profile" method="post" enctype="multipart/form-data">
+       <input type="hidden" name="userno" id="userno" value="${userno}">  
         
       
 		<div class='profile'><img src="/userProfile/${profileStoredName}"></div>
 	 
         
         <input type="file" id="file" name="file">
-       <input type="hidden" name="userno" id="userno" value="${userno}">  
 	    <button>프로필 수정</button>
 <!--     	    <a href="/mypage/main"><button type="button">취소</button></a> -->
         </form>

@@ -56,6 +56,8 @@ public interface MypageService {
 	 */
 	public void removeProfile(ProfileFile profileFile);
 
+	public int findcntInfo(ProfileFile profileFile);
+
 
 
 

@@ -52,6 +52,13 @@ public interface MypageDao {
 	 */
 	public void deleteProfileName(ProfileFile profileFile);
 
+	/**
+	 *  프로필 사진 조회
+	 * @param profileFile
+	 * @return
+	 */
+	public int selectCntProfile(ProfileFile profileFile);
+
 
 
 }

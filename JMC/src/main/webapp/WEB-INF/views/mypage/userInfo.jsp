@@ -16,7 +16,7 @@
        		<div class="labelbox"><label for="userId">아이디</label></div>
 	
 			<div class="">
-				<input type="text" name="userId" id="userId" disabled="disabled">
+				<input type="text" name="userId" id="userId" value="${loginInfo.useId}" disabled="disabled">
 			</div>	
 	    </div>
 	    
@@ -55,7 +55,7 @@
 <div class="box1">
 
 	<div class="labelbox"><label for="userName">이름</label></div>
-	<div class="box2"><input type="text" name="userName" id="userName" disabled="disabled"></div>
+	<div class="box2"><input type="text" name="userName" id="userName" value="${loginInfo.userName}" disabled="disabled"></div>
 	
 </div>
 

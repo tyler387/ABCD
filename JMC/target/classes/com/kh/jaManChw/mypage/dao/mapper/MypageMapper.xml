@@ -38,6 +38,12 @@
 	  	DELETE FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
 	  </delete>
+	  
+	  <select id="selectCntProfile" resultType="int" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  	SELECT COUNT(*)
+	  	FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </select>
 
 
   </mapper>

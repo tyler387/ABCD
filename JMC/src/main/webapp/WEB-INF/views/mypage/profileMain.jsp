@@ -8,6 +8,7 @@
   </div>
       <div class="right">
         <div class='profile'>
+         <input type="hidden" name="userno" id="userno" value="${userno}"> 
 		  	<div>
 		  		<img src="/userProfile/${profileStoredName}">
 		  	</div>
@@ -16,10 +17,7 @@
 	  		<div>
 	  			<a href="/mypage/profile"><button>프로필 수정</button></a>
 	  		</div>
-	  		
-	  		<div>
-	  			<a href="/mypage/remove"><button>프로필 삭제</button></a>
-	  		</div>
+	  	
       </div>
     </div>
 

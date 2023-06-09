@@ -57,6 +57,7 @@ img{
 	
 }
 .list1{
+	margin-top : 20px;
 	padding-bottom: 15px;
 }
 .list2{
@@ -80,10 +81,11 @@ img{
 }
 
 .list3{
-	padding-bottom: 13px;
+	padding-top:10px;
+	padding-bottom: 15px;
 }
 .list3:hover{
-	border-left: 5px solid #371e06;
+	border-left: 3px solid #371e06;
 	padding-left: 5px;
 }
 

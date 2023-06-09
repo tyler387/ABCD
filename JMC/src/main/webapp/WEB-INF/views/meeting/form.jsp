@@ -84,7 +84,7 @@
 	<label>모임 날짜<input type="datetime-local" id="meetingDate" name="meetingDate"></label><br><br>
 	<label>참가비<input type="text" id="fee" name="fee" placeholder="원"></label><br><br>
 	<label>인원 수<input type="number" id="headCount" name="headCount" min="2"  max="10"></label><br><br>
-	<label>모임 소개<input type="text" id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></label><br><br>
+	<label>모임 소개<textarea id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></textarea></label><br><br>
 	
 	
 	<label>친구 목록</label>
@@ -115,13 +115,15 @@
 	추가 태그<br>
 	
 	<label>흡연 여부:</label>
-	<label>가능<input type="radio" id="smokeyes" name="smoke" value="yes" checked="checked"></label>
+	<label>무관<input type="radio" id="smokenomatter" name="smoke" value="nomatter" checked="checked"> </label>
+	<label>가능<input type="radio" id="smokeyes" name="smoke" value="yes"></label>
 	<label>불가능<input type="radio" id="smokeno" name="smoke" value="no"></label>
 	
 	<br><br>
 	
 	<label>동반자 여부:</label>
-	<label>가능<input type="radio" id="friendyes" name="friend" value="yes" checked="checked"></label>
+	<label>무관<input type="radio" id="smokenomatter" name="friend" value="nomatter" checked="checked"> </label>
+	<label>가능<input type="radio" id="friendyes" name="friend" value="yes"></label>
 	<label>불가능<input type="radio" id="friendno" name="friend" value="no"></label>
 	
 	

@@ -3,17 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp" />
-<h1>신규 개발 페이지</h1>
+<c:import url="../layout/mypageAside.jsp" />
 
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
-a<br>
+  </div>
+      <div class="right">
+        <div><h1>친구 목록</h1></div>
+        <div style="width:150px;"><hr></div>
+        <div>총 친구 수</div>
+      </div>
+    </div>
 
 <c:import url="../layout/footer.jsp" />

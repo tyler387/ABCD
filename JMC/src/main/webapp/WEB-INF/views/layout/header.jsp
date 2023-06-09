@@ -5,20 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>header</title>
+<title>JAMANCHU</title>
 <style type="text/css">
 
 header{
   position: sticky;
   top: 0;
   backdrop-filter: blur(30px);
-  background: black;
+  background: #371e06;
   color: white;
-  padding-left: 120px; 
-  padding-right: 40px; 
-  display: flex; 
+/*   padding-left: 120px;  */
+/*   padding-right: 40px;  */
+  display:flex; 
   justify-content: flex-end;
   align-items: center;
+/*   width: 100%; */
+  
+
 }
 
 header a{
@@ -35,12 +38,13 @@ a {
 }
 
 #header #menu{
-  position:relative; 
+/*   position:relative;  */
   /* z-index: 99;  */
   padding-top : 12px;
   background-color: white;
   height: 50px;
   text-align: center;
+  margin-left: 130px;
 }
 
 #header [class*="main"] {
@@ -50,7 +54,7 @@ a {
 
 #header [class*="main"] ul {
   border-radius: 5px 5px 5px 5px;
-  border: 1px solid black;
+  border: 1px solid #371e06;
 }
 #header .main1{
   padding-left: 0px;
@@ -77,7 +81,7 @@ a {
   font-weight: bold;
 }
 #header .main2 {
-  width:110%;
+  width:100%;
   position: absolute;
   top: 50px;
   left: -9999px;
@@ -85,19 +89,17 @@ a {
   padding: 0px;
 }
 #header .main1>li:hover {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #371e06;
 }
 #header .main2 li:hover {
-  border-left: 5px solid black;
+  border-left: 5px solid #371e06;
 }
 
 #header .main2>li {
   position: relative;
 }
-#header .main2>li:hover .main3 {
-  left: 100%;
-}
-#header .main2>li a, {
+
+#header .main2>li a {
   border-radius: 10px;
   margin: 10px;
 }
@@ -106,12 +108,13 @@ a {
    height: 100%;
    padding: 0px;
    margin: 0px;
+ 
  }
 
-.footer header {
-   height: 60px;
-   background-color: #e9eaed;
-}
+/* .footer header { */
+/*    height: 60px; */
+/*    background-color: #371e06; */
+/* } */
 
  #wrap {
   min-height: calc(100% - 120px);
@@ -120,10 +123,12 @@ a {
 
  .footer {
    height: 300px;
-   background-color: black;
+   background-color: #371e06;
    text-align: center;
    padding-top: 70px;
    color: white;
+   position: absolute; 
+   width:100%;
  }
 
 
@@ -131,25 +136,34 @@ a {
 </head>
 
 <body>
+
 <div id="header">
 <header>
 <c:if test="${role eq 'admin'}">
 	<a href="/admin/main">관리자페이지</a>
 </c:if>
-<c:if test="${userId eq null}">
-	<a href="/login/login">로그인</a>
-</c:if>	
-<c:if test="${userId ne null}">
+<%-- <c:if test="${empty login}"> --%>
+<!-- 	<a href="/login/login">로그인</a> -->
+<%-- </c:if>	 --%>
+<c:if test="${not empty login}">
 	<a href="/login/logout">로그아웃</a>
-	<a href="#">마이페이지</a>
+	<a href="/mypage/main">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
+<c:if test="${empty socialNum and empty login}">
+	<a href="/login/login">로그인</a>
+</c:if>	
+<c:if test="${not empty socialNum}">
+	<a href="/login/logout">로그아웃</a>
+	<a href="/mypage/main">마이페이지</a>
+	<a href="#">알람</a>
+</c:if>
+
 </header>
 
 <div id="menu">
   <ul class="main1">
-    <li style="border: none;"><a href="/login/main">JAMANCHO</a>
-    </li>
+    <li style="border: none;"><a href="/login/main">JAMANCHU</a></li>
     <li><a href="#">회사소개</a></li>
     <li style="border: none;"><a href="#">모임</a>
        <ul class="main2">

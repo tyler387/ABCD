@@ -46,7 +46,7 @@ div.admin1 {
 <div class="input-group mb-12 ms-auto  justify-content-end"
 	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 600px;">
 		<select name ="filter" id="filter" class=" form-select" style="width: 100px;">
-		   <option value = "user_id" selected>아이디</option>
+		   <option value = "U.user_id" selected>아이디</option>
 		   <option value = "user_name">이름</option>
 		   <option value = "grade">등급</option>
 		</select>
@@ -86,7 +86,7 @@ div.admin1 {
 </table>
 <br>
 <div>
-<c:import url="./paging.jsp" />
+<c:import url="../../paging.jsp"/>
 </div>
 </div>
 </div>

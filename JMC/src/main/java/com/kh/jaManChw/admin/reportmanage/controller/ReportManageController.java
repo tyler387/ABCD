@@ -43,6 +43,7 @@ public class ReportManageController {
 		
 	}
 	
+	
 	@RequestMapping("/post/filter")
 	public String userfiltering(
 			Model model, String curPage,
@@ -50,12 +51,16 @@ public class ReportManageController {
 			) {
 		logger.info("map 출력 {}", map);
 		String ccurpage = curPage;
-		String type = "post";
-		Paging paging = reportManageService.getpaging(ccurpage, type);
+		map.put("type", "board");
+		Paging paging = reportManageService.getFilterPaging(ccurpage, map);
 		map.put("paging", paging);
 		List<Map<String, Object>> reportpost = reportManageService.getReportPostFiltering(map);
-		logger.info("{}", reportpost);
-		model.addAttribute("userfilter", reportpost);
+		logger.info("map 출력 {}", map);
+		logger.info("reportpost {}", reportpost);
+		model.addAttribute("filterList", true);
+		model.addAttribute("reportB", reportpost);
+		model.addAttribute("paging", paging);
+		model.addAttribute("filter", map);
 		
 		return "/admin/report/post/filter";
 	}

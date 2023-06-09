@@ -161,7 +161,7 @@ div.admin1 {
 
 
 <div id="pagingDivTag">
-<c:import url="../../../layout/paging.jsp" />
+<c:import url="../../paging.jsp"/>
 </div>
 
 </div>	

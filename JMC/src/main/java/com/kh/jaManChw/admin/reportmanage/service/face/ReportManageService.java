@@ -96,6 +96,15 @@ public interface ReportManageService {
 	 * @param map
 	 */
 	public void eraseReportMeeting(Map<String, Object> map);
+	
+	/**
+	 * 필터링에서 사용할 페이징 수 계산
+	 * 
+	 * @param ccurpage
+	 * @param map
+	 * @return
+	 */
+	public Paging getFilterPaging(String ccurpage, Map<String, Object> map);
 
 
 }

@@ -97,7 +97,6 @@ div.admin1 {
 // 			 }
 // 			console.log("content: ", content)
 // 	})
-</script>
 <div id="resultt">
 	<c:import url="../../main.jsp"></c:import>
 	

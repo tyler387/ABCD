@@ -3,12 +3,151 @@
 
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-
 <c:import url="../layout/header.jsp" />
 
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+
+ <style type="text/css">
+
+ .my-hr2 { 
+ 	border: 0;
+ 	height: 5px;
+ 	background: #ccc;	 
+
+	}
+ .meeting {
+	height: 700px;
+	width: 600px;
+	margin: 0 auto;
+	}
+ 
+
+  .meetingform {
+  	 border-radius: 20px;
+ 	 box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
+  
+   }
+ 
+   .meetingpre {
+   	 border-radius: 20px;
+ 	 box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);  
+   }
+   
+   .meetingbtn {
+   	 height: 50px;
+  	 width: 300px;
+  	 border-radius: 20px;
+  	 background: orange;	
+  	 color: #fff;
+   
+   }
+   
+   .btndiv {
+   	 text-align:center;
+   	
+   }
+ 	h1 {
+	 text-align: center; 	
+ 	
+ 	}
+ 	.meetingbtn:hover {
+ 	
+ 	  background-color: #ffcca8;
+ 	}
+ 	
+ </style>
+
+
+	
+	<h1>모임 등록</h1>
+	
+	
+	<div class="meeting"> 
+	
+	
+	
+	<form action="/meeting/form" method="post">
+	
+	<div class="meetingform">
+	<h4>모임의 정보를 등록해 주세요</h4>
+	<label>모임 명<input type="text" id="mname" name="mname" placeholder="모임 이름"></label><br>
+	<label>모임 지역
+	<input type="text" id="sample6_postcode" name="loc"  placeholder="우편번호">
+	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+	<input type="text" id="sample6_address" name="loc1" placeholder="도로명주소"><br>
+	<input type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목">
+	<input type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></label><br><br>
+	<label>모임 날짜<input type="datetime-local" id="meetingDate" name="meetingDate"></label><br><br>
+	<label>참가비<input type="text" id="fee" name="fee" placeholder="원"></label><br><br>
+	<label>인원 수<input type="number" id="headCount" name="headCount" min="2"  max="10"></label><br><br>
+	<label>모임 소개<textarea id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></textarea></label><br><br>
+	
+	
+	<label>친구 목록</label>
+	<select name="friendlist">
+	<c:forEach var = "friendlist" items="${friendList }">
+	<option value="${ friendlist.userno}">${friendlist.userName }</option>
+	
+	</c:forEach>
+	</select>
+	
+   
+	</div>	
+	
+	<div class="meetingpre">
+	<h4>선호하는 친구 타입(선택)</h4>
+	
+	성별<br>
+	<label>남자<input type="radio" value="man" name="gender"></label>
+	<label>여자<input type="radio" value="woman" name="gender"></label>			
+	<label>무관<input type="radio" value="none" name="gender" checked="checked"></label><br><br>
+	
+	나이<br>
+	<input type="number" id="minage" name="minage" min="20" max="99" value="20">
+	~
+	<input type="number" id="maxage" name="maxage" min="20" max="99" value="99" ><br><br>
+	
+	
+	추가 태그<br>
+	
+	<label>흡연 여부:</label>
+	<label>무관<input type="radio" id="smokenomatter" name="smoke" value="nomatter" checked="checked"> </label>
+	<label>가능<input type="radio" id="smokeyes" name="smoke" value="yes"></label>
+	<label>불가능<input type="radio" id="smokeno" name="smoke" value="no"></label>
+	
+	<br><br>
+	
+	<label>동반자 여부:</label>
+	<label>무관<input type="radio" id="smokenomatter" name="friend" value="nomatter" checked="checked"> </label>
+	<label>가능<input type="radio" id="friendyes" name="friend" value="yes"></label>
+	<label>불가능<input type="radio" id="friendno" name="friend" value="no"></label>
+	
+	
+	
+	</div>
+	
+	<br><br>
+	<div class="btndiv"><button class="meetingbtn">등록하기</button></div>
+	
+	</form>		
+	
+	</div><br><br><br><br>
+	
 <script>
+
+	if(document.getElementById("smoke").checked) {
+		document.getElementById("smokehidden").disabled = true;
+	}
+	
+	if(document.getElementById("friend").checked) {
+		document.getElementById("friendhidden").disabled = true;
+	}
+	
+	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -57,69 +196,5 @@
         }).open();
     }
 </script>
-
-
- <style type="text/css">
-
- 
-	
- .div1 {
-	background-color: #E2E2E2;
-	height: 600px;
-	width: 600px;
-	margin: 0 auto;
-	}
- 
-
-
- 
- 
- </style>
-
-
-	
-	<h1>모임 등록</h1>
-	
-	
-	<div class="div1"> 
-	
-	<h4>모임의 정보를 등록해 주세요</h4>
-	
-	
-	<form action="/meeting/form" method="post">
-	
-	<label>모임 명<input type="text" id="mname" name="mname" placeholder="모임 이름"></label><br>
-	<label>모임 지역
-	<input type="text" id="sample6_postcode" name="loc"  placeholder="우편번호">
-	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" id="sample6_address" name="loc1" placeholder="주소"><br>
-	<input type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목">
-	<input type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></label><br><br>
-	<label>모임 날짜<input type="datetime-local" id="meetingDate" name="meetingDate"></label><br><br>
-	<label>참가비<input type="text" id="fee" name="fee" placeholder="원"></label><br><br>
-	<label>인원 수<input type="number" id="headCount" name="headCount" min="2"  max="10"></label><br><br>
-	<label>모임 소개<input type="text" id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></label><br><br>
-	
-	
-	<label>친구 목록</label>
-	<select>
-	<c:forEach var = "friendlist" items="${friendList }">
-	<option value="${ friend_userno}">${friendlist.userName }</option>
-	
-	</c:forEach>
-	</select>
-	
-	
-	<button>등록</button>
-	<button>취소</button>    
-	
-	<h4>선호하는 친구 타입(선택)</h4>
-	
-		
-	
-	
-	</form>		
-	
-	</div>
 
 <c:import url="../layout/footer.jsp" />

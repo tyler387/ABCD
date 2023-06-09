@@ -2,69 +2,63 @@ package com.kh.jaManChw.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ChatMessage {
 
 	private int messageno;
 	private int chatno;
-	private int userno;
+	private String sendId;
 	private String message;
-	private Date sendTile;
+	private Date sendTime;
 	
 	public ChatMessage() {}
-
-	public ChatMessage(int messageno, int chatno, int userno, String message, Date sendTile) {
+	
+	public ChatMessage(int messageno, int chatno, String sendId, String message, Date sendTime) {
 		super();
 		this.messageno = messageno;
 		this.chatno = chatno;
-		this.userno = userno;
+		this.sendId = sendId;
 		this.message = message;
-		this.sendTile = sendTile;
+		this.sendTime = sendTime;
 	}
 
 	@Override
 	public String toString() {
-		return "ChatMessage [messageno=" + messageno + ", chatno=" + chatno + ", userno=" + userno + ", message="
-				+ message + ", sendTile=" + sendTile + "]";
+		return "ChatMessage [messageno=" + messageno + ", chatno=" + chatno + ", sendId=" + sendId + ", message="
+				+ message + ", sendTime=" + sendTime + "]";
 	}
 
 	public int getMessageno() {
 		return messageno;
 	}
-
 	public void setMessageno(int messageno) {
 		this.messageno = messageno;
 	}
-
 	public int getChatno() {
 		return chatno;
 	}
-
 	public void setChatno(int chatno) {
 		this.chatno = chatno;
 	}
-
-	public int getUserno() {
-		return userno;
+	public String getSendId() {
+		return sendId;
 	}
-
-	public void setUserno(int userno) {
-		this.userno = userno;
+	public void setSendId(String sendId) {
+		this.sendId = sendId;
 	}
-
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-	public Date getSendTile() {
-		return sendTile;
+	public Date getSendTime() {
+		return sendTime;
 	}
-
-	public void setSendTile(Date sendTile) {
-		this.sendTile = sendTile;
+	public void setSendTime(Date sendTime) {
+		this.sendTime = sendTime;
 	}
+	
 	
 }

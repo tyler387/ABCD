@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.kh.jaManChw.mypage.dao.face.MypageDao">
+  
+  	  <update id="updateUserInfo"  parameterType="com.kh.jaManChw.dto.Users">
+		UPDATE USERS SET USER_NICK=#{userNick},USER_PW=#{userPw},EMAIL=#{email},PHONE=#{phone},ADDR1=#{addr1},ADDR2=#{addr2},ADDR3=#{addr3}  		
+		WHERE USERNO=#{userno}
+	  </update>
+	  
+	  <select id="selectUserInfo" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT * 
+	  	FROM USERS
+	  	WHERE USERNO=#{userno}
+	  </select>
+	  
+	  <update id="updateUserStatus"  parameterType="com.kh.jaManChw.dto.Users">
+		UPDATE USERS SET STATUS='leave'  		
+		WHERE USERNO=#{userno}
+	  </update>
+	  
+	  <insert id="insertFile"  parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  	INSERT INTO PROFILE_FILE(PROFILENO, USERNO, PROFILE_ORIGIN_NAME, PROFILE_STORED_NAME, PROFILESIZE)
+	  	VALUES (PROFILE_FILE_SEQ.NEXTVAL,#{userno},#{profileOriginName},#{profileStoredName},#{profilesize})
+	  </insert>
+	  
+	  
+	  <select id="selectfileInfo" resultType="com.kh.jaManChw.dto.ProfileFile" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  	SELECT *
+	  	FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </select>
+	  
+	  <delete id="deleteProfileName" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  	DELETE FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </delete>
+	  
+	  <select id="selectCntProfile" resultType="int" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  	SELECT COUNT(*)
+	  	FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </select>
+
+
+  </mapper>

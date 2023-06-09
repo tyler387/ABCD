@@ -6,12 +6,12 @@ public class ProfileFile {
 	private int userno;
 	private String profileOriginName;
 	private String profileStoredName;
-	private String profilesize;
+	private long profilesize;
 	
 	public ProfileFile() {}
 
 	public ProfileFile(int profileno, int userno, String profileOriginName, String profileStoredName,
-			String profilesize) {
+			long profilesize) {
 		super();
 		this.profileno = profileno;
 		this.userno = userno;
@@ -58,12 +58,12 @@ public class ProfileFile {
 		this.profileStoredName = profileStoredName;
 	}
 
-	public String getProfilesize() {
+	public long getProfilesize() {
 		return profilesize;
 	}
 
-	public void setProfilesize(String profilesize) {
-		this.profilesize = profilesize;
+	public void setProfilesize(long l) {
+		this.profilesize = l;
 	}
 
 }

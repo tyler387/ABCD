@@ -163,5 +163,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		}
 	
 	
-	
+	@Override
+		public Preference detailPreference(Preference preference) {
+			return meetingDao.selectDetailPreference(preference);
+		}
 }

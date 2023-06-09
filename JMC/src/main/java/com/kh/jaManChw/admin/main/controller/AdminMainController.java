@@ -14,22 +14,19 @@ public class AdminMainController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
-	@RequestMapping("/main2")
-	public void adminmain2() {
-		logger.info("어드민 메인 접속");
-	}
-	
 
 	@RequestMapping("/main")
-	public void adminmain() {
+	public void adminmain(HttpSession session) {
 		logger.info("어드민 메인 접속");
+		session.setAttribute("userno", 5);
 	}
 	
 	//관리자 게시글 구분 세션 추가
 	@RequestMapping("/main/boardCategory")
-	public String adminBoardOptionSession(HttpSession session, String boardOption) {
+	public String adminBoardOptionSession(HttpSession session, String boardOption ) {
 		session.setAttribute("boardOption", boardOption);
 		
-		return "redirect:../board/list";
+		
+		return "redirect:/admin/board/boardview/list";
 	}
 }

@@ -29,8 +29,8 @@ public class UserManageController {
 	
 	@Autowired UserManageService userManageService;
 	
-//	@GetMapping("/mg/list")
-	@GetMapping("/mg/main")
+//	@GetMapping("/mg/main")
+	@GetMapping("/mg/list")
 	public void user(
 			Model model,
 			String curPage
@@ -39,10 +39,11 @@ public class UserManageController {
 		String ccurpage = curPage;
 		Paging paging = userManageService.getpaging(ccurpage);
 		logger.info("{}",paging);
-		List<Users> users = userManageService.UserMgPage(paging);
-		logger.info("{}", users);
-		model.addAttribute("users", users);
+		List<Users> userfilter = userManageService.UserMgPage(paging);
+		logger.info("{}", userfilter);
+		model.addAttribute("userfilter", userfilter);
 		model.addAttribute("paging", paging);
+		model.addAttribute("pagetype", "list");
 	}
 	
 	
@@ -72,16 +73,23 @@ public class UserManageController {
 	}
 	
 	@RequestMapping("/mg/filter")
-	public void userfiltering(
+	public String userfiltering(
 			Model model, String curPage,
 			@RequestParam Map<String, Object> map
 			) {
+		logger.info("filter1 에이잭스 출력 : {}", map);
 		String ccurpage = curPage;
-		Paging paging = userManageService.getpaging(ccurpage);
+		Paging paging = userManageService.getFilterPaging(curPage, map);
+		logger.info("페이징 {}", paging);
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
 		model.addAttribute("userfilter", userfilter);
+		model.addAttribute("paging", paging);
+		model.addAttribute("pagetype", "filter");
+		model.addAttribute("map", map);
+		
+		return "admin/user/mg/list";
 	}
 	
 //	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
@@ -109,9 +117,30 @@ public class UserManageController {
 //	}
 	
 //	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
+//	@RequestMapping("/mg/filter1")
+//	public String userfiltering2(
+//			Model model, String curPage,
+//			@RequestParam Map<String, Object> map
+//			) {
+//		logger.info("filter1 에이잭스 출력 : {}", map);
+//		String ccurpage = curPage;
+//		Paging paging = userManageService.getFilterPaging(curPage, map);
+//		logger.info("페이징 {}", paging);
+//		map.put("paging", paging);
+//		List<Users> userfilter = userManageService.getUserMgFiltering(map);
+//		logger.info("{}", userfilter);
+//		model.addAttribute("userfilter", userfilter);
+//		model.addAttribute("paging", paging);
+//		logger.info("모델값 {}", model);
+////		return "/admin/user/mg/filter";
+//	}
+//	
+//	@RequestMapping(value = "/mg/filter1", method = { RequestMethod.POST })
+	@ResponseBody
 	@RequestMapping("/mg/filter1")
-	public String userfiltering2(
-			Model model, String curPage,
+	public ModelAndView userfiltering2(
+			ModelAndView mav,
+			String curPage,
 			@RequestParam Map<String, Object> map
 			) {
 		logger.info("filter1 에이잭스 출력 : {}", map);
@@ -121,10 +150,12 @@ public class UserManageController {
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
-		model.addAttribute("userfilter", userfilter);
-		model.addAttribute("paging", paging);
-		logger.info("모델값 {}", model);
-		return "/admin/user/mg/filter";
+		
+	      mav.addObject("userfilter", userfilter);
+	      mav.addObject("paging", paging);
+	      
+	      mav.setViewName("/admin/user/mg/list");
+	 	return mav;
 	}
 	
 	
@@ -141,18 +172,19 @@ public class UserManageController {
 		
 	}
 	@PostMapping("/mg/update")
-	public String UserMgUpdate2(@RequestParam HashMap<String, String> hashmap) {		
+	public String UserMgUpdate2(@RequestParam Map<String, Object> map) {		
 		logger.info("post update 들어옴");
-		logger.info("수정될 유저 정보{}", hashmap);
-		
-//		userManageService.reviseUserMgUpdate(users);
-		return "redirect:/admin/user/mg/list";
+		logger.info("수정될 유저 정보{}", map);
+		String curPage = (String) map.get("curPage");
+		logger.info("페이지정보{}: ", curPage);
+		userManageService.reviseUserMgUpdate(map);
+		return "redirect:/admin/user/mg/list?curPage="+curPage;
 	}
 	@RequestMapping("/mg/withdraw")
-	public String UserMgWithdraw(int userno) {
+	public String UserMgWithdraw(int userno, String curPage) {
 		
 		userManageService.reviseUserMgWithdraw(userno);
-		return "redirect:/admin/user/mg/list";
+		return "redirect:/admin/user/mg/list?curPage="+curPage;
 	}
 	
 	@GetMapping("/black/list")
@@ -181,7 +213,7 @@ public class UserManageController {
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
-		model.addAttribute("userfilter", userfilter);
+		model.addAttribute("users", userfilter);
 		model.addAttribute("paging", paging);
 		
 		return "/admin/user/black/filter";
@@ -191,7 +223,7 @@ public class UserManageController {
 	@RequestMapping("/black/update")
 	public String BlackUpdate(int userno, String curPage) {
 		logger.info("유저번호 입력 받은 거 : {}", userno);
-		userManageService.reviseUserUpdate(userno);
+		userManageService.reviseUserBlackUpdate(userno);
 		
 		return "redirect:/admin/user/black/list";
 	}

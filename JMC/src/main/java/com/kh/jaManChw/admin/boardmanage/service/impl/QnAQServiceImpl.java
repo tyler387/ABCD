@@ -39,7 +39,13 @@ public class QnAQServiceImpl implements QnAQService {
 	@Override
 	public Paging getQnAPaging(Map<String, Object> filterAndPagingMap) {
 
-		int filterQnACurPage = 1;
+		int filterQnACurPage = 0;
+		
+		if(filterAndPagingMap.get("curPage") != null && !"".equals(filterAndPagingMap.get("curPage"))) {
+			String curPage = (String)filterAndPagingMap.get("curPage");
+			
+			filterQnACurPage = Integer.parseInt(curPage);  
+		}
 		
 		return new Paging(filterQnACurPage,qnAQDao.selectCntQnAQFilterAll(filterAndPagingMap));
 	}

@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
+
 <mapper namespace ="com.kh.jaManChw.admin.reportmanage.dao.face.ReportManageDao">
 
 	<select id="selectCntAll"  resultType="int"  parameterType="String">
@@ -15,8 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM (
 		    SELECT rownum rnum, B.* FROM (
 		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
-		            WHERE R.userno = U.userno and R.report_type = 'post'  and R.r_userno = Q.userno
-		            ORDER BY R.userno DESC
+		            WHERE R.userno = U.userno and R.report_type = 'board'  and R.r_userno = Q.userno
+		            ORDER BY R.reportno DESC
 		        )B
 		    )
 		WHERE rnum BETWEEN #{startno} AND #{endno}
@@ -24,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectReportPostView" resultType="hashMap" parameterType="String">
       SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
-      WHERE R.reportno = #{reportno} and R.report_type = 'post' and R.userno = U.userno and R.r_userno = Q.userno
+      WHERE R.reportno = #{reportno} and R.report_type = 'board' and R.userno = U.userno and R.r_userno = Q.userno
 	</select>
 
 	<select id="selectUserPost" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
@@ -32,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    SELECT rownum rnum, B.* FROM (
 		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
 		            WHERE R.userno = U.userno and R.report_type = 'user'  and R.r_userno = Q.userno
-		            ORDER BY R.userno DESC
+		            ORDER BY R.reportno DESC
 		        )B
 		    )
 		WHERE rnum BETWEEN #{startno} AND #{endno}
@@ -58,16 +59,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        declare
 	        begin
 				UPDATE users SET warn_count = warn_count+1
-				WHERE userno = ${userno};
-				UPDATE report SET status = 'processed'
+				WHERE userno = ${ruserno};
+				UPDATE report SET status = 'done'
 				WHERE reportno = ${reportno};
 			end
 		}
 	</if>
 		<if test="type == 'cancel'">
-		UPDATE report SET status = 'processed'
+		UPDATE report SET status = 'done'
 		WHERE reportno = ${reportno}
 	</if>
+	</update>
+		
+	<select id="selectReportMeeting" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
+		SELECT * FROM (
+		    SELECT rownum rnum, B.* FROM (
+		            SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+		            WHERE R.userno = U.userno and R.report_type = 'meeting'  and R.r_userno = Q.userno
+		            ORDER BY R.reportno DESC
+		        )B
+		    )
+		WHERE rnum BETWEEN #{startno} AND #{endno}
+	</select>
+	
+	<select id="selectReportMeetingView" resultType="hashMap" parameterType="String">
+      SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
+      WHERE R.reportno = #{reportno} and R.report_type = 'meeting' and R.userno = U.userno and R.r_userno = Q.userno
+	</select>
+	
+	<update id="deleteReportPostBoard" parameterType="map">
+		UPDATE board
+		SET 
+		status = 'unactive'
+		WHERE
+		boardno = ${boardno}
+	</update>
+	
+	<update id="updateReportMeeting"  parameterType="map">
+		<if test="type == 'approval'">
+	    {call
+	        declare
+	        begin
+				UPDATE users SET warn_count = warn_count+1
+				WHERE userno = ${ruserno};
+				UPDATE report SET status = 'done'
+				WHERE reportno = ${reportno};
+			end
+		}
+	</if>
+		<if test="type == 'cancel'">
+		UPDATE report SET status = 'done'
+		WHERE reportno = ${reportno}
+	</if>
+	</update>
+	
+	<update id="deleteReportMeeting" parameterType="map">
+		UPDATE meeting
+		SET 
+		status = 'unactive'
+		WHERE
+		meetingno = ${meetingno}
 	</update>
 	
 </mapper>

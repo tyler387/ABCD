@@ -18,5 +18,10 @@ public interface ChatService {
 	public List<ChatMessage> getHistory(int chatno);
 
 	public void insertMessage(ChatMessage message);
+
+	public ChatRoom getChatRoomInfo(int roomno);
+
+	public List<ChatMessage> loadMessage(ChatMessage chatMessage);
+	
 	
 }

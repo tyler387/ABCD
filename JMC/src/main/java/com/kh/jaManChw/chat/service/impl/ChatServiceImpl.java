@@ -49,4 +49,14 @@ public class ChatServiceImpl implements ChatService {
 		chatDao.insertMyMessage(message);
 	}
 
+	@Override
+	public ChatRoom getChatRoomInfo(int chatno) {
+		return chatDao.selectChatRoomByChatno(chatno);
+	}
+
+	@Override
+	public List<ChatMessage> loadMessage(ChatMessage chatMessage) {
+		return chatDao.selectChatMessageLoad(chatMessage);
+	}
+
 }

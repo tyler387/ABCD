@@ -10,15 +10,37 @@
 <!-- 		insert into chat_message values(chat_message_seq.nextval,#{chatno},1,#{message},sysdate) -->
 <!-- 	</insert> -->
 	<select id="selectAllChatno" parameterType="com.kh.jaManChw.dto.ChatUser" resultType="com.kh.jaManChw.dto.ChatRoom">
-		SELECT chatno FROM CHAT_USER WHERE userno = #{userno}
+		select * from chat_room where chatno in (select chatno from chat_user where userno=#{userno})
 	</select>
 	
 	<select id="selectAllMessage" parameterType="int" resultType="com.kh.jaManChw.dto.ChatMessage">
-		SELECT * FROM chat_message WHERE chatno = #{chatno}	order by sendtime asc
+<!-- 		SELECT * FROM chat_message WHERE chatno = #{chatno}	 -->
+<!-- 		order by sendtime asc -->
+	select * from (
+	select rownum rnum,a.* from (
+	select c.* from chat_message c where chatno = #{chatno} order by messageno desc
+	)a 
+	) 
+	where rnum between 1 and 10 order by messageno asc
+
 	</select>
 	
 	<insert id="insertMyMessage" parameterType="com.kh.jaManChw.dto.ChatMessage">
-		INSERT INTO chat_message values(chat_message_seq.nextval,#{chatno},#{message},sysdate,#{sendId})
+		INSERT INTO chat_message values(chat_message_seq.nextval,#{chatno},#{message},#{sendTime},#{sendId})
 	</insert>
+	
+	<select id="selectChatRoomByChatno" parameterType="int" resultType="com.kh.jaManChw.dto.ChatRoom">
+		SELECT * FROM chat_room WHERE chatno = #{chatno}
+	</select>
+	<select id="selectChatMessageLoad" parameterType="com.kh.jaManChw.dto.ChatMessage" resultType="com.kh.jaManChw.dto.ChatMessage">
+<!-- 		select * from chat_message  where chatno = #{chatno} and messageno <![CDATA[   <   ]]> ${messageno} -->
+<!-- 		and rownum between 1 and 10 -->
+select * from(
+select rownum rnum, a.* from (
+    select c.* from chat_message c where chatno = #{chatno} and messageno <![CDATA[   <   ]]> #{messageno} order by messageno desc
+)a
+)where rnum between 1 and 10
+
+	</select>
 	
 </mapper>

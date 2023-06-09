@@ -16,4 +16,8 @@ public interface ChatDao {
 
 	public void insertMyMessage(ChatMessage message);
 
+	public ChatRoom selectChatRoomByChatno(int chatno);
+
+	public List<ChatMessage> selectChatMessageLoad(ChatMessage chatMessage);
+
 }

@@ -2,6 +2,8 @@ package com.kh.jaManChw.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ChatMessage {
 
 	private int messageno;

@@ -4,6 +4,7 @@
 
 <c:import url="../layout/header.jsp"/>
 
+
 <style type="text/css">
 
 .find-btn{
@@ -62,5 +63,5 @@
 
 </div>
 
-
 <c:import url="../layout/footer.jsp"/> 
+<c:import url="../chat/chatbutton.jsp"></c:import>

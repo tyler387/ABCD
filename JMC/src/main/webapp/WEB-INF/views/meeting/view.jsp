@@ -6,7 +6,7 @@
 
 
 <c:import url="../layout/header.jsp" />
-
+<c:import url="../chat/chatbutton.jsp"></c:import>
 
 
 
@@ -236,6 +236,15 @@
 	</tr>
 	<tr>		
 		<th>추가 태그</th>
+		<td>흡연 여부: 
+			<c:if test="${viewpreference.smoke eq 'nomatter'}"> 무관</c:if>
+			<c:if test="${viewpreference.smoke eq 'yes'}"> 흡연가능</c:if>
+			<c:if test="${viewpreference.smoke eq 'no'}"> 흡연금지</c:if>
+			
+			동반자 여부:
+			<c:if test="${viewpreference.friend eq 'nomatter'}"> 무관</c:if>
+			<c:if test="${viewpreference.friend eq 'yes'}"> 동반자가능</c:if>
+			<c:if test="${viewpreference.friend eq 'no'}"> 동반자금지</c:if>
 	</tr>
 
 

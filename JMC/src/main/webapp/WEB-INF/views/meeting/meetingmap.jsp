@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:import url="../layout/header.jsp" />
+<c:import url="../chat/chatbutton.jsp"></c:import>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a27b174f52c385cc5f77f0b961a3735b&libraries=services,clusterer,drawing"></script>
 

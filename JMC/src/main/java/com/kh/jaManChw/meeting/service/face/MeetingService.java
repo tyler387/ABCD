@@ -46,6 +46,9 @@ public interface MeetingService {
 
 	public int getMeetinglistcountnow(Meeting meeting);
 
+	public Preference detailPreference(Preference preference);
+	
+
 	
 	
 	

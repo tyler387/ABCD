@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+   
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <style>
 table {
@@ -21,66 +23,106 @@ table, td, th {
 }
 
 div.admin1 {
-        width: 100%;
         height: 650x;
+      	padding-left: 60px;
+    width: 98%;
         
 }
+
 
 </style>
 
 
 
-<!-- jQuery 2.2.4 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
+ 
+	 
 
 <script type="text/javascript">
-$(function() {
-	$("#searchBtn").click(function() {
+ 
+ 	var curPage = ${paging.curPage};
+	var totalCount = ${paging.totalCount};
+ 	var totalPage = ${paging.totalPage};
+ 	var listCount =${paging.listCount};
+ 	var pageCount = ${paging.pageCount};
+ 	var startPage = ${paging.startPage};
+ 	var endPage = ${paging.endPage};
+ 	var startno = ${paging.startno};
+ 	var endno = ${paging.endno};
+ 	
+	var filter = null ; 
+	var content = null ;
+	$(function() {
+		$("#content").keydown(function(e) {
+	// 		console.log(e);
+			if(e.keyCode == 13){
+				$("#searchBtn").click();
+			}
+		})
 		
-			 $.ajax({
-			type: "post"
-			, url: "./filter1"
-// 			, data:  {filter : "user_id", content : "cc"}
-			, data:  {filter : $("#filter").val(), content : $("#content").val()}
-			, dataType: "html" 
-			, success: function( res ) {
-				console.log("AJAX 성공")
-				$("#result").html(res)
-			}
-			, error: function() {
-				console.log("AJAX 실패")
-			}
-		}) 
-	})
-})
-</script>
+	// 			 if (confirm("정말 삭제하시겠습니까??") == true){ 
+	// 			     document.removefrm.submit();
+	// 			 }else{   //취소
+	// 			     return false;
+	// 			 }
+	// 	})
+	}
+// 	$("#searchBtn").click(function() {
+		
+// 		filter = $("#filter").val();
+// 		content = $("#content").val();
+		
+// 		$.ajax({
+// 			type: "post"
+// 			, url: "./filter1"
+// 			, data:  {filter : filter, content : content}
+// 			, dataType: "html" 
+// 			, success: function( res ) {
+// 				console.log("AJAX 성공")
+// 				$("#resultt").html(res)
+// 				filter = $("#filter").val();
+				
+// 			}
+// 			, error: function() {
+// 				console.log("AJAX 실패")
+// 			}
+// 		})
+// 	})
 
+// $("#deletebtn").click(function(){
+// 			 if (confirm("정말 삭제하시겠습니까??") == true){ 
+// 			     document.removefrm.submit();
+// 				   location.reload();
+// 			 }else{   //취소
+// 			     return false;
+// 			 }
+// 			console.log("content: ", content)
+// 	})
+<div id="resultt">
+	<c:import url="../../main.jsp"></c:import>
+	
+	
+	
+	<div id="Alltitle" style="text-align: center; padding-top: 10px;">
+		<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
+			유저 수정 페이지
+		</h1>
+	</div>
 
-
-</head>
-<body>
-<div id="Alltitle" style="text-align: center; padding-top: 10px;"><h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center;">
-유저 수정 페이지</h1></div>
-
-<!-- <form action="./filter" method="post"> -->
 <div class="text-end" style="padding-right: 50px; padding-top: 15px; margin-bottom:15px;">
-<select name ="filter" id="filter">
-   <option value = "user_id" selected>아이디</option>
-   <option value = "user_name">이름</option>
-   <option value = "grade">등급</option>
-</select>
-
-검색 : <input type="text" name="content" id="content">
-<button id="searchBtn">검색하기</button>
+<form action="./filter" method="post">
+		<select name ="filter" id="filter">
+		   <option value = "user_id" selected>아이디</option>
+		   <option value = "user_name">이름</option>
+		   <option value = "grade">등급</option>
+		</select>
+		
+		검색 : <input type="text" name="content" id="content">
+		<button id="searchBtn" type="submit" class="btn btn-secondary btn-sm">검색하기</button>
+</form>
 </div> 
+	
 <div id="result" class="admin1">
+	
 <table class="table table table-hover">
 <tr class="table-secondary">
 	<th>아이디</th>
@@ -93,7 +135,7 @@ $(function() {
 	<th>가입일</th>
 	<th>관리</th>
 </tr>
-<c:forEach var="users" items="${users }">
+<c:forEach var="users" items="${userfilter }">
 <tr>
 	<th>${users.userId }</th>
 	<th><c:choose>
@@ -108,15 +150,23 @@ $(function() {
 	<th><fmt:formatDate value="${users.birth }" pattern="yyyy-MM-dd"/></th>
 	<th>${users.userId }</th>
 	<th>${users.phone }</th>
-	<th>${users.joinDate }</th>
+	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
 	<th><a href="./update?userno=${users.userno }"><button type="button" class="btn btn-secondary">수정</button></a>
-	<a href="./withdraw?userno=${users.userno }"><button type="button" class="btn btn-secondary">탈퇴</button></a></th>
+	<a href="./withdraw?userno=${users.userno }&curPage=${paging.curPage}"><button type="button" class="btn btn-secondary" id ="deletebtn" onClick="window.location.reload()">탈퇴</button></a></th>
 </tr>
 </c:forEach>
 </table>
-<br><br><br>
-<div>
-<c:import url="./paging.jsp" />
+
+
+<div id="pagingDivTag">
+<c:import url="../../../layout/paging.jsp" />
+</div>
+
+</div>	
+	
 </div>
 </div>
+</body>
+</div>
+</html>
 

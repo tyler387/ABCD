@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.kh.jaManChw.admin.itemmanage.dao.face.ItemDao">
+
+	<select id="getItemno" resultType="int">
+		SELECT item_seq.nextval FROM dual
+	</select>
+	
+<!-- ItemOption 넣다가 실패함 여기부터 시작 -->	
+	
+	<insert id="insertItem" parameterType="Item">
+		INSERT INTO item(
+			itemno, 
+			item_title, 
+			item_content, 
+			item_price, 
+			item_type,
+			item_status,
+			all_item_count
+						)
+		VALUES(
+			#{itemno}, 
+			#{itemTitle}, 
+			#{itemContent}, 
+			#{itemPrice}, 
+			#{itemType}, 
+			#{itemStatus}, 
+			#{allItemCount}
+			)
+	</insert>
+	
+	<insert id="insertItemOption" parameterType="ItemOption">
+		INSERT INTO item_option(
+			item_optionno, 
+			itemno, option_content, 
+			option_count, 
+			extra_charge
+			)
+		VALUES(
+			item_option_seq.nextval, 
+			#{itemno}, 
+			#{optionContent}, 
+			#{optionCount}, 
+			#{extraCharge}
+			)
+	</insert>
+	
+	<insert id="insertItemFile" parameterType="ItemFile">
+		INSERT INTO item_file(
+			item_view_fileno,
+			itemno, 
+			i_origin_name, 
+			i_stored_name, 
+			filesize
+			)
+		VALUES(
+			item_file_seq.nextval, 
+			#{itemno}, 
+			#{iOriginName}, 
+			#{iStoredName}, 
+			#{filesize}
+			)
+	</insert>
+	
+	<select id="selectCntAllItem" resultType="int">
+		SELECT count(*) FROM item
+	</select>
+	
+	<select id="selectItemAll" resultType="map" parameterType="Paging">
+		SELECT * FROM(
+			SELECT rownum rnum, B.* FROM (
+				SELECT itemno, 
+						item_title, 
+						item_content, 
+						to_char(item_price, 'FM999,999,999,999l') item_Price, 
+						item_type, item_status, 
+						write_date, 
+						all_item_count  
+				FROM item
+				ORDER BY itemno DESC
+			)B
+		)
+		WHERE rnum BETWEEN #{startno} AND #{endno} 
+	</select>
+	
+	<select id="selectCntFilterItem" resultType="int" parameterType="map">
+		SELECT count(*) FROM item
+		<if test="content != null and !''.equals(content)">
+		WHERE upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+		</if>
+	</select>
+	
+	<select id="selectItemByFilter" resultType="map" parameterType="map">
+		SELECT * FROM(
+			SELECT rownum rnum, B.* FROM (
+				SELECT itemno, 
+					item_title, 
+					item_content, 
+					to_char(item_price, 'FM999,999,999,999l') item_Price, 
+					item_type,
+					item_status, 
+					write_date, 
+					all_item_count  
+				FROM item
+				WHERE 1 = 1
+					<if test="filter.content != null and !''.equals(filter.content)">
+					AND upper(${filter.filter}) LIKE '%' || upper(#{filter.content}) || '%'
+					</if>
+				ORDER BY itemno DESC
+			)B
+		)
+		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno} 
+	</select>
+	
+	<select id="selectItemOptionDetail" resultType="ItemOption" parameterType="int">
+		SELECT *
+		FROM item_option
+		WHERE itemno = #{itemno}
+	</select>
+	
+	<select id="selectItemFileDetail" resultType="ItemFile" parameterType="int">
+		SELECT *
+		FROM item_file
+		WHERE itemno = #{itemno}
+	</select>
+	
+	<select id="selectItemDetail" resultType="Item" parameterType="int">
+		SELECT *
+		FROM item
+		WHERE itemno = #{itemno}
+	</select>
+	
+	<update id="updateItem" parameterType="Item">
+		UPDATE item SET
+			item_title = #{itemTitle},
+			item_content = #{itemContent},
+			item_price = #{itemPrice},
+			item_type = #{itemType},
+			item_Status = #{itemStatus},
+			all_item_count = #{allItemCount}
+		WHERE itemno = #{itemno}
+	</update>
+	
+	<delete id="deleteItemOption" parameterType="int">
+		DELETE item_option WHERE itemno = #{itemno}
+	</delete>
+	
+	<delete id="deleteItemFile" parameterType="int">
+		DELETE item_file WHERE itemno = #{itemno}
+	</delete>
+
+	<delete id="deleteItem" parameterType="int">
+		DELETE item WHERE itemno = #{itemno}
+	</delete>
+
+</mapper>

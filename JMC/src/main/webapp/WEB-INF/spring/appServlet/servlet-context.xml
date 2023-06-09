@@ -39,6 +39,7 @@
 	<resources mapping="/summerfile/**" location="/summerfile/" />
 	<resources mapping="/itemContentFile/**" location="/itemContentFile/" />
 	<resources mapping="/itemfile/**" location="/itemfile/" />
+	<resources mapping="/userProfile/**" location="/userProfile/" />
 <!--=================================================================================================================-->
 
 

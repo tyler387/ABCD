@@ -139,13 +139,13 @@
 	
 <script>
 
-	if(document.getElementById("smoke").checked) {
-		document.getElementById("smokehidden").disabled = true;
-	}
+// 	if(document.getElementById("smoke").checked) {
+// 		document.getElementById("smokehidden").disabled = true;
+// 	}
 	
-	if(document.getElementById("friend").checked) {
-		document.getElementById("friendhidden").disabled = true;
-	}
+// 	if(document.getElementById("friend").checked) {
+// 		document.getElementById("friendhidden").disabled = true;
+// 	}
 	
 	
     function sample6_execDaumPostcode() {

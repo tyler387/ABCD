@@ -55,10 +55,11 @@
 
 <select id="selectMeetinglistAll" resultType="com.kh.jaManChw.dto.Meeting">
 	
-	SELECT * FROM MEETING 
-	where meeting_date &gt; sysdate
-	order by meetingno desc
-
+	select * from meeting m
+	join (select count(*) cnt,meetingno from applicant
+	group by meetingno) a on m.meetingno = a.meetingno
+	where m.head_count &gt; a.cnt and meeting_date &gt; sysdate 
+	order by m.meetingno desc
 </select>
 
 <select id="selectMeeting" resultType="com.kh.jaManChw.dto.Meeting" parameterType="com.kh.jaManChw.dto.Meeting">
@@ -127,13 +128,13 @@
 
 <select id="selectMeetingListCount" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int">
 
-select count(*) from meeting
+select count(*) from meeting where meeting_date &gt; sysdate
 	
 </select>
 
 <select id="selectMeetingListCountnow" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int">
 
-select count(*) from meeting where status = 'active'
+select count(*) from meeting where status = 'active' and meeting_date &gt; sysdate
 
 </select>
 
@@ -150,6 +151,12 @@ select count(*) from meeting where status = 'active'
 <select id="selectMeetingListByMap" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
 
 	select * from meeting where loc1 in(#{mapData} , #{mapData1})
+
+</select>
+
+<select id="selectDetailPreference" parameterType="com.kh.jaManChw.dto.Preference" resultType="com.kh.jaManChw.dto.Preference">
+
+	select * from preference where meetingno = #{meetingno}
 
 </select>
 

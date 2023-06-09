@@ -52,7 +52,7 @@
 	<interceptors>
 		<interceptor>
 			<!-- 관리자 관련 모든 클래스에 대한 인터셉터를 지정한다 -->
-			<mapping path="/com/kh/jaManChw/admin/**"/>
+			<mapping path="/**/admin/**"/>
 			<beans:bean class="com.kh.jaManChw.util.interceptor.AdminInterceptor"/>
 		</interceptor>	
 	</interceptors>

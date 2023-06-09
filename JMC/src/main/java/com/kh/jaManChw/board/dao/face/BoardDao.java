@@ -3,9 +3,12 @@ package com.kh.jaManChw.board.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kh.jaManChw.dto.Board;
 import com.kh.jaManChw.dto.BoardComment;
 import com.kh.jaManChw.dto.BoardFile;
+import com.kh.jaManChw.dto.BoardLike;
 import com.kh.jaManChw.util.Paging;
 
 public interface BoardDao {
@@ -64,8 +67,46 @@ public interface BoardDao {
 	 */
 	public List<Map<String, Object>> selectCateAllFile(Map<String, Object> pagingAndBoardOptionno);
 
-	public void insertBoardFile(BoardFile boardFile);
+	/**
+	 * 글 쓰기 전에 다음 boardno값을 조회하기 위한 메서드(seq.nextval)
+	 * @return 다음 boardno값
+	 */
+	public int selectCreateBoardno();
 
+	/**
+	 * 글 쓰기 시에 작성한 내용을 삽입한다.
+	 * @param board - 게시글 번호, 게시판 분류 번호, 내용  
+	 * 			추후 유저번호 받아야 함....
+	 */
 	public void insertBoard(Board board);
 
+	public void insertBoardFile(BoardFile boardFile);
+
+	public int selectReco(BoardLike like);
+
+	public void insertReco(BoardLike like);
+
+	public void deleteReco(BoardLike like);
+
+	/**
+	 * 전체 좋아요 개수를 조회한다 
+	 * 
+	 * @param boardno - 게시글 번호
+	 * @return 게시글의 전체 좋아요 개수
+	 */
+	public int selectCntLikeAll(int boardno);
+
+	
+	/**
+	 * 검색 결과에 따른 결과 보여주기
+	 * @param board - boardOptionno를 담은 객체
+	 * @param searchData - 검색어
+	 * @return 검색어와 일치하고 boardOptionno에 일치하는 리스트 반환
+	 */
+	public List<Map<String, Object>> selectBoardFile(@Param("board") Board board, @Param("searchData")String searchData);
+
+
+
+
+	
 }

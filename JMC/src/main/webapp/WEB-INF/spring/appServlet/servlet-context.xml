@@ -36,6 +36,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/summerfile/**" location="/summerfile/" />
 	<resources mapping="/upload/**" location="/upload/" />
+	<resources mapping="/boardFileUpload/**" location="/boardFileUpload/" />
+	
 <!--=================================================================================================================-->
 
 

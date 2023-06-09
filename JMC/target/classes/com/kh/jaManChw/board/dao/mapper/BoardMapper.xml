@@ -84,9 +84,69 @@
 		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
 		
 	</select>
+	
+	<select id="selectCreateBoardno" resultType="int">
+		SELECT board_seq.nextVal FROM dual
+	</select>
+	
+	
+	
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD
+		VALUES ( #{boardno}, #{boardOptionno}, #{userno}, #{content}, 'active', sysdate, sysdate )
+	</insert>
+
 	<insert id="insertBoardFile" parameterType="BoardFile">
 		INSERT INTO BOARD_File
-		VALUES ()
+		VALUES ( boardFile_seq.nextval, #{boardno},#{originName}, #{storedName}, ${filesize})
 	</insert>
+	<select id="selectReco" parameterType="BoardLike" resultType="int">
+		select count(*) from board_like 
+		where userno = #{userno} and boardno = #{boardno}
+	</select>
+	<insert id="insertReco" parameterType="BoardLike">
+		insert into board_like values(board_like_seq.nextval,#{boardno},#{userno})
+	</insert>
+	<delete id="deleteReco" parameterType="BoardLike">
+		delete from board_like where boardno = #{boardno} and userno = #{userno}
+	</delete>
+	
+	<select id="selectAllReco" parameterType="BoardLike" resultType="int">
+		select count(*) from board_like where boardno = #{boardno} and userno = #{userno}
+	</select>
+	
+	<select id="selectCntLikeAll" resultType="int" parameterType="int">
+		SELECT count(*) FROM board_Like
+		WHERE boardno = #{boardno}
+	</select>
+
+	<select id="selectBoardFile" parameterType="map" resultType="map">
+		SELECT b.*, bf.stored_name, u.user_nick
+		FROM board b, board_file bf, users u
+		WHERE 1 = 1
+		AND b.boardno = bf.boardno
+		AND b.userno = u.userno
+		<if test="board.boardOptionno !=0">
+		AND b.board_optionno = #{board.boardOptionno}
+		</if>
+		AND (upper(content) LIKE '%' || upper(#{searchData}) || '%'
+		or upper(user_nick) LIKE '%' || upper(#{searchData}) || '%')
+		ORDER BY b.boardno DESC
+	</select>
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
   
   </mapper>

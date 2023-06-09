@@ -3,11 +3,15 @@ package com.kh.jaManChw.board.service.face;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kh.jaManChw.dto.Board;
 import com.kh.jaManChw.dto.BoardComment;
 import com.kh.jaManChw.dto.BoardFile;
+import com.kh.jaManChw.dto.BoardLike;
 import com.kh.jaManChw.util.Paging;
 
 public interface BoardService {
@@ -72,10 +76,31 @@ public interface BoardService {
 	 * 작성한 글과 사진들을 DB에 insert한다.
 	 * @param boardWrite   작성된 글
 	 * @param file          첨부한 파일
+	 * @param session 
 	 */
-	public void writeBoard(String boardWrite, List<MultipartFile> file);
+	public void writeBoard(String category, String boardWrite, List<MultipartFile> file, HttpSession session);
 
-	public void writeBoard(MultipartHttpServletRequest request);
+	public Map<String, Integer> recoBoard(int boardno, HttpSession session);
+
+	/**
+	 * 
+	 * @param boardno
+	 * @param session
+	 * @return
+	 */
+	public Map<String, Integer> recoBoardJoHuye(int boardno, HttpSession session);
+
+	/**
+	 * 검색 결과에 따른 결과 보여주기
+	 * @param searchData - 검색어
+	 * @return	검색어와 일치하는 fileList
+	 */
+	public List<Map<String, Object>> searchBoardFile(Board board, String searchData);
+
+	public int chkReco(int boardno, int userno);
+
+
+
 	
 	
 

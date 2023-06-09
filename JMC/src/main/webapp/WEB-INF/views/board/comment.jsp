@@ -1,9 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-    
+
+<c:choose>
+<c:when test="${sessionScope.userId eq null}">
+<div id="noncComment">
+로그인 후 덧글을 작성할 수 있습니다.<br><br>
+</div>
+</c:when> 
+
+<c:when test="${sessionScope.userId ne null }">  
 <div id="cComment">
 <input type="text" id="commentWrite" name="cContent" placeholder="덧글을 작성하세요"><button id="btnWrite">등록</button><br>
+
+</c:when>
+</c:choose>   
+
+
+
 <div id="commentList">
 
 <div id="commentContent" >
@@ -29,9 +43,7 @@ ${list.commentno}.<div id="cContent${list.commentno}"> ${list.cContent }</div>
 </div>
 </div>
 
-    
-
-    
+ 
  <style type="text/css">
 #cComment{
 	position: absolute;
@@ -41,10 +53,11 @@ ${list.commentno}.<div id="cContent${list.commentno}"> ${list.cContent }</div>
 }
 
 #commentContent{
-/* overflowoverflow-y:auto; */
-/* width:300px;  */
-/* height:168px;  */
-/* word-break: break-all; */
+
+ width:310px;
+ height:290px;
+ margin: 0px;
+ overflow: auto;
 }
 
 .cContent{
@@ -53,6 +66,15 @@ ${list.commentno}.<div id="cContent${list.commentno}"> ${list.cContent }</div>
 	 text-align: center;
 	 font-size: 3px;
 	 float: right;
+}
+
+#noncComment{
+	border : 1px solid #ccc;
+	width : 300px;
+	border-radius: 15px;
+	text-align: center;
+    margin-top: 10px;
+    padding-top: 20px;
 }
 
 .confirm{

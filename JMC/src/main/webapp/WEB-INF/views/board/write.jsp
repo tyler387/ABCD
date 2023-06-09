@@ -6,7 +6,7 @@
 
 
 <form id="uploadFile"  enctype="multipart/form-data">
-<select id="category">
+<select id="category" name="category">
   	<option value="none">=== 선택 ===</option>
 	<option value ="11">모임후기</option>
 	<option value ="12">술자랑 & 구입기</option>
@@ -30,7 +30,7 @@
 	<input type="file" id="file" name="file" multiple="multiple" class="form-control rounded-bottom d-none">
 	<br>
 	<button type ="button" id="boardContent">등록</button>
-	</form>
+</form>
 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -81,15 +81,17 @@ $(function() {
 			
 		}
 	})
+	
+	
+	
 	$("#boardContent").click(function(){
-		let formData = new FormData($("#uploadFile")[0])
+		var formData = new FormData($("#uploadFile")[0])
 		
 // 		formData.append("file", $("#file")[0].files[0])
 		
 // 		console.log(formData)
 		
 // 		alert(JSON.stringify(formData ))
-
  		var cateData = $('#category').val()
 		 console.log("boardContent click!!")
 		 
@@ -101,19 +103,27 @@ $(function() {
 			    contentType: false,
 			    enctype : 'multipart/form-data',
 // 			    data: {file : formData },
-			    data: formData,
+				data: formData,
+//			    data: {file : formData, cateData : cateData},
 			    success: function(res) {
 
 			        console.log("AJAX 성공");
-		            $("#write2").remove()
-		     	   
+
+//        	         $("#back").remove()
+//        	          console.log("res는???", res)
+// //        	         $("#back").append(res)
+// //     	            $("#grid").children().remove()    
+// 		        // $("#back").append(res)
+       	        
+					location.reload();
 			    },
 			    error: function() {
 			        console.log("AJAX 실패");
 			    }
+		
 		})
-				 $("#write").append()
-			    	
+			   
+	
 	})
 	
 	

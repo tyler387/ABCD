@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.jaManChw.board.service.face.BoardService;
 import com.kh.jaManChw.dto.Board;
 import com.kh.jaManChw.dto.BoardComment;
@@ -68,24 +65,39 @@ public class BoardController {
 		
 	//게시글의 글, 사진, 좋아요 수, 덧글수 등을 가지고 온다.
 		@GetMapping("/allFile2")
-		public void boardDdtail(@RequestParam int boardno, Model model) {
+		public void boardDdtail(@RequestParam int boardno, Model model,HttpSession session) {
 			Map<String, Object> map  = new HashMap<>();
+			
+			int chkreco;
+			if(session.getAttribute("userno")==null) {
+				chkreco = 0;
+			}else {
+				int userno = (int)session.getAttribute("userno");
+				chkreco = boardService.chkReco(boardno,userno);
+			}
 			map = boardService.showAllDetail(boardno);
 			logger.info("map : {}" , map);
 			model.addAttribute("map", map);
+			model.addAttribute("chkReco",chkreco);
 		}
 		
 		//사진들을 클릭 했을 때 해당 글, 사진, 좋아요 수, 댓글 수 등을 가져온다.
 		@ResponseBody
 		@GetMapping("/abacabc")
-		public ModelAndView clickViewDetail(int boardno, ModelAndView mav) {
+		public ModelAndView clickViewDetail(int boardno, ModelAndView mav,HttpSession session) {
 //			System.out.println(boardno);
-			
+			int chkreco;
+			if(session.getAttribute("userno")==null) {
+				chkreco = 0;
+			}else {
+				int userno = (int)session.getAttribute("userno");
+				chkreco = boardService.chkReco(boardno,userno);
+			}
 			Map<String, Object> map  = new HashMap<>();
 			map = boardService.showAllDetail(boardno);
 			
 			logger.info("map값 : {}", map);
-			
+			mav.addObject("chkReco",chkreco);
 			mav.addObject("map",map);
 			mav.setViewName("/board/allFile2");
 			
@@ -117,7 +129,7 @@ public class BoardController {
 		@ResponseBody
 		@PostMapping("/commentWrite")
 		public ModelAndView commnetWrite(String data, int boardno, ModelAndView mav) {
-			logger.info("commentWrite!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			logger.info("commentWrite");
 			logger.info("boardComment : {}", data);
 			
 			logger.info("boardno {}", boardno);
@@ -178,7 +190,7 @@ public class BoardController {
 		
 		//게시글의 글, 사진, 좋아요 수, 덧글수 등을 다시 가지고 온다.
 		@GetMapping("/coCountLikeCount")
-		public String deleteBoardDdtail(@RequestParam int boardno, Model model) {
+		public String deleteBoarDetail(@RequestParam int boardno, Model model) {
 			Map<String, Object> map  = new HashMap<>();
 			map = boardService.showAllDetail(boardno);
 			logger.info("map : {}" , map);
@@ -222,7 +234,7 @@ public class BoardController {
 				Model model
 				, String curPage
 				, @RequestParam(name = "boardOptionno", required = false, defaultValue = "0") int boardOptionno){
-			logger.info("board/allFile11   [GET]aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			logger.info("board/allFile11   [GET]");
 			logger.info("curPage11 : {}", curPage);
 			
 			Paging paging = boardService.getPage(curPage);
@@ -256,7 +268,7 @@ public class BoardController {
 			map = boardService.showAllDetail(boardNo);
 
 
-			logger.info("map11 : {}" , map);
+			logger.info("map : {}" , map);
 
 			logger.info("map-stoaredName:{}", map.get("STORED_NAME"));
 
@@ -266,8 +278,6 @@ public class BoardController {
 
 			model.addAttribute("map", map);
 
-			
-			logger.info("map22 : {}" , map);
 			
 			return list; 
 		}
@@ -279,14 +289,15 @@ public class BoardController {
 				){
 			
 			Map<String, Object> firstFileno = boardService.showAllDetail(boardno);
-			
 			return firstFileno;
 		}
 		
+
 		@GetMapping("/write")
 		public ModelAndView boardWrite(ModelAndView mav) {
 			
 			logger.info("boardWrite컨트롤러!");
+
 			
 //			mav.addObject("boardO	ptionno", boardOptionno);
 			mav.setViewName("/board/write");		
@@ -295,32 +306,114 @@ public class BoardController {
 			
 		}
 		
+	
+		
+		
+		
 		
 		//MeSSION
 		//1. 보드 옵션NO가지고 오게 하기
 		
-//		//게시글 작성 + 이미지 첨부 값 가지고 오기
-//		@PostMapping("/write")
-//		public void boardWrite(String cateData, String boardWrite, @RequestParam(value = "file") List<MultipartFile> file) {
-//			//카테고리 값은 도대체 어떻게 가지고 오는 가...
-//		    logger.info("카테고리 값: {}", cateData);
-//		    logger.info("글 작성 내용: {}", boardWrite);
-//		    logger.info("파일 첨부 값: {}", file);
-//	
-//		    boardService.writeBoard(boardWrite, file);
-//		    
-//		}
 		//게시글 작성 + 이미지 첨부 값 가지고 오기
 		@PostMapping("/write")
-		public void boardWrite(MultipartHttpServletRequest request) {
-			
-			boardService.writeBoard(request);
-			
+		public @ResponseBody String boardWrite(String category, String boardWrite, @RequestParam(value = "file") List<MultipartFile> file, HttpSession session) {
+			//카테고리 값은 도대체 어떻게 가지고 오는 가...
+		    logger.info("카테고리 값: {}", category);
+		    logger.info("글 작성 내용: {}", boardWrite);
+		    logger.info("파일 첨부 값: {}", file);
+		    
+	
+		    
+		    
+		    boardService.writeBoard(category, boardWrite, file, session);
+		    
+//		    Paging paging = boardService.getPage(curPage);
+//		    
+//		    List<BoardFile> list = boardService.showAllFile(paging);
+//	
+//			Map<String, Object> map  = new HashMap<>();
+//			map = boardService.showAllDetail(list.get(0).getBoardno());
+//
+//			logger.info("map : {}" , map);
+//
+// 			model.addAttribute("paging", paging);
+//			model.addAttribute("list", list);
+//			model.addAttribute("map", map);
+		    
+		    return "success";
+		    		
 		}
 
 		
+		@RequestMapping("/boardReco")
+		@ResponseBody
+		public Map<String, Integer> boardReco(int boardno, HttpSession session, Model model) {
+			
+			Map<String, Integer> allLikeInfo = boardService.recoBoard(boardno,session);
+			
+			
+			
+			
+			return allLikeInfo;
+		}
 		
+		@RequestMapping("/boardRecoJoHuye")
+		@ResponseBody
+		public Map<String, Integer> boardRecoJoHuye(int boardno, HttpSession session, Model model) {
+			
+			Map<String, Integer> allLikeInfo = boardService.recoBoardJoHuye(boardno,session);
+			
+			
+			return allLikeInfo;
+		}
 		
+		@RequestMapping("/search")
+		@ResponseBody
+		public List<Map<String, Object>> BoardSearch(@RequestParam(name = "boardOptionno", required = false, defaultValue = "0") int boardOptionno, String searchData, Model model) {
+			
+			logger.info("보드옵션 번호 {}", boardOptionno);
+			
+			Board board= new Board();
+			board.setBoardOptionno(boardOptionno);
+			
+			logger.info("board: {}", board);
+
+			List<Map<String, Object>> searchList = boardService.searchBoardFile(board, searchData);
+			
+			logger.info("검색어로 가져온 list: {}", searchList);
+	
+			logger.info("첫 게시글: {}", searchList.get(0).get("BOARDNO"));
+
+			Map<String, Object> map  = new HashMap<>();
+
+		
+			
+			Object boardNoObject = searchList.get(0).get("BOARDNO");
+			BigDecimal boardNoBigDecimal = (BigDecimal) boardNoObject;
+		    String boardNoString = boardNoBigDecimal.toString();
+			int boardNo = Integer.parseInt(boardNoString);
+			
+			map = boardService.showAllDetail(boardNo);
+			
+//			int boardno = Integer.parseInt((String)list.get(2).get("BOARDNO"));
+//			logger.info("해치웠나?4-2");
+			
+			map = boardService.showAllDetail(boardNo);
+
+
+			logger.info("map : {}" , map);
+
+			logger.info("map-stoaredName:{}", map.get("STORED_NAME"));
+
+			model.addAttribute("searchList", searchList);
+
+			model.addAttribute("map", map);
+
+			
+			return searchList; 
+
+
+		}
 		
 		
 		

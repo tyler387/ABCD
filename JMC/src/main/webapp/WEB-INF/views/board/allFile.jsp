@@ -17,8 +17,8 @@
 }
 
 .boardPic{
-width: 250px;
-height: 250px;
+width: 245px;
+height: 245px;
 }
 
 .boardDetailPic{
@@ -80,7 +80,7 @@ height: 300px;
 #nav{
 	background : black;
 	text-align : center;
-	
+
 
 }
 #nav ul {margin:0; padding:0; list-style:none; color:white}
@@ -155,6 +155,9 @@ input {
 	width: 609px;
 	margin: 0 auto;
 }
+.cate{
+	cursor : pointer;
+}
 
 
 </style>
@@ -169,6 +172,7 @@ input {
 
 
 <script type="text/javascript">
+
 $(function(){
 
 $.ajax({
@@ -191,7 +195,7 @@ $.ajax({
 		
 		var putHtml = "" 
 		for(var i = 0; i <res.length; i ++){
-		putHtml += "<a data-boardno='"+res[i].BOARDNO+"'><img src='/upload/"+res[i].STORED_NAME+"/' class='boardPic'></a>";
+		putHtml += "<a data-boardno='"+res[i].BOARDNO+"'><img src='/boardFileUpload/"+res[i].STORED_NAME+"/' class='boardPic'></a>";
 // 		putHtml += "<a data-boardno='"+res[i].BOARDNO+"'><img src='/upload/"+res[i].STORED_NAME+".jsp/'></a>";
 // 		putHtml += "<a data-boardno='"+res[i].BOARDNO+"' id='a"+i+"'><img alt='사진' src=''></a>";
 		}
@@ -208,10 +212,42 @@ $.ajax({
 				console.log("AJAX 성공")
 
 				
-				$("#article > img").attr("src", "/upload/"+res1.STORED_NAME)
+				$("#article > img").attr("src", "/boardFileUpload/"+res1.STORED_NAME)
 				$("#article > #content22").html(res1.CONTENT)
+				
+				
+				console.log("댓글 수 잘 찍히냐?", res1.COCOUNT)
+				console.log("좋아요 수 잘 찍히냐?", res1.LIKECOUNT)
+				
+				
 				$("#article[id='cocountSpan']").html(res1.COCOUNT)
 				$("#article[id='like']").html(res1.LIKECOUNT)
+				
+				$.ajax({
+		         type: "get"
+		         , data: {boardno : res[0].BOARDNO}
+		         , dataType: "json"
+		         , success: function(res){
+		            console.log("AJAX 성공")
+		            console.log("res!!", res)
+		    		if(res.chkReco == 0){
+		    			$("#likeCount").html(res.allCount)
+		    			$("#heartw").attr("style","display: inline")
+		    			$("#heartr").attr("style","display: none")
+		    			
+		    			
+		    		}else{
+		    			$("#likeCount").html(res.allCount)
+		    			$("#heartw").attr("style","display: none")
+		    			$("#heartr").attr("style","display: inline")
+		    			
+		    		}
+		          
+		         }
+		         , error: function(){
+		            console.log("AJAX 실패")   
+		         }
+		      })
 			}
 			 , error: function(){
 		            console.log("AJAX 실패")   
@@ -240,9 +276,10 @@ $.ajax({
 		         , dataType: "html"
 		         , success: function(res){
 		            console.log("AJAX 성공")
-		          //  console.log(res)
-		            $("#merchant").children().remove()
+		            
+		            $("#merchant").children().remove()    
 		            $("#merchant").append(res)
+		            
 		         }
 		         , error: function(){
 		            console.log("AJAX 실패")   
@@ -250,55 +287,10 @@ $.ajax({
 		      })
 	} )
 	
-// 	$("#grid").children("a").click(function(){
-// 		      console.log("#ajax click")
-// 		  var boardno = $(this).attr("data-boardno")
-// 		  	console.log("boardno :", boardno)
-		     
-		  
-// 		  $.ajax({
-// 		         type: "get"
-// 		         , url: "/board/abacabc"
-// 		         , data: {boardno : boardno}
-// 		         , dataType: "html"
-// 		         , success: function(res){
-// 		            console.log("AJAX 성공")
-// 		          //  console.log(res)
-// 		            $("#merchant").children().remove()
-// 		            $("#merchant").append(res)
-// 		         }
-// 		         , error: function(){
-// 		            console.log("AJAX 실패")   
-// 		         }
-// 		      })
-// 	})
-	
-// 	$("#whole").click(function(){
-// 		console.log("#whole ajax click")
-		
-		
-// 		$.ajax({
-// 			type: "get"
-// 			, url: "/board/allFilepage"
-// 			,dataType : "html"
-// 			, data : {}
-// 			,success: function(res){
-// 				console.log("AJAX 성공")
-//  				$("html").children().remove()
-//  		        $("html").append(res)
-// 			}
-// 			 , error: function(){
-// 		            console.log("AJAX 실패")   
-// 		    }
-			
-			
-// 		})
-		
-		
-// 	})
+
 	$(".cate").click(function(){
 		console.log(".cate ajax click")
-		var boardOptionno = $(this).val()
+		boardOptionno = $(this).val()
 		console.log(boardOptionno)
 		
 		$.ajax({
@@ -322,8 +314,7 @@ $.ajax({
 		var putHtml = "" 
 		for(var i = 0; i <res.length; i ++){
 
-		putHtml += "<a data-boardno='"+res[i].BOARDNO+"'><img src='/upload/"+res[i].STORED_NAME+"/' class='boardPic'></a>";
-// 		putHtml += "<a data-boardno='"+res[i].BOARDNO+"' id='a"+i+"'><img alt='사진' src=''></a>";
+		putHtml += "<a data-boardno='"+res[i].BOARDNO+"'><img src='/boardFileUpload/"+res[i].STORED_NAME+"/' class='boardPic'></a>";
 		}
 		
 		$("#merchantList").html(putHtml);
@@ -339,11 +330,18 @@ $.ajax({
 			,success: function(res1){
 				console.log("AJAX 성공")
 				console.log("값 잘 가지고 옴????", res[0].BOARDNO);
-				$("#article > img").attr("src", "/upload/"+res1.STORED_NAME)
+				$("#article > img").attr("src", "/boardFileUpload/"+res1.STORED_NAME)
 				//★여기서 추가로 글 값들까지 가지고 오게 해야 함.........
 				$("#article > #content22").html(res1.CONTENT)
-				$("#article[id='cocountSpan']").html(res1.COCOUNT)
-				$("#article[id='like']").html(res1.LIKECOUNT)
+				console.log("댓글 수 잘 찍히냐?", res1.COCOUNT)
+				
+				console.log("좋아요 수 잘 찍히냐?", res1.LIKECOUNT)
+
+ 				$("#cocountSpan").html(res1.COCOUNT)
+ 				$("#likeCount").html(res1.LIKECOUNT)
+ 				//23/06/08 19:30 주석 후 위에 내용 작성
+// 			    $("#article[id='cocountSpan']").html(res1.COCOUNT)
+// 				$("#article[id='like']").html(res1.LIKECOUNT)
 				
 			
 			}

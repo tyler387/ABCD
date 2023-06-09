@@ -55,6 +55,11 @@
 		<level value="info" />
 	</logger>
 	
+	<!-- 결제 관련 -->	
+	<logger name="com.kh.jaManChw.payment">
+		<level value="info" />
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

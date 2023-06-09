@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.jaManChw.admin.itemmanage.dao.face.ItemQnAQDao">
+
+	<select id="selectCntAllQnAQ" resultType="int">
+		SELECT count(*) FROM Item_QnA_Q
+	</select>
+
+	<select id="selectItemQnAQAll" resultType="map" parameterType="Paging">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM (
+		        SELECT iqq.*, 
+		            user_id, 
+		            user_name, 
+		            iqa.mgr_itemno,
+		            i.item_title,
+		            i_stored_name
+		        FROM item_QnA_Q iqq, 
+		            USERS u, 
+		            item_QnA_A iqa, 
+		            
+		            item_File if, 
+		            item i
+		        WHERE 1 = 1
+		            AND iqq.userno = u.userno
+		            AND iqq.item_qnano = iqa.item_qnano(+)
+		            AND iqa.ia_status(+) != 'delete'
+		            AND iqq.itemno = i.itemno
+		            AND iqq.itemno = if.itemno
+		        ORDER BY iqq.item_qnano DESC
+		    )B
+		)
+		WHERE rnum BETWEEN #{startno} AND #{endno} 
+	</select>
+	
+	<select id="selectCntFilterQnAQ" resultType="int" parameterType="map">
+		SELECT count(*) FROM Item_QnA_Q iqq
+		<if test="content != null and !''.equals(content)">
+		WHERE upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+		</if>
+	</select>
+	
+	<select id="selectItemQnAQListByFilter" resultType="map" parameterType="map">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM (
+		        SELECT iqq.*, 
+		            user_id, 
+		            user_name, 
+		            iqa.mgr_itemno,
+		            i.item_title,
+		            i_stored_name
+		        FROM item_QnA_Q iqq,
+		        	users u, 
+		            item_QnA_A iqa, 
+		            item_File if, 
+		            item i
+		        WHERE 1 = 1
+		            AND iqq.userno = u.userno
+		            <if test="filter.content != null and !''.equals(filter.content)">
+		            AND upper(${filter.filter}) LIKE '%' || upper(#{filter.content}) || '%'
+		            </if>
+		            AND iqq.item_qnano = iqa.item_qnano(+)
+		            AND iqq.itemno = i.itemno
+		            AND iqq.itemno = if.itemno
+		        ORDER BY iqq.item_qnano DESC
+		    )B
+		)
+		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
+	</select>	
+	
+	<select id="selectItemQnAQDetail" resultType="map" parameterType="int">
+		SELECT iqq.*, user_id, user_name, i.item_title
+		FROM item_QnA_Q iqq,
+		    users u,
+		    item_File if, 
+		    item i
+		WHERE 1 = 1 
+		    AND iqq.userno = u.userno
+		    AND iqq.itemno = i.itemno
+		    AND iqq.itemno = if.itemno
+		    AND iqq.item_qnano = #{itemQnano}
+	</select>
+	
+	<update id="updateItemQnAQ" parameterType="ItemQnAQ">
+		UPDATE item_QnA_Q SET iq_status = 'done' WHERE item_qnano = #{itemQnano}
+	</update>
+	
+	<update id="updateItemQnAQUnprocessed" parameterType="ItemQnAQ">
+		UPDATE item_QnA_Q SET iq_status = 'unprocessed' WHERE item_qnano = #{itemQnano}
+	</update>
+	
+</mapper>

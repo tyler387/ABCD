@@ -7,15 +7,15 @@ public class Item {
 	public int itemno;
 	public String itemTitle;
 	public String itemContent;
-	public double itemPrice;
+	public int itemPrice;
 	public String itemType;
-	public String status;
+	public String itemStatus;
 	public Date writeDate;
 	public int allItemCount;
 	
 	public Item() {}
 	
-	public Item(int itemno, String itemTitle, String itemContent, double itemPrice, String itemType, String status,
+	public Item(int itemno, String itemTitle, String itemContent, int itemPrice, String itemType, String itemStatus,
 			Date writeDate, int allItemCount) {
 		super();
 		this.itemno = itemno;
@@ -23,7 +23,7 @@ public class Item {
 		this.itemContent = itemContent;
 		this.itemPrice = itemPrice;
 		this.itemType = itemType;
-		this.status = status;
+		this.itemStatus = itemStatus;
 		this.writeDate = writeDate;
 		this.allItemCount = allItemCount;
 	}
@@ -31,7 +31,7 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item [itemno=" + itemno + ", itemTitle=" + itemTitle + ", itemContent=" + itemContent + ", itemPrice="
-				+ itemPrice + ", itemType=" + itemType + ", status=" + status + ", writeDate=" + writeDate
+				+ itemPrice + ", itemType=" + itemType + ", itemStatus=" + itemStatus + ", writeDate=" + writeDate
 				+ ", allItemCount=" + allItemCount + "]";
 	}
 
@@ -59,11 +59,11 @@ public class Item {
 		this.itemContent = itemContent;
 	}
 
-	public double getItemPrice() {
+	public int getItemPrice() {
 		return itemPrice;
 	}
 
-	public void setItemPrice(double itemPrice) {
+	public void setItemPrice(int itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 
@@ -75,12 +75,12 @@ public class Item {
 		this.itemType = itemType;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getItemStatus() {
+		return itemStatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setItemStatus(String itemStatus) {
+		this.itemStatus = itemStatus;
 	}
 
 	public Date getWriteDate() {

@@ -50,6 +50,14 @@ public class MypageServiceImpl implements MypageService {
 	public int deleteUser(Users users) {
 		return mypageDao.updateUserStatus(users);
 	}
+	
+	
+	
+	
+	@Override
+	public int findcntInfo(ProfileFile profileFile) {
+		return mypageDao.selectCntProfile(profileFile);
+	}
 
 
 	@Override
@@ -66,20 +74,20 @@ public class MypageServiceImpl implements MypageService {
 		String storedPath = context.getRealPath("userProfile");
 		logger.info("storedPath : {}",storedPath);
 		
+		// 저장폴더 객체 생성 - 저장할 폴더생성
 		File storedFolder = new File(storedPath);
 		storedFolder.mkdir();
 		
 		File dest = null;
 		String storedName = null;
-		String profileImgUrl = "";
+		
 		do {
 			
 			// 보통은 중복될일이 극히 드물지만 혹지 몰라 해두는 것.
 			//저장할 파일 이름 생성하기
 			storedName = file.getOriginalFilename(); // DNJSQHS VKDLFUAD
 			storedName += UUID.randomUUID().toString().split("-")[0]; // UUID추가
-			
-			
+		
 			logger.info("storedName : {}" , storedName);
 			
 			//실제 저장될 파일 객체
@@ -109,33 +117,32 @@ public class MypageServiceImpl implements MypageService {
 		profile.setProfileStoredName(storedName);
 		profile.setProfilesize(file.getSize());
 		
+		session.setAttribute("profileStoredName", profile.getProfileStoredName());
+		
 		//model.addAttribute("profile", profile);
 		logger.info("profile:{}",profile);
 
-		//insertFile() 호출
-		mypageDao.insertFile(profile);
-
+		// 사용자의 프로필이 저장되어 있는지 확인 있으면 삭제 없으면 삽입
+		int res = mypageDao.selectCntProfile(profileFile);
+			
+		if(res > 0) {			
+			// 저장된 파일 삭제
+			mypageDao.deleteProfileName(profileFile);
+		}else {			
+			//insertFile() 호출
+			mypageDao.insertFile(profile);
+			
+		}
+		
 	}
 
 
-
 	@Override
-	public ProfileFile fileInfo(ProfileFile profileFile,Model model) {
+	public ProfileFile fileInfo(ProfileFile profileFile,Model model,HttpSession session) {
 		return mypageDao.selectfileInfo(profileFile);
 	}
 
 
-	@Override
-	public void removeProfile(ProfileFile profileFile) {
-
-		mypageDao.deleteProfileName(profileFile);
-	}
-
-
-	@Override
-	public int findcntInfo(ProfileFile profileFile) {
-		return mypageDao.selectCntProfile(profileFile);
-	}
 
 
 

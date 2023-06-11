@@ -2,6 +2,7 @@ package com.kh.jaManChw.login.service.face;
 
 import org.springframework.ui.Model;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersService {
@@ -74,6 +75,8 @@ public interface UsersService {
 	 * @return true : 로그인 차단
 	 */
 	public boolean leaveLogin(Users users);
+
+
 
 
 	

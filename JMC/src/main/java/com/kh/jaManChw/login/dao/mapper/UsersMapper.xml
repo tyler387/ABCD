@@ -61,7 +61,7 @@
 	  <select id="selectStatusbyUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
 	  	SELECT count(*)
 	  	FROM USERS
-	  	WHERE STATUS='blacklist' and USER_Id=#{userId}	  
+	  	WHERE STATUS='block' and USER_Id=#{userId}	  
 	  </select>
 	  
 	   <select id="selectLeaveUserByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
@@ -69,6 +69,7 @@
 	  	FROM USERS
 	  	WHERE STATUS='leave' and USER_Id=#{userId}	  
 	  </select>
+	  
 	  
   
   </mapper>

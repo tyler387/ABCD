@@ -49,7 +49,12 @@ public class MypageController {
 
 	// 마이페이지 정보수정
 	@GetMapping("/mypage/userInfo")
-	public void userInfoPage(Model model,Users users) {
+	public void userInfoPage(Model model,Users users,HttpSession session) {
+		
+		//세션에 저장된 userno 가져오기
+		int userno = (Integer)session.getAttribute("userno");
+		users.setUserno(userno);
+		
 		Users loginInfo = mypageService.getloginInfo(users);
 		model.addAttribute("loginInfo", loginInfo);
 		
@@ -95,74 +100,50 @@ public class MypageController {
 //-----------------------------------------------------------
 	// 프로필사진수정 메인페이지
 	@GetMapping("/mypage/profileMain")
-	public void profileMainPage() {}
+	public void profileMainPage(HttpSession session,ProfileFile profileFile) {
+		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
+	}
 	
 	// 프로필사진수정 페이지
 	@GetMapping("/mypage/profile")
 	public void profilePage(HttpSession session,ProfileFile profileFile,Model model) {
 		
-		// 세션에 담긴 userno 가져오기
+		// 세션에 담긴 정보 가져오기
 		profileFile.setUserno((Integer)session.getAttribute("userno"));
+		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
+
 		
 		//파일 정보 가져오기
-		ProfileFile profile = mypageService.fileInfo(profileFile,model);
+		ProfileFile profile = mypageService.fileInfo(profileFile,model,session);
 
 		model.addAttribute("profile", profile);
 		logger.info("profile:{}",profile);
-		
 
 				
 	}
 	
 	// 프로필사진 수정
 	@PostMapping("/mypage/profile")
-	public void uploadProfile(MultipartFile file, HttpSession session,ProfileFile profileFile,Model model,Users users) {
+	public String uploadProfile(MultipartFile file, HttpSession session,ProfileFile profileFile,Model model,Users users) {
 
 		logger.info("file:{}",file);
 
-		int userno = (Integer)session.getAttribute("userno");
-		profileFile.setUserno(userno);
+		// userno 세션에서 가져오기
+		profileFile.setUserno((Integer)session.getAttribute("userno"));
+		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
 		
-		logger.info("file is empty? {}",!file.isEmpty());
-		
-		int userprofile = mypageService.findcntInfo(profileFile);
-		
-		if(userprofile>0) {
+		// 파일이 있으면 -> 업로드할 파일이 있으면
+		if(!file.isEmpty()) {	
 			
-			// db에 저장된 프로필 삭제
-			mypageService.removeProfile(profileFile);
-			
-			// 프로필 다시 저장
-			mypageService.profileSave(file,session,profileFile);
-		}else {
 			// 프로필 저장
 			mypageService.profileSave(file,session,profileFile);
 			
-			//파일 정보 가져오기
-			ProfileFile profile = mypageService.fileInfo(profileFile,model);
-			
-			model.addAttribute("profile", profile);
-			model.addAttribute("profileStoredName", profile.getProfileStoredName());
-			
-			
-			logger.info("profile",profile);
+			// 파일의 저장이름 세션에 저장
+			String profileStoredName = (String)session.getAttribute("profileStroedName");
+			profileFile.setProfileStoredName(profileStoredName);
 		}
 		
-//		//파일 유무
-//		if(!file.isEmpty()) {
-//			// 프로필 저장
-//			mypageService.profileSave(file,session,profileFile);
-//			logger.info("file:{}",file);
-//		
-//		}else {
-//			// db에 저장된 프로필 삭제
-//			mypageService.removeProfile(profileFile);
-//			
-//		}
-		
-		//return;
-		
-		//logger.info("sesion:{}",session.getAttribute("userno"));
+		return "redirect:/mypage/profileMain";
 
 	}
 	

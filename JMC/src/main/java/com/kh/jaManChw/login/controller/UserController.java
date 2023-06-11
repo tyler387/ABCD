@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.login.service.face.UsersService;
+import com.kh.jaManChw.mypage.service.face.MypageService;
 
 @Controller
 public class UserController {
@@ -22,6 +24,7 @@ public class UserController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired UsersService usersService;
+	@Autowired MypageService mypageService;
 
 	@RequestMapping("/login/main")
 	public void mainPage() {}
@@ -32,7 +35,7 @@ public class UserController {
 
 	// 로그인 - true or false
 	@PostMapping("/login/login")
-	public String userlogin(HttpSession session, Users users,Model model) {
+	public String userlogin(HttpSession session, Users users,Model model,ProfileFile profileFile) {
 		logger.info("{}", users);
 		
 		//탈퇴 유저 로그인 방지
@@ -45,35 +48,42 @@ public class UserController {
 			return "redirect:/login/main";
 		}
 		
-		//블랙리스트 유저 로그인 방지
-		boolean blackList = usersService.blackLogin(users);
+		//block 유저 로그인 방지
+		boolean block = usersService.blackLogin(users);
 		
-		if(blackList) {
+		if(block) {
 			
 			// 세션 삭제
-			session.removeAttribute("userno");
+			session.invalidate();
 			return "redirect:/login/main";
 		}
 
 		// 로그인 인증
 		boolean isLogin = usersService.login(users);	
 		
+		//유저 정보 가져오기
 		Users info = usersService.getuserInfo(users);
-		
+		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
 
+		// info 모델에 저장
+		model.addAttribute("info",info);
+		
 		if (isLogin) {
+			
 			logger.info("userlogin() - 로그인 성공");
-			model.addAttribute("info",info);
+			
+			
 			
 			// 세션에 파라미터 값 저장
 			session.setAttribute("login", isLogin);
 			session.setAttribute("userno", info.getUserno());
-			session.setAttribute("userNick", info.getUserNick());
-			session.setAttribute("email", info.getEmail());
+			//session.setAttribute("userNick", info.getUserNick());
+			//session.setAttribute("email", info.getEmail());
 			session.setAttribute("userId", info.getUserId());
 			session.setAttribute("role", info.getRole());
 			session.setAttribute("social",info.getSocialNum());
 			session.setAttribute("status", info.getStatus());
+			
 			
 			logger.info("social:{}",info.getSocialNum());
 			logger.info("userno : {}",info.getUserno());

@@ -33,6 +33,13 @@ public interface MypageService {
 	 * @return 1: 탈퇴 성공, 0: 탈퇴 실패
 	 */
 	public int deleteUser(Users users);
+	
+	/**
+	 * 파일 정보 조회
+	 * @param profileFile
+	 * @return fileInfo
+	 */
+	public ProfileFile fileInfo(ProfileFile profileFile,Model model,HttpSession session);
 
 	/**
 	 * 
@@ -43,18 +50,12 @@ public interface MypageService {
 
 
 
-	/**
-	 * 파일 정보 조회
-	 * @param profileFile
-	 * @return fileInfo
-	 */
-	public ProfileFile fileInfo(ProfileFile profileFile,Model model);
 
 	/**
 	 *  프로필사진 삭제
 	 * @param profileFile
 	 */
-	public void removeProfile(ProfileFile profileFile);
+	//public void removeProfile(ProfileFile profileFile);
 
 	public int findcntInfo(ProfileFile profileFile);
 

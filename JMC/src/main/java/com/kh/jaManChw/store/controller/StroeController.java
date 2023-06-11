@@ -61,5 +61,13 @@ public class StroeController {
 	      
 	      return mav;
 	}
+	
+	
+	
+	//칵테일 용품 카테고리로 이동
+	@RequestMapping("/goodsAll")
+	public void itemAll10() {
+		logger.info("칵테일 용품 카테고리 메인");
+	}
 
 }

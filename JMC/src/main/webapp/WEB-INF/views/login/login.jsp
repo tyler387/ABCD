@@ -98,7 +98,6 @@ button[type=button] {
 	<div>
 		<h1 style="font-size: 68px;">Login</h1>
 	</div>
-	
 	<div class="input_box">
 	<div class="IDinput_box">
 		<label for="userId"></label>

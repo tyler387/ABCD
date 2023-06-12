@@ -2,6 +2,7 @@ package com.kh.jaManChw.login.service.face;
 
 import org.springframework.ui.Model;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersService {
@@ -89,6 +90,8 @@ public interface UsersService {
 	 * @param userInfo - 회원가입할 정보를 가져올 DTO
 	 */
 	public void joinUsersNaver(Users userInfo);
+
+
 
 
 	

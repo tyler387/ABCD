@@ -2,6 +2,7 @@ package com.kh.jaManChw.login.dao.face;
 
 import org.springframework.ui.Model;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersDao {
@@ -87,6 +88,7 @@ public interface UsersDao {
 	 * @param userInfo - 네이버에서 전달한 개인정보를 담은 DTO
 	 */
 	public void insertNaverUser(Users userInfo);
+
 	
 
 

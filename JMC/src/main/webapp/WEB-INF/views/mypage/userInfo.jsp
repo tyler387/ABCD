@@ -5,18 +5,47 @@
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
 
+<style type="text/css">
+
+#userInfoForm{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: 30px;
+
+}
+
+.box1{
+	display: flex;
+	flex-direction:column;  
+	justify-content: flex-start;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	width: 380px;
+}
+
+.userInfo-btn{
+	margin-bottom: 30px;
+	
+
+}
+
+
+</style>
+
   </div>
       <div class="right">
-       회원정보 수정
-       <div style="width:100px;"><hr></div>
+      <div  style="font-size: 20px; padding-top: 38px; margin-left: 20px; "> 회원정보 수정</div>
+       <div style="width:150px; margin-left: 18px;"><hr></div>
        
-       <form action="/mypage/userInfo" method="post">
-       <div><input type="hidden" id="userno" name="userno" value="${userno}"></div>
-       <div class="box1">
+       <form action="/mypage/userInfo" method="post" id="userInfoForm">
+       	<div><input type="hidden" id="userno" name="userno" value="${loginInfo.userno}"></div>
+       	<div class="box1">
        		<div class="labelbox"><label for="userId">아이디</label></div>
 	
 			<div class="">
-				<input type="text" name="userId" id="userId" value="${loginInfo.useId}" disabled="disabled">
+				<input type="text" name="userId" id="userId" disabled value='${loginInfo.userId }'>
 			</div>	
 	    </div>
 	    
@@ -55,7 +84,7 @@
 <div class="box1">
 
 	<div class="labelbox"><label for="userName">이름</label></div>
-	<div class="box2"><input type="text" name="userName" id="userName" value="${loginInfo.userName}" disabled="disabled"></div>
+	<div class="box2"><input type="text" name="userName" id="userName" disabled value="${loginInfo.userName}"></div>
 	
 </div>
 
@@ -63,7 +92,7 @@
 <div class="box1">
 
 	<div class="labelbox"><label for="birth">생년월일</label></div>		
-	<div class="box2"><input type="date" name="birth" id="birth" disabled="disabled"></div>	
+	<div class="box2"><input type="text" name="birth" id="birth" disabled value="${loginInfo.birth}"></div>	
 	
 </div>
 
@@ -73,8 +102,7 @@
 	<div class="labelbox"><label>성별</label></div>	
 	
 	<div class="select">
-		<input type="radio" id="select" name="gender" value="M"><label for="select">남자</label>	
-		<input type="radio" id="select2" name="gender" value="F"><label for="select2">여자</label>
+		<input type="radio" id="select" name="gender" disabled value="${loginInfo.gender}"><label for="select">남자</label>	
 	</div>
 </div>
 
@@ -130,10 +158,11 @@
 		<input type="text" id="addr4" placeholder="참고항목">
 	</div>
 </div>
+<div class="userInfo-btn">
         <a href="/mypage/delete"><button type="button">회원탈퇴</button></a> 
  		<a href="/mypage/main"><button type="button">취소</button></a>
-       	<a href="/mypage/main"><button >저장</button></a>
-  
+       	<a href="/mypage/main"><button>저장</button></a>
+  </div>
   </form>
        
       </div>

@@ -2,6 +2,7 @@ package com.kh.jaManChw.mypage.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -15,12 +16,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.Applicant;
+import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.meeting.service.face.MeetingService;
 import com.kh.jaManChw.mypage.service.face.MypageService;
 
 
@@ -29,6 +34,8 @@ public class MypageController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired MypageService mypageService;
+	
+	@Autowired MeetingService meetingService;
 	
 	//서블릿 컨텍스트 객체
 	@Autowired ServletContext context;
@@ -175,6 +182,16 @@ public class MypageController {
 //		return mypageService.getSearchLists(users);
 //	}
 
+	//---------------------------------------------
+	//마이페이지 모임
+	@GetMapping("/mypage/meeting")
+	public void myMeeting(HttpSession session, Model model) {
+		
+		List<Applicant> list = meetingService.getMyMeetingApplicatn(session);
+		
+		logger.info("testsetset{}",list);
+		model.addAttribute("list",list);
+	}
 
 
 }

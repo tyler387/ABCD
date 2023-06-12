@@ -3,6 +3,8 @@ package com.kh.jaManChw.meeting.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,4 +189,17 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		public Preference detailPreference(Preference preference) {
 			return meetingDao.selectDetailPreference(preference);
 		}
+
+	@Override
+	public List<Applicant> getMyMeetingApplicatn(HttpSession session) {
+		
+		Meeting meeting = new Meeting();
+		meeting.setUserno((int)session.getAttribute("userno"));
+		List<Meeting> list = meetingDao.selectMyMeetingno(meeting);
+		
+		List<Applicant> applList = meetingDao.selectAllApplicant(list);
+		
+		return applList;
+	}
+
 }

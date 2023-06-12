@@ -43,19 +43,23 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	//모임 작성 폼으로 이동 
 	@GetMapping("/meeting/form")
 	public String meetingWriteForm(Meeting meeting , Model model, HttpSession session) {
-		
+
 		logger.info("/meeting/form [GET]");
 		
 		String url = "";
 		
+		//로그인이 되어있지 않으면 로그인창으로 return 
 		if((session.getAttribute("login")==null)) {
 			
 			return "redirect: /login/login";
-			
+		
+		//로그인이 되어있으면 모임 작성 폼으로 이동 
 		} else {  
 			
 			url = "/meeting/form";
 		}
+		
+		//세션에서 사용자 userno값 가져와서 userno에 넣기 
 		int userno = (int)session.getAttribute("userno");
 		meeting.setUserno(meetingService.getUserno(userno));
 		
@@ -77,18 +81,11 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	@PostMapping("/meeting/form")
 	public String meetingWrite(Meeting meeting , Preference preference, HttpSession session
 	,@RequestParam( name = "friendlist") int friendlist) {
-		
-		
-		//int friends = Integer.parseInt(friend);
+			
 		logger.info("testest{}",friendlist);
 		logger.info("/meeting/form [POST]");
 		logger.info("check!!!!!!!!!!!{}" , preference);
 		//알림기능 추가개발예정 
-		
-
-		
-		
-//		선호하는 타입에 null이들어가면 preference 객체를 새로 생성  
 		
 		int userno = (int)session.getAttribute("userno");
 		System.out.println(userno);
@@ -111,8 +108,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("!!!!!!!!!!!!1{}" , preference);
 		
+		//모임과 선호하는타입, 참가자와, 모임 등록자 등록 
 		meetingService.inputMeeting(meeting , preference, applicant, leader);
-		
 		
 		
 		logger.info("{}" , preference);

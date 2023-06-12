@@ -12,9 +12,21 @@ import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 
 public interface MeetingDao {
-
+	
+	
+	/**
+	 * 모임 등록 정보 삽입하기 
+	 * 
+	 * @param meeting - 등록될 모임 정보  
+	 */
 	public void insertMeeting(Meeting meeting);
-
+	
+	/**
+	 * 사용자의 모든 친구 목록 조회하기
+	 * 
+	 * @param userno -  
+	 * @return
+	 */
 	public List<Users> selectFriendListAll(int userno);
 
 	public int selectMeetingno();

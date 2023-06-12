@@ -8,7 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.kh.jaManChw.chat.dao.face.ChatDao;
 import com.kh.jaManChw.dto.Applicant;
+import com.kh.jaManChw.dto.ChatRoom;
+import com.kh.jaManChw.dto.ChatUser;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
@@ -26,6 +29,7 @@ public class MeetingServiceImpl implements MeetingService{
 private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 @Autowired MeetingDao meetingDao;	
+@Autowired ChatDao chatDao;
 	
 	@Override
 	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant, Applicant leader) {
@@ -50,6 +54,22 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		leader.setMeetingno(meetingno);
 		
 		meetingDao.insertMeetingUser(leader);
+		
+		int nextChatno = chatDao.selectNextChatno();
+		
+		ChatRoom chatRoom = new ChatRoom();
+		chatRoom.setChatno(nextChatno);
+		chatRoom.setChatname(meeting.getMname());
+		chatRoom.setMeetingno(meetingno);
+		chatRoom.setChatcloseday(meeting.getMeetingDate());
+		
+		chatDao.insertChatRoom(chatRoom);
+
+		ChatUser chatUser = new ChatUser();
+		chatUser.setChatno(nextChatno);
+		chatUser.setUserno(leader.getUserno());
+		chatDao.insertChatUser(chatUser);
+		
 	}
 	
 	@Override

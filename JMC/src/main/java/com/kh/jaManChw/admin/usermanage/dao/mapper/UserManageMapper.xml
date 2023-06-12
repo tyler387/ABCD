@@ -28,9 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM (
 		SELECT rownum rnum, B.* FROM (
 		select * FROM users
+		WHERE 1 = 1 
 		<if test="content != null and !''.equals(content)">
-		WHERE upper(${filter}) LIKE '%' || upper(#{content}) || '%'
-		</if> 
+		and upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+		</if>
+		<if test="status != null and !''.equals(status)">
+		and status =  #{status}
+		</if>
 		ORDER BY userno DESC
 		) B
 		)users
@@ -47,9 +51,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectFilterCntAll" resultType="int" parameterType="map">
-		select count(*) FROM users
+		select count(*) FROM users WHERE 1=1
 		<if test="content != null and !''.equals(content)"> 
-		WHERE upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+		and upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+		</if>
+		<if test="status != null and !''.equals(status)">
+		and status = #{status}
 		</if>
 	</select>
 	

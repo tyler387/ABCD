@@ -51,6 +51,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<if test="content != null and !''.equals(content)">
 				and upper(${filter}) LIKE '%' || upper(#{content}) || '%'
 				</if>
+				<if test="status != null and !''.equals(status)">
+				and R.status =  #{status}
+				</if>
 		            ORDER BY R.reportno DESC
 		        )B
 		    )
@@ -133,6 +136,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        WHERE R.userno = U.userno and R.report_type = #{type} and R.r_userno = Q.userno 
 				<if test="content != null and !''.equals(content)">
 				and upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+				</if>
+				<if test="status != null and !''.equals(status)">
+				and R.status =  #{status}
 				</if>
 		        ORDER BY R.reportno DESC
 			)B

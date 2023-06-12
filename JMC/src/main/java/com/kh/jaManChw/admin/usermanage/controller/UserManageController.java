@@ -81,16 +81,17 @@ public class UserManageController {
 		String ccurpage = curPage;
 		Paging paging = userManageService.getFilterPaging(curPage, map);
 		logger.info("페이징 {}", paging);
+		logger.info("상태 {}", map.get("status"));
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
-		model.addAttribute("filterList", true);
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("userfilter", userfilter);
 		model.addAttribute("paging", paging);
 		model.addAttribute("filter", map);
 		model.addAttribute("pagetype", "filter");
 		
-		return "admin/user/mg/list";
+		return "admin/user/mg/filter";
 	}
 	
 //	@ResponseBody
@@ -170,7 +171,7 @@ public class UserManageController {
 		map.put("paging", paging);
 		List<Users> userfilter = userManageService.getUserMgFiltering(map);
 		logger.info("{}", userfilter);
-		model.addAttribute("filterList", true);
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("userfilter", userfilter);
 		model.addAttribute("users", userfilter);
 		model.addAttribute("filter", map);

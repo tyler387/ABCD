@@ -111,10 +111,23 @@ div.admin1 {
 
 <form action="./filter" method="post">
 <div class="input-group mb-12 ms-auto  justify-content-end"
-	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 600px;">
+	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 750px;">
+	
+	<label for="content" class="input-group-text">상태</label>&nbsp;
+	<select name ="status" id="status" class=" form-select" style="width: 115px;">
+		<option value="" selected>미선택</option>
+		<option value="active">정상</option>
+		<option value="leave">탈퇴</option>
+		<option value="unactive">휴먼</option>
+		<option value="block">정지</option>
+		<option value="blacklist">블랙리스트</option>
+	</select>
+	&nbsp;&nbsp;
 		<select name ="filter" id="filter" class=" form-select" style="width: 100px;">
 		   <option value = "user_id" selected>아이디</option>
 		   <option value = "user_name">이름</option>
+		   <option value = "user_nick">닉네임</option>
+		   <option value = "phone">폰번호</option>
 		   <option value = "grade">등급</option>
 		</select>
 		<label for="content" class="input-group-text">검색 </label>

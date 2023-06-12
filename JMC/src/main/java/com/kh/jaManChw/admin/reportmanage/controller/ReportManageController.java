@@ -45,7 +45,7 @@ public class ReportManageController {
 	
 	
 	@RequestMapping("/post/filter")
-	public String userfiltering(
+	public String ReportPostfiltering(
 			Model model, String curPage,
 			@RequestParam Map<String, Object> map
 			) {
@@ -54,14 +54,27 @@ public class ReportManageController {
 		map.put("type", "board");
 		Paging paging = reportManageService.getFilterPaging(ccurpage, map);
 		map.put("paging", paging);
+		logger.info("map 출력 {}", map.get("status"));
+//		if(map.get("status") == null) {
+//			logger.info("상태값 없음, 필터만 검색");
+//			model.addAttribute("filterList", true);
+//		}else if(map.get("status") != null && map.get("content") == null){
+//			logger.info("상태값 있음, 상태만 검색");
+//			model.addAttribute("filterStatus", true);
+//		}else if(map.get("status") != null) {
+//			logger.info("상태값만 있고 필터 X, 상태만 검색");
+//			model.addAttribute("filterStatus", true);
+//		}else if(map.get("status") != null &&  map.get("content") != null) {
+//			logger.info("상태값, 필터 모두 검색");
+//			model.addAttribute("filterListStatus", true);
+//		}
 		List<Map<String, Object>> reportpost = reportManageService.getReportPostFiltering(map);
 		logger.info("map 출력 {}", map);
+		model.addAttribute("filterListStatus", true);
 		logger.info("reportpost {}", reportpost);
-		model.addAttribute("filterList", true);
 		model.addAttribute("reportB", reportpost);
 		model.addAttribute("paging", paging);
 		model.addAttribute("filter", map);
-		
 		return "/admin/report/post/filter";
 	}
 	
@@ -73,7 +86,6 @@ public class ReportManageController {
 		logger.info("boardno : {}", reportView);
 		
 		model.addAttribute("reportView", reportView);
-		
 	}
 	
 	@RequestMapping("/post/state")
@@ -102,6 +114,7 @@ public class ReportManageController {
 		}
 	
 	
+	// 고쳐야함~
 	@RequestMapping("/user/list")
 	public void ReportUserList(
 			Model model,
@@ -118,6 +131,28 @@ public class ReportManageController {
 		model.addAttribute("paging", paging);
 	}
 	
+	
+	@RequestMapping("/user/filter")
+	public String ReportUserfiltering(
+			Model model, String curPage,
+			@RequestParam Map<String, Object> map
+			) {
+		logger.info("map 출력 {}", map);
+		String ccurpage = curPage;
+		map.put("type", "user");
+		Paging paging = reportManageService.getFilterPaging(ccurpage, map);
+		map.put("paging", paging);
+		logger.info("map 출력 {}", map.get("status"));
+		List<Map<String, Object>> reportpost = reportManageService.getReportPostFiltering(map);
+		logger.info("map 출력 {}", map);
+		model.addAttribute("filterListStatus", true);
+		logger.info("reportpost {}", reportpost);
+		model.addAttribute("reportB", reportpost);
+		model.addAttribute("paging", paging);
+		model.addAttribute("filter", map);
+		return "/admin/report/post/filter";
+	}
+	
 	@RequestMapping("/user/userview")
 	public void ReportUserView(Model model, @RequestParam String reportno) {
 		logger.info("boardno : {}", reportno);
@@ -129,6 +164,7 @@ public class ReportManageController {
 		
 	}
 	
+	//고쳐야함~
 	@RequestMapping("/meeting/list")
 	public void ReportMeetingList(
 			Model model,
@@ -144,6 +180,27 @@ public class ReportManageController {
 		model.addAttribute("reportB", reportB);
 		model.addAttribute("paging", paging);
 	}
+	@RequestMapping("/meeting/filter")
+	public String ReportMeetingfiltering(
+			Model model, String curPage,
+			@RequestParam Map<String, Object> map
+			) {
+		logger.info("map 출력 {}", map);
+		String ccurpage = curPage;
+		map.put("type", "meeting");
+		Paging paging = reportManageService.getFilterPaging(ccurpage, map);
+		map.put("paging", paging);
+		logger.info("map 출력 {}", map.get("status"));
+		List<Map<String, Object>> reportpost = reportManageService.getReportPostFiltering(map);
+		logger.info("map 출력 {}", map);
+		model.addAttribute("filterListStatus", true);
+		logger.info("reportpost {}", reportpost);
+		model.addAttribute("reportB", reportpost);
+		model.addAttribute("paging", paging);
+		model.addAttribute("filter", map);
+		return "/admin/report/post/filter";
+	}
+	
 	@RequestMapping("/meeting/meetingview")
 	public void ReportMeetingView(Model model, @RequestParam String reportno) {
 		logger.info("boardno : {}", reportno);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.login.dao.face.UsersDao;
 import com.kh.jaManChw.login.service.face.UsersService;
@@ -110,11 +111,18 @@ public class UsersServiceImpl implements UsersService {
 		
 	}
 
-	
 
+	
+	@Override
+	public int isNaverUser(String userId) {
+		return usersDao.selectCntByUserId(userId);
+	}
 	 
 
-	
+	@Override
+	public void joinUsersNaver(Users userInfo) {
+		usersDao.insertNaverUser(userInfo);
+	}
 
 
 

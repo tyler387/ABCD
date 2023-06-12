@@ -50,6 +50,14 @@ public class MypageServiceImpl implements MypageService {
 	public int deleteUser(Users users) {
 		return mypageDao.updateUserStatus(users);
 	}
+	
+	
+	
+	
+	@Override
+	public int findcntInfo(ProfileFile profileFile) {
+		return mypageDao.selectCntProfile(profileFile);
+	}
 
 
 	@Override
@@ -66,20 +74,20 @@ public class MypageServiceImpl implements MypageService {
 		String storedPath = context.getRealPath("userProfile");
 		logger.info("storedPath : {}",storedPath);
 		
+		// 저장폴더 객체 생성 - 저장할 폴더생성
 		File storedFolder = new File(storedPath);
 		storedFolder.mkdir();
 		
 		File dest = null;
 		String storedName = null;
-		String profileImgUrl = "";
+		
 		do {
 			
 			// 보통은 중복될일이 극히 드물지만 혹지 몰라 해두는 것.
 			//저장할 파일 이름 생성하기
 			storedName = file.getOriginalFilename(); // DNJSQHS VKDLFUAD
 			storedName += UUID.randomUUID().toString().split("-")[0]; // UUID추가
-			
-			
+		
 			logger.info("storedName : {}" , storedName);
 			
 			//실제 저장될 파일 객체
@@ -109,33 +117,58 @@ public class MypageServiceImpl implements MypageService {
 		profile.setProfileStoredName(storedName);
 		profile.setProfilesize(file.getSize());
 		
+		session.setAttribute("profile", profile.getProfileStoredName());
+		
 		//model.addAttribute("profile", profile);
 		logger.info("profile:{}",profile);
 
-		//insertFile() 호출
-		mypageDao.insertFile(profile);
-
-	}
-
-
-
-	@Override
-	public ProfileFile fileInfo(ProfileFile profileFile,Model model) {
-		return mypageDao.selectfileInfo(profileFile);
-	}
-
-
-	@Override
-	public void removeProfile(ProfileFile profileFile) {
-
-		mypageDao.deleteProfileName(profileFile);
+		
+		// 사용자의 프로필이 저장되어 있는지 확인 있으면 삭제 없으면 삽입
+		int res = mypageDao.selectCntProfile(profileFile);
+			
+		
+		logger.info("res:{}",res);
+		if(res > 0) {			
+			// 저장된 파일 삭제
+			mypageDao.deleteProfileName(profileFile);
+			mypageDao.insertFile(profile);			
+			logger.info("res:{}");	
+			
+		}
+		
 	}
 
 
 	@Override
-	public int findcntInfo(ProfileFile profileFile) {
-		return mypageDao.selectCntProfile(profileFile);
+	public ProfileFile fileInfo(Users info) {
+		return mypageDao.selectfileInfo(info.getUserno());
 	}
+
+
+	@Override
+	public List<Users> getSearchLists(Users users) {
+		return mypageDao.selectSearchList(users);
+	}
+
+
+//	@Override
+//	public void getSession(HttpSession session, ProfileFile profileFile, Model model) {
+//		// 세션에 담긴 정보 가져오기
+//		profileFile.setUserno((Integer)session.getAttribute("userno"));
+//		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
+//	
+//		Users info = new Users();
+//		info.setUserno((int)session.getAttribute("userno"));
+//	
+//		//파일 정보 가져오기
+//		ProfileFile profile = mypageService.fileInfo(info);
+//	
+//		model.addAttribute("profile", profile);
+//		logger.info("profile:{}",profile);
+//		
+//	}
+
+
 
 
 

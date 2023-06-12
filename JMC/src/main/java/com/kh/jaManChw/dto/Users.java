@@ -28,11 +28,17 @@ public class Users {
 	private Date joinDate;
 	private long socialNum;
 	
+	// 검색 필터
+	private String type;
+	private String keyword;
+	
 	public Users() {}
-
+	
+	
 	public Users(int userno, String userId, String userPw, String userName, String userNick, Date birth, String gender,
 			String email, String phone, String addr1, String addr2, String addr3, String grade, int warnCount,
-			String profileImgUrl, String status, String role, String platFormOption, Date joinDate, long socialNum) {
+			String profileImgUrl, String status, String role, String platFormOption, Date joinDate, long socialNum,
+			String type, String keyword) {
 		super();
 		this.userno = userno;
 		this.userId = userId;
@@ -54,6 +60,8 @@ public class Users {
 		this.platFormOption = platFormOption;
 		this.joinDate = joinDate;
 		this.socialNum = socialNum;
+		this.type = type;
+		this.keyword = keyword;
 	}
 
 	@Override
@@ -63,168 +71,231 @@ public class Users {
 				+ phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
 				+ ", warnCount=" + warnCount + ", profileImgUrl=" + profileImgUrl + ", status=" + status + ", role="
 				+ role + ", platFormOption=" + platFormOption + ", joinDate=" + joinDate + ", socialNum=" + socialNum
-				+ "]";
+				+ ", type=" + type + ", keyword=" + keyword + "]";
 	}
+
 
 	public int getUserno() {
 		return userno;
 	}
 
+
 	public void setUserno(int userno) {
 		this.userno = userno;
 	}
+
 
 	public String getUserId() {
 		return userId;
 	}
 
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 
 	public String getUserPw() {
 		return userPw;
 	}
 
+
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
+
 
 	public String getUserName() {
 		return userName;
 	}
 
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 
 	public String getUserNick() {
 		return userNick;
 	}
 
+
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
 	}
+
 
 	public Date getBirth() {
 		return birth;
 	}
 
+
 	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
+
 
 	public String getGender() {
 		return gender;
 	}
 
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getPhone() {
 		return phone;
 	}
 
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 
 	public String getAddr1() {
 		return addr1;
 	}
 
+
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
 	}
+
 
 	public String getAddr2() {
 		return addr2;
 	}
 
+
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
+
 
 	public String getAddr3() {
 		return addr3;
 	}
 
+
 	public void setAddr3(String addr3) {
 		this.addr3 = addr3;
 	}
+
 
 	public String getGrade() {
 		return grade;
 	}
 
+
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+
 
 	public int getWarnCount() {
 		return warnCount;
 	}
 
+
 	public void setWarnCount(int warnCount) {
 		this.warnCount = warnCount;
 	}
+
 
 	public String getProfileImgUrl() {
 		return profileImgUrl;
 	}
 
+
 	public void setProfileImgUrl(String profileImgUrl) {
 		this.profileImgUrl = profileImgUrl;
 	}
+
 
 	public String getStatus() {
 		return status;
 	}
 
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 
 	public String getRole() {
 		return role;
 	}
 
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 
 	public String getPlatFormOption() {
 		return platFormOption;
 	}
 
+
 	public void setPlatFormOption(String platFormOption) {
 		this.platFormOption = platFormOption;
 	}
+
 
 	public Date getJoinDate() {
 		return joinDate;
 	}
 
+
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
+
 
 	public long getSocialNum() {
 		return socialNum;
 	}
 
+
 	public void setSocialNum(long socialNum) {
 		this.socialNum = socialNum;
 	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	
+	
 	
 }
 	

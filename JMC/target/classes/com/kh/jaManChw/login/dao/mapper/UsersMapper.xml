@@ -61,7 +61,7 @@
 	  <select id="selectStatusbyUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
 	  	SELECT count(*)
 	  	FROM USERS
-	  	WHERE STATUS='blacklist' and USER_Id=#{userId}	  
+	  	WHERE STATUS='block' and USER_Id=#{userId}	  
 	  </select>
 	  
 	   <select id="selectLeaveUserByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
@@ -70,5 +70,44 @@
 	  	WHERE STATUS='leave' and USER_Id=#{userId}	  
 	  </select>
 	  
+  	  <insert id="insertNaverUser" parameterType="Users">
+  	  	INSERT INTO users(
+  	  		userno,
+			user_id,
+			user_pw,
+			user_name,
+			user_nick,
+			birth,
+			gender,
+			email,
+			phone,
+			addr1,
+			addr2,
+			addr3,
+			grade,
+			warn_count,
+			profil_img_url,
+			platform_option
+  	  	)
+  	  	VALUES(
+  	  		users_seq.nextval,
+  	  		#{userId},
+  	  		#{userPw},
+  	  		#{userName},
+  	  		#{userNick},
+  	  		#{birth},
+  	  		#{gender},
+  	  		#{email},
+  	  		#{phone},
+  	  		#{addr1},
+  	  		#{addr2},
+  	  		#{addr3},
+  	  		#{grade},
+  	  		#{warnCount},
+  	  		#{profileImgUrl},
+  	  		#{platFormOption}
+  	  	)
+  	  </insert>
+
   
   </mapper>

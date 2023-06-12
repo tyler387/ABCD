@@ -83,6 +83,11 @@ public interface MeetingDao {
 	
 	
 	
+
+	public List<Meeting> selectMyMeetingno(Meeting meeting);
+
+	public List<Applicant> selectAllApplicant(List<Meeting> list);
+
 	
 	
 

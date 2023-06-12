@@ -66,7 +66,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	
 	@Override
-		public List<Meeting> getMeetinglistAll() {
+		public List<Meeting> getMeetinglistAll(Meeting meeting) {
+		
+		meetingDao.updatestatus(meeting);
 		
 		
 		return meetingDao.selectMeetinglistAll();
@@ -166,5 +168,11 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	@Override
 		public Preference detailPreference(Preference preference) {
 			return meetingDao.selectDetailPreference(preference);
+		}
+	
+	@Override
+		public int getMeetingappcount(Meeting meeting) {
+		
+			return meetingDao.selectMeetingappcount(meeting);
 		}
 }

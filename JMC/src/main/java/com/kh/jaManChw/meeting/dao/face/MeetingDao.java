@@ -58,6 +58,13 @@ public interface MeetingDao {
 	public List<Meeting> selectMeetingListByMap(@Param("mapData") String mapData, @Param("mapData1")String mapData1);
 
 	public Preference selectDetailPreference(Preference preference);
+
+	public int selectMeetingappcount(Meeting meeting);
+
+	public void updatestatus(Meeting meeting);
+	
+	
+	
 	
 	
 

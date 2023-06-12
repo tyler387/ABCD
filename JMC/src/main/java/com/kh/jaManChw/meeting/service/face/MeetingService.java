@@ -18,7 +18,8 @@ public interface MeetingService {
 
 	public int getUserno(int userno);
 	
-	public List<Meeting> getMeetinglistAll();
+	public List<Meeting> getMeetinglistAll(Meeting meeting);
+	
 
 	public Meeting detailMeeting(Meeting meeting);
 
@@ -47,6 +48,9 @@ public interface MeetingService {
 	public int getMeetinglistcountnow(Meeting meeting);
 
 	public Preference detailPreference(Preference preference);
+
+	public int getMeetingappcount(Meeting meeting);
+	
 	
 
 	

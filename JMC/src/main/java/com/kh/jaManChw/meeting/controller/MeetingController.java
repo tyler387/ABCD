@@ -126,10 +126,12 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	@GetMapping("/meeting/meetingcal")
 	public void allMeetingListByCal(Model model , Meeting meeting ) {
 		
+		
+		
 		logger.info("/meeting/meetingcal [GET]" );
 		
 		//전체 모임 목록 가져오기 
-		List<Meeting> meetinglist = meetingService.getMeetinglistAll();
+		List<Meeting> meetinglist = meetingService.getMeetinglistAll(meeting);
 		
 		//전체 모임 개수 가져오기 
 		int meetingcount = meetingService.getMeetinglistcount(meeting);
@@ -146,12 +148,13 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//지도로 모든 모임 조회 
 	@GetMapping("/meeting/meetingmap")
-	public void allMeetingListByMap(Model model, Meeting meeting) {
+	public void allMeetingListByMap(Model model, Meeting meeting, Applicant applicant ) {
 		
 		logger.info("/meeting/meetingmap [GET]" );
 		
+		
 		//전체 모임 목록 가져오기 
-		List<Meeting> meetinglist = meetingService.getMeetinglistAll();
+		List<Meeting> meetinglist = meetingService.getMeetinglistAll(meeting);
 		
 		int meetingcount = meetingService.getMeetinglistcount(meeting);
 		

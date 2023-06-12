@@ -24,11 +24,17 @@ public interface MeetingDao {
 	/**
 	 * 사용자의 모든 친구 목록 조회하기
 	 * 
-	 * @param userno -  
-	 * @return
+	 * @param userno - 사용자의 정보  
+	 * @return 사용자의 모든 친구 목록 
 	 */
 	public List<Users> selectFriendListAll(int userno);
 
+	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int selectMeetingno();
 
 	public void insertPreference(Preference preference);

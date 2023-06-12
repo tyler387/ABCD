@@ -75,6 +75,21 @@ public interface UsersService {
 	 */
 	public boolean leaveLogin(Users users);
 
+	/**
+	 * 네이버 소셜로 로그인한 경우 회원가입 되어 있는 회원인지 확인한다
+	 * 
+	 * @param userId - 소셜로그인을 시도 했을때 처음에 생성된 유저의 id값
+	 * @return 1 : 이미 소셜로그인을 시도한적이 있는 회원, 0: 소셜로그인을 처음 시도하는 회원
+	 */
+	public int isNaverUser(String userId);
+
+	/**
+	 * 네이버 소셜로 로그인 한 경우 회원가입 되어 있지 않다면 회원가입을 진행한다
+	 * 
+	 * @param userInfo - 회원가입할 정보를 가져올 DTO
+	 */
+	public void joinUsersNaver(Users userInfo);
+
 
 	
 

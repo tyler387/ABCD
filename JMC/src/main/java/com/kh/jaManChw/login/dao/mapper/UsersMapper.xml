@@ -70,5 +70,42 @@
 	  	WHERE STATUS='leave' and USER_Id=#{userId}	  
 	  </select>
 	  
+  	  <select id="insertNaverUser" parameterType="Users">
+  	  	INSERT INTO users(
+  	  	USERNO
+			user_id
+			user_pw
+			user_name
+			user_nick
+			birth
+			gender
+			email
+			phone
+			addr1
+			addr2
+			addr3
+			grade
+			warn_count
+			profil_img_url
+			platform_option
+  	  	)
+  	  	VALUES(
+  	  		${userId},
+  	  		${userPw},
+  	  		${userName},
+  	  		${userNick},
+  	  		${birth},
+  	  		${gender},
+  	  		${email},
+  	  		${phone},
+  	  		${addr1},
+  	  		${addr2},
+  	  		${addr3},
+  	  		${grade},
+  	  		${warnCount},
+  	  		${profileImgUrl},
+  	  		${plateformOption}
+  	  	)
+  	  </select>
   
   </mapper>

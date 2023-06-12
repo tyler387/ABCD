@@ -3,6 +3,8 @@ package com.kh.jaManChw.meeting.service.face;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
@@ -18,7 +20,8 @@ public interface MeetingService {
 
 	public int getUserno(int userno);
 	
-	public List<Meeting> getMeetinglistAll();
+	public List<Meeting> getMeetinglistAll(Meeting meeting);
+	
 
 	public Meeting detailMeeting(Meeting meeting);
 
@@ -45,6 +48,14 @@ public interface MeetingService {
 	public List<Meeting> getMeetingByMap(String mapData, String mapData1);
 
 	public int getMeetinglistcountnow(Meeting meeting);
+
+	public Preference detailPreference(Preference preference);
+
+	public int getMeetingappcount(Meeting meeting);
+	
+	
+	public List<Applicant> getMyMeetingApplicatn(HttpSession session);
+
 
 	
 	

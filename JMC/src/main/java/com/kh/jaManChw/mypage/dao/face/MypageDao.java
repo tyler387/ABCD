@@ -1,5 +1,7 @@
 package com.kh.jaManChw.mypage.dao.face;
 
+import java.util.List;
+
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 
@@ -39,12 +41,7 @@ public interface MypageDao {
 	 */
 	public void updateProfile(Users users);
 
-	/**
-	 * 프로필 정보 조회
-	 * @param profileFile
-	 * @return
-	 */
-	public ProfileFile selectfileInfo(ProfileFile profileFile);
+
 
 	/**
 	 * 프로필 사진 삭제
@@ -58,6 +55,18 @@ public interface MypageDao {
 	 * @return
 	 */
 	public int selectCntProfile(ProfileFile profileFile);
+
+	/**
+	 * 유저 정보 조회
+	 * @param users
+	 * @return
+	 */
+	public List<Users> selectSearchList(Users users);
+
+	public ProfileFile selectfileInfo(int userno);
+
+	
+
 
 
 

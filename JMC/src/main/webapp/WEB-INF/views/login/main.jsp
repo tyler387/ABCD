@@ -4,6 +4,7 @@
 
 <c:import url="../layout/header.jsp"/>
 
+
 <style type="text/css">
 
 .find-btn{
@@ -48,7 +49,6 @@
 로그인 상태 : ${login} 
 
 
-
 <div class="find-btn">
 
 
@@ -63,5 +63,5 @@
 
 </div>
 
-
 <c:import url="../layout/footer.jsp"/> 
+<c:import url="../chat/chatbutton.jsp"></c:import>

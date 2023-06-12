@@ -20,4 +20,10 @@ public interface ChatDao {
 
 	public List<ChatMessage> selectChatMessageLoad(ChatMessage chatMessage);
 
+	public int selectNextChatno();
+
+	public void insertChatRoom(ChatRoom chatRoom);
+
+	public void insertChatUser(ChatUser chatUser);
+
 }

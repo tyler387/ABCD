@@ -36,10 +36,9 @@ public interface MypageService {
 	
 	/**
 	 * 파일 정보 조회
-	 * @param profileFile
 	 * @return fileInfo
 	 */
-	public ProfileFile fileInfo(ProfileFile profileFile,Model model,HttpSession session);
+	public ProfileFile fileInfo(Users info);
 
 	/**
 	 * 
@@ -58,6 +57,15 @@ public interface MypageService {
 	//public void removeProfile(ProfileFile profileFile);
 
 	public int findcntInfo(ProfileFile profileFile);
+
+	/**
+	 * 유저 검색
+	 * @param users
+	 * @return 유저 
+	 */
+	public List<Users> getSearchLists(Users users);
+
+	//public void getSession(HttpSession session, ProfileFile profileFile, Model model);
 
 
 

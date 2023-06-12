@@ -1,19 +1,22 @@
 package com.kh.jaManChw.mypage.controller;
 
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaManChw.dto.ProfileFile;
@@ -32,11 +35,20 @@ public class MypageController {
 	
 	// 마이페이지 메인
 	@GetMapping("/mypage/main")
-	public void mypageMain(Users users,Model model,HttpSession session) {
+	public void mypageMain(Users users,Model model,HttpSession session,ProfileFile profileFile) {
 		
-		//세션에 저장된 userno 가져오기
+		//세션에 저장된 정보 가져오기
+		ProfileFile profile = new ProfileFile();
+		
+		profile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
+		profile.setProfileno((int)session.getAttribute("userno"));
+		
+		
 		int userno = (Integer)session.getAttribute("userno");
 		users.setUserno(userno);
+		
+		logger.info("profileFile : {}", profileFile);
+		model.addAttribute("profile", profileFile);
 		
 		//유저 정보 가져오기 - 메인에서 로그인한 유저 정보 조회
 		Users loginInfo = mypageService.getloginInfo(users);
@@ -44,6 +56,7 @@ public class MypageController {
 		
 		logger.info("users :{}",users);
 		logger.info("loginInfo : {}", loginInfo);	
+		logger.info("profileFile : {}", profileFile);	
 		
 	}
 
@@ -98,24 +111,23 @@ public class MypageController {
 		}
 	}
 //-----------------------------------------------------------
-	// 프로필사진수정 메인페이지
-	@GetMapping("/mypage/profileMain")
-	public void profileMainPage(HttpSession session,ProfileFile profileFile) {
-		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
-	}
-	
 	// 프로필사진수정 페이지
 	@GetMapping("/mypage/profile")
 	public void profilePage(HttpSession session,ProfileFile profileFile,Model model) {
 		
+		
+		//mypageService.getSession(session,profileFile,model);
+		
 		// 세션에 담긴 정보 가져오기
 		profileFile.setUserno((Integer)session.getAttribute("userno"));
 		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
-
-		
+	
+		Users info = new Users();
+		info.setUserno((int)session.getAttribute("userno"));
+	
 		//파일 정보 가져오기
-		ProfileFile profile = mypageService.fileInfo(profileFile,model,session);
-
+		ProfileFile profile = mypageService.fileInfo(info);
+	
 		model.addAttribute("profile", profile);
 		logger.info("profile:{}",profile);
 
@@ -130,7 +142,8 @@ public class MypageController {
 
 		// userno 세션에서 가져오기
 		profileFile.setUserno((Integer)session.getAttribute("userno"));
-		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
+		session.setAttribute("profile", profileFile.getProfileStoredName());
+		
 		
 		// 파일이 있으면 -> 업로드할 파일이 있으면
 		if(!file.isEmpty()) {	
@@ -143,17 +156,24 @@ public class MypageController {
 			profileFile.setProfileStoredName(profileStoredName);
 		}
 		
-		return "redirect:/mypage/profileMain";
+		return "redirect:/mypage/main";
 
 	}
 	
 
 //-----------------------------------------------------------	
-	//친구목록 페이지 페이징
-	@GetMapping("/mypage/friendList")
-	public void friendPage() {}
-	
-	
+	//유저 검색 기능	
+//	@GetMapping("/mypage/friendList")
+//	@ResponseBody
+//	public List<Users> getuserSearchList(@RequestParam("type") String type,
+//								@RequestParam("keyword") String keyword,Model model) throws Exception {
+//									
+//		Users users = new Users();
+//		users.setType(type);
+//		users.setKeyword(keyword);
+//
+//		return mypageService.getSearchLists(users);
+//	}
 
 
 

@@ -35,7 +35,7 @@ public class UserController {
 
 	// 로그인 - true or false
 	@PostMapping("/login/login")
-	public String userlogin(HttpSession session, Users users,Model model,ProfileFile profileFile) {
+	public String userlogin(HttpSession session, Users users,Model model) {
 		logger.info("{}", users);
 		
 		//탈퇴 유저 로그인 방지
@@ -63,7 +63,17 @@ public class UserController {
 		
 		//유저 정보 가져오기
 		Users info = usersService.getuserInfo(users);
-		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
+		logger.info("info:{}",info);
+		
+		ProfileFile profile = mypageService.fileInfo(info);
+	
+		if(profile !=null) {
+			session.setAttribute("profile", profile);
+			logger.info("profile:{}",profile);
+						
+		}
+		
+		logger.info("profile:{}",profile);
 
 		// info 모델에 저장
 		model.addAttribute("info",info);

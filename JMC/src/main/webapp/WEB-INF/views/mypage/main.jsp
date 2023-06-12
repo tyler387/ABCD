@@ -47,13 +47,12 @@
       
       <div  class="box1">
       	<div class="info">
-      	
+      	 
       		<label for="my" style="font-size: 20px; padding-top: 38px; margin-left: 20px; ">내정보</label>
       		<div style="width:75px; margin-left: 18px;" ><hr></div>
-      		
       		<div class="img">
       			<div id="userinfo1">
-      				<img src="/userProfile/${profileStoredName}" id="profileimg">
+      				<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg">
       			</div>
       			<div id="userinfo2">
 		       		<div class="info">아이디 : ${userId }</div>
@@ -64,7 +63,7 @@
       	</div>
       	
       	<div class="info">
-	      	<label for="my" style="font-size: 20px; padding-top: 50px; margin-left: 20px; ">진행중인 모임</label>
+	      	<label for="myMeetiong" style="font-size: 20px; padding-top: 50px; margin-left: 20px; ">진행중인 모임</label>
 	      	<div style="width:140px; margin-left: 18px;" ><hr></div>
 	      		
 	      	<div class="meeting">
@@ -73,7 +72,7 @@
       	</div>
       	
       	<div class="info">
-	      	<label for="my" style="font-size: 20px; padding-top: 50px; margin-left: 20px; ">결제</label>
+	      	<label for="myBuyList" style="font-size: 20px; padding-top: 50px; margin-left: 20px; ">결제</label>
 	      	<div style="width:65px; margin-left: 18px;" ><hr></div>
       		
       		<div class="buylist">
@@ -86,14 +85,14 @@
       <div class="box2">
       	<div class="info">
       	
-      		<label for="my" style="font-size: 20px; padding-top: 38px; margin-left: 20px; ">내등급</label>
+      		<label for="myGrade" style="font-size: 20px; padding-top: 38px; margin-left: 20px; ">내등급</label>
       		<div style="width:75px; margin-left: 18px;" ><hr></div>
       		
       		<div class="grade">
       		
 	      		<div class="img">
 	      			<div id="userinfo1">
-	      				<img src="/userProfile/${profileStoredName}" id="gradeimg">
+	      				<img src="/userProfile/${fileInfo.profileStoredName}" id="gradeimg">
 	      			</div>
 	      			<div id="userinfo2">
 			       		<div class="info">등급 : ${loginInfo.grade}</div>

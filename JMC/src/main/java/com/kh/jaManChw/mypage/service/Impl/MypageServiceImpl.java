@@ -117,20 +117,22 @@ public class MypageServiceImpl implements MypageService {
 		profile.setProfileStoredName(storedName);
 		profile.setProfilesize(file.getSize());
 		
-		session.setAttribute("profileStoredName", profile.getProfileStoredName());
+		session.setAttribute("profile", profile.getProfileStoredName());
 		
 		//model.addAttribute("profile", profile);
 		logger.info("profile:{}",profile);
 
+		
 		// 사용자의 프로필이 저장되어 있는지 확인 있으면 삭제 없으면 삽입
 		int res = mypageDao.selectCntProfile(profileFile);
 			
+		
+		logger.info("res:{}",res);
 		if(res > 0) {			
 			// 저장된 파일 삭제
 			mypageDao.deleteProfileName(profileFile);
-		}else {			
-			//insertFile() 호출
-			mypageDao.insertFile(profile);
+			mypageDao.insertFile(profile);			
+			logger.info("res:{}");	
 			
 		}
 		
@@ -138,9 +140,33 @@ public class MypageServiceImpl implements MypageService {
 
 
 	@Override
-	public ProfileFile fileInfo(ProfileFile profileFile,Model model,HttpSession session) {
-		return mypageDao.selectfileInfo(profileFile);
+	public ProfileFile fileInfo(Users info) {
+		return mypageDao.selectfileInfo(info.getUserno());
 	}
+
+
+	@Override
+	public List<Users> getSearchLists(Users users) {
+		return mypageDao.selectSearchList(users);
+	}
+
+
+//	@Override
+//	public void getSession(HttpSession session, ProfileFile profileFile, Model model) {
+//		// 세션에 담긴 정보 가져오기
+//		profileFile.setUserno((Integer)session.getAttribute("userno"));
+//		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
+//	
+//		Users info = new Users();
+//		info.setUserno((int)session.getAttribute("userno"));
+//	
+//		//파일 정보 가져오기
+//		ProfileFile profile = mypageService.fileInfo(info);
+//	
+//		model.addAttribute("profile", profile);
+//		logger.info("profile:{}",profile);
+//		
+//	}
 
 
 

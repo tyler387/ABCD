@@ -95,7 +95,7 @@ img{
   
   <div class='profile'>
   	<div>
-  		<a href="/mypage/profileMain"><img src="/userProfile/${profileStoredName}"></a> 
+  		<a href="/mypage/profileMain"><img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}"></a> 
   	</div>
   </div>
   	<div class="userInfo">
@@ -108,7 +108,7 @@ img{
   <li class="list1"><a href="/mypage/main">My</a>
   
   	<ul class="list2">
-  		<li class="list3"><a href="/mypage/profileMain">프로필수정</a></li>
+  		<li class="list3"><a href="/mypage/profile">프로필수정</a></li>
   		<li class="list3"><a href="/mypage/userInfo">회원 정보</a></li>
   	</ul>
   </li>

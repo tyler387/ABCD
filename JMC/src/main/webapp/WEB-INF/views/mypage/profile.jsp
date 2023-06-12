@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
 
@@ -11,12 +12,12 @@
       <input type="hidden" name="userno" id="userno" value="${userno}">  
   
 	<div class='profile'>
-		<img src="/userProfile/${profileStoredName}" id="profileimg"> 
+		<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
         <input type="file" id="file" name="file">
      </div>  
     
     <button id="profileInput" >프로필 수정</button>
-    <a href="/mypage/profileMain"><button>취소</button></a>
+    <a href="/mypage/main"><button>취소</button></a>
     
       </form>
     </div>

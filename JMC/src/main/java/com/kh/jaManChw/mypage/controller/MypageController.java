@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -161,17 +162,21 @@ public class MypageController {
 
 //-----------------------------------------------------------	
 	//유저 검색 기능	
-	@GetMapping("/mypage/friendList")
+	@GetMapping("/mypage/search")
 	@ResponseBody
-	public List<Users> getuserSearchList(@RequestParam("type") String type,
+	public String getuserSearchList(@RequestParam("type") String type,
 								@RequestParam("keyword") String keyword,Model model) throws Exception {
-									
-		Users users = new Users();
-		users.setType(type);
-		users.setKeyword(keyword);
+		
+		// 유저 list 모델값에 저장 - 키워드로 찾을 수 있는 값들
+		List<Users> userList = mypageService.getSearchLists(type,keyword);	
+		model.addAttribute("userList",userList);
 
-		return mypageService.getSearchLists(users);
+		return "/mypage/friendList";
 	}
+	
+	// 친구목록
+	@RequestMapping("/mypage/friendList")
+	public void friendPage() {}
 
 
 

@@ -23,16 +23,7 @@ public class NaverController {
 	
 	@Autowired private NaverService naverService;
 	@Autowired private UsersService usersService;
-	
-	@GetMapping("/naverlogin")
-	public void naverlogin(
-			HttpSession session
-			) {
-		//JSP에 정보를 입력하기에는 노출의 위험이 있기에 controller에서 선처리 후 보낸다
-		Map<String, String> naverMap = naverService.getNaverApiInfo();
 		
-		session.setAttribute("apiURL", naverMap.get("apiURL"));
-	}	
 	
 	@GetMapping("/naverlogincallback")
 	public String naverloginCall(String code, String state, HttpSession session) {

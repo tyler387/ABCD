@@ -52,7 +52,13 @@
       		<div style="width:75px; margin-left: 18px;" ><hr></div>
       		<div class="img">
       			<div id="userinfo1">
-      				<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg">
+      			<c:if test="${profile.profileStoredName eq null}">
+      				<img src="<%=request.getContextPath() %>/userProfile/pexels-tobias-bjørkli-1693095.jpgf6f88b97" id="profileimg"> 
+      			 </c:if>
+      			  
+      			   <c:if test="${profile.profileStoredName ne null}">
+						<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
+      			   </c:if>
       			</div>
       			<div id="userinfo2">
 		       		<div class="info">아이디 : ${userId }</div>
@@ -90,15 +96,51 @@
       		
       		<div class="grade">
       		
+      		<c:if test="${loginInfo.grade == 1}">
 	      		<div class="img">
 	      			<div id="userinfo1">
-	      				<img src="/userProfile/${fileInfo.profileStoredName}" id="gradeimg">
+	      				<img src="/resources/image/2b50.png" id="gradeimg">
 	      			</div>
 	      			<div id="userinfo2">
 			       		<div class="info">등급 : ${loginInfo.grade}</div>
-			       		
 			       	</div>
 	      		</div>
+	      	</c:if>	
+	      	
+	      	<c:if test="${loginInfo.grade == 2}">
+	      		<div class="img">
+	      			<div id="userinfo1">
+	      				<img src="/resources/image/별2.png" id="gradeimg">
+	      			</div>
+	      			<div id="userinfo2">
+			       		<div class="info">등급 : ${loginInfo.grade}</div>
+			       	</div>
+	      		</div>
+	      	</c:if>
+	      	
+	      	<c:if test="${loginInfo.grade == 3}">
+	      		<div class="img">
+	      			<div id="userinfo1">
+	      				<img src="/resources/image/별3.png" id="gradeimg">
+	      			</div>
+	      			<div id="userinfo2">
+			       		<div class="info">등급 : ${loginInfo.grade}</div>
+			       	</div>
+	      		</div>
+	      	</c:if>
+	      	
+	      	<c:if test="${loginInfo.grade == 4}">
+	      		<div class="img">
+	      			<div id="userinfo1">
+	      				<img src="/resources/image/별4.png" id="gradeimg">
+	      			</div>
+	      			<div id="userinfo2">
+			       		<div class="info">등급 : ${loginInfo.grade}</div>
+			       	</div>
+	      		</div>
+	      	</c:if>
+	      		
+	      		
       			
       		</div>
       	</div>

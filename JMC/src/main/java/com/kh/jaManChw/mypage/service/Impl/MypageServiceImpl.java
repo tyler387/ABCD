@@ -2,7 +2,9 @@ package com.kh.jaManChw.mypage.service.Impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -142,16 +144,20 @@ public class MypageServiceImpl implements MypageService {
 
 
 	@Override
-	public List<Users> getSearchLists(Users users) {
-		return mypageDao.selectSearchList(users);
-	}
-
-
-	@Override
 	public ProfileFile getFileName(ProfileFile profileFile) {
 		return mypageDao.selectFileName(profileFile);
 	}
 
+	@Override
+	public List<Users> getSearchLists(String type,String keyword) {
+		
+		Map<String, String> searchParam = new HashMap<String, String>();
+		searchParam.put("type", type);
+		searchParam.put("keyword", keyword);
+		List<Users> userList = mypageDao.selectSearchList(keyword);
+		return userList;
+	
+	}
 
 
 

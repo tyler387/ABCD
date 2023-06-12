@@ -11,7 +11,8 @@
         <div style="width:150px;"><hr></div>
         <div>총 친구 수</div>
         
-        <form name="friendFind" autocomplete="off">
+<!--        <form name="friendFind" autocomplete="off" action="/mypage/search" method="get"> -->
+       <form name="friendFind" autocomplete="off">
          <div>
         	<select name="type">
         		<option value="userId">아이디</option>
@@ -23,11 +24,36 @@
         </div>
         
         <div>
-        	<button>검색</button>
-        </div>
-        
-        </form>
+        	<input type="button" onclick="getSearchList()" id="search" value="검색">
+        </div>       
+         <div>
+         
+         <table id="searchFriend">
+			<tr>
+				<th>유저 아이디</th>
+				<th>유저 닉네임</th>
+			</tr>
+			<c:forEach var="com.kh.jaManChw.dto.Users" items="${userList }">
+			<tr>
+				<td>${userList.userId }</td>
+				<td>${userList.userNick }</td>
+			</tr>
+			</c:forEach>
+			</table>
+         
+         </div>
+         </form>
+         
+         
       </div>
     </div>
+
+<script type="text/javascript">
+function getSearchList() {
+
+};
+
+
+</script>
 
 <c:import url="../layout/footer.jsp" />

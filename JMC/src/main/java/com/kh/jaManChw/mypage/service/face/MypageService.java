@@ -57,20 +57,21 @@ public interface MypageService {
 	public int findcntInfo(ProfileFile profileFile);
 
 	/**
-	 * 유저 검색
-	 * @param users
-	 * @return 유저 
-	 */
-	public List<Users> getSearchLists(Users users);
-
-	/**
 	 * 파일 이름 조회하기
 	 * @param profileFile
 	 * @return
 	 */
 	public ProfileFile getFileName(ProfileFile profileFile);
+	
+	/**
+	 * 키워드로 유저 검색
+	 * @param users
+	 * @return 유저 
+	 */
+	public List<Users> getSearchLists(String type,String keyword);
 
-	//public void getSession(HttpSession session, ProfileFile profileFile, Model model);
+
+	
 
 
 

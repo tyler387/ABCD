@@ -56,12 +56,7 @@ public interface MypageDao {
 	 */
 	public int selectCntProfile(ProfileFile profileFile);
 
-	/**
-	 * 유저 정보 조회
-	 * @param users
-	 * @return
-	 */
-	public List<Users> selectSearchList(Users users);
+
 
 	public ProfileFile selectfileInfo(int i);
 
@@ -71,6 +66,8 @@ public interface MypageDao {
 	 * @return
 	 */
 	public ProfileFile selectFileName(ProfileFile profileFile);
+
+	public List<Users> selectSearchList(String keyword);
 
 	
 

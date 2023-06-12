@@ -94,10 +94,14 @@ img{
   <div class="left">
   
   <div class='profile'>
-  	<div>
-  		<a href="/mypage/profileMain"><img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}"></a> 
-  	</div>
-  </div>
+	<c:if test="${profile.profileStoredName eq null}">
+      <img src="<%=request.getContextPath() %>/userProfile/pexels-tobias-bjørkli-1693095.jpgf6f88b97" id="profileimg"> 
+    </c:if>
+      			  
+	<c:if test="${profile.profileStoredName ne null}">
+		<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
+	</c:if>  
+	</div>
   	<div class="userInfo">
   		${userId }
   	</div>

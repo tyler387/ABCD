@@ -128,6 +128,27 @@ a:visited {
 $(function() {
 	
 	
+	<%-- 
+	
+	웹 에디터에 엄청 큰 사진을 올리게 되면 서버(tomcat)이 받아들이지 못해 POST 요청모두를 못받는 
+	경우가 생길수 있는데 이 경우엔 서버의 요청에 대한 사이즈를 무제한으로 설정하면 해결할수 있다 
+	이 경우는 mutipart가 아니라 data-64로 처리하는 동안 발생하는 문제점이다
+	확인해보니 아무런 톰캣 설정을 하지 않으면 POST타입으로 데이터를 전송할때 POST BODY의 사이즈가 2mb로
+	제한되어 있다는 부분이 문제점이 되는 것임...!
+	
+	server 프로젝트에서 server.xml파일에서 
+	<Connector connectionTimeout="20000" port="8888" protocol="HTTP/1.1" redirectPort="8443"/>
+	에서 
+	<Connector connectionTimeout="20000" port="8888" protocol="HTTP/1.1" redirectPort="8443" maxPostSize="5242880"/>
+	과 같이 사이즈를 지정해주거나 
+	<Connector connectionTimeout="20000" port="8888" protocol="HTTP/1.1" redirectPort="8443" maxPostSize="-1"/>
+	으로 지정하면 문제가 해결된다
+	 
+	 ** -1로 설정하면 최대 설정값인 2GB로 설정이된다
+	 
+	
+	 --%>
+	
 	//div#content에 에디터 적용하기
 	$("#summernote").summernote({
 				height: 400,

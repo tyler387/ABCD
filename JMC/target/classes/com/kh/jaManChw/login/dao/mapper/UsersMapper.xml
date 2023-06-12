@@ -70,6 +70,6 @@
 	  	WHERE STATUS='leave' and USER_Id=#{userId}	  
 	  </select>
 	  
-	  
+
   
   </mapper>

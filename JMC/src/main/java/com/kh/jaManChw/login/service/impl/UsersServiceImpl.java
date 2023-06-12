@@ -113,10 +113,16 @@ public class UsersServiceImpl implements UsersService {
 
 
 	
-
+	@Override
+	public int isNaverUser(String userId) {
+		return usersDao.selectCntByUserId(userId);
+	}
 	 
 
-	
+	@Override
+	public void joinUsersNaver(Users userInfo) {
+		usersDao.insertNaverUser(userInfo);
+	}
 
 
 

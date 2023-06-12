@@ -172,7 +172,7 @@ a {
       </ul>
     </li>
     <li><a href="/board/allFile">커뮤니티</a></li>
-    <li><a href="#">스토어</a></li>
+    <li><a href="/store/main">스토어</a></li>
     <li><a href="#">고객센터</a></li>
     </ul>
 </div>

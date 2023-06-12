@@ -111,18 +111,16 @@ public class ItemServiceImpl implements ItemService{
 		//item DTO에 담긴 정보를 DB의 item테이블에 저장한다
 		itemDao.insertItem(item);
 
-		for(ItemOption io : itemOptionParam) {
-			
-			// 2. itemOption DTO - 만약 옵션값을 넣는다면...
-			if (itemOptionParam !=null) {
+		if (itemOptionParam !=null) {
+			for(ItemOption io : itemOptionParam) {
+				
+				// 2. itemOption DTO - 만약 옵션값을 넣는다면...
 				io.setItemno(itemno);
-//			itemOption.setOptionContent(itemParam.get("OptionContent"));
-//			itemOption.setOptionCount(Integer.parseInt(itemParam.get("optionCount")));
-//			itemOption.setExtraCharge(Integer.parseInt(itemParam.get("extraCharge")));
-			}
-			
-			//itemOption이 있는 경우는 itemOption DTO에 담긴 정보를 DB의 item테이블에 저장한다
-			if (itemOptionParam != null) {
+	//			itemOption.setOptionContent(itemParam.get("OptionContent"));
+	//			itemOption.setOptionCount(Integer.parseInt(itemParam.get("optionCount")));
+	//			itemOption.setExtraCharge(Integer.parseInt(itemParam.get("extraCharge")));
+				
+				//itemOption이 있는 경우는 itemOption DTO에 담긴 정보를 DB의 item테이블에 저장한다
 				itemDao.insertItemOption(io);
 			}
 		}

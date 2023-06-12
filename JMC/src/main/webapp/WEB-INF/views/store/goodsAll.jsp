@@ -59,9 +59,9 @@
 
 #searchWrite{
 	width: 250px;
-	height: 50px;
+	height: 30px;
  	position: relative;
-	left : 900px;
+	left : 1000px;
 
 }
 
@@ -78,6 +78,12 @@
 .item{
 text-align: center;
 }
+
+#btn_Search{
+    position: relative;
+    left: 952px;
+    top: 8px;
+}
 </style>
 
 <body>
@@ -85,46 +91,38 @@ text-align: center;
 칵테일 용품
 <span class="search"><!-- 검색어 관련 -->
  	<input type="text" id="searchWrite" name="searchWrite" placeholder="검색어를 입력하세요">
-<!--  	<img id="btn_Search" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"> -->
+ 	<img id="btn_Search" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" width="25px" height="25px">
 </span>
 </div>
 <hr>
 <div id="btn_group">
 <button id="goodswhole">전체보기</button>
+<c:if test="${list.get(0).ITEM_TYPE eq '칵테일 재료' 
+				or list.get(0).ITEM_TYPE eq '칵테일 도구' 
+				or list.get(0).ITEM_TYPE eq '칵테일 잔'}">
 <button id="goodsglass">글라스</button>
 <button id="goodsshaker">쉐이커</button>
 <button id="goodsoffset">지거</button>
+</c:if>
+
+
+
+<c:if test="${list.get(0) eq '위스키 물품' 
+				or list.get(0) eq '와인 물품'}">
+</c:if>
 </div>
+
 
 <div class="container">
-	<div class="item"><img id="material" src="/resources/image/뉴욕 롱 드링크.jpg" width="250px" height="250px" >
-		<div>글라스</div>
-		<div>제품명</div>
-		<div>4,900원</div>
+<c:forEach var="list" items="${list}">
+	<div class="item">
+	<img id="material" src='/itemfile/${list.I_STORED_NAME}/' width="250px" height="250px" >
+	      <div>${list.ITEM_TYPE }</div>
+	      <div>${list.ITEM_TITLE }</div>
+	      <div>${list.ITEM_PRICE }</div>
 	</div>
-	
-	
-	<div class="item"><img id="material" src="/resources/image/렉싱톤 락 글라스.jpg" width="250px" height="250px" >
-		<div>글라스</div>
-		<div>제품명</div>
-		<div>4,900원</div>
-	</div>
-	<div class="item"><img id="material" src="/resources/image/뮌헨 맥주 글라스.jpg" width="250px" height="250px" >C</div>
-	<div class="item"><img id="material" src="/resources/image/브랜디잔.jpg" width="250px" height="250px" >D</div>
-	<div class="item"><img id="material" src="/resources/image/오션 임페리얼 글라스.jpg" width="250px" height="250px" >E</div>
-	<div class="item"><img id="material" src="/resources/image/지거음.jpg" width="250px" height="250px" >
-		<div>글라스</div>
-		<div>제품명</div>
-		<div>4,900원</div>	
-	</div>
-	<div class="item"><img id="material" src="/resources/image/포코 그란데 고블렛.jpg" width="250px" height="250px" >
-		<div>글라스</div>
-		<div>제품명</div>
-		<div>4,900원</div>
-	</div>
-	<div class="item"><img id="material" src="/resources/image/포크 바스푼.jpg" width="250px" height="250px" >H</div>
+</c:forEach>
 </div>
-
 
 
 <c:import url="../layout/footer.jsp" />

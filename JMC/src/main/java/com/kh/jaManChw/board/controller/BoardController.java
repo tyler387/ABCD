@@ -229,7 +229,7 @@ public class BoardController {
 		
 		//카테고리로 가면 해당 카테고리의 curPage 가장 마지막 글을 보여줌
 		@ResponseBody
-		@GetMapping("/cateFilepage")
+		@RequestMapping("/cateFilepage")
 		public List<Map<String, Object>> cateFilepage(
 				Model model
 				, String curPage

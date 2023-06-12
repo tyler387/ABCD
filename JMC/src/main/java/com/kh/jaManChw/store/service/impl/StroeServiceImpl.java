@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.jaManChw.store.dao.face.StroeDao;
 import com.kh.jaManChw.store.service.face.StroeService;
+import com.kh.jaManChw.util.Paging;
 
 @Service
 public class StroeServiceImpl implements StroeService {
@@ -33,6 +34,24 @@ public class StroeServiceImpl implements StroeService {
 		
 		stroeDao.updateSbUpdate(map);
 		
+	}
+
+	@Override
+	public List<Map<String, Object>> showAllGoods(String type) {
+		
+		return stroeDao.selectAllItem(type);
+	}
+
+	@Override
+	public Paging getPage(String curPage) {
+		int noCurPage=0;
+		if(curPage !=null && !"".equals(curPage)) {
+			noCurPage = Integer.parseInt(curPage);
+		}
+		logger.info("ServiceCurPage : {}", noCurPage);
+		
+		
+		return new Paging(noCurPage, stroeDao.selectCurPage(noCurPage), 8, 10);
 	}
 	
 	

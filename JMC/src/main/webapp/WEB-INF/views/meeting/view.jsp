@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="../layout/header.jsp" />
 <c:import url="../chat/chatbutton.jsp"></c:import>
@@ -13,7 +13,10 @@
 <style>
 
 
-
+.reportbtn{
+ text-align: right;
+ height: 20px;
+}
 
 .btn-open-popup{
   text-align: right;
@@ -39,35 +42,48 @@
 	top: 80%;
 	left: 210;
 }
+
+
+.meetingviewall{
+	margin: 0 auto;	
+	z-index: 1000;
+}
+
 .meetinginfo{
-	position: relative;
-	top: 3%;
-	left: 70%;
+	
+	width: 500px;
+	height: 300px;
+	float: right;
 }
 
 .meetinginfo2{
 	border-radius: 20px;
-	border : 1px solid black;
+	box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
+	position: relative;
 	width: 500px;
 	height: 300px;
 
 }
 
+.nicknamebox{
+  margin: 0 auto;
+  width: 500px;
 
+}
 
 .nicknameboxleader{
-  background-color:#99ccff;
-  width:250px;
-  height:100px;
+  background-color:#white;
+  width:300px;
+  height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   
   }
 
-.nicknamebox{
-  background-color:#99ccff;
-  width:250px;
-  height:100px;
+.nicknameboxapp{
+  background-color:#white;
+  width:300px;
+  height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   
@@ -81,6 +97,7 @@
 	height: 100%;
 	display: none;
 	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 9999;
 }
 
 .modal.show {
@@ -109,6 +126,7 @@
 	height: 100%;
 	display: none;
 	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 9999;
 }
 
 .modal2.show {
@@ -175,7 +193,9 @@
 
 <br><br>
 
-<div>
+<h4>조회수:${viewmeeting.hit }</h4>
+
+<div class= "reportbtn">
 	<button class="btn-open-popup">신고하기</button>
 </div>
 
@@ -206,6 +226,9 @@
 <!-- <a onclick="reportpopup();"><button>신고하기</button></a> -->
 
 <hr>
+
+<div class= "meetingviewall">
+
 <div class = "meetinginfo">
 
 
@@ -220,7 +243,7 @@
 	
 	<tr>	
 		<th>모임 일시</th>
-		<td>${viewmeeting.meetingDate }</td>
+		<td><fmt:formatDate value="${viewmeeting.meetingDate }" pattern="yyyy년MM월dd일 a h시mm분" type="date"/></td>
 	</tr>
 	<tr>	
 		<th>모집 인원</th>
@@ -262,13 +285,13 @@
 <%-- <a onclick="window.open('/meeting/join?meetingno=${viewmeeting.meetingno}')"> --%>
 <!-- <button>모임 신청</button></a> -->
 
+<div class="nicknamebox">
 
-<h1>모집자</h1>
-<div class=nicknameboxleader>
-	<a onclick="window.open('/meeting/applicant?userno=${applicantnick1.userno}&meetingno=${viewmeeting.meetingno}' )">
+<h2>모집자</h2>
+<div class=nicknameboxleader a onclick="window.open('/meeting/applicant?userno=${applicantnick1.userno}&meetingno=${viewmeeting.meetingno}' )">
 	<table>
 		<tr>
-			<th>모집자 닉네임</th>
+			<th>닉네임</th>
 		</tr>
 
 		<tr>
@@ -281,19 +304,20 @@
 </a>
 </div>
 
-<h1>참가자</h1>
+<h2>모집 인원 현황</h2>
+총원 명 / 확정 인원 명<br><br>
+
 <c:forEach var="applicantnick" items="${applicantnick }">
 	
 	<!-- <table onclick="applicantpopup();"> -->
 
 	
-	<div class=nicknamebox >
-	<a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
+	<div class=nicknameboxapp a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
 	
 	
 	<table>
 		<tr>
-			<th>참가자 닉네임</th>
+			<th>닉네임</th>
 		</tr>
 
 		<tr>
@@ -305,7 +329,8 @@
 	</a>
 	</div>
 </c:forEach>
-
+</div>
+</div>
 <script>
       const body = document.querySelector('body');
       const modal = document.querySelector('.modal');

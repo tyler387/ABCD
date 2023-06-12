@@ -18,6 +18,20 @@
 
 <style type="text/css">
 
+
+
+.meetingsearch {
+  position: relative;	
+  width: 300px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+
+
+
 .join {
 
 
@@ -80,7 +94,7 @@
 .meetinglist{
   margin: 0 auto;
   overflow: scroll; 
-  width: 310px;
+  width: 350px;
   height: 850px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
@@ -88,7 +102,7 @@
 
 .skyblue{
   background-color:#99ccff;
-  width:300px;
+  width:350px;
   height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
@@ -176,8 +190,12 @@
 
 
 <div class="meetingbar">
-<button class="filter">필터</button>
-<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>		
+<a data-toggle="modal" data-target="#joinFilterModal" class="filter">
+<img src="https://www.greenlight.co.kr/pc/public/img/i_filter.png" class="img2"> 필터</a>
+
+<input type="text" class="meetingsearch" name="meetingsearch" id="meetingsearch" placeholder="검색어 입력"> 	
+
+</div>
 </div><br>
 
 
@@ -189,8 +207,8 @@
 </div>
 
 <div>
-<h4>전체 : ${meetingcount}개 / 현재: ${meetingcountnow }개 모집 중</h4><br>
-<div class="meetinglist1" style="flex: 1; width: 310px;">
+<h4>전체 : ${meetingcount}개 | 모집 중 ${meetingcountnow }개 </h4><br>
+<div class="meetinglist1" style="flex: 1; width: 350px;">
 <c:import url="/WEB-INF/views/meeting/meetinglist.jsp"/>
 </div>
 </div>
@@ -259,7 +277,10 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-	$("#search").click(function() {
+	$("#meetingsearch").keypress(function(e) {
+		if(e.keyCode && e.keyCode == 13){
+			$("#meetingsearch").trigger("click");
+		}
 		console.log("#search click")
 		$.ajax({
 			type: "get"

@@ -36,7 +36,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired ServletContext context;
 	
 	@Override
-	public Paging getPage(String curPage) {
+	public Paging getPage(String curPage, int boardOptionno) {
 		
 		int noCurPage=0;
 		if(curPage !=null && !"".equals(curPage)) {
@@ -45,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
 		logger.info("ServiceCurPage : {}", noCurPage);
 		
 		
-		return new Paging(noCurPage, boardDao.selectCurPage(noCurPage), 9, 10);
+		return new Paging(noCurPage, boardDao.selectCurPage(boardOptionno), 9, 10);
 	}
 
 	@Override

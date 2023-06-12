@@ -2,6 +2,7 @@ package com.kh.jaManChw.login.dao.face;
 
 import org.springframework.ui.Model;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersDao {
@@ -79,6 +80,8 @@ public interface UsersDao {
 	 * @return 탈퇴유저
 	 */
 	public int selectLeaveUserByUserId(Users users);
+
+
 	
 
 

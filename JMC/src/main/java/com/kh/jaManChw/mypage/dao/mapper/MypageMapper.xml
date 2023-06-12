@@ -28,7 +28,7 @@
 	  </insert>
 	  
 	  
-	  <select id="selectfileInfo" resultType="com.kh.jaManChw.dto.ProfileFile" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  <select id="selectfileInfo" resultType="com.kh.jaManChw.dto.ProfileFile">
 	  	SELECT *
 	  	FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
@@ -44,6 +44,11 @@
 	  	FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
 	  </select>
+	  
+<!-- 	  <select id="selectSearchList" resultMap=""> -->
+	  
+	  
+<!-- 	  </select> -->
 
 
   </mapper>

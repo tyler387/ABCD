@@ -37,27 +37,29 @@ public class MypageController {
 	@GetMapping("/mypage/main")
 	public void mypageMain(Users users,Model model,HttpSession session,ProfileFile profileFile) {
 		
-		//세션에 저장된 정보 가져오기
-		ProfileFile profile = new ProfileFile();
-		
-		profile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
-		profile.setProfileno((int)session.getAttribute("userno"));
-		
-		
+		// 세션에서 userno 가져오기
 		int userno = (Integer)session.getAttribute("userno");
 		users.setUserno(userno);
+		logger.info("users main:{}",users);
 		
-		logger.info("profileFile : {}", profileFile);
-		model.addAttribute("profile", profileFile);
+		
+		//담아온 세션으로 파일 저장된 이름 불러오기
+		ProfileFile profile = mypageService.fileInfo(users);
+		//ProfileFile profile= mypageService.getFileName(profileFile);
+		
+	
+		//파일 정보 모델에 넣기 가져오기	
+		model.addAttribute("profile", profile);
+		logger.info("profile 수정:{}",profile);
+
+		// profile 모델값에 담기
+		model.addAttribute("profile", profile);
+		logger.info("profile:{}",profile);
 		
 		//유저 정보 가져오기 - 메인에서 로그인한 유저 정보 조회
 		Users loginInfo = mypageService.getloginInfo(users);
-		model.addAttribute("loginInfo", loginInfo);
-		
-		logger.info("users :{}",users);
-		logger.info("loginInfo : {}", loginInfo);	
-		logger.info("profileFile : {}", profileFile);	
-		
+		model.addAttribute("loginInfo", loginInfo);	
+		logger.info("loginInfo main : {}", loginInfo);			
 	}
 
 	// 마이페이지 정보수정
@@ -69,7 +71,7 @@ public class MypageController {
 		users.setUserno(userno);
 		
 		Users loginInfo = mypageService.getloginInfo(users);
-		model.addAttribute("loginInfo", loginInfo);
+		model.addAttribute("loginInfo userInfo", loginInfo);
 		
 	}
 	
@@ -113,23 +115,21 @@ public class MypageController {
 //-----------------------------------------------------------
 	// 프로필사진수정 페이지
 	@GetMapping("/mypage/profile")
-	public void profilePage(HttpSession session,ProfileFile profileFile,Model model) {
+	public void profilePage(HttpSession session,ProfileFile profileFile,Model model,Users users) {
 		
+		//세션에 저장된 userno 가져오기
+		int userno = (Integer)session.getAttribute("userno");
+		users.setUserno(userno);
+		logger.info("users 수정:{}",users);
 		
-		//mypageService.getSession(session,profileFile,model);
+		//담아온 세션으로 파일 저장된 이름 불러오기
+		ProfileFile profile = mypageService.fileInfo(users);
+		//ProfileFile profile= mypageService.getFileName(profileFile);
 		
-		// 세션에 담긴 정보 가져오기
-		profileFile.setUserno((Integer)session.getAttribute("userno"));
-		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
 	
-		Users info = new Users();
-		info.setUserno((int)session.getAttribute("userno"));
-	
-		//파일 정보 가져오기
-		ProfileFile profile = mypageService.fileInfo(info);
-	
+		//파일 정보 모델에 넣기 가져오기	
 		model.addAttribute("profile", profile);
-		logger.info("profile:{}",profile);
+		logger.info("profile 수정:{}",profile);
 
 				
 	}
@@ -142,18 +142,16 @@ public class MypageController {
 
 		// userno 세션에서 가져오기
 		profileFile.setUserno((Integer)session.getAttribute("userno"));
-		session.setAttribute("profile", profileFile.getProfileStoredName());
-		
 		
 		// 파일이 있으면 -> 업로드할 파일이 있으면
 		if(!file.isEmpty()) {	
 			
 			// 프로필 저장
-			mypageService.profileSave(file,session,profileFile);
+			ProfileFile profile = mypageService.profileSave(file, profileFile);
 			
 			// 파일의 저장이름 세션에 저장
-			String profileStoredName = (String)session.getAttribute("profileStroedName");
-			profileFile.setProfileStoredName(profileStoredName);
+			session.setAttribute("profile", profile.getProfileStoredName());
+			
 		}
 		
 		return "redirect:/mypage/main";
@@ -163,17 +161,17 @@ public class MypageController {
 
 //-----------------------------------------------------------	
 	//유저 검색 기능	
-//	@GetMapping("/mypage/friendList")
-//	@ResponseBody
-//	public List<Users> getuserSearchList(@RequestParam("type") String type,
-//								@RequestParam("keyword") String keyword,Model model) throws Exception {
-//									
-//		Users users = new Users();
-//		users.setType(type);
-//		users.setKeyword(keyword);
-//
-//		return mypageService.getSearchLists(users);
-//	}
+	@GetMapping("/mypage/friendList")
+	@ResponseBody
+	public List<Users> getuserSearchList(@RequestParam("type") String type,
+								@RequestParam("keyword") String keyword,Model model) throws Exception {
+									
+		Users users = new Users();
+		users.setType(type);
+		users.setKeyword(keyword);
+
+		return mypageService.getSearchLists(users);
+	}
 
 
 

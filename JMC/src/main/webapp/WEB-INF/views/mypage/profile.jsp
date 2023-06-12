@@ -12,8 +12,14 @@
       <input type="hidden" name="userno" id="userno" value="${userno}">  
   
 	<div class='profile'>
-		<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
-        <input type="file" id="file" name="file">
+		<c:if test="${profile.profileStoredName eq null}">
+			<img src="<%=request.getContextPath() %>/userProfile/pexels-tobias-bjørkli-1693095.jpgf6f88b97" id="profileimg"> 
+	        <input type="file" id="file" name="file">
+        </c:if>
+        <c:if test="${profile.profileStoredName ne null}">
+			<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
+	        <input type="file" id="file" name="file">
+        </c:if>
      </div>  
     
     <button id="profileInput" >프로필 수정</button>

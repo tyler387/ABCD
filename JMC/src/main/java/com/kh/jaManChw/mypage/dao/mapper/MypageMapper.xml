@@ -28,7 +28,7 @@
 	  </insert>
 	  
 	  
-	  <select id="selectfileInfo" resultType="com.kh.jaManChw.dto.ProfileFile">
+	  <select id="selectfileInfo" parameterType="int" resultType="com.kh.jaManChw.dto.ProfileFile">
 	  	SELECT *
 	  	FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
@@ -41,6 +41,12 @@
 	  
 	  <select id="selectCntProfile" resultType="int" parameterType="com.kh.jaManChw.dto.ProfileFile">
 	  	SELECT COUNT(*)
+	  	FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </select>
+	  
+	   <select id="selectFileName" resultType="com.kh.jaManChw.dto.ProfileFile">
+	  	SELECT PROFILE_STORED_NAME
 	  	FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
 	  </select>

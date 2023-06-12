@@ -2,25 +2,21 @@ package com.kh.jaManChw.mypage.service.Impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.mypage.dao.face.MypageDao;
 import com.kh.jaManChw.mypage.service.face.MypageService;
-import com.kh.jaManChw.util.Paging;
 
 
 @Service
@@ -61,13 +57,14 @@ public class MypageServiceImpl implements MypageService {
 
 
 	@Override
-	public void profileSave(MultipartFile file,HttpSession session,ProfileFile profileFile) {
+	public ProfileFile profileSave(MultipartFile file,ProfileFile profileFile) {
 
+		
 
 		//파일 크기 0이면 업로드 중지
 		if(file.getSize() <= 0) {
 			logger.info("파일 크기 0 : 업로드 중단");
-			return;
+			return null;
 		}
 		
 		//파일 저장 경로 - 없으면 폴더 생성
@@ -112,12 +109,10 @@ public class MypageServiceImpl implements MypageService {
 		ProfileFile profile = new ProfileFile();
 		
 		//세션을 profile에 삽입
-		profile.setUserno((Integer)session.getAttribute("userno"));		
+		profile.setUserno(profileFile.getUserno());		
 		profile.setProfileOriginName(file.getOriginalFilename());
 		profile.setProfileStoredName(storedName);
 		profile.setProfilesize(file.getSize());
-		
-		session.setAttribute("profile", profile.getProfileStoredName());
 		
 		//model.addAttribute("profile", profile);
 		logger.info("profile:{}",profile);
@@ -136,6 +131,7 @@ public class MypageServiceImpl implements MypageService {
 			
 		}
 		
+		return profile;
 	}
 
 
@@ -151,22 +147,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 
-//	@Override
-//	public void getSession(HttpSession session, ProfileFile profileFile, Model model) {
-//		// 세션에 담긴 정보 가져오기
-//		profileFile.setUserno((Integer)session.getAttribute("userno"));
-//		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
-//	
-//		Users info = new Users();
-//		info.setUserno((int)session.getAttribute("userno"));
-//	
-//		//파일 정보 가져오기
-//		ProfileFile profile = mypageService.fileInfo(info);
-//	
-//		model.addAttribute("profile", profile);
-//		logger.info("profile:{}",profile);
-//		
-//	}
+	@Override
+	public ProfileFile getFileName(ProfileFile profileFile) {
+		return mypageDao.selectFileName(profileFile);
+	}
+
+
 
 
 

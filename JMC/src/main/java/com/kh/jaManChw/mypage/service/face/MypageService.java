@@ -41,13 +41,11 @@ public interface MypageService {
 	public ProfileFile fileInfo(Users info);
 
 	/**
-	 * 
+	 *  파일 업로드
 	 * @param file
 	 * @param profileFile
 	 */
-	public void profileSave(MultipartFile file,HttpSession session,ProfileFile profileFile);
-
-
+	public ProfileFile profileSave(MultipartFile file,ProfileFile profileFile);
 
 
 	/**
@@ -64,6 +62,13 @@ public interface MypageService {
 	 * @return 유저 
 	 */
 	public List<Users> getSearchLists(Users users);
+
+	/**
+	 * 파일 이름 조회하기
+	 * @param profileFile
+	 * @return
+	 */
+	public ProfileFile getFileName(ProfileFile profileFile);
 
 	//public void getSession(HttpSession session, ProfileFile profileFile, Model model);
 

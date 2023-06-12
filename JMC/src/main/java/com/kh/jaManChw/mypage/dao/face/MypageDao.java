@@ -63,7 +63,14 @@ public interface MypageDao {
 	 */
 	public List<Users> selectSearchList(Users users);
 
-	public ProfileFile selectfileInfo(int userno);
+	public ProfileFile selectfileInfo(int i);
+
+	/**
+	 * userno로 파일 이름 조회하기
+	 * @param profileFile
+	 * @return
+	 */
+	public ProfileFile selectFileName(ProfileFile profileFile);
 
 	
 

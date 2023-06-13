@@ -46,7 +46,8 @@
 3<input type="hidden" value="10000" id="item3"><br>
 4<input type="hidden" value="item4" id="item4"><br>
 총 주문액 : 
- 
+
+${sbList } 
   <!-- 결제위젯, 이용약관 영역 -->
   <div id="payment-method"></div>
   <div id="agreement"></div>

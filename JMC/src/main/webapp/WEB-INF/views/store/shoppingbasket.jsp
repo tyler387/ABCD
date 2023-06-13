@@ -4,8 +4,8 @@
     
     	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
+	
+<c:import url="../layout/header.jsp"/>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -104,10 +104,14 @@ $(function(){
 	<th>관리</th>
 </tr>	
 <c:forEach var="list" items="${list}" varStatus="status" >
-<input type="hidden" value="${list.BASKETNO }" id="bk	no" name="basketno">
+<input type="hidden" value="${list.BASKETNO }" id="bkno" name="basketno">
 <tr>
-	<th><input type="checkbox" name="color" value="blue"><c:out value="${status.index}" /></th> 
-	<th>${list.ITEM_TITLE }</th>
+	<th class="cart_info_td">
+	<input type="checkbox" name="cartArr" value="${list.BASKETNO }" data-cartNo="${list.BASKETNO }" checked>
+<%-- 	<c:out value="${status.index}" /> --%>
+<%-- 	<input type="hidden" value="${list.BASKETNO }" name="itemcount" class="itemcount"> --%>
+	</th> 
+	<th>${list.ITEM_TITLE }</th>	
 	<th>
 		<input type="text" value="${list.SB_ITEM_COUNT}" name="sbItemCount" class="sbItemCount">
 		<input type="hidden" value="${list.BASKETNO }" name="basketno" class="basketno" >${list.SB_ITEM_COUNT }
@@ -119,9 +123,54 @@ $(function(){
 </c:forEach> 
 </table>
 
-<button id="commentbtn">결제하기</button>
+<button id="btnOrder" type="button">선택 결제하기</button>
+<!-- <button id="btnOrderAll" type="button">전체 결제하기</button> -->
 <!-- <button value="bkno" name="bknolist" id="bknolist">결제하기</button> -->
 </form>
 </div>
-</body>
-</html>
+<script type="text/javascript">
+$(function() {
+	   
+	   //선택 주문
+	   $("#btnOrder").click(function() {
+	      console.log("선택주문 선택")
+	      
+	      var totalArr = $("input[name=cartArr]").length
+	      var checked = $("input[name=cartArr]:checked").length
+
+	      if(checked == 0) {
+	         console.log("선택된 상품이 없습니다.")
+	         alert("선택된 상품이 없습니다.")
+	         return false;
+	      } else {
+	         
+	         if(totalArr == checked) {
+	            console.log("선택주문에서 전체주문으로 넘어감")
+	            var chkArr = new Array();
+	            $("input[name=cartArr]:checked").each(function() {
+	               chkArr.push($(this).attr("data-cartNo"))
+	            })
+	            
+	            console.log(chkArr)
+	            location.href="/payment/main?basketno=" + chkArr;
+	           //선택 항목이 전체가 아니라면   
+	         } 
+	         if(totalArr != checked) {
+	            console.log("선택주문으로 넘어감")
+	            
+	            var chkArr = new Array();
+	            
+	            $("input[name=cartArr]:checked").each(function() {
+	               chkArr.push($(this).attr("data-cartNo"))
+	            })
+	             
+	            console.log(chkArr)
+	            location.href="/payment/main?basketno=" + chkArr;
+	         }
+	      
+	      }
+	   })
+	   
+})
+</script>
+<c:import url="../layout/footer.jsp" />

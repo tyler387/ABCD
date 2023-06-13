@@ -1,6 +1,7 @@
 package com.kh.jaManChw.payment.service.face;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,6 @@ public interface PaymentService {
 	 * @return 추출하여 완성된 리스트 DTO 
 	 * 
 	 */
-	public List<ShoppingBasket> getParamList(int[] sbItemcount, int[] basketno);
+	public List<ShoppingBasket> getParamList(int[] basketno);
 
 }

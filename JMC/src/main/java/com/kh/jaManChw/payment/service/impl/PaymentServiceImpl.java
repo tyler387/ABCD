@@ -14,7 +14,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Encoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -122,18 +124,21 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public List<ShoppingBasket> getParamList(int[] sbItemcount, int[] basketno) {
+	public List<ShoppingBasket> getParamList(int[] basketno) {
 
 		List<ShoppingBasket> sbList = new ArrayList<>();
+//		Map<String, Object> map = new HashMap<>();
+		// 배열을 사용하여 원하는 작업 수행
 		for (int i = 0 ; i < basketno.length; i++) {
 			ShoppingBasket shoppingBasket = new ShoppingBasket();
 			
 			shoppingBasket.setBasketno(basketno[i]);
-			shoppingBasket.setSbItemCount(sbItemcount[i]);
 			
-			sbList.add(shoppingBasket);
+//			map.put("sbList", paymentDao.selectShoppingAllBasketList(shoppingBasket));
+			sbList.addAll(paymentDao.selectShoppingAllBasketList(shoppingBasket));
+			logger.info("sbList {}", sbList);
 		}
-		
+		logger.info("장바구니쇼핑 리스트 {}", sbList);
 		return sbList;
 	}
 

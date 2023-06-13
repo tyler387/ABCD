@@ -141,9 +141,9 @@ div.admin1 {
 <table class="table table table-hover">
 <tr class="table-secondary">
 	<th>아이디</th>
-	<th>상태</th>
 	<th>이름</th>
 	<th>닉네임</th>
+	<th>상태</th>
 	<th>생년원일</th>
 	<th>성별</th>
 	<th>폰번호</th>
@@ -153,6 +153,8 @@ div.admin1 {
 <c:forEach var="users" items="${userfilter }">
 <tr>
 	<th>${users.userId }</th>
+	<th>${users.userName }</th>
+	<th>${users.userNick }</th>
 	<th><c:choose>
 		<c:when test="${users.status eq 'leave'}">탈퇴</c:when>
 		<c:when test="${users.status eq	'active'}">정상</c:when>
@@ -160,8 +162,6 @@ div.admin1 {
 		<c:when test="${users.status eq 'blacklist'}">블랙리스트</c:when>
 		<c:when test="${users.status eq 'block'}">정지</c:when>
 	</c:choose>  </th>
-	<th>${users.userName }</th>
-	<th>${users.userNick }</th>
 	<th><fmt:formatDate value="${users.birth }" pattern="yyyy-MM-dd"/></th>
 	<th>${users.userId }</th>
 	<th>${users.phone }</th>

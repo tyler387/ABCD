@@ -31,6 +31,7 @@ div.admin1 {
 
 </style>
 
+
 <c:import url="../../main.jsp"></c:import>
 
 
@@ -101,34 +102,43 @@ div.admin1 {
 </c:forEach>
 </table>
 <br>
-<!-- 모달테스트 -->
-  <button id="testBtn" class="btn">모달 테스트</button>
   <!-- 회원가입 확인 Modal-->
-	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">모달테스트</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">X</span>
-					</button>
-				</div>
-				<div class="modal-body">블랙리스트 설정을 하시겠습니까?</div>
-				<div class="modal-footer">
-					<a class="btn" id="modalY" href="#">예</a>
-					<button class="btn" type="button" data-dismiss="modal">아니요</button>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+<!-- 		<div class="modal-dialog" role="document"> -->
+<!-- 			<div class="modal-content"> -->
+<!-- 				<div class="modal-header"> -->
+<!-- 					<h5 class="modal-title" id="exampleModalLabel">모달테스트</h5> -->
+<!-- 					<button class="close" type="button" data-dismiss="modal" aria-label="Close"> -->
+<!-- 						<span aria-hidden="true">X</span> -->
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 				<div class="modal-body">블랙리스트 설정을 하시겠습니까?</div> -->
+<!-- 				<div class="modal-footer"> -->
+<!-- 					<a class="btn" id="modalY" href="#">예</a> -->
+<!-- 					<button class="btn" type="button" data-dismiss="modal">아니요</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+
+<div>
+
 	<script>
-		$('#testBtn').click(function(e){
+	$(document).on("click",  "#blackBtn", function(e) {
 			e.preventDefault();
 			$('#testModal').modal("show");
 		});
+		$(document).on("click",  "#stopBtn", function(e) {
+// 			$('#stopBtn').click(function(e){
+			e.preventDefault();
+			$('#testModal').modal("show");
+		});
+		$(document).on("click",  "#modalY", function() {
+// 		$('#modalY').click(function(e){
+			location.href="/payment/main?basketno=" + chkArr;
+		});
 	</script>
 
-<div>
 <c:import url="../../paging.jsp"/>
 </div>
 </div>

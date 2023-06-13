@@ -83,29 +83,28 @@ public class PaymentController {
 	
 	@RequestMapping("/main")
 	public void PaymentMain(
-//			@RequestParam Map<String, String> map,
-			int[] sbItemcount, int[] basketno
+			@RequestParam Map<String, String> map,
+			 int[] basketno, Model model
 			) {
 		logger.info("결제할 상품들 출력{}");
 		
-		List<ShoppingBasket> sbList = paymentService.getParamList(sbItemcount, basketno);
+		List<ShoppingBasket> sbList = paymentService.getParamList(basketno);
+//		Map<String, Object> list = paymentService.getParamList(basketno);
+		logger.info("sbListsbListsbListsbList = {}", sbList);
+		logger.info("bbsssb = {}", sbList);
 		
 		logger.info("결제할 상품들 출력{}", sbList);
+		model.addAttribute("sbList", sbList);
 	}
 	
 
 	@RequestMapping("/abc")
 	public String abc(HttpServletRequest request,
-//			String val, String bbb,
-			@RequestParam Map<String, String> map) {
-		logger.info("{}", request.getAttribute("val"));
-//		logger.info("val = {}", val);
-//		logger.info("bbb = {}", bbb);
+			@RequestParam Map<String, String> map, int[] basketno) {
 		logger.info("bbb = {}", map);
-		
+		logger.info("bbb = {}", basketno);
 		JSONObject jsonObject = paymentService.paymentInfo(request);
-		
-		map.put("asdada", "asdasdasda");
+//		map.put("asdada", "asdasdasda");
 		
 		//paymentKey 이걸로 주문 취소 등 해야함
 		logger.info("{}", jsonObject);

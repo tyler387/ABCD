@@ -21,7 +21,6 @@
 	<input type="hidden" class="form-control" value="${paging.curPage}" aria-label="Username" aria-describedby="basic-addon1"  name="curPage">
 	<input type="hidden" class="form-control" value="${users.userId}" aria-label="Username" aria-describedby="basic-addon1"  name="userId">
 	<input type="hidden" class="form-control" value="${users.userPw}" aria-label="Username" aria-describedby="basic-addon1"  name="userPw">
-	<input type="hidden" class="form-control" value="${users.status}" aria-label="Username" aria-describedby="basic-addon1"  name="status">
 	<input type="hidden" class="form-control" value="${users.role}" aria-label="Username" aria-describedby="basic-addon1"  name="role">
 	<input type="hidden" class="form-control" value="${users.platFormOption}" aria-label="Username" aria-describedby="basic-addon1"  name="platFormOption">
 	
@@ -73,6 +72,44 @@
 	<div class="input-group mb-3">
 	  <span class="input-group-text" id="basic-addon1">성별</span>
 	  <input type="text" class="form-control" value="${users.gender }" aria-label="Username" aria-describedby="basic-addon1" name="gender">
+	  <span class="input-group-text" id="basic-addon1">상태</span>
+	  	<select name ="status" id="status" class=" form-select" style="width: 70px;">
+	  	<c:if test="${users.status eq 'active' }">
+			<option value="active" selected>정상</option>
+			<option value="leave">탈퇴</option>
+			<option value="unactive">휴먼</option>
+			<option value="block">정지</option>
+			<option value="blacklist">블랙리스트</option>
+	  	</c:if>
+  		<c:if test="${users.status eq 'leave' }">
+			<option value="active">정상</option>
+			<option value="leave"selected>탈퇴</option>
+			<option value="unactive">휴먼</option>
+			<option value="block">정지</option>
+			<option value="blacklist">블랙리스트</option>
+	  	</c:if>
+	  	<c:if test="${users.status eq 'unactive' }">
+			<option value="active">정상</option>
+			<option value="leave">탈퇴</option>
+			<option value="unactive" selected>휴먼</option>
+			<option value="block">정지</option>
+			<option value="blacklist">블랙리스트</option>
+	  	</c:if>
+	  	<c:if test="${users.status eq 'block' }">
+			<option value="active">정상</option>
+			<option value="leave">탈퇴</option>
+			<option value="unactive">휴먼</option>
+			<option value="block" selected>정지</option>
+			<option value="blacklist">블랙리스트</option>
+	  	</c:if>
+	  	<c:if test="${users.status eq 'blacklist' }">
+			<option value="active">정상</option>
+			<option value="leave">탈퇴</option>
+			<option value="unactive">휴먼</option>
+			<option value="block">정지</option>
+			<option value="blacklist" selected>블랙리스트</option>
+	  	</c:if>
+	</select>
 	</div>
 	
 	<div class="input-group mb-3">

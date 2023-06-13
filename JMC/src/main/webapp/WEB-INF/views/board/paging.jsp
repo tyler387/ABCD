@@ -39,23 +39,23 @@
 <%--===========================Go to First=============================--%>
 <%-- 첫 페이지로 이동 --%>
 <c:if test="${paging.curPage ne 1}">
-   <li class ="page-item"><span class="page-link first">첫 페이지</span></li>
+   <li class ="page-item first"><span class="page-link">첫 페이지</span></li>
 </c:if>
 
 <%-- 현재 페이지가 1이라면 첫 페이지로 이동하는 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage eq 1}">
-   <li class="page-item disabled"><span class="page-link first">첫 페이지</span></li>
+   <li class="disabled page-item  first"><span class="page-link">첫 페이지</span></li>
 </c:if>
 <%--====================================================================--%>
 
 <%--=====================Move to before page list=======================--%>
 <%-- 페이지리스트를 이전 페이지 리스트로 이동(이동시엔 페이지 리스트의 첫페이지로 보낸다) --%>
 <c:if test="${paging.startPage ne 1}">
-   <li class="page-item"><span class="page-link beforelist">&laquo;</span></li>
+   <li class="page-item beforelist"><span class="page-link">&laquo;</span></li>
 </c:if>
 <%-- 현재 페이지리스트의 시작 페이지가 1이라면 기능을 비활성화한다 --%>
 <c:if test="${paging.startPage eq 1}">
-   <li class="page-item disabled"><span class="page-link beforelist">&laquo;</span></li>
+   <li class="disabled page-item  beforelist"><span class="page-link">&laquo;</span></li>
 </c:if>
 <%--====================================================================--%>
 
@@ -63,12 +63,12 @@
 
 <%-- 현재 페이지를 이전 페이지로 이동시킨다--%>
 <c:if test="${paging.curPage gt 1}">
-   <li class="page-item"><span class="page-link before">&lt;</span></li>
+   <li class="page-item before"><span class="page-link">&lt;</span></li>
 </c:if>
   
 <%-- 현재 페이지가 1보다 작거나 같다면 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage le 1}">
-   <li class="page-item disabled"><span class="page-link before">&lt;</span></li>
+   <li class="disabled page-item  before"><span class="page-link">&lt;</span></li>
 </c:if>
 <%--====================================================================--%>
 
@@ -77,10 +77,10 @@
 <%-- ./list페이지로 이동할때 현재 페이지 정보를 쿼리스트링형태로 전송함 --%>
 <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
    <c:if test="${paging.curPage eq i }">
-      <li class="page-item active usable"><span class="page-link number">${i }</span></li>
+      <li class="page-item active usable gotoPage"><span class="page-link number">${i}</span></li>
    </c:if>
    <c:if test="${paging.curPage ne i }">
-      <li class="page-item usable"><span class="page-link number">${i }</span></li>
+      <li class="page-item usable gotoPage"><span class="page-link number">${i }</span></li>
    </c:if>   
 </c:forEach>
 <%--====================================================================--%>
@@ -88,36 +88,36 @@
 <%--=======================Move to after page==========================--%>
 <%-- 현재 페이지를 다음 페이지로 이동시킨다--%>
 <c:if test="${paging.curPage lt paging.totalPage}">
-   <li  class="page-item"><span class="page-link next" >&gt;</span></li>
+   <li  class="page-item next"><span class="page-link" >&gt;</span></li>
 </c:if>
 
 <%-- 현재 페이지가 전체 페이지보다 크거나 같다면 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage ge paging.totalPage}">
-   <li class="page-item disabled"><span class="page-link next">&gt;</span></li>
+   <li class="disabled page-item  next"><span class="page-link">&gt;</span></li>
 </c:if>
 <%--====================================================================--%>
 
 <%--=====================Move to before page list=======================--%>
 <%-- 페이지리스트를 다음 페이지 리스트로 이동(이동시엔 페이지 리스트의 첫페이지로 보낸다) --%>
 <c:if test="${paging.endPage ne paging.totalPage}">
-   <li class="page-item"><span class="page-link nextlist" >&raquo;</span></li>
+   <li class="page-item nextlist"><span class="page-link" >&raquo;</span></li>
 </c:if>
 
 <%-- 현재 페이지리스트의 끝 페이지가 끝 페이지와 같다면 기능을 비활성화한다 --%>
 <c:if test="${paging.endPage eq paging.totalPage}">
-   <li class="page-item disabled"><span class="page-link nextlist">&raquo;</span></li>
+   <li class="disabled page-item  nextlist"><span class="page-link">&raquo;</span></li>
 </c:if>
 <%--====================================================================--%>
 
 <%--===========================Go to End=============================--%>
 <%-- 끝 페이지로 이동 --%>
 <c:if test="${paging.curPage ne paging.totalPage}">
-   <li class="page-item"><span class="page-link end">끝 페이지</span></li>
+   <li class="page-item end"><span class="page-link">끝 페이지</span></li>
 </c:if>
 
 <%-- 현재 페이지가 끝페이지라면 끝 페이지로 이동하는 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage eq paging.totalPage}">
-   <li class="page-item disabled"><span class="page-link end">끝 페이지</span></li>
+   <li class="disabled page-item  end"><span class="page-link">끝 페이지</span></li>
 </c:if>
 <%--====================================================================--%>
 

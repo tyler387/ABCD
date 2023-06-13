@@ -14,11 +14,12 @@ import com.kh.jaManChw.util.Paging;
 public interface BoardDao {
 
 	/**
-	 * 페이징 하기 
-	 * @param curPage
+	 * 카테고리값에 대한 페이징 객체를 조회
+	 * 
+	 * @param boardOptionno - 카테고리 값 
 	 * @return
 	 */
-	public int selectCurPage(int noCurPage);
+	public int selectCurPage(int boardOptionno);
 
 	/**
 	 * 보드 파일에 있는 사진들을 모두 조회하고 가지고 온다.

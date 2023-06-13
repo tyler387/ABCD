@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.Paging;
@@ -69,6 +70,20 @@ public interface MypageService {
 	 * @return 유저 
 	 */
 	public List<Users> getSearchLists(String type,String keyword);
+
+	/**
+	 *  친구 목록 리스트
+	 * @param friendList
+	 * @param users 
+	 * @return
+	 */
+	public List<FriendList> getFriendList(Users users);
+
+	/**
+	 * 친구 추가하기
+	 * @param friendList
+	 */
+	public void friendAdd(FriendList friendList);
 
 
 	

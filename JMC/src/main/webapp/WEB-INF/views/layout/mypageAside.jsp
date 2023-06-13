@@ -95,11 +95,11 @@ img{
   
   <div class='profile'>
 	<c:if test="${profile.profileStoredName eq null}">
-      <img src="<%=request.getContextPath() %>/userProfile/pexels-tobias-bjørkli-1693095.jpgf6f88b97" id="profileimg"> 
+      <img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png"> 
     </c:if>
       			  
 	<c:if test="${profile.profileStoredName ne null}">
-		<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
+		<img src="<%=request.getContextPath()%>/userProfile/${profile.profileStoredName}"> 
 	</c:if>  
 	</div>
   	<div class="userInfo">
@@ -130,8 +130,13 @@ img{
   		<li class="list3"><a href="#">결제 내역</a></li>
   	</ul>
   	</li>
-  <li class="list1"><a href="/mypage/friendList">친구</a></li>
-  <li class="list1"><a href="#">커뮤니티</a></li>
+  <li class="list1"><a href="/mypage/friendList">친구</a>
+  	<ul class="list2">
+  		<li class="list3"><a href="/mypage/friendfind">친구 찾기</a></li>
+  		<li class="list3"><a href="/mypage/friendList">내친구 목록</a></li>
+  	</ul>
+  </li>
+  <li class="list1"><a href="/mypage/myBoard">커뮤니티</a></li>
   <li class="list1"><a href="#">공지사항</a></li>
  
 </ul>

@@ -2,6 +2,7 @@ package com.kh.jaManChw.mypage.service.Impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.mypage.dao.face.MypageDao;
@@ -151,25 +153,32 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<Users> getSearchLists(String type,String keyword) {
 		
-		Map<String, String> searchParam = new HashMap<String, String>();
-		searchParam.put("type", type);
-		searchParam.put("keyword", keyword);
-		List<Users> userList = mypageDao.selectSearchList(keyword);
-		return userList;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		return mypageDao.selectSearchList(map);
 	
 	}
 
 
+	@Override
+	public List<FriendList> getFriendList(Users users) {
+		return mypageDao.selectFriendAll(users);
+	}
 
 
+	@Override
+	public void friendAdd(FriendList friendList) {
+		int res = mypageDao.insertFriend(friendList);
+		
+		if(res>0) {
+			logger.info("친구추가 성공");
+		}else {
+			logger.info("친구추가 실패");
+		}
 
-
-
-
-
-
-
-	
+	}
 
 
 }

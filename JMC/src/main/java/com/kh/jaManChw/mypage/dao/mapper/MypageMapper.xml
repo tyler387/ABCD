@@ -51,14 +51,32 @@
 	  	WHERE USERNO=#{userno}
 	  </select>
 	  
-	  <select id="selectSearchList" parameterType="com.kh.jaManChw.dto.Users" resultType="com.kh.jaManChw.dto.Users">
-	  	SELECT USER_ID,USER_NICK,USER_NAME
-	  	FROM USERS WHERE 1=1
-	  	<choose>
-	  		<when test="type != null and type.equals('userId')">AND USER_ID LIKE CONCAT('%',#{keyword},'%')</when>
-	  		<when test="type != null and type.equals('userNick')">AND USER_NICK = #{userNick}</when>
-	  	</choose>
-	  </select>
+	 <select id="selectSearchList" resultType="com.kh.jaManChw.dto.Users">
+		  SELECT USERNO, USER_ID, USER_NICK, USER_NAME
+		  FROM USERS
+		  <choose>
+		    <when test="type == 'all'">
+		      WHERE (USER_ID LIKE '%' || #{keyword}|| '%' OR USER_NICK LIKE '%' || #{keyword} || '%')
+		    </when>
+		    <otherwise>
+		      WHERE ${type} LIKE '%' || #{keyword} || '%'
+		    </otherwise>
+		  </choose>
+	</select>
+	
+	<select id="selectFriendAll" resultType="com.kh.jaManChw.dto.Users">
+		SELECT FL.*, U.USER_ID, USER_NICK, USER_NAME
+		FROM FRIEND_LIST FL, USERS U
+		WHERE  1 = 1
+		    AND fl.friend_userno = u.userno
+		    AND fl.userno = #{userno}
+		ORDER BY FRIEND_USERNO
+	</select>
+	
+	<insert id="insertFriend" parameterType="com.kh.jaManChw.dto.FriendList" >
+		INSERT INTO FRIEND_LIST (FRIEND_LISTNO,USERNO,FRIEND_USERNO,FRIEND_BLOCK)
+		VALUES (FRIEND_LIST_SEQ.NEXTVAL,#{userno},#{friendUserno},DEFAULT)
+	</insert>
 
 
   </mapper>

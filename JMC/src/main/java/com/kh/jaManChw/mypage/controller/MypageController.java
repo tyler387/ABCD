@@ -1,7 +1,9 @@
 package com.kh.jaManChw.mypage.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -9,17 +11,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.mypage.service.face.MypageService;
@@ -60,7 +59,12 @@ public class MypageController {
 		//유저 정보 가져오기 - 메인에서 로그인한 유저 정보 조회
 		Users loginInfo = mypageService.getloginInfo(users);
 		model.addAttribute("loginInfo", loginInfo);	
-		logger.info("loginInfo main : {}", loginInfo);			
+		logger.info("loginInfo main : {}", loginInfo);	
+		
+		//친구목록 불러오기
+		List<FriendList> list = mypageService.getFriendList(users);
+		model.addAttribute("list", list);
+		logger.info("list-친구목록:{}",list);
 	}
 
 	// 마이페이지 정보수정
@@ -163,21 +167,73 @@ public class MypageController {
 //-----------------------------------------------------------	
 	//유저 검색 기능	
 	@GetMapping("/mypage/search")
-	@ResponseBody
-	public String getuserSearchList(@RequestParam("type") String type,
-								@RequestParam("keyword") String keyword,Model model) throws Exception {
+	public String getuserSearchList(String type, String keyword,Model model){
+		
+		logger.info("type: {}, keyword: {}", type, keyword);
 		
 		// 유저 list 모델값에 저장 - 키워드로 찾을 수 있는 값들
-		List<Users> userList = mypageService.getSearchLists(type,keyword);	
-		model.addAttribute("userList",userList);
+		List<Users> list = mypageService.getSearchLists(type,keyword);	
+		model.addAttribute("list",list);
 
-		return "/mypage/friendList";
+		logger.info("userList:{}",list);
+		return "/mypage/friendfind";
 	}
 	
+	// 친구 추가
+	@GetMapping("/mypage/friendfind")
+	public void friendfindPage(FriendList friendList,HttpSession session) {
+		
+		//세션에 저장된 userno 가져오기
+		//int userno = (Integer)session.getAttribute("userno");
+		//friendList.setUserno(userno);
+		
+		logger.info("friendList:{}",friendList);
+	}
+	
+	// 친구 추가
+	@PostMapping("/mypage/friendfind")
+	@ResponseBody
+	public Map<String, Object> friendfind(String userno,HttpSession session) {
+		
+		//세션에 저장된 userno 가져오기
+		int myno = (Integer)session.getAttribute("userno");
+		
+		FriendList friendList = new FriendList();
+		friendList.setUserno(myno);
+		friendList.setFriendUserno(Integer.parseInt(userno));
+		
+		logger.info("friendList:{}",friendList);
+		
+		mypageService.friendAdd(friendList);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("result", true);
+		
+		return returnMap; 
+	}
+
 	// 친구목록
-	@RequestMapping("/mypage/friendList")
-	public void friendPage() {}
+	@GetMapping("/mypage/friendList")
+	public void friendPage(Model model,HttpSession session,Users users) {
+		
+		//세션에 저장된 userno 가져오기
+		int userno = (Integer)session.getAttribute("userno");
+		logger.info("userno - 친구목록 :{} ",userno);
+		users.setUserno(userno);
+		
+		List<FriendList> list = mypageService.getFriendList(users);
+		model.addAttribute("list", list);
+		logger.info("list-친구목록:{}",list);
+	}
 
-
+//-------------------------------------------------------------------
+	//내가 쓴 게시글 조회
+	@GetMapping("/mypage/myBoard")
+	public void myboardPage() {}
+	
+	//게시글 상세 페이지
+	@GetMapping("/mypage/myBoarddetail")
+	public void myboarddetailPage() {}
 
 }

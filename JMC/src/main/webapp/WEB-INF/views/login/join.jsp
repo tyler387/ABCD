@@ -473,7 +473,7 @@ $(document).ready(function(){
 	var userId = $('#userId').val();
 	$.ajax({
 	    type : 'post',           // 타입 (get, post, put 등등)
-	    url : '/login/idcheck',           // 요청할 서버url
+	    url : '/login/idcheck',   // 요청할 서버url
 	    dataType : 'json',       // 데이터 타입 (html, xml, json, text 등등)
 	    data : {userId:userId} , // 보낼 데이터 (Object , String, Array)
 	    success : function(res) { // 결과 성공 콜백함수

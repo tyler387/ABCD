@@ -1,7 +1,9 @@
 package com.kh.jaManChw.mypage.dao.face;
 
 import java.util.List;
+import java.util.Map;
 
+import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 
@@ -67,7 +69,26 @@ public interface MypageDao {
 	 */
 	public ProfileFile selectFileName(ProfileFile profileFile);
 
-	public List<Users> selectSearchList(String keyword);
+	/**
+	 * keyword와 type값으로 유저 검색
+	 * @param map
+	 * @return
+	 */
+	public List<Users> selectSearchList(Map<String, String> map);
+
+	/**
+	 * 유저 넘버로 친구목록 조회
+	 * @param map
+	 * @return
+	 */
+	public List<FriendList> selectFriendAll(Users users);
+
+	/**
+	 * userno로 친구 추가하기
+	 * @param friendList
+	 * @return
+	 */
+	public int insertFriend(FriendList friendList);
 
 	
 

@@ -5,55 +5,102 @@
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
 
+
+<style type="text/css">
+	table {
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  width: 90%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-left: 15px;
+}
+
+
+th {
+  text-align: left;
+}
+  
+  
+ td, th {
+  padding: 1em .5em;
+  vertical-align: middle;
+}
+  
+ td {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
+}
+
+  
+ @media all and (max-width: 768px) {
+    
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  th {
+    text-align: right;
+  }
+  
+  table {
+    position: relative; 
+    padding-bottom: 0;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+  }
+  
+  
+  tr {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  th {
+    border-bottom: 1px solid #a39485;
+  }
+  
+  td {
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  
+  }
+	
+
+</style>
+
   </div>
       <div class="right">
-        <div><h1>친구 목록</h1></div>
-        <div style="width:150px;"><hr></div>
-        <div>총 친구 수</div>
-        
-<!--        <form name="friendFind" autocomplete="off" action="/mypage/search" method="get"> -->
-       <form name="friendFind" autocomplete="off">
-         <div>
-        	<select name="type">
-        		<option value="userId">아이디</option>
-        		<option value="userNick">닉네임</option>
-        	</select>
-        </div>
-        <div>
-        	<input type="text" name="keyword" value="">
-        </div>
-        
-        <div>
-        	<input type="button" onclick="getSearchList()" id="search" value="검색">
-        </div>       
-         <div>
+      
+      <div><h1>친구 목록</h1></div>
+       <div style="width:150px;"><hr></div>
+         	
+        <div id="tablebox">
          
-         <table id="searchFriend">
-			<tr>
-				<th>유저 아이디</th>
-				<th>유저 닉네임</th>
-			</tr>
-			<c:forEach var="com.kh.jaManChw.dto.Users" items="${userList }">
-			<tr>
-				<td>${userList.userId }</td>
-				<td>${userList.userNick }</td>
-			</tr>
-			</c:forEach>
-			</table>
+         <div id="searchFriend">
+				<input type="hidden" name="userno" id="userno" value="${userno}">
+				<table class="friendTable">
+					<tr>
+						<th>유저 아이디</th>
+						<th>유저 닉네임</th>
+						<th>유저 이름</th>
+					</tr>
+				<c:forEach var="list" items="${list }">
+					
+					<tr>
+						<td>${list.userId }</td>
+						<td>${list.userNick }</td>
+						<td>${list.userName }</td>
+					</tr>
+				</c:forEach>
+				</table>
+	 		</div>
          
          </div>
-         </form>
-         
-         
       </div>
     </div>
-
-<script type="text/javascript">
-function getSearchList() {
-
-};
-
-
-</script>
 
 <c:import url="../layout/footer.jsp" />

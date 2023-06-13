@@ -62,7 +62,7 @@
 	<div class='profile'>
 		<c:if test="${profile.profileStoredName eq null}">
 			<div>
-				<img src="<%=request.getContextPath() %>/userProfile/pexels-tobias-bjørkli-1693095.jpgf6f88b97" id="profileimg"> 
+				<img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="profileimg"> 
 			</div>	
 			
 			<div class="filebox">	

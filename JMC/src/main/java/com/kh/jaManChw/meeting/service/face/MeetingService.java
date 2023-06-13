@@ -54,7 +54,10 @@ public interface MeetingService {
 	public int getMeetingappcount(Meeting meeting);
 	
 	
-	public List<Applicant> getMyMeetingApplicatn(HttpSession session);
+
+	public List<Map<String, Object>> getApplicantInfo(HttpSession session);
+
+	public void updateApplicant(Applicant applicant);
 
 
 	

@@ -54,4 +54,13 @@ select rownum rnum, a.* from (
 	<insert id="insertChatUser" parameterType="com.kh.jaManChw.dto.ChatUser">
 		INSERT INTO chat_user values(chat_user_seq.nextval, #{chatno}, #{userno})
 	</insert>
+	
+	<insert id="insertChatUserAgree" parameterType="com.kh.jaManChw.dto.Applicant">
+		INSERT INTO chat_user values(chat_user_seq.nextval,
+		(select chatno from chat_room where meetingno = #{meetingno}), #{userno}
+		
+		)
+		
+	</insert>
+	
 </mapper>

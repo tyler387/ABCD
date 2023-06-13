@@ -172,11 +172,19 @@ select count(*) from meeting where status = 'active' and meeting_date &gt; sysda
 <select id="selectMyMeetingno" parameterType="com.kh.jaManChw.dto.Meeting" resultType="com.kh.jaManChw.dto.Meeting">
 	select meetingno from meeting where userno = #{userno}
 </select>
-<select id="selectAllApplicant" parameterType="java.util.List" resultType="com.kh.jaManChw.dto.Applicant">
-	select * from applicant where meetingno in 
-	<foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+<select id="selectApllicantInfo" parameterType="java.util.List" resultType="map">
+    select u.*,a.applicant_content,m.mname,m.meetingno from users u join applicant a
+    on u.userno = a.userno
+    join meeting m 
+    on a.meetingno = m.meetingno
+    where a.meetingno in
+   	<foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
 	#{item.meetingno}
 	</foreach>
-	and agree = 'nocheck'
+     and agree = 'nocheck'
 </select>
+<update id="updateApplicantAgree" parameterType="com.kh.jaManChw.dto.Applicant">
+	update applicant set agree = #{agree}
+	where userno = ${userno} and meetingno = #{meetingno}
+</update>
 </mapper>

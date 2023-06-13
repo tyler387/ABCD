@@ -185,13 +185,22 @@ public class MypageController {
 	//---------------------------------------------
 	//마이페이지 모임
 	@GetMapping("/mypage/meeting")
-	public void myMeeting(HttpSession session, Model model) {
+	public String myMeeting(HttpSession session, Model model) {
+		if(session.getAttribute("userno")==null) {
+			return "redirect:/login/login";
+		}
 		
-		List<Applicant> list = meetingService.getMyMeetingApplicatn(session);
+		List<Map<String, Object>> map = meetingService.getApplicantInfo(session);
 		
-		logger.info("testsetset{}",list);
-		model.addAttribute("list",list);
+		logger.info("testsetset{}",map);
+		model.addAttribute("map",map);
+		return "/mypage/meeting";
 	}
-
+	@GetMapping("/mypage/agree")
+	public String agree(Applicant applicant) {
+		logger.info("usernousernousernouserno{}",applicant.getUserno());
+		meetingService.updateApplicant(applicant);
+		return "redirect:/mypage/meeting";
+	}
 
 }

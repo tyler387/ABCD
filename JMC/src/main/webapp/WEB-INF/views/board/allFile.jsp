@@ -179,6 +179,7 @@ $(function(){
 	//시작과 함께 로드되는 AJAX파트 - 사실은 카테고리값에 따른 전체 조회
 	categoryEvent(0,1)
 	
+	
 	var curPage;
 	var totalPage;
 	
@@ -189,28 +190,64 @@ $(function(){
 	})
 	
 	$("#pagingDiv").on("click", ".first", function () {
-
-		categoryEvent(boardOptionno, 1);
+		if(!$(".first").hasClass("disabled")){
+				categoryEvent(boardOptionno, 1);
+		}
 	})
 
-	$(document).on("click", ".before", function () {
-		console.log("curPage-before",curPage)
-		
-		curPage = parseInt(curPage) - 1;
-		categoryEvent(boardOptionno, curPage);
-	})
-
-	$("#pagingDiv").on("click", ".next", function () {
-		console.log("curPage-after",curPage)
-		
-		curPage = parseInt(curPage) + 1;
-		categoryEvent(boardOptionno, curPage);
+	$("#pagingDiv").on("click", ".beforelist", function () {
+		if(!$(".beforelist").hasClass("disabled")){
+			curPage = parseInt(curPage) - 10
+			categoryEvent(boardOptionno, curPage);
+		}
 	})
 	
+	$("#pagingDiv").on("click", ".before", function () {
+		if(!$(".before").hasClass("disabled")){
+			console.log("curPage-before",curPage)
+			curPage = parseInt(curPage) - 1;
+			console.log("curPage-before--",curPage)
+			console.log("boardOptionno--",boardOptionno)
+			categoryEvent(boardOptionno, curPage)
+		}
+	})
+	
+	$("#pagingDiv").on("click", ".next", function () {
+		if (!$(".next").hasClass("disabled")) {
+			console.log("curPage-after",curPage)
+			console.log("curPage-after is NaN",isNaN(curPage))
+			
+			if(isNaN(curPage)){
+				curPage = 1;
+			}
+			
+			curPage = parseInt(curPage) + 1;
+			categoryEvent(boardOptionno, curPage);
+		}
+	})
+	
+	$("#pagingDiv").on("click", ".nextlist", function () {
+		if(!$(".nextlist").hasClass("disabled")){
+			
+			if(isNaN(curPage)){
+				curPage = 1;
+			}
+
+			curPage = parseInt(curPage) + 10
+			categoryEvent(boardOptionno, curPage);
+		}
+	})
+
 	$("#pagingDiv").on("click", ".end", function () {
-		console.log("totalPage",$("#totalPage").val())
-		
-		categoryEvent(boardOptionno, totalPage);
+		if (!$(".end").hasClass("disabled")) {
+			console.log("totalPage",$("#totalPage").val())
+			
+			categoryEvent(boardOptionno, $("#totalPage").val());
+			
+			//현재 페이지 값을 전체 페이지 값으로 유지
+			//	전체 페이지가 AJAX를 통해 발생된것이 아니기에..
+			curPage = $("#totalPage").val()
+		}
 	})
 	
 	//<a>태그가 클릭되었을 때의 함수!
@@ -239,31 +276,33 @@ $(function(){
 	
 	})
 
-	
-	
 
-		$(".cate").click(function(){
+	$(".cate").click(function(){
+		
 		console.log(".cate ajax click")
 		boardOptionno = $(this).val()
 		console.log(boardOptionno)
 		
 		categoryEvent(boardOptionno, 0);
-		
-		
-		})
+	
+	})
 	
 })
-
-
  
 //카테고리를 누를때 전체 게시글과 첫 게시글이 변경된다 
 function categoryEvent(boardOptionno, curPage) {
 		
+	if(boardOptionno === undefined){
+		console.log("isUndefined: ".boardOptionno === undefined)
+		boardOptionno = 0;
+		console.log("boardOptionno: ",boardOptionno)
+	}
+	
 		$.ajax({
 			type: "get"	
 			, url: "/board/cateFilepage"
 			,dataType : "json"
-			, data : {boardOptionno:boardOptionno, curPage: curPage}
+			, data : {boardOptionno:boardOptionno, curPage:curPage}
 			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 			,success: function(res){
 				console.log("AJAX 성공")
@@ -279,13 +318,10 @@ function categoryEvent(boardOptionno, curPage) {
 				
 				var putHtml = "" 
 				for(var i = 0; i <res.list.length; i ++){
-		
 				putHtml += "<a data-boardno='"+res.list[i].BOARDNO+"'><img src='/boardFileUpload/"+res.list[i].STORED_NAME+"/' class='boardPic' style='box-shadow: 0px 1px 2px;  border-radius: 10px; border: 3px;'></a>";
 				}
 				
 				$("#merchantList").html(putHtml);
-				
-				
 				
 				$.ajax({
 					type: "get"
@@ -309,6 +345,7 @@ function categoryEvent(boardOptionno, curPage) {
 		
 		 				$("#cocountSpan").html(res1.COCOUNT)
 		 				$("#likeCount").html(res1.LIKECOUNT)
+		 				
 		 				//23/06/08 19:30 주석 후 위에 내용 작성
 		// 			    $("#article[id='cocountSpan']").html(res1.COCOUNT)
 		// 				$("#article[id='like']").html(res1.LIKECOUNT)
@@ -339,18 +376,18 @@ function categoryEvent(boardOptionno, curPage) {
 								$("#pagingDiv").html(pagingRes);
 							}
 							, error: function(){
-						            console.log("AJAX 실패")   
+						            console.log("AJAX 실패1")   
 						    }
 						})
 					}
 					, error: function(){
-			            console.log("AJAX 실패")   
+			            console.log("AJAX 실패2")   
 				    }
 				})
 				
 		}
 		 , error: function(){
-			 console.log("AJAX 실패")   
+			 console.log("AJAX 실패3")   
     	}
 	})
 } 

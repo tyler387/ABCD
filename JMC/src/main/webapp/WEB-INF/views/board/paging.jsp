@@ -44,7 +44,7 @@
 
 <%-- 현재 페이지가 1이라면 첫 페이지로 이동하는 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage eq 1}">
-   <li class="page-item disabled first"><span class="page-link">첫 페이지</span></li>
+   <li class="disabled page-item  first"><span class="page-link">첫 페이지</span></li>
 </c:if>
 <%--====================================================================--%>
 
@@ -55,7 +55,7 @@
 </c:if>
 <%-- 현재 페이지리스트의 시작 페이지가 1이라면 기능을 비활성화한다 --%>
 <c:if test="${paging.startPage eq 1}">
-   <li class="page-item disabled beforelist"><span class="page-link">&laquo;</span></li>
+   <li class="disabled page-item  beforelist"><span class="page-link">&laquo;</span></li>
 </c:if>
 <%--====================================================================--%>
 
@@ -68,7 +68,7 @@
   
 <%-- 현재 페이지가 1보다 작거나 같다면 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage le 1}">
-   <li class="page-item disabled before"><span class="page-link">&lt;</span></li>
+   <li class="disabled page-item  before"><span class="page-link">&lt;</span></li>
 </c:if>
 <%--====================================================================--%>
 
@@ -93,7 +93,7 @@
 
 <%-- 현재 페이지가 전체 페이지보다 크거나 같다면 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage ge paging.totalPage}">
-   <li class="page-item disabled next"><span class="page-link">&gt;</span></li>
+   <li class="disabled page-item  next"><span class="page-link">&gt;</span></li>
 </c:if>
 <%--====================================================================--%>
 
@@ -105,7 +105,7 @@
 
 <%-- 현재 페이지리스트의 끝 페이지가 끝 페이지와 같다면 기능을 비활성화한다 --%>
 <c:if test="${paging.endPage eq paging.totalPage}">
-   <li class="page-item disabled nextlist"><span class="page-link">&raquo;</span></li>
+   <li class="disabled page-item  nextlist"><span class="page-link">&raquo;</span></li>
 </c:if>
 <%--====================================================================--%>
 
@@ -117,7 +117,7 @@
 
 <%-- 현재 페이지가 끝페이지라면 끝 페이지로 이동하는 기능을 비활성화한다 --%>
 <c:if test="${paging.curPage eq paging.totalPage}">
-   <li class="page-item disabled end"><span class="page-link">끝 페이지</span></li>
+   <li class="disabled page-item  end"><span class="page-link">끝 페이지</span></li>
 </c:if>
 <%--====================================================================--%>
 

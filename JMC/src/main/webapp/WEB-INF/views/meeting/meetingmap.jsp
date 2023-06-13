@@ -77,17 +77,19 @@
 }
 
 .meetinglist{
+  background-color: #E2E2E2;
   margin: 0 auto;
   overflow: scroll; 
-  width: 310px;
+  width: 400px;
   height: 850px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
 }
 
-.skyblue{
-  background-color:#99ccff;
-  width:300px;
+
+.meetingbox{
+  background-color:white;
+  width:380px;
   height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
@@ -121,10 +123,6 @@
   border-radius: 20px;
   background: orange;	
   color: #fff;
-}
-
-.fc-event-title-container{
-	background-color: skyblue;
 }
 
 

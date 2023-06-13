@@ -190,9 +190,8 @@
 	
 		<label>한줄 신청창</label>
 		<input type="hidden" name="meetingno" id="meetingno" value=${viewmeeting.meetingno }>
-		<input type="text" id="applicantContent" name="applicantContent">
-	
-	
+		<textarea cols="50" rows="10" id="applicantContent" name="applicantContent"> </textarea>                                     <br><br><br><br><br><br><br><br>
+		
 		<button onclick="fn_join()">모임 신청</button>
 	
 	</form>

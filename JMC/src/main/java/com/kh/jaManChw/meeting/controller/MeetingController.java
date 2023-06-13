@@ -124,7 +124,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	public void allMeetingListByCal(Model model , Meeting meeting ) {
 		
 		
-		
 		logger.info("/meeting/meetingcal [GET]" );
 		
 		//전체 모임 목록 가져오기 
@@ -268,7 +267,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//모임 상세보기 조회 
 	@GetMapping("/meeting/view")
-	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference) {
+	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference, Applicant applicant) {
 		
 		logger.info("/meeting/view [GET]");
 		
@@ -284,7 +283,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			url = "/meeting/view";
 		}
 		
-		
+		int appcount = meetingService.applicantCount(applicant);
+		int appcountcheck = meetingService.applicantCheckCount(applicant);
 		Meeting viewmeeting = meetingService.detailMeeting(meeting);
 		Preference viewpreference = meetingService.detailPreference(preference);
 		List<Users> applicantnick = meetingService.getUserNickAll(meeting);
@@ -295,6 +295,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("{}!!!!", applicantnick);
 		
 		
+		model.addAttribute("appcount", appcount);
+		model.addAttribute("appcountcheck", appcountcheck);
 		model.addAttribute("viewmeeting", viewmeeting);
 		model.addAttribute("viewpreference", viewpreference);
 		model.addAttribute("applicantnick", applicantnick);

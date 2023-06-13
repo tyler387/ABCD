@@ -12,6 +12,14 @@
 
 <style>
 
+.applicantnickbox {
+  margin: 0 auto;
+  height: 600px;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px 0 rgba(100, 100, 100, 0.16), 0 2px 17px 0 rgba(200, 200, 200, 0.2);
+  overflow: scroll;
+}
+
 
 .reportbtn{
  text-align: right;
@@ -45,14 +53,17 @@
 
 
 .meetingviewall{
+	display: inline block;
+	width: 1200px;
+	height: 1000px;
 	margin: 0 auto;	
 	z-index: 1000;
 }
 
 .meetinginfo{
 	
-	width: 500px;
-	height: 300px;
+	width: 600px;
+	height: 400px;
 	float: right;
 }
 
@@ -66,14 +77,13 @@
 }
 
 .nicknamebox{
-  margin: 0 auto;
   width: 500px;
 
 }
 
 .nicknameboxleader{
   background-color:#white;
-  width:300px;
+  width:500px;
   height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
@@ -82,7 +92,7 @@
 
 .nicknameboxapp{
   background-color:#white;
-  width:300px;
+  width:500px;
   height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
@@ -237,28 +247,28 @@
 <div class = "meetinginfo2">
 <table>
 	<tr>
-		<th>모임 위치</th>
+		<th>&emsp;<img src="https://www.greenlight.co.kr/pc/public/img/i_position1.png">&ensp;모임 위치</th>
 		<td>${viewmeeting.loc1}</td>
 	</tr>
 	
 	<tr>	
-		<th>모임 일시</th>
+		<th>&emsp;<img src="https://www.greenlight.co.kr/pc/public/img/i_calendar1.png">&ensp;모임 일시</th>
 		<td><fmt:formatDate value="${viewmeeting.meetingDate }" pattern="yyyy년MM월dd일 a h시mm분" type="date"/></td>
 	</tr>
 	<tr>	
-		<th>모집 인원</th>
+		<th>&emsp;<img src="https://www.greenlight.co.kr/pc/public/img/i_users.png">&ensp;모집 인원</th>
 		<td>${viewmeeting.headCount}</td>
 	</tr>
 	<tr>	
-		<th>참가비</th>
+		<th><img src="https://www.greenlight.co.kr/pc/public/img/i_price.png">&ensp;참가비</th>
 		<td>${viewmeeting.fee }원</td>
 	</tr>
 	<tr>	
-		<th>모임 소개</th>
+		<th>&emsp;<img src="https://www.greenlight.co.kr/pc/public/img/i_descript.png">&ensp;모임 소개</th>
 		<td>${viewmeeting.introduce }</td>
 	</tr>
 	<tr>		
-		<th>추가 태그</th>
+		<th>&emsp;<img src="https://www.greenlight.co.kr/pc/public/img/i_tag.png" class="top-2">&ensp;추가 태그</th>
 		<td>흡연 여부: 
 			<c:if test="${viewpreference.smoke eq 'nomatter'}"> 무관</c:if>
 			<c:if test="${viewpreference.smoke eq 'yes'}"> 흡연가능</c:if>
@@ -305,14 +315,16 @@
 </div>
 
 <h2>모집 인원 현황</h2>
-총원 명 / 확정 인원 명<br><br>
+총원 ${appcount}명 / 확정 인원 ${appcountcheck}명<br><br>
+
+<div class="applicantnickbox">
 
 <c:forEach var="applicantnick" items="${applicantnick }">
 	
 	<!-- <table onclick="applicantpopup();"> -->
 
 	
-	<div class=nicknameboxapp a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
+	<div class="nicknameboxapp" a onclick="window.open('/meeting/applicant?userno=${applicantnick.userno}&meetingno=${viewmeeting.meetingno}' )">
 	
 	
 	<table>
@@ -329,6 +341,7 @@
 	</a>
 	</div>
 </c:forEach>
+</div>
 </div>
 </div>
 <script>

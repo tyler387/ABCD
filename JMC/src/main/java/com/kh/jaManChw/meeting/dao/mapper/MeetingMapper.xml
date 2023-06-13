@@ -130,7 +130,7 @@ update (select * from meeting  m join(select count(*)cnt,meetingno from applican
 	
 </insert>
 <select id="selectMeetingByDate" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
-	SELECT * FROM meeting where trunc(meeting_date) = to_date(#{result}, 'yyyy/mm/dd')
+	SELECT * FROM meeting where status = 'active' and meeting_date &gt; sysdate and trunc(meeting_date) = to_date(#{result}, 'yyyy/mm/dd')
 </select>
 
 <select id="selectMeetingListCount" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int">
@@ -172,6 +172,9 @@ select count(*) from meeting where status = 'active' and meeting_date &gt; sysda
 <select id="selectMyMeetingno" parameterType="com.kh.jaManChw.dto.Meeting" resultType="com.kh.jaManChw.dto.Meeting">
 	select meetingno from meeting where userno = #{userno}
 </select>
+
+
+
 <select id="selectAllApplicant" parameterType="java.util.List" resultType="com.kh.jaManChw.dto.Applicant">
 	select * from applicant where meetingno in 
 	<foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
@@ -179,4 +182,20 @@ select count(*) from meeting where status = 'active' and meeting_date &gt; sysda
 	</foreach>
 	and agree = 'nocheck'
 </select>
+
+
+
+<select id="selectApplicantCount" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
+
+	select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' 
+
+</select>
+
+<select id="selectApplicantCheckCount" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
+
+	select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' and agree = 'yes' 
+
+</select>
+
+
 </mapper>

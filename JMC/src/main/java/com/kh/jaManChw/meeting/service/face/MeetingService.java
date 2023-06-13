@@ -56,6 +56,12 @@ public interface MeetingService {
 	
 	public List<Applicant> getMyMeetingApplicatn(HttpSession session);
 
+	public int applicantCount(Applicant applicant);
+
+	public int applicantCheckCount(Applicant applicant);
+	
+	
+
 
 	
 	

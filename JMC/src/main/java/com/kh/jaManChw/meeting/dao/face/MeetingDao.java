@@ -88,6 +88,12 @@ public interface MeetingDao {
 
 	public List<Applicant> selectAllApplicant(List<Meeting> list);
 
+	public int selectApplicantCount(Applicant applicant);
+
+	public int selectApplicantCheckCount(Applicant applicant);
+	
+	
+
 	
 	
 

@@ -209,5 +209,17 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		return applList;
 	}
+	
+	@Override
+		public int applicantCount(Applicant applicant) {
+		
+			return meetingDao.selectApplicantCount(applicant);
+		}
+	
+	@Override
+		public int applicantCheckCount(Applicant applicant) {
+		
+			return meetingDao.selectApplicantCheckCount(applicant);
+		}
 
 }

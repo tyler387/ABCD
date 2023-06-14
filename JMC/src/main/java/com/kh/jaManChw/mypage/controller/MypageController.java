@@ -16,26 +16,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-=======
-import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> branch 'master' of https://github.com/JaManChw/JMC
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-<<<<<<< HEAD
 import com.kh.jaManChw.board.service.face.BoardService;
 import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.dto.FriendList;
-=======
 import com.kh.jaManChw.dto.Applicant;
-import com.kh.jaManChw.dto.Meeting;
->>>>>>> branch 'master' of https://github.com/JaManChw/JMC
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
 import com.kh.jaManChw.mypage.service.face.MypageService;
-import com.kh.jaManChw.util.Paging;
+import com.kh.jaManChw.util.MeetingPaging;
 
 
 @Controller
@@ -227,16 +219,33 @@ public class MypageController {
 
 	//---------------------------------------------
 	//마이페이지 모임
-	@GetMapping("/mypage/meeting")
-	public void myMeeting(HttpSession session, Model model) {
+	@GetMapping("/meeting")
+	public String myMeeting(HttpSession session, Model model,String curPage) {
+		if(session.getAttribute("userno")==null) {
+			return "redirect:/login/login";
+		}
 		
-		List<Applicant> list = meetingService.getMyMeetingApplicatn(session);
-		
-		logger.info("testsetset{}",list);
-		model.addAttribute("list",list);
+		MeetingPaging paging = meetingService.getPaging(curPage,session);
+		List<Map<String,Object>>map2 = meetingService.getApplicantAll(session, paging);
+
+		model.addAttribute("map",map2);
+		model.addAttribute("paging",paging);
+		return "/mypage/meeting";
 	}
-
-
+	@GetMapping("/agree")
+	public String agree(Applicant applicant,Model model) {
+		
+		if(applicant.getAgree().equals("yes")) {
+			//정원 수 초과시 true
+			boolean countChk = meetingService.chkHeadCount(applicant);
+			if(countChk) {
+				applicant.setAgree("no");
+				
+			}
+		}
+		meetingService.updateApplicant(applicant);
+		return "redirect:/mypage/meeting";
+	}
 	// 친구목록
 	@GetMapping("/friendList")
 	public void friendPage(Model model,HttpSession session,Users users) {

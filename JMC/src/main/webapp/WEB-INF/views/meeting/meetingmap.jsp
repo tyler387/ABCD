@@ -12,6 +12,11 @@
 
 <style type="text/css">
 
+
+h4 {
+	margin-bottom: 50px;
+
+}
 .meetingsearch {
   position: relative;	
   width: 300px;
@@ -21,11 +26,26 @@
   font-size: 14px;
 }
 
+.filtercheck {
+  height: 50px;
+  width: 300px;
+  border-radius: 20px; 
+  background: orange;
+  color: #fff;
+  position: relative;
+  text-align : center;
+  top: 40%;
+  left: 100;
+
+}
+
+
 
 .meetingbar {
 
 	width: 1550px;
 	text-align: right;
+	margin-bottom: 25px;
 
 }
 
@@ -93,7 +113,7 @@
   height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
-  
+  margin-bottom: 20px;
   }
 
 .meetingmap{
@@ -107,6 +127,7 @@
 .selectbtn{
   height: 100px;
   text-align: center;
+  margin-top: 50px;
 }
 
 .selectbtncal{
@@ -115,6 +136,7 @@
   border-radius: 20px;
   background: gray;
   color: #fff;
+  border: none;
 	
 }
 .selectbtnmap{
@@ -123,6 +145,7 @@
   border-radius: 20px;
   background: orange;	
   color: #fff;
+  border: none;
 }
 
 
@@ -132,30 +155,31 @@
 	<div class="modal_body">
 		<h1>필터</h1>
 		
+		<div class="cost">
 		요금
 		<input type="radio" id="feeAll" name="fee" value="999999999999999999" checked>상관없음
 		<input type="radio" id="fee100000" name="fee" value="100000" >10만원 미만
 		<input type="radio" id="fee50000" name="fee" value="50000" >5만원 미만
 		<input type="radio" id="fee30000" name="fee" value="30000" >3만원 미만
-		<br>
+		</div>
+		
+		<div class="count">
 		인원
 		<input type="radio" id="countAll" name="headCount" value="999999999999999999" checked>상관없음
 		<input type="radio" id="count10" name="headCount" value="10" >10명 미만
 		<input type="radio" id="count7" name="headCount" value="7" >7명 미만
 		<input type="radio" id="count5" name="headCount" value="5" >5명 미만
+		</div>
 		
-		<br>
-		<br>
-		<br>
-		<button id="filterinput">확인</button>
+	
+		<button class="filtercheck" id="filterinput">확인</button>
 		
 	</div>
 </div>
 	
-	
 	<div class="selectbtn">
 		<button class="selectbtncal" onclick="location.href='/meeting/meetingcal'">캘린더</button>
-		<button class="selectbtnmap">지도</button><br>
+		<button class="selectbtnmap">지도</button>
 	</div>
 
 <div class="meetingbar">
@@ -164,7 +188,7 @@
 
 <input type="text" class="meetingsearch" name="meetingsearch" id="meetingsearch" placeholder="검색어 입력"> 	
 
-</div><br>
+</div>
 	
 	<div class= "meetingall">
 		<div class= "meetingmap" id="map" style="width:1000px;height:800px;"></div>
@@ -178,7 +202,7 @@
 
 	
 	<div>	
-	<h4>전체 : ${meetingcount}개 | 모집 중 ${meetingcountnow }개</h4><br>
+	<h4>전체 : ${meetingcount}개 | 모집 중 ${meetingcountnow }개</h4>
 	<div class="meetinglist1">
 		<c:import url="/WEB-INF/views/meeting/meetinglist.jsp"/>
 	</div>

@@ -29,12 +29,25 @@
   font-size: 14px;
 }
 
+.filtercheck {
+  height: 50px;
+  width: 300px;
+  border-radius: 20px; 
+  background: orange;
+  color: #fff;
+  position: relative;
+  text-align : center;
+  top: 40%;
+  left: 100;
+  border: none;
+
+}
 
 
 
 .join {
 
-
+	margin-bottom: 25px;
 }
 
 .meetingbar {
@@ -107,7 +120,7 @@
   height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
-  
+  margin-bottom: 20px;
   }
 
 .meetingcal{
@@ -131,6 +144,7 @@
   border-radius: 20px; 
   background: orange;
   color: #fff;
+  border: none;
 	
 }
 .selectbtnmap{
@@ -139,6 +153,7 @@
   border-radius: 20px;
   background: gray;	
   color: #fff;
+  border: none;
 }
 
 .fc-event-title-container{
@@ -148,35 +163,38 @@
 
 
 
+
 </style>
 
 <div id="modal" class="modal">
 	<div class="modal_body">
 		<h1>필터</h1>
 		
+		<div class="cost">
 		요금
 		<input type="radio" id="feeAll" name="fee" value="999999999999999999" checked>상관없음
 		<input type="radio" id="fee100000" name="fee" value="100000" >10만원 미만
 		<input type="radio" id="fee50000" name="fee" value="50000" >5만원 미만
 		<input type="radio" id="fee30000" name="fee" value="30000" >3만원 미만
-		<br>
+		</div>
+		
+		<div class="count">
 		인원
 		<input type="radio" id="countAll" name="headCount" value="999999999999999999" checked>상관없음
 		<input type="radio" id="count10" name="headCount" value="10" >10명 미만
 		<input type="radio" id="count7" name="headCount" value="7" >7명 미만
 		<input type="radio" id="count5" name="headCount" value="5" >5명 미만
+		</div>
 		
-		<br>
-		<br>
-		<br>
-		<button id="filterinput">확인</button>
+		
+		<button class="filtercheck" id="filterinput">확인</button>
 		
 	</div>
 </div>
 
 
 <div class="join">
-
+<br><br>
 <div class="selectbtn">
 <button class="selectbtncal">캘린더</button>
 <button class="selectbtnmap" onclick="location.href='/meeting/meetingmap'">지도</button><br>
@@ -190,7 +208,8 @@
 <input type="text" class="meetingsearch" name="meetingsearch" id="meetingsearch" placeholder="검색어 입력"> 	
 
 </div>
-</div><br>
+
+</div>
 
 
 <div class= "meetingall">

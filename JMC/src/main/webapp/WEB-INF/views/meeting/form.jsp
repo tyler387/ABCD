@@ -9,61 +9,78 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<style type="text/css">
 
+b {
+	display: block;
+}
 
- <style type="text/css">
+input {
+	height: 20px;
+}
 
- .my-hr2 { 
- 	border: 0;
- 	height: 5px;
- 	background: #ccc;	 
+.meeting-join {
+	margin-bottom: 50px;
+}
 
-	}
- .meeting {
-	height: 700px;
+.meeting-pre {
+	margin-bottom: 10px;
+}
+
+.meeting-pre1 {
+	margin-bottom: 10px;
+}
+
+.meeting {
 	width: 600px;
 	margin: 0 auto;
-	}
- 
+}
 
-  .meetingform {
-  	 border-radius: 20px;
- 	 box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
-  
-   }
- 
-   .meetingpre {
-   	 border-radius: 20px;
- 	 box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);  
-   }
-   
-   .meetingbtn {
-   	 height: 50px;
-  	 width: 300px;
-  	 border-radius: 20px;
-  	 background: orange;	
-  	 color: #fff;
-   
-   }
-   
-   .btndiv {
-   	 text-align:center;
-   	
-   }
- 	h1 {
-	 text-align: center; 	
- 	
- 	}
- 	.meetingbtn:hover {
- 	
- 	  background-color: #ffcca8;
- 	}
- 	
- </style>
+.meetingform {
+	border-radius: 20px;
+	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
+		rgb(200 200 200/ 20%);
+	padding: 20px;
+	margin-bottom: 50px;
+}
+
+.meetingpre {
+	border-radius: 20px;
+	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
+		rgb(200 200 200/ 20%);
+	margin-bottom: 50px;
+	padding: 20px;
+}
+
+.meetingbtn {
+	height: 50px;
+	width: 300px;
+	border-radius: 20px;
+	background: orange;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+}
+
+.btndiv {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+h1 {
+	text-align: center;
+}
+
+.meetingbtn:hover {
+	background-color: #ffcca8;
+}
 
 
-	
-	<h1>모임 등록</h1>
+</style>
+
+
+
+<h1>모임 등록</h1>
 	
 	
 	<div class="meeting"> 
@@ -74,52 +91,57 @@
 	
 	<div class="meetingform">
 	<h4>모임의 정보를 등록해 주세요</h4>
-	<label>모임 명<input type="text" id="mname" name="mname" placeholder="모임 이름"></label><br>
-	<label>모임 지역
-	<input type="text" id="sample6_postcode" name="loc"  placeholder="우편번호">
-	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" id="sample6_address" name="loc1" placeholder="도로명주소"><br>
-	<input type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목">
-	<input type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></label><br><br>
-	<label>모임 날짜<input type="datetime-local" id="meetingDate" name="meetingDate"></label><br><br>
-	<label>참가비<input type="text" id="fee" name="fee" placeholder="원"></label><br><br>
-	<label>인원 수<input type="number" id="headCount" name="headCount" min="2"  max="10"></label><br><br>
-	<label>모임 소개<textarea id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></textarea></label><br><br>
+	<div class="meeting-join">
+	<label><b>모임 명</b>
+	<input type="text" id="mname" name="mname" placeholder="모임 이름"></label></div>
+	<div class="meeting-loc"><label><b>모임 지역</b><input type="text" id="sample6_postcode" name="loc"  placeholder="우편번호"></label>
+	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></div>
+	<div class="meeting-loc"><input type="text" id="sample6_address" name="loc1" placeholder="도로명주소">
+	<input type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목"></div>
+	<div class="meeting-join"><input type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></div>
+	<div class="meeting-join"><label><b>모임 날짜</b><input type="datetime-local" id="meetingDate" name="meetingDate"></label></div>
+	<div class="meeting-join"><label><b>참가비</b><input type="text" id="fee" name="fee" placeholder="원"></label></div>
+	<div class="meeting-join"><label><b>인원 수</b><input type="number" id="headCount" name="headCount" min="2"  max="10"></label></div>
+	<div class="meeting-join"><label><b>모임 소개</b><textarea rows="10px" cols="50px" id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></textarea></label></div>
 	
 	
-	<label>친구 목록</label>
+	<div class="meeting-join"><label><b>친구 목록</b></label>
 	<select name="friendlist">
 	<c:forEach var = "friendlist" items="${friendList }">
 	<option value="${ friendlist.userno}">${friendlist.userName }</option>
 	
 	</c:forEach>
 	</select>
-	
+	</div>
    
 	</div>	
 	
 	<div class="meetingpre">
 	<h4>선호하는 친구 타입(선택)</h4>
 	
-	성별<br>
+	<div class="meeting-pre"><b>성별</b></div>
+	<div class="meeting-pre1">
 	<label>남자<input type="radio" value="man" name="gender"></label>
 	<label>여자<input type="radio" value="woman" name="gender"></label>			
-	<label>무관<input type="radio" value="none" name="gender" checked="checked"></label><br><br>
+	<label>무관<input type="radio" value="none" name="gender" checked="checked"></label>
+	</div>
 	
-	나이<br>
+	<div class="meeting-pre"><b>나이</b></div>
+	<div class="meeting-pre1">
 	<input type="number" id="minage" name="minage" min="20" max="99" value="20">
 	~
-	<input type="number" id="maxage" name="maxage" min="20" max="99" value="99" ><br><br>
+	<input type="number" id="maxage" name="maxage" min="20" max="99" value="99" >
+	</div>
 	
+	<div class="meeting-pre"><b>추가 태그</b></div>
 	
-	추가 태그<br>
-	
+	<div class="meeting-pre">
 	<label>흡연 여부:</label>
 	<label>무관<input type="radio" id="smokenomatter" name="smoke" value="nomatter" checked="checked"> </label>
 	<label>가능<input type="radio" id="smokeyes" name="smoke" value="yes"></label>
 	<label>불가능<input type="radio" id="smokeno" name="smoke" value="no"></label>
+	</div>
 	
-	<br><br>
 	
 	<label>동반자 여부:</label>
 	<label>무관<input type="radio" id="smokenomatter" name="friend" value="nomatter" checked="checked"> </label>
@@ -130,12 +152,11 @@
 	
 	</div>
 	
-	<br><br>
 	<div class="btndiv"><button class="meetingbtn">등록하기</button></div>
 	
 	</form>		
 	
-	</div><br><br><br><br>
+	</div>
 	
 <script>
 

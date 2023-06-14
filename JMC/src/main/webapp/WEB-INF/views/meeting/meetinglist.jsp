@@ -27,10 +27,8 @@
 <td>${meeting.hit}</td>
 </tr>
 
-
 </table>
 </div>
-<br>
 </c:forEach>
 </div>
 </div>

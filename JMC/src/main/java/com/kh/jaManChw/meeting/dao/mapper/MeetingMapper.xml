@@ -55,7 +55,7 @@
 
 <select id="selectMeetinglistAll" resultType="com.kh.jaManChw.dto.Meeting">
 	
-	select * from meeting where status = 'active' and meeting_date &gt; sysdate
+select * from meeting where status = 'active' and meeting_date &gt; sysdate
 	
 </select>
 
@@ -63,41 +63,46 @@
 
 update (select * from meeting  m join(select count(*)cnt,meetingno from applicant group by meetingno)a on m.meetingno = a.meetingno) set status = 'unactive' where head_count &lt;= cnt
 
-
 </update>
-
-
 
 
 <select id="selectMeeting" resultType="com.kh.jaManChw.dto.Meeting" parameterType="com.kh.jaManChw.dto.Meeting">
 
-	SELECT * FROM MEETING 
-	WHERE meetingno = #{meetingno} 
+SELECT * FROM MEETING WHERE meetingno = #{meetingno} 
 
 </select>
 
 <update id="updatehit" parameterType="com.kh.jaManChw.dto.Meeting">
 	
-	UPDATE MEETING SET HIT = HIT + 1 WHERE meetingno = #{meetingno} 
+UPDATE MEETING SET HIT = HIT + 1 WHERE meetingno = #{meetingno} 
 
 </update>
 
 <insert id="insertReportMeeting" parameterType="com.kh.jaManChw.dto.ReportMeeting">
 
-	INSERT INTO report_meeting values(report_meeting_seq.nextval , #{meetingno} , #{userno} , #{rmTitle}, #{rmContent}, 'processed' , #{rmOption}, default )
+INSERT INTO report_meeting values(report_meeting_seq.nextval , #{meetingno} , #{userno} , #{rmTitle}, #{rmContent}, 'processed' , #{rmOption}, default )
 
 </insert>
 
 
-<select id="selectUserNickAll" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Meeting">
+<select id="selectUserNickAgree" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Meeting">
+
+select * from users inner join applicant 
+on applicant.userno = users.userno 
+where applicant.meetingno = #{meetingno} and leader = 'no' and applicant.agree = 'yes'
+	
+</select>
+
+<select id="selectUserNickNoCheck" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Meeting">
 
 	select *
     from users inner join applicant 
     on applicant.userno = users.userno 
-    where applicant.meetingno = #{meetingno} and leader = 'no'
+    where applicant.meetingno = #{meetingno} and leader = 'no' and applicant.agree = 'nocheck'
 
 	
 </select>
+
 
 <select id="selectMeetingApplicantLeader" resultType = "com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Meeting">
 	
@@ -126,9 +131,10 @@ update (select * from meeting  m join(select count(*)cnt,meetingno from applican
 
 <insert id = "insertJoinMeeting" parameterType="com.kh.jaManChw.dto.Applicant">
 	
-	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'nocheck' , 1, 'no')
+	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'nocheck' , 1, 'no', applicant_seq.nextval)
 	
 </insert>
+
 <select id="selectMeetingByDate" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
 	SELECT * FROM meeting where status = 'active' and meeting_date &gt; sysdate and trunc(meeting_date) = to_date(#{result}, 'yyyy/mm/dd')
 </select>
@@ -146,7 +152,7 @@ select count(*) from meeting where status = 'active' and meeting_date &gt; sysda
 </select>
 
 <select id="selectMeetingListByMname" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
-	SELECT * FROM meeting where mname=#{search}
+	SELECT * FROM meeting where mname like concat('%'|| #{search},'%')
 </select>
 
 <select id="selectMeetingListByFilter" parameterType="Map" resultType="com.kh.jaManChw.dto.Meeting">
@@ -187,13 +193,19 @@ select count(*) from meeting where status = 'active' and meeting_date &gt; sysda
 
 <select id="selectApplicantCount" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
 
-	select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' 
+select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' 
 
 </select>
 
 <select id="selectApplicantCheckCount" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
 
-	select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' and agree = 'yes' 
+select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' and agree = 'yes' 
+
+</select>
+
+<select id="selectApplicantNoCheckCount" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
+
+select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' and agree = 'nocheck' 
 
 </select>
 

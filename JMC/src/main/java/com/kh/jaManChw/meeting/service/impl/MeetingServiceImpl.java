@@ -116,10 +116,17 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 
 
 	@Override
-	public List<Users> getUserNickAll(Meeting meeting) {
+	public List<Users> getUserNickAgree(Meeting meeting) {
 		
-		return meetingDao.selectUserNickAll(meeting);
+		return meetingDao.selectUserNickAgree(meeting);
 	}
+	
+	@Override
+		public List<Users> getUserNickNocheck(Meeting meeting) {
+		
+		return meetingDao.selectUserNickNoCheck(meeting);
+	}
+	
 	
 	@Override
 	public Users getUserNickLeader(Meeting meeting) {
@@ -220,6 +227,12 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		public int applicantCheckCount(Applicant applicant) {
 		
 			return meetingDao.selectApplicantCheckCount(applicant);
+		}
+	
+	@Override
+		public int applicantNoCheckCount(Applicant applicant) {
+		
+			return meetingDao.selectApplicantNoCheckCount(applicant);
 		}
 
 }

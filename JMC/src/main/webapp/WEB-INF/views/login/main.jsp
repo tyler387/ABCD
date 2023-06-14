@@ -22,6 +22,7 @@
 	width: 300px;
 	background: orange;
 	border-radius: 20px;
+	border: none;
 	
 }
 .find-btn2{
@@ -32,6 +33,7 @@
 	width: 300px;
 	background: gray;	
 	border-radius: 20px;
+	border: none;
 }
 
 .find-btn1:hover{

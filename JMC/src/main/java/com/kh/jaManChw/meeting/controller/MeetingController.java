@@ -285,21 +285,25 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		int appcount = meetingService.applicantCount(applicant);
 		int appcountcheck = meetingService.applicantCheckCount(applicant);
+		int appcountnocheck = meetingService.applicantNoCheckCount(applicant);
 		Meeting viewmeeting = meetingService.detailMeeting(meeting);
 		Preference viewpreference = meetingService.detailPreference(preference);
-		List<Users> applicantnick = meetingService.getUserNickAll(meeting);
+		List<Users> applicantnickagree = meetingService.getUserNickAgree(meeting);
+		List<Users> applicantnicknochceck = meetingService.getUserNickNocheck(meeting);
 		Users applicantnick1 = meetingService.getUserNickLeader(meeting);
 		
 		
 		logger.info("{}" , viewmeeting);
-		logger.info("{}!!!!", applicantnick);
+		logger.info("{}!!!!", applicantnickagree);
 		
 		
 		model.addAttribute("appcount", appcount);
 		model.addAttribute("appcountcheck", appcountcheck);
+		model.addAttribute("appcountnocheck", appcountnocheck);
 		model.addAttribute("viewmeeting", viewmeeting);
 		model.addAttribute("viewpreference", viewpreference);
-		model.addAttribute("applicantnick", applicantnick);
+		model.addAttribute("applicantnickagree", applicantnickagree);
+		model.addAttribute("applicantnicknocheck", applicantnicknochceck);
 		model.addAttribute("applicantnick1", applicantnick1);
 		
 		
@@ -374,13 +378,18 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		int meetingno = applicant.getMeetingno();
 		int userno = (int)session.getAttribute("userno");
-		applicant.setUserno(meetingService.getUserno(userno));
+		int userno2 = applicant.getUserno();
+		logger.info("meetingno!!{})", meetingno);
+		logger.info("userno!!!{}" , userno2);
 		
-		meetingService.inputJoinMeeting(applicant);
-		
+		if(userno != userno2 ) {
+			applicant.setUserno(meetingService.getUserno(userno));
+			
+			meetingService.inputJoinMeeting(applicant);
+		} 
 		
 		return "redirect: /meeting/view?meetingno="+ meetingno;
 	}
 	
-	
+
 }

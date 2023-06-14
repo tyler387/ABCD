@@ -25,9 +25,11 @@ public interface MeetingService {
 
 	public Meeting detailMeeting(Meeting meeting);
 
-	public List<Users> getUserNickAll(Meeting meeting);
-
 	public Users getUserNickLeader(Meeting meeting);
+	
+	public List<Users> getUserNickAgree(Meeting meeting);
+
+	public List<Users> getUserNickNocheck(Meeting meeting);	
 	
 	public void inputReportMeeting(ReportMeeting reportMeeting);
 
@@ -59,6 +61,11 @@ public interface MeetingService {
 	public int applicantCount(Applicant applicant);
 
 	public int applicantCheckCount(Applicant applicant);
+
+	public int applicantNoCheckCount(Applicant applicant);
+	
+
+	
 	
 	
 

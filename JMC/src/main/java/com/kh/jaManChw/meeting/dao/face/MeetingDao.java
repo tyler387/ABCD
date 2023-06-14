@@ -47,7 +47,9 @@ public interface MeetingDao {
 	
 	public void insertReportMeeting(ReportMeeting reportMeeting);
 
-	public List<Users> selectUserNickAll(Meeting meeting);
+	public List<Users> selectUserNickAgree(Meeting meeting);
+	
+	public List<Users> selectUserNickNoCheck(Meeting meeting);
 	
 	public Users selectMeetingApplicantLeader(Meeting meeting);
 	
@@ -81,8 +83,6 @@ public interface MeetingDao {
 
 	public void updatestatus(Meeting meeting);
 	
-	
-	
 
 	public List<Meeting> selectMyMeetingno(Meeting meeting);
 
@@ -91,6 +91,12 @@ public interface MeetingDao {
 	public int selectApplicantCount(Applicant applicant);
 
 	public int selectApplicantCheckCount(Applicant applicant);
+
+	public int selectApplicantNoCheckCount(Applicant applicant);
+	
+
+	
+	
 	
 	
 

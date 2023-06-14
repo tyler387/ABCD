@@ -199,12 +199,20 @@ $(document).ready(function() {
 // 아이디 저장 - 쿠키 관련 스크립트
 $(document).ready(function() {
 	
+	if (${not empty loginAccess or loginAccess}) {
+		alert("로그인하지 않아 접근이 불가능합니다!")	
+	}
+	
 	//저장된 쿠키값을 id에 저장해준다. 쿠키값이 없으면 공백처리된다.
 	var userLoginId = getCookie('userLoginId');
 	$('#userId').val(userLoginId);
 	
 	//아이디 값이 쿠키에 저장되어 있으면 체크
 	if($('#userId').val() != ""){
+		
+		//저장된 쿠키값을 id에 저장해준다. 쿠키값이 없으면 공백처리된다.
+		var userLoginId = getCookie('userLoginId');
+		$('#userId').val(userLoginId);
 		
 		// ID 저장하기를 체크 상태로 두기.
 		$("#saveId").attr("checked", true); 
@@ -269,5 +277,8 @@ $(document).ready(function() {
 
 </script>
 
+<c:remove var="adminAccess" scope="session"/>
+<c:remove var="loginAccess" scope="session"/>
+<c:remove var="statusAccess" scope="session"/>
 
 <c:import url="../layout/footer.jsp"/> 

@@ -119,7 +119,7 @@ img{
   <li class="list1"><a href="#">모임</a>
   
   	<ul class="list2">
-  		<li class="list3"><a href="#">모임 현황</a></li>
+  		<li class="list3"><a href="../mypage/meeting">모임신청 현황</a></li>
   		<li class="list3"><a href="#">종료된 모임</a></li>
   	</ul>
   </li>	

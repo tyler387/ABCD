@@ -1,12 +1,15 @@
 package com.kh.jaManChw.mypage.service.face;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.BoardFile;
+import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.Paging;
@@ -41,13 +44,11 @@ public interface MypageService {
 	public ProfileFile fileInfo(Users info);
 
 	/**
-	 * 
+	 *  파일 업로드
 	 * @param file
 	 * @param profileFile
 	 */
-	public void profileSave(MultipartFile file,HttpSession session,ProfileFile profileFile);
-
-
+	public ProfileFile profileSave(MultipartFile file,ProfileFile profileFile);
 
 
 	/**
@@ -59,13 +60,48 @@ public interface MypageService {
 	public int findcntInfo(ProfileFile profileFile);
 
 	/**
-	 * 유저 검색
+	 * 파일 이름 조회하기
+	 * @param profileFile
+	 * @return
+	 */
+	public ProfileFile getFileName(ProfileFile profileFile);
+	
+	/**
+	 * 키워드로 유저 검색
 	 * @param users
 	 * @return 유저 
 	 */
-	public List<Users> getSearchLists(Users users);
+	public List<Users> getSearchLists(String type,String keyword);
 
-	//public void getSession(HttpSession session, ProfileFile profileFile, Model model);
+	/**
+	 *  친구 목록 리스트
+	 * @param friendList
+	 * @param users 
+	 * @return
+	 */
+	public List<Map<String, Object>> getFriendList(Users users);
+
+	/**
+	 * 친구 추가하기
+	 * @param friendList
+	 */
+	public void friendAdd(FriendList friendList);
+
+	/**
+	 * 내가쓴 사진 게시물 가져오기
+	 * @param users
+	 * @return 내가쓴 사진 게시물
+	 */
+	public List<BoardFile> getMyboardFile(Users users);
+
+	/**
+	 * 친구 삭제
+	 * @param myno
+	 */
+	public void removeFriend(int userno);
+
+
+	
 
 
 

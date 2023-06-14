@@ -6,19 +6,89 @@
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
 
+<style type="text/css">
+.profileForm{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;	
+
+}
+.profilebtn{
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	
+}
+.profile{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+.file{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;	
+}
+.profileUpdatebtn{
+	border: 1px solid #371e06;
+    background-color: #371e06;
+    border-radius: 7px;
+    color: #fff;
+    width: 180px;
+    height: 39px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 40px;
+
+
+}
+.btnbox{
+	padding-left: 10px;
+}
+.filebox{
+	
+}
+
+</style>
+
 </div>
     <div class="right">
      <form action="/mypage/profile" method="post" enctype="multipart/form-data" id="profileForm">
       <input type="hidden" name="userno" id="userno" value="${userno}">  
   
 	<div class='profile'>
-		<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
-        <input type="file" id="file" name="file">
+		<c:if test="${profile.profileStoredName eq null}">
+			<div>
+				<img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="profileimg"> 
+			</div>	
+			
+			<div class="filebox">	
+		        <input type="file" id="file" name="file">
+		    </div>
+        </c:if>
+        
+        <c:if test="${profile.profileStoredName ne null}">
+	        <div>
+				<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
+			</div>	
+			
+			<div class="filebox">
+		        <input type="file" id="file" name="file">
+		    </div>    
+        </c:if>
      </div>  
     
-    <button id="profileInput" >프로필 수정</button>
-    <a href="/mypage/main"><button>취소</button></a>
-    
+    <div class="profilebtn">
+    	<div class="btnbox">
+    		<button id="profileInput" class="profileUpdatebtn">프로필 수정</button>
+    	</div>
+    	<div class="btnbox">
+    		<a href="/mypage/main"><button class="profileUpdatebtn" >취소</button></a>
+    	</div>
+    </div>
       </form>
     </div>
   </div>
@@ -26,42 +96,7 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
-function profileImageUpload(principalId) {
-    $("#profileInput").click();
 
-    $("#profileInput").on("change", (e) => {
-        let f = e.target.files[0];
-
-        if (!f.type.match("image.*")) {
-            alert("이미지를 등록해야 합니다.");
-            return;
-        }
-
-        // FormData 객체를 이용하면 form 태그의 필드와 그 값을 나타내는 일련의 key/value 쌍을 담을 수 있음
-        let profileForm = $("#profileForm")[0];
-        let formData = new FormData(profileForm);
-
-        // 서버에 이미지 전송하기
-        $.ajax({
-            type: "post",
-            url: '/userProfile/${profileStoredName}',
-            data: formData,
-            contentType: false,    // x-www-form-urlencoded로 파싱되는 것을 방지
-            processData: false,    // contentType을 false로 설정할 경우 QueryString이 자동 설정되는 것을 방지
-            enctype: "multipart/form-data",
-            dataType: "json"
-        }).done(resp => {
-            // 사진 전송 성공시 이미지 변경
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                $("#profileimg").attr("src", e.target.result);
-            }
-            reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
-        }).fail(error => {
-            console.log(error);
-        });
-    });
-}
 
 </script>    
     

@@ -1,5 +1,7 @@
 package com.kh.jaManChw.login.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.login.service.face.NaverService;
 import com.kh.jaManChw.login.service.face.UsersService;
 import com.kh.jaManChw.mypage.service.face.MypageService;
 
@@ -25,18 +28,26 @@ public class UserController {
 
 	@Autowired UsersService usersService;
 	@Autowired MypageService mypageService;
+	@Autowired NaverService naverService;
 
 	@RequestMapping("/login/main")
 	public void mainPage() {}
 
 	// 로그인 페이지 이동
 	@GetMapping("/login/login")
-	public void loginPage() {}
+	public void loginPage(HttpSession session) {
+		//JSP에 정보를 입력하기에는 노출의 위험이 있기에 controller에서 선처리 후 보낸다
+		Map<String, String> naverMap = naverService.getNaverApiInfo();
+		
+		session.setAttribute("apiURL", naverMap.get("apiURL"));
+	}
 
 	// 로그인 - true or false
 	@PostMapping("/login/login")
 	public String userlogin(HttpSession session, Users users,Model model) {
 		logger.info("{}", users);
+		
+
 		
 		//탈퇴 유저 로그인 방지
 		boolean leaveUser = usersService.leaveLogin(users);
@@ -106,8 +117,9 @@ public class UserController {
 
 			// 세션 삭제
 			session.invalidate();
-
-			// 로그인실패시 로그인 페이지로 리다이렉트
+			
+			model.addAttribute("msg","아이디, 비밀번호를 다시 체크해주세요");
+			
 			return "/login/login";
 		} // if(isLogin)문 end		
 	} // userlogin() end

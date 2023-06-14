@@ -28,17 +28,13 @@ public class Users {
 	private Date joinDate;
 	private long socialNum;
 	
-	// 검색 필터
-	private String type;
-	private String keyword;
 	
 	public Users() {}
 	
 	
 	public Users(int userno, String userId, String userPw, String userName, String userNick, Date birth, String gender,
 			String email, String phone, String addr1, String addr2, String addr3, String grade, int warnCount,
-			String profileImgUrl, String status, String role, String platFormOption, Date joinDate, long socialNum,
-			String type, String keyword) {
+			String profileImgUrl, String status, String role, String platFormOption, Date joinDate, long socialNum) {
 		super();
 		this.userno = userno;
 		this.userId = userId;
@@ -60,8 +56,7 @@ public class Users {
 		this.platFormOption = platFormOption;
 		this.joinDate = joinDate;
 		this.socialNum = socialNum;
-		this.type = type;
-		this.keyword = keyword;
+
 	}
 
 	@Override
@@ -71,7 +66,7 @@ public class Users {
 				+ phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
 				+ ", warnCount=" + warnCount + ", profileImgUrl=" + profileImgUrl + ", status=" + status + ", role="
 				+ role + ", platFormOption=" + platFormOption + ", joinDate=" + joinDate + ", socialNum=" + socialNum
-				+ ", type=" + type + ", keyword=" + keyword + "]";
+				+ "]";
 	}
 
 
@@ -273,29 +268,6 @@ public class Users {
 	public void setSocialNum(long socialNum) {
 		this.socialNum = socialNum;
 	}
-
-
-	public String getType() {
-		return type;
-	}
-
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
-	
-	
 	
 }
 	

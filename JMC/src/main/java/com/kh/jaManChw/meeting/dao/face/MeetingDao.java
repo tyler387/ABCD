@@ -10,6 +10,7 @@ import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.util.MeetingPaging;
 
 public interface MeetingDao {
 	
@@ -86,7 +87,16 @@ public interface MeetingDao {
 
 	public List<Meeting> selectMyMeetingno(Meeting meeting);
 
-	public List<Applicant> selectAllApplicant(List<Meeting> list);
+
+	public List<Map<String, Object>> selectApllicantInfo(List<Meeting> list);
+
+	public void updateApplicantAgree(Applicant applicant);
+
+	public int selectCnt(List<Meeting> list);
+
+	public List<Map<String, Object>> selectApplicantPaging(@Param("list")List<Meeting> list,@Param("paging") MeetingPaging paging);
+
+	public int selectNotFull(Applicant applicant);
 
 	
 	

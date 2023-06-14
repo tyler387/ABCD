@@ -8,6 +8,10 @@
 <title>JAMANCHU</title>
 <style type="text/css">
 
+body {
+  background: #f5f5f5;
+}
+
 header{
   position: sticky;
   top: 0;
@@ -20,8 +24,6 @@ header{
   justify-content: flex-end;
   align-items: center;
 /*   width: 100%; */
-  
-
 }
 
 header a{
@@ -41,14 +43,14 @@ a {
 /*   position:relative;  */
   /* z-index: 99;  */
   padding-top : 12px;
-  background-color: white;
+  background-color: #f5f5f5;
   height: 50px;
   text-align: center;
   margin-left: 130px;
 }
 
 #header [class*="main"] {
-  background-color: white;
+  background-color: #f5f5f5;
   border-radius: 5px 5px 5px 5px;
 }
 

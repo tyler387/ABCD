@@ -40,6 +40,12 @@
   top: 40%;
   left: 100;
   border: none;
+  font-size: 20px;
+
+}
+
+.filtercheck:hover { 
+	background-color: #ffcca8;
 
 }
 
@@ -123,6 +129,11 @@
   margin-bottom: 20px;
   }
 
+.meetingbox:hover{
+  background-color: beige;
+
+}
+
 .meetingcal{
   
   margin-right: 30px;
@@ -145,8 +156,20 @@
   background: orange;
   color: #fff;
   border: none;
+  font-size: 20px;
 	
 }
+
+.selectbtncal:hover{
+	background-color: #ffcca8;
+
+
+}
+
+.selectbtnmap:hover{
+	background-color: #e2e2e2;
+}
+
 .selectbtnmap{
   height: 50px;
   width: 300px;
@@ -154,6 +177,7 @@
   background: gray;	
   color: #fff;
   border: none;
+  font-size: 20px;
 }
 
 .fc-event-title-container{

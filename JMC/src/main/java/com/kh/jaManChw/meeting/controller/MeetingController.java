@@ -1,14 +1,18 @@
 package com.kh.jaManChw.meeting.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,11 +25,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
@@ -68,10 +75,15 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		//모임 작성 폼에 가져올 친구 목록 조회
 		List<Users> friendList = meetingService.selectFriendListAll(userno);
 		
+//		if (friendlist == null) {
+//			friendlist = null;
+//		}
+//		
 		logger.info("{}", friendList);
 	
 		//모델에 모임 작성 폼에 가져올 친구 목록 담아주기 
 		model.addAttribute("friendList", friendList);
+//		model.addAttribute("friendlist", friendlist);
 		
 		//로그인 세션 처리 
 		return url;
@@ -267,7 +279,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//모임 상세보기 조회 
 	@GetMapping("/meeting/view")
-	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference, Applicant applicant) {
+	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference, Applicant applicant,ProfileFile profileFile) {
 		
 		logger.info("/meeting/view [GET]");
 		
@@ -283,6 +295,10 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			url = "/meeting/view";
 		}
 		
+		
+		
+		
+		
 		int appcount = meetingService.applicantCount(applicant);
 		int appcountcheck = meetingService.applicantCheckCount(applicant);
 		int appcountnocheck = meetingService.applicantNoCheckCount(applicant);
@@ -293,8 +309,14 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		Users applicantnick1 = meetingService.getUserNickLeader(meeting);
 		
 		
+		
+		//파일 정보 가져오기
+		
+	
+		List<Map<String, Object>> map = meetingService.allInfo(applicant);
+		
 		logger.info("{}" , viewmeeting);
-		logger.info("{}!!!!", applicantnickagree);
+		logger.info("{}!!!!", map);
 		
 		
 		model.addAttribute("appcount", appcount);
@@ -372,21 +394,27 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//선택한 모임에 참여하기 
 	@PostMapping("/meeting/join")
-	public String meetingJoinInput(HttpSession session, Model model , Applicant applicant) {
-		
+	public String meetingJoinInput(HttpSession session, Model model , Applicant applicant ) {
 		logger.info("/meeting/join [POST]");
 		
 		int meetingno = applicant.getMeetingno();
-		int userno = (int)session.getAttribute("userno");
-		int userno2 = applicant.getUserno();
-		logger.info("meetingno!!{})", meetingno);
-		logger.info("userno!!!{}" , userno2);
 		
-		if(userno != userno2 ) {
-			applicant.setUserno(meetingService.getUserno(userno));
+		int userno = (int)session.getAttribute("userno");
+		
+		
+		
+		logger.info("meetingno{}" , meetingno);
+		
+		logger.info("applicant{}" , applicant);
+		
+		applicant.setUserno(meetingService.getUserno(userno));
+		int chk = meetingService.chkUser(applicant);
+		
+		if(chk==1) {
 			
-			meetingService.inputJoinMeeting(applicant);
-		} 
+		}else {
+		meetingService.inputJoinMeeting(applicant);
+		}
 		
 		return "redirect: /meeting/view?meetingno="+ meetingno;
 	}

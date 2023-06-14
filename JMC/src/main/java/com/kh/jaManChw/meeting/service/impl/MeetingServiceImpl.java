@@ -17,6 +17,7 @@ import com.kh.jaManChw.dto.ChatUser;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.controller.MeetingController;
@@ -234,5 +235,14 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 			return meetingDao.selectApplicantNoCheckCount(applicant);
 		}
-
+	
+	@Override
+		public int chkUser(Applicant applicant) {
+			return meetingDao.selectMeetingAppUser(applicant);
+		}
+	@Override
+		public List<Map<String, Object>> allInfo(Applicant applicant) {
+		
+			return meetingDao.selectAllInfo(applicant);
+		}
 }

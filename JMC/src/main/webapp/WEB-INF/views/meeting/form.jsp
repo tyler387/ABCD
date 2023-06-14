@@ -11,12 +11,44 @@
 
 <style type="text/css">
 
+
+[type="radio"]{
+	vertical-align: middle;
+
+}
+
+label{
+	vertical-align: middle;
+}
+
+.mname {
+	width: 400px;
+}
+
+.postcode {
+	width: 295px;
+
+}
+
+.post {
+	width: 400px;
+
+
+}
 b {
 	display: block;
 }
 
 input {
-	height: 20px;
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+}
+
+textarea{
+	border-radius: 10px;
+
 }
 
 .meeting-join {
@@ -42,6 +74,8 @@ input {
 		rgb(200 200 200/ 20%);
 	padding: 20px;
 	margin-bottom: 50px;
+	text-align: center;
+	background-color: beige;
 }
 
 .meetingpre {
@@ -49,7 +83,9 @@ input {
 	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
 		rgb(200 200 200/ 20%);
 	margin-bottom: 50px;
+	text-align: center;
 	padding: 20px;
+	background-color: beige;
 }
 
 .meetingbtn {
@@ -75,6 +111,10 @@ h1 {
 	background-color: #ffcca8;
 }
 
+.meeting-loc {
+
+	margin-bottom : 10px;
+}
 
 </style>
 
@@ -86,22 +126,23 @@ h1 {
 	<div class="meeting"> 
 	
 	
-	
 	<form action="/meeting/form" method="post">
 	
 	<div class="meetingform">
+	
 	<h4>모임의 정보를 등록해 주세요</h4>
+	
 	<div class="meeting-join">
-	<label><b>모임 명</b>
-	<input type="text" id="mname" name="mname" placeholder="모임 이름"></label></div>
-	<div class="meeting-loc"><label><b>모임 지역</b><input type="text" id="sample6_postcode" name="loc"  placeholder="우편번호"></label>
+	
+	<div class="meeting-join"><label><b>모임 명</b><input class="mname" type="text" id="mname" name="mname" placeholder="모임 이름"></label></div>
+	<div class="meeting-loc"><label><b>모임 지역</b><input class="postcode" type="text" id="sample6_postcode" name="loc"  placeholder="우편번호"></label>
 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></div>
-	<div class="meeting-loc"><input type="text" id="sample6_address" name="loc1" placeholder="도로명주소">
-	<input type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목"></div>
-	<div class="meeting-join"><input type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></div>
+	<div class="meeting-loc"><input class="post" type="text" id="sample6_address" name="loc1" placeholder="도로명주소"></div>
+	<div class="meeting-loc"><input class="post" type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목"></div>
+	<div class="meeting-join"><input class="post" type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></div>
 	<div class="meeting-join"><label><b>모임 날짜</b><input type="datetime-local" id="meetingDate" name="meetingDate"></label></div>
 	<div class="meeting-join"><label><b>참가비</b><input type="text" id="fee" name="fee" placeholder="원"></label></div>
-	<div class="meeting-join"><label><b>인원 수</b><input type="number" id="headCount" name="headCount" min="2"  max="10"></label></div>
+	<div class="meeting-join"><label><b>인원 수</b><input type="number" id="headCount" name="headCount" min="2"  max="10" placeholder="명"></label></div>
 	<div class="meeting-join"><label><b>모임 소개</b><textarea rows="10px" cols="50px" id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></textarea></label></div>
 	
 	
@@ -113,6 +154,7 @@ h1 {
 	</c:forEach>
 	</select>
 	</div>
+	</div>
    
 	</div>	
 	
@@ -121,9 +163,9 @@ h1 {
 	
 	<div class="meeting-pre"><b>성별</b></div>
 	<div class="meeting-pre1">
-	<label>남자<input type="radio" value="man" name="gender"></label>
-	<label>여자<input type="radio" value="woman" name="gender"></label>			
-	<label>무관<input type="radio" value="none" name="gender" checked="checked"></label>
+	<label>남자</label><input type="radio" value="man" name="gender">
+	<label>여자</label><input type="radio" value="woman" name="gender">		
+	<label>무관</label><input type="radio" value="none" name="gender" checked="checked">
 	</div>
 	
 	<div class="meeting-pre"><b>나이</b></div>
@@ -137,16 +179,16 @@ h1 {
 	
 	<div class="meeting-pre">
 	<label>흡연 여부:</label>
-	<label>무관<input type="radio" id="smokenomatter" name="smoke" value="nomatter" checked="checked"> </label>
-	<label>가능<input type="radio" id="smokeyes" name="smoke" value="yes"></label>
-	<label>불가능<input type="radio" id="smokeno" name="smoke" value="no"></label>
+	<label>무관</label><input type="radio" id="smokenomatter" name="smoke" value="nomatter" checked="checked">
+	<label>가능</label><input type="radio" id="smokeyes" name="smoke" value="yes">
+	<label>불가능</label><input type="radio" id="smokeno" name="smoke" value="no">
 	</div>
 	
 	
 	<label>동반자 여부:</label>
-	<label>무관<input type="radio" id="smokenomatter" name="friend" value="nomatter" checked="checked"> </label>
-	<label>가능<input type="radio" id="friendyes" name="friend" value="yes"></label>
-	<label>불가능<input type="radio" id="friendno" name="friend" value="no"></label>
+	<label>무관</label><input type="radio" id="smokenomatter" name="friend" value="nomatter" checked="checked">
+	<label>가능</label><input type="radio" id="friendyes" name="friend" value="yes">
+	<label>불가능</label><input type="radio" id="friendno" name="friend" value="no">
 	
 	
 	
@@ -155,6 +197,7 @@ h1 {
 	<div class="btndiv"><button class="meetingbtn">등록하기</button></div>
 	
 	</form>		
+	
 	
 	</div>
 	

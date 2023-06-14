@@ -221,6 +221,7 @@
 	</div>
 </div>
 
+
 <div class="modal2">
   <div class="modal_body2">
     <h1>모임 신청</h1>
@@ -230,7 +231,7 @@
 		<input type="hidden" name="meetingno" id="meetingno" value=${viewmeeting.meetingno }>
 		<textarea cols="50" rows="10" id="applicantContent" name="applicantContent"> </textarea>                                 
 		
-		<button class="btn_join" onclick="fn_join()">모임 신청</button>
+		<button class="btn_join" onclick="fn_join()"id="btn_join">모임 신청</button>
 	
 	</form>
     
@@ -253,7 +254,6 @@
 
 
 <h2>모집 정보</h2>
-
 <div class = "meetinginfo2">
 <table>
 	<tr>
@@ -338,7 +338,9 @@
 	
 	<table>
 		<tr>
+			<th>프로필</th>
 			<th>닉네임</th>
+			
 		</tr>
 
 		<tr>
@@ -366,10 +368,12 @@
 	
 	<table>
 		<tr>
+			<th>프로필</th>
 			<th>닉네임</th>
 		</tr>
 
 		<tr>
+			<td><img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"></td>
 			<td>${applicantnicknocheck.userNick}</td>
 
 		</tr>
@@ -383,6 +387,7 @@
 </div>
 </div>
 <script>
+
       const body = document.querySelector('body');
       const modal = document.querySelector('.modal');
       const btnOpenPopup = document.querySelector('.btn-open-popup');

@@ -9,6 +9,7 @@ import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 
@@ -63,6 +64,15 @@ public interface MeetingService {
 	public int applicantCheckCount(Applicant applicant);
 
 	public int applicantNoCheckCount(Applicant applicant);
+
+	public int chkUser(Applicant applicant);
+
+
+	public List<Map<String, Object>> allInfo(Applicant applicant);
+	
+
+	
+	
 	
 
 	

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 
@@ -93,6 +94,17 @@ public interface MeetingDao {
 	public int selectApplicantCheckCount(Applicant applicant);
 
 	public int selectApplicantNoCheckCount(Applicant applicant);
+
+	public int selectMeetingAppUser(Applicant applicant);
+
+	public ProfileFile selectFileInfo(Users info);
+
+	public List<Map<String, Object>> selectAllInfo(Applicant applicant);
+	
+
+	
+	
+
 	
 
 	

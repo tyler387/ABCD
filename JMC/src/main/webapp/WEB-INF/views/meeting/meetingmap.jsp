@@ -36,8 +36,16 @@ h4 {
   text-align : center;
   top: 40%;
   left: 100;
+  border: none;
+  font-size: 20px;
 
 }
+
+.filtercheck:hover { 
+	background-color: #ffcca8;
+
+}
+
 
 
 
@@ -115,6 +123,11 @@ h4 {
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   margin-bottom: 20px;
   }
+  
+.meetingbox:hover{
+  background-color: beige;
+
+}
 
 .meetingmap{
   height: 800px;
@@ -137,6 +150,8 @@ h4 {
   background: gray;
   color: #fff;
   border: none;
+  font-size: 20px;
+  
 	
 }
 .selectbtnmap{
@@ -146,6 +161,16 @@ h4 {
   background: orange;	
   color: #fff;
   border: none;
+  font-size: 20px;
+}
+
+.selectbtncal:hover{
+	background-color: #e2e2e2;
+
+}
+
+.selectbtnmap:hover{
+	background-color: #ffcca8;
 }
 
 

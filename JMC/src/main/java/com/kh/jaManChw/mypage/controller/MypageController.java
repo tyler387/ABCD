@@ -27,6 +27,7 @@ import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
 import com.kh.jaManChw.mypage.service.face.MypageService;
+import com.kh.jaManChw.util.MeetingPaging;
 
 
 @Controller
@@ -185,20 +186,30 @@ public class MypageController {
 	//---------------------------------------------
 	//마이페이지 모임
 	@GetMapping("/mypage/meeting")
-	public String myMeeting(HttpSession session, Model model) {
+	public String myMeeting(HttpSession session, Model model,String curPage) {
 		if(session.getAttribute("userno")==null) {
 			return "redirect:/login/login";
 		}
 		
-		List<Map<String, Object>> map = meetingService.getApplicantInfo(session);
-		
-		logger.info("testsetset{}",map);
-		model.addAttribute("map",map);
+		MeetingPaging paging = meetingService.getPaging(curPage,session);
+
+		List<Map<String,Object>>map2 = meetingService.getApplicantAll(session, paging);
+
+		model.addAttribute("map",map2);
+		model.addAttribute("paging",paging);
 		return "/mypage/meeting";
 	}
 	@GetMapping("/mypage/agree")
-	public String agree(Applicant applicant) {
-		logger.info("usernousernousernouserno{}",applicant.getUserno());
+	public String agree(Applicant applicant,Model model) {
+		
+		if(applicant.getAgree().equals("yes")) {
+			//정원 수 초과시 true
+			boolean countChk = meetingService.chkHeadCount(applicant);
+			if(countChk) {
+				applicant.setAgree("no");
+				
+			}
+		}
 		meetingService.updateApplicant(applicant);
 		return "redirect:/mypage/meeting";
 	}

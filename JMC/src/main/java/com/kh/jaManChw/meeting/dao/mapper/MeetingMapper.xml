@@ -187,4 +187,40 @@ select count(*) from meeting where status = 'active' and meeting_date &gt; sysda
 	update applicant set agree = #{agree}
 	where userno = ${userno} and meetingno = #{meetingno}
 </update>
+
+<select id="selectCnt" parameterType="java.util.List" resultType="int">
+    select count(*) cnt from users u join applicant a
+    on u.userno = a.userno
+    join meeting m 
+    on a.meetingno = m.meetingno
+    where a.meetingno in
+   	<foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+	#{item.meetingno}
+	</foreach>
+     and agree = 'nocheck'
+
+</select>
+<select id="selectApplicantPaging" resultType="map">
+    select * from(
+    select rownum rnum,u.*,a.applicant_content,m.mname,m.meetingno from users u join applicant a
+    on u.userno = a.userno
+    join meeting m 
+    on a.meetingno = m.meetingno
+    where a.meetingno in
+   	<foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+	#{item.meetingno}
+	</foreach>
+     and agree = 'nocheck'
+     ) WHERE rnum BETWEEN #{paging.startno } AND #{paging.endno }
+</select>
+
+<select id="selectNotFull" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
+select count(*) from meeting  m 
+join (select count(*) cnt, a.meetingno from applicant a 
+where agree = 'yes'
+group by a.meetingno) c 
+on m.meetingno = c.meetingno
+where m.head_count <![CDATA[<=]]> c.cnt and m.meetingno = #{meetingno}
+
+</select>
 </mapper>

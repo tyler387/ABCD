@@ -2,13 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
 
 
 <style type="text/css">
-	table {
+.inputbox{
+	display: inline-block;
+}
+
+.selectbox{
+	display: inline-block;	
+}
+table {
   border: 1px #a39485 solid;
   font-size: .9em;
   box-shadow: 0 2px 5px rgba(0,0,0,.25);
@@ -69,51 +75,73 @@ th {
   
   
   }
-	
+
+
 
 </style>
 
   </div>
       <div class="right">
       
-      <div><h1>친구 목록</h1></div>
-       <div style="width:150px;"><hr></div>
-         	
-        <div id="tablebox">
-         
-         <div id="FriendList">
- 				<input type="hidden" name="userno" id="userno" value="${userno}">
-				<table class="friendTable">
-					<tr>
-						<th>유저 아이디</th>
-						<th>유저 닉네임</th>
-						<th>유저 이름</th>
-					</tr>
-				<c:forEach var="list" items="${list}">
-					
-					<tr>
-						<td>${list.USER_ID }</td>
-						<td>${list.USER_NICK }</td>
-						<td>${list.USER_NAME }</td>
-						<td>
-
-							<img src="/resources/image/optionAddIcon.png" class="friendremove" data-userno="${list.FRIEND_USERNO}" style="width:30px;height:30px;">
-						</td>
-					</tr>
-				</c:forEach>
-				</table>
-	 		</div>
+      
+      <div class="anotherbox">
+         	<div><h1>친구 찾기</h1></div>
+        		<div style="width:150px;"><hr></div>
+         	</div>
+        
+       <form name="friendFind" autocomplete="off" action="/mypage/search" method="get" class="searchbox"> 
+<!--        <form name="friendFind" autocomplete="off"> -->
+         <div class="selectbox">
+        	<select name="type">
+        		<option value="all">아이디+닉네임</option>
+        		<option value="user_id">아이디</option>
+        		<option value="user_nick">닉네임</option>
+        	</select>
+     
+	        <div class="inputbox">
+	        	<input type="text" name="keyword" >
+	        </div>
+        
+	      
+	        <button>검색</button>
+	        
+	     </div>  
+	     </form>   
+	     <form action="/mypage/friendfind" method="post">
+         <input type="hidden" id="userno" name="userno" value="${userno}">
+         <div id="tablebox">
+         <div id="searchFriend">
+			<table class="labelbox1">
+				<tr>
+					<th>유저 아이디</th>
+					<th>유저 닉네임</th>
+					<th>유저 이름</th>
+				</tr>
+			
+			<c:forEach var="list" items="${list }">
+			<tr>
+				<td>${list.userId }</td>
+				<td>${list.userNick }</td>
+				<td>${list.userName }</td>
+				<td>
+					<img src="/resources/image/optionAddIcon.png" class="friendAdd" data-userno="${list.userno}" style="width:30px;height:30px;">
+				</td>
+			</tr>
+			</c:forEach>
+			</table>
+		 </div>
          
          </div>
+        </form>
+         
       </div>
     </div>
-    
-    
-    <script type="text/javascript">
+
+<script type="text/javascript">
 
 $(function() {
 	
-	$("#FriendList").on("click", ".friendremove", function () {
+	$("#searchFriend").on("click", ".friendAdd", function () {
 		
 		var userno = $(this).attr("data-userno")
 		
@@ -128,7 +156,7 @@ function dataToss(userno) {
 	console.log("받나요? ", userno)
 	$.ajax({
 		type:'post',
-		url:'/mypage/friendList',
+		url:'/mypage/friendfind',
 		dataType : 'json', 
 		data : {userno: userno} ,
 		success: function (data) {

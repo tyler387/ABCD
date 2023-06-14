@@ -81,8 +81,15 @@ button[type=button] {
 .kakaobtn img{
 	width: 400px;
 	height: 50px;
+	padding-bottom: 10px;
+	cursor: pointer;	
+}
+
+.naverbtn img{
+	width: 400px;
+	height: 50px;
 	padding-bottom: 300px;
-	cursor: pointer;
+	cursor: pointer;	
 }
 
 .input_box input:focus{
@@ -137,10 +144,23 @@ button[type=button] {
             <img src="/resources/image/kakao_login_medium_wide.png">
         </a>
 	</div>
+	
+	<div class="naverbtn">
+ 		<a href="${apiURL}"><img src="/resources/image/btnG_완성형.png"/></a>
+	</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
+
+var input = document.getElementById("userPw");
+
+input.addEventListener("keyup", function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("loginBtn").click();
+  }
+});
 
 
 $('#userId').blur(function() {

@@ -233,13 +233,18 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		meeting.setUserno((int)session.getAttribute("userno"));
 		List<Meeting> list = meetingDao.selectMyMeetingno(meeting);
 		int totalCount;
+		logger.info("list!!@!@!@!@!@!@{}",list);
 		if(list.isEmpty()) {
+			logger.info("test");
 			totalCount = 1;
 		}else {
 		
 		totalCount = meetingDao.selectCnt(list);
 		}
 		logger.info("totalCount{}",totalCount);
+		if(totalCount==0) {
+			totalCount = 1;
+		}
 		MeetingPaging paging = new MeetingPaging(noCurPage, totalCount);
 		return paging;
 	}

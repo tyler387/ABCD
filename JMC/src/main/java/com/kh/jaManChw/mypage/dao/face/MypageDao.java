@@ -3,9 +3,11 @@ package com.kh.jaManChw.mypage.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.util.Paging;
 
 public interface MypageDao {
 	
@@ -81,7 +83,7 @@ public interface MypageDao {
 	 * @param map
 	 * @return
 	 */
-	public List<FriendList> selectFriendAll(Users users);
+	public List<Map<String, Object>> selectFriendAll(Users users);
 
 	/**
 	 * userno로 친구 추가하기
@@ -89,6 +91,27 @@ public interface MypageDao {
 	 * @return
 	 */
 	public int insertFriend(FriendList friendList);
+
+	/**
+	 * 내가 올린 사진게시물 조회하기
+	 * @param users
+	 * @return 내가 올린 사진 파일
+	 */
+	public List<BoardFile> selectMyboard(Users users);
+
+	/**
+	 * 친구가 됐는지 행 조회
+	 * @param friendList
+	 * @return
+	 */
+	public int selectCntFriend(FriendList friendList);
+
+	/**
+	 * 친구삭제
+	 * @param userno
+	 */
+	public void deleteFriend(int userno);
+
 
 	
 

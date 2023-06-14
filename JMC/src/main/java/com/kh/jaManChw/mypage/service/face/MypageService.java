@@ -1,12 +1,14 @@
 package com.kh.jaManChw.mypage.service.face;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
@@ -77,13 +79,26 @@ public interface MypageService {
 	 * @param users 
 	 * @return
 	 */
-	public List<FriendList> getFriendList(Users users);
+	public List<Map<String, Object>> getFriendList(Users users);
 
 	/**
 	 * 친구 추가하기
 	 * @param friendList
 	 */
 	public void friendAdd(FriendList friendList);
+
+	/**
+	 * 내가쓴 사진 게시물 가져오기
+	 * @param users
+	 * @return 내가쓴 사진 게시물
+	 */
+	public List<BoardFile> getMyboardFile(Users users);
+
+	/**
+	 * 친구 삭제
+	 * @param myno
+	 */
+	public void removeFriend(int userno);
 
 
 	

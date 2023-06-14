@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.mypage.dao.face.MypageDao;
 import com.kh.jaManChw.mypage.service.face.MypageService;
+import com.kh.jaManChw.util.Paging;
 
 
 @Service
@@ -163,22 +165,41 @@ public class MypageServiceImpl implements MypageService {
 
 
 	@Override
-	public List<FriendList> getFriendList(Users users) {
+	public List<Map<String, Object>> getFriendList(Users users) {
 		return mypageDao.selectFriendAll(users);
 	}
 
 
 	@Override
 	public void friendAdd(FriendList friendList) {
-		int res = mypageDao.insertFriend(friendList);
+		int res = mypageDao.selectCntFriend(friendList);
 		
 		if(res>0) {
-			logger.info("친구추가 성공");
+			logger.info("우린 친구야");
 		}else {
-			logger.info("친구추가 실패");
+			mypageDao.insertFriend(friendList);
+			logger.info("친구추가");
 		}
 
 	}
+
+
+	@Override
+	public List<BoardFile> getMyboardFile(Users users) {
+		return mypageDao.selectMyboard(users);
+	}
+
+
+	@Override
+	public void removeFriend(int userno) {
+		mypageDao.deleteFriend(userno);
+		
+	}
+
+	
+
+
+
 
 
 }

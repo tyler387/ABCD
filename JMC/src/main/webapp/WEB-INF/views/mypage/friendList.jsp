@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
@@ -80,20 +81,24 @@ th {
          	
         <div id="tablebox">
          
-         <div id="searchFriend">
-				<input type="hidden" name="userno" id="userno" value="${userno}">
+         <div id="FriendList">
+ 				<input type="hidden" name="userno" id="userno" value="${userno}">
 				<table class="friendTable">
 					<tr>
 						<th>유저 아이디</th>
 						<th>유저 닉네임</th>
 						<th>유저 이름</th>
 					</tr>
-				<c:forEach var="list" items="${list }">
+				<c:forEach var="list" items="${list}">
 					
 					<tr>
-						<td>${list.userId }</td>
-						<td>${list.userNick }</td>
-						<td>${list.userName }</td>
+						<td>${list.USER_ID }</td>
+						<td>${list.USER_NICK }</td>
+						<td>${list.USER_NAME }</td>
+						<td>
+
+							<img src="/resources/image/optionAddIcon.png" class="friendremove" data-userno="${list.FRIEND_USERNO}" style="width:30px;height:30px;">
+						</td>
 					</tr>
 				</c:forEach>
 				</table>
@@ -102,5 +107,47 @@ th {
          </div>
       </div>
     </div>
+    
+    
+    <script type="text/javascript">
+
+$(function() {
+	
+	$("#FriendList").on("click", ".friendremove", function () {
+		
+		var userno = $(this).attr("data-userno")
+		
+		console.log(userno);
+		
+		dataToss(userno);
+	})
+	
+})
+
+function dataToss(userno) {
+	console.log("받나요? ", userno)
+	$.ajax({
+		type:'post',
+		url:'/mypage/friendList',
+		dataType : 'json', 
+		data : {userno: userno} ,
+		success: function (data) {
+			console.log("AJAX s") 
+			console.log("result", data.result) 
+			if(data.result){
+				$(this).unwrap()
+			}
+           },
+        error: function () {
+			console.log("AJAX e") 
+		}
+		
+	})
+	
+}
+
+
+
+</script>
 
 <c:import url="../layout/footer.jsp" />

@@ -52,8 +52,6 @@
 
 
 
-
-
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -217,8 +215,10 @@ $(function(){
 
 		console.log("#ajax like click")
 		var boardno = "${map.BOARDNO}"
-		console.log(boardno)
-		
+		console.log(boardno)	
+
+
+		"${sessionScope.userId}"
 		
 		  $.ajax({
 		         type: "get"
@@ -232,18 +232,33 @@ $(function(){
 		    			$("#likeCount").html(res.allCount)
 		    			$("#heartw").show()
 		    			$("#heartr").hide()
-		    			
+		    		
 		    			
 		    		}else{
 		    			$("#likeCount").html(res.allCount)
 		    			$("#heartw").hide()
 		    			$("#heartr").show()
-		    			
 		    		}
+		            
 		          
 		         }
 		         , error: function(){
-		            console.log("AJAX 실패")   
+		            console.log("AJAX 실패")
+		    		if(${empty loginAccess or loginAccess}){
+		    			alert("로그인하지 않아 접근이 불가능합니다!")
+		    		}else if(${empty statusAccess or statusAccess}){
+		    			alert("해당 아이디는 접근할수 없는 상태입니다, 관리자에게 문의 바랍니다")
+		    		}
+		            
+		            //해당 요청요청마다 응답을 주고서 삭제할 경우에는 세션보다는 
+		            //Request영역이 적절...!
+<%-- 		            <% --%>
+// 		            session.removeAttribute("loginAccess");
+// 		            session.removeAttribute("adminAccess");
+// 		            session.removeAttribute("statusAccess");
+<%-- 		            %> --%>
+	            	
+	            	
 		         }
 		      })//END AJAX
 		      /* AJAX종료 후 발동 */
@@ -337,3 +352,4 @@ $(function(){
 
 })
 </script>
+

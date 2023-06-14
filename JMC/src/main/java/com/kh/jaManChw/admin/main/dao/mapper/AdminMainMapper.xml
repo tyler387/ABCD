@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.kh.jaManChw.admin.main.dao.face.AdminMainDao">
+
+	<select id="selectCntTodayJoinUsers" resultType="int" parameterType="String">
+		SELECT 
+			count(*) cnt 
+		FROM 
+			users
+		WHERE to_char(join_date,'YYYY/MM/DD') = #{today}
+	</select>
+	
+	<select id="selectTodayJoinUsers" resultType="Users" parameterType="String">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+				SELECT
+					 * 
+				FROM 
+					users
+				WHERE to_char(join_date,'YYYY/MM/DD') = #{today}
+				ORDER BY join_date DESC
+			) B
+		)
+		WHERE rnum BETWEEN 1 AND 10
+	</select>
+	
+	<select id="selectCntTodayWriteBoards" resultType="int" parameterType="String">
+		SELECT 
+			count(*) cnt 
+		FROM 
+			board
+		WHERE 1 = 1
+			AND to_char(write_date,'YYYY/MM/DD') = #{today}
+
+	</select>
+	
+	<select id="selectTodayWriteBoards" resultType="map" parameterType="String">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+		        SELECT 
+		            b.boardno
+		            , board_title
+		            , to_date(write_date, 'YY/MM/dd HH24:MI') write_date
+		            , user_id
+		            , user_nick
+		            , user_name
+		        FROM 
+		            board b
+		            , users u
+		            , board_option bo
+		        WHERE 1 = 1
+		            AND to_char(write_date,'YYYY/MM/DD') = #{today}
+		            AND b.userno = u.userno
+		            AND b.board_optionno = bo.board_optionno
+		        ORDER BY write_date DESC
+			) B
+		)
+		WHERE rnum BETWEEN 1 AND 10
+	</select>
+	
+	<select id="selectCntTodayWriteReportBoards" resultType="int" parameterType="String">
+		SELECT 
+			count(*) cnt 
+		FROM 
+			report
+		WHERE  1 = 1 
+			AND to_char(write_date,'YYYY/MM/DD') = #{today}
+			AND report_type = 'board'
+	</select>
+	
+	<select id="selectTodayWriteReportBoards" resultType="map" parameterType="String">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+				SELECT 
+					r.*
+					, u.user_id
+					, u.user_nick
+					, u.user_name
+		            , ru.user_id r_user_id
+		            , ru.user_nick r_user_nick
+		            , ru.user_name r_user_name
+				FROM 
+					report r
+					, users u
+		            , board b
+		            , users ru
+				WHERE  1 = 1 
+				    AND to_char(r.write_date,'YYYY/MM/DD') = '2023/06/12'
+				    AND r.userno = u.userno
+		            AND r.boardno = b.boardno
+		            AND b.userno = ru.userno
+				    AND report_type = 'board'
+				ORDER BY r.write_date DESC
+			) B
+		)
+		WHERE rnum BETWEEN 1 AND 10
+	</select>
+	
+	<select id="selectCntTodayWriteReportUsers" resultType="int" parameterType="String">
+		SELECT 
+			count(*) cnt 
+		FROM 
+			report
+		WHERE 1 = 1 
+			AND to_char(write_date,'YYYY/MM/DD') = #{today}
+			AND report_type = 'user'
+	</select>
+	
+	<select id="selectTodayWriteReportUsers" resultType="map" parameterType="String">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+				SELECT 
+				    r.*
+				    , u.user_id
+				    , u.user_nick
+				    , u.user_name
+				    , ru.user_id r_user_id
+				    , ru.user_nick r_user_nick
+				    , ru.user_name r_user_name
+				FROM 
+				    report r 
+				    , users u
+				    , users ru
+				WHERE 1 = 1 
+				    AND to_char(write_date,'YYYY/MM/DD') = #{today}
+				    AND r.userno = u.userno
+				    AND r.r_userno = ru.userno
+				    AND report_type = 'user'
+				ORDER BY r.write_date DESC
+			) B
+		)
+		WHERE rnum BETWEEN 1 AND 10
+	</select>
+	
+	<select id="selectCntTodayWriteReportMeetings" resultType="int" parameterType="String">
+		SELECT 
+			count(*) cnt 
+		FROM 
+			report
+		WHERE  1 = 1 
+			AND to_char(write_date,'YYYY/MM/DD') = #{today}
+			AND report_type = 'meeting'
+	</select>
+	
+	<select id="selectTodayWriteReportMeetings" resultType="map" parameterType="String">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+				SELECT 
+					r.*
+					, u.user_id
+					, u.user_nick
+					, u.user_name
+		            , m.mname
+		            , ru.user_id r_user_id
+		            , ru.user_nick r_user_nick
+		            , ru.user_name r_user_name
+				FROM 
+					report r
+					, users u
+		            , meeting m
+		            , users ru
+				WHERE  1 = 1 
+				    AND to_char(r.write_date,'YYYY/MM/DD') = #{today}
+				    AND r.userno = u.userno
+		            AND r.meetingno = m.meetingno
+		            AND m.userno = ru.userno
+				    AND report_type = 'meeting'		
+				ORDER BY r.write_date DESC
+			) B
+		)
+		WHERE rnum BETWEEN 1 AND 10
+	</select>
+	
+	<select id="selectCntTodayWriteMeetings" resultType="int" parameterType="String">
+		SELECT 
+			count(*) cnt 
+		FROM 
+			meeting
+		WHERE to_char(make_date,'YYYY/MM/DD') = #{today}	
+	</select>
+	
+	<select id="selectTodayWriteMeetings" resultType="map" parameterType="String">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM(
+				SELECT
+					 m.*
+					 , user_id
+					 , user_nick
+					 , user_name
+				FROM 
+					meeting m 
+					, users u
+				WHERE 1 = 1 
+				    AND to_char(make_date,'YYYY/MM/DD') = #{today}
+				    AND m.userno = u.userno
+				ORDER BY make_date DESC
+			) B
+		)
+		WHERE rnum BETWEEN 1 AND 10
+	</select>
+
+</mapper>

@@ -168,6 +168,11 @@ $('#userPw').blur(function() {
 
 	$(document).ready(function() {
 		
+		if (${not empty loginAccess or loginAccess}) {
+			alert("로그인하지 않아 접근이 불가능합니다!")	
+		}
+		
+		
 		//저장된 쿠키값을 id에 저장해준다. 쿠키값이 없으면 공백처리된다.
 		var userLoginId = getCookie('userLoginId');
 		$('#userId').val(userLoginId);
@@ -238,5 +243,8 @@ $('#userPw').blur(function() {
 
 </script>
 
+<c:remove var="adminAccess" scope="session"/>
+<c:remove var="loginAccess" scope="session"/>
+<c:remove var="statusAccess" scope="session"/>
 
 <c:import url="../layout/footer.jsp"/> 

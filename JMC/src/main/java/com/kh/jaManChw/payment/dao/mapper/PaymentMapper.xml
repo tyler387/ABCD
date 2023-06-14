@@ -9,16 +9,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insertPayment" parameterType="Payment" >
 		insert INTO buy_list values(BUY_LIST_SEQ.nextval, 23, 1, #{orderName}, 100, 'abc', sysdate)
-	
 	</insert>
 
-<!-- 	<select id="selectShoppingBasketList" resultType="" parameterType="list"> -->
-<!-- 		<foreach item="list" collection="sbList"> -->
-<!-- 		select * from shopping_basket where basketno=${list.basketno} -->
-<!-- 		</foreach> -->
-<!-- 	</select> -->
-
-	<select id="selectShoppingAllBasketList" resultType="ShoppingBasket" parameterType="ShoppingBasket">
-		select * from shopping_basket where basketno = ${basketno}
+	<select id="selectShoppingAllBasketList" resultType="hashmap" parameterType="int">
+		select S.*, I.ITEM_TITLE,I.item_price FROM shopping_basket S, item I where S.basketno = ${basketno} and S.itemno = I.itemno
+	</select>
+	
+	<select id="selectOncetrypayno" resultType="int">
+		SELECT oncetrypay_seq.nextVal FROM dual
 	</select>
 </mapper>

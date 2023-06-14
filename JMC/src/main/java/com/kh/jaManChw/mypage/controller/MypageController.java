@@ -16,14 +16,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+<<<<<<< HEAD
+=======
+import org.springframework.web.bind.annotation.RequestParam;
+>>>>>>> branch 'master' of https://github.com/JaManChw/JMC
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
 import com.kh.jaManChw.board.service.face.BoardService;
 import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.dto.FriendList;
+=======
+import com.kh.jaManChw.dto.Applicant;
+import com.kh.jaManChw.dto.Meeting;
+>>>>>>> branch 'master' of https://github.com/JaManChw/JMC
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.meeting.service.face.MeetingService;
 import com.kh.jaManChw.mypage.service.face.MypageService;
 import com.kh.jaManChw.util.Paging;
 
@@ -34,6 +44,8 @@ public class MypageController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired MypageService mypageService;
+	
+	@Autowired MeetingService meetingService;
 	
 	//서블릿 컨텍스트 객체
 	@Autowired ServletContext context;
@@ -212,6 +224,18 @@ public class MypageController {
 		return returnMap; 
 	}
 	
+
+	//---------------------------------------------
+	//마이페이지 모임
+	@GetMapping("/mypage/meeting")
+	public void myMeeting(HttpSession session, Model model) {
+		
+		List<Applicant> list = meetingService.getMyMeetingApplicatn(session);
+		
+		logger.info("testsetset{}",list);
+		model.addAttribute("list",list);
+	}
+
 
 	// 친구목록
 	@GetMapping("/friendList")

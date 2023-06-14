@@ -42,7 +42,7 @@ body{
 }
  a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
- a:hover {  color: white; text-decoration: none; font-weight: 700;}
+ #chatRoom:hover {  color: white; text-decoration: none; font-weight: 700;}
  a{
      display: flex;
     /* padding: 30px; */
@@ -64,14 +64,20 @@ body{
 <div class="chatList">
 <c:choose>
 <c:when test="${sessionScope.userId eq null}">
-<a>로그인 후 이용 가능!!</a><br>
+<a>로그인 후 이용 가능!!</a>
 </c:when>
 <c:when test="${sessionScope.userId ne null }">
+
+	<c:if test="${empty list }">
+		<a>모임 등록/신청 후 채팅방 이용</a>
+	</c:if>
+	<c:if test="${not empty list }">
 <c:forEach var="list" items="${list }">
 <div id="listAll">
 <a href="./chatroom?chatno=${list.chatno }" id="chatRoom">${list.chatname }</a>
 </div>
 </c:forEach>
+	</c:if>
 </c:when>
 </c:choose>
 </div>

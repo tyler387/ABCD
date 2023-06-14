@@ -69,7 +69,7 @@ $(function(){
 							runAjax = false
 							return;
 						}
-						console.log(res[0])
+						
 						for(var i in res){
 							var sendTime = new Date(res[i].sendTime)
 							if(res[i].sendId==userid){
@@ -291,6 +291,7 @@ body{
 }
 #chatName{
 	border : 1px solid #8D7B68;
+	border-bottom: 1px solid black;
     border-radius: 30px 30px 0 0;
 }
 #chatmessage{
@@ -311,6 +312,7 @@ body{
     width: 50px;
     color: white;
     margin-top: 5px;
+    border-radius: 15px;
 }
 </style>
 </head>

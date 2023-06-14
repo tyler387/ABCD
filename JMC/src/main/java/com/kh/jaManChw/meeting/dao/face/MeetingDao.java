@@ -12,11 +12,29 @@ import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 
 public interface MeetingDao {
-
+	
+	
+	/**
+	 * 모임 등록 정보 삽입하기 
+	 * 
+	 * @param meeting - 등록될 모임 정보  
+	 */
 	public void insertMeeting(Meeting meeting);
-
+	
+	/**
+	 * 사용자의 모든 친구 목록 조회하기
+	 * 
+	 * @param userno - 사용자의 정보  
+	 * @return 사용자의 모든 친구 목록 
+	 */
 	public List<Users> selectFriendListAll(int userno);
 
+	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int selectMeetingno();
 
 	public void insertPreference(Preference preference);
@@ -58,6 +76,18 @@ public interface MeetingDao {
 	public List<Meeting> selectMeetingListByMap(@Param("mapData") String mapData, @Param("mapData1")String mapData1);
 
 	public Preference selectDetailPreference(Preference preference);
+
+	public int selectMeetingappcount(Meeting meeting);
+
+	public void updatestatus(Meeting meeting);
+	
+	
+	
+
+	public List<Meeting> selectMyMeetingno(Meeting meeting);
+
+	public List<Applicant> selectAllApplicant(List<Meeting> list);
+
 	
 	
 

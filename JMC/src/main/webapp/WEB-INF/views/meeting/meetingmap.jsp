@@ -12,6 +12,15 @@
 
 <style type="text/css">
 
+.meetingsearch {
+  position: relative;	
+  width: 300px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
 
 .meetingbar {
 
@@ -102,7 +111,7 @@
   height: 50px;
   width: 300px;
   border-radius: 20px;
-  background: orange;
+  background: gray;
   color: #fff;
 	
 }
@@ -110,7 +119,7 @@
   height: 50px;
   width: 300px;
   border-radius: 20px;
-  background: gray;	
+  background: orange;	
   color: #fff;
 }
 
@@ -152,8 +161,11 @@
 	</div>
 
 <div class="meetingbar">
-<button class="filter">필터</button>
-<input type="text" name="meetingsearch" id="meetingsearch"> <button id="search">검색</button>		
+<a data-toggle="modal" data-target="#joinFilterModal" class="filter">
+<img src="https://www.greenlight.co.kr/pc/public/img/i_filter.png" class="img2"> 필터</a>
+
+<input type="text" class="meetingsearch" name="meetingsearch" id="meetingsearch" placeholder="검색어 입력"> 	
+
 </div><br>
 	
 	<div class= "meetingall">
@@ -168,7 +180,7 @@
 
 	
 	<div>	
-	<h4>전체 : ${meetingcount}개 / 현재: ${meetingcountnow }개 모집 중</h4><br>
+	<h4>전체 : ${meetingcount}개 | 모집 중 ${meetingcountnow }개</h4><br>
 	<div class="meetinglist1">
 		<c:import url="/WEB-INF/views/meeting/meetinglist.jsp"/>
 	</div>
@@ -230,8 +242,10 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-	$("#search").click(function() {
-		console.log("#search click")
+	$("#meetingsearch").keypress(function(e) {
+		if(e.keyCode && e.keyCode == 13){
+			$("#meetingsearch").trigger("click");
+		}
 		$.ajax({
 			type: "get"
 			, url: "/meeting/meetingsearch"

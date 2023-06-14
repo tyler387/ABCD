@@ -49,18 +49,25 @@
 	SELECT userno from users 
 	where userno = #{userno} 
 	
-
 </select> 
+
 
 
 <select id="selectMeetinglistAll" resultType="com.kh.jaManChw.dto.Meeting">
 	
-	select * from meeting m
-	join (select count(*) cnt,meetingno from applicant
-	group by meetingno) a on m.meetingno = a.meetingno
-	where m.head_count &gt; a.cnt and meeting_date &gt; sysdate 
-	order by m.meetingno desc
+	select * from meeting where status = 'active' and meeting_date &gt; sysdate
+	
 </select>
+
+<update id="updatestatus" parameterType="com.kh.jaManChw.dto.Meeting">
+
+update (select * from meeting  m join(select count(*)cnt,meetingno from applicant group by meetingno)a on m.meetingno = a.meetingno) set status = 'unactive' where head_count &lt;= cnt
+
+
+</update>
+
+
+
 
 <select id="selectMeeting" resultType="com.kh.jaManChw.dto.Meeting" parameterType="com.kh.jaManChw.dto.Meeting">
 
@@ -119,7 +126,7 @@
 
 <insert id = "insertJoinMeeting" parameterType="com.kh.jaManChw.dto.Applicant">
 	
-	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'yes' , 1, 'no')
+	insert into applicant values(#{meetingno}, #{userno}, #{applicantContent}, 'nocheck' , 1, 'no')
 	
 </insert>
 <select id="selectMeetingByDate" parameterType="String" resultType="com.kh.jaManChw.dto.Meeting">
@@ -161,4 +168,15 @@ select count(*) from meeting where status = 'active' and meeting_date &gt; sysda
 </select>
 
 
+
+<select id="selectMyMeetingno" parameterType="com.kh.jaManChw.dto.Meeting" resultType="com.kh.jaManChw.dto.Meeting">
+	select meetingno from meeting where userno = #{userno}
+</select>
+<select id="selectAllApplicant" parameterType="java.util.List" resultType="com.kh.jaManChw.dto.Applicant">
+	select * from applicant where meetingno in 
+	<foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+	#{item.meetingno}
+	</foreach>
+	and agree = 'nocheck'
+</select>
 </mapper>

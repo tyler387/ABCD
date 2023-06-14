@@ -18,7 +18,7 @@
 </form>
 
 <form method="post" action="/payment/main">
-<table class="table table table-hover">
+<table class="table table table-hover" >
 <tr class="table-secondary">
 	<th>인덱스</th>
 	<th>상품이름</th>

@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 		</foreach> -->
 <!-- 	</select> -->
 
-	<select id="selectShoppingAllBasketList" resultType="map" parameterType="ShoppingBasket">
+	<select id="selectShoppingAllBasketList" resultType="ShoppingBasket" parameterType="ShoppingBasket">
 		select * from shopping_basket where basketno = ${basketno}
 	</select>
 </mapper>

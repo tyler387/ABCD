@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
     	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    	
-<!DOCTYPE html>
-<html>
-<head>
+	
+<c:import url="../layout/header.jsp"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	  <script src="https://js.tosspayments.com/v1/payment-widget"></script>
+	  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
 // $(function() {
 // 	$("#toss").click(function() {
@@ -24,7 +25,6 @@
 // 				console.log("AJAX 성공")
 // 				$("#tossstart").html(res)
 // 				filter = $("#filter").val();
-			
 // 			}
 // 			, error: function() {
 // 				console.log("AJAX 실패")
@@ -35,18 +35,37 @@
 </script>
 </head>
 <body>
-<input type="hidden" value="함석봉"  id="name">
-<input type="hidden" value="abcd" id="name2">
+${sbList }
+<table class="table table table-hover" style="width: 1200px; margin: 0 auto;">
+<tr class="table-secondary">
+	<th>상품번호</th>
+	<th>상품이름</th>
+	<th>갯수</th>
+	<th>가격</th>
+	<th>관리</th>
+</tr>	
+<c:forEach var="list" items="${sbList } " varStatus="status" >
+<tr>
+	<th class="cart_info_td">
+	<c:out value="${status.index + 1}" /> 
+	</th> 
+	<th>${sbItemCount }
+	</th>	
+	<th>
+	2
+	</th>
+	<th>3</th>
+	<th><button type="button" class="btn btn-secondary" class ="deletebtn" onClick="window.location.reload()">삭제</button></th>
+</tr>
+</c:forEach> 
+</table>
+
 아이디 : 나나나
-이름 : 함석봉
+이름 : <input type="text" id="name" onchange='printName()'>
 번호 : 01054906413<br>
 주문 목록 : 
-1<input type="hidden" value="item1" id="item1"><br>
-2<input type="hidden" value="item2" id="item2"><br>
 3<input type="hidden" value="10000" id="item3"><br>
-4<input type="hidden" value="item4" id="item4"><br>
 총 주문액 : 
-
 ${sbList } 
   <!-- 결제위젯, 이용약관 영역 -->
   <div id="payment-method"></div>
@@ -54,13 +73,17 @@ ${sbList }
   <!-- 결제하기 버튼 -->
   <button id="payment-button">결제하기</button>
   <script> 
-
   	var name = $("#name").val(); 
-  	var name2 = $("#name2").val();
   	var price = $("#item3").val();
   	console.log("네임", name);
-  	console.log("네임2", name2);
   	console.log("가격", price);
+  	
+  	function printName()  {
+  	  name = document.getElementById('name').value;
+  	document.getElementById('name').value = name;
+  	console.log("네임", name);
+  	}
+  	
 	const clientKey = 'test_ck_4vZnjEJeQVxpqRELbWqVPmOoBN0k'
     const customerKey = "rNodXBSE7vXPAX54LsEgx" // 내 상점의 고객을 식별하는 고유한 키
     // 커스텀키는 유저 번호가 들어가야함
@@ -96,9 +119,6 @@ ${sbList }
       })
     })
   </script>
-
+<c:import url="../layout/footer.jsp" />
 <!-- <div id ="tossstart"> -->
 <!-- </div> -->
-
-</body>
-</html>

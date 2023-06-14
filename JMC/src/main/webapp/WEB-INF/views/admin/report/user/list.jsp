@@ -109,7 +109,7 @@ div.admin1 {
 </table>
 <br>
 <div>
-<c:import url="./paging.jsp" />
+<c:import url="../../paging.jsp"/>
 </div>
 </div>
 </div>

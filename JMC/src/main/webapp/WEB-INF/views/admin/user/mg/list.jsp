@@ -140,7 +140,7 @@ div.admin1 {
 	
 <table class="table table table-hover">
 <tr class="table-secondary">
-	<th>아이디</th>
+	<th style="width: 278px;">아이디</th>
 	<th>이름</th>
 	<th>닉네임</th>
 	<th>상태</th>
@@ -163,7 +163,7 @@ div.admin1 {
 		<c:when test="${users.status eq 'block'}">정지</c:when>
 	</c:choose>  </th>
 	<th><fmt:formatDate value="${users.birth }" pattern="yyyy-MM-dd"/></th>
-	<th>${users.userId }</th>
+	<th>${users.gender }</th>
 	<th>${users.phone }</th>
 	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
 	<th><a href="./update?userno=${users.userno }"><button type="button" class="btn btn-secondary">수정</button></a>

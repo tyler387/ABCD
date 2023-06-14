@@ -9,8 +9,8 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 <!-- 		<property name="url" value="jdbc:oracle:thin:@kihoonsdb_medium?TNS_ADMIN=D:/wallet/Wallet_KiHoonsDB"/> -->
-<!-- 		<property name="url" value="jdbc:oracle:thin:@kihoonsdb_medium?TNS_ADMIN=C:/wallet/Wallet_KiHoonsDB"/> -->
-		<property name="url" value="jdbc:oracle:thin:@kihoonsdb_medium?TNS_ADMIN=/Users/wallet/Wallet_KiHoonsDB"/>
+		<property name="url" value="jdbc:oracle:thin:@kihoonsdb_medium?TNS_ADMIN=C:/wallet/Wallet_KiHoonsDB"/>
+<!-- 		<property name="url" value="jdbc:oracle:thin:@kihoonsdb_medium?TNS_ADMIN=/Users/wallet/Wallet_KiHoonsDB"/> -->
 		<property name="username" value="admin"/>
 		<property name="password" value="thdrlgns123!Q"/>
 	</bean>

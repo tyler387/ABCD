@@ -47,7 +47,7 @@ $("#delete_btn").click(function(){
 </div>
 <hr>
 
-<div style ="width: 600px; margin: 0 auto; padding-top : 80px;">
+<div style ="width: 600px; margin: 0 auto; padding-top : 80px; ">
 
 <c:forEach var="report" items="${reportView }">
 

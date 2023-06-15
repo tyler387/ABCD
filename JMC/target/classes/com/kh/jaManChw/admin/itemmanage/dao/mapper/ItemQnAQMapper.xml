@@ -37,7 +37,10 @@
 	</select>
 	
 	<select id="selectCntFilterQnAQ" resultType="int" parameterType="map">
-		SELECT count(*) FROM Item_QnA_Q iqq
+		SELECT 
+			count(*) 
+		FROM 
+			Item_QnA_Q iqq
 		<if test="content != null and !''.equals(content)">
 		WHERE upper(${filter}) LIKE '%' || upper(#{content}) || '%'
 		</if>
@@ -72,7 +75,11 @@
 	</select>	
 	
 	<select id="selectItemQnAQDetail" resultType="map" parameterType="int">
-		SELECT iqq.*, user_id, user_name, i.item_title
+		SELECT 
+			iqq.*
+			, user_id
+			, user_name
+			, i.item_title
 		FROM item_QnA_Q iqq,
 		    users u,
 		    item_File if, 
@@ -85,11 +92,19 @@
 	</select>
 	
 	<update id="updateItemQnAQ" parameterType="ItemQnAQ">
-		UPDATE item_QnA_Q SET iq_status = 'done' WHERE item_qnano = #{itemQnano}
+		UPDATE 
+			item_QnA_Q 
+		SET 
+			iq_status = 'done' 
+		WHERE item_qnano = #{itemQnano}
 	</update>
 	
 	<update id="updateItemQnAQUnprocessed" parameterType="ItemQnAQ">
-		UPDATE item_QnA_Q SET iq_status = 'unprocessed' WHERE item_qnano = #{itemQnano}
+		UPDATE 
+			item_QnA_Q 
+		SET 
+			iq_status = 'unprocessed' 
+		WHERE item_qnano = #{itemQnano}
 	</update>
 	
 </mapper>

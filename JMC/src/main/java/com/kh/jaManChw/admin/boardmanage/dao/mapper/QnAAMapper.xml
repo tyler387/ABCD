@@ -6,25 +6,51 @@
 <mapper namespace="com.kh.jaManChw.admin.boardmanage.dao.face.QnAADao">
 	
 	<insert id="insertQnAA" parameterType="QnAA">
-		INSERT INTO QnA_A(answerno, questionno, userno, a_content)
-		VALUES(QnA_A_seq.nextval, #{questionno}, #{userno}, #{aContent})
+		INSERT INTO QnA_A(
+			answerno
+			, questionno
+			, userno
+			, a_content
+		)
+		VALUES(
+			QnA_A_seq.nextval
+			, #{questionno}
+			, #{userno}
+			, #{aContent}
+		)
 		
 	</insert>
 	
 	<update id="upadateQnAQStatus" parameterType="QnAA">
-		UPDATE QnA_Q SET q_status = 'done' WHERE questionno = #{questionno}
+		UPDATE 
+			QnA_Q 
+		SET 
+			q_status = 'done' 
+		WHERE questionno = #{questionno}
 	</update>
 	
 	<select id="selectQnAADetail" resultType="map" parameterType="QnAA">
-    	SELECT answerno, a.a_content aContent, u.userno FROM QnA_A a, users u
-        WHERE 1 = 1
-        AND a.userno = u.userno
-        AND answerno = #{answerno}
+	   	SELECT 
+	   		answerno
+	   		, a.a_content aContent
+	   		, u.userno 
+	   	FROM 
+	   		QnA_A a
+	   		, users u
+	    WHERE 1 = 1
+	       AND a.userno = u.userno
+	       AND answerno = #{answerno}
 	</select>
 	<update id="updateQnAA" parameterType="QnAA">
-		UPDATE QnA_A SET a_Content = #{aContent} WHERE answerno = #{answerno}
+		UPDATE 
+			QnA_A 
+		SET a_Content = #{aContent} 
+		WHERE answerno = #{answerno}
 	</update>
 	<update id="updateQnAAStatus" parameterType="QnAA">
-		UPDATE QnA_A SET a_Status = 'delete' WHERE answerno = #{answerno}
+		UPDATE 
+			QnA_A 
+		SET a_Status = 'delete' 
+		WHERE answerno = #{answerno}
 	</update>
 </mapper>

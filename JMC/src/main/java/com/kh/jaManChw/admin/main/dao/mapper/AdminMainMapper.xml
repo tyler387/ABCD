@@ -14,7 +14,7 @@
 		WHERE to_char(join_date,'YYYY/MM/DD') = #{today}
 	</select>
 	
-	<select id="selectTodayJoinUsers" resultType="Users" parameterType="String">
+	<select id="selectTodayJoinUsers" resultType="map" parameterType="String">
 		SELECT * FROM(
 		    SELECT rownum rnum, B.* FROM(
 				SELECT
@@ -44,7 +44,7 @@
 		        SELECT 
 		            b.boardno
 		            , board_title
-		            , to_date(write_date, 'YY/MM/dd HH24:MI') write_date
+		            , write_date
 		            , user_id
 		            , user_nick
 		            , user_name

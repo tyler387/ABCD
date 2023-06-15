@@ -9,6 +9,8 @@ import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
+import com.kh.jaManChw.dto.ProfileFile;
+import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.MeetingPaging;
@@ -17,7 +19,7 @@ public interface MeetingService {
 	
 	public List<Users> selectFriendListAll(int userno);
 
-	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant, Applicant leader);
+	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant);
 
 	public int getUserno(int userno);
 	
@@ -26,11 +28,14 @@ public interface MeetingService {
 
 	public Meeting detailMeeting(Meeting meeting);
 
-	public List<Users> getUserNickAll(Meeting meeting);
-
 	public Users getUserNickLeader(Meeting meeting);
 	
-	public void inputReportMeeting(ReportMeeting reportMeeting);
+	public List<Users> getUserNickAgree(Meeting meeting);
+
+	public List<Users> getUserNickNocheck(Meeting meeting);	
+	
+	public void inputReportMeeting(Report reportMeeting);
+	
 
 	public Applicant getMeetingApplicant(Applicant applicant);
 
@@ -65,6 +70,33 @@ public interface MeetingService {
 	public List<Map<String, Object>> getApplicantAll(HttpSession session, MeetingPaging paging);
 
 	public boolean chkHeadCount(Applicant applicant);
+
+	public int applicantCount(Applicant applicant);
+
+	public int applicantCheckCount(Applicant applicant);
+
+	public int applicantNoCheckCount(Applicant applicant);
+
+	public int chkUser(Applicant applicant);
+
+
+	public List<Map<String, Object>> allInfo(Applicant applicant);
+	
+
+	
+	
+	
+
+	
+	
+	
+	public MeetingPaging getappliPaging(String curPage, HttpSession session);
+
+	public List<Map<String, Object>> getMyapplicant(HttpSession session, MeetingPaging paging);
+
+	public List<Map<String,Object>> getMyMeeting(HttpSession session, MeetingPaging paging);
+
+	public MeetingPaging getMyMeetingCount(String curPage, HttpSession session);
 
 
 	

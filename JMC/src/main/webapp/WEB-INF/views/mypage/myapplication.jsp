@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp" />
@@ -80,9 +79,40 @@ table{
   </div>
       <div class="right">
       
-<c:import url="./meetingTable.jsp"></c:import>
+      <div id="tablesize">
+        	<table>
+  		<thead id="thead">
+  		<tr>
+  			<th>모임명</th>
+  			<th>자기소개</th>
+  			<th>현재상태</th>
+ 		</tr>
+  		</thead>
+  		<tbody>
+  			<c:forEach var="map" items="${map}">
+  			<tr>
+  				<td>${map.MNAME }</td>
+  				<td>${map.APPLICANT_CONTENT }</td>
+  				<c:choose>
+  					<c:when test="${map.AGREE eq 'nocheck' }">
+  					<td>대기중</td>
+  					</c:when>
+  					<c:when test="${map.AGREE eq 'yes' }">
+  					<td>수락</td>
+  					</c:when>
+  					<c:when test="${map.AGREE eq 'no' }">
+  					<td>거절</td>
+  					</c:when>
+  				</c:choose>
+  			</tr>
+  			</c:forEach>
+  		</tbody>
+  	</table>
+  	</div>
+    <div id="paging">
+	<c:import url="../layout/meetingpaging.jsp"></c:import>
+	</div>
       </div>
     </div>
-
 
 <c:import url="../layout/footer.jsp" />

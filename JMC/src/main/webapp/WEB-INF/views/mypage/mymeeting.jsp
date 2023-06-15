@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
 
@@ -20,7 +19,7 @@ th{
 td{
 	text-align: center;
 }
-#agreeY,#agreeN{	
+#view{	
 	display : inline-block;
 	width : 70px;
 	padding : 10px;
@@ -32,14 +31,11 @@ tr{
 	height : 100px;	
 	border-bottom : 1px solid black;
 }
-#agreeY{
+#view{
 	background-color: #371e06;
 	color : white;
 }
-#agreeN{
-	background-color: #f1f0f0;
-	color : black;
-}
+
 
 .pagination li{
     margin: 0 0 0 0;
@@ -80,9 +76,34 @@ table{
   </div>
       <div class="right">
       
-<c:import url="./meetingTable.jsp"></c:import>
+      <div id="tablesize">
+        	<table>
+  		<thead id="thead">
+  		<tr>
+  			<th>모임명</th>
+  			<th>모임날짜</th>
+  			<th>현재인원</th>
+  			<th>상세보기</th>
+ 		</tr>
+  		</thead>
+  		<tbody>
+  			<c:forEach var="map" items="${map}">
+  			<tr>
+  				<td>${map.MNAME }</td>
+  				<td>
+  				<fmt:formatDate value="${map.MEETING_DATE }" pattern="MM월dd일 a hh:mm"/>
+  				</td>
+  				<td>${map.CNT } / ${map.HEAD_COUNT }</td>
+  				<td><a href="../meeting/view?meetingno=${map.MEETINGNO }" id="view">바로가기</a>
+  			</tr>
+  			</c:forEach>
+  		</tbody>
+  	</table>
+  	</div>
+    <div id="paging">
+	<c:import url="../layout/meetingpaging.jsp"></c:import>
+	</div>
       </div>
     </div>
-
 
 <c:import url="../layout/footer.jsp" />

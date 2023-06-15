@@ -98,6 +98,15 @@ public interface MeetingDao {
 
 	public int selectNotFull(Applicant applicant);
 
+
+	public List<Map<String, Object>> selectMyApplicant(@Param("applicant")Applicant applicant, @Param("paging")MeetingPaging paging);
+
+	public int selectCntAll(Meeting meeting);
+
+	public List<Map<String,Object>> selectMyMeetingList(@Param("meeting")Meeting meeting, @Param("paging")MeetingPaging paging);
+
+	public int selectMyMeetingCntAll(Meeting meeting);
+
 	
 	
 

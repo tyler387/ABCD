@@ -233,6 +233,20 @@ public class MypageController {
 	
 
 	//---------------------------------------------
+	//내가 등록한 모임
+	@RequestMapping("/mymeeting")
+	public void myMeetingList(HttpSession session,String curPage, Model model) {
+		MeetingPaging paging = meetingService.getMyMeetingCount(curPage,session);
+		
+		List<Map<String,Object>> map= meetingService.getMyMeeting(session,paging);
+		
+		model.addAttribute("map",map);
+		model.addAttribute("paging",paging);
+		
+		
+	}
+	
+	
 	//마이페이지 모임
 	@GetMapping("/meeting")
 	public String myMeeting(HttpSession session, Model model,String curPage) {
@@ -249,18 +263,39 @@ public class MypageController {
 	}
 	@GetMapping("/agree")
 	public String agree(Applicant applicant,Model model) {
-		
+		model.addAttribute("test","123");
 		if(applicant.getAgree().equals("yes")) {
 			//정원 수 초과시 true
 			boolean countChk = meetingService.chkHeadCount(applicant);
 			if(countChk) {
+				model.addAttribute("message","정원초과하여 자동 거절");
+				model.addAttribute("url","/mypage/meeting");
 				applicant.setAgree("no");
-				
+				//모집인원 남아있을 경우 
+			}else {
+				model.addAttribute("message","모집인원 추가");
+				model.addAttribute("url","/mypage/meeting");
 			}
+		}else {
+				model.addAttribute("message","모집인원 거절");
+				model.addAttribute("url","/mypage/meeting");
+				
 		}
 		meetingService.updateApplicant(applicant);
-		return "redirect:/mypage/meeting";
+		return "./layout/alert";
 	}
+	//내가 신청한 내역
+	@RequestMapping("/myapplication")
+	public String application(HttpSession session,String curPage,Model model) {
+		MeetingPaging paging = meetingService.getappliPaging(curPage,session);
+		List<Map<String,Object>> map = meetingService.getMyapplicant(session,paging);
+		
+		model.addAttribute("map",map);
+		model.addAttribute("paging",paging);
+		
+		return "/mypage/myapplication";
+	}
+	
 	// 친구목록
 	@GetMapping("/friendList")
 	public void friendPage(Model model,HttpSession session,Users users) {

@@ -8,7 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
-import com.kh.jaManChw.dto.ReportMeeting;
+import com.kh.jaManChw.dto.ProfileFile;
+import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.MeetingPaging;
 
@@ -46,9 +47,11 @@ public interface MeetingDao {
 
 	public void updatehit(Meeting meeting);
 	
-	public void insertReportMeeting(ReportMeeting reportMeeting);
+	public void insertReportMeeting(Report reportMeeting);
 
-	public List<Users> selectUserNickAll(Meeting meeting);
+	public List<Users> selectUserNickAgree(Meeting meeting);
+	
+	public List<Users> selectUserNickNoCheck(Meeting meeting);
 	
 	public Users selectMeetingApplicantLeader(Meeting meeting);
 	
@@ -59,8 +62,6 @@ public interface MeetingDao {
 	public void insertJoinMeeting(Applicant applicant);
 
 	public int selectUserNo(int userno);
-
-	public void insertMeetingFriend(Applicant applicant);
 
 	public void insertMeetingUser(Applicant leader);
 	
@@ -82,8 +83,6 @@ public interface MeetingDao {
 
 	public void updatestatus(Meeting meeting);
 	
-	
-	
 
 	public List<Meeting> selectMyMeetingno(Meeting meeting);
 
@@ -97,6 +96,37 @@ public interface MeetingDao {
 	public List<Map<String, Object>> selectApplicantPaging(@Param("list")List<Meeting> list,@Param("paging") MeetingPaging paging);
 
 	public int selectNotFull(Applicant applicant);
+
+	public int selectApplicantCount(Applicant applicant);
+
+	public int selectApplicantCheckCount(Applicant applicant);
+
+	public int selectApplicantNoCheckCount(Applicant applicant);
+
+	public int selectMeetingAppUser(Applicant applicant);
+
+	public ProfileFile selectFileInfo(Users info);
+
+	public List<Map<String, Object>> selectAllInfo(Applicant applicant);
+	
+
+	
+	
+
+	
+
+	
+	
+	
+	
+
+	public List<Map<String, Object>> selectMyApplicant(@Param("applicant")Applicant applicant, @Param("paging")MeetingPaging paging);
+
+	public int selectCntAll(Meeting meeting);
+
+	public List<Map<String,Object>> selectMyMeetingList(@Param("meeting")Meeting meeting, @Param("paging")MeetingPaging paging);
+
+	public int selectMyMeetingCntAll(Meeting meeting);
 
 	
 	

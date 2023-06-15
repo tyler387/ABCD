@@ -9,38 +9,37 @@ public class Users {
 	private int userno;
 	private String userId;
 	private String userPw;
-	private String userName;
 	private String userNick;
+	private String userName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birth;
 	private String gender;
 	private String email;
 	private String phone;
-	private String addr1;
+	private int addr1;
 	private String addr2;
 	private String addr3;
 	private String grade; //당근마켓 온도같은 역할하는 것
 	private int warnCount;
-	private String profileImgUrl;
 	private String status;
 	private String role;
 	private String platFormOption;
 	private Date joinDate;
-	private long socialNum;
+	private String socialNum;
 	
 	
 	public Users() {}
-	
-	
-	public Users(int userno, String userId, String userPw, String userName, String userNick, Date birth, String gender,
-			String email, String phone, String addr1, String addr2, String addr3, String grade, int warnCount,
-			String profileImgUrl, String status, String role, String platFormOption, Date joinDate, long socialNum) {
+
+
+	public Users(int userno, String userId, String userPw, String userNick, String userName, Date birth, String gender,
+			String email, String phone, int addr1, String addr2, String addr3, String grade, int warnCount,
+			String status, String role, String platFormOption, Date joinDate, String socialNum) {
 		super();
 		this.userno = userno;
 		this.userId = userId;
 		this.userPw = userPw;
-		this.userName = userName;
 		this.userNick = userNick;
+		this.userName = userName;
 		this.birth = birth;
 		this.gender = gender;
 		this.email = email;
@@ -50,23 +49,21 @@ public class Users {
 		this.addr3 = addr3;
 		this.grade = grade;
 		this.warnCount = warnCount;
-		this.profileImgUrl = profileImgUrl;
 		this.status = status;
 		this.role = role;
 		this.platFormOption = platFormOption;
 		this.joinDate = joinDate;
 		this.socialNum = socialNum;
-
 	}
+
 
 	@Override
 	public String toString() {
-		return "Users [userno=" + userno + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
-				+ ", userNick=" + userNick + ", birth=" + birth + ", gender=" + gender + ", email=" + email + ", phone="
+		return "Users [userno=" + userno + ", userId=" + userId + ", userPw=" + userPw + ", userNick=" + userNick
+				+ ", userName=" + userName + ", birth=" + birth + ", gender=" + gender + ", email=" + email + ", phone="
 				+ phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3=" + addr3 + ", grade=" + grade
-				+ ", warnCount=" + warnCount + ", profileImgUrl=" + profileImgUrl + ", status=" + status + ", role="
-				+ role + ", platFormOption=" + platFormOption + ", joinDate=" + joinDate + ", socialNum=" + socialNum
-				+ "]";
+				+ ", warnCount=" + warnCount + ", status=" + status + ", role=" + role + ", platFormOption="
+				+ platFormOption + ", joinDate=" + joinDate + ", socialNum=" + socialNum + "]";
 	}
 
 
@@ -100,16 +97,6 @@ public class Users {
 	}
 
 
-	public String getUserName() {
-		return userName;
-	}
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-
 	public String getUserNick() {
 		return userNick;
 	}
@@ -117,6 +104,16 @@ public class Users {
 
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 
@@ -160,12 +157,12 @@ public class Users {
 	}
 
 
-	public String getAddr1() {
+	public int getAddr1() {
 		return addr1;
 	}
 
 
-	public void setAddr1(String addr1) {
+	public void setAddr1(int addr1) {
 		this.addr1 = addr1;
 	}
 
@@ -210,16 +207,6 @@ public class Users {
 	}
 
 
-	public String getProfileImgUrl() {
-		return profileImgUrl;
-	}
-
-
-	public void setProfileImgUrl(String profileImgUrl) {
-		this.profileImgUrl = profileImgUrl;
-	}
-
-
 	public String getStatus() {
 		return status;
 	}
@@ -260,12 +247,12 @@ public class Users {
 	}
 
 
-	public long getSocialNum() {
+	public String getSocialNum() {
 		return socialNum;
 	}
 
 
-	public void setSocialNum(long socialNum) {
+	public void setSocialNum(String socialNum) {
 		this.socialNum = socialNum;
 	}
 	

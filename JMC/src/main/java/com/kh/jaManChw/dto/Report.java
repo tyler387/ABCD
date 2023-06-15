@@ -6,8 +6,9 @@ public class Report {
 
 	private int reportno;
 	private int userno;
-	private int rUserno;
+	private int ruserno;
 	private int boardno;
+	private int meetingno;
 	private String title;
 	private String content;
 	private String status;
@@ -18,26 +19,11 @@ public class Report {
 	public Report() {
 	}
 
-	public Report(int reportno, int userno, int rUserno, int boardno, String title, String content, String status,
-			String reportOption, Date writeDate, String reportType) {
-		super();
-		this.reportno = reportno;
-		this.userno = userno;
-		this.rUserno = rUserno;
-		this.boardno = boardno;
-		this.title = title;
-		this.content = content;
-		this.status = status;
-		this.reportOption = reportOption;
-		this.writeDate = writeDate;
-		this.reportType = reportType;
-	}
-
 	@Override
 	public String toString() {
-		return "Report [reportno=" + reportno + ", userno=" + userno + ", rUserno=" + rUserno + ", boardno=" + boardno
-				+ ", title=" + title + ", content=" + content + ", status=" + status + ", reportOption=" + reportOption
-				+ ", writeDate=" + writeDate + ", reportType=" + reportType + "]";
+		return "Report [reportno=" + reportno + ", userno=" + userno + ", ruserno=" + ruserno + ", boardno=" + boardno
+				+ ", meetingno=" + meetingno + ", title=" + title + ", content=" + content + ", status=" + status
+				+ ", reportOption=" + reportOption + ", writeDate=" + writeDate + ", reportType=" + reportType + "]";
 	}
 
 	public int getReportno() {
@@ -56,12 +42,12 @@ public class Report {
 		this.userno = userno;
 	}
 
-	public int getrUserno() {
-		return rUserno;
+	public int getRuserno() {
+		return ruserno;
 	}
 
-	public void setrUserno(int rUserno) {
-		this.rUserno = rUserno;
+	public void setRuserno(int ruserno) {
+		this.ruserno = ruserno;
 	}
 
 	public int getBoardno() {
@@ -70,6 +56,14 @@ public class Report {
 
 	public void setBoardno(int boardno) {
 		this.boardno = boardno;
+	}
+
+	public int getMeetingno() {
+		return meetingno;
+	}
+
+	public void setMeetingno(int meetingno) {
+		this.meetingno = meetingno;
 	}
 
 	public String getTitle() {
@@ -119,6 +113,25 @@ public class Report {
 	public void setReportType(String reportType) {
 		this.reportType = reportType;
 	}
+
+	public Report(int reportno, int userno, int ruserno, int boardno, int meetingno, String title, String content,
+			String status, String reportOption, Date writeDate, String reportType) {
+		super();
+		this.reportno = reportno;
+		this.userno = userno;
+		this.ruserno = ruserno;
+		this.boardno = boardno;
+		this.meetingno = meetingno;
+		this.title = title;
+		this.content = content;
+		this.status = status;
+		this.reportOption = reportOption;
+		this.writeDate = writeDate;
+		this.reportType = reportType;
+	}
+
+	
+	
 	
 	
 }

@@ -38,11 +38,15 @@ public class BoardController {
 	
 	//게시글 클릭시 자동으로 9개의 사진을 역순으로 가지고 오기 (1)
 		@GetMapping("/allFile")
-		public void boardAllFile(Model model, String curPage){
+		public void boardAllFile(
+				Model model, 
+				String curPage,
+				@RequestParam(name = "boardOptionno", required = false, defaultValue = "0") int boardOptionno
+				){
 			logger.info("board/allFile   [GET]");
 			logger.info("curPage : {}", curPage);
 			
-			Paging paging = boardService.getPage(curPage);
+			Paging paging = boardService.getPage(curPage, boardOptionno);
 			
 			logger.info("Paging {}", paging);
 			
@@ -76,7 +80,7 @@ public class BoardController {
 				chkreco = boardService.chkReco(boardno,userno);
 			}
 			map = boardService.showAllDetail(boardno);
-			logger.info("map : {}" , map);
+			logger.info("map의 정보는 뭘까용ㅇㅇㅇㅇㅇㅇ : {}" , map);
 			model.addAttribute("map", map);
 			model.addAttribute("chkReco",chkreco);
 		}
@@ -90,12 +94,12 @@ public class BoardController {
 			if(session.getAttribute("userno")==null) {
 				chkreco = 0;
 			}else {
-				int userno = (int)session.getAttribute("userno");
-				chkreco = boardService.chkReco(boardno,userno);
+				int abc = (int)session.getAttribute("userno");
+				chkreco = boardService.chkReco(boardno,abc);
 			}
+			
 			Map<String, Object> map  = new HashMap<>();
 			map = boardService.showAllDetail(boardno);
-			
 			logger.info("map값 : {}", map);
 			mav.addObject("chkReco",chkreco);
 			mav.addObject("map",map);
@@ -229,15 +233,15 @@ public class BoardController {
 		
 		//카테고리로 가면 해당 카테고리의 curPage 가장 마지막 글을 보여줌
 		@ResponseBody
-		@GetMapping("/cateFilepage")
-		public List<Map<String, Object>> cateFilepage(
+		@RequestMapping("/cateFilepage")
+		public Map<String, Object> cateFilepage(
 				Model model
 				, String curPage
 				, @RequestParam(name = "boardOptionno", required = false, defaultValue = "0") int boardOptionno){
 			logger.info("board/allFile11   [GET]");
 			logger.info("curPage11 : {}", curPage);
 			
-			Paging paging = boardService.getPage(curPage);
+			Paging paging = boardService.getPage(curPage, boardOptionno);
 			
 			logger.info("Paging11 {}", paging);
 			logger.info("해치웠나?1");
@@ -267,7 +271,11 @@ public class BoardController {
 			
 			map = boardService.showAllDetail(boardNo);
 
+			Map<String, Object> allMap = new HashMap<>();
 
+			allMap.put("list", list);
+			allMap.put("paging", paging);
+			
 			logger.info("map : {}" , map);
 
 			logger.info("map-stoaredName:{}", map.get("STORED_NAME"));
@@ -279,7 +287,7 @@ public class BoardController {
 			model.addAttribute("map", map);
 
 			
-			return list; 
+			return allMap; 
 		}
 		
 		@ResponseBody
@@ -321,8 +329,6 @@ public class BoardController {
 		    logger.info("카테고리 값: {}", category);
 		    logger.info("글 작성 내용: {}", boardWrite);
 		    logger.info("파일 첨부 값: {}", file);
-		    
-	
 		    
 		    
 		    boardService.writeBoard(category, boardWrite, file, session);
@@ -415,6 +421,16 @@ public class BoardController {
 
 		}
 		
-		
+		//AJAX를 통해 페이징 객체를 받아 페이지 네이션 페이지를 반환한다 
+		@RequestMapping("/getPaging")
+		public String getPagnation(
+				Paging paging
+				,Model model
+				) {
+			logger.info("페이징 객체: {}", paging);
+			model.addAttribute("paging", paging);
+			
+			return "/board/paging";
+		}
 		
 }

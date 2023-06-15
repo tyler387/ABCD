@@ -5,9 +5,10 @@
 
 
 <div class="meetinglist">
-<h1>모임 목록</h1>
+
+<h1><img src="https://www.greenlight.co.kr/pc/public/img/i_super_join.png">모임 목록</h1>
 <c:forEach var = "meeting" items="${meetinglist }">
-<div class="skyblue" onclick="location.href='/meeting/view?meetingno=${meeting.meetingno}'">
+<div class="meetingbox" onclick="location.href='/meeting/view?meetingno=${meeting.meetingno}'">
 
 <table>
 
@@ -26,10 +27,8 @@
 <td>${meeting.hit}</td>
 </tr>
 
-
 </table>
 </div>
-<br>
 </c:forEach>
 </div>
 </div>

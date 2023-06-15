@@ -1,0 +1,79 @@
+package com.kh.jaManChw.store.dao.face;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.kh.jaManChw.dto.Item;
+import com.kh.jaManChw.dto.ItemFile;
+import com.kh.jaManChw.dto.ItemOption;
+import com.kh.jaManChw.util.Paging;
+
+public interface StoreDao {
+
+	public List<Map<String, String>> selectAllShoppingbasketList(int userno);
+
+	public void updateSbUpdate(Map<String, String> map);
+
+	/**
+	 * 페이징 하기 
+	 * @param curPage
+	 * @return
+	 */
+	public int selectCurPage(int noCurPage);
+	
+	/**
+	 * goods 상품에 대한 리스트를 가지고 온다.
+	 * @param type - goods를 필터해주기 위한 타입
+	 * @param paging 
+	 * @return goods리스트를 반환한다.
+	 */
+	public List<Map<String, Object>> selectAllItem(@Param("type") String type,@Param("paging") Paging paging);
+
+	
+	/**
+	 * 
+	 * @param type - 카테고리 값
+	 * @param paging - 페이징
+	 * @return       - 해당 카테고리 값의 리스트를 반환한다.
+	 */
+	public List<Map<String, Object>> selectCateSectrion(@Param("type") String type, @Param("paging")Paging paging);
+
+	/**
+	 * 검색어에 따른 리스트를 가지고 온다.
+	 * @param searchData - 검색어
+	 * @param paging - 페이징
+	 * @return       검색어에 따른 리스트
+	 */
+	public List<Map<String, Object>> selectSerchItem(@Param("searchData") String searchData, @Param("paging") Paging paging);
+
+	
+	/**
+	 * itemno를 통해 itemOption테이블을 조회한다 
+	 * 
+	 * @param itemno - 판매 상품 번호
+	 * @return 상품 옵션의 상세 정보
+	 */
+	public List<ItemOption> selectItemOptionDetail(int itemno);
+
+	/**
+	 * itemno를 통해 item테이블을 조회한다 
+	 * 
+	 * @param itemno - 판매 상품 번호
+	 * @return 상품 파일의 상세 정보
+	 */
+	public List<ItemFile> selectItemFileDetail(int itemno);
+
+	/**
+	 * itemno를 통해 item테이블을 조회한다 
+	 * 
+	 * @param - 판매 상품 번호
+	 * @return 상품 파일의 상세 정보
+	 */
+	public Item selectItemDetail(int itemno);
+	
+	
+
+
+}

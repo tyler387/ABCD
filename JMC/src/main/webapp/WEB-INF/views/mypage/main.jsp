@@ -7,6 +7,7 @@
 
 <style type="text/css"> 
 
+
 .img{
 	display: flex;
 	align-items: center;

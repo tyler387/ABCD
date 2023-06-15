@@ -119,8 +119,9 @@ img{
   <li class="list1"><a href="#">모임</a>
   
   	<ul class="list2">
-  		<li class="list3"><a href="../mypage/meeting">모임신청 현황</a></li>
-  		<li class="list3"><a href="#">종료된 모임</a></li>
+  		<li class="list3"><a href="../mypage/mymeeting">등록한 모임</a></li>
+  		<li class="list3"><a href="../mypage/meeting">내 모임신청 현황</a></li>
+  		<li class="list3"><a href="../mypage/myapplication">나의 신청 현황</a></li>
   	</ul>
   </li>	
   <li class="list1"><a href="#">구매</a>

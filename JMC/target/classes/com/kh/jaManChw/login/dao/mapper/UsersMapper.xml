@@ -6,31 +6,30 @@
   
   <mapper namespace="com.kh.jaManChw.login.dao.face.UsersDao">
   
-      <select id="selectCntByUserIdPw" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
-        SELECT count(*)
-        FROM USERS
-        WHERE upper(USER_ID) = upper(#{userId}) AND USER_PW=#{userPw}
-     </select>
 
+	  <select id="selectCntByUserIdPw" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
+	  	SELECT count(*)
+	  	FROM USERS
+	  	WHERE upper(USER_ID) = upper(#{userId}) AND USER_PW=#{userPw}
+	  </select>
 	  
-    <select id="selectuserByUserId" resultType="com.kh.jaManChw.dto.Users" parameterType="string">
-      SELECT * 
-      FROM USERS 
-      WHERE upper(USER_ID)=upper(#{userId})
-    </select>
-
+	  <select id="selectuserByUserId" resultType="com.kh.jaManChw.dto.Users" parameterType="string">
+	  	SELECT * 
+	  	FROM USERS 
+	  	WHERE upper(USER_ID)=upper(#{userId})
+	  </select>
 	  
 	  <select id="selectroleByuseridpw" resultType="String" parameterType="com.kh.jaManChw.dto.Users">
-        SELECT ROLE
-        FROM USERS
-        WHERE upper(USER_ID)=upper(#{userId}) AND USER_PW=#{userPw}
-      </select>
+	  	SELECT ROLE
+	  	FROM USERS
+	  	WHERE upper(USER_ID)=upper(#{userId}) AND USER_PW=#{userPw}
+	  </select>
 	  
 	  <select id="selectCntByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
-        SELECT count(*)
-        FROM USERS
-        WHERE upper(USER_ID)=upper(#{userId})
-     </select>
+	  	SELECT count(*)
+	  	FROM USERS
+	  	WHERE upper(USER_ID)=upper(#{userId})
+	  </select>
 	  
 	  <insert id="insertUsers" parameterType="com.kh.jaManChw.dto.Users">
 	  	INSERT INTO USERS(USERNO,USER_ID,USER_PW,USER_NICK,USER_NAME,BIRTH,GENDER,EMAIL,PHONE,ADDR1,ADDR2,ADDR3,GRADE,WARN_COUNT,STATUS,ROLE,PLATFORM_OPTION,SOCIALNUM)

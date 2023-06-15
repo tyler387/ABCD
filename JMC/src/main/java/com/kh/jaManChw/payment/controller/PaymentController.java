@@ -100,8 +100,8 @@ public class PaymentController {
 	}
 	
 
-	@RequestMapping("/abc")
-	public String abc(HttpServletRequest request,
+	@RequestMapping("/paysuccess")
+	public String paysuccess(HttpServletRequest request,
 			@RequestParam Map<String, String> map, int[] basketno, String[] itemTitle) {
 		logger.info("맵 = {}", map);
 		logger.info("바스켓넘버 = {}", basketno);

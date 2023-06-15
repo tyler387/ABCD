@@ -54,7 +54,7 @@ var userno = ${userno }
 			, dataType: "html" 
 			, success: function( res ) {
 				console.log("AJAX 성공")
-				$("#result").html(res)
+				location.reload();
 				
 			}
 			, error: function() {
@@ -81,7 +81,7 @@ var userno = ${userno }
 <body>
 <h1>장바구니</h1>
 <hr>
-
+<div id="result">
 <form method="post" action="/payment/main">
 <table class="table table table-hover">
 <tr class="table-secondary">

@@ -3,12 +3,17 @@ package com.kh.jaManChw.meeting.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.kh.jaManChw.chat.dao.face.ChatDao;
 import com.kh.jaManChw.dto.Applicant;
+import com.kh.jaManChw.dto.ChatRoom;
+import com.kh.jaManChw.dto.ChatUser;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
@@ -17,6 +22,7 @@ import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.controller.MeetingController;
 import com.kh.jaManChw.meeting.dao.face.MeetingDao;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
+import com.kh.jaManChw.util.MeetingPaging;
 
 
 
@@ -26,6 +32,7 @@ public class MeetingServiceImpl implements MeetingService{
 private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 @Autowired MeetingDao meetingDao;	
+@Autowired ChatDao chatDao;
 	
 	@Override
 	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant, Applicant leader) {
@@ -50,6 +57,22 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		leader.setMeetingno(meetingno);
 		
 		meetingDao.insertMeetingUser(leader);
+		
+		int nextChatno = chatDao.selectNextChatno();
+		
+		ChatRoom chatRoom = new ChatRoom();
+		chatRoom.setChatno(nextChatno);
+		chatRoom.setChatname(meeting.getMname());
+		chatRoom.setMeetingno(meetingno);
+		chatRoom.setChatcloseday(meeting.getMeetingDate());
+		
+		chatDao.insertChatRoom(chatRoom);
+
+		ChatUser chatUser = new ChatUser();
+		chatUser.setChatno(nextChatno);
+		chatUser.setUserno(leader.getUserno());
+		chatDao.insertChatUser(chatUser);
+		
 	}
 	
 	@Override
@@ -66,7 +89,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	
 	@Override
-		public List<Meeting> getMeetinglistAll() {
+		public List<Meeting> getMeetinglistAll(Meeting meeting) {
+		
+		meetingDao.updatestatus(meeting);
 		
 		
 		return meetingDao.selectMeetinglistAll();
@@ -163,5 +188,90 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		}
 	
 	
+	@Override
+		public Preference detailPreference(Preference preference) {
+			return meetingDao.selectDetailPreference(preference);
+		}
+	
+	@Override
+		public int getMeetingappcount(Meeting meeting) {
+		
+			return meetingDao.selectMeetingappcount(meeting);
+		}
+
+	@Override
+	public List<Map<String, Object>> getApplicantInfo(HttpSession session) {
+		Meeting meeting = new Meeting();
+		meeting.setUserno((int)session.getAttribute("userno"));
+		List<Meeting> list = meetingDao.selectMyMeetingno(meeting);
+		
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+		return meetingDao.selectApllicantInfo(list);
+		}
+	}
+	@Override
+		public void updateApplicant(Applicant applicant) {
+
+			meetingDao.updateApplicantAgree(applicant);
+			logger.info("testetsetsetset{}",applicant.getAgree());
+			logger.info("equestaefseufssdfjsdfk{}",applicant.getAgree().equals("yes"));
+			if(applicant.getAgree().equals("yes")) {
+				chatDao.insertChatUserAgree(applicant);
+			}
+		}
+
+	@Override
+	public MeetingPaging getPaging(String curPage,HttpSession session) {
+		int noCurPage=0;
+	      if(curPage !=null && !"".equals(curPage)) {
+	         noCurPage = Integer.parseInt(curPage);
+	      }
+		Meeting meeting = new Meeting();
+		meeting.setUserno((int)session.getAttribute("userno"));
+		List<Meeting> list = meetingDao.selectMyMeetingno(meeting);
+		int totalCount;
+		logger.info("list!!@!@!@!@!@!@{}",list);
+		if(list.isEmpty()) {
+			logger.info("test");
+			totalCount = 1;
+		}else {
+		
+		totalCount = meetingDao.selectCnt(list);
+		}
+		logger.info("totalCount{}",totalCount);
+		if(totalCount==0) {
+			totalCount = 1;
+		}
+		MeetingPaging paging = new MeetingPaging(noCurPage, totalCount);
+		return paging;
+	}
+
+	@Override
+	public List<Map<String, Object>> getApplicantAll(HttpSession session, MeetingPaging paging) {
+		Meeting meeting = new Meeting();
+		meeting.setUserno((int)session.getAttribute("userno"));
+		
+		List<Meeting> list = meetingDao.selectMyMeetingno(meeting);
+		logger.info("isEmpty{}",list.isEmpty());
+		if(list.isEmpty()) {
+		return null;
+		}else {
+		return meetingDao.selectApplicantPaging(list,paging);
+		}
+	}
+	@Override
+	public boolean chkHeadCount(Applicant applicant) {
+		int chkCount = meetingDao.selectNotFull(applicant);
+		if(chkCount == 1) {
+			return true;
+		}else {
+			return false;
+			
+		}
+		
+	}
 	
 }

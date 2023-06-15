@@ -38,16 +38,17 @@ function backbuttonshow(){
 	position:fixed;
 	bottom : 10%;
 	left : 90%;
+	z-index : 9990;
 }
 .close{
 	position : relative;
 	display : none;
-	right : 330px;
+	right : 310px;
 	width : 370px;
 	height : 600px;
 	background-color: white;
 	border-radius: 30px;
-    box-shadow: 0px 0px 5px 3px gray;
+    box-shadow: 0px 0px 5px 3px #8D7B68;
 	
 	
 }
@@ -86,17 +87,20 @@ function backbuttonshow(){
 	cursor: pointer;
 }
 #chatbutton{
-    border: 0px solid white;
+ border: 3px solid white;
     border-radius: 50px;
     background-color: white;
-	width: 80px;
-	cursor: pointer;
+    width: 80px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 3px #8D7B68;
 }
 </style>
 </head>
 <body>
 <div id="buttonjsp">
-<img  src="../resources/image/chaticon.png" id="chatbutton">
+<div id="imgbutton">
+<img  src="../resources/image/chaticon4.png" id="chatbutton">
+</div>
 <!-- <button id="chatbutton">채팅방</button> -->
 <div class="close">
 <div id="headerButton">
@@ -107,7 +111,7 @@ function backbuttonshow(){
 <img src="../resources/image/close.png" id="closeButton">
 </div>
 </div>
-<iframe src="./chatroomlist" id="iframeChat">
+<iframe src="../chat/chatroomlist" id="iframeChat">
 </iframe>
 </div>
 </div>

@@ -81,8 +81,15 @@ button[type=button] {
 .kakaobtn img{
 	width: 400px;
 	height: 50px;
+	padding-bottom: 10px;
+	cursor: pointer;	
+}
+
+.naverbtn img{
+	width: 400px;
+	height: 50px;
 	padding-bottom: 300px;
-	cursor: pointer;
+	cursor: pointer;	
 }
 
 .input_box input:focus{
@@ -98,7 +105,6 @@ button[type=button] {
 	<div>
 		<h1 style="font-size: 68px;">Login</h1>
 	</div>
-	
 	<div class="input_box">
 	<div class="IDinput_box">
 		<label for="userId"></label>
@@ -138,10 +144,23 @@ button[type=button] {
             <img src="/resources/image/kakao_login_medium_wide.png">
         </a>
 	</div>
+	
+	<div class="naverbtn">
+ 		<a href="${apiURL}"><img src="/resources/image/btnG_완성형.png"/></a>
+	</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
+
+var input = document.getElementById("userPw");
+
+input.addEventListener("keyup", function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("loginBtn").click();
+  }
+});
 
 
 $('#userId').blur(function() {
@@ -165,72 +184,91 @@ $('#userPw').blur(function() {
 	}
 	return true;
 })
+
+$(document).ready(function() {
+	
+	let message = "[[${msg}]]";
+	
+    if (message != "") {
+        alert(message);
+    }
+})
 		
 
-	$(document).ready(function() {
+
+// 아이디 저장 - 쿠키 관련 스크립트
+$(document).ready(function() {
+	
+	if (${not empty loginAccess or loginAccess}) {
+		alert("로그인하지 않아 접근이 불가능합니다!")	
+	}
+	
+	//저장된 쿠키값을 id에 저장해준다. 쿠키값이 없으면 공백처리된다.
+	var userLoginId = getCookie('userLoginId');
+	$('#userId').val(userLoginId);
+	
+	//아이디 값이 쿠키에 저장되어 있으면 체크
+	if($('#userId').val() != ""){
 		
 		//저장된 쿠키값을 id에 저장해준다. 쿠키값이 없으면 공백처리된다.
 		var userLoginId = getCookie('userLoginId');
 		$('#userId').val(userLoginId);
 		
-		//아이디 값이 쿠키에 저장되어 있으면 체크
-		if($('#userId').val() != ""){
-			
-			// ID 저장하기를 체크 상태로 두기.
-			$("#saveId").attr("checked", true); 
-		}
+		// ID 저장하기를 체크 상태로 두기.
+		$("#saveId").attr("checked", true); 
+	}
+	
+	// 아이디 저장하기 -> 아이디가 저장되면 (해당 메소드 요소에 변화 생기면)
+	$('#saveId').change(function() {
 		
-		// 아이디 저장하기 -> 아이디가 저장되면 (해당 메소드 요소에 변화 생기면)
-		$('#saveId').change(function() {
-			
-			// #saveId에 체크가 되면
-			if($('#saveId').is(':checked')){
-				var userInputId = $("#userId").val();
-				//7일동안 쿠키 저장 setCookie(쿠키 설정할 이름,value,exdays)
-				 setCookie("userLoginId", userInputId, 30);
-			}else{ 
-				// ID 저장하기 체크 해제 시,
-	            deleteCookie("userLoginId");
-	        }
-		})
+		// #saveId에 체크가 되면
+		if($('#saveId').is(':checked')){
+			var userInputId = $("#userId").val();
+			//7일동안 쿠키 저장 setCookie(쿠키 설정할 이름,value,exdays)
+			 setCookie("userLoginId", userInputId, 30);
+		}else{ 
+			// ID 저장하기 체크 해제 시,
+            deleteCookie("userLoginId");
+        }
+	})
+	
+	// 아이디 저장하기가  눌린상태에서, ID를 입력한 경우
+     $("#userId").keyup(function(){
+     	if($("#saveId").is(":checked")){  //checked true
+            var userLoginId = $("#userId").val();
+            setCookie("userLoginId", userInputId, 30); // 30일 동안 쿠키 보관
+        }
+    });
 		
-		// 아이디 저장하기가  눌린상태에서, ID를 입력한 경우
-	     $("#userId").keyup(function(){
-	     	if($("#saveId").is(":checked")){  //checked true
-	            var userLoginId = $("#userId").val();
-	            setCookie("userLoginId", userInputId, 30); // 30일 동안 쿠키 보관
-	        }
-	    });
-		
-		// 쿠키 관련된 자바스크립트
-		function setCookie(cookieName, value, exdays){
-		    var exdate = new Date();
-		    exdate.setDate(exdate.getDate() + exdays);
-		    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-		    document.cookie = cookieName + "=" + cookieValue;
-		}
-		 
-		function deleteCookie(cookieName){
-		    var expireDate = new Date();
-		    expireDate.setDate(expireDate.getDate() - 1);
-		    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-		}
-		 
-		function getCookie(cookieName) {
-		    cookieName = cookieName + '=';
-		    var cookieData = document.cookie;
-		    var start = cookieData.indexOf(cookieName);
-		    var cookieValue = '';
-		    if(start != -1){
-		        start += cookieName.length;
-		        var end = cookieData.indexOf(';', start);
-		        if(end == -1)end = cookieData.length;
-		        cookieValue = cookieData.substring(start, end);
-		    }
-		    return unescape(cookieValue);
-		}
-		
-	});
+	// 쿠키 관련된 자바스크립트
+	function setCookie(cookieName, value, exdays){
+	    var exdate = new Date();
+	    exdate.setDate(exdate.getDate() + exdays);
+	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+	    document.cookie = cookieName + "=" + cookieValue;
+	}
+	 
+	function deleteCookie(cookieName){
+	    var expireDate = new Date();
+	    expireDate.setDate(expireDate.getDate() - 1);
+	    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+	}
+	 
+	function getCookie(cookieName) {
+	    cookieName = cookieName + '=';
+	    var cookieData = document.cookie;
+	    var start = cookieData.indexOf(cookieName);
+	    var cookieValue = '';
+	    if(start != -1){
+	        start += cookieName.length;
+	        var end = cookieData.indexOf(';', start);
+	        if(end == -1)end = cookieData.length;
+	        cookieValue = cookieData.substring(start, end);
+	    }
+	    return unescape(cookieValue);
+	}
+	
+});
 	
  	
  		
@@ -239,5 +277,8 @@ $('#userPw').blur(function() {
 
 </script>
 
+<c:remove var="adminAccess" scope="session"/>
+<c:remove var="loginAccess" scope="session"/>
+<c:remove var="statusAccess" scope="session"/>
 
 <c:import url="../layout/footer.jsp"/> 

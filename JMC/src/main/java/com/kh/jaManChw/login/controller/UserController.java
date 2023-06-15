@@ -1,5 +1,7 @@
 package com.kh.jaManChw.login.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.login.service.face.NaverService;
 import com.kh.jaManChw.login.service.face.UsersService;
+import com.kh.jaManChw.mypage.service.face.MypageService;
 
 @Controller
 public class UserController {
@@ -22,18 +27,27 @@ public class UserController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired UsersService usersService;
+	@Autowired MypageService mypageService;
+	@Autowired NaverService naverService;
 
 	@RequestMapping("/login/main")
 	public void mainPage() {}
 
 	// 로그인 페이지 이동
 	@GetMapping("/login/login")
-	public void loginPage() {}
+	public void loginPage(HttpSession session) {
+		//JSP에 정보를 입력하기에는 노출의 위험이 있기에 controller에서 선처리 후 보낸다
+		Map<String, String> naverMap = naverService.getNaverApiInfo();
+		
+		session.setAttribute("apiURL", naverMap.get("apiURL"));
+	}
 
 	// 로그인 - true or false
 	@PostMapping("/login/login")
 	public String userlogin(HttpSession session, Users users,Model model) {
 		logger.info("{}", users);
+		
+
 		
 		//탈퇴 유저 로그인 방지
 		boolean leaveUser = usersService.leaveLogin(users);
@@ -45,35 +59,52 @@ public class UserController {
 			return "redirect:/login/main";
 		}
 		
-		//블랙리스트 유저 로그인 방지
-		boolean blackList = usersService.blackLogin(users);
+		//block 유저 로그인 방지
+		boolean block = usersService.blackLogin(users);
 		
-		if(blackList) {
+		if(block) {
 			
 			// 세션 삭제
-			session.removeAttribute("userno");
+			session.invalidate();
 			return "redirect:/login/main";
 		}
 
 		// 로그인 인증
 		boolean isLogin = usersService.login(users);	
 		
+		//유저 정보 가져오기
 		Users info = usersService.getuserInfo(users);
+		logger.info("info:{}",info);
 		
+		ProfileFile profile = mypageService.fileInfo(info);
+	
+		if(profile !=null) {
+			session.setAttribute("profile", profile);
+			logger.info("profile:{}",profile);
+						
+		}
+		
+		logger.info("profile:{}",profile);
 
+		// info 모델에 저장
+		model.addAttribute("info",info);
+		
 		if (isLogin) {
+			
 			logger.info("userlogin() - 로그인 성공");
-			model.addAttribute("info",info);
+			
+			
 			
 			// 세션에 파라미터 값 저장
 			session.setAttribute("login", isLogin);
 			session.setAttribute("userno", info.getUserno());
-			session.setAttribute("userNick", info.getUserNick());
-			session.setAttribute("email", info.getEmail());
+			//session.setAttribute("userNick", info.getUserNick());
+			//session.setAttribute("email", info.getEmail());
 			session.setAttribute("userId", info.getUserId());
 			session.setAttribute("role", info.getRole());
 			session.setAttribute("social",info.getSocialNum());
 			session.setAttribute("status", info.getStatus());
+			
 			
 			logger.info("social:{}",info.getSocialNum());
 			logger.info("userno : {}",info.getUserno());
@@ -86,8 +117,9 @@ public class UserController {
 
 			// 세션 삭제
 			session.invalidate();
-
-			// 로그인실패시 로그인 페이지로 리다이렉트
+			
+			model.addAttribute("msg","아이디, 비밀번호를 다시 체크해주세요");
+			
 			return "/login/login";
 		} // if(isLogin)문 end		
 	} // userlogin() end

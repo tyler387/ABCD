@@ -28,8 +28,8 @@
 
 
 </table>
-<br>
 </div>
+<br>
 </c:forEach>
 </div>
 </div>

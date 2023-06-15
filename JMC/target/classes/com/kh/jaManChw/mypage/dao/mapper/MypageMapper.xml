@@ -28,7 +28,7 @@
 	  </insert>
 	  
 	  
-	  <select id="selectfileInfo" resultType="com.kh.jaManChw.dto.ProfileFile" parameterType="com.kh.jaManChw.dto.ProfileFile">
+	  <select id="selectfileInfo" parameterType="int" resultType="com.kh.jaManChw.dto.ProfileFile">
 	  	SELECT *
 	  	FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
@@ -44,6 +44,61 @@
 	  	FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
 	  </select>
+	  
+	   <select id="selectFileName" resultType="com.kh.jaManChw.dto.ProfileFile">
+	  	SELECT PROFILE_STORED_NAME
+	  	FROM PROFILE_FILE
+	  	WHERE USERNO=#{userno}
+	  </select>
+	  
+	 <select id="selectSearchList" resultType="com.kh.jaManChw.dto.Users">
+		  SELECT USERNO, USER_ID, USER_NICK, USER_NAME
+		  FROM USERS
+		  <choose>
+		    <when test="type == 'all'">
+		      WHERE (USER_ID LIKE '%' || #{keyword}|| '%' OR USER_NICK LIKE '%' || #{keyword} || '%')
+		    </when>
+		    <otherwise>
+		      WHERE ${type} LIKE '%' || #{keyword} || '%'
+		    </otherwise>
+		  </choose>
+	</select>
+	
+	<select id="selectFriendAll" resultType="map">
+		SELECT FL.*, U.USER_ID, USER_NICK, USER_NAME
+		FROM FRIEND_LIST FL, USERS U
+		WHERE  1 = 1
+		    AND fl.friend_userno = u.userno
+		    AND fl.userno = #{userno}
+		ORDER BY FRIEND_USERNO
+	</select>
+	
+	<select id="selectCntFriend" resultType="int" parameterType="com.kh.jaManChw.dto.FriendList">
+		SELECT COUNT(*)
+		FROM FRIEND_LIST FL, USERS U
+		WHERE (U.USERNO=#{userno}
+		    AND FL.FRIEND_USERNO=#{friendUserno})
+	</select>
+	
+	<insert id="insertFriend" parameterType="com.kh.jaManChw.dto.FriendList" >
+		INSERT INTO FRIEND_LIST (FRIEND_LISTNO,USERNO,FRIEND_USERNO,FRIEND_BLOCK)
+		VALUES (FRIEND_LIST_SEQ.NEXTVAL,#{userno},#{friendUserno},DEFAULT)
+	</insert>
+	
+	<select id="selectMyboard" parameterType="com.kh.jaManChw.dto.Users" resultType="map">
+		SELECT B.BOARDNO,B.BOARD_OPTIONNO,B.USERNO,B.CONTENT,B.STATUS,B.WRITE_DATE,B.UPDATE_DATE, USER_ID,STORED_NAME
+		FROM BOARD B, BOARD_FILE BF, USERS U
+		WHERE 1=1
+		    AND BF.BOARDNO = B.BOARDNO
+		    AND B.USERNO =U.USERNO
+		    AND U.USERNO=#{userno}
+		ORDER BY B.BOARDNO
+	</select>
+	
+	<delete id="deleteFriend" parameterType="com.kh.jaManChw.dto.FriendList">
+		DELETE FROM FRIEND_LIST
+	  	WHERE FRIEND_USERNO=#{friendUserno}	
+	</delete>
 
 
   </mapper>

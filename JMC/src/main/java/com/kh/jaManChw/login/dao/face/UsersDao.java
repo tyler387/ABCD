@@ -2,6 +2,7 @@ package com.kh.jaManChw.login.dao.face;
 
 import org.springframework.ui.Model;
 
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 
 public interface UsersDao {
@@ -79,6 +80,15 @@ public interface UsersDao {
 	 * @return 탈퇴유저
 	 */
 	public int selectLeaveUserByUserId(Users users);
+
+	/**
+	 * 네이버 소셜 로그인을 처음 한 경우 네이버에서 전달해준 정보를 통해 회원가입을 한다
+	 *  부족한 정보는 "naver"로 삽입하여 저장한다
+	 *  
+	 * @param userInfo - 네이버에서 전달한 개인정보를 담은 DTO
+	 */
+	public void insertNaverUser(Users userInfo);
+
 	
 
 

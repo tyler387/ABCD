@@ -98,7 +98,16 @@ ${list.commentno}.<div id="cContent${list.commentno}"> ${list.cContent }</div>
 
 //댓글 작성 관련 AJax
 $(function(){
+	
+	//댓글 작성 후 엔터키로 해도 작동 시키기
+	$("#commentWrite").keydown(function(e) {
+		if(e.keyCode == 13){
+			$("#btnWrite").click();
+		}
+	})
 
+	
+	//마우스로 클릭했을 때 작동 시키기
 	//"#btnWrite"태그가 클릭되었을 때의 함수!
 	$("#btnWrite").click(function(){
 		console.log("#ajax commentWrite click")

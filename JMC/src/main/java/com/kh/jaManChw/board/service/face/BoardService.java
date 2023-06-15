@@ -17,11 +17,12 @@ import com.kh.jaManChw.util.Paging;
 public interface BoardService {
 
 	/**
-	 * 페이징 하기 
-	 * @param curPage
+	 * 현재 페이지와 카테고리값에 대한 페이징 객체를 조회
+	 * @param curPage - 현재 페이지 
+	 * @param boardOptionno - 카테고리 값 
 	 * @return
 	 */
-	public Paging getPage(String curPage);
+	public Paging getPage(String curPage, int boardOptionno);
 
 	/**
 	 * 보드 파일에 있는 사진들을 모두 조회하고 가지고 온다.
@@ -98,6 +99,8 @@ public interface BoardService {
 	public List<Map<String, Object>> searchBoardFile(Board board, String searchData);
 
 	public int chkReco(int boardno, int userno);
+
+	
 
 
 

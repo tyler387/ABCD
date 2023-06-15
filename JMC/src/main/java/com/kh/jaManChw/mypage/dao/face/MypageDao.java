@@ -1,7 +1,13 @@
 package com.kh.jaManChw.mypage.dao.face;
 
+import java.util.List;
+import java.util.Map;
+
+import com.kh.jaManChw.dto.BoardFile;
+import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.util.Paging;
 
 public interface MypageDao {
 	
@@ -39,12 +45,7 @@ public interface MypageDao {
 	 */
 	public void updateProfile(Users users);
 
-	/**
-	 * 프로필 정보 조회
-	 * @param profileFile
-	 * @return
-	 */
-	public ProfileFile selectfileInfo(ProfileFile profileFile);
+
 
 	/**
 	 * 프로필 사진 삭제
@@ -58,6 +59,62 @@ public interface MypageDao {
 	 * @return
 	 */
 	public int selectCntProfile(ProfileFile profileFile);
+
+
+
+	public ProfileFile selectfileInfo(int i);
+
+	/**
+	 * userno로 파일 이름 조회하기
+	 * @param profileFile
+	 * @return
+	 */
+	public ProfileFile selectFileName(ProfileFile profileFile);
+
+	/**
+	 * keyword와 type값으로 유저 검색
+	 * @param map
+	 * @return
+	 */
+	public List<Users> selectSearchList(Map<String, String> map);
+
+	/**
+	 * 유저 넘버로 친구목록 조회
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String, Object>> selectFriendAll(Users users);
+
+	/**
+	 * userno로 친구 추가하기
+	 * @param friendList
+	 * @return
+	 */
+	public int insertFriend(FriendList friendList);
+
+	/**
+	 * 내가 올린 사진게시물 조회하기
+	 * @param users
+	 * @return 내가 올린 사진 파일
+	 */
+	public List<BoardFile> selectMyboard(Users users);
+
+	/**
+	 * 친구가 됐는지 행 조회
+	 * @param friendList
+	 * @return
+	 */
+	public int selectCntFriend(FriendList friendList);
+
+	/**
+	 * 친구삭제
+	 * @param userno
+	 */
+	public void deleteFriend(int userno);
+
+
+	
+
 
 
 

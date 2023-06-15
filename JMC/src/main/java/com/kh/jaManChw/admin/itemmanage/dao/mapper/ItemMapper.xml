@@ -35,8 +35,9 @@
 	<insert id="insertItemOption" parameterType="ItemOption">
 		INSERT INTO item_option(
 			item_optionno, 
-			itemno, option_content, 
-			option_count, 
+			itemno, 
+			option_content, 
+			option_count,
 			extra_charge
 			)
 		VALUES(

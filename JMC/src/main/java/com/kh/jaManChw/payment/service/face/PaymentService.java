@@ -22,6 +22,6 @@ public interface PaymentService {
 	 */
 	public List<Map<String, String>> getParamList(int[] basketno);
 
-	public JSONObject paymentInfo(HttpServletRequest request, Map<String, String> map, int[] basketno);
+	public JSONObject paymentInfo(HttpServletRequest request, Map<String, String> map, int[] basketno, String[] itemTitle);
 
 }

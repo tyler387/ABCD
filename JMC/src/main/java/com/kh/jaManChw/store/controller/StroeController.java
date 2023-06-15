@@ -49,7 +49,7 @@ public class StroeController {
 			@RequestParam Map<String, String> map, 
 			ModelAndView mav) {
 		
-			int userno = 256;
+			int userno = 1;
 	      logger.info("상품수량 갯수 {}", map);
 		
 	      stroeService.SbUpdate(map);

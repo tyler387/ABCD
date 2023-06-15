@@ -106,7 +106,7 @@ public class PaymentController {
 		logger.info("맵 = {}", map);
 		logger.info("바스켓넘버 = {}", basketno);
 		logger.info("itemTitle = {}", itemTitle);
-		JSONObject jsonObject = paymentService.paymentInfo(request, map, basketno);
+		JSONObject jsonObject = paymentService.paymentInfo(request, map, basketno, itemTitle);
 //		map.put("asdada", "asdasdasda");
 		
 		//paymentKey 이걸로 주문 취소 등 해야함

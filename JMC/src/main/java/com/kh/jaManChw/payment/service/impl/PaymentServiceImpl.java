@@ -43,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	
 	@Override
-	public JSONObject paymentInfo(HttpServletRequest request, Map<String, String> map, int[] basketno) {
+	public JSONObject paymentInfo(HttpServletRequest request, Map<String, String> map, int[] basketno, String[] itemTitle) {
 		
 		String orderId = request.getParameter("orderId");
 		String paymentKey = request.getParameter("paymentKey");
@@ -117,8 +117,12 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		int oncetrypayno = paymentDao.selectOncetrypayno();
 		
-//		Payment payment = new Payment();
+		int abc = itemTitle.length - 1;
+		String abb = itemTitle[0] +" 외 " + abc + "건";
 		
+		logger.info("상품명 :  {}", abb);
+		
+//		Payment payment = new Payment();
 //		payment.setOrderName((String)jsonObject.get("orderName"));
 //		paymentDao.insertPayment(payment);
 		

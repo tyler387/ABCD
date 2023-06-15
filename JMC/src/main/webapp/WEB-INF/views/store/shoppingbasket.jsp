@@ -82,7 +82,7 @@ $(function(){
 
 <div id="result">
 <form method="post" action="./shoppingbasket">
-<input type="hidden" value="256" name="userno">
+<input type="hidden" value="1" name="userno">
 
 <button>장바구니 보기</button>
 </form>

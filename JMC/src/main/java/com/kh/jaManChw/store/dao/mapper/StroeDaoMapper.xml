@@ -14,8 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 <!-- 	유저 번호 넣어야함	 -->
-	<select id="updateSbUpdate"  resultType="map">
-		UPDATE shopping_basket SET SB_ITEM_COUNT = ${sbItemCount} where basketno = ${basketno}
+	<select id="updateSbUpdate"  resultType="map" parameterType="map">
+		UPDATE shopping_basket SET SB_ITEM_COUNT = ${sbItemCount} where basketno = ${basketno} and userno = ${userno}
 	</select>
 
 	<select id="selectAllItem" parameterType="string" resultType="hashmap">

@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace ="com.kh.jaManChw.payment.dao.face.PaymentDao">
 
 	<insert id="insertPayment" parameterType="Payment" >
-		insert INTO buy_list values(BUY_LIST_SEQ.nextval, 23, 1, #{orderName}, 100, 'abc', sysdate)
+		insert INTO buy_list values(BUY_LIST_SEQ.nextval, 23, 1, #{orderName}, 100, 'abc', current_stamp)
 	</insert>
 
 	<select id="selectShoppingAllBasketList" resultType="hashmap" parameterType="int">

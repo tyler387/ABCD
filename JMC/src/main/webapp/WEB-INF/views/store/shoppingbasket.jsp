@@ -29,6 +29,7 @@ $(function() {
 <script type="text/javascript">
 
 $(function(){
+var userno = ${userno }
 	
 	$(".sbItemCount").blur(function () {
 		
@@ -38,7 +39,8 @@ $(function(){
 		
 	})
 	
-	$(".bkupdateBtn").click(function() {
+	$(document).on("click",  ".bkupdateBtn", function() {
+// 	$(".bkupdateBtn").click(function() {
 		var basketno = $(this).attr("data-basketno");
 		var sbItemCount = $(this).attr("data-sbItemcount");
 		
@@ -48,7 +50,7 @@ $(function(){
 		$.ajax({
 			type: "post"
 			, url: "./shoppingBasketList"
-			, data:  {basketno : basketno, sbItemCount: sbItemCount}
+			, data:  {basketno : basketno, sbItemCount: sbItemCount, userno : userno}
 			, dataType: "html" 
 			, success: function( res ) {
 				console.log("AJAX 성공")
@@ -79,13 +81,6 @@ $(function(){
 <body>
 <h1>장바구니</h1>
 <hr>
-
-<div id="result">
-<form method="post" action="./shoppingbasket">
-<input type="hidden" value="1" name="userno">
-
-<button>장바구니 보기</button>
-</form>
 
 <form method="post" action="/payment/main">
 <table class="table table table-hover">

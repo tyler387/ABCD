@@ -24,7 +24,7 @@ public interface AdminMainDao {
 	 * @param today
 	 * @return 회원리스트
 	 */
-	public List<Users> selectTodayJoinUsers(String today);
+	public List<Map<String, Object>> selectTodayJoinUsers(String today);
 
 	/**
 	 * 오늘 작성된 게시글의 수를 조회하여 반환한다

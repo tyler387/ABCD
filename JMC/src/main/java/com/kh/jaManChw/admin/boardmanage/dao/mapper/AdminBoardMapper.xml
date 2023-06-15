@@ -19,10 +19,15 @@
 	<select id="selectAdminBoardAllByBoardOption" resultType="map" parameterType="map">
 		SELECT * FROM(
 		    SELECT rownum rnum, B.* FROM(
-      			SELECT ab.*, u.user_id FROM admin_board ab, users u
+      			SELECT 
+      				ab.*
+      				, u.user_id 
+      			FROM 
+      				admin_board ab
+      				, users u
 		        WHERE ab_option = #{boardOption}
-		        AND ab.userno = u.userno
-		        AND ab.ab_status = 'undelete'
+			        AND ab.userno = u.userno
+			        AND ab.ab_status = 'undelete'
 		        ORDER BY admin_boardno DESC
 		    )B
 		)
@@ -31,27 +36,59 @@
 	</select>
 
 	<select id="selectCreateAdminBoardno" resultType="int">
-		SELECT admin_board_seq.nextVal FROM dual
+		SELECT 
+			admin_board_seq.nextVal 
+		FROM 
+			dual
 	</select>
 	
 	<insert id="insertAdminBoard" parameterType="AdminBoard">
-		INSERT INTO admin_board (admin_Boardno, userno, title, content, ab_option)
-		VALUES(#{adminBoardno}, #{userno}, #{title}, #{content}, #{abOption})
+		INSERT INTO admin_board (
+			admin_Boardno
+			, userno
+			, title
+			, content
+			, ab_option
+			)
+		VALUES(
+			#{adminBoardno}
+			, #{userno}
+			, #{title}
+			, #{content}
+			, #{abOption}
+			)
 	</insert>
 
 	<insert id="insertAdminBoardFile" parameterType="AdminBoardFile">
-		INSERT INTO admin_board_file(admin_fileno, admin_boardno, abf_origin_name, abf_stored_name, filesize)
-		VALUES(admin_board_file_seq.nextval, ${adminBoardno}, #{abf_origin_name}, #{abf_stored_name}, ${filesize})
+		INSERT INTO admin_board_file(
+			admin_fileno
+			, admin_boardno
+			, abf_origin_name
+			, abf_stored_name
+			, filesize
+			)
+		VALUES(
+			admin_board_file_seq.nextval
+			, ${adminBoardno}
+			, #{abf_origin_name}
+			, #{abf_stored_name}
+			, ${filesize}
+			)
 	</insert>
 	
 	<select id="selectAdminBoardDetail" resultType="AdminBoard" parameterType="AdminBoard">
-		SELECT * FROM admin_board
+		SELECT
+			 * 
+		FROM 
+			admin_board
 		WHERE 1 = 1
-		AND admin_boardno = ${adminBoardno}
+			AND admin_boardno = ${adminBoardno}
 	</select>
 	
 	<update id="updateAdminBoard" parameterType="AdminBoard">
-		UPDATE admin_board SET 
+		UPDATE 
+			admin_board 
+		SET 
 			title = #{title}, 
 			content = #{content},
 			last_update_date = current_timestamp
@@ -59,7 +96,9 @@
 	</update>
 	
 	<update id="updateAdminBoarStatus" parameterType="int">
-		UPDATE admin_board SET
+		UPDATE 
+			admin_board 
+		SET
 			ab_status = 'delete'
 		WHERE admin_boardno = #{admonBoardno}
 	</update>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="./main.jsp"/>
 
@@ -11,11 +12,11 @@
 	margin: 0 auto;
 }
 
-.container{
-	border: 1px solid black;
-	display: inline-block;
-	height: 310px;
-}
+.topcontainer{ 
+ 	border: 1px solid black; 
+ 	height: 310px; 
+} 
+
 #iine1st{
 	margin:0 auto;
 	width: 1250px;
@@ -23,20 +24,24 @@
 
 #line3nd{
 	margin:0 auto;
-	width: 1000px;
+	width: 1200px;
 }
 
 #joinUser, #writeBoard {
-	display : inline-block;
 	vertical-align: text-bottom;
+	margin: 0 auto;
 }
 
 #joinUser > div , #writeBoard > div {
 	border: 1px solid black;
 }
 
+#joinUser{
+	width: 1200px;
+}
+
 #writeBoard{
-	width: 730px;
+	width: 1200px;
 }
 #writeReport{
 	width: 1210px;
@@ -60,6 +65,7 @@ td, th{
 	width
 }
 
+
 #todayBoards > table {
 	width: 700px;
 }
@@ -69,7 +75,7 @@ td, th{
 	<div id="iine1st">
 		<div id="joinUser">
 		<h4>오늘 가입한 유저</h4>
-			<div class="container">
+			<div class="topcontainer">
 				<div id="cntUsers">
 					가입한 유저 수:<span>${allInfoMap.todayJoinUsersCnt}</span>
 				</div>
@@ -88,10 +94,10 @@ td, th{
 							<tr>
 							<td>${userList.USERNO}</td>
 							<td>${userList.USER_ID}</td>
-							<td>${userList.USER_PW}</td>
 							<td>${userList.USER_NAME}</td>
 							<td>${userList.GENDER}</td>
-							<td>${userList.JOIN_DATE}</td>
+							<fmt:parseDate value="${userList.JOIN_DATE}" pattern="yyyy-MM-dd HH:mm" var="logDate"/>
+							<td><fmt:formatDate value="${logDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -105,7 +111,7 @@ td, th{
 		
 		<div id="writeBoard">
 		<h4>오늘 작성된 게시글</h4>
-			<div class="container">
+			<div class="topcontainer">
 				<div id="cntBoards">
 					생성된 게시글 수:<span>${allInfoMap.todayWriteBoardsCnt}</span>
 				</div>
@@ -261,7 +267,7 @@ td, th{
 	<div id="line3nd">
 		<div id="makeMeeting">
 		<h4>오늘 생성된 모임</h4>
-			<div class="container">
+			<div class="topcontainer">
 				<div id="cntMeeting">
 					생성된 모임 수:<span>${allInfoMap.todayWriteMeetingsCnt}</span>
 				</div>

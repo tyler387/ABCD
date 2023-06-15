@@ -178,6 +178,7 @@
   color: #fff;
   border: none;
   font-size: 20px;
+  cursor:pointer;
 }
 
 .fc-event-title-container{

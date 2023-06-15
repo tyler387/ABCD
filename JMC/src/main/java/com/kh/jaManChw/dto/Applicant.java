@@ -2,6 +2,7 @@ package com.kh.jaManChw.dto;
 
 public class Applicant {
 
+	private int applicantno;
 	private int meetingno;
 	private int userno;
 	private String applicantContent;
@@ -10,8 +11,10 @@ public class Applicant {
 	
 	public Applicant() {}
 
-	public Applicant(int meetingno, int userno, String applicantContent, String agree, int trialNumber) {
+	public Applicant(int applicantno, int meetingno, int userno, String applicantContent, String agree,
+			int trialNumber) {
 		super();
+		this.applicantno = applicantno;
 		this.meetingno = meetingno;
 		this.userno = userno;
 		this.applicantContent = applicantContent;
@@ -21,8 +24,16 @@ public class Applicant {
 
 	@Override
 	public String toString() {
-		return "Applicant [meetingno=" + meetingno + ", userno=" + userno + ", applicantContent=" + applicantContent
-				+ ", agree=" + agree + ", trialNumber=" + trialNumber + "]";
+		return "Applicant [applicantno=" + applicantno + ", meetingno=" + meetingno + ", userno=" + userno
+				+ ", applicantContent=" + applicantContent + ", agree=" + agree + ", trialNumber=" + trialNumber + "]";
+	}
+
+	public int getApplicantno() {
+		return applicantno;
+	}
+
+	public void setApplicantno(int applicantno) {
+		this.applicantno = applicantno;
 	}
 
 	public int getMeetingno() {

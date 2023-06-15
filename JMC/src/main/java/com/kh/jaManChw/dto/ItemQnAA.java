@@ -8,25 +8,25 @@ public class ItemQnAA {
 	private int itemQnano;
 	private int userno;
 	private String iaContent;
+	private Date iaWriteDate;
 	private String iaStatus;
-	private Date writeDate;
 	
 	public ItemQnAA() {}
 
-	public ItemQnAA(int mgrItemno, int itemQnano, int userno, String iaContent, String iaStatus, Date writeDate) {
+	public ItemQnAA(int mgrItemno, int itemQnano, int userno, String iaContent, String iaStatus, Date iaWriteDate) {
 		super();
 		this.mgrItemno = mgrItemno;
 		this.itemQnano = itemQnano;
 		this.userno = userno;
 		this.iaContent = iaContent;
 		this.iaStatus = iaStatus;
-		this.writeDate = writeDate;
+		this.iaWriteDate = iaWriteDate;
 	}
 
 	@Override
 	public String toString() {
 		return "ItemQnAA [mgrItemno=" + mgrItemno + ", itemQnano=" + itemQnano + ", userno=" + userno + ", iaContent="
-				+ iaContent + ", iaStatus=" + iaStatus + ", writeDate=" + writeDate + "]";
+				+ iaContent + ", iaStatus=" + iaStatus + ", iaWriteDate=" + iaWriteDate + "]";
 	}
 
 	public int getMgrItemno() {
@@ -69,12 +69,12 @@ public class ItemQnAA {
 		this.iaStatus = iaStatus;
 	}
 
-	public Date getWriteDate() {
-		return writeDate;
+	public Date getIaWriteDate() {
+		return iaWriteDate;
 	}
 
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
+	public void setIaWriteDate(Date iaWriteDate) {
+		this.iaWriteDate = iaWriteDate;
 	}
 	
 }

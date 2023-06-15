@@ -8,8 +8,16 @@
 <title>JAMANCHU</title>
 <style type="text/css">
 
+@font-face {
+    font-family: '양진체';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
   background: #f5f5f5;
+  font-family: '양진체';
 }
 
 header{

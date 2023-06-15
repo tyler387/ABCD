@@ -18,6 +18,16 @@ function back(){
 
 </script>
 <style type="text/css">
+
+
+
+@font-face {
+    font-family: '양진체';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
 #listAll{
 	width: 100%;
 	height: 80px;
@@ -25,6 +35,7 @@ function back(){
 	text-align: center;
 	margin-top: 15px;
 	border-radius: 10px;
+	font-family: '양진체';
 	
 }
 #listAll:hover{

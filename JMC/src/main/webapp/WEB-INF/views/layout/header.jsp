@@ -23,7 +23,7 @@ header{
   display:flex; 
   justify-content: flex-end;
   align-items: center;
-/*   width: 100%; */
+  width: 100%; 
 }
 
 header a{
@@ -144,9 +144,7 @@ a {
 <c:if test="${role eq 'admin'}">
 	<a href="/admin/main">관리자페이지</a>
 </c:if>
-<%-- <c:if test="${empty login}"> --%>
-<!-- 	<a href="/login/login">로그인</a> -->
-<%-- </c:if>	 --%>
+
 <c:if test="${not empty login}">
 	<a href="/login/logout">로그아웃</a>
 	<a href="/mypage/main">마이페이지</a>
@@ -179,4 +177,3 @@ a {
     </ul>
 </div>
 </div>
-

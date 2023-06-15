@@ -276,4 +276,28 @@ where applicant.meetingno = #{meetingno} and leader = 'no' and applicant.agree =
 	
 </select>
 
+<select id="selectCntAll" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int">
+select count(*) from applicant where userno = #{userno}
+
+</select>
+<select id="selectMyApplicant" resultType="map">
+	select * from (
+	select rownum rnum,a.*,m.mname from applicant a join meeting m
+	on a.meetingno = m.meetingno where a.userno = #{applicant.userno}
+	
+	)WHERE leader = 'no' and 
+	rnum BETWEEN #{paging.startno} AND #{paging.endno}
+
+</select>
+<select id="selectMyMeetingList"  resultType="map">
+select  * from (
+select rownum rnum, m.*,c.cnt from meeting m join (select count(*) cnt, a.meetingno from applicant a  where agree = 'yes' group by a.meetingno) c
+on m.meetingno = c.meetingno) t
+where t.userno = #{meeting.userno} and rnum BETWEEN #{paging.startno} AND #{paging.endno}
+</select>
+
+<select id="selectMyMeetingCntAll" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int" >
+	select count(*) from meeting where userno = #{userno}
+
+</select>
 </mapper>

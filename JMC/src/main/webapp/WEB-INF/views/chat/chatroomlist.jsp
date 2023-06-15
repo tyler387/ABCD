@@ -75,12 +75,12 @@ body{
 <div class="chatList">
 <c:choose>
 <c:when test="${sessionScope.userId eq null}">
-<a>로그인 후 이용 가능!!</a>
+<a style="font-size : 30px;">로그인 후 이용 가능</a>
 </c:when>
 <c:when test="${sessionScope.userId ne null }">
 
 	<c:if test="${empty list }">
-		<a>모임 등록/신청 후 채팅방 이용</a>
+		<a style="font-size : 30px;">모임 등록/신청 후 채팅방 이용</a>
 	</c:if>
 	<c:if test="${not empty list }">
 <c:forEach var="list" items="${list }">

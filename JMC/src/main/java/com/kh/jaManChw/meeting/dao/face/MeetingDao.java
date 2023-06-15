@@ -121,6 +121,14 @@ public interface MeetingDao {
 	
 	
 
+	public List<Map<String, Object>> selectMyApplicant(@Param("applicant")Applicant applicant, @Param("paging")MeetingPaging paging);
+
+	public int selectCntAll(Meeting meeting);
+
+	public List<Map<String,Object>> selectMyMeetingList(@Param("meeting")Meeting meeting, @Param("paging")MeetingPaging paging);
+
+	public int selectMyMeetingCntAll(Meeting meeting);
+
 	
 	
 

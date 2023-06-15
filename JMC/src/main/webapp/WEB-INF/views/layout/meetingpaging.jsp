@@ -41,7 +41,7 @@
 <%-- ./list페이지로 이동할때 현재 페이지 정보를 쿼리스트링형태로 전송함 --%>
 <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
 	<c:if test="${paging.curPage eq i }">
-	<li><a href="./meeting?curPage=${i}" id="apaging" style="font-weight: 500;">${i}</a></li>
+	<li><a href="./meeting?curPage=${i}" id="apaging" style="font-weight: 700;">${i}</a></li>
 	</c:if>	
 	<c:if test="${paging.curPage ne i }">
 	<li><a href="./meeting?curPage=${i}" id="apaging">${i}</a></li>

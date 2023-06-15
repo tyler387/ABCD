@@ -90,6 +90,13 @@ public interface MeetingService {
 	
 	
 	
+	public MeetingPaging getappliPaging(String curPage, HttpSession session);
+
+	public List<Map<String, Object>> getMyapplicant(HttpSession session, MeetingPaging paging);
+
+	public List<Map<String,Object>> getMyMeeting(HttpSession session, MeetingPaging paging);
+
+	public MeetingPaging getMyMeetingCount(String curPage, HttpSession session);
 
 
 	

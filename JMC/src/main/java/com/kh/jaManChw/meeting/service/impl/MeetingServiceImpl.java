@@ -273,5 +273,46 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		}
 		
 	}
+	@Override
+		public MeetingPaging getappliPaging(String curPage, HttpSession session) {
+		int noCurPage=0;
+	      if(curPage !=null && !"".equals(curPage)) {
+	         noCurPage = Integer.parseInt(curPage);
+	      }
+		Meeting meeting = new Meeting();
+		meeting.setUserno((int)session.getAttribute("userno"));
+		int totalCount = meetingDao.selectCntAll(meeting);
+		MeetingPaging paging = new MeetingPaging(noCurPage, totalCount);
+		return paging;
+		}
+	@Override
+		public List<Map<String, Object>> getMyapplicant(HttpSession session, MeetingPaging paging) {
+		
+			Applicant applicant = new Applicant();
+			applicant.setUserno((int)session.getAttribute("userno"));
+			
+		return meetingDao.selectMyApplicant(applicant,paging);
+		}
 	
+	@Override
+		public MeetingPaging getMyMeetingCount(String curPage, HttpSession session) {
+		int noCurPage=0;
+	      if(curPage !=null && !"".equals(curPage)) {
+	         noCurPage = Integer.parseInt(curPage);
+	      }	
+			Meeting meeting = new Meeting();
+			meeting.setUserno((int)session.getAttribute("userno"));
+			int totalCount = meetingDao.selectMyMeetingCntAll(meeting);
+			MeetingPaging paging = new MeetingPaging(noCurPage, totalCount);
+		return paging;
+		}
+	
+		@Override
+		public List<Map<String,Object>> getMyMeeting(HttpSession session, MeetingPaging paging) {
+			
+			Meeting meeting = new Meeting();
+			meeting.setUserno((int)session.getAttribute("userno"));
+			
+			return meetingDao.selectMyMeetingList(meeting,paging);
+		}
 }

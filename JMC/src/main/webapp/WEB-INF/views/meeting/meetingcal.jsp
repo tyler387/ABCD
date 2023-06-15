@@ -120,8 +120,9 @@
 }
 
 .selectbtn{
-  height: 100px;
+  height: 70px;
   text-align: center;
+  margin-top: 30px;
 }
 
 .selectbtncal{
@@ -138,6 +139,7 @@
   border-radius: 20px;
   background: gray;	
   color: #fff;
+  cursor:pointer;
 }
 
 .fc-event-title-container{

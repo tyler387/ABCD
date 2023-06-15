@@ -1,4 +1,4 @@
-package com.kh.jaManChw.aop;
+package com.kh.jaManChw.util.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

@@ -116,25 +116,33 @@
 	</select>
 	
 	<select id="selectItemOptionDetail" resultType="ItemOption" parameterType="int">
-		SELECT *
-		FROM item_option
+		SELECT 
+			*
+		FROM 
+			item_option
 		WHERE itemno = #{itemno}
 	</select>
 	
 	<select id="selectItemFileDetail" resultType="ItemFile" parameterType="int">
-		SELECT *
-		FROM item_file
+		SELECT 
+			*
+		FROM 
+			item_file
 		WHERE itemno = #{itemno}
 	</select>
 	
 	<select id="selectItemDetail" resultType="Item" parameterType="int">
-		SELECT *
-		FROM item
+		SELECT
+			*
+		FROM 
+			item
 		WHERE itemno = #{itemno}
 	</select>
 	
 	<update id="updateItem" parameterType="Item">
-		UPDATE item SET
+		UPDATE 
+			item 
+		SET
 			item_title = #{itemTitle},
 			item_content = #{itemContent},
 			item_price = #{itemPrice},
@@ -145,11 +153,15 @@
 	</update>
 	
 	<delete id="deleteItemOption" parameterType="int">
-		DELETE item_option WHERE itemno = #{itemno}
+		DELETE 
+			item_option 
+		WHERE itemno = #{itemno}
 	</delete>
 	
 	<delete id="deleteItemFile" parameterType="int">
-		DELETE item_file WHERE itemno = #{itemno}
+		DELETE 
+			item_file 
+		WHERE itemno = #{itemno}
 	</delete>
 
 	<delete id="deleteItem" parameterType="int">

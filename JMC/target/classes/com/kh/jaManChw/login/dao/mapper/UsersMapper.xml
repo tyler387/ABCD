@@ -9,25 +9,25 @@
 	  <select id="selectCntByUserIdPw" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
 	  	SELECT count(*)
 	  	FROM USERS
-	  	WHERE USER_ID=#{userId} AND USER_PW=#{userPw}
+	  	WHERE upper(USER_ID) = upper(#{userId}) AND USER_PW=#{userPw}
 	  </select>
 	  
 	  <select id="selectuserByUserId" resultType="com.kh.jaManChw.dto.Users" parameterType="string">
 	  	SELECT * 
 	  	FROM USERS 
-	  	WHERE USER_ID=#{userId} 
+	  	WHERE upper(USER_ID)=upper(#{userId})
 	  </select>
 	  
 	  <select id="selectroleByuseridpw" resultType="String" parameterType="com.kh.jaManChw.dto.Users">
 	  	SELECT ROLE
 	  	FROM USERS
-	  	WHERE USER_ID=#{userId} AND USER_PW=#{userPw}
+	  	WHERE upper(USER_ID)=upper(#{userId}) AND USER_PW=#{userPw}
 	  </select>
 	  
 	  <select id="selectCntByUserId" resultType="int" parameterType="com.kh.jaManChw.dto.Users">
 	  	SELECT count(*)
 	  	FROM USERS
-	  	WHERE USER_ID=#{userId}
+	  	WHERE upper(USER_ID)=upper(#{userId})
 	  </select>
 	  
 	  <insert id="insertUsers" parameterType="com.kh.jaManChw.dto.Users">

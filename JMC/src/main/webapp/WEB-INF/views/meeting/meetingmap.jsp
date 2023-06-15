@@ -103,8 +103,9 @@
 }
 
 .selectbtn{
-  height: 100px;
+  height: 70px;
   text-align: center;
+  margin-top: 30px;
 }
 
 .selectbtncal{
@@ -113,7 +114,7 @@
   border-radius: 20px;
   background: gray;
   color: #fff;
-	
+  cursor:pointer;
 }
 .selectbtnmap{
   height: 50px;
@@ -156,7 +157,7 @@
 	
 	
 	<div class="selectbtn">
-		<button class="selectbtncal" onclick="location.href='/meeting/meetingcal'">캘린더</button>
+		<button class="selectbtncal"  onclick="location.href='/meeting/meetingcal'">캘린더</button>
 		<button class="selectbtnmap">지도</button><br>
 	</div>
 

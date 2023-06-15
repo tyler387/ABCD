@@ -33,7 +33,7 @@ import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ProfileFile;
-import com.kh.jaManChw.dto.ReportMeeting;
+import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
 
@@ -72,29 +72,16 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("{}!!!" , userno);
 		
-		//모임 작성 폼에 가져올 친구 목록 조회
-		List<Users> friendList = meetingService.selectFriendListAll(userno);
-		
-//		if (friendlist == null) {
-//			friendlist = null;
-//		}
-//		
-		logger.info("{}", friendList);
 	
-		//모델에 모임 작성 폼에 가져올 친구 목록 담아주기 
-		model.addAttribute("friendList", friendList);
-//		model.addAttribute("friendlist", friendlist);
-		
+
 		//로그인 세션 처리 
 		return url;
 	}
 	
 	//모임 작성 폼에 적은 모임 등록
 	@PostMapping("/meeting/form")
-	public String meetingWrite(Meeting meeting , Preference preference, HttpSession session
-	,@RequestParam( name = "friendlist") int friendlist) {
+	public String meetingWrite(Meeting meeting , Preference preference, HttpSession session) {
 			
-		logger.info("testest{}",friendlist);
 		logger.info("/meeting/form [POST]");
 		logger.info("check!!!!!!!!!!!{}" , preference);
 		//알림기능 추가개발예정 
@@ -108,10 +95,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		leader.setUserno(userno);
 		
-		//친구초대로 초대한 사람 정보 가져와서 넣어주기 
-		Applicant applicant = new Applicant();
-		
-		applicant.setUserno(friendlist);
 		
 		// preference값이 null인 경우에만 새로운 Prefrence 객체 생성 
 		if(preference == null) {
@@ -121,7 +104,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("!!!!!!!!!!!!1{}" , preference);
 		
 		//모임과 선호하는타입, 참가자와, 모임 등록자 등록 
-		meetingService.inputMeeting(meeting , preference, applicant, leader);
+		meetingService.inputMeeting(meeting , preference, leader);
 		
 		
 		logger.info("{}" , preference);
@@ -346,7 +329,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//선택한 모임 신고하기  
 	@PostMapping("/meeting/report")
-	public String reportInput( ReportMeeting reportMeeting, HttpSession session) {
+	public String reportInput( Report reportMeeting, HttpSession session) {
 		
 		logger.info("/meeting/report [POST]");
 		
@@ -413,8 +396,19 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		if(chk==1) {
 			
 		}else {
-		meetingService.inputJoinMeeting(applicant);
+		
+		//신청 버튼 여러번 못눌리게 딜레이 주기 
+		int delay = 3000;
+		
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+			
+		meetingService.inputJoinMeeting(applicant);
+		
+	}
 		
 		return "redirect: /meeting/view?meetingno="+ meetingno;
 	}

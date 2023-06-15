@@ -66,6 +66,7 @@ textarea{
 .meeting {
 	width: 600px;
 	margin: 0 auto;
+	font-family: '양진체';
 }
 
 .meetingform {
@@ -96,6 +97,7 @@ textarea{
 	color: #fff;
 	border: none;
 	font-size: 20px;
+	font-family: '양진체';
 }
 
 .btndiv {
@@ -146,14 +148,7 @@ h1 {
 	<div class="meeting-join"><label><b>모임 소개</b><textarea rows="10px" cols="50px" id="introduce" name="introduce" placeholder="모임 소개 및 주의 사항"></textarea></label></div>
 	
 	
-	<div class="meeting-join"><label><b>친구 목록</b></label>
-	<select name="friendlist">
-	<c:forEach var = "friendlist" items="${friendList }">
-	<option value="${ friendlist.userno}">${friendlist.userName }</option>
 	
-	</c:forEach>
-	</select>
-	</div>
 	</div>
    
 	</div>	

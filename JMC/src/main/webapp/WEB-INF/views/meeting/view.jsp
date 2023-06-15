@@ -12,6 +12,9 @@
 
 <style>
 
+th{
+	width: 118px;
+}
 
 .report{
   height: 30px;
@@ -61,6 +64,12 @@
   top: 80%;
   left: 100;
   border: none;
+  font-size: 20px;
+
+}
+
+.btn-open-popup2:hover{
+	background-color: #ffcca8;
 
 }
 
@@ -74,6 +83,8 @@
   position: absolute;
   top: 60%;
   left: 100;
+  border: none;
+  font-size: 20px;
 
 }
 
@@ -113,6 +124,7 @@
 	position: relative;
 	width: 500px;
 	height: 300px;
+	background-color: white;
 
 }
 
@@ -130,6 +142,8 @@
   margin-bottom: 50px;
   
   }
+  
+
 
 .nicknameboxapp{
   margin-bottom: 50px;
@@ -198,6 +212,13 @@
 	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 	transform: translateX(-50%) translateY(-50%);
 }
+
+.btn_join:hover {
+	
+	background-color: #ffcca8;
+	
+}
+
 </style>
 
 
@@ -209,9 +230,10 @@
 		<form id="report" action="/meeting/report" method="post">
 
 			<input type="hidden" name="meetingno" id="meetingno"value=${viewmeeting.meetingno }>
-			<div><label>게시글 제목<input type="text" readonly="readonly" name="rmTitle" id="rmTitle" value="${viewmeeting.mname }"></label></div>
-			<div><label>게시글 내용<input type="text" readonly="readonly" name="rmContent" id="rmContent" value="${viewmeeting.introduce }"></label></div>
-			<label>신고사항<textarea cols="50" rows="10" id="rmOption" name="rmOption"> </textarea></label>
+			<input type="hidden" name="ruserno" id="ruserno" value=${viewmeeting.userno }>
+			<div><label>게시글 제목<input type="text" readonly="readonly" name="title" id="title" value="${viewmeeting.mname }"></label></div>
+			<div><label>게시글 내용<input type="text" readonly="readonly" name="content" id="content" value="${viewmeeting.introduce }"></label></div>
+			<label>신고사항<textarea cols="50" rows="10" id="reportOption" name="reportOption"> </textarea></label>
 
 
 			<button class="btn_report" onclick="fn_insert()">신고하기</button>
@@ -344,6 +366,7 @@
 		</tr>
 
 		<tr>
+			<td><img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"></td>
 			<td>${applicantnickagree.userNick}</td>
 
 		</tr>
@@ -368,12 +391,10 @@
 	
 	<table>
 		<tr>
-			<th>프로필</th>
 			<th>닉네임</th>
 		</tr>
 
 		<tr>
-			<td><img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"></td>
 			<td>${applicantnicknocheck.userNick}</td>
 
 		</tr>

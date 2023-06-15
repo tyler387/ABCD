@@ -10,6 +10,7 @@ import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ProfileFile;
+import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.MeetingPaging;
@@ -18,7 +19,7 @@ public interface MeetingService {
 	
 	public List<Users> selectFriendListAll(int userno);
 
-	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant, Applicant leader);
+	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant);
 
 	public int getUserno(int userno);
 	
@@ -33,7 +34,8 @@ public interface MeetingService {
 
 	public List<Users> getUserNickNocheck(Meeting meeting);	
 	
-	public void inputReportMeeting(ReportMeeting reportMeeting);
+	public void inputReportMeeting(Report reportMeeting);
+	
 
 	public Applicant getMeetingApplicant(Applicant applicant);
 

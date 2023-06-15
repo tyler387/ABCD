@@ -9,6 +9,7 @@ import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ProfileFile;
+import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.MeetingPaging;
@@ -47,7 +48,7 @@ public interface MeetingDao {
 
 	public void updatehit(Meeting meeting);
 	
-	public void insertReportMeeting(ReportMeeting reportMeeting);
+	public void insertReportMeeting(Report reportMeeting);
 
 	public List<Users> selectUserNickAgree(Meeting meeting);
 	
@@ -62,8 +63,6 @@ public interface MeetingDao {
 	public void insertJoinMeeting(Applicant applicant);
 
 	public int selectUserNo(int userno);
-
-	public void insertMeetingFriend(Applicant applicant);
 
 	public void insertMeetingUser(Applicant leader);
 	

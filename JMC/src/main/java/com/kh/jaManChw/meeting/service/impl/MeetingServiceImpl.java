@@ -18,7 +18,7 @@ import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ProfileFile;
-import com.kh.jaManChw.dto.ReportMeeting;
+import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.controller.MeetingController;
 import com.kh.jaManChw.meeting.dao.face.MeetingDao;
@@ -36,7 +36,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 @Autowired ChatDao chatDao;
 	
 	@Override
-	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant, Applicant leader) {
+	public void inputMeeting(Meeting meeting, Preference preference, Applicant leader) {
 		
 		
 		int meetingno = meetingDao.selectMeetingno();
@@ -51,9 +51,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		meetingDao.insertPreference(preference);
 		
-		applicant.setMeetingno(meetingno);
-		
-		meetingDao.insertMeetingFriend( applicant);
 		
 		leader.setMeetingno(meetingno);
 		
@@ -109,7 +106,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	}
 	
 	@Override
-		public void inputReportMeeting(ReportMeeting reportMeeting) {		
+		public void inputReportMeeting(Report reportMeeting) {		
 		
 		meetingDao.insertReportMeeting(reportMeeting);
 		

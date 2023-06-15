@@ -68,8 +68,11 @@ public class StoreController {
 	
 	
 	//칵테일 용품 카테고리로 이동 후 goods 리스트를 DESC순으로 불러오기 + Paging
+	//+ goods관련 카테고리를 클릭하면 해당 카테고리 리스트만 불러온다.
 	@RequestMapping("/goodsAll")
-	public void goodsAll(String type, String curPage,  Model model) {
+	public void goodsAll(String type, String searchData, String curPage,  Model model) {
+		
+		logger.info("검색 데이터: {}", searchData);
 		
 		Paging paging = storeService.getPage(curPage);
 		
@@ -82,29 +85,35 @@ public class StoreController {
 		//세션으로 가지고 가는 것도 방법이나 잘 모르겠음
 		//logger.info("goods: {}", session.getAttribute("goodsAll"));
 
-		List<Map<String, Object>> list = storeService.showAllGoods(type, paging);
+		List<Map<String, Object>> list = storeService.showAllGoods(type, searchData, paging);
 		
-		//logger.info("용품의 리스트: {}", list);
+		logger.info("용품의 리스트: {}", list);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
+	}
+	
+	@RequestMapping("/itemDetail")
+	public void itemDetail(int itemno, String curPage, Model model) {
+		logger.info("아이템 번호! : {}", itemno);
+		
+		Map<String, Object> allItemDetail = storeService.showDetailItem(itemno);
+		
+		logger.info("상품에 대한 자세한 정보: {}", allItemDetail);
+		
+		model.addAttribute("curPage", curPage);
+		model.addAttribute("allItemDetail", allItemDetail);
+	}
+	
+	@RequestMapping("/storeBoard")
+	public void storeBoard() {
+		
+	}
+	
+	@RequestMapping("/boardWrite2")
+	public void boardWrite() {
+		
 	}
 
-	//카테고리별로 물건을 보여준다.
-	@RequestMapping("/itemDetailSection")
-	public void itemDetailSection(String type, String curPage, Model model) {
-		
-		logger.info("칵테일 카테고리 값 : {}", type);
-		
-		Paging paging = storeService.getPage(curPage);
-		
-		logger.info("curPage : {}", curPage);
-		
-		List<Map<String, Object>> list = storeService.showCateGoods(type, paging);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("paging", paging);
-		
-	}
 
 }

@@ -330,8 +330,6 @@ public class BoardController {
 		    logger.info("글 작성 내용: {}", boardWrite);
 		    logger.info("파일 첨부 값: {}", file);
 		    
-	
-		    
 		    
 		    boardService.writeBoard(category, boardWrite, file, session);
 		    

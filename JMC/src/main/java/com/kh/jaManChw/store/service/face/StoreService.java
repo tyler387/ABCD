@@ -13,37 +13,39 @@ public interface StoreService {
 	 * @param userno
 	 * @return 
 	 */
-	List<Map<String, String>> getShoppingbasketList(int userno);
+	public List<Map<String, String>> getShoppingbasketList(int userno);
 	
 	/**
 	 * 수정된 수량 숫자와 장바구니번호를 받아서 수정
 	 * 
 	 * @param map
 	 */
-	void SbUpdate(Map<String, String> map);
+	public void SbUpdate(Map<String, String> map);
 
 	/**
 	 * 페이징 하기 
 	 * @param curPage
 	 * @return
 	 */
-	Paging getPage(String curPage);
+	public Paging getPage(String curPage);
 
 	/**
 	 * goods 상품에 대한 리스트를 가지고 온다.
 	 * @param type - goods를 필터해주기 위한 타입
-	 * @param paging 
+	 * @param searchData 검색어 값
+	 * @param paging  페이징
 	 * @return goods리스트를 반환한다.
 	 */
-	List<Map<String, Object>> showAllGoods(String type, Paging paging);
+	public List<Map<String, Object>> showAllGoods(String type, String searchData, Paging paging);
 
 	/**
-	 * 
-	 * @param type - 카테고리 값
-	 * @param paging - 페이징
-	 * @return       - 해당 카테고리 값의 리스트를 반환한다.
+	 * 해당 아이템에 대한 상세 정보를 가지고 온다.
+	 * @param itemno - 아이템번호
+	 * @return 아이템에 대한 상세 정보들
 	 */
-	List<Map<String, Object>> showCateGoods(String type, Paging paging);
+	public Map<String, Object> showDetailItem(int itemno);
+
+
 
 
 }

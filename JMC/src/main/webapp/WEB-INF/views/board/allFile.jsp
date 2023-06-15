@@ -103,6 +103,7 @@ height: 300px;
 	display: grid;
     grid-template-columns: repeat(3, 250px);
     grid-template-rows: repeat(3, 250px);
+    cursor : pointer;
   
 }
 

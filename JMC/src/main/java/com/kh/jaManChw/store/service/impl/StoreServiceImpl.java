@@ -1,5 +1,6 @@
 package com.kh.jaManChw.store.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.jaManChw.dto.Item;
+import com.kh.jaManChw.dto.ItemFile;
+import com.kh.jaManChw.dto.ItemOption;
 import com.kh.jaManChw.store.dao.face.StoreDao;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
@@ -48,16 +52,43 @@ public class StoreServiceImpl implements StoreService {
 	}
 	
 	@Override
-	public List<Map<String, Object>> showAllGoods(String type, Paging paging ) {
+	public List<Map<String, Object>> showAllGoods(String type, String searchData, Paging paging ) {
 		
-		return storeDao.selectAllItem(type, paging);
+		//if (type.equals("goods") || type.equals("material"))
+		//검색어 없이 그냥 전체 조회를 했을 때
+		if (type.equals("goods")&& searchData == null) {	
+			
+			return storeDao.selectAllItem(type, paging);
+		}
+		//검색어가 존재했을 때 검색어로 조회하기
+		else if(type.equals("goods")&& searchData != null){
+			
+			return storeDao.selectSerchItem(searchData, paging);
+			
+		}
+		//goods키워드를 제외한 즉, 세부 카테고리 전체 보기
+		return storeDao.selectCateSectrion(type, paging);
 	}
 
 	@Override
-	public List<Map<String, Object>> showCateGoods(String type, Paging paging) {
+	public Map<String, Object> showDetailItem(int itemno) {
+
+		//각자에 맞는 List<DTO>를 맵으로 넣으라
 		
-		return storeDao.selectCateSectrion(type, paging);
+		List<ItemOption> itemOptionDetailList = storeDao.selectItemOptionDetail(itemno);
+		List<ItemFile> itemFileDetailList = storeDao.selectItemFileDetail(itemno);
+		Item itemDetail = storeDao.selectItemDetail(itemno);
+		
+		Map<String, Object> detailItem = new HashMap<>();
+		
+		detailItem.put("itemDetail", itemDetail);
+		detailItem.put("itemOptionDetailList", itemOptionDetailList);
+		detailItem.put("itemFileDetailList", itemFileDetailList);
+
+		return detailItem;
 	}
+
+
 
 	
 	

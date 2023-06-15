@@ -1,28 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <c:import url="../layout/header.jsp" />
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+
 <style type="text/css">
 
 
 
 #btn_group button {
-	border: 1px solid skyblue;
+	border: 1px solid #FFA500;
 	background-color: rgba(0, 0, 0, 0);
-	color: skyblue;
+	color: #FFA500;
 	padding: 5px;
 	font-size: 25px;
 }
 
 #btn_group button:hover {
 	color: white;
-	background-color: skyblue;
+	background-color: #FFA500;
 }
 
 #goodswhole {
@@ -38,6 +35,7 @@
 	border-bottom-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+
 }
 
 #goodsshaker {
@@ -77,6 +75,7 @@
 
 .item{
 text-align: center;
+cursor: pointer;
 }
 
 #btn_Search{
@@ -87,83 +86,36 @@ text-align: center;
 </style>
 
 <script type="text/javascript">
-//엔터로 해도 작동 시키기
-$("#searchWrite").keydown(function(e) {
-	if(e.keyCode == 13){
-		$("#btn_Search").click();
-	}
-})
-
-//마우스로 클릭시 작동 시키기
- $("#btn_Search").click(function() {
-	 console.log("돋보기 버튼 클릭 됨")
-	 var searchData = $('#searchWrite').val()
+$(function(){
 	
-	 if(searchData == ""){
-		 return;
-	 }
-	 console.log(boardOptionno)
 	
-	 if(boardOptionno == undefined){
-		 boardOptionno=0
-	 }
-	console.log("검색 값 :", searchData)
-	console.log(boardOptionno)
-	 
-	 $.ajax({
-	         type: "get"
-	         , url: "/board/search"
-		     , dataType: "json"
-	         , data: {searchData : searchData, boardOptionno: boardOptionno}
-			 ,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
-	         , success: function(res){
-	            console.log("AJAX 성공")
-	            console.log("res!!!!! :", res)
-	    		var putHtml = "" 
-	    			for(var i = 0; i <res.length; i ++){
+	//엔터로 해도 작동 시키기
+	$("#searchWrite").keydown(function(e) {
+		if(e.keyCode == 13){
+			$("#btn_Search").click();
+		}
+	})//엔터키 function종료
+	
+	//마우스로 클릭시 작동 시키기
+	$("#btn_Search").click(function() {
+			 console.log("돋보기 버튼 클릭 됨")
+			 var searchData = $('#searchWrite').val()
+			 console.log("검색 값 :", searchData)
+			// location.href="/store/itemSearch?type=" + searchData
+			 var searchUrl ="/store/goodsAll?type=goods&searchData=" + encodeURIComponent(searchData);
+			 window.location.href = searchUrl; 
+	})// $("#btn_Search").click(function()종료
 
-	    			putHtml += "<a data-boardno='"+res[i].BOARDNO+"'><img src='/boardFileUpload/"+res[i].STORED_NAME+"/' class='boardPic'></a>";
-	    			}
-	            
-	            $("#merchantList").html(putHtml);
-	    		$.ajax({
-	    			type: "get"
-	    			, url: "/board/firstPage"
-	    			,dataType : "json"
-	    			, data : {boardno: res[0].BOARDNO}
-	    			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
-	    			,success: function(res1){
-	    				console.log("AJAX 성공")
-	    				console.log("값 잘 가지고 옴????", res[0].BOARDNO);
-	    				$("#article > img").attr("src", "/boardFileUpload/"+res1.STORED_NAME)
-	    				//★여기서 추가로 글 값들까지 가지고 오게 해야 함.........
-	    				$("#article > #content22").html(res1.CONTENT)
-	    				$("#article[id='cocountSpan']").html(res1.COCOUNT)
-	    				$("#article[id='like']").html(res1.LIKECOUNT)
-	    				
-	    			
-	    			}
-	    			
-	    			 , error: function(){
-	    		            console.log("AJAX 실패")   
-	    		    }
-	    		})
-	    			           
-	            
-	            
-	         }//SUCCESS종료
-	         , error: function(){
-	            console.log("AJAX 실패")   
-	         }//ERROR종료
-	      })//AJAX 종료 		 
-
-
-
- })//function 종료
-
-
-
-
+	$(".item").click(function(){
+		console.log("상품 클릭 됨")
+		var itemno = $(this).attr("data-itemno");
+		console.log("아이템 번호", itemno)
+		var detailUrl = "/store/itemDetail?itemno=" +encodeURIComponent(itemno);
+		window.location.href = detailUrl; 
+	})			 
+				 
+				 
+})//function종료
 </script>
 
 <body>
@@ -180,9 +132,9 @@ $("#searchWrite").keydown(function(e) {
 <c:if test="${list.get(0).ITEM_TYPE eq '칵테일 재료' 
 				or list.get(0).ITEM_TYPE eq '칵테일 도구' 
 				or list.get(0).ITEM_TYPE eq '칵테일 잔'}">
-<a href="/store/itemDetailSection?type=goodsglass"><button id="goodsglass">칵테일 재료</button></a>
-<a href="/store/itemDetailSection?type=goodsshaker"><button id="goodsshaker">칵테일 도구</button></a>
-<a href="/store/itemDetailSection?type=goodsoffset"><button id="goodsoffset">칵테일 잔</button></a>
+<a href="/store/goodsAll?type=goodsglass"><button id="goodsglass">칵테일 재료</button></a>
+<a href="/store/goodsAll?type=goodsshaker"><button id="goodsshaker">칵테일 도구</button></a>
+<a href="/store/goodsAll?type=goodsoffset"><button id="goodsoffset">칵테일 잔</button></a>
 </c:if>
 
 
@@ -194,12 +146,12 @@ $("#searchWrite").keydown(function(e) {
 
 
 <div class="container">
-<c:forEach var="list" items="${list}">
-	<div class="item">
-	<img id="material" src='/itemfile/${list.I_STORED_NAME}/' width="250px" height="250px" >
+<c:forEach var="list" items="${list}" varStatus="data">
+	<div class="item" data-itemno="${list.ITEMNO}">
+	<img class="material" src='/itemfile/${list.I_STORED_NAME}/' width="250px" height="250px" >
 	      <div>${list.ITEM_TYPE }</div>
 	      <div>${list.ITEM_TITLE }</div>
-	      <div>${list.ITEM_PRICE }</div>
+	      <div>${list.ITEM_PRICE }원</div>
 	</div>
 </c:forEach>
 </div>

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -17,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.jaManChw.board.dao.face.BoardDao;
 import com.kh.jaManChw.board.service.face.BoardService;
@@ -51,6 +49,26 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardFile> showAllFile(Paging page) {
 		
+//		List<BoardFile> makeList = boardDao.selectAllFile(page); 
+		
+//		List<BoardFile> completeList = new ArrayList<>();
+//
+//		int boardFileboardno = 0;
+//		
+//		for(BoardFile bf: makeList) {
+//
+//			if(bf.getBoardno() == boardFileboardno) {
+//				continue;
+//			}
+//			
+//			boardFileboardno = bf.getBoardno();
+//			
+//			completeList.add(bf);
+//		}
+		
+		
+		
+//		return completeList;
 		return boardDao.selectAllFile(page);
 	}
 
@@ -135,18 +153,21 @@ public class BoardServiceImpl implements BoardService {
 			File dest = null;
 			String storedName = null;
 			
+
+			
+			
 			do {
 				//저장할 파일 이름 생성하기
 				storedName = UUID.randomUUID().toString().split("-")[0]+UUID.randomUUID().toString().split("-")[4]; //UUID 추가
 				logger.info("storedName : {}", storedName);
 				dest = new File(storedFolder, storedName);
-				
+	
 			}while(dest.exists());
 			try {
 				//업로드 된 파일을 boardFileUpload폴더에 저장하기
 				mfile.transferTo(dest);
 				
-				
+
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -155,7 +176,7 @@ public class BoardServiceImpl implements BoardService {
 			
 			//DB에 파일에 대한 정보를 삽입하는 메서드
 			BoardFile boardFile = new BoardFile();
-			
+	
 			//Q : 파일이 여러개면 어떻게 함...?List로 받아야 하는뎅...?
 			//A : for문으로 돌려서 진행함!
 			boardFile.setStoredName(storedName);
@@ -166,11 +187,12 @@ public class BoardServiceImpl implements BoardService {
 			logger.info("보드에 대한 정보 값: {}", board);
 			logger.info("보드 파일에 대한 정보 값: {}", boardFile);
 
-			boardDao.insertBoardFile(boardFile);
-		}	
 			board.setUserno((int)session.getAttribute("userno"));	
+			logger.info("보드에 대한 정보 값2222: {}", board);
 			boardDao.insertBoard(board);
-	
+			boardDao.insertBoardFile(boardFile);
+			
+		}	
 	}
 
 	@Override

@@ -72,5 +72,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
 	
 	</select>
+	
+	<select id="selectSerchItem" parameterType="map" resultType="map">
+		SELECT * FROM (
+			SELECT rownum rnum, I.* FROM(
+				SELECT I.*, IF.I_STORED_NAME
+				FROM ITEM I
+				JOIN ITEM_FILE IF
+				ON I.ITEMNO = IF.ITEMNO
+				WHERE 1=1
+                AND (upper(item_title) LIKE '%' || upper(#{searchData}) || '%'
+                or upper(item_content) LIKE '%' || upper(#{searchData}) || '%')
+				ORDER BY I.ITEMNO DESC
+			)I
+		)
+		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
+	
+	</select>
+	
+	<select id="selectItemOptionDetail" resultType="ItemOption" parameterType="int">
+		SELECT *
+		FROM item_option
+		WHERE itemno = #{itemno}
+	</select>
+	
+	<select id="selectItemFileDetail" resultType="ItemFile" parameterType="int">
+		SELECT *
+		FROM item_file
+		WHERE itemno = #{itemno}
+	</select>
+	
+	<select id="selectItemDetail" resultType="Item" parameterType="int">
+		SELECT *
+		FROM item
+		WHERE itemno = #{itemno}
+	</select>
 
 </mapper>

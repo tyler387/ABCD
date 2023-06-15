@@ -106,6 +106,9 @@ $(function () {
 
 </style>
 
+
+
+
 로그인 상태 : ${login} 
 로그인 세션 상태: ${loginAccess}
 관리자 세션 상태: ${adminAccess}
@@ -123,6 +126,7 @@ $(function () {
 <div class="content">
 모임을 통해 다양한 위스키를 접해보세요.
 </div>
+
 
 
 <div class="find-btn">

@@ -232,7 +232,7 @@ public class NaverServiceImpl implements NaverService {
             user.setEmail(email);
             user.setPhone(phone);
             user.setBirth(birth);
-            user.setAddr1("naver");
+            user.setAddr1(0);
             user.setAddr2("naver");
             user.setAddr3("naver");
             user.setGrade("naver");

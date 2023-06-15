@@ -94,11 +94,11 @@ img{
   <div class="left">
   
   <div class='profile'>
-	<c:if test="${profile.profileStoredName eq null}">
+	<c:if test="${empty profile}">
       <img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png"> 
     </c:if>
       			  
-	<c:if test="${profile.profileStoredName ne null}">
+	<c:if test="${not empty profile}">
 		<img src="<%=request.getContextPath()%>/userProfile/${profile.profileStoredName}"> 
 	</c:if>  
 	</div>

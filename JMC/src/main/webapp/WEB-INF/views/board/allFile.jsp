@@ -13,7 +13,7 @@
 }
 
 #content{
-	padding-top: 50px;
+	padding-top: 70px;
 }
 
 .boardPic{

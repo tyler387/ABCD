@@ -11,13 +11,13 @@
 		WHERE USERNO=#{userno}
 	  </update>
 	  
-	  <select id="selectUserInfo" resultType="com.kh.jaManChw.dto.Users" parameterType="com.kh.jaManChw.dto.Users">
+	  <select id="selectUserInfo" resultType="com.kh.jaManChw.dto.Users" parameterType="int">
 	  	SELECT * 
 	  	FROM USERS
 	  	WHERE USERNO=#{userno}
 	  </select>
 	  
-	  <update id="updateUserStatus"  parameterType="com.kh.jaManChw.dto.Users">
+	  <update id="updateUserStatus"  parameterType="int">
 		UPDATE USERS SET STATUS='leave'  		
 		WHERE USERNO=#{userno}
 	  </update>
@@ -29,7 +29,7 @@
 	  
 	  
 	  <select id="selectfileInfo" parameterType="int" resultType="com.kh.jaManChw.dto.ProfileFile">
-	  	SELECT *
+	  	SELECT PROFILE_STORED_NAME
 	  	FROM PROFILE_FILE
 	  	WHERE USERNO=#{userno}
 	  </select>
@@ -56,10 +56,10 @@
 		  FROM USERS
 		  <choose>
 		    <when test="type == 'all'">
-		      WHERE (USER_ID LIKE '%' || #{keyword}|| '%' OR USER_NICK LIKE '%' || #{keyword} || '%')
+		      WHERE (UPPER(USER_ID) LIKE '%' || UPPER(#{keyword})|| '%' OR UPPER(USER_NICK) LIKE '%' || UPPER(#{keyword}) || '%')
 		    </when>
 		    <otherwise>
-		      WHERE ${type} LIKE '%' || #{keyword} || '%'
+		      WHERE ${type} LIKE '%' || UPPER(#{keyword}) || '%'
 		    </otherwise>
 		  </choose>
 	</select>

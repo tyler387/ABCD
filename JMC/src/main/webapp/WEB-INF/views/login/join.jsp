@@ -247,6 +247,9 @@ input#email_checknumber{
 	<div class="box2">
 		<input type="date" name="birth" id="birth">
 	</div>	
+	<div class="msgbox">
+		<span id="birthMsg" style="font-size: 17px;"></span>	
+	</div>	
 	
 </div>
 
@@ -335,7 +338,7 @@ input#email_checknumber{
 	</div>
 </div>
 
-<a href="/login/login"><button class="btn" id="submit">JOIN</button></a>
+<button class="btn" id="submit">JOIN</button>
 
 
  </form>  
@@ -345,13 +348,31 @@ input#email_checknumber{
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
+// //이메일주소 가져오기
+// $("#userEmail1").blur(function(){ email();});
+
+// $("#userEmail2").change(function(){ email(); });
+
+
+
+
+// function email() {
+// const emailF = $("#userEmail1").val();
+// const middle = $("#middle").text();
+// const address = $("#userEmail2").val();
+
+// if(emailF != "" && address != "") {
+//    $("#email").val(emailF + middle + address);
+// }
+// };
+
 
 $(document).ready(function(){
 
 	// FIXME: 필요 스크립트 전개 영역
     let checkID = RegExp(/^[a-zA-Z0-9]{6,20}$/);
     let checkPW = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/);
-    let checkName = RegExp(/^[가-힣]|[A-Z]|[a-z]$/);
+    let checkName = RegExp(/^[가-힣]{2,}$/);
     let checkPhone = RegExp(/^\d{3}\d{3,4}\d{4}$/);        
     let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
          
@@ -370,14 +391,15 @@ $(document).ready(function(){
 			$('#id_msg').html("대소문자,숫자를 포함한 6자리~20자리로 입력해주세요.");
 			$('#id_msg').css('color','red');
 //             $("#userId").focus();                
-            return false;
+            return true;
             
-        }else if(checkID.test(userId)) {
-        	$('#id_msg').html("사용가능한 아이디입니다.")
-        	$('#id_msg').css("color", "#3f8ef7");                           
-//         	$("#userPw").focus();
-        	return true;
         }
+// 		else if(checkID.test(userId)) {
+//         	$('#id_msg').html("사용가능한 아이디입니다.")
+//         	$('#id_msg').css("color", "#3f8ef7");                           
+// //         	$("#userPw").focus();
+//         	return true;
+//         }
     }); //$('#userId').blur end
 		
 	$('#userPw').blur(function() {
@@ -465,6 +487,8 @@ $(document).ready(function(){
         	return true;
 		}
 	}) //$('#phone').blur ed
+	
+
 
 })//$(document).ready ed
 
@@ -480,6 +504,9 @@ $(document).ready(function(){
 	        if(res > 0){
 	        	$('#id_msg').html('이미 사용중인 아이디입니다.');
 	        	$('#id_msg').css('color','red');
+	        }else{
+	        	$('#id_msg').html("사용가능한 아이디입니다.")
+	         	$('#id_msg').css("color", "#3f8ef7");    
 	        }
 	    	console.log(res);
 	    },

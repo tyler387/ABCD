@@ -117,8 +117,9 @@ public class UserController {
 
 			// 세션 삭제
 			session.invalidate();
-
-			// 로그인실패시 로그인 페이지로 리다이렉트
+			
+			model.addAttribute("msg","아이디, 비밀번호를 다시 체크해주세요");
+			
 			return "/login/login";
 		} // if(isLogin)문 end		
 	} // userlogin() end

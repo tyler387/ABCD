@@ -18,4 +18,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE shopping_basket SET SB_ITEM_COUNT = ${sbItemCount} where basketno = ${basketno}
 	</select>
 
+	<select id="selectAllItem" parameterType="string" resultType="hashmap">
+		SELECT I.*, IF.I_STORED_NAME
+		FROM ITEM I
+		JOIN ITEM_FILE IF
+		ON I.ITEMNO = IF.ITEMNO
+		WHERE 1=1
+		<if test="type == goods">
+			AND item_type = '칵테일 재료'
+			OR item_type = '칵테일 도구'
+			OR item_type = '칵테일 잔'
+		</if>
+		<if test="type == materials">
+			AND item_type = '위스키 물품'
+			OR item_type = '와인 물품'
+		</if>
+		ORDER BY I.ITEMNO DESC
+	</select>
+	
+	<select id="selectCurPage" resultType="int">
+		SELECT count(*) cont FROM Item_File
+	</select>
+
 </mapper>

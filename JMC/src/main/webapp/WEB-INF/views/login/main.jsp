@@ -3,7 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../layout/header.jsp"/>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	if (${not empty adminAccess or adminAccess}) {
+		alert("관리자 권한이 존재하지 않아 접근할수 없습니다!")
+	}else if(${not empty statusAccess or statusAccess}){
+		alert("해당 아이디는 접근할수 없는 상태입니다, 관리자에게 문의 바랍니다")
+	}
+	
+})
+</script>
 
+<c:remove var="adminAccess" scope="session"/>
+<c:remove var="loginAccess" scope="session"/>
+<c:remove var="statusAccess" scope="session"/>
 
 <style type="text/css">
 
@@ -47,7 +61,9 @@
 </style>
 
 로그인 상태 : ${login} 
-
+로그인 세션 상태: ${loginAccess}
+관리자 세션 상태: ${adminAccess}
+상태 세션 상태: ${statusAccess}
 
 <div class="find-btn">
 
@@ -63,5 +79,8 @@
 
 </div>
 
+
+
 <c:import url="../layout/footer.jsp"/> 
 <c:import url="../chat/chatbutton.jsp"></c:import>
+

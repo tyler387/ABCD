@@ -24,6 +24,11 @@ public class AdminInterceptor implements HandlerInterceptor{
 		
 		logger.info("user_role: {}",session.getAttribute("role"));
 		
+		//기존에 잘못된 경로로 접근하여  세션에 접근에대한 값이 존재한다면
+		// 모두 삭제한다
+		session.setAttribute("loginAccess", false);
+		session.setAttribute("adminAccess", false);
+		session.setAttribute("statusAccess", false);
 		
 		//세션에 담겨 있는 로그인 정보를 통해 
 		// 1. 로그인이 되어 있는지 , 2. 관리자가 맞는지, 3. 아이디 상태가 활성화가 되어 있는 상태인지
@@ -31,6 +36,8 @@ public class AdminInterceptor implements HandlerInterceptor{
 			
 			//1. 비로그인 상태
 			logger.info("접속 불가 =>> 비로그인 상태입니다, 세션을 확인하세요");
+			
+			session.setAttribute("loginAccess", true);
 			
 			//1-1. 비로그인시 로그인 페이지로 이동시킨다
 			response.sendRedirect("/login/login");
@@ -43,6 +50,8 @@ public class AdminInterceptor implements HandlerInterceptor{
 			//2. 접속자가 관리자가 아닌 경우
 			logger.info("접속 불가 =>> 관리자가 아닙니다, 아이디 권한을 확인하세요");
 			
+			session.setAttribute("adminAccess", true);
+			
 			//2-1. 관리자가 아닌 경우 유저 메인페이지로 이동시킨다
 			response.sendRedirect("/login/main");
 			
@@ -53,6 +62,8 @@ public class AdminInterceptor implements HandlerInterceptor{
 			
 			//3. 접속 상태가 "active"가 아닌 경우
 			logger.info("접속 불가 =>> 아이디가 활성화 상태가 아닙니다, 아이디 상태를 확인하세요");
+			
+			session.setAttribute("statusAccess", true);
 			
 			//3-1. 접속 상태가 "active"가 아닌 경우, 메인 페이지로 이동시킨다.
 			response.sendRedirect("/login/main");

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,5 +107,9 @@ a:visited {
 	<p><a href="<%=request.getContextPath() %>/admin/main/boardCategory?boardOption=event">이벤트 관리</a><br></p>
 	<p><a href="<%=request.getContextPath() %>/admin/board/qna/list">Q & A 관리</a><br><br></p>
 	
+	<div>
+	<a href="<%=request.getContextPath() %>/login/main">메인 페이지로</a>
 	</div>
-<div class="right">
+	</div>
+	
+	<div class="right">

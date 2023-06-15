@@ -1,6 +1,7 @@
 package com.kh.jaManChw.mypage.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,26 +11,38 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
 import org.springframework.web.bind.annotation.RequestParam;
+
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.kh.jaManChw.board.service.face.BoardService;
+import com.kh.jaManChw.dto.BoardFile;
+import com.kh.jaManChw.dto.FriendList;
+
 import com.kh.jaManChw.dto.Applicant;
+
 import com.kh.jaManChw.dto.Meeting;
+
+
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
 import com.kh.jaManChw.mypage.service.face.MypageService;
+import com.kh.jaManChw.util.MeetingPaging;
 
 
 @Controller
+@RequestMapping("/mypage")
 public class MypageController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -39,36 +52,44 @@ public class MypageController {
 	
 	//서블릿 컨텍스트 객체
 	@Autowired ServletContext context;
+	@Autowired BoardService boardService;
 	
 	// 마이페이지 메인
-	@GetMapping("/mypage/main")
+	@GetMapping("/main")
 	public void mypageMain(Users users,Model model,HttpSession session,ProfileFile profileFile) {
 		
-		//세션에 저장된 정보 가져오기
-		ProfileFile profile = new ProfileFile();
-		
-		profile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
-		profile.setProfileno((int)session.getAttribute("userno"));
-		
-		
+		// 세션에서 userno 가져오기
 		int userno = (Integer)session.getAttribute("userno");
 		users.setUserno(userno);
+		logger.info("users main:{}",users);
 		
-		logger.info("profileFile : {}", profileFile);
-		model.addAttribute("profile", profileFile);
+		
+		//담아온 세션으로 파일 저장된 이름 불러오기
+		ProfileFile profile = mypageService.fileInfo(users);
+		//ProfileFile profile= mypageService.getFileName(profileFile);
+		
+	
+		//파일 정보 모델에 넣기 가져오기	
+		model.addAttribute("profile", profile);
+		logger.info("profile 수정:{}",profile);
+
+		// profile 모델값에 담기
+		model.addAttribute("profile", profile);
+		logger.info("profile:{}",profile);
 		
 		//유저 정보 가져오기 - 메인에서 로그인한 유저 정보 조회
 		Users loginInfo = mypageService.getloginInfo(users);
-		model.addAttribute("loginInfo", loginInfo);
+		model.addAttribute("loginInfo", loginInfo);	
+		logger.info("loginInfo main : {}", loginInfo);	
 		
-		logger.info("users :{}",users);
-		logger.info("loginInfo : {}", loginInfo);	
-		logger.info("profileFile : {}", profileFile);	
-		
+		//친구목록 불러오기
+		List<Map<String, Object>> list = mypageService.getFriendList(users);
+		model.addAttribute("list", list);
+		logger.info("list-친구목록:{}",list);
 	}
 
 	// 마이페이지 정보수정
-	@GetMapping("/mypage/userInfo")
+	@GetMapping("/userInfo")
 	public void userInfoPage(Model model,Users users,HttpSession session) {
 		
 		//세션에 저장된 userno 가져오기
@@ -76,12 +97,12 @@ public class MypageController {
 		users.setUserno(userno);
 		
 		Users loginInfo = mypageService.getloginInfo(users);
-		model.addAttribute("loginInfo", loginInfo);
+		model.addAttribute("loginInfo userInfo", loginInfo);
 		
 	}
 	
 	// 유저 정보 수정
-	@PostMapping("/mypage/userInfo")
+	@PostMapping("/userInfo")
 	public String changeInfo(Users users,HttpSession session) {
 		
 		int res = mypageService.changeInfo(users);
@@ -100,11 +121,11 @@ public class MypageController {
 	
 //-----------------------------------------------------------
 	// 회원탈퇴 페이지
-	@GetMapping("/mypage/delete")
+	@GetMapping("/delete")
 	public void deletePage() {}
 	
 	// 회원탈퇴
-	@PostMapping("/mypage/delete")
+	@PostMapping("/delete")
 	public String deleteUser(Users users,HttpSession session) {
 		int res = mypageService.deleteUser(users);
 		
@@ -119,48 +140,44 @@ public class MypageController {
 	}
 //-----------------------------------------------------------
 	// 프로필사진수정 페이지
-	@GetMapping("/mypage/profile")
-	public void profilePage(HttpSession session,ProfileFile profileFile,Model model) {
+	@GetMapping("/profile")
+	public void profilePage(HttpSession session,ProfileFile profileFile,Model model,Users users) {
 		
+		//세션에 저장된 userno 가져오기
+		int userno = (Integer)session.getAttribute("userno");
+		users.setUserno(userno);
+		logger.info("users 수정:{}",users);
 		
-		//mypageService.getSession(session,profileFile,model);
+		//담아온 세션으로 파일 저장된 이름 불러오기
+		ProfileFile profile = mypageService.fileInfo(users);
+		//ProfileFile profile= mypageService.getFileName(profileFile);
 		
-		// 세션에 담긴 정보 가져오기
-		profileFile.setUserno((Integer)session.getAttribute("userno"));
-		profileFile.setProfileStoredName((String)session.getAttribute("profileStoredName"));
 	
-		Users info = new Users();
-		info.setUserno((int)session.getAttribute("userno"));
-	
-		//파일 정보 가져오기
-		ProfileFile profile = mypageService.fileInfo(info);
-	
+		//파일 정보 모델에 넣기 가져오기	
 		model.addAttribute("profile", profile);
-		logger.info("profile:{}",profile);
+		logger.info("profile 수정:{}",profile);
 
 				
 	}
 	
 	// 프로필사진 수정
-	@PostMapping("/mypage/profile")
+	@PostMapping("/profile")
 	public String uploadProfile(MultipartFile file, HttpSession session,ProfileFile profileFile,Model model,Users users) {
 
 		logger.info("file:{}",file);
 
 		// userno 세션에서 가져오기
 		profileFile.setUserno((Integer)session.getAttribute("userno"));
-		session.setAttribute("profile", profileFile.getProfileStoredName());
-		
 		
 		// 파일이 있으면 -> 업로드할 파일이 있으면
 		if(!file.isEmpty()) {	
 			
 			// 프로필 저장
-			mypageService.profileSave(file,session,profileFile);
+			ProfileFile profile = mypageService.profileSave(file, profileFile);
 			
 			// 파일의 저장이름 세션에 저장
-			String profileStoredName = (String)session.getAttribute("profileStroedName");
-			profileFile.setProfileStoredName(profileStoredName);
+			session.setAttribute("profile", profile.getProfileStoredName());
+			
 		}
 		
 		return "redirect:/mypage/main";
@@ -170,28 +187,127 @@ public class MypageController {
 
 //-----------------------------------------------------------	
 	//유저 검색 기능	
-//	@GetMapping("/mypage/friendList")
-//	@ResponseBody
-//	public List<Users> getuserSearchList(@RequestParam("type") String type,
-//								@RequestParam("keyword") String keyword,Model model) throws Exception {
-//									
-//		Users users = new Users();
-//		users.setType(type);
-//		users.setKeyword(keyword);
-//
-//		return mypageService.getSearchLists(users);
-//	}
+	@GetMapping("/search")
+	public String getuserSearchList(String type, String keyword,Model model){
+		
+		logger.info("type: {}, keyword: {}", type, keyword);
+		
+		// 유저 list 모델값에 저장 - 키워드로 찾을 수 있는 값들
+		List<Users> list = mypageService.getSearchLists(type,keyword);	
+		model.addAttribute("list",list);
+
+		logger.info("userList:{}",list);
+		return "/mypage/friendfind";
+	}
+	
+	// 친구 추가
+	@GetMapping("/friendfind")
+	public void friendfindPage(FriendList friendList,HttpSession session) {}
+	
+	// 친구 추가
+	@PostMapping("/friendfind")
+	@ResponseBody
+	public Map<String, Object> friendfind(String userno,HttpSession session) {
+		
+		//세션에 저장된 userno 가져오기
+		int myno = (Integer)session.getAttribute("userno");
+		
+		FriendList friendList = new FriendList();
+		friendList.setUserno(myno);
+		friendList.setFriendUserno(Integer.parseInt(userno));
+		
+		logger.info("friendList:{}",friendList);
+		
+		mypageService.friendAdd(friendList);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		returnMap.put("result", true);
+		
+		return returnMap; 
+	}
+	
 
 	//---------------------------------------------
 	//마이페이지 모임
-	@GetMapping("/mypage/meeting")
-	public void myMeeting(HttpSession session, Model model) {
+	@GetMapping("/meeting")
+	public String myMeeting(HttpSession session, Model model,String curPage) {
+		if(session.getAttribute("userno")==null) {
+			return "redirect:/login/login";
+		}
 		
-		List<Applicant> list = meetingService.getMyMeetingApplicatn(session);
+		MeetingPaging paging = meetingService.getPaging(curPage,session);
+		List<Map<String,Object>>map2 = meetingService.getApplicantAll(session, paging);
+
+		model.addAttribute("map",map2);
+		model.addAttribute("paging",paging);
+		return "/mypage/meeting";
+	}
+	@GetMapping("/agree")
+	public String agree(Applicant applicant,Model model) {
 		
-		logger.info("testsetset{}",list);
-		model.addAttribute("list",list);
+		if(applicant.getAgree().equals("yes")) {
+			//정원 수 초과시 true
+			boolean countChk = meetingService.chkHeadCount(applicant);
+			if(countChk) {
+				applicant.setAgree("no");
+				
+			}
+		}
+		meetingService.updateApplicant(applicant);
+		return "redirect:/mypage/meeting";
+	}
+	// 친구목록
+	@GetMapping("/friendList")
+	public void friendPage(Model model,HttpSession session,Users users) {
+		
+		//세션에 저장된 userno 가져오기
+		int userno = (Integer)session.getAttribute("userno");
+		logger.info("userno - 친구목록 :{} ",userno);
+		users.setUserno(userno);
+		
+		List<Map<String, Object>> list = mypageService.getFriendList(users);
+		model.addAttribute("list", list);
+		logger.info("list-친구목록:{}",list);
+		
 	}
 
+	@PostMapping("/friendList")
+	public void friendRemove(int userno) {
+		logger.info("userno :{}",userno);
+		mypageService.removeFriend(userno);
+		
+	}
+//-------------------------------------------------------------------
+	//내가 쓴 게시글 조회
+	@GetMapping("/myBoard")
+	public void myboardPage(Model model,HttpSession session,Users users ) {
 
+		//세션에 저장된 userno 가져오기
+		users.setUserno((Integer)session.getAttribute("userno"));
+		
+		//내가 올린 사진게시물 가져오기
+		List<BoardFile> list = mypageService.getMyboardFile(users);
+
+		// view로 가져갈 list값 모델에 담기
+		model.addAttribute("list", list);
+
+		
+	}
+	
+	//게시글 상세 페이지
+	@GetMapping("/myBoarddetail")
+	public void myboarddetailPage(Model model,HttpSession session,Users users) {
+		
+		//세션에 저장된 userno 가져오기
+		users.setUserno((Integer)session.getAttribute("userno"));
+		
+		//내가 올린 사진게시물 가져오기
+		List<BoardFile> list = mypageService.getMyboardFile(users);
+
+		// view로 가져갈 list값 모델에 담기
+		model.addAttribute("list", list);
+	}
+
+	
 }

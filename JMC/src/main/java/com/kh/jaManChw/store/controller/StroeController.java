@@ -3,6 +3,8 @@ package com.kh.jaManChw.store.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.kh.jaManChw.store.service.face.StroeService;
+import com.kh.jaManChw.util.Paging;
 
 @RequestMapping("/store")
 @Controller
@@ -61,5 +63,32 @@ public class StroeController {
 	      
 	      return mav;
 	}
+	
+	
+	
+	//칵테일 용품 카테고리로 이동 후 goods 리스트를 DESC순으로 불러오기
+	@RequestMapping("/goodsAll")
+	public void goodsAll(String type, Model model, String curPage) {
+		
+		Paging paging = stroeService.getPage(curPage);
+		
+		logger.info("Paging {}", paging);
+		
+		logger.info("칵테일 용품 카테고리 메인");
+		logger.info("칵테일 용품 카테고리 메인 {}", type);
+		
+		//세션으로 가지고 가는 것도 방법이나 잘 모르겠음
+		//logger.info("goods: {}", session.getAttribute("goodsAll"));
+
+		List<Map<String, Object>> list = stroeService.showAllGoods(type);
+		
+		//logger.info("용품의 리스트: {}", list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		
+		
+	}
+
 
 }

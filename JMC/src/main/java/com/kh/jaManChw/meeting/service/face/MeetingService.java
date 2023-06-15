@@ -12,6 +12,7 @@ import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.util.MeetingPaging;
 
 public interface MeetingService {
 	
@@ -57,7 +58,16 @@ public interface MeetingService {
 	public int getMeetingappcount(Meeting meeting);
 	
 	
-	public List<Applicant> getMyMeetingApplicatn(HttpSession session);
+
+	public List<Map<String, Object>> getApplicantInfo(HttpSession session);
+
+	public void updateApplicant(Applicant applicant);
+
+	public MeetingPaging getPaging(String curPage, HttpSession session);
+
+	public List<Map<String, Object>> getApplicantAll(HttpSession session, MeetingPaging paging);
+
+	public boolean chkHeadCount(Applicant applicant);
 
 	public int applicantCount(Applicant applicant);
 

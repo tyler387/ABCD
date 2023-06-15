@@ -16,7 +16,7 @@ public class Users {
 	private String gender;
 	private String email;
 	private String phone;
-	private String addr1;
+	private int addr1;
 	private String addr2;
 	private String addr3;
 	private String grade; //당근마켓 온도같은 역할하는 것
@@ -25,15 +25,15 @@ public class Users {
 	private String role;
 	private String platFormOption;
 	private Date joinDate;
-	private long socialNum;
+	private String socialNum;
 	
 	
 	public Users() {}
 
 
 	public Users(int userno, String userId, String userPw, String userNick, String userName, Date birth, String gender,
-			String email, String phone, String addr1, String addr2, String addr3, String grade, int warnCount,
-			String status, String role, String platFormOption, Date joinDate, long socialNum) {
+			String email, String phone, int addr1, String addr2, String addr3, String grade, int warnCount,
+			String status, String role, String platFormOption, Date joinDate, String socialNum) {
 		super();
 		this.userno = userno;
 		this.userId = userId;
@@ -157,12 +157,12 @@ public class Users {
 	}
 
 
-	public String getAddr1() {
+	public int getAddr1() {
 		return addr1;
 	}
 
 
-	public void setAddr1(String addr1) {
+	public void setAddr1(int addr1) {
 		this.addr1 = addr1;
 	}
 
@@ -247,12 +247,12 @@ public class Users {
 	}
 
 
-	public long getSocialNum() {
+	public String getSocialNum() {
 		return socialNum;
 	}
 
 
-	public void setSocialNum(long socialNum) {
+	public void setSocialNum(String socialNum) {
 		this.socialNum = socialNum;
 	}
 	

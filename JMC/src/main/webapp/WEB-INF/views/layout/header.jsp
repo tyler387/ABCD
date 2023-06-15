@@ -8,6 +8,18 @@
 <title>JAMANCHU</title>
 <style type="text/css">
 
+@font-face {
+    font-family: '양진체';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  background: #f5f5f5;
+  font-family: '양진체';
+}
+
 header{
   position: sticky;
   top: 0;
@@ -20,8 +32,6 @@ header{
   justify-content: flex-end;
   align-items: center;
 /*   width: 100%; */
-  
-
 }
 
 header a{
@@ -41,14 +51,14 @@ a {
 /*   position:relative;  */
   /* z-index: 99;  */
   padding-top : 12px;
-  background-color: white;
+  background-color: #f5f5f5;
   height: 50px;
   text-align: center;
   margin-left: 130px;
 }
 
 #header [class*="main"] {
-  background-color: white;
+  background-color: #f5f5f5;
   border-radius: 5px 5px 5px 5px;
 }
 
@@ -165,10 +175,10 @@ a {
   <ul class="main1">
     <li style="border: none;"><a href="/login/main">JAMANCHU</a></li>
     <li><a href="/">회사소개</a></li>
-    <li style="border: none;"><a href="#">모임</a>
+    <li style="border: none; cursor:pointer;"><a>모임</a>
        <ul class="main2">
         <li><a href="/meeting/form">모임 등록</a></li>
-        <li><a href="#">모임 신청</a></li>
+        <li><a href="/meeting/meetingcal">모임 신청</a></li>
       </ul>
     </li>
     <li><a href="/board/allFile">커뮤니티</a></li>

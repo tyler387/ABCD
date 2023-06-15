@@ -8,8 +8,8 @@ public class BoardComment {
 	private int boardno;
 	private int userno;
 	private String cContent;
-	private String cStatus; 
 	private Date writeDate;
+	private String cStatus; 
 	
 	public BoardComment() {}
 

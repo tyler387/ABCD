@@ -94,10 +94,14 @@ img{
   <div class="left">
   
   <div class='profile'>
-  	<div>
-  		<a href="/mypage/profileMain"><img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}"></a> 
-  	</div>
-  </div>
+	<c:if test="${profile.profileStoredName eq null}">
+      <img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png"> 
+    </c:if>
+      			  
+	<c:if test="${profile.profileStoredName ne null}">
+		<img src="<%=request.getContextPath()%>/userProfile/${profile.profileStoredName}"> 
+	</c:if>  
+	</div>
   	<div class="userInfo">
   		${userId }
   	</div>
@@ -115,8 +119,9 @@ img{
   <li class="list1"><a href="#">모임</a>
   
   	<ul class="list2">
-  		<li class="list3"><a href="#">모임 현황</a></li>
-  		<li class="list3"><a href="#">종료된 모임</a></li>
+  		<li class="list3"><a href="../mypage/mymeeting">등록한 모임</a></li>
+  		<li class="list3"><a href="../mypage/meeting">내 모임신청 현황</a></li>
+  		<li class="list3"><a href="../mypage/myapplication">나의 신청 현황</a></li>
   	</ul>
   </li>	
   <li class="list1"><a href="#">구매</a>
@@ -126,8 +131,13 @@ img{
   		<li class="list3"><a href="#">결제 내역</a></li>
   	</ul>
   	</li>
-  <li class="list1"><a href="/mypage/friendList">친구</a></li>
-  <li class="list1"><a href="#">커뮤니티</a></li>
+  <li class="list1"><a href="/mypage/friendList">친구</a>
+  	<ul class="list2">
+  		<li class="list3"><a href="/mypage/friendfind">친구 찾기</a></li>
+  		<li class="list3"><a href="/mypage/friendList">내친구 목록</a></li>
+  	</ul>
+  </li>
+  <li class="list1"><a href="/mypage/myBoard">커뮤니티</a></li>
   <li class="list1"><a href="#">공지사항</a></li>
  
 </ul>

@@ -237,7 +237,6 @@ public class NaverServiceImpl implements NaverService {
             user.setAddr3("naver");
             user.setGrade("naver");
             user.setWarnCount(0);
-            user.setProfileImgUrl("naver");
             user.setPlatFormOption("naver");
 
             br.close();

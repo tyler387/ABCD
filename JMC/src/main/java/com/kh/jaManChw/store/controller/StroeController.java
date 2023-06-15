@@ -69,6 +69,18 @@ public class StroeController {
 		
 	}
 	
+	@RequestMapping("/shoppingBasketDelete")
+	public String StoreShoppingbasketDelete(@RequestParam Map<String, String> map, HttpSession session) {
+		int userno = (Integer)session.getAttribute("userno");
+		logger.info("세션 유저 넘버 {}", userno);
+		logger.info("상품수량 갯수 {}", map);
+      	map.put("userno", Integer.toString(userno));
+      	logger.info("유저넘버 받아서 맵값 확인하기 {}", map);
+      	
+		stroeService.Shoppingbasketerase(map);
+		 return "redirect:/store/shoppingbasket";
+	}
+	
 	
 	//칵테일 용품 카테고리로 이동 후 goods 리스트를 DESC순으로 불러오기
 	@RequestMapping("/goodsAll")

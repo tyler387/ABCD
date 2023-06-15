@@ -23,4 +23,6 @@ public interface StroeDao {
 	 */
 	public int selectCurPage(int noCurPage);
 
+	void DeleteShoppingBasket(Map<String, String> map);
+
 }

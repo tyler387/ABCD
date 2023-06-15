@@ -12,10 +12,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<select id="selectShoppingAllBasketList" resultType="hashmap" parameterType="int">
-		select S.*, I.ITEM_TITLE,I.item_price FROM shopping_basket S, item I where S.basketno = ${basketno} and S.itemno = I.itemno
+		select S.*, I.ITEM_TITLE,I.item_price, F.I_STORED_NAME FROM shopping_basket S, item I, item_file F where S.basketno = ${basketno} and S.itemno = I.itemno and I.itemno = F.itemno
 	</select>
 	
 	<select id="selectOncetrypayno" resultType="int">
-		SELECT oncetrypay_seq.nextVal FROM dual
+		SELECT buy_list_seq.nextVal FROM dual
 	</select>
+<!-- 	<select id="selectShoppingBasket" resultType="map" parameterType="int"> -->
+<!-- 		SELECT oncetrypay_seq.nextVal FROM dual -->
+<!-- 	</select> -->
+	<insert id="insertShoppingBasketList" parameterType="map">
+	
+	insert INTO order_detail(orderno, userno, itemno, item_name, item_count, item_option, item_total_price, order_status, add1, add2, add3, name, phone, buyno)
+	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{basketitem.ITEM_TITLE}, ${basketitem.SB_ITEM_COUNT}, '옵션', ${basketitem.ITEM_PRICE * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
+	</insert>
+	<insert id="insertShoppingBasketBuyList" parameterType="map">
+	insert INTO buy_list(buyno, userno, item_name, total_price, buy_option)
+	values(${buyno}, ${userno}, #{AllItemName}, ${totalprice}, 'ab')
+	</insert>
+	
+	<delete id="deleteShoppingBasketList" parameterType="int">
+	DELETE FROM shopping_basket
+	WHERE BASKETNO = ${basketno}
+	</delete>
 </mapper>

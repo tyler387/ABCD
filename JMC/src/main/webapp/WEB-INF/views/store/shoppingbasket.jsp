@@ -6,16 +6,131 @@
 	
 <c:import url="../layout/header.jsp"/>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-	
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<style type="text/css">
+
+
+label{
+	vertical-align: middle;
+}
+
+.mname {
+	width: 400px;
+}
+
+.postcode {
+	width: 295px;
+
+}
+
+.post {
+	width: 400px;
+
+
+}
+b {
+	display: block;
+}
+
+input {
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+}
+
+textarea{
+	border-radius: 10px;
+
+}
+
+.meeting-join {
+	margin-bottom: 50px;
+}
+
+.meeting-pre {
+	margin-bottom: 10px;
+}
+
+.meeting-pre1 {
+	margin-bottom: 10px;
+}
+
+.meeting {
+	width: 600px;
+	margin: 0 auto;
+	font-family: '양진체';
+}
+
+.meetingform {
+	width: 800px;
+    margin: auto;
+	border-radius: 20px;
+	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
+		rgb(200 200 200/ 20%);
+	padding: 20px;
+	margin-bottom: 50px;
+	text-align: center;
+	background-color: beige;
+}
+
+.meetingpre {
+	border-radius: 20px;
+	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
+		rgb(200 200 200/ 20%);
+	margin-bottom: 50px;
+	text-align: center;
+	padding: 20px;
+	background-color: beige;
+}
+
+.paymentBtn {
+	height: 50px;
+	width: 300px;
+	border-radius: 20px;
+	background: orange;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	font-family: '양진체';
+}
+
+.btndiv {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+h1 {
+	text-align: center;
+}
+
+.meetingbtn:hover {
+	background-color: #ffcca8;
+}
+
+.meeting-loc {
+
+	margin-bottom : 10px;
+}
+
+.post[id~='sample']{
+width: 295px;
+}
+
+table.txc-table {
+
+width: 100%;
+
+table-layout: fixed;
+border : 1px solid black;
+} 
+
+table thead tr {
+
+width: 100%;
+}
+</style>
 <script type="text/javascript">
 $(function() {
-
-// 	$("#bknolist").click(function() {
-		
-
-// 		})
 	
 })
 </script>
@@ -30,6 +145,16 @@ $(function() {
 
 $(function(){
 var userno = ${userno }
+ 
+var price = 3000;
+ 
+	$(function() {
+  		<c:forEach var='i' items='${list}'>
+  		price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}
+  		</c:forEach>
+  	  	console.log("가격", price);
+  		$("#totalPrice").html(price)
+	  	})
 	
 	$(".sbItemCount").blur(function () {
 		
@@ -50,6 +175,29 @@ var userno = ${userno }
 		$.ajax({
 			type: "post"
 			, url: "./shoppingBasketList"
+			, data:  {basketno : basketno, sbItemCount: sbItemCount, userno : userno}
+			, dataType: "html" 
+			, success: function( res ) {
+				console.log("AJAX 성공")
+				location.reload();
+			}
+			, error: function() {
+				console.log("AJAX 실패")
+			}
+		})
+	})
+	
+	
+	$(document).on("click",  ".bkDeleteBtn", function() {
+		var basketno = $(this).attr("data-basketno");
+		var sbItemCount = $(this).attr("data-sbItemcount");
+		
+		console.log("범인1:", basketno)
+		console.log("범인2:", sbItemCount)
+		
+		$.ajax({
+			type: "post"
+			, url: "./shoppingBasketDelete"
 			, data:  {basketno : basketno, sbItemCount: sbItemCount, userno : userno}
 			, dataType: "html" 
 			, success: function( res ) {
@@ -78,43 +226,53 @@ var userno = ${userno }
 	});
 });
 </script>
-<body>
 <h1>장바구니</h1>
 <hr>
+<div style="height: 30px;"></div>
+<div class="meetingform">
 <div id="result">
 <form method="post" action="/payment/main">
-<table class="table table table-hover">
+<table class="table table table-hover txc-table" style="margin: auto;">
 <tr class="table-secondary">
 	<th>인덱스</th>
 	<th>상품이름</th>
+	<th>상품사진</th>
 	<th>갯수</th>
 	<th>가격</th>
 	<th>관리</th>
 </tr>	
 <c:forEach var="list" items="${list}" varStatus="status" >
-<input type="hidden" value="${list.BASKETNO }" id="bkno" name="basketno">
 <tr>
 	<th class="cart_info_td">
 	<input type="checkbox" name="cartArr" value="${list.BASKETNO }" data-cartNo="${list.BASKETNO }" checked>
-<%-- 	<c:out value="${status.index}" /> --%>
-<%-- 	<input type="hidden" value="${list.BASKETNO }" name="itemcount" class="itemcount"> --%>
 	</th> 
-	<th>${list.ITEM_TITLE }</th>	
+	<th>${list.ITEM_TITLE }</th>	 
+	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="85px" height="85px">
+	</th>	 
 	<th>
-		<input type="text" value="${list.SB_ITEM_COUNT}" name="sbItemCount" class="sbItemCount">
+		<input type="text" value="${list.SB_ITEM_COUNT}" name="sbItemCount" class="sbItemCount" style="width: 35px;">
 		<input type="hidden" value="${list.BASKETNO }" name="basketno" class="basketno" >${list.SB_ITEM_COUNT }
 		<button type="button" class="btn btn-secondary bkupdateBtn"  data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">수정</button>
 	</th>
-	<th>${list.ITEM_PRICE * list.SB_ITEM_COUNT }</th>
-	<th><button type="button" class="btn btn-secondary" class ="deletebtn" onClick="window.location.reload()">삭제</button></th>
+	<th class="perPrice">${list.ITEM_PRICE * list.SB_ITEM_COUNT }</th>
+	<th><button type="button" class="btn btn-secondary bkDeleteBtn" class ="deletebtn" data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">삭제</button></th>
 </tr>
 </c:forEach> 
+<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>배송비 3000원 + 총 금액 :<span id="totalPrice">0</span></th>
+</tr>
 </table>
-
-<button id="btnOrder" type="button">선택 결제하기</button>
+<br><br>
+<button id="btnOrder" class ="paymentBtn"style="width: 200px; margin: auto;">선택 결제하기</button>
 <!-- <button id="btnOrderAll" type="button">전체 결제하기</button> -->
 <!-- <button value="bkno" name="bknolist" id="bknolist">결제하기</button> -->
 </form>
+</div>
 </div>
 <script type="text/javascript">
 $(function() {

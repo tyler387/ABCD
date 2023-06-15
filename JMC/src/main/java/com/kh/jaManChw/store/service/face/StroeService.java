@@ -35,5 +35,12 @@ public interface StroeService {
 	 * @return
 	 */
 	Paging getPage(String curPage);
+	
+	/**
+	 * 장바구니에서 선택 삭제하기
+	 * 
+	 * @param map
+	 */
+	void Shoppingbasketerase(Map<String, String> map);
 
 }

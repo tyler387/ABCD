@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace ="com.kh.jaManChw.store.dao.face.StroeDao">
 	
 	<select id="selectAllShoppingbasketList" parameterType="int" resultType="map">
-		select S.*, I.ITEM_TITLE,I.item_price FROM shopping_basket S, item I where S.userno = ${userno} and S.itemno = I.itemno
+		select S.*, I.ITEM_TITLE,I.item_price, F.I_STORED_NAME FROM shopping_basket S, item I, item_file F where S.userno = ${userno} and S.itemno = I.itemno and I.itemno = F.itemno
 	</select>
 	
 <!-- 	유저 번호 넣어야함	 -->
@@ -39,5 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectCurPage" resultType="int">
 		SELECT count(*) cont FROM Item_File
 	</select>
-
+	
+	<delete id="DeleteShoppingBasket" parameterType="map">
+	DELETE FROM shopping_basket
+	WHERE USERNO = ${userno} and BASKETNO = ${basketno}
+	</delete>
 </mapper>

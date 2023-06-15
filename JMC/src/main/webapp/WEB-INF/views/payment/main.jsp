@@ -5,14 +5,138 @@
     	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
-<c:import url="../layout/header.jsp"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<c:import url="../layout/header.jsp"/>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	  <script src="https://js.tosspayments.com/v1/payment-widget"></script>
-	  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	  	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	  	
+<style type="text/css">
+
+
+label{
+	vertical-align: middle;
+}
+
+.mname {
+	width: 400px;
+}
+
+.postcode {
+	width: 295px;
+
+}
+
+.post {
+	width: 400px;
+
+
+}
+b {
+	display: block;
+}
+
+input {
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+}
+
+textarea{
+	border-radius: 10px;
+
+}
+
+.meeting-join {
+	margin-bottom: 50px;
+}
+
+.meeting-pre {
+	margin-bottom: 10px;
+}
+
+.meeting-pre1 {
+	margin-bottom: 10px;
+}
+
+.meeting {
+	width: 600px;
+	margin: 0 auto;
+	font-family: '양진체';
+}
+
+.meetingform {
+	width: 800px;
+    margin: auto;
+	border-radius: 20px;
+	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
+		rgb(200 200 200/ 20%);
+	padding: 20px;
+	margin-bottom: 50px;
+	text-align: center;
+	background-color: beige;
+}
+
+.meetingpre {
+	border-radius: 20px;
+	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
+		rgb(200 200 200/ 20%);
+	margin-bottom: 50px;
+	text-align: center;
+	padding: 20px;
+	background-color: beige;
+}
+
+.paymentBtn {
+	height: 50px;
+	width: 300px;
+	border-radius: 20px;
+	background: orange;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	font-family: '양진체';
+}
+
+.btndiv {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+h1 {
+	text-align: center;
+}
+
+.meetingbtn:hover {
+	background-color: #ffcca8;
+}
+
+.meeting-loc {
+
+	margin-bottom : 10px;
+}
+
+.post[id~='sample']{
+width: 295px;
+}
+
+table.txc-table {
+
+width: 100%;
+
+table-layout: fixed;
+border : 1px solid black;
+} 
+
+table thead tr {
+
+width: 100%;
+}
+
+</style>
+  	
+ 	 
 <script type="text/javascript">
 // $(function() {
 // 	$("#toss").click(function() {
@@ -34,12 +158,14 @@
 // 	})
 // }) 
 </script>
-</head>
-<body>
-<table class="table table table-hover" style="width: 1200px; margin: 0 auto;">
+
+<div style="height: 30px;"></div>
+<div class="meetingform">
+<table class="table table table-hover txc-table" style="width: 700px; margin: 0 auto;">
 <tr class="table-secondary">
 	<th>상품번호</th>
 	<th>상품이름</th>
+	<th>상품사진</th>
 	<th>갯수</th>
 	<th>가격</th>
 </tr>	
@@ -47,6 +173,7 @@
 <tr>
 	<th class="cart_info_td">${status.count}</th> 
 	<th>${list.ITEM_TITLE}</th>	
+	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="85px" height="85px"></th>
 	<th>${list.SB_ITEM_COUNT}</th>
 	<th class="perPrice">${list.ITEM_PRICE * list.SB_ITEM_COUNT}</th>
 </tr>
@@ -55,45 +182,46 @@
 	<th></th>
 	<th></th>
 	<th></th>
-	<th>총 금액 :<span id="totalPrice">0</span></th>
+	<th></th>
+	<th>배송비 3000원 + 총 금액 :<span id="totalPrice">0</span></th>
 </tr>
 </table>
 
 <input type="hidden" id="basketno" name="basketno" value="${basketno }">
-
 <div style ="width: 600px; margin: 0 auto; padding-top : 80px; ">
 	<div class="input-group mb-3">
 	  <span class="input-group-text" id="basic-addon1">이름</span>
-	  <input type="text" class="form-control" value="" aria-label="userNick" aria-describedby="basic-addon1" id="name" name="name" onchange='printName()'>
-	</div>
-	<div class="input-group mb-3">
+	  <input type="text" class="form-control" value="" aria-label="userNick" aria-describedby="basic-addon1" id="name" name="name" onchange='printName()' style="width: 120px;">
 	  <span class="input-group-text" id="basic-addon1">핸드폰 번호</span>
 	  <input type="text" class="form-control" value="" aria-label="phone" aria-describedby="basic-addon1" id="phone" name="phone" onchange='printPhone()'>
 	</div>
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="basic-addon1">우편번호</span>
-	<input type="text" class="form-control" value="" aria-label="userNick" aria-describedby="basic-addon1" name="loc" id="sample6_postcode"  placeholder="우편번호" onchange='printLoc()'>
-	  <span class="input-group-text" id="basic-addon1">참고항목</span>
-	<input type="text" class="form-control" value="" aria-label="phone" aria-describedby="basic-addon1" name="loc3" id="sample6_extraAddress" placeholder="참고항목" onchange='printLoc3()'><br><br>
-	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-	</div>
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="basic-addon1">도로명주소</span>
-	<input type="text" class="form-control" value="" aria-label="userNick" aria-describedby="basic-addon1" name="loc1" id="sample6_address" placeholder="도로명주소" onchange='printLoc1()' style="width: 170px;"><br>
-	</div>
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="basic-addon1">상세주소</span>
-	<input type="text" class="form-control" value="" aria-label="phone" aria-describedby="basic-addon1"  name="loc2" id="sample6_detailAddress" placeholder="상세주소" onchange='printLoc2()'>
-	</div>
+	<br>
 	
+	<div class="meeting-loc"><label><span>배송 정보</span><br><input class="postcode" type="text" id="sample6_postcode" name="loc"  placeholder="우편번호"  onchange='printLoc()'></label>
+	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></div>
+	<div class="meeting-loc"><input class="post" type="text" id="sample6_address" name="loc1" placeholder="도로명주소" onchange='printLoc1()'></div>
+	<div class="meeting-loc"><input class="post" type="text" id="sample6_detailAddress" name="loc2" placeholder="상세주소" onchange='printLoc2()'></div>
+<!-- 	<div class="meeting-loc"><input class="post" type="text" id="sample6_extraAddress" name="loc3" placeholder="참고항목" onchange='printLoc3()'></div> -->
+	<div class="meeting-loc">
+<!-- 	<input type="text" class="form-control" class="post postcode" value="" name="loc" id="sample6_postcode"  placeholder="우편번호" onchange='printLoc()'> -->
+<!-- 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"> -->
+<!-- 	<input type="text" class="form-control" class="post" value=""  name="loc3" id="sample6_extraAddress" placeholder="참고항목" onchange='printLoc3()'><br> -->
+<!-- 	<input type="text" class="form-control" class="post" value="" name="loc1" id="sample6_address" placeholder="도로명주소" onchange='printLoc1()'> -->
+<!-- 	<input type="text" class="form-co넴ㄴtrol" class="post" value="" name="loc2" id="sample6_detailAddress" placeholder="상세주소" onchange='printLoc2()'><br> -->
+	<br><br>
 </div>
   <!-- 결제위젯, 이용약관 영역 -->
-  <div id="payment-method" style="width: 800px; margin: auto;"></div>
-  <div id="agreement" style="width: 800px; margin: auto;"></div>
+  <div id="payment-method" style="width: 550px; margin: auto;"></div>
+  <div id="agreement" style="width: 550px; margin: auto;"></div><br><br>
   <!-- 결제하기 버튼 -->
-  <div id="agreement" style="width: 100px; margin: auto;"><button id="payment-button" style="width: 100px; margin: auto;">결제하기</button></div>
-  
-  
+	  <div id="agreement" style="width: 100px; margin: auto; padding-bottom: 30px; display: inline-block">
+	  <button id="payment-button" class ="paymentBtn"style="width: 100px; margin: auto;">결제하기</button>
+	  </div>
+	    <div id="agreement" style="width: 100px; margin: auto; padding-bottom: 30px; display: inline-block">
+	  <a href="/store/shoppingbasket"><button id="payment-button" class ="paymentBtn" style="width: 100px; margin: auto;">취소하기</button></a>
+	  </div>
+  </div>
+</div>
   <script type="text/javascript"> 
   	var name = null; 
   	var phone = null;
@@ -101,7 +229,7 @@
   	var loc1 = null;
   	var loc2 = null;
   	var loc3 = null;
-  	var price = 0;
+  	var price = 3000;
     
   	$(function() {
   		<c:forEach var='i' items='${sbList}'>
@@ -222,6 +350,7 @@
 //         successUrl: "http://localhost:8888/payment/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
         successUrl: "http://localhost:8888/payment/paysuccess?name="+name
         			+"&phone="+phone
+        			+"&totalprice="+price
         			+"&loc="+loc
         			+"&loc1="+loc1
         			+"&loc2="+loc2
@@ -240,7 +369,6 @@
     })
 
   </script>
-  
 
 <c:import url="../layout/footer.jsp" />
 <!-- <div id ="tossstart"> -->

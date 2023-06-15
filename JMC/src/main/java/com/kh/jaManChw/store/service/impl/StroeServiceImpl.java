@@ -54,7 +54,11 @@ public class StroeServiceImpl implements StroeService {
 		return new Paging(noCurPage, stroeDao.selectCurPage(noCurPage), 8, 10);
 	}
 	
-	
+	@Override
+	public void Shoppingbasketerase(Map<String, String> map) {
+		
+		stroeDao.DeleteShoppingBasket(map);
+	}
 	
 	
 }

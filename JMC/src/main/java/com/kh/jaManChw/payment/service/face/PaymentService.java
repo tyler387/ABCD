@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
@@ -20,8 +21,9 @@ public interface PaymentService {
 	 * @return 추출하여 완성된 리스트 DTO 
 	 * 
 	 */
-	public List<Map<String, String>> getParamList(int[] basketno);
+	public List<Map<String, Object>> getParamList(int[] basketno);
 
-	public JSONObject paymentInfo(HttpServletRequest request, Map<String, String> map, int[] basketno, String[] itemTitle);
+	public JSONObject paymentInfo(HttpServletRequest request, Map<String, Object> map, int[] basketno, String[] itemTitle, HttpSession session);
+
 
 }

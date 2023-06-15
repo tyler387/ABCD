@@ -17,6 +17,7 @@ import java.util.Base64.Encoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -83,13 +84,13 @@ public class PaymentController {
 	
 	@RequestMapping("/main")
 	public void PaymentMain(
-			@RequestParam Map<String, String> map,
+			@RequestParam Map<String, Object> map,
 			 int[] basketno, Model model
 			) {
 		logger.info("결제할 상품들 출력 맵 {}", map);
 		logger.info("결제할 상품들 출력 바스켓넘버{}", basketno);
 		
-		List<Map<String, String>> sbList = paymentService.getParamList(basketno);
+		List<Map<String, Object>> sbList = paymentService.getParamList(basketno);
 //		Map<String, Object> list = paymentService.getParamList(basketno);
 		logger.info("sbListsbListsbListsbList = {}", sbList);
 		logger.info("bbsssb = {}", sbList);
@@ -101,13 +102,18 @@ public class PaymentController {
 	
 
 	@RequestMapping("/paysuccess")
-	public String paysuccess(HttpServletRequest request,
-			@RequestParam Map<String, String> map, int[] basketno, String[] itemTitle) {
+	public String paysuccess(HttpServletRequest request, HttpSession session,
+			@RequestParam Map<String, Object> map, int[] basketno, String[] itemTitle) {
 		logger.info("맵 = {}", map);
 		logger.info("바스켓넘버 = {}", basketno);
 		logger.info("itemTitle = {}", itemTitle);
-		JSONObject jsonObject = paymentService.paymentInfo(request, map, basketno, itemTitle);
-//		map.put("asdada", "asdasdasda");
+		logger.info("세션유저넘버 = {}", session.getAttribute("userno"));
+		String userno = String.valueOf(session.getAttribute("userno"));
+		logger.info("세션 유저넘버", userno);
+		map.put("userno", userno);
+		logger.info(" 원래 담긴 맵", map);
+		
+		JSONObject jsonObject = paymentService.paymentInfo(request, map, basketno, itemTitle, session);
 		
 		//paymentKey 이걸로 주문 취소 등 해야함
 		logger.info("{}", jsonObject);

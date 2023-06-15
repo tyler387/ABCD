@@ -8,9 +8,9 @@ public class ChatMessage {
 
 	private int messageno;
 	private int chatno;
-	private String sendId;
 	private String message;
 	private Date sendTime;
+	private String sendId;
 	
 	public ChatMessage() {}
 	

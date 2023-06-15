@@ -11,12 +11,12 @@ public class ItemQnAQ {
 	private String iqContent;
 	private String iqOption;
 	private String iqStatus;
-	private Date writeDate;
+	private Date iqWriteDate;
 	
 	public ItemQnAQ() {}
 
 	public ItemQnAQ(int itemQnano, int itemno, int userno, String iqTitle, String iqContent, String iqOption,
-			String iqStatus, Date writeDate) {
+			String iqStatus, Date iqWriteDate) {
 		super();
 		this.itemQnano = itemQnano;
 		this.itemno = itemno;
@@ -25,14 +25,14 @@ public class ItemQnAQ {
 		this.iqContent = iqContent;
 		this.iqOption = iqOption;
 		this.iqStatus = iqStatus;
-		this.writeDate = writeDate;
+		this.iqWriteDate = iqWriteDate;
 	}
 
 	@Override
 	public String toString() {
 		return "ItemQnAQ [itemQnano=" + itemQnano + ", itemno=" + itemno + ", userno=" + userno + ", iqTitle=" + iqTitle
-				+ ", iqContent=" + iqContent + ", iqOption=" + iqOption + ", iqStatus=" + iqStatus + ", writeDate="
-				+ writeDate + "]";
+				+ ", iqContent=" + iqContent + ", iqOption=" + iqOption + ", iqStatus=" + iqStatus + ", iqWriteDate="
+				+ iqWriteDate + "]";
 	}
 
 	public int getItemQnano() {
@@ -91,12 +91,12 @@ public class ItemQnAQ {
 		this.iqStatus = iqStatus;
 	}
 
-	public Date getWriteDate() {
-		return writeDate;
+	public Date getIqWriteDate() {
+		return iqWriteDate;
 	}
 
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
+	public void setIqWriteDate(Date iqWriteDate) {
+		this.iqWriteDate = iqWriteDate;
 	}
 	
 }

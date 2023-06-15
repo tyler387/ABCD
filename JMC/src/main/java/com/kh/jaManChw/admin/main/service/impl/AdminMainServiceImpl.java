@@ -16,7 +16,6 @@ import com.kh.jaManChw.admin.main.service.face.AdminMainService;
 import com.kh.jaManChw.dto.Board;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Report;
-import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 
 @Service

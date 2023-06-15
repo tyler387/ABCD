@@ -1,14 +1,18 @@
 package com.kh.jaManChw.meeting.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,12 +25,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
-import com.kh.jaManChw.dto.ReportMeeting;
+import com.kh.jaManChw.dto.ProfileFile;
+import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
 
@@ -65,24 +72,16 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("{}!!!" , userno);
 		
-		//모임 작성 폼에 가져올 친구 목록 조회
-		List<Users> friendList = meetingService.selectFriendListAll(userno);
-		
-		logger.info("{}", friendList);
 	
-		//모델에 모임 작성 폼에 가져올 친구 목록 담아주기 
-		model.addAttribute("friendList", friendList);
-		
+
 		//로그인 세션 처리 
 		return url;
 	}
 	
 	//모임 작성 폼에 적은 모임 등록
 	@PostMapping("/meeting/form")
-	public String meetingWrite(Meeting meeting , Preference preference, HttpSession session
-	,@RequestParam( name = "friendlist") int friendlist) {
+	public String meetingWrite(Meeting meeting , Preference preference, HttpSession session) {
 			
-		logger.info("testest{}",friendlist);
 		logger.info("/meeting/form [POST]");
 		logger.info("check!!!!!!!!!!!{}" , preference);
 		//알림기능 추가개발예정 
@@ -96,10 +95,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		leader.setUserno(userno);
 		
-		//친구초대로 초대한 사람 정보 가져와서 넣어주기 
-		Applicant applicant = new Applicant();
-		
-		applicant.setUserno(friendlist);
 		
 		// preference값이 null인 경우에만 새로운 Prefrence 객체 생성 
 		if(preference == null) {
@@ -109,7 +104,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("!!!!!!!!!!!!1{}" , preference);
 		
 		//모임과 선호하는타입, 참가자와, 모임 등록자 등록 
-		meetingService.inputMeeting(meeting , preference, applicant, leader);
+		meetingService.inputMeeting(meeting , preference, leader);
 		
 		
 		logger.info("{}" , preference);
@@ -122,7 +117,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	//달력으로 모든 모임 조회 
 	@GetMapping("/meeting/meetingcal")
 	public void allMeetingListByCal(Model model , Meeting meeting ) {
-		
 		
 		
 		logger.info("/meeting/meetingcal [GET]" );
@@ -268,7 +262,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//모임 상세보기 조회 
 	@GetMapping("/meeting/view")
-	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference) {
+	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference, Applicant applicant,ProfileFile profileFile) {
 		
 		logger.info("/meeting/view [GET]");
 		
@@ -285,19 +279,36 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		}
 		
 		
+		
+		
+		
+		int appcount = meetingService.applicantCount(applicant);
+		int appcountcheck = meetingService.applicantCheckCount(applicant);
+		int appcountnocheck = meetingService.applicantNoCheckCount(applicant);
 		Meeting viewmeeting = meetingService.detailMeeting(meeting);
 		Preference viewpreference = meetingService.detailPreference(preference);
-		List<Users> applicantnick = meetingService.getUserNickAll(meeting);
+		List<Users> applicantnickagree = meetingService.getUserNickAgree(meeting);
+		List<Users> applicantnicknochceck = meetingService.getUserNickNocheck(meeting);
 		Users applicantnick1 = meetingService.getUserNickLeader(meeting);
 		
 		
+		
+		//파일 정보 가져오기
+		
+	
+		List<Map<String, Object>> map = meetingService.allInfo(applicant);
+		
 		logger.info("{}" , viewmeeting);
-		logger.info("{}!!!!", applicantnick);
+		logger.info("{}!!!!", map);
 		
 		
+		model.addAttribute("appcount", appcount);
+		model.addAttribute("appcountcheck", appcountcheck);
+		model.addAttribute("appcountnocheck", appcountnocheck);
 		model.addAttribute("viewmeeting", viewmeeting);
 		model.addAttribute("viewpreference", viewpreference);
-		model.addAttribute("applicantnick", applicantnick);
+		model.addAttribute("applicantnickagree", applicantnickagree);
+		model.addAttribute("applicantnicknocheck", applicantnicknochceck);
 		model.addAttribute("applicantnick1", applicantnick1);
 		
 		
@@ -318,7 +329,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//선택한 모임 신고하기  
 	@PostMapping("/meeting/report")
-	public String reportInput( ReportMeeting reportMeeting, HttpSession session) {
+	public String reportInput( Report reportMeeting, HttpSession session) {
 		
 		logger.info("/meeting/report [POST]");
 		
@@ -366,19 +377,41 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//선택한 모임에 참여하기 
 	@PostMapping("/meeting/join")
-	public String meetingJoinInput(HttpSession session, Model model , Applicant applicant) {
-		
+	public String meetingJoinInput(HttpSession session, Model model , Applicant applicant ) {
 		logger.info("/meeting/join [POST]");
 		
 		int meetingno = applicant.getMeetingno();
-		int userno = (int)session.getAttribute("userno");
-		applicant.setUserno(meetingService.getUserno(userno));
 		
+		int userno = (int)session.getAttribute("userno");
+		
+		
+		
+		logger.info("meetingno{}" , meetingno);
+		
+		logger.info("applicant{}" , applicant);
+		
+		applicant.setUserno(meetingService.getUserno(userno));
+		int chk = meetingService.chkUser(applicant);
+		
+		if(chk==1) {
+			
+		}else {
+		
+		//신청 버튼 여러번 못눌리게 딜레이 주기 
+		int delay = 3000;
+		
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+			
 		meetingService.inputJoinMeeting(applicant);
 		
+	}
 		
 		return "redirect: /meeting/view?meetingno="+ meetingno;
 	}
 	
-	
+
 }

@@ -5,11 +5,18 @@
     <script type="text/javascript">
     
 </script>
+<style type="text/css">
+#proId{
+	width : 70px;
+	height : 60px;
+}
+</style>
      
       <div id="tablesize">
         	<table>
   		<thead id="thead">
   		<tr>
+  			<th>프로필</th>
   			<th>모임명</th>
   			<th>닉네임</th>
   			<th>자기소개</th>
@@ -19,6 +26,18 @@
   		<tbody>
   			<c:forEach var="map" items="${map}">
   			<tr>
+				<c:choose>
+					<c:when test="${map.PROFILE_STORED_NAME eq null}">
+  					<td>
+  					<img src="../resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="proId">
+  					</td>
+					</c:when>
+					<c:when test="${map.PROFILE_STORED_NAME ne null }">
+					<td>
+					<img src="<%=request.getContextPath()%>/userProfile/${map.PROFILE_STORED_NAME}" id="proId">
+					</td>
+					</c:when>
+				</c:choose>
   				<td>${map.MNAME }</td>
   				<td>${map.USER_NICK }</td>
   				<td>${map.APPLICANT_CONTENT }</td>

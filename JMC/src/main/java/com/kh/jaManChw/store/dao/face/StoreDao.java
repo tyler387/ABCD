@@ -81,7 +81,7 @@ public interface StoreDao {
 	 */
 	public void insertShoppingBasket(ShoppingBasket sb);
 	
-	
+	public void DeleteShoppingBasket(Map<String, String> map);
 	
 
 

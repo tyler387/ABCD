@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:import url="../layout/header.jsp" />
-<c:import url="../chat/chatbutton.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
@@ -150,6 +149,7 @@
 }
 
 .selectbtncal{
+  font-family: '양진체';
   height: 50px;
   width: 300px;
   border-radius: 20px; 
@@ -171,6 +171,7 @@
 }
 
 .selectbtnmap{
+  font-family: '양진체';
   height: 50px;
   width: 300px;
   border-radius: 20px;

@@ -11,15 +11,8 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<div>
-<form method="post" action="./shoppingbasket">
-<input type="hidden" value="256" name="userno">
-
-<button>장바구니 보기</button>
-</form>
-
 <form method="post" action="/payment/main">
-<table class="table table table-hover">
+<table class="table table table-hover" >
 <tr class="table-secondary">
 	<th>인덱스</th>
 	<th>상품이름</th>

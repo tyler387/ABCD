@@ -14,10 +14,15 @@
     font-weight: normal;
     font-style: normal;
 }
-
+ 
 body {
   background: #f5f5f5;
   font-family: '양진체';
+}
+
+header img{
+	width: 100px;
+	height: 100px;
 }
 
 header{
@@ -140,15 +145,19 @@ a {
    position: absolute; 
    width:100%;
  }
+ 
+
 
 
 </style>
 </head>
-
+<c:import url="../chat/chatbutton.jsp"></c:import>
 <body>
 
 <div id="header">
 <header>
+
+<div class="logo"><img src='/resources/image/주황로고.png'></div>
 <c:if test="${role eq 'admin'}">
 	<a href="<%=request.getContextPath()%>/admin/main">관리자페이지</a>
 </c:if>
@@ -167,12 +176,18 @@ a {
 	<a href="#">알람</a>
 </c:if>
 
+<c:if test="${platFormOption eq 'naver'}">
+	<a href="/login/logout">로그아웃</a>
+	<a href="/mypage/main">마이페이지</a>
+	<a href="#">알람</a>
+</c:if>
+
 </header>
 
 <div id="menu">
   <ul class="main1">
     <li style="border: none;"><a href="<%=request.getContextPath()%>/login/main">JAMANCHU</a></li>
-    <li><a href="<%=request.getContextPath()%>/">회사소개</a></li>
+    <li><a href="<%=request.getContextPath()%>/company/info">회사소개</a></li>
     <li style="border: none; cursor:pointer;"><a>모임</a>
        <ul class="main2">
         <li><a href="<%=request.getContextPath()%>/meeting/form">모임 등록</a></li>

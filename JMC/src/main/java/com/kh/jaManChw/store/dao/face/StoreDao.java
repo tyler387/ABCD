@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.kh.jaManChw.dto.Item;
 import com.kh.jaManChw.dto.ItemFile;
 import com.kh.jaManChw.dto.ItemOption;
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.util.Paging;
 
 public interface StoreDao {
@@ -72,6 +73,14 @@ public interface StoreDao {
 	 * @return 상품 파일의 상세 정보
 	 */
 	public Item selectItemDetail(int itemno);
+
+	/**
+	 * 전달받은 파라미터를 통해 장바구니 DB에 삽입한다
+	 * 
+	 * @param sb - 파라미터를 받아올 DTO 객체
+	 */
+	public void insertShoppingBasket(ShoppingBasket sb);
+	
 	
 	
 

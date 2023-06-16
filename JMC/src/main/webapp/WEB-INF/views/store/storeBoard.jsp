@@ -38,13 +38,17 @@ thead {
 	</tr>
 </thead>
 
+<c:forEach var="itemQnAQList" items="${itemQnAQList }">
 <tr>
-		<td style="width: 15%;" id="status">abc</td>
-		<td style="width: 45%;" id="trcontent">def</td>
-		<td style="width: 15%;" id="trWriter">adf</td>
-		<td style="width: 25%;" id="trdate">sss</td>
 
+	
+		<td style="width: 15%;" id="status">${itemQnAQList.IQ_STATUS }</td>
+		<td style="width: 45%;" id="trcontent">${itemQnAQList.IQ_TITLE }</td>
+		<td style="width: 15%;" id="trWriter">${itemQnAQList.USER_ID }</td>
+		<td style="width: 25%;" id="trdate">${itemQnAQList.WRITE_DATE }</td>
+	
 </tr>
+</c:forEach>
 
 </table>
 <!-- 	 <input type="button" value="문의하기" onclick="showPopup();" /> -->

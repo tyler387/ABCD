@@ -102,8 +102,9 @@ ${allItemDetail.itemDetail.itemContent }
 <h1>QnA</h1>
 
 </div>
+<div id="storeboard">
 <c:import url="../store/storeBoard.jsp" />
-
+</div>
 <c:import url="../layout/footer.jsp" />
 
 

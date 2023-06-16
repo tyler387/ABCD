@@ -161,9 +161,13 @@ $("#modalbutton").click(function(){
 		        	 	, modalContent: modalContent
 		        	 	, itemno : ${allItemDetail.itemDetail.itemno}}
 		         , dataType: "html"
-		         , success: function(res){
-		        	 console.log(res)
+		         , success: function(){
+		        	 
 		            console.log("AJAX 성공")
+		            $("#storeboard").load(
+		            "./storeBoard"		
+		            )
+		            
 		         }
 		         , error: function(){
 		            console.log("AJAX 실패")   

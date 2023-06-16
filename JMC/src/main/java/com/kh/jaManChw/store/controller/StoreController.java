@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
 import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
@@ -27,9 +29,9 @@ public class StoreController {
 	//log4j.xml에서 <logger> 설정 필요
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired StoreService storeService;
+	@Autowired private StoreService storeService;
 	
-
+	@Autowired private ItemQnAQService itemQnAQService;
 	
 	@RequestMapping("/main")
 	public void StoreMain() {
@@ -111,13 +113,27 @@ public class StoreController {
 		Map<String, Object> allItemDetail = storeService.showDetailItem(itemno);
 		
 		logger.info("상품에 대한 자세한 정보: {}", allItemDetail);
+		//---------------------------------------------------------
+		Paging paging = itemQnAQService.getItemQnAQPaging(curPage);
 		
+		List<Map<String, Object>> itemQnAQList = itemQnAQService.showItemQnAQList(itemQnAQService.getItemQnAQPaging(curPage));
+		logger.info("itemQnAQList: {}", itemQnAQList);
+		
+		
+		//--------------------------------------------------------
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("allItemDetail", allItemDetail);
+		
+
+
+		model.addAttribute("itemQnAQList", itemQnAQList);
+		model.addAttribute("paging", paging);
 	}
 	
 	@RequestMapping("/storeBoard")
-	public void storeBoard() {
+	public void storeBoard(String curPage, Model model) {
+		
+
 		
 	}
 	
@@ -134,17 +150,14 @@ public class StoreController {
 //	
 //	}
 	@PostMapping("/abcabc")
-	public void itemQnAWrite(String modalTitle, String modalContent, int itemno, HttpSession session, Model model) {
+	@ResponseBody
+	public void itemQnAWrite(String modalTitle, String modalContent, int itemno, HttpSession session,Model model) {
 		logger.info("문의글 작성한 거 받아오기");
 		logger.info(modalTitle);
 		logger.info(modalContent);
 		logger.info("item:{}",itemno);
 		storeService.writeItemQnA(modalTitle, modalContent, itemno, session);
-
-	
-
 		
-		model.addAttribute("model", model);
 	}
 
 	@PostMapping("/write/basket")

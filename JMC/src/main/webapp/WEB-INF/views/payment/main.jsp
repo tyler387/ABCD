@@ -99,6 +99,18 @@ textarea{
 	font-family: '양진체';
 }
 
+.postbtn {
+	height: 28px;
+	width: 97px;
+	border-radius: 20px; 
+	background: orange;
+	color: #fff;
+	border: none;
+	font-size: 15px;
+	font-family: '양진체';
+}
+
+
 .btndiv {
 	text-align: center;
 	margin-bottom: 100px;
@@ -181,9 +193,7 @@ width: 100%;
 <tr>
 	<th></th>
 	<th></th>
-	<th></th>
-	<th></th>
-	<th>배송비 3000원 + 총 금액 :<span id="totalPrice">0</span></th>
+	<th colspan="3">배송비 3000원 + 총 금액 :<span id="totalPrice">0</span></th>
 </tr>
 </table>
 
@@ -198,7 +208,7 @@ width: 100%;
 	<br>
 	
 	<div class="meeting-loc"><label><span>배송 정보</span><br><input class="postcode" type="text" id="sample6_postcode" name="loc"  placeholder="우편번호"  onchange='printLoc()'></label>
-	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></div>
+	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"  class="postbtn"></div>
 	<div class="meeting-loc"><input class="post" type="text" id="sample6_address" name="loc1" placeholder="도로명주소" onchange='printLoc1()'></div>
 	<div class="meeting-loc"><input class="post" type="text" id="sample6_detailAddress" name="loc2" placeholder="상세주소" onchange='printLoc2()'></div>
 <!-- 	<div class="meeting-loc"><input class="post" type="text" id="sample6_extraAddress" name="loc3" placeholder="참고항목" onchange='printLoc3()'></div> -->

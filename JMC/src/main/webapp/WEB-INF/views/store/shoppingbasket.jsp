@@ -93,6 +93,16 @@ textarea{
 	font-size: 20px;
 	font-family: '양진체';
 }
+.bsketbtn {
+	height: 25px;
+	width: 73px;
+	border-radius: 10px;
+	background: orange;
+	color: #fff;
+	border: none;
+	font-size: 15px;
+	font-family: '양진체';
+}
 
 .btndiv {
 	text-align: center;
@@ -129,18 +139,6 @@ table thead tr {
 width: 100%;
 }
 </style>
-<script type="text/javascript">
-$(function() {
-	
-})
-</script>
-<script type="text/javascript">
-// function deletingBook(bookname){
-// 	var sbItemcount = 
-	
-//     }
-
-</script>
 <script type="text/javascript">
 
 $(function(){
@@ -234,10 +232,11 @@ var price = 3000;
 <form method="post" action="/payment/main">
 <table class="table table table-hover txc-table" style="margin: auto;">
 <tr class="table-secondary">
-	<th>인덱스</th>
+	<th>상품번호</th>
 	<th>상품이름</th>
+	<th>상품옵션</th>
 	<th>상품사진</th>
-	<th>갯수</th>
+	<th style="width: 150px;">갯수</th>
 	<th>가격</th>
 	<th>관리</th>
 </tr>	
@@ -247,25 +246,25 @@ var price = 3000;
 	<input type="checkbox" name="cartArr" value="${list.BASKETNO }" data-cartNo="${list.BASKETNO }" checked>
 	</th> 
 	<th>${list.ITEM_TITLE }</th>	 
+	<th>${list.OPTION_CONTENT }</th>	 
 	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="85px" height="85px">
 	</th>	 
 	<th>
 		<input type="text" value="${list.SB_ITEM_COUNT}" name="sbItemCount" class="sbItemCount" style="width: 35px;">
-		<input type="hidden" value="${list.BASKETNO }" name="basketno" class="basketno" >${list.SB_ITEM_COUNT }
-		<button type="button" class="btn btn-secondary bkupdateBtn"  data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">수정</button>
+		<input type="hidden" value="${list.BASKETNO }" name="basketno" class="basketno" >
+		<button type="button" class="btn btn-secondary bkupdateBtn bsketbtn"  data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">수량 수정</button>
 	</th>
-	<th class="perPrice">${list.ITEM_PRICE * list.SB_ITEM_COUNT }</th>
-	<th><button type="button" class="btn btn-secondary bkDeleteBtn" class ="deletebtn" data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">삭제</button></th>
+	<th class="perPrice">${list.ITEM_PRICE * list.SB_ITEM_COUNT }</th> 
+	<th><button type="button" class="btn btn-secondary bkDeleteBtn bsketbtn" data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">상품 삭제</button></th>
 </tr>
 </c:forEach> 
 <tr>
 	<th></th>
 	<th></th>
-	<th></th>
-	<th></th>
-	<th></th>
-	<th>배송비 3000원 + 총 금액 :<span id="totalPrice">0</span></th>
-</tr>
+	<th></th> 
+	<th></th> 
+	<th colspan="3">배송비 3000원 + 총 금액 :<span id="totalPrice">0</span></th>
+</tr> 
 </table>
 <br><br>
 <button id="btnOrder" class ="paymentBtn"style="width: 200px; margin: auto;">선택 결제하기</button>

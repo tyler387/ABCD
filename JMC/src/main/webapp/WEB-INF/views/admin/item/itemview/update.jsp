@@ -140,8 +140,12 @@ $(function() {
 		
 		}
 	})
-	
 
+	
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/JaManChw/JMC
 })
 </script>
 

@@ -28,9 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM (
 		SELECT rownum rnum, B.* FROM (
 		select * FROM users
+		WHERE 1 = 1 
 		<if test="content != null and !''.equals(content)">
-		WHERE ${filter} = #{content}
-		</if> 
+		and upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+		</if>
+		<if test="status != null and !''.equals(status)">
+		and status =  #{status}
+		</if>
 		ORDER BY userno DESC
 		) B
 		)users
@@ -47,9 +51,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectFilterCntAll" resultType="int" parameterType="map">
-		select count(*) FROM users
+		select count(*) FROM users WHERE 1=1
 		<if test="content != null and !''.equals(content)"> 
-		WHERE ${filter} = #{content}
+		and upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+		</if>
+		<if test="status != null and !''.equals(status)">
+		and status = #{status}
 		</if>
 	</select>
 	
@@ -66,7 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateUserMgUpdate" parameterType="map">
 UPDATE users SET user_id = #{userId}, user_name = #{userName}, user_nick=#{userNick}
-, email = #{email}, phone = #{phone}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3}, birth =#{birth}, gender=#{gender} 
+, email = #{email}, phone = #{phone}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3}, birth =#{birth}, gender=#{gender}
+, status=#{status} 
 	WHERE userno = ${userno}
 	</update>
 	

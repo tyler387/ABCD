@@ -97,6 +97,7 @@ div.admin1 {
 // 			 }
 // 			console.log("content: ", content)
 // 	})
+</script>
 <div id="resultt">
 	<c:import url="../../main.jsp"></c:import>
 	
@@ -108,27 +109,41 @@ div.admin1 {
 		</h1>
 	</div>
 
-<div class="text-end" style="padding-right: 50px; padding-top: 15px; margin-bottom:15px;">
 <form action="./filter" method="post">
-		<select name ="filter" id="filter">
+<div class="input-group mb-12 ms-auto  justify-content-end"
+	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 750px;">
+	
+	<label for="content" class="input-group-text">상태</label>&nbsp;
+	<select name ="status" id="status" class=" form-select" style="width: 115px;">
+		<option value="" selected>미선택</option>
+		<option value="active">정상</option>
+		<option value="leave">탈퇴</option>
+		<option value="unactive">휴먼</option>
+		<option value="block">정지</option>
+		<option value="blacklist">블랙리스트</option>
+	</select>
+	&nbsp;&nbsp;
+		<select name ="filter" id="filter" class=" form-select" style="width: 100px;">
 		   <option value = "user_id" selected>아이디</option>
 		   <option value = "user_name">이름</option>
+		   <option value = "user_nick">닉네임</option>
+		   <option value = "phone">폰번호</option>
 		   <option value = "grade">등급</option>
 		</select>
-		
-		검색 : <input type="text" name="content" id="content">
+		<label for="content" class="input-group-text">검색 </label>
+		<input type="text" name="content" id="content">
 		<button id="searchBtn" type="submit" class="btn btn-secondary btn-sm">검색하기</button>
-</form>
 </div> 
+</form>
 	
 <div id="result" class="admin1">
 	
 <table class="table table table-hover">
 <tr class="table-secondary">
-	<th>아이디</th>
-	<th>상태</th>
+	<th style="width: 278px;">아이디</th>
 	<th>이름</th>
 	<th>닉네임</th>
+	<th>상태</th>
 	<th>생년원일</th>
 	<th>성별</th>
 	<th>폰번호</th>
@@ -138,6 +153,8 @@ div.admin1 {
 <c:forEach var="users" items="${userfilter }">
 <tr>
 	<th>${users.userId }</th>
+	<th>${users.userName }</th>
+	<th>${users.userNick }</th>
 	<th><c:choose>
 		<c:when test="${users.status eq 'leave'}">탈퇴</c:when>
 		<c:when test="${users.status eq	'active'}">정상</c:when>
@@ -145,10 +162,8 @@ div.admin1 {
 		<c:when test="${users.status eq 'blacklist'}">블랙리스트</c:when>
 		<c:when test="${users.status eq 'block'}">정지</c:when>
 	</c:choose>  </th>
-	<th>${users.userName }</th>
-	<th>${users.userNick }</th>
 	<th><fmt:formatDate value="${users.birth }" pattern="yyyy-MM-dd"/></th>
-	<th>${users.userId }</th>
+	<th>${users.gender }</th>
 	<th>${users.phone }</th>
 	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
 	<th><a href="./update?userno=${users.userno }"><button type="button" class="btn btn-secondary">수정</button></a>
@@ -159,7 +174,7 @@ div.admin1 {
 
 
 <div id="pagingDivTag">
-<c:import url="../../../layout/paging.jsp" />
+<c:import url="../../paging.jsp"/>
 </div>
 
 </div>	
@@ -169,4 +184,5 @@ div.admin1 {
 </body>
 </div>
 </html>
+
 

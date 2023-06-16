@@ -3,6 +3,9 @@ package com.kh.jaManChw.store.service.face;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.util.Paging;
 
 public interface StoreService {
@@ -45,7 +48,31 @@ public interface StoreService {
 	 */
 	public Map<String, Object> showDetailItem(int itemno);
 
+	/**
+	 * 배열로 된 파라미터 쌍으로 DTO에 한번씩 담아 DTO List를 반환한다
+	 * 
+	 * @param itemOptionno - 상품 옵션 번호
+	 * @param sbItemCount - 상품 옵션 주문 갯수
+	 * @param itemno - 상품 번호
+	 * @param userno - 유저 번호 
+	 * @return
+	 */
+	public List<ShoppingBasket> getsbListParam(String[] itemOptionno, String[] sbItemCount, int itemno, int userno);
 
+	/**
+	 * 전달받은 파라미터를 통해 장바구니 DB에 삽입한다
+	 * 
+	 * @param sbList - 파라미터를 받아올 List객체
+	 */
+	public void writeShoppingBasket(List<ShoppingBasket> sbList);
+
+
+	/**
+	 * 장바구니에서 선택 삭제하기
+	 * 
+	 * @param map
+	 */
+	public void Shoppingbasketerase(Map<String, String> map);
 
 
 }

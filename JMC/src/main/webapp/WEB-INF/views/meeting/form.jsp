@@ -114,7 +114,7 @@ h1 {
 }
 
 .meeting-loc {
-
+ 	swidth: 295px;
 	margin-bottom : 10px;
 }
 
@@ -141,7 +141,7 @@ h1 {
 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></div>
 	<div class="meeting-loc"><input class="post" type="text" id="sample6_address" name="loc1" placeholder="도로명주소"></div>
 	<div class="meeting-loc"><input class="post" type="text" id="sample6_extraAddress" name="loc2" placeholder="참고항목"></div>
-	<div class="meeting-join"><input class="post" type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></div>
+	<div class="meeting-loc"><input class="post" type="text" id="sample6_detailAddress" name="loc3" placeholder="상세주소"></div>
 	<div class="meeting-join"><label><b>모임 날짜</b><input type="datetime-local" id="meetingDate" name="meetingDate"></label></div>
 	<div class="meeting-join"><label><b>참가비</b><input type="text" id="fee" name="fee" placeholder="원"></label></div>
 	<div class="meeting-join"><label><b>인원 수</b><input type="number" id="headCount" name="headCount" min="2"  max="10" placeholder="명"></label></div>

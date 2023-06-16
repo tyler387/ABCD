@@ -17,6 +17,7 @@ import java.util.Base64.Encoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,8 +54,18 @@ public class PaymentController {
 		
 	}
 	
+//	@RequestMapping("/end")
+//	public void PaymentEnd(HttpServletRequest request,
+////			String val, String bbb,
+//			@RequestParam Map<String, String> map) {
+//		logger.info("여기는 결제가 끝난 시점");
+//		logger.info("bbb = {}", map);
+//		logger.info("request = {}", map);
+//		logger.info("여기는 결제가 끝난 시점");
+//	}
 	@RequestMapping("/end")
 	public void PaymentEnd() {
+
 	}
 	
 	@RequestMapping("/fail")
@@ -73,27 +84,43 @@ public class PaymentController {
 	
 	@RequestMapping("/main")
 	public void PaymentMain(
-//			@RequestParam Map<String, String> map,
-			int[] sbItemcount, int[] basketno
+			@RequestParam Map<String, Object> map,
+			 int[] basketno, Model model
 			) {
-		logger.info("결제할 상품들 출력{}");
+		logger.info("결제할 상품들 출력 맵 {}", map);
+		logger.info("결제할 상품들 출력 바스켓넘버{}", basketno);
 		
-		List<ShoppingBasket> sbList = paymentService.getParamList(sbItemcount, basketno);
+		List<Map<String, Object>> sbList = paymentService.getParamList(basketno);
+//		Map<String, Object> list = paymentService.getParamList(basketno);
+		logger.info("sbListsbListsbListsbList = {}", sbList);
+		logger.info("bbsssb = {}", sbList);
 		
 		logger.info("결제할 상품들 출력{}", sbList);
+		model.addAttribute("sbList", sbList);
+		model.addAttribute("basketno", basketno);
 	}
 	
 
-	@RequestMapping("/abc")
-	public String abc(HttpServletRequest request) {
+	@RequestMapping("/paysuccess")
+	public String paysuccess(HttpServletRequest request, HttpSession session,
+			@RequestParam Map<String, Object> map, int[] basketno, String[] itemTitle) {
+		logger.info("맵 = {}", map);
+		logger.info("바스켓넘버 = {}", basketno);
+		logger.info("itemTitle = {}", itemTitle);
+		logger.info("세션유저넘버 = {}", session.getAttribute("userno"));
+		String userno = String.valueOf(session.getAttribute("userno"));
+		logger.info("세션 유저넘버", userno);
+		map.put("userno", userno);
+		logger.info(" 원래 담긴 맵", map);
 		
-		JSONObject jsonObject = paymentService.paymentInfo(request);
+		JSONObject jsonObject = paymentService.paymentInfo(request, map, basketno, itemTitle, session);
 		
 		//paymentKey 이걸로 주문 취소 등 해야함
 		logger.info("{}", jsonObject);
 		logger.info("{}", jsonObject.get("orderId"));
 		
 		 return "redirect:/payment/end";
+//		 return "forward:/payment/end";
 	}
 	
 	@RequestMapping("/shoppingBasketList")

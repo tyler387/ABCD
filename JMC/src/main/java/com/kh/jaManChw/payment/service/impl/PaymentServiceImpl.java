@@ -14,9 +14,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Base64.Encoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.jaManChw.dto.OrderDetail;
 import com.kh.jaManChw.dto.Payment;
 import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.payment.dao.face.PaymentDao;
@@ -38,14 +42,18 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Autowired PaymentDao paymentDao;
 	
+	
+	
 	@Override
-	public JSONObject paymentInfo(HttpServletRequest request) {
+	public JSONObject paymentInfo(HttpServletRequest request, Map<String, Object> map, int[] basketno, String[] itemTitle, HttpSession session) {
 		
+		logger.info(" 원래 담긴 맵 {}", map);
+		logger.info(" 원래 담긴 장바구니번호 {}", basketno);
+		logger.info(" 원래 담긴 아이템 이름 {}", itemTitle);
 		String orderId = request.getParameter("orderId");
 		String paymentKey = request.getParameter("paymentKey");
 		String amount = request.getParameter("amount");
 		String secretKey = "test_sk_k6bJXmgo28evgEjWYDj3LAnGKWx4:";
-
 		JSONObject jsonObject = null;
 		
 		Encoder encoder = Base64.getEncoder(); 
@@ -110,11 +118,35 @@ public class PaymentServiceImpl implements PaymentService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		logger.info("세션유저넘버 = {}", session.getAttribute("userno"));
+		String userno = String.valueOf(session.getAttribute("userno"));
+		logger.info("세션 유저넘버 {}", userno);
+		map.put("userno", userno);
+		logger.info(" 원래 담긴 맵 {}", map);
 		
-		Payment payment = new Payment();
+		int abc = itemTitle.length - 1;
+		String AllItemName = itemTitle[0] +" 외 " + abc + "건";
 		
-		payment.setOrderName((String)jsonObject.get("orderName"));
-		paymentDao.insertPayment(payment);
+		int buyno = paymentDao.selectOncetrypayno();
+		map.put("buyno", buyno);
+		map.put("AllItemName", AllItemName);
+		logger.info("상품명 :  {}", AllItemName);
+		paymentDao.insertShoppingBasketBuyList(map);
+		
+		for (int i : basketno) {
+//			Map<String, String> order = new HashMap<>();
+//			OrderDetail orderDetail = new OrderDetail();
+			map.put("basketitem",paymentDao.selectShoppingAllBasketList(i));
+			logger.info("장바구니 셀렉된 거 보여죽 {}", map);
+			paymentDao.insertShoppingBasketList(map);
+			paymentDao.deleteShoppingBasketList(i);
+//			order.put("userno", userno);
+		}
+		
+		
+//		Payment payment = new Payment();
+//		payment.setOrderName((String)jsonObject.get("orderName"));
+//		paymentDao.insertPayment(payment);
 		
 		logger.info("{}", jsonObject);
 		
@@ -122,19 +154,17 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public List<ShoppingBasket> getParamList(int[] sbItemcount, int[] basketno) {
+	public List<Map<String, Object>> getParamList(int[] basketno) {
 
-		List<ShoppingBasket> sbList = new ArrayList<>();
-		for (int i = 0 ; i < basketno.length; i++) {
-			ShoppingBasket shoppingBasket = new ShoppingBasket();
-			
-			shoppingBasket.setBasketno(basketno[i]);
-			shoppingBasket.setSbItemCount(sbItemcount[i]);
-			
-			sbList.add(shoppingBasket);
+		List<Map<String, Object>> sbList = new ArrayList<>();
+//		Map<String, Object> map = new HashMap<>();
+		// 배열을 사용하여 원하는 작업 수행
+		for (int i : basketno) {
+//			map.put("sbList", paymentDao.selectShoppingAllBasketList(shoppingBasket));
+			sbList.add(paymentDao.selectShoppingAllBasketList(i));
+			logger.info("sbList {}", sbList);
 		}
-		
+		logger.info("장바구니쇼핑 리스트 {}", sbList);
 		return sbList;
 	}
-
-}
+}	

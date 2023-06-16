@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-   
 <%--     var curPage = <c:out value="${paging.curPage}"></c:out>; --%>
 <%--    var totalCount = <c:out value="${paging.totalCount}"></c:out>; --%>
 <%--     var totalPage = <c:out value="${paging.totalPage}"></c:out>; --%>
@@ -25,6 +24,7 @@
 <%-- 사용불가 표현 CSS --%>
 .disabled{
    color: gray;
+   	display: inline-block;
 }
 </style>
 

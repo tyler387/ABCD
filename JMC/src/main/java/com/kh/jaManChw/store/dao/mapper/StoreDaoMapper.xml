@@ -141,4 +141,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	DELETE FROM shopping_basket
 	WHERE USERNO = ${userno} and BASKETNO = ${basketno}
 	</delete>
+	
+	<select id=""></select>
 </mapper>

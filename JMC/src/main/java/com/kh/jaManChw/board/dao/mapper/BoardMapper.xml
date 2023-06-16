@@ -63,8 +63,8 @@
 	</select>
 	
 	<insert id="writeUserBoardComment" parameterType="BoardComment">
-		INSERT INTO BOARD_COMMENT
-		VALUES (boardComment_seq.nextval, #{boardno}, 10, #{cContent}, sysdate, 'active')
+		INSERT INTO BOARD_COMMENT(commentno, boardno, userno, c_content, c_status)
+		VALUES (boardComment_seq.nextval, #{boardno}, #{userno}, #{cContent}, 'active')
 	</insert>
 	
 	<update id="updateUserBoardComment" parameterType="BoardComment">

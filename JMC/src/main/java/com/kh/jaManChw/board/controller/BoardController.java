@@ -132,12 +132,16 @@ public class BoardController {
 		
 		@ResponseBody
 		@PostMapping("/commentWrite")
-		public ModelAndView commnetWrite(String data, int boardno, ModelAndView mav) {
+		public ModelAndView commnetWrite(String data, int boardno, ModelAndView mav, HttpSession session) {
 			logger.info("commentWrite");
 			logger.info("boardComment : {}", data);
 			
 			logger.info("boardno {}", boardno);
+			
+			
+			
 			BoardComment bComment = new BoardComment();
+			bComment.setUserno((int)session.getAttribute("userno"));
 			bComment.setcContent(data);
 			bComment.setBoardno(boardno);
 			

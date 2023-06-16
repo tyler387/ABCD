@@ -107,4 +107,32 @@
 		WHERE item_qnano = #{itemQnano}
 	</update>
 	
+		<select id="selectItemQnAQAll2" resultType="map" parameterType="Map">
+		SELECT * FROM(
+		    SELECT rownum rnum, B.* FROM (
+		        SELECT iqq.*, 
+		            user_id, 
+		            user_name, 
+		            iqa.mgr_itemno,
+		            i.item_title,
+		            i_stored_name
+		        FROM item_QnA_Q iqq, 
+		            USERS u, 
+		            item_QnA_A iqa, 
+		            
+		            item_File if, 
+		            item i
+		        WHERE 1 = 1
+		            AND iqq.userno = u.userno
+		            AND iqq.item_qnano = iqa.item_qnano(+)
+		            AND iqa.ia_status(+) != 'delete'
+		            AND iqq.itemno = i.itemno
+		            AND iqq.itemno = if.itemno
+		            AND iqq.itemno = #{itemno}
+		        ORDER BY iqq.item_qnano DESC
+		    )B
+		)
+		WHERE rnum BETWEEN #{itemQnAQPaging.startno} AND #{itemQnAQPaging.endno} 
+	</select>
+	
 </mapper>

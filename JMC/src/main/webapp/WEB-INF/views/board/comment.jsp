@@ -11,7 +11,7 @@
 
 <c:when test="${sessionScope.userId ne null }">  
 <div id="cComment">
-<input type="text" id="commentWrite" name="cContent" placeholder="덧글을 작성하세요"><button id="btnWrite">등록</button><br>
+<input type="text" id="commentWrite" name="cContent" placeholder="덧글을 작성하세요" style="display:inline-block; margin-bottom:5px;" ><button id="btnWrite">등록</button><br>
 
 </c:when>
 </c:choose>   

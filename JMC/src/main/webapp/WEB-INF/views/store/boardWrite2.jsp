@@ -164,9 +164,7 @@ $("#modalbutton").click(function(){
 		         , success: function(){
 		        	 
 		            console.log("AJAX 성공")
-		            $("#storeboard").load(
-		            "./storeBoard"		
-		            )
+		            location.reload();
 		            
 		         }
 		         , error: function(){

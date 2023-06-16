@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +108,7 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/itemDetail")
-	public void itemDetail(int itemno, String curPage, Model model) {
+	public void itemDetail(@Param("itemno") int itemno, String curPage, Model model) {
 		logger.info("아이템 번호! : {}", itemno);
 		
 		Map<String, Object> allItemDetail = storeService.showDetailItem(itemno);
@@ -116,7 +117,8 @@ public class StoreController {
 		//---------------------------------------------------------
 		Paging paging = itemQnAQService.getItemQnAQPaging(curPage);
 		
-		List<Map<String, Object>> itemQnAQList = itemQnAQService.showItemQnAQList(itemQnAQService.getItemQnAQPaging(curPage));
+		//★관리자에서 작성한 것!+selectAll이 아니라 해당 상품에 QNA만 가지고 오는 걸로 메서드 바꾸기!
+		List<Map<String, Object>> itemQnAQList = itemQnAQService.showItemQnAQList2(itemQnAQService.getItemQnAQPaging(curPage), itemno);
 		logger.info("itemQnAQList: {}", itemQnAQList);
 		
 		

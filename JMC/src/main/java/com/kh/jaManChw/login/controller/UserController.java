@@ -54,10 +54,7 @@ public class UserController {
 		boolean leaveUser = usersService.leaveLogin(users);
 		
 		if(leaveUser) {
-			
-			// 세션 삭제
 			session.invalidate();
-		
 			return "redirect:/login/main";
 		}
 		
@@ -65,49 +62,36 @@ public class UserController {
 		boolean block = usersService.blackLogin(users);
 		
 		if(block) {
-			
-			// 세션 삭제
-			session.invalidate();
-			
+			session.invalidate();			
 			return "redirect:/login/login";
 		}
 
-		// 로그인 인증
-		boolean isLogin = usersService.login(users);	
-		
 		//유저 정보 가져오기
 		Users info = usersService.getuserInfo(users);
 		logger.info("info:{}",info);
-		
-		ProfileFile profile = mypageService.fileInfo(info);
-		
-		if(profile !=null) {
-			session.setAttribute("profile", profile);
-			logger.info("profile:{}",profile);
-			
-		}
-		
-		logger.info("profile:{}",profile);
-		// info 모델에 저장
 		model.addAttribute("info",info);
 		
-		if (isLogin) {
-			
-
-			
+		// 로그인 인증
+		boolean isLogin = usersService.login(users);	
+		
+		if (isLogin) {		
 			logger.info("userlogin() - 로그인 성공");
 			
+			
+			// 프로필 정보 가져오기
+			ProfileFile profile = mypageService.fileInfo(info);	
+			if(profile !=null) {session.setAttribute("profile", profile);}
+			logger.info("profile:{}",profile);		
 			
 			
 			// 세션에 파라미터 값 저장
 			session.setAttribute("login", isLogin);
 			session.setAttribute("userno", info.getUserno());
-			//session.setAttribute("userNick", info.getUserNick());
-			//session.setAttribute("email", info.getEmail());
 			session.setAttribute("userId", info.getUserId());
 			session.setAttribute("role", info.getRole());
 			session.setAttribute("social",info.getSocialNum());
 			session.setAttribute("status", info.getStatus());
+			session.setAttribute("platFormOption", info.getPlatFormOption());
 			
 			
 			logger.info("social:{}",info.getSocialNum());

@@ -144,5 +144,4 @@ $(function () {
 </div>
 
 <c:import url="../layout/footer.jsp"/> 
-<c:import url="../chat/chatbutton.jsp"></c:import>
 

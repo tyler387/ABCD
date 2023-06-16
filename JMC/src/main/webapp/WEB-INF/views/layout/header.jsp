@@ -144,7 +144,7 @@ a {
 
 </style>
 </head>
-
+<c:import url="../chat/chatbutton.jsp"></c:import>
 <body>
 
 <div id="header">

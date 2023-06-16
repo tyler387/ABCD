@@ -149,6 +149,7 @@
 }
 
 .selectbtncal{
+  font-family: '양진체';
   height: 50px;
   width: 300px;
   border-radius: 20px; 
@@ -170,6 +171,7 @@
 }
 
 .selectbtnmap{
+  font-family: '양진체';
   height: 50px;
   width: 300px;
   border-radius: 20px;

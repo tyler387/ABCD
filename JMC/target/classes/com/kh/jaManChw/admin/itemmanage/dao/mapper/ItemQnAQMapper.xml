@@ -8,7 +8,7 @@
 	<select id="selectCntAllQnAQ" resultType="int">
 		SELECT count(*) FROM Item_QnA_Q
 	</select>
-
+ 
 	<select id="selectItemQnAQAll" resultType="map" parameterType="Paging">
 		SELECT * FROM(
 		    SELECT rownum rnum, B.* FROM (

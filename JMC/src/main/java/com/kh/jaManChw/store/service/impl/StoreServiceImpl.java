@@ -1,6 +1,8 @@
 package com.kh.jaManChw.store.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaManChw.dto.Item;
 import com.kh.jaManChw.dto.ItemFile;
 import com.kh.jaManChw.dto.ItemOption;
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.store.dao.face.StoreDao;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
@@ -89,8 +92,39 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 
-
+	@Override
+	public List<ShoppingBasket> getsbListParam(String[] itemOptionno, String[] sbItemCount, int itemno, int userno) {
+		
+		List<ShoppingBasket> sbList = new ArrayList<>();
+		
+		for(var i = 0 ; i < itemOptionno.length; i++) {
+			ShoppingBasket sb = new ShoppingBasket();
+			sb.setItemno(itemno);
+			sb.setUserno(userno);
+			sb.setSbItemCount(Integer.parseInt(sbItemCount[i]));
+			sb.setItemOptionno(Integer.parseInt(itemOptionno[i]));
+			
+			sbList.add(sb);
+		}
+		
+		return sbList;
+	}
 	
+	@Override
+	public void writeShoppingBasket(List<ShoppingBasket> sbList) {
+
+		for(ShoppingBasket sb : sbList) {
+			
+			storeDao.insertShoppingBasket(sb);
+			
+		}
+	}
+	
+	@Override
+	public void Shoppingbasketerase(Map<String, String> map) {
+		
+		storeDao.DeleteShoppingBasket(map);
+	}
 	
 	
 	

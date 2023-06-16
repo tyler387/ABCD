@@ -33,5 +33,8 @@ public interface ReportManageDao {
 
 	public void deleteReportMeeting(Map<String, Object> map);
 
+	public int selectFilterCntAll(Map<String, Object> map);
+
+
 
 }

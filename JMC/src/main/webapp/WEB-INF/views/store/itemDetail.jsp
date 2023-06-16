@@ -70,26 +70,29 @@
 
 
 
-			<form action="#">
 			  <div><label for="lang">구매 옵션을 선택해 주세요</label></div>
 				  <select name="option" id="option" >
-				    <option value="${allItemDetail.itemDetail.itemPrice}" id="test">${allItemDetail.itemDetail.itemTitle}</option>
+				    <option value="${allItemDetail.itemDetail.itemPrice}" id="test" data-optionno='0'>${allItemDetail.itemDetail.itemTitle}</option>
 				   	<c:forEach var="option2" items="${allItemDetail.itemOptionDetailList }">
-				   	<option value="${allItemDetail.itemDetail.itemPrice+option2.extraCharge}" class="addOption">${allItemDetail.itemDetail.itemTitle}+${option2.optionContent}</option>
+				   	<option value="${allItemDetail.itemDetail.itemPrice+option2.extraCharge}" class="addOption" data-optionno='${option2.itemOptionno}'>${allItemDetail.itemDetail.itemTitle}+${option2.optionContent}</option>
 					</c:forEach>
 				  </select>
-			</form>
 				<input type="submit" value="선택" id="click3" />
 
+			
+			<form id="sender">
 			<div id="result">
 				
 				
 			</div>
+
 <!-- 			없다가 선택 버튼 클릭시 생기도록 해야 함 -->
-			<div id="price">총 합계 : </div>
+			<div id="price">총 합계 :<span id="totalPrice">0</span></div>
 			<hr>
-			<button>장바구니 담기</button>
-			<button>바로구매 하기</button>
+			<input type="hidden" name="itemno" value="${allItemDetail.itemDetail.itemno}" readonly="readonly">
+			<button id="btnBasket">장바구니 담기</button>
+			<button id="btnBuyNow">바로구매 하기</button>
+			</form>
 		</div>
 </div>
 <hr>
@@ -130,25 +133,33 @@ $(function() {
 		
 // 		$("#result").html(option)
 		$("#result").append(
-			"<div>" + $("#option :selected").html() + "</div>"		
+			"<div>" + $("#option :selected").html() + "</div>"+
+				"<input type='hidden' name='itemOptionno' value='"+$("#option :selected").attr("data-Optionno")+"' readonly='readonly'>"
 		)
 		$("#result").append(
-			"<div id='price'>"
-			+	"<b>"
-			+	$("#option :selected").val()
-			+ 	"</b>원"
-			+	"<div class='input-group' style='margin-left: auto;'>"
-			+	"<input type='button' class='btnCount' value='-'/>"
-			+	"<div class='resultNum'>1</div>"
-			+	"<input type='button' class='btnCount'  value='+'/>"
-			+	"</div>"
-			+	"</div>"
-			+	"</div>"					
-			)
+				"<div class='price'>"
+			+		"<b data-perPrice="+$("#option :selected").val()+">"
+			+		$("#option :selected").val()
+			+ 		"</b>원"
+			+		"<div class='input-group' style='margin-left: auto;'>"
+			+			"<input type='button' class='btnCount' value='-'/>"
+			+			"<div class='resultNum'>1</div>"
+			+			"<input type='button' class='btnCount'  value='+'/>"
+			+		"</div>"	
+			+		"<input type='hidden' name='sbItemCount' value='1' readonly='readonly'>"
+			+	"</div>"	
+		)
+		
+		var totalPrice = 0;
+		for (var i = 0; i < $(".price").children('b').length; i++) {
+			totalPrice += Number($(".price").children('b')[i].innerHTML)
+		}
+		$("#totalPrice").html(totalPrice)
 		
 	})
 	<!-- 가격 + 수량 관련 -->
 
+	
 	
 	$("#result").on("click", ".btnCount", function() {
 		
@@ -156,16 +167,27 @@ $(function() {
 		
 		if ($(this).val() == "+") {
 			var count1 = $(this).parent().children("div").text();
+			
+			const perPrice = $(this).parent().parent().children('b').attr("data-perPrice")
+			
 		
 			console.log("뭐죠?", count1)
-			console.log("뭐죠?1", $(this).parent().children("div").text())
+			console.log("뭐죠?1", $(this).parent().children("div").attr("data-perPrice"))
+			console.log("각 가격 ", perPrice)
 			count1++
 			
+			//각 상품의 갯수가 추가될때마다 count와의 곱으로 각 옵션마다의 총 합을 계산함
+			console.log("추가됐나요?",perPrice*count1)
+			var optionTotalPrice = perPrice*count1
 			$(this).parent().children("div").text(count1);
+			$(this).parent().parent().children('b').text(optionTotalPrice);
+			$(this).parent().parent().children('input').val(count1);
+			
 		}
 		
 		if ($(this).val() == "-") {
-			let count2 = $(this).parent().children("div").text();
+			var count2 = $(this).parent().children("div").text();
+			const perPrice = $(this).parent().parent().children('b').attr("data-perPrice")
 			
 			console.log("뭐죠3?", count2)
 			
@@ -174,28 +196,51 @@ $(function() {
 				count2--
 			}
 			
+			var optionTotalPrice = perPrice*count2
+			
 			$(this).parent().children("div").text(count2);
+			$(this).parent().parent().children('b').text(optionTotalPrice);
+			$(this).parent().parent().children('input').val(count2);
 		}
 		
+		var totalPrice = 0;
+		for (var i = 0; i < $(".price").children('b').length; i++) {
+			totalPrice += Number($(".price").children('b')[i].innerHTML)
+		}
+		$("#totalPrice").html(totalPrice)
+	})
+	
+	$("#btnBasket").click(function() {
+		$("#sender").submit(function() {
+			$("#sender").attr("action","./write/basket")
+			$("#sender").attr("method","post")
+		})
+	})
+	$("#btnBuyNow").click(function() {
+		$("#sender").submit(function() {
+			$("#sender").attr("action","./buynow")
+			$("#sender").attr("method","get")
+		})
 	})
 
+
 })
-	function count(type)  {
-		console.log("오냐오냐오냐오냐");
-		  // 결과를 표시할 element
-		  const resultElement = $(".resultNum").html();
-		  
-		  // 현재 화면에 표시된 값
-		  let number = resultElement.innerText;
-		  number = parseInt(number)
-		  // 더하기/빼기
-		  if(type === 'plus') {
-		    number = number + 1;
-		  }else if(type === 'minus')  {
-		    number = number - 1;
-		  }
-		  
-		  // 결과 출력
-		  resultElement.innerText = number;
-		}
+function count(type)  {
+	console.log("오냐오냐오냐오냐");
+	  // 결과를 표시할 element
+	  const resultElement = $(".resultNum").html();
+	  
+	  // 현재 화면에 표시된 값
+	  let number = resultElement.innerText;
+	  number = parseInt(number)
+	  // 더하기/빼기
+	  if(type === 'plus') {
+	    number = number + 1;
+	  }else if(type === 'minus')  {
+	    number = number - 1;
+	  }
+	  
+	  // 결과 출력
+	  resultElement.innerText = number;
+	}
 </script>

@@ -98,5 +98,25 @@ public class ReportManageServiceImpl implements ReportManageService {
 		reportManageDao.deleteReportMeeting(map);
 	}
 	
-	
+	@Override
+	public Paging getFilterPaging(String ccurpage, Map<String, Object> map) {
+		//전달파라미터 curPage 추출
+		
+		String param = ccurpage;
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		} else {
+			System.out.println("[WARN] BoardService - getPaging() : curPage값이 null이거나 비어있음");
+		}
+		
+		//총 게시글 수 조회하기
+		int totalCount = reportManageDao.selectFilterCntAll(map);
+		
+		//페이징 객체
+//		Paging paging = new Paging(totalCount, curPage, 30, 5); //listCount:30, pageCount:5
+		Paging paging = new Paging(curPage, totalCount);
+		
+		return paging;
+	}
 }

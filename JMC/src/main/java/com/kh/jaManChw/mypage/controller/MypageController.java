@@ -263,7 +263,6 @@ public class MypageController {
 	}
 	@GetMapping("/agree")
 	public String agree(Applicant applicant,Model model) {
-		model.addAttribute("test","123");
 		if(applicant.getAgree().equals("yes")) {
 			//정원 수 초과시 true
 			boolean countChk = meetingService.chkHeadCount(applicant);

@@ -172,7 +172,7 @@ a {
 <div id="menu">
   <ul class="main1">
     <li style="border: none;"><a href="/login/main">JAMANCHU</a></li>
-    <li><a href="/">회사소개</a></li>
+    <li><a href="/company/info">회사소개</a></li>
     <li style="border: none; cursor:pointer;"><a>모임</a>
        <ul class="main2">
         <li><a href="/meeting/form">모임 등록</a></li>

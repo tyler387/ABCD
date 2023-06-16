@@ -108,4 +108,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE itemno = #{itemno}
 	</select>
 
+	<insert id="insertShoppingBasket" parameterType="ShoppingBasket">
+		INSERT INTO shopping_basket(
+			basketno
+			, itemno
+			, userno
+			, sb_item_count
+			<if test="itemOptionno != 0">
+			, item_optionno
+			</if>
+			)
+		VALUES(
+			shopping_basket_seq.nextval
+			, #{itemno}
+			, #{userno}
+			, #{sbItemCount}
+			<if test="itemOptionno != 0">
+			, #{itemOptionno}
+			</if>
+			)
+	</insert>
 </mapper>

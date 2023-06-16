@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
 
@@ -115,5 +116,22 @@ public class StoreController {
 		
 	}
 
-
+	@PostMapping("/write/basket")
+	public void shoppingBasketPage(
+			String[] itemOptionno
+			,String[] sbItemCount
+			,HttpSession session
+			,int itemno
+			,Model model
+			) {
+		
+		logger.info("가져왓나요?: {}",itemOptionno[0]);
+		logger.info("가져왓나요?: {}",sbItemCount[0]);
+		
+		List<ShoppingBasket> sbList = storeService.getsbListParam(itemOptionno,sbItemCount, itemno, (Integer)session.getAttribute("userno"));
+		logger.info("what:{}",sbList);
+		storeService.writeShoppingBasket(sbList);
+		
+		
+	}
 }

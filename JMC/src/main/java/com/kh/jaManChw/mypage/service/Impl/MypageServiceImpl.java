@@ -132,11 +132,11 @@ public class MypageServiceImpl implements MypageService {
 		if(res > 0) {			
 			// 저장된 파일 삭제
 			mypageDao.deleteProfileName(profileFile);
-			mypageDao.insertFile(profile);			
 			logger.info("res:{}");	
-			
-		}
-		
+			mypageDao.insertFile(profile);				
+		}else {		
+		mypageDao.insertFile(profile);
+		}		
 		return profile;
 	}
 

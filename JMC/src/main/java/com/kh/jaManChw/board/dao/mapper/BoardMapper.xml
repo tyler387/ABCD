@@ -26,7 +26,15 @@
 	</select>
 	
 	<select id="selectAllDetail" parameterType="int" resultType="map">
-		SELECT b.*, bf.stored_name , bcCo.cnt CoCount, bcL.cnt likeCount
+		SELECT 
+			b.boardno
+			, b.board_optionno
+			, b.userno
+			, b.content
+			, b.status
+			, bf.stored_name 
+			, bcCo.cnt CoCount
+			, bcL.cnt likeCount
 		FROM 
 		    board b,  
 		    (SELECT count(bc.boardno) cnt , b.boardno
@@ -94,14 +102,17 @@
 	
 	
 	<insert id="insertBoard" parameterType="Board">
-		INSERT INTO BOARD
-		VALUES ( #{boardno}, #{boardOptionno}, #{userno}, #{content}, 'active', sysdate, sysdate )
+		INSERT INTO BOARD(boardno, board_optionno, userno, content, status)
+		VALUES ( #{boardno}, #{boardOptionno}, #{userno}, #{content}, 'active')
 	</insert>
 
 	<insert id="insertBoardFile" parameterType="BoardFile">
 		INSERT INTO BOARD_File
-		VALUES ( boardFile_seq.nextval, #{boardno},#{originName}, #{storedName}, ${filesize})
+		VALUES ( boardFile_seq.nextval, #{boardno}, #{originName}, #{storedName}, #{filesize})
 	</insert>
+	
+	
+	
 	<select id="selectReco" parameterType="BoardLike" resultType="int">
 		select count(*) from board_like 
 		where userno = #{userno} and boardno = #{boardno}

@@ -21,7 +21,7 @@
   align-items: center; 
 /*   text-align:center; */
   min-height: 60vh;
-  padding-top: 60px;
+ padding-top: 200px;
 
 }
 
@@ -163,6 +163,7 @@ input.addEventListener("keyup", function (event) {
 });
 
 
+
 $('#userId').blur(function() {
 	var userId = $('#userId').val();
 
@@ -185,12 +186,13 @@ $('#userPw').blur(function() {
 	return true;
 })
 
-$(document).ready(function() {
+$('#loginBtn').click(function() {
 	
-	let message = "[[${msg}]]";
+	var userId = $('#userId').val();
+	var userPw = $('#userPw').val();
 	
-    if (message != "") {
-        alert(message);
+    if (userId == "" || userPw == "") {
+        alert("아이디, 비밀번호를 다시 체크해주세요");
     }
 })
 		

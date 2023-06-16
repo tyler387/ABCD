@@ -11,11 +11,12 @@ public class AdminBoard {
 	private String abOption;
 	private String abStatus;
 	private Date writeDate;
+	private Date lastUpdateDate;
 	
 	public AdminBoard() {}
 
 	public AdminBoard(int adminBoardno, int userno, String title, String content, String abOption, String abStatus,
-			Date writeDate) {
+			Date writeDate, Date lastUpdateDate) {
 		super();
 		this.adminBoardno = adminBoardno;
 		this.userno = userno;
@@ -24,12 +25,14 @@ public class AdminBoard {
 		this.abOption = abOption;
 		this.abStatus = abStatus;
 		this.writeDate = writeDate;
+		this.lastUpdateDate = lastUpdateDate;
 	}
 
 	@Override
 	public String toString() {
 		return "AdminBoard [adminBoardno=" + adminBoardno + ", userno=" + userno + ", title=" + title + ", content="
-				+ content + ", abOption=" + abOption + ", abStatus=" + abStatus + ", writeDate=" + writeDate + "]";
+				+ content + ", abOption=" + abOption + ", abStatus=" + abStatus + ", writeDate=" + writeDate
+				+ ", lastUpdateDate=" + lastUpdateDate + "]";
 	}
 
 	public int getAdminBoardno() {
@@ -86,6 +89,14 @@ public class AdminBoard {
 
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 	
 }

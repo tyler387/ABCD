@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Report;
-import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 
 public interface AdminMainDao {

@@ -159,9 +159,9 @@
 	</div>
 </div>
 <div class="userInfo-btn">
-        <a href="/mypage/delete"><button type="button">회원탈퇴</button></a> 
- 		<a href="/mypage/main"><button type="button">취소</button></a>
-       	<a href="/mypage/main"><button>저장</button></a>
+        <button>저장</button>
+        <a href="/mypage/delete"><input type="button" value="회원탈퇴"></a> 
+ 		<a href="/mypage/main"><input type="button" value="취소"></a>
   </div>
   </form>
        

@@ -65,7 +65,7 @@ public class MypageController {
 		
 		
 		//담아온 세션으로 파일 저장된 이름 불러오기
-		ProfileFile profile = mypageService.fileInfo(users);
+		ProfileFile profile =  mypageService.fileInfo(users);
 		//ProfileFile profile= mypageService.getFileName(profileFile);
 		
 	
@@ -73,9 +73,6 @@ public class MypageController {
 		model.addAttribute("profile", profile);
 		logger.info("profile 수정:{}",profile);
 
-		// profile 모델값에 담기
-		model.addAttribute("profile", profile);
-		logger.info("profile:{}",profile);
 		
 		//유저 정보 가져오기 - 메인에서 로그인한 유저 정보 조회
 		Users loginInfo = mypageService.getloginInfo(users);
@@ -97,7 +94,7 @@ public class MypageController {
 		users.setUserno(userno);
 		
 		Users loginInfo = mypageService.getloginInfo(users);
-		model.addAttribute("loginInfo userInfo", loginInfo);
+		model.addAttribute("loginInfo", loginInfo);
 		
 	}
 	
@@ -113,7 +110,7 @@ public class MypageController {
 			
 		}else {
 			logger.info("정보수정 실패");
-			session.invalidate();
+			
 			return "redirect:/mypage/userInfo";
 		}
 		
@@ -122,7 +119,14 @@ public class MypageController {
 //-----------------------------------------------------------
 	// 회원탈퇴 페이지
 	@GetMapping("/delete")
-	public void deletePage() {}
+	public void deletePage(Users users,HttpSession session,Model model) {
+		//세션에 저장된 userno 가져오기
+		int userno = (Integer)session.getAttribute("userno");
+		users.setUserno(userno);
+		
+		model.addAttribute("user", users);
+		
+	}
 	
 	// 회원탈퇴
 	@PostMapping("/delete")
@@ -176,7 +180,7 @@ public class MypageController {
 			ProfileFile profile = mypageService.profileSave(file, profileFile);
 			
 			// 파일의 저장이름 세션에 저장
-			session.setAttribute("profile", profile.getProfileStoredName());
+			session.setAttribute("profile", profile);
 			
 		}
 		

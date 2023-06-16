@@ -12,7 +12,7 @@
       <h3>탈퇴를 진행하시겠습니까?</h3>
       <form action="/mypage/delete" method="post">
         <div class="userleave">
-        	<div><input type="hidden" id="userno" name="userno" value="${userno}"></div>
+        	<div><input type="hidden" id="userno" name="userno" value="${user.userno}"></div>
 			<div class="box1">
 			
 				<div class="labelbox"><label for="userId">아이디</label></div>

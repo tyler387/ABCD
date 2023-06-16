@@ -10,7 +10,6 @@ import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Report;
-import com.kh.jaManChw.dto.ReportMeeting;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.MeetingPaging;
 

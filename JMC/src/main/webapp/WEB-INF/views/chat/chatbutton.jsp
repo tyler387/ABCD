@@ -105,6 +105,7 @@ function backbuttonshow(){
     border-radius: 50px;
     background-color: white;
     width: 80px;
+    height:80px;
     cursor: pointer;
     box-shadow: 0px 0px 5px 3px #8D7B68;
 }

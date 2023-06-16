@@ -22,6 +22,7 @@ import com.kh.jaManChw.login.service.face.UsersService;
 import com.kh.jaManChw.mypage.service.face.MypageService;
 
 @Controller
+@RequestMapping("/login")
 public class UserController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -30,11 +31,11 @@ public class UserController {
 	@Autowired MypageService mypageService;
 	@Autowired NaverService naverService;
 
-	@RequestMapping("/login/main")
+	@RequestMapping("/main")
 	public void mainPage() {}
 
 	// 로그인 페이지 이동
-	@GetMapping("/login/login")
+	@GetMapping("/login")
 	public void loginPage(HttpSession session) {
 		//JSP에 정보를 입력하기에는 노출의 위험이 있기에 controller에서 선처리 후 보낸다
 		Map<String, String> naverMap = naverService.getNaverApiInfo();
@@ -43,7 +44,7 @@ public class UserController {
 	}
 
 	// 로그인 - true or false
-	@PostMapping("/login/login")
+	@PostMapping("/login")
 	public String userlogin(HttpSession session, Users users,Model model) {
 		logger.info("{}", users);
 		
@@ -56,6 +57,7 @@ public class UserController {
 			
 			// 세션 삭제
 			session.invalidate();
+		
 			return "redirect:/login/main";
 		}
 		
@@ -66,7 +68,8 @@ public class UserController {
 			
 			// 세션 삭제
 			session.invalidate();
-			return "redirect:/login/main";
+			
+			return "redirect:/login/login";
 		}
 
 		// 로그인 인증
@@ -77,19 +80,20 @@ public class UserController {
 		logger.info("info:{}",info);
 		
 		ProfileFile profile = mypageService.fileInfo(info);
-	
+		
 		if(profile !=null) {
 			session.setAttribute("profile", profile);
 			logger.info("profile:{}",profile);
-						
+			
 		}
 		
 		logger.info("profile:{}",profile);
-
 		// info 모델에 저장
 		model.addAttribute("info",info);
 		
 		if (isLogin) {
+			
+
 			
 			logger.info("userlogin() - 로그인 성공");
 			
@@ -116,29 +120,18 @@ public class UserController {
 			logger.info("userlogin() - 로그인 실패");
 
 			// 세션 삭제
-			session.invalidate();
-			
-			model.addAttribute("msg","아이디, 비밀번호를 다시 체크해주세요");
-			
+			session.invalidate();		
 			return "/login/login";
 		} // if(isLogin)문 end		
 	} // userlogin() end
 
-//	@RequestMapping("/login/logout")
-//	public String userLogout(HttpSession session) {
-//		logger.info("userLogout() - 로그아웃 성공");
-//		// 세션 삭제
-//		session.invalidate();
-//		// 메인페이지로 리다이렉트
-//		return "redirect:/login/main";
-//	}
 
 	// 회원가입 페이지 이동
-	@GetMapping("/login/join")
+	@GetMapping("/join")
 	public void joinPage() {}
 
 	// 홈페이지 내에서 회원가입, 완료 후 메인페이지로이동
-	@PostMapping("/login/join")
+	@PostMapping("/join")
 	public String userJoin(Users users) {
 		logger.info("{}",users);
 		
@@ -148,7 +141,7 @@ public class UserController {
 		
 		logger.info("회원가입 성공");
 
-		return "redirect:/login/main";
+		return "redirect:/login/login";
 	} // userJoin() end
 	
 
@@ -171,7 +164,7 @@ public class UserController {
 //		
 //	} // idchdck() end
 	
-	@RequestMapping("/login/idcheck")
+	@RequestMapping("/idcheck")
 	@ResponseBody
 	public int idCheck(@RequestParam("userId") String userId) {
 		int res = usersService.IdCheck(userId);
@@ -187,11 +180,11 @@ public class UserController {
 	
 	
 	// 아이디찾기 페이지 이동
-	@GetMapping("/login/searchId")
+	@GetMapping("/searchId")
 	public void searchIdPage() {}
 	
 	// 이메일로 아이디 찾기
-	@PostMapping("/login/searchId")
+	@PostMapping("/searchId")
 	public String findIdByemail(Users users,Model model,HttpSession session) {
 		
 		Users result = usersService.searchName(users);
@@ -210,15 +203,15 @@ public class UserController {
 	} // findIdByemail() end
 	
 	// 찾은 아이디 보여주는 페이지 이동
-	@GetMapping("/login/searchResultId")
+	@GetMapping("/searchResultId")
 	public void searchResultIdPage() {}
 	
 	
 	// 비밀번호 찾기 페이지
-	@GetMapping("/login/searchPw")
+	@GetMapping("/searchPw")
 	public void searchPwPage() {}
 	
-	@PostMapping("/login/searchPw")		
+	@PostMapping("/searchPw")		
 	public String searchPw(Users users,Model model,HttpSession session) {
 		Users res = usersService.searchId(users);
 		
@@ -237,11 +230,11 @@ public class UserController {
 	
 
 	// 찾는 비밀번호 페이지
-	@GetMapping("/login/searchResultPw")
+	@GetMapping("/searchResultPw")
 	public void searchResultPwPage() {}
 	
 	// 비밀번호 재설정
-	@PostMapping("/login/searchResultPw")
+	@PostMapping("/searchResultPw")
 	public String searchResultPw(Users users,HttpSession session) {
 
 		

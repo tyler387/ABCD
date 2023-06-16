@@ -87,7 +87,6 @@ public interface MeetingDao {
 	public List<Meeting> selectMyMeetingno(Meeting meeting);
 
 
-	public List<Map<String, Object>> selectApllicantInfo(List<Meeting> list);
 
 	public void updateApplicantAgree(Applicant applicant);
 

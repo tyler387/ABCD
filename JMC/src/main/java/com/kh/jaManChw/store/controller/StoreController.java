@@ -39,7 +39,7 @@ public class StoreController {
 		
 		int userno = (Integer)session.getAttribute("userno");
 		logger.info("세션 유저 넘버 {}", userno);
-		List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
+		List<Map<String, Object>> list = storeService.getShoppingbasketList(userno);
 		logger.info("장바구니 조회결과{}", list);
 		model.addAttribute("list", list);
 		
@@ -55,7 +55,7 @@ public class StoreController {
 	      map.put("userno", Integer.toString(userno));
 	      storeService.SbUpdate(map);
 	      //유저 번호 받아야함
-	      List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
+	      List<Map<String, Object>> list = storeService.getShoppingbasketList(userno);
 	      mav.addObject("list", list);
 		//뷰네임 지정	-> jsonView 적용
 		mav.setViewName("/store/shoppingBasketList");
@@ -126,7 +126,7 @@ public class StoreController {
 	}
 
 	@PostMapping("/write/basket")
-	public void shoppingBasketPage(
+	public String shoppingBasketPage(
 			String[] itemOptionno
 			,String[] sbItemCount
 			,HttpSession session
@@ -141,6 +141,7 @@ public class StoreController {
 		logger.info("what:{}",sbList);
 		storeService.writeShoppingBasket(sbList);
 		
+		return "redirect:../shoppingbasket";
 		
 	}
 }

@@ -16,7 +16,7 @@ public interface UserManageDao {
 	public int selectCntAll();
 
 
-	public Users getUserdata(int userno);
+	public Map<String, String> getUserdata(int userno);
 
 	public void deleteUserMgWithdraw(int userno);
 
@@ -27,6 +27,10 @@ public interface UserManageDao {
 	public void updateUserBlackStop(int userno);
 
 	public void updateUserMgUpdate(Map<String, Object> map);
+
+	public int selectUserProfile(int userno);
+
+	public Map<String, String> getUserdataProfile(int userno);
 
 	
 }

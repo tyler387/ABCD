@@ -30,8 +30,24 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired StoreDao storeDao;
 
 	@Override
-	public List<Map<String, String>> getShoppingbasketList(int userno) {
+	public List<Map<String, Object>> getShoppingbasketList(int userno) {
 		
+		List<Map<String, Object>> map = storeDao.ItemOptionList();
+//		Map<String, String> map2 = storeDao.ItemOptionList();
+//		storeDao.ItemOptionList();
+		
+		List<Map<String, Object>> map2 = storeDao.selectAllShoppingbasketList(userno);
+		
+		for(Map<String, Object> m : map2) {
+			
+			if(m.get("ITEM_OPTIONNO") != null || !"".equals(m.get("ITEM_OPTIONNO"))) {
+//			m.put("ITEM_OPTION", storeDao.selectOptionByOptionno(m.get("ITEM_OPTIONNO")));
+			}
+		}
+		
+//		logger.info("아이템옵션 목록 {}", map);
+		logger.info("장바구니 목록 {}", map2);
+//		logger.info("아이템옵션 목록 {}");
 		return storeDao.selectAllShoppingbasketList(userno);
 		
 	}

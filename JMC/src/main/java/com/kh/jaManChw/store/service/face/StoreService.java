@@ -16,7 +16,7 @@ public interface StoreService {
 	 * @param userno
 	 * @return 
 	 */
-	public List<Map<String, String>> getShoppingbasketList(int userno);
+	public List<Map<String, Object>> getShoppingbasketList(int userno);
 	
 	/**
 	 * 수정된 수량 숫자와 장바구니번호를 받아서 수정

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
 
@@ -27,6 +27,8 @@ public class StoreController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired StoreService storeService;
+	
+
 	
 	@RequestMapping("/main")
 	public void StoreMain() {
@@ -110,10 +112,43 @@ public class StoreController {
 		
 	}
 	
-	@RequestMapping("/boardWrite2")
-	public void boardWrite() {
+	@GetMapping("/boardWrite2")
+	public void getBoardWrite() {
 		
+	}
+	
+//	@PostMapping("/boardWrite2")
+//	public void postBoardWrite(String modalTitle, String modalContent){
+//		logger.info("★★★★★★★★여기 옴????");
+//		logger.info(modalTitle);
+//		logger.info(modalContent);
+//	
+//	}
+	@PostMapping("/abcabc")
+	public void itemQnAWrite(String modalTitle, String modalContent, int itemno, HttpSession session, Model model) {
+		logger.info("문의글 작성한 거 받아오기");
+		logger.info(modalTitle);
+		logger.info(modalContent);
+		logger.info("item:{}",itemno);
+		storeService.writeItemQnA(modalTitle, modalContent, itemno, session);
+
+	
+
+		
+		model.addAttribute("model", model);
 	}
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

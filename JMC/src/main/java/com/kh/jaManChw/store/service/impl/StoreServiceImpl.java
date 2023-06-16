@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.kh.jaManChw.dto.Item;
 import com.kh.jaManChw.dto.ItemFile;
 import com.kh.jaManChw.dto.ItemOption;
+import com.kh.jaManChw.dto.ItemQnAQ;
 import com.kh.jaManChw.store.dao.face.StoreDao;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
@@ -90,7 +93,25 @@ public class StoreServiceImpl implements StoreService {
 
 
 
-	
+	@Override
+	public void writeItemQnA(String modalTitle, String modalContent, int itemno, HttpSession session) {
+
+		//문의 테이블에 내용 넣어 주기
+		
+		ItemQnAQ itemQnAQ = new ItemQnAQ();
+		
+		itemQnAQ.setItemno(itemno);
+		itemQnAQ.setUserno((int)session.getAttribute("userno"));
+		logger.info("유저번호{}", (int)session.getAttribute("userno"));
+		itemQnAQ.setIqTitle(modalTitle);
+		itemQnAQ.setIqContent(modalContent);
+		
+		//굳 원하는 값 잘 가지고 들어 옴
+		logger.info("아이템QnAQ의 값: {}", itemQnAQ );
+		
+		storeDao.insertItemQnA(itemQnAQ);
+		
+	}
 	
 	
 	

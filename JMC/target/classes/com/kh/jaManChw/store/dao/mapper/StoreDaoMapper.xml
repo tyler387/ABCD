@@ -107,5 +107,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM item
 		WHERE itemno = #{itemno}
 	</select>
+	
+	<insert id="insertItemQnA" parameterType="ItemQnAQ">
+	INSERT INTO ITEM_QNA_Q(ITEM_QNANO, ITEMNO, USERNO, IQ_TITLE, IQ_CONTENT, IQ_OPTION, IQ_STATUS)
+	VALUES(ITEM_QNA_Q_seq.NEXTVAL, #{itemno}, #{userno}, #{iqTitle}, #{iqContent}, '1', 'unprocessed')
+	</insert>
 
 </mapper>

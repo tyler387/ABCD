@@ -3,6 +3,8 @@ package com.kh.jaManChw.store.service.face;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.kh.jaManChw.util.Paging;
 
 public interface StoreService {
@@ -44,6 +46,15 @@ public interface StoreService {
 	 * @return 아이템에 대한 상세 정보들
 	 */
 	public Map<String, Object> showDetailItem(int itemno);
+
+	/**
+	 * 상품에 대한 문의글 작성하기
+	 * @param modalTitle    문의글 제목
+	 * @param modalContent  문의글 내용
+	 * @param itemno        상품 번호
+	 * @param session       회원 값
+	 */
+	public void writeItemQnA(String modalTitle, String modalContent, int itemno, HttpSession session);
 
 
 

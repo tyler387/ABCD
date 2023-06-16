@@ -85,7 +85,7 @@
 </head>
 <body>
  <div id="container">
-        <button id="btn-modal">글 쓰기버튼</button>
+        <button id="btn-modal">상품 문의하기</button>
         <div id="lorem-ipsum"></div>
 </div>
 <div id="modal" class="modal-overlay">
@@ -94,15 +94,20 @@
             <h2>궁금한 점을 작성하세요.</h2>
         </div>
         <div class="close-area">X</div>
+        
+<!--         <form id="modalBoardWrite" action="./itemDetail" method="post"> -->
+        
         <div class="content">
             <p>어디 한 번 내용 써봐</p>
           <div id="modaldivt">제목<input type="text" id="modalTitle" style="width: 300px; height:30px";></div>
           <div id="modaldivc">내용<input type="text" id="modalContent" style="width: 300px; height: 200px;"></div>
-          <input type="button" id="modalbutton" value="확인">          
+          
+          <button id="modalbutton" onclick="confirm">확인</button>
+   
         </div>
+<!--         </form> -->
     </div>
 </div>
-
 
 
 
@@ -128,7 +133,46 @@
 	    }
 	})
 	
+// 	//값 넘겨 받을려고 했는데 필요 없는 듯!
+// 	function confirm(modalBoardWrite) {
+//     	modalBoardWrite.action = "/store/boardWrite2";
+//     	modalBoardWrite.method = "post";
+//     	modalBoardWrite.submit();
+// }
+
+</script>
+
+<script type="text/javascript">
+
+$("#modalbutton").click(function(){
+	console.log("모달창 확인 버튼 클릭됨")
+	var modalTitle = $("#modalTitle").val()
+	var modalContent = $("#modalContent").val()
+	console.log(modalTitle)
+	console.log(modalContent)
 	
+	console.log("받았나?",${allItemDetail.itemDetail.itemno})
 	
+	//-----------------------------------
+	 $.ajax({
+		         type: "post"
+		         , url: "/store/abcabc"
+		         , data: {modalTitle : modalTitle
+		        	 	, modalContent: modalContent
+		        	 	, itemno : ${allItemDetail.itemDetail.itemno}}
+		         , dataType: "html"
+		         , success: function(res){
+		        	 console.log(res)
+		            console.log("AJAX 성공")
+		         }
+		         , error: function(){
+		            console.log("AJAX 실패")   
+		         }
+		      })
+	//----------------------------------------
+})
+	
+
+
 </script>
 

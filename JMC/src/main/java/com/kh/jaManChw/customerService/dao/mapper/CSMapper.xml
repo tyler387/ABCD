@@ -5,4 +5,183 @@
 
 <mapper namespace="com.kh.jaManChw.customerService.dao.face.CSDao">
 
+	<select id="selectCntTotalNotice" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			admin_board
+		WHERE 1 = 1
+			AND ab_option = 'notice'
+	</select>
+	
+	<select id="selectNoticeList" resultType="map" parameterType="Paging">
+		SELECT 
+			admin_boardno
+			, title
+			, CAST(write_date as date) write_date
+			, u.user_nick
+		FROM
+			admin_board ab, users u  
+		WHERE 1 = 1
+			AND ab.userno = u.userno
+			AND ab_option = 'notice'
+		ORDER BY admin_boardno DESC
+	</select>
+	
+	<select id="selectNoticeDetail" resultType="map" parameterType="int">
+		SELECT 
+			admin_boardno
+			, title
+			, content
+			, CAST(write_date as date) write_date
+			, u.user_nick
+		FROM
+			admin_board ab
+			, users u  
+		WHERE 1 = 1
+			AND ab.userno = u.userno
+			AND ab_option = 'notice'
+			AND admin_boardno = #{adminBoardno}
+	</select>
+	
+	<select id="selectCntTotalEvent" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			admin_board
+		WHERE 1 = 1
+			AND ab_option = 'event'	
+	</select>
+	
+	<select id="selectEventList" resultType="map" parameterType="Paging">
+		SELECT 
+			admin_boardno
+			, title
+			, content
+			, CAST(write_date as date) write_date
+			, u.user_nick
+		FROM
+			admin_board ab
+			, users u  
+		WHERE 1 = 1
+			AND ab.userno = u.userno
+			AND ab_option = 'event'
+		ORDER BY admin_boardno DESC
+	</select>
+	
+	<select id="selectEventDetail" resultType="map" parameterType="int">
+		SELECT 
+			admin_boardno
+			, title
+			, content
+			, CAST(write_date as date) write_date
+			, u.user_nick
+		FROM
+			admin_board ab
+			, users u  
+		WHERE 1 = 1
+			AND ab.userno = u.userno
+			AND ab_option = 'event'
+			AND admin_boardno = #{adminBoardno}
+	</select>
+	
+	<select id="selectCntTotalQnA" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			QnA_Q
+	</select>
+	
+	<select id="selectQnAList" resultType="map" parameterType="Paging">
+		SELECT 
+			questionno
+			, qq.userno
+			, qq.q_title
+			, qq.q_content
+			, qq.q_status
+			, qq.is_public
+			, CAST(write_date as date) write_date
+			, u.user_nick
+		FROM
+			QnA_Q qq
+			, users u  
+		WHERE 1 = 1
+			AND qq.userno = u.userno
+		ORDER BY questionno DESC
+	</select>
+	
+	<select id="selectQnADetail" resultType="map" parameterType="int">
+		SELECT 
+			questionno
+			, qq.userno
+			, qq.q_title
+			, qq.q_content
+			, qq.q_status
+			, qq.is_public
+			, CAST(write_date as date) write_date
+			, u.user_nick
+		FROM
+			QnA_Q qq
+			, users u  
+		WHERE 1 = 1
+			AND qq.userno = u.userno
+			AND qq.questionno = #{quesitonno}
+	</select>
+	
+	<insert id="insertQnAQ" parameterType="QnAQ">
+		INSERT INTO QnA_Q(
+			questionno
+			, userno
+			, q_title
+			, q_content
+			, is_public
+			)
+		VALUES(
+			qna_q_seq.nextval
+			, #{userno}
+			, #{qTitle}
+			, #{qContent}
+			, #{isPublic}
+			)
+	</insert>
+	
+	<update id="updateQnAQ" parameterType="QnAQ">
+		UPDATE
+			QnA_Q
+		SET
+			q_title = #{qTitle}
+			, q_content = #{qContent}
+		WHERE
+			questionno = #{questionno}
+	</update>
+	
+	<delete id="deleteQnAQ" parameterType="int">
+		DELETE FROM QnA_Q
+		WHERE questionno = #{questionno}
+	</delete>
+	
+	<select id="selectCntAnswer" parameterType="int" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			qna_a
+		WHERE 1 = 1
+			AND questionno = #{questionno}
+			AND a_status = 'undelete' 
+	</select>
+	<select id="selectQnAADetail" resultType="map" parameterType="int">
+		SELECT 
+		    answerno
+		    , qa.userno
+		    , qa.a_content
+		    , qa.a_status
+		    , CAST(write_date as date) write_date
+		    , u.user_nick
+		FROM
+		    QnA_A qa
+		    , users u  
+		WHERE 1 = 1
+		    AND qa.userno = u.userno
+		    AND qa.questionno = #{questionno}
+	</select>
 </mapper>

@@ -150,20 +150,20 @@ a {
 <div id="header">
 <header>
 <c:if test="${role eq 'admin'}">
-	<a href="/admin/main">관리자페이지</a>
+	<a href="<%=request.getContextPath()%>/admin/main">관리자페이지</a>
 </c:if>
 
 <c:if test="${not empty login}">
-	<a href="/login/logout">로그아웃</a>
-	<a href="/mypage/main">마이페이지</a>
+	<a href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
+	<a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
 <c:if test="${empty socialNum and empty login}">
-	<a href="/login/login">로그인</a>
+	<a href="<%=request.getContextPath()%>/login/login">로그인</a>
 </c:if>	
 <c:if test="${not empty socialNum}">
-	<a href="/login/logout">로그아웃</a>
-	<a href="/mypage/main">마이페이지</a>
+	<a href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
+	<a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
 
@@ -171,17 +171,17 @@ a {
 
 <div id="menu">
   <ul class="main1">
-    <li style="border: none;"><a href="/login/main">JAMANCHU</a></li>
-    <li><a href="/">회사소개</a></li>
+    <li style="border: none;"><a href="<%=request.getContextPath()%>/login/main">JAMANCHU</a></li>
+    <li><a href="<%=request.getContextPath()%>/">회사소개</a></li>
     <li style="border: none; cursor:pointer;"><a>모임</a>
        <ul class="main2">
-        <li><a href="/meeting/form">모임 등록</a></li>
-        <li><a href="/meeting/meetingcal">모임 신청</a></li>
+        <li><a href="<%=request.getContextPath()%>/meeting/form">모임 등록</a></li>
+        <li><a href="<%=request.getContextPath()%>/meeting/meetingcal">모임 신청</a></li>
       </ul>
     </li>
-    <li><a href="/board/allFile">커뮤니티</a></li>
-    <li><a href="/store/main">스토어</a></li>
-    <li><a href="#">고객센터</a></li>
+    <li><a href="<%=request.getContextPath()%>/board/allFile">커뮤니티</a></li>
+    <li><a href="<%=request.getContextPath()%>/store/main">스토어</a></li>
+    <li><a href="<%=request.getContextPath()%>/cs/notice/list">고객센터</a></li>
     </ul>
 </div>
 </div>

@@ -10,10 +10,12 @@ public class QnAQ {
 	private String qContent;
 	private String qStatus;
 	private Date writeDate;
-	
+	private String isPublic;
+
 	public QnAQ() {}
 
-	public QnAQ(int questionno, int userno, String qTitle, String qContent, String qStatus, Date writeDate) {
+	public QnAQ(int questionno, int userno, String qTitle, String qContent, String qStatus, Date writeDate,
+			String isPublic) {
 		super();
 		this.questionno = questionno;
 		this.userno = userno;
@@ -21,12 +23,13 @@ public class QnAQ {
 		this.qContent = qContent;
 		this.qStatus = qStatus;
 		this.writeDate = writeDate;
+		this.isPublic = isPublic;
 	}
 
 	@Override
 	public String toString() {
 		return "QnAQ [questionno=" + questionno + ", userno=" + userno + ", qTitle=" + qTitle + ", qContent=" + qContent
-				+ ", qStatus=" + qStatus + ", writeDate=" + writeDate + "]";
+				+ ", qStatus=" + qStatus + ", writeDate=" + writeDate + ", isPublic=" + isPublic + "]";
 	}
 
 	public int getQuestionno() {
@@ -75,6 +78,14 @@ public class QnAQ {
 
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	public String getIsPublic() {
+		return isPublic;
+	}
+
+	public void setIsPublic(String isPublic) {
+		this.isPublic = isPublic;
 	}
 	
 }

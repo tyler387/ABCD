@@ -229,8 +229,6 @@ public class AdminBoardManageController {
 			QnAA qnAAParam,
 			Model model
 			) {
-		//임시로 유저정보 삽입
-//		session.setAttribute("userno", 99);
 		
 		qnAAService.writeQnAA(qnAAService.getCompleteParam(session, qnAAParam));
 		

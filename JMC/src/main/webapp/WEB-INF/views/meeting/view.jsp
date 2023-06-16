@@ -12,6 +12,7 @@
 
 <style>
 
+
 th{
 	width: 118px;
 }
@@ -65,6 +66,7 @@ th{
   left: 100;
   border: none;
   font-size: 20px;
+  font-family: '양진체';
 
 }
 
@@ -85,6 +87,7 @@ th{
   left: 100;
   border: none;
   font-size: 20px;
+  font-family: '양진체';
 
 }
 
@@ -96,8 +99,11 @@ th{
   color: #fff;
   text-align : center;
   position: absolute;
+  border: none;
   top: 60%;
   left: 100;
+  font-family: '양진체';
+  font-size: 20px;
 
 }
 
@@ -328,7 +334,7 @@ th{
 <div class="nicknamebox">
 
 <h2>모집자</h2>
-<div class=nicknameboxleader onclick="window.open('/meeting/applicant?userno=${applicantnick1.userno}&meetingno=${viewmeeting.meetingno}' )">
+<div class=nicknameboxleader id=nicknameboxleader onclick="window.open('/meeting/applicant?userno=${applicantnick1.userno}&meetingno=${viewmeeting.meetingno}' , 'popup' , 'width=500, height=300, top=200, right=500, resizable=no')">
 	<table>
 		<tr>
 			<th>닉네임</th>
@@ -355,7 +361,7 @@ th{
 
 <c:forEach var="applicantnickagree" items="${applicantnickagree}">
 	
-	<div class="nicknameboxapp" onclick="window.open('/meeting/applicant?userno=${applicantnickagree.userno}&meetingno=${viewmeeting.meetingno}' )">
+	<div class="nicknameboxapp" >
 	
 	
 	<table>
@@ -386,7 +392,7 @@ th{
 	
 
 	
-	<div class="nicknameboxapp" onclick="window.open('/meeting/applicant?userno=${applicantnicknocheck.userno}&meetingno=${viewmeeting.meetingno}' )">
+	<div class="nicknameboxapp" >
 	
 	
 	<table>
@@ -408,6 +414,18 @@ th{
 </div>
 </div>
 <script>
+	
+		
+		
+		
+		
+		
+		
+		
+	
+	
+
+
 
       const body = document.querySelector('body');
       const modal = document.querySelector('.modal');

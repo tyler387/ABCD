@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -355,6 +356,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		Users applicantuser = meetingService.getMeetingApplicantUser(users);
 		Applicant applicantview = meetingService.getMeetingApplicant(applicant);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+		
 		
 		logger.info("{}" , applicantview);
 		

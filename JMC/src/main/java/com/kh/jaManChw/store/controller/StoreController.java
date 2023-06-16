@@ -34,14 +34,11 @@ public class StoreController {
 		logger.info("판매사이트 메인");
 	}
 	
-	@GetMapping("/shoppingbasket")
-	public void GetStoreShoppingbasket() {
+	@RequestMapping("/shoppingbasket")
+	public void PostStoreShoppingbasket(Model model, HttpSession session) {
 		
-	}
-	
-	@PostMapping("/shoppingbasket")
-	public void PostStoreShoppingbasket(int userno, Model model) {
-		
+		int userno = (Integer)session.getAttribute("userno");
+		logger.info("세션 유저 넘버 {}", userno);
 		List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
 		logger.info("장바구니 조회결과{}", list);
 		model.addAttribute("list", list);
@@ -51,11 +48,11 @@ public class StoreController {
 	@RequestMapping("/shoppingBasketList")
 	public ModelAndView SbUpdate(
 			@RequestParam Map<String, String> map, 
-			ModelAndView mav) {
-		
-			int userno = 256;
+			ModelAndView mav, HttpSession session) {
+			int userno = (Integer)session.getAttribute("userno");
+			logger.info("세션 유저 넘버 {}", userno);
 	      logger.info("상품수량 갯수 {}", map);
-		
+	      map.put("userno", Integer.toString(userno));
 	      storeService.SbUpdate(map);
 	      //유저 번호 받아야함
 	      List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
@@ -64,6 +61,18 @@ public class StoreController {
 		mav.setViewName("/store/shoppingBasketList");
 	      
 	      return mav;
+	}
+	
+	@RequestMapping("/shoppingBasketDelete")
+	public String StoreShoppingbasketDelete(@RequestParam Map<String, String> map, HttpSession session) {
+		int userno = (Integer)session.getAttribute("userno");
+		logger.info("세션 유저 넘버 {}", userno);
+		logger.info("상품수량 갯수 {}", map);
+      	map.put("userno", Integer.toString(userno));
+      	logger.info("유저넘버 받아서 맵값 확인하기 {}", map);
+      	
+      	storeService.Shoppingbasketerase(map);
+		 return "redirect:/store/shoppingbasket";
 	}
 	
 	

@@ -67,6 +67,12 @@ public interface StoreService {
 	public void writeShoppingBasket(List<ShoppingBasket> sbList);
 
 
+	/**
+	 * 장바구니에서 선택 삭제하기
+	 * 
+	 * @param map
+	 */
+	public void Shoppingbasketerase(Map<String, String> map);
 
 
 }

@@ -120,6 +120,12 @@ public class StoreServiceImpl implements StoreService {
 		}
 	}
 	
+	@Override
+	public void Shoppingbasketerase(Map<String, String> map) {
+		
+		storeDao.DeleteShoppingBasket(map);
+	}
+	
 	
 	
 }

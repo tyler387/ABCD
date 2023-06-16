@@ -211,7 +211,7 @@ width: 100%;
 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"  class="postbtn"></div>
 	<div class="meeting-loc"><input class="post" type="text" id="sample6_address" name="loc1" placeholder="도로명주소" onchange='printLoc1()'></div>
 	<div class="meeting-loc"><input class="post" type="text" id="sample6_detailAddress" name="loc2" placeholder="상세주소" onchange='printLoc2()'></div>
-<!-- 	<div class="meeting-loc"><input class="post" type="text" id="sample6_extraAddress" name="loc3" placeholder="참고항목" onchange='printLoc3()'></div> -->
+	<div class="meeting-loc"><input class="post" type="hidden" id="sample6_extraAddress" name="loc3" placeholder="참고항목" onchange='printLoc3()'></div>
 	<div class="meeting-loc">
 <!-- 	<input type="text" class="form-control" class="post postcode" value="" name="loc" id="sample6_postcode"  placeholder="우편번호" onchange='printLoc()'> -->
 <!-- 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"> -->

@@ -60,7 +60,6 @@ public interface MeetingService {
 	
 	
 
-	public List<Map<String, Object>> getApplicantInfo(HttpSession session);
 
 	public void updateApplicant(Applicant applicant);
 

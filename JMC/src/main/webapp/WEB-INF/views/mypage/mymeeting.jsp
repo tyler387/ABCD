@@ -101,7 +101,20 @@ table{
   	</table>
   	</div>
     <div id="paging">
-	<c:import url="../layout/meetingpaging.jsp"></c:import>
+		<div class="page">
+<ul class="pagination">
+
+<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+	<c:if test="${paging.curPage eq i }">
+	<li><a href="./mymeeting?curPage=${i}" id="apaging" style="font-weight: 700;">${i}</a></li>
+	</c:if>	
+	<c:if test="${paging.curPage ne i }">
+	<li><a href="./mymeeting?curPage=${i}" id="apaging">${i}</a></li>
+	</c:if>	
+</c:forEach>
+
+</ul>
+</div>
 	</div>
       </div>
     </div>

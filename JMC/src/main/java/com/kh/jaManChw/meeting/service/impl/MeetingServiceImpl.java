@@ -205,19 +205,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		}
 
 	@Override
-	public List<Map<String, Object>> getApplicantInfo(HttpSession session) {
-		Meeting meeting = new Meeting();
-		meeting.setUserno((int)session.getAttribute("userno"));
-		List<Meeting> list = meetingDao.selectMyMeetingno(meeting);
-		
-		
-		if(list.isEmpty()) {
-			return null;
-		}else {
-		return meetingDao.selectApllicantInfo(list);
-		}
-	}
-	@Override
 		public void updateApplicant(Applicant applicant) {
 
 			meetingDao.updateApplicantAgree(applicant);

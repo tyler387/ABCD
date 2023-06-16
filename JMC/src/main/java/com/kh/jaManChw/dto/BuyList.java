@@ -5,7 +5,6 @@ import java.util.Date;
 public class BuyList {
 
 	private int buyno;
-	private int itemno;
 	private int userno;
 	private String itemName;
 	private double totalPrice;
@@ -14,11 +13,9 @@ public class BuyList {
 	
 	public BuyList() {}
 
-	public BuyList(int buyno, int itemno, int userno, String itemName, double totalPrice, String buyOption,
-			Date buyDate) {
+	public BuyList(int buyno, int userno, String itemName, double totalPrice, String buyOption, Date buyDate) {
 		super();
 		this.buyno = buyno;
-		this.itemno = itemno;
 		this.userno = userno;
 		this.itemName = itemName;
 		this.totalPrice = totalPrice;
@@ -28,8 +25,8 @@ public class BuyList {
 
 	@Override
 	public String toString() {
-		return "BuyList [buyno=" + buyno + ", itemno=" + itemno + ", userno=" + userno + ", itemName=" + itemName
-				+ ", totalPrice=" + totalPrice + ", buyOption=" + buyOption + ", buyDate=" + buyDate + "]";
+		return "BuyList [buyno=" + buyno + ", userno=" + userno + ", itemName=" + itemName + ", totalPrice="
+				+ totalPrice + ", buyOption=" + buyOption + ", buyDate=" + buyDate + "]";
 	}
 
 	public int getBuyno() {
@@ -38,14 +35,6 @@ public class BuyList {
 
 	public void setBuyno(int buyno) {
 		this.buyno = buyno;
-	}
-
-	public int getItemno() {
-		return itemno;
-	}
-
-	public void setItemno(int itemno) {
-		this.itemno = itemno;
 	}
 
 	public int getUserno() {
@@ -87,5 +76,6 @@ public class BuyList {
 	public void setBuyDate(Date buyDate) {
 		this.buyDate = buyDate;
 	}
+
 	
 }

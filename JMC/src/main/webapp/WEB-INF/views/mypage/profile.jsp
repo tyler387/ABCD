@@ -60,7 +60,7 @@
       <input type="hidden" name="userno" id="userno" value="${userno}">  
   
 	<div class='profile'>
-		<c:if test="${profile.profileStoredName eq null}">
+		<c:if test="${empty profile}">
 			<div>
 				<img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="profileimg"> 
 			</div>	
@@ -70,7 +70,7 @@
 		    </div>
         </c:if>
         
-        <c:if test="${profile.profileStoredName ne null}">
+        <c:if test="${not empty profile}">
 	        <div>
 				<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
 			</div>	

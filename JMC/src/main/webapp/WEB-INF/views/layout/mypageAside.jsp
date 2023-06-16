@@ -94,11 +94,11 @@ img{
   <div class="left">
   
   <div class='profile'>
-	<c:if test="${profile.profileStoredName eq null}">
+	<c:if test="${empty profile}">
       <img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png"> 
     </c:if>
       			  
-	<c:if test="${profile.profileStoredName ne null}">
+	<c:if test="${not empty profile}">
 		<img src="<%=request.getContextPath()%>/userProfile/${profile.profileStoredName}"> 
 	</c:if>  
 	</div>
@@ -116,7 +116,7 @@ img{
   		<li class="list3"><a href="/mypage/userInfo">회원 정보</a></li>
   	</ul>
   </li>
-  <li class="list1"><a href="#">모임</a>
+  <li class="list1"><a href="../mypage/mymeeting">모임</a>
   
   	<ul class="list2">
   		<li class="list3"><a href="../mypage/mymeeting">등록한 모임</a></li>

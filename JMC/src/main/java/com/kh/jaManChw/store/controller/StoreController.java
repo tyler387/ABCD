@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
 
@@ -35,14 +36,11 @@ public class StoreController {
 		logger.info("판매사이트 메인");
 	}
 	
-	@GetMapping("/shoppingbasket")
-	public void GetStoreShoppingbasket() {
+	@RequestMapping("/shoppingbasket")
+	public void PostStoreShoppingbasket(Model model, HttpSession session) {
 		
-	}
-	
-	@PostMapping("/shoppingbasket")
-	public void PostStoreShoppingbasket(int userno, Model model) {
-		
+		int userno = (Integer)session.getAttribute("userno");
+		logger.info("세션 유저 넘버 {}", userno);
 		List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
 		logger.info("장바구니 조회결과{}", list);
 		model.addAttribute("list", list);
@@ -52,11 +50,11 @@ public class StoreController {
 	@RequestMapping("/shoppingBasketList")
 	public ModelAndView SbUpdate(
 			@RequestParam Map<String, String> map, 
-			ModelAndView mav) {
-		
-			int userno = 256;
+			ModelAndView mav, HttpSession session) {
+			int userno = (Integer)session.getAttribute("userno");
+			logger.info("세션 유저 넘버 {}", userno);
 	      logger.info("상품수량 갯수 {}", map);
-		
+	      map.put("userno", Integer.toString(userno));
 	      storeService.SbUpdate(map);
 	      //유저 번호 받아야함
 	      List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
@@ -67,6 +65,17 @@ public class StoreController {
 	      return mav;
 	}
 	
+	@RequestMapping("/shoppingBasketDelete")
+	public String StoreShoppingbasketDelete(@RequestParam Map<String, String> map, HttpSession session) {
+		int userno = (Integer)session.getAttribute("userno");
+		logger.info("세션 유저 넘버 {}", userno);
+		logger.info("상품수량 갯수 {}", map);
+      	map.put("userno", Integer.toString(userno));
+      	logger.info("유저넘버 받아서 맵값 확인하기 {}", map);
+      	
+      	storeService.Shoppingbasketerase(map);
+		 return "redirect:/store/shoppingbasket";
+	}
 	
 	
 	//칵테일 용품 카테고리로 이동 후 goods 리스트를 DESC순으로 불러오기 + Paging
@@ -138,7 +147,24 @@ public class StoreController {
 		model.addAttribute("model", model);
 	}
 
-
+	@PostMapping("/write/basket")
+	public void shoppingBasketPage(
+			String[] itemOptionno
+			,String[] sbItemCount
+			,HttpSession session
+			,int itemno
+			,Model model
+			) {
+		
+		logger.info("가져왓나요?: {}",itemOptionno[0]);
+		logger.info("가져왓나요?: {}",sbItemCount[0]);
+		
+		List<ShoppingBasket> sbList = storeService.getsbListParam(itemOptionno,sbItemCount, itemno, (Integer)session.getAttribute("userno"));
+		logger.info("what:{}",sbList);
+		storeService.writeShoppingBasket(sbList);
+		
+		
+	}
 }
 
 

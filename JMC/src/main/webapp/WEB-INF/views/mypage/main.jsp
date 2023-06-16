@@ -114,11 +114,11 @@ th {
       		<div style="width:75px; margin-left: 18px;" ><hr></div>
       		<div class="img">
       			<div id="userinfo1">
-      			<c:if test="${profile.profileStoredName eq null}">
+      			<c:if test="${empty profile}">
       				<img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="profileimg"> 
       			 </c:if>
       			  
-      			   <c:if test="${profile.profileStoredName ne null}">
+      			   <c:if test="${not empty profile}">
 						<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
       			   </c:if>
       			</div>
@@ -158,7 +158,7 @@ th {
       		
       		<div class="grade">
       		
-      		<c:if test="${loginInfo.grade == 1}">
+      		<c:if test="${loginInfo.grade == '술찐'}">
 	      		<div class="img">
 	      			<div id="userinfo1">
 	      				<img src="/resources/image/2b50.png" id="gradeimg">
@@ -169,38 +169,38 @@ th {
 	      		</div>
 	      	</c:if>	
 	      	
-	      	<c:if test="${loginInfo.grade == 2}">
-	      		<div class="img">
-	      			<div id="userinfo1">
-	      				<img src="/resources/image/별2.png" id="gradeimg">
-	      			</div>
-	      			<div id="userinfo2">
-			       		<div class="info">등급 : ${loginInfo.grade}</div>
-			       	</div>
-	      		</div>
-	      	</c:if>
+<%-- 	      	<c:if test="${loginInfo.grade == 2}"> --%>
+<!-- 	      		<div class="img"> -->
+<!-- 	      			<div id="userinfo1"> -->
+<!-- 	      				<img src="/resources/image/별2.png" id="gradeimg"> -->
+<!-- 	      			</div> -->
+<!-- 	      			<div id="userinfo2"> -->
+<%-- 			       		<div class="info">등급 : ${loginInfo.grade}</div> --%>
+<!-- 			       	</div> -->
+<!-- 	      		</div> -->
+<%-- 	      	</c:if> --%>
 	      	
-	      	<c:if test="${loginInfo.grade == 3}">
-	      		<div class="img">
-	      			<div id="userinfo1">
-	      				<img src="/resources/image/별3.png" id="gradeimg">
-	      			</div>
-	      			<div id="userinfo2">
-			       		<div class="info">등급 : ${loginInfo.grade}</div>
-			       	</div>
-	      		</div>
-	      	</c:if>
+<%-- 	      	<c:if test="${loginInfo.grade == 3}"> --%>
+<!-- 	      		<div class="img"> -->
+<!-- 	      			<div id="userinfo1"> -->
+<!-- 	      				<img src="/resources/image/별3.png" id="gradeimg"> -->
+<!-- 	      			</div> -->
+<!-- 	      			<div id="userinfo2"> -->
+<%-- 			       		<div class="info">등급 : ${loginInfo.grade}</div> --%>
+<!-- 			       	</div> -->
+<!-- 	      		</div> -->
+<%-- 	      	</c:if> --%>
 	      	
-	      	<c:if test="${loginInfo.grade == 4}">
-	      		<div class="img">
-	      			<div id="userinfo1">
-	      				<img src="/resources/image/별4.png" id="gradeimg">
-	      			</div>
-	      			<div id="userinfo2">
-			       		<div class="info">등급 : ${loginInfo.grade}</div>
-			       	</div>
-	      		</div>
-	      	</c:if>
+<%-- 	      	<c:if test="${loginInfo.grade == 4}"> --%>
+<!-- 	      		<div class="img"> -->
+<!-- 	      			<div id="userinfo1"> -->
+<!-- 	      				<img src="/resources/image/별4.png" id="gradeimg"> -->
+<!-- 	      			</div> -->
+<!-- 	      			<div id="userinfo2"> -->
+<%-- 			       		<div class="info">등급 : ${loginInfo.grade}</div> --%>
+<!-- 			       	</div> -->
+<!-- 	      		</div> -->
+<%-- 	      	</c:if> --%>
 	      		
 	      		
       			

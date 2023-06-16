@@ -9,6 +9,7 @@ import com.kh.jaManChw.dto.Item;
 import com.kh.jaManChw.dto.ItemFile;
 import com.kh.jaManChw.dto.ItemOption;
 import com.kh.jaManChw.dto.ItemQnAQ;
+import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.util.Paging;
 
 public interface StoreDao {
@@ -79,7 +80,15 @@ public interface StoreDao {
 	 * @param itemQnAQ	QnAQ시에 필요한 모든 정보 값!
 	 */
 	public void insertItemQnA(ItemQnAQ itemQnAQ);
+
+	/**
+	 * 전달받은 파라미터를 통해 장바구니 DB에 삽입한다
+	 * 
+	 * @param sb - 파라미터를 받아올 DTO 객체
+	 */
+	public void insertShoppingBasket(ShoppingBasket sb);
 	
+	public void DeleteShoppingBasket(Map<String, String> map);
 	
 
 

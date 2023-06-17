@@ -9,8 +9,6 @@
 		SELECT item_seq.nextval FROM dual
 	</select>
 	
-<!-- ItemOption 넣다가 실패함 여기부터 시작 -->	
-	
 	<insert id="insertItem" parameterType="Item">
 		INSERT INTO item(
 			itemno, 
@@ -109,6 +107,9 @@
 				WHERE 1 = 1
 					<if test="filter.content != null and !''.equals(filter.content)">
 					AND upper(${filter.filter}) LIKE '%' || upper(#{filter.content}) || '%'
+					</if>
+					<if test="filter.status != null and !''.equals(filter.status)">
+					AND upper(item_status) =upper(#{filter.status})
 					</if>
 				ORDER BY itemno DESC
 			)B

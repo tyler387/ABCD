@@ -15,17 +15,22 @@
 	</select>
 	
 	<select id="selectNoticeList" resultType="map" parameterType="Paging">
-		SELECT 
-			admin_boardno
-			, title
-			, CAST(write_date as date) write_date
-			, u.user_nick
-		FROM
-			admin_board ab, users u  
-		WHERE 1 = 1
-			AND ab.userno = u.userno
-			AND ab_option = 'notice'
-		ORDER BY admin_boardno DESC
+		SELECT * FROM(
+		    SELECT rownum rnum, N.* FROM(
+				SELECT 
+					admin_boardno
+					, title
+					, CAST(write_date as date) write_date
+					, u.user_nick
+				FROM
+					admin_board ab, users u  
+				WHERE 1 = 1
+					AND ab.userno = u.userno
+					AND ab_option = 'notice'
+				ORDER BY admin_boardno DESC
+		        ) N
+		)
+		WHERE rnum BETWEEN #{startno} AND #{endno}
 	</select>
 	
 	<select id="selectNoticeDetail" resultType="map" parameterType="int">

@@ -201,6 +201,7 @@ public class AdminBoardManageController {
 		
 		logger.info("filterL : {}", filterAndPagingList);
 		
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("filterList", true);
 		model.addAttribute("filter", filterAndPagingMap);
 		model.addAttribute("qnAQList", filterAndPagingList);

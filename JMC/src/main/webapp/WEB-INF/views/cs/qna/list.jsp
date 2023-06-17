@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="../../layout/header.jsp"/>
+<c:import url="../header.jsp"/>
 <style type="text/css">
 
 table{
@@ -24,7 +24,7 @@ tr, th, td{
 
 div.main {
     padding-bottom: 90px;
-      margin: 0 auto;
+    margin: 0 auto;
     width: 1800px;
     height: 750px;
 }
@@ -57,21 +57,104 @@ div.title{
 /*     float:left; */
    height: 120px;
 }
+
+/*	페이지네이션 CSS */
+.page{
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.pagination {
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+	margin-top: 20px;
+}
+
+.pagination li {
+	display: inline;
+	text-align: center;
+}
+
+.pagination a{
+	float: left;
+	display: block;
+	font-size: 14px;
+	text-decoration: none;
+	padding: 5px 12px;
+	color: #96a0ad;
+	line-height: 1.5;	
+}
+
+.first{
+	margin-right: 15px;
+}
+.last{
+	margin-left: 15px;
+}
+
+.first:hover, .last:hover, .leftP:hover, .rightP:hover, .leftList:hover, .rightList:hover{
+	color: #2e9cdf;
+}
+
+.pagnation a:active{
+	cursor: default;
+	color: #fffff;
+}
+
+.pagnation a:active{
+	outline: none;
+}
+
+.modal .num{
+	margin-left: 3px;
+	padding: 0;
+	width: 30px;
+	height:30px;
+	line-height: 30px;
+	-moz-border-radius: 20%;
+	-webkit-border-radius: 20%;
+	border-radius: 20%;
+}
+
+.modal .num.active, .modal .num:active{
+	background-color: #91d1f7;
+	cursor:pointer;
+}
+
+.arrow-leftList{
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid blue;
+}
+ 
+.arrow-leftP{
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid blue;
+}
 </style>
 
 <script type="text/javascript">
-if(${not empty isNotYourQnA || isNotYourQnA}){
+if(${not empty isNotYourQnA or isNotYourQnA}){
 	alert("남의 문의 글을 조회할순 없습니다")
 	<c:remove var="isNotYourQnA" scope="session"/>
 }
 
-if(${not empty isAlreadyAnswered || isAlreadyAnswered}){
+if(${not empty isAlreadyAnswered or isAlreadyAnswered}){
 	alert("이미 답변이 완료된 글은 삭제, 수정이 불가능합니다")
 	<c:remove var="isAlreadyAnswered" scope="session"/>
 }
 	
 </script>
-
+is : ${not empty isNotYourQnA || isNotYourQnA} <br>
+is : ${isNotYourQnA}<br>
+is : ${not empty isNotYourQnA}<br>
 
 <div class="main">
 	<div class="left">
@@ -155,6 +238,9 @@ if(${not empty isAlreadyAnswered || isAlreadyAnswered}){
 						</c:forEach>
 					</tbody>
 				</table>
+				<div id="pagingContainer">
+					<c:import url="../paging.jsp"/>
+				</div>
 			</div>
 		</div>
 	</div>

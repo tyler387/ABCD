@@ -123,6 +123,7 @@ public class ItemManageController {
 		
 		List<Map<String, Object>> filterItemList = itemService.showItemListByFilter(filterPaging , filterMap);
 	
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("filterList", true);
 		model.addAttribute("filter", filterMap);
 		model.addAttribute("paging", filterPaging);
@@ -242,6 +243,7 @@ public class ItemManageController {
 		logger.info("paging: {}", paging);
 		List<Map<String, Object>> filteredItemQnAQList =itemQnAQService.showItemQnAQListByFilter(paging, filterMap);
 
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("filterList", true);
 		model.addAttribute("filter", filterMap);
 		model.addAttribute("itemQnAQList", filteredItemQnAQList);

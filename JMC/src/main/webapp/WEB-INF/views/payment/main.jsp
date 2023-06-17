@@ -245,7 +245,7 @@ width: 100%;
 // 	console.log("ㅁㄴㅇ", name);
   function userinfo() {
 //    $("#name").val(name);
-   $("#name").attr("value", ${user.USER_NAME});
+   $("#name").attr("value", '${user.USER_NAME}');
 // 	document.getElementById('name').value = ${user.USER_NAME};
 	}
   </script>

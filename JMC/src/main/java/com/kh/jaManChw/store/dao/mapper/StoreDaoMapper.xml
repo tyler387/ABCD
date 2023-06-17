@@ -139,8 +139,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		
 	<delete id="DeleteShoppingBasket" parameterType="map" >
-	DELETE FROM shopping_basket
-	WHERE USERNO = ${userno} and BASKETNO = ${basketno}
+	DELETE FROM 
+		shopping_basket
+	WHERE 
+		USERNO = ${userno} 
+		and BASKETNO = ${basketno}
 	</delete>
 	
 	<select id="ItemOptionList" resultType="hashmap">
@@ -158,6 +161,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectAllBuyDetail"  parameterType="map" resultType="hashmap">
-	select * FROM order_detail where userno = ${userno} and buyno = ${buyno}
+	select 
+		 orderno
+		 , userno
+		 , itemno
+		 , item_name
+		 , item_count
+		 , item_option
+		 , item_total_price
+		 , order_status
+		 , CAST(status_date as DATE) status_date
+		 , add1
+		 , add2
+		 , add3
+		 , name
+		 , phone
+		 , buyno
+	FROM 
+		order_detail 
+	where 1 = 1
+		AND userno = ${userno} 
+		and buyno = ${buyno}
 	</select>
 </mapper>

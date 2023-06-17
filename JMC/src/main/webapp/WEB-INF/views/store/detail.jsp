@@ -165,7 +165,7 @@ width: 100%;
 	<th>${list.ITEM_NAME}</th>	 
 	<th>${list.ITEM_COUNT }</th>
 	<th class="perPrice">${list.ITEM_TOTAL_PRICE }</th> 
-	<th>${list.STATUS_DATE }</th>
+	<th><fmt:formatDate value="${list.STATUS_DATE}" pattern="yyyy/MM/dd HH:mm"/></th>
 	<th>${list.NAME }</th>
 	<th>${list.ADD2 }  &nbsp;&nbsp; ${list.ADD3 }</th>
 	<th>

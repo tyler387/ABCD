@@ -139,6 +139,7 @@ img{
   </li>
   <li class="list1"><a href="/mypage/myBoard">커뮤니티</a></li>
   <li class="list1"><a href="/store/shoppingbasket">장바구니</a></li>
+  <li class="list1"><a href="/store/buylist">결제내역</a></li>
   <li class="list1"><a href="#">공지사항</a></li>
  
 </ul>

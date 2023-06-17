@@ -73,6 +73,29 @@ public interface StoreService {
 	 * @param map
 	 */
 	public void Shoppingbasketerase(Map<String, String> map);
+	
+	/**
+	 * 
+	 * 바로구매 장바구니 가장 최근 번호 조회
+	 * @return
+	 */
+	public int getbasketno();
+	
+	/**
+	 * 결제내역 모든 조회
+	 * @param userno 
+	 * 
+	 * @return
+	 */
+	public List<Map<String, String>> getBuyList(String userno);
+	
+	/**
+	 * 결제내역 상세조회
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public List<Map<String, String>> getBuyDetail(Map<String, String> map);
 
 
 }

@@ -35,4 +35,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	DELETE FROM shopping_basket
 	WHERE BASKETNO = ${basketno}
 	</delete>
+	
+	<select id="selectOptionByOptionno" resultType="hashmap">
+	select * FROM item_option where ITEM_OPTIONNO = ${object}
+	</select>
+	
+	<select id="selectUserInfo" resultType="hashmap" parameterType="string">
+	select * from users where userno = ${userno}
+	</select>
 </mapper>

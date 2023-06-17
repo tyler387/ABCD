@@ -92,6 +92,15 @@ public interface StoreDao {
 	 */
 	public List<Map<String, Object>> ItemOptionList();
 	
+	
+	public Map<String, Object> selectOptionByOptionno(Object object);
+
+	public int selectBaskteno();
+
+	public List<Map<String, String>> selectAllBuyList(String userno);
+
+	public List<Map<String, String>> selectAllBuyDetail(Map<String, String> map);
+	
 
 
 }

@@ -37,7 +37,7 @@ public interface UserManageService {
 	 * @param userno
 	 * @return 
 	 */
-	public Users getUserData(int userno);
+	public Map<String, String> getUserData(int userno);
 	
 	/**
 	 * userno로 해당 회원 탈퇴처리

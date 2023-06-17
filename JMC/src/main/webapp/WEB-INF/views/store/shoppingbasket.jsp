@@ -5,6 +5,7 @@
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
 <c:import url="../layout/header.jsp"/>
+<c:import url="../layout/mypageAside.jsp" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<style type="text/css">
 
@@ -62,7 +63,7 @@ textarea{
 }
 
 .meetingform {
-	width: 800px;
+	width: 1000px;
     margin: auto;
 	border-radius: 20px;
 	box-shadow: 0 2px 12px 0 rgb(100 100 100/ 16%), 0 2px 17px 0
@@ -128,8 +129,7 @@ width: 295px;
 
 table.txc-table {
 
-width: 100%;
-
+width: 977px;
 table-layout: fixed;
 border : 1px solid black;
 } 
@@ -224,6 +224,8 @@ var price = 3000;
 	});
 });
 </script>
+</div>
+    <div class="right">
 <h1>장바구니</h1>
 <hr>
 <div style="height: 30px;"></div>
@@ -246,15 +248,19 @@ var price = 3000;
 	<input type="checkbox" name="cartArr" value="${list.BASKETNO }" data-cartNo="${list.BASKETNO }" checked>
 	</th> 
 	<th>${list.ITEM_TITLE }</th>	 
-	<th>${list.OPTION_CONTENT }</th>	 
+	<th><c:if test="${list.ITEM_OPTION.OPTION_CONTENT ne null }">${list.ITEM_OPTION.OPTION_CONTENT }</c:if>
+	<c:if test="${list.ITEM_OPTION.OPTION_CONTENT eq null }"> 없음 </c:if></th>	 
 	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="85px" height="85px">
-	</th>	 
+	</th>	  
 	<th>
 		<input type="text" value="${list.SB_ITEM_COUNT}" name="sbItemCount" class="sbItemCount" style="width: 35px;">
 		<input type="hidden" value="${list.BASKETNO }" name="basketno" class="basketno" >
 		<button type="button" class="btn btn-secondary bkupdateBtn bsketbtn"  data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">수량 수정</button>
 	</th>
-	<th class="perPrice">${list.ITEM_PRICE * list.SB_ITEM_COUNT }</th> 
+	<th class="perPrice">
+	<c:if test="${list.ITEM_OPTION.OPTION_CONTENT ne null }">${(list.ITEM_PRICE + list.ITEM_OPTION.EXTRA_CHARGE) * list.SB_ITEM_COUNT}</c:if>
+	<c:if test="${list.ITEM_OPTION.OPTION_CONTENT eq null }">${list.ITEM_PRICE * list.SB_ITEM_COUNT}</c:if>
+	</th> 
 	<th><button type="button" class="btn btn-secondary bkDeleteBtn bsketbtn" data-sbItemCount="${list.SB_ITEM_COUNT}" data-basketno="${list.BASKETNO}">상품 삭제</button></th>
 </tr>
 </c:forEach> 
@@ -267,10 +273,12 @@ var price = 3000;
 </tr> 
 </table>
 <br><br>
-<button id="btnOrder" class ="paymentBtn"style="width: 200px; margin: auto;">선택 결제하기</button>
+<button id="btnOrder" class ="paymentBtn"style="width: 200px; margin: auto;" type="button">선택 결제하기</button>
 <!-- <button id="btnOrderAll" type="button">전체 결제하기</button> -->
 <!-- <button value="bkno" name="bknolist" id="bknolist">결제하기</button> -->
 </form>
+</div>
+</div>
 </div>
 </div>
 <script type="text/javascript">

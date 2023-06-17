@@ -149,7 +149,6 @@ width: 100%;
 <div style="height: 30px;"></div>
 <div class="meetingform">
 <div id="result">
-<form method="post" action="/payment/main">
 <table class="table table table-hover txc-table" style="margin: auto;">
 <tr class="table-secondary">
 	<th>주문이름</th>
@@ -178,10 +177,8 @@ width: 100%;
 </tr>
 </c:forEach> 
 </table> 
-<br><br>
-</form>
 </div>
 </div>
 </div>
-</div>
+</div> 
 <c:import url="../layout/footer.jsp" />

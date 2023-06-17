@@ -11,7 +11,25 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-top : 100px;
+}
 
+.searchbox{
+	display:flex;
+/* 	justify-content:center; */
+	align-items: center;
+	flex-direction:column;
+	width:  680px;
+	height:  750px;	
+	margin-bottom: 350px;
+	border: 1px solid #371e06;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 5px 5px 15px;
+	margin-top: 100px;
+	
+}
+#searchForm{
+	padding-top: 45px;
 }
 .namebox{
 	display: flex;
@@ -21,17 +39,6 @@
 	margin-top: 120px;
 }
 
-form{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	margin-top: 59px;	
-	padding-bottom: 280px;
-
-	
-	
-}
 
 label{
 	font-size: 24px;
@@ -44,6 +51,13 @@ input[type=text]{
      border-radius: 4px;
      font-size: 20px; 
      outline: none; 
+     color : #371e06;
+}
+
+input:focus{
+   border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
 }
 
 input#userEmail1{
@@ -60,85 +74,164 @@ select{
      border-radius: 4px;
      font-size: 20px; 
      outline: none; 
-
+     border-color:#371e06;
+   	 outline: none !important;
+}
+select:focus{
+   box-shadow: 0 0 10px #371e06;
 }
 
-div.nextBtn{
-	padding-top: 20px;
+.search-idbtn{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align:center;
+	cursor:pointer;
 }
-button#nextbtn.btn{
-    height: 30px;
-    width: 88px;
+.search-idbtn{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #371e06;
+	color: #fff;
+	height: 40px;
+	width: 100px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 18px;
+	margin-right: 20px;
+	
+}
 
+.search-idbtn:hover{
+	background-color: #ffcca8;
 }
+#nextbtn{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #371e06;
+	color: #fff;
+	height: 50px;
+	width: 500px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 20px;
+	margin-right: 20px;
+	margin-top: 90px;
+	
+}
+#nextbtn:hover{
+	background-color: #ffcca8;
+}
+.emailSelect {
+  box-sizing: border-box;
+  width: 200px;
+  padding: 4px;
+  font-size: 14px;
+  border-radius: 6px;
+  height: 34px;
+  font-size: 18px;
+}
+
+.option {
+  padding: 4px;
+  font-size: 14px;
+  color: black;
+  background: white;
+}
+.option:hover {
+	border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
+}
+
 
 </style>
 
 
 <div class="container">
 	
-	<div class="namebox">
-		<h1 style="font-size: 35px;">아이디 찾기</h1>
+<div class="searchbox">	
+	<div class="namebox" style="margin-bottom:5px; ">
+		<h1 style="font-size: 35px;">아이디   찾기</h1>
 	</div>
 	
- 
- <form action="/login/searchId" method="post" onsubmit="return submitCheck();"> 
+ 	<form action="/login/searchId" method="post" onsubmit="return submitCheck();" id="searchForm"> 
 		<div class="inputId">
-			<label for="userName">이름</label>
+			<label for="userName">이 름</label>
 			<div>
 				<input type="text" id="userName" name="userName">
 			</div>
-			<div>
+			<div style="padding-top:8px;">
 				<span id="name_msg"></span>
 			</div>
 		</div>
 
 	<div class="email-group">
-		<label>이메일</label>
+		<label>이 메 일</label>
 		
 		<div class="input-group">
 			<input type="text" name="email" id="userEmail1">		
-			<select name="email" id="userEmail2">
-				<option>@naver.com</option>
-				<option>@google.com</option>
-				<option>@daum.net</option>
-				<option>@hanmail.com</option>
+			<select class="emailSelect" name="email" id="userEmail2">
+				<option class="option">@naver.com</option>
+				<option class="option">@google.com</option>
+				<option class="option">@daum.net</option>
+				<option class="option">@hanmail.com</option>
 			</select>
+			<div class="msgbox">
+				<span id="emailMsg" style="font-size: 17px;"></span>	
+			</div>	
 		
 			<div>
 				<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-				<button type="button" id="email_checkbtn" name="email_checkbtn">본인인증</button>
+				<button class="search-idbtn" type="button" id="email_checkbtn" name="email_checkbtn">본인인증</button>
 			</div>
-			<div>
+			<div style="padding-top:8px;">
 				<span id="emailNumMsg" style="font-size: 17px;"></span>
 			</div>
 		</div>
 			
 		<div class='nextBtn'>
-			<button class="btn" id="nextbtn">다음</button>
+			<button class="search-idbtn" id="nextbtn">NEXT</button>
 		</div>
 	</div>
  </form> 
+</div> 
  </div>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
-$('#userName').blur(function() {
-	var userName = $('#userName').val();
+$(document).ready(function(){
 
-	if(userName === ''){	
-		$('#name_msg').html('이름을 입력해 주세요');
-		$('#name_msg').css('color','red');
-//			$("#userName").focus();
-		return false;
-	}else{  
-		$('#name_msg').html('');
-		$('#name_msg').css('color','#3f8ef7');
-//     	$("#birth").focus();
-    	return true;
-	}
-}) //$('#userName').blur ed
+	// FIXME: 필요 스크립트 전개 영역
+    let checkName = RegExp(/^[가-힣a-zA-Z]{2,}$/);
+    let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
 
+	$('#userName').blur(function() {
+		var userName = $('#userName').val();
+	
+		if(userName === ''){	
+			$('#name_msg').html('이름을 입력해 주세요');
+			$('#name_msg').css('color','red');
+	//			$("#userName").focus();
+			return false;
+			
+		}else if(!checkName.test(userName)){
+			$('#name_msg').html('옳지않은 형식입니다.');
+			$('#name_msg').css('color','red');
+			return false;
+			
+		}else{  
+			$('#name_msg').html('');
+			$('#name_msg').css('color','#3f8ef7');
+	//     	$("#birth").focus();
+	    	return true;
+		}
+	}) //$('#userName').blur ed
+
+
+})
 
 
 $(document).ready(function(){
@@ -154,7 +247,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type: 'GET',
-			url: '/login/mailCheck?email=' + email, // GET 방식이라 Url 뒤에 email을 뭍힐 수 있다.
+			url: '/login/mailCheck?email=' + email, // GET 방식이라 Url 뒤에 email을 붙힐 수 있다.
 			dataType: 'text',
 			success: function(data) {
 				/* console.log('data: ' + data); */
@@ -200,7 +293,7 @@ $(document).ready(function(){
 		if (!isCertification) {
 			alert('인증이 완료되지 않았습니다.');
 			return false;
-		} else {
+		}else{
 			return true;
 		}
 	});

@@ -96,7 +96,7 @@ textarea{
 }
 .bsketbtn {
 	height: 25px;
-	width: 73px;
+	width: 100px;
 	border-radius: 10px;
 	background: orange;
 	color: #fff;
@@ -162,7 +162,7 @@ width: 100%;
 	<th class="cart_info_td">${list.BUYNO}</th> 
 	<th>${list.ITEM_NAME}</th>	 
 	<th class="perPrice">${list.TOTAL_PRICE }</th> 
-	<th><a href="/store/detail?buyno=${list.BUYNO}"><button type="button" class="btn btn-secondary bsketbtn" data-basketno="${list.BUYNO}">상품 보기</button></a></th>
+	<th><a href="/store/detail?buyno=${list.BUYNO}"><button type="button" class="btn btn-secondary bsketbtn" data-basketno="${list.BUYNO}">주문 상세보기</button></a></th>
 </tr>
 </c:forEach> 
 </table> 

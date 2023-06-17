@@ -37,7 +37,7 @@ $(function () {
 .title{
 
 	font-family: '양진체';
-	color: orange;
+	color: white;
 	font-size: 40px;
 	margin-bottom: 50px;
 } 
@@ -46,7 +46,7 @@ $(function () {
 .content {
 
 	font-family: '양진체';
-	color: orange;
+	color: black;
 	font-size: 40px;
 	margin-bottom: 50px;
 }
@@ -114,8 +114,9 @@ $(function () {
 관리자 세션 상태: ${adminAccess}
 상태 세션 상태: ${statusAccess}
 
-<div class="mainpage">
 
+<div class="mainpage">
+<img src="../resources/image/프로젝트 메인페이지.jpg" class="main">
 
 <div class="all">
 
@@ -144,5 +145,4 @@ $(function () {
 </div>
 
 <c:import url="../layout/footer.jsp"/> 
-<c:import url="../chat/chatbutton.jsp"></c:import>
 

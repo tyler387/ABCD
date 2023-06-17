@@ -262,6 +262,7 @@ width: 100%;
    $("#sample6_postcode").attr("value", '${user.ADDR1}');
    $("#sample6_address").attr("value", '${user.ADDR2}');
    $("#phone").attr("value", '${user.PHONE}');
+// 	document.getElementById('name').value = ${user.USER_NAME};
 	}
   </script>
   <script type="text/javascript"> 

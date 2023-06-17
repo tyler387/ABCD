@@ -12,7 +12,7 @@
 	align-items: center;
 }
 
-form{
+.joinForm{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -32,20 +32,26 @@ input{
 	height: 25px;
 	border: 0;
     border: 1px #371e06 solid;
+    border-radius: 4px;
+    outline: none; 
 }
 
-input[type=button]{
-	border: 1px solid #371e06;
-    background-color: #371e06;
-    border-radius: 7px;
-    color: #fff;
-    width: 150px;
-    height: 30px;
-    font-size: 14px;
-    margin: 0px 0px 0px 10px;
-	padding: 0px 0px 0px 0px; 
+.btn{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #371e06;
+	color: #fff;
+	height: 40px;
+	width: 390px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 18px;
+	margin-right: 20px;
 	cursor: pointer;
-	
+}
+.btn:hover{
+	background-color: #ffcca8;
 }
 
 .box1{
@@ -60,11 +66,9 @@ input[type=button]{
 
 .box2{
 	display: flex;
-/* 	s   */
 	justify-content: flex-start;
 	padding-top: 5px;
 	padding-bottom: 15px;
-/* 	width: 380px; */
 }
 
 .box2 #userEmail1{
@@ -83,18 +87,7 @@ input#userId{
 	padding: 0px 0px 0px 0px; 
 }
 
-button[type=button]{
-	border: 1px solid #371e06;
-    background-color: #371e06;
-    border-radius: 7px;
-    color: #fff;
-    width: 78px;
-    height: 30px;
-    font-size: 14px;
-    margin: 0px 0px 0px 10px;
-	padding: 0px 0px 0px 0px; 
-	cursor: pointer;
-}
+
 
 input#email_checknumber{
 	margin: 0px 0px 0px 0px;
@@ -102,17 +95,24 @@ input#email_checknumber{
 	width: 170px; 
 }
 
-.btn{
-	border: 1px solid #371e06;
-    background-color: #371e06;
-    border-radius: 7px;
-    color: #fff;
-    width: 390px;
-    height: 39px;
-    font-size: 25px;
-    cursor: pointer;
+input[type=button]{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #371e06;
+	color: #fff;
+	height: 40px;
+	width: 100px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 18px;
+	margin-right: 20px;
+	cursor: pointer;
+	
+}
 
-
+input[type=button]:hover{
+	background-color: #ffcca8;
 }
 
 .select{
@@ -139,18 +139,18 @@ input#email_checknumber{
 	cursor: pointer;
 	height: 30px;
 	width: 173px;
-	border: 1px solid #371e06;
+	border: 1px solid orange;
 	line-height:  24px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 22px;
 }
 .select input[type=radio]+lable{
-	background-color: #371e06;
+	background-color: orange;
 	color :#333;
 }
 .select input[type=radio]:checked+label{
-	background-color: #371e06;
+	background-color: orange;
 	color: #fff;
 }
 
@@ -170,6 +170,28 @@ input#email_checknumber{
    box-shadow: 0 0 10px #371e06;
 }
 
+.selectOption {
+  box-sizing: border-box;
+  width: 200px;
+  padding: 4px;
+  font-size: 14px;
+  border-radius: 6px;
+  height: 34px;
+  font-size: 18px;
+}
+
+.option {
+  padding: 4px;
+  font-size: 14px;
+  color: black;
+  background: white;
+}
+.option:hover {
+	border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
+}
+
 
 
 </style>
@@ -177,8 +199,8 @@ input#email_checknumber{
 <body>
 <div id="continner">
 
-<form action="/login/join" method="post"> 
-<h1 style="font-size:63px;">JAMANCHU</h1> 
+<form class="joinForm" action="/login/join" method="post" > 
+	<h1 style="font-size:63px;">JAMANCHU</h1> 
 
 <div class="box1">
 
@@ -186,13 +208,12 @@ input#email_checknumber{
 	
 	<div class="box2">
 		<input type="text" name="userId" id="userId">
-		<button type="button" id="idbtn" name="idbtn" onclick="idcheck()">중복확인</button>
+		<input type="button" id="idbtn" name="idbtn" onclick="idcheck()" value="중복확인">
 	</div>	
 	
 	
 	<div class="msgbox">
 		<span id="id_msg" style="font-size: 17px;"></span>	
-	
 	</div>	
 </div>
  
@@ -275,11 +296,11 @@ input#email_checknumber{
 		<div class="box2">
 			<input type="text" name="email" id="userEmail1">
 			
-			<select name="email" id="userEmail2">
-				<option>@naver.com</option>
-				<option>@google.com</option>
-				<option>@daum.net</option>
-				<option>@hanmail.com</option>
+			<select class="selectOption" name="email" id="userEmail2">
+				<option class="option">@naver.com</option>
+				<option class="option">@google.com</option>
+				<option class="option">@daum.net</option>
+				<option class="option">@hanmail.com</option>
 			</select>
 			</div>
 			<div class="msgbox">
@@ -287,9 +308,9 @@ input#email_checknumber{
 			</div>	
 			<div class="box3">
 				<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-				<button type="button" id="emailbtn" name="emailbtn">본인인증</button>
+				<input type="button" id="emailbtn" name="emailbtn" value="본인인증">
 			</div>
-			<div>
+			<div style="padding-top:8px;">
 				<span id="emailNumMsg" style="font-size: 17px;"></span>
 			</div>
 		</div>
@@ -304,14 +325,11 @@ input#email_checknumber{
 	<div class="labelbox"><label for="phone">휴대전화*</label></div>	
 	
 	<div class="box2">
-		<select name="phone" id="phone1">
-				<option>SKT</option>
-				<option>KT</option>
-				<option>LG</option>
-				<option>SKT알뜰폰</option>
-				<option>KT알뜰폰</option>
-				<option>LG알뜰폰</option>
-			</select>
+		<select class="selectOption" name="phone" id="phone1">
+				<option class="option">SKT</option>
+				<option class="option">KT</option>
+				<option class="option">LG</option>
+		</select>
 		<input type="tel" name="phone" id="phone">
 	</div>
 		<div class="msgbox">
@@ -394,12 +412,7 @@ $(document).ready(function(){
             return true;
             
         }
-// 		else if(checkID.test(userId)) {
-//         	$('#id_msg').html("사용가능한 아이디입니다.")
-//         	$('#id_msg').css("color", "#3f8ef7");                           
-// //         	$("#userPw").focus();
-//         	return true;
-//         }
+
     }); //$('#userId').blur end
 		
 	$('#userPw').blur(function() {

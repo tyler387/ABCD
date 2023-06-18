@@ -152,6 +152,7 @@ width: 100%;
 <table class="table table table-hover txc-table" style="margin: auto;">
 <tr class="table-secondary">
 	<th>주문이름</th>
+	<th>상품사진</th>
 	<th>갯수</th>
 	<th>가격</th>
 	<th>구매시간</th>
@@ -162,6 +163,7 @@ width: 100%;
 <c:forEach var="list" items="${buylist}" varStatus="status" >
 <tr>
 	<th>${list.ITEM_NAME}</th>	 
+	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="60px" height="60px"></th>	 
 	<th>${list.ITEM_COUNT }</th>
 	<th class="perPrice">${list.ITEM_TOTAL_PRICE }</th> 
 	<th><fmt:formatDate value="${list.STATUS_DATE}" pattern="yyyy/MM/dd HH:mm"/></th>

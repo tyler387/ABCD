@@ -20,6 +20,11 @@ body {
   font-family: '양진체';
 }
 
+header img{
+	width: 100px;
+	height: 100px;
+}
+
 header{
   position: sticky;
   top: 0;
@@ -141,15 +146,19 @@ a {
    position: absolute; 
    width:100%;
  }
+ 
+
 
 
 </style>
 </head>
-
+<c:import url="../chat/chatbutton.jsp"></c:import>
 <body>
 
 <div id="header">
 <header>
+
+<div class="logo"><img src='/resources/image/주황로고.png'></div>
 <c:if test="${role eq 'admin'}">
 	<a href="/admin/main">관리자페이지</a>
 </c:if>
@@ -163,6 +172,12 @@ a {
 	<a href="/login/login">로그인</a>
 </c:if>	
 <c:if test="${not empty socialNum}">
+	<a href="/login/logout">로그아웃</a>
+	<a href="/mypage/main">마이페이지</a>
+	<a href="#">알람</a>
+</c:if>
+
+<c:if test="${platFormOption eq 'naver'}">
 	<a href="/login/logout">로그아웃</a>
 	<a href="/mypage/main">마이페이지</a>
 	<a href="#">알람</a>

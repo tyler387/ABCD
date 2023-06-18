@@ -33,8 +33,7 @@ public class UserManageController {
 //	@GetMapping("/mg/main")
 	@GetMapping("/mg/list")
 	public void user(
-			Model model,
-			String curPage
+			Model model, String curPage
 			) {
 		logger.info("user list 처음 ");
 		String ccurpage = curPage;
@@ -48,35 +47,9 @@ public class UserManageController {
 	}
 	
 	
-//	@PostMapping("/mg/list")
-//	public @ResponseBody ModelAndView userfiltering23(
-//			ModelAndView mav, String curPage,
-//			@RequestParam Map<String, Object> map
-//			) {
-//		logger.info("filter1 에이잭스 출력 : {}", map);
-//		String ccurpage = curPage;
-//		logger.info("11111111");
-//		Paging paging = userManageService.getpaging(ccurpage);
-//		logger.info("2222222222");
-//		map.put("paging", paging);
-//		logger.info("3333333333333");
-//		List<Users> userfilter = userManageService.getUserMgFiltering(map);
-//		logger.info("444444444444444444");
-//		
-//		//모델값 지정	-> 응답 데이터 JSON 변환
-//		mav.addObject("userfilter", userfilter);
-//		mav.addObject("paging", paging);
-//		
-//		//뷰네임 지정	-> jsonView 적용
-//		mav.setViewName("jsonView");
-//		
-//		return mav; 
-//	}
-	
 	@RequestMapping("/mg/filter")
 	public String userfiltering(
-			Model model, String curPage,
-			@RequestParam Map<String, Object> map
+			Model model, String curPage, @RequestParam Map<String, Object> map
 			) {
 		logger.info("filter1 에이잭스 출력 : {}", map);
 		String ccurpage = curPage;
@@ -94,28 +67,6 @@ public class UserManageController {
 		
 		return "admin/user/mg/filter";
 	}
-	
-//	@ResponseBody
-//	@RequestMapping("/mg/filter1")
-//	public ModelAndView userfiltering2(
-//			ModelAndView mav,
-//			String curPage,
-//			@RequestParam Map<String, Object> map
-//			) {
-//		logger.info("filter1 에이잭스 출력 : {}", map);
-//		String ccurpage = curPage;
-//		Paging paging = userManageService.getFilterPaging(curPage, map);
-//		logger.info("페이징 {}", paging);
-//		map.put("paging", paging);
-//		List<Users> userfilter = userManageService.getUserMgFiltering(map);
-//		logger.info("{}", userfilter);
-//		
-//	      mav.addObject("userfilter", userfilter);
-//	      mav.addObject("paging", paging);
-//	      
-//	      mav.setViewName("/admin/user/mg/list");
-//	 	return mav;
-//	}
 	
 	
 	@GetMapping("/mg/update")
@@ -162,8 +113,7 @@ public class UserManageController {
 	@GetMapping("/black/list")
 //	@RequestMapping("/black/main2")
 	public void UserBlackPage(
-			Model model,
-			String curPage) {
+			Model model, String curPage) {
 		logger.info("user list");
 		logger.info("curPage: {}", curPage);
 		String ccurpage = curPage;
@@ -177,8 +127,7 @@ public class UserManageController {
 	
 	@RequestMapping("/black/filter")
 	public String blackfiltering(
-			Model model, String curPage,
-			@RequestParam Map<String, Object> map
+			Model model, String curPage, @RequestParam Map<String, Object> map
 			) { 
 		String ccurpage = curPage;
 		Paging paging = userManageService.getFilterPaging(ccurpage, map);

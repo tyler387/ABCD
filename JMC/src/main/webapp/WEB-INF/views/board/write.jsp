@@ -17,7 +17,7 @@
 
 
 
-<input type="text" placeholder="입력하세요!" id="boardWrite" name="boardWrite" style="width:300px;height:300px; font-size:12px;">
+<input type="text" size="20" placeholder="입력하세요!" id="boardWrite" name="boardWrite" style="width:300px;height:300px; font-size:12px;">
 
 <!-- 부트스트랩 제거 후 주석한 부분1 -->
 <!-- <div class="img-wrap" style="cursor:pointer;">	 -->

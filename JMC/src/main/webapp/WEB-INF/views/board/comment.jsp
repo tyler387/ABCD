@@ -11,7 +11,8 @@
 
 <c:when test="${sessionScope.userId ne null }">  
 <div id="cComment">
-<input type="text" id="commentWrite" name="cContent" placeholder="덧글을 작성하세요" style="display:inline-block; margin-bottom:5px;" ><button id="btnWrite">등록</button><br>
+<div><input type="text" id="commentWrite" name="cContent" placeholder="덧글을 작성하세요" style="display:inline-block; margin-bottom:5px; padding: 10px 62px;" ></div>
+<button id="btnWrite" style="margin-top:5px; margin-left: 260px">등록</button><br>
 
 </c:when>
 </c:choose>   
@@ -22,10 +23,12 @@
 
 <div id="commentContent" >
 <c:forEach var="list" items="${list}" varStatus="status" >
+
 <input type="hidden" value="${list.commentno }">
 
 ${list.commentno}.<div id="cContent${list.commentno}"> ${list.cContent }</div>
- 
+<c:choose>
+ <c:when test="${sessionScope.userno eq list.userno}">
 <button class="cDelete" data-commentno="${list.commentno}" data-contentno="${list.commentno}" data-boardno="${list.boardno}">삭제</button>
 
 <!-- 작성하는 것1111 -->
@@ -33,7 +36,8 @@ ${list.commentno}.<div id="cContent${list.commentno}"> ${list.cContent }</div>
 <button class="cContent" data-commentno="${list.commentno}" data-contentno="${list.commentno}" data-boardno="${list.boardno}">수정</button>
 
 <button class="confirm" data-commentno="${list.commentno}" data-contentno="${list.commentno}" >확인</button><br>
-
+</c:when>
+</c:choose>   
 <!-- 작성하는 것2222 1은1 2는2의 짝꿍 -->
 <%-- <button class="cContent" onclick="func(${list.commentno})" >수정</button><br> --%>
 

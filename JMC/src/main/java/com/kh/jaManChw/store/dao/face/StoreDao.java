@@ -60,7 +60,7 @@ public interface StoreDao {
 	public List<ItemOption> selectItemOptionDetail(int itemno);
 
 	/**
-	 * itemno를 통해 item테이블을 조회한다 
+	 * itemno를 통해 itemFile테이블을 조회한다 
 	 * 
 	 * @param itemno - 판매 상품 번호
 	 * @return 상품 파일의 상세 정보

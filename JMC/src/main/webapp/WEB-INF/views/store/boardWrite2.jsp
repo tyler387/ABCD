@@ -32,8 +32,8 @@
             -webkit-backdrop-filter: blur( 13.5px );
             border-radius: 10px;
             border: 1px solid rgba( 255, 255, 255, 0.18 );
-            width: 400px;
-            height: 500px;
+            width: 320px;
+            height: 400px;
             position: relative;
             top: -100px;
             padding: 10px;
@@ -70,7 +70,7 @@
         }
         #modalbutton{
         	margin-top: 20px;
-   			margin-left: 275px;
+   			margin-left: 230px;
    			border: 2px solid white;
 			background-color: rgba(0, 0, 0, 0);
 			color: white;
@@ -97,10 +97,11 @@
         
 <!--         <form id="modalBoardWrite" action="./itemDetail" method="post"> -->
         
-        <div class="content">
-            <p>어디 한 번 내용 써봐</p>
-          <div id="modaldivt">제목<input type="text" id="modalTitle" style="width: 300px; height:30px";></div>
-          <div id="modaldivc">내용<input type="text" id="modalContent" style="width: 300px; height: 200px;"></div>
+        <div class="content"> 
+          <div id="modaldivt" style="margin-bottom:5px;">제목</div>
+          <input type="text" id="modalTitle" style="width: 300px; height:30px; margin-bottom:5px;" >
+          <div id="modaldivc" style="margin-bottom:5px;">내용</div>
+          <input type="text" id="modalContent" style="width: 300px; height: 200px; margin-bottom:5px;">
           
           <button id="modalbutton" onclick="confirm">확인</button>
    

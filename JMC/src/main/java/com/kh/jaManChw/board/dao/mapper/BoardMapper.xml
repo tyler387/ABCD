@@ -134,7 +134,12 @@
 	</select>
 
 	<select id="selectBoardFile" parameterType="map" resultType="map">
-		SELECT b.*, bf.stored_name, u.user_nick
+		SELECT b.boardno
+		, b.board_optionno
+		, b.userno
+		, b.content
+		, b.status
+		, bf.stored_name, u.user_nick
 		FROM board b, board_file bf, users u
 		WHERE 1 = 1
 		AND b.boardno = bf.boardno

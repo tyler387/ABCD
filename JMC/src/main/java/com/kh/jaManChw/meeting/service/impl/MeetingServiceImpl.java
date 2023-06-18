@@ -14,10 +14,8 @@ import com.kh.jaManChw.chat.dao.face.ChatDao;
 import com.kh.jaManChw.dto.Applicant;
 import com.kh.jaManChw.dto.ChatRoom;
 import com.kh.jaManChw.dto.ChatUser;
-import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
-import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.controller.MeetingController;
@@ -30,6 +28,7 @@ import com.kh.jaManChw.util.MeetingPaging;
 @Component
 public class MeetingServiceImpl implements MeetingService{
 
+	
 private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 @Autowired MeetingDao meetingDao;	
@@ -73,11 +72,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 	}
 	
-	@Override
-	public List<Users> selectFriendListAll(int userno) {
-		
-		return meetingDao.selectFriendListAll(userno);
-	}
+	
 	
 	@Override
 		public int getUserno(int userno) {
@@ -264,9 +259,10 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			return meetingDao.selectMeetingAppUser(applicant);
 		}
 	@Override
-		public List<Map<String, Object>> allInfo(Applicant applicant) {
+		public List<Map<String, Object>> allInfo(Users applicantnick1) {
 		
-			return meetingDao.selectAllInfo(applicant);
+		
+			return meetingDao.selectAllInfo(applicantnick1);
 		}
 
 	@Override
@@ -335,4 +331,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			
 			return meetingDao.selectMyMeetingList(meeting,paging);
 		}
+		@Override
+			public Map<String, Object> leader(Applicant applicant) {
+				return meetingDao.selectLeader(applicant);
+			}
 }

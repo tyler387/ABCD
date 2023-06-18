@@ -207,6 +207,14 @@ h1 {
 // 	}
 	
 	
+	$('input[type="text"]').keydown(function() {
+	 	if (event.keyCode === 13) {
+    	event.preventDefault();
+  		};
+	});
+	
+	
+	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

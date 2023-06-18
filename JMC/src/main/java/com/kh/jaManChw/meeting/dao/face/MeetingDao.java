@@ -106,7 +106,7 @@ public interface MeetingDao {
 
 	public ProfileFile selectFileInfo(Users info);
 
-	public List<Map<String, Object>> selectAllInfo(Applicant applicant);
+	public List<Map<String, Object>> selectAllInfo(Users applicantnick1);
 	
 
 	
@@ -126,6 +126,8 @@ public interface MeetingDao {
 	public List<Map<String,Object>> selectMyMeetingList(@Param("meeting")Meeting meeting, @Param("paging")MeetingPaging paging);
 
 	public int selectMyMeetingCntAll(Meeting meeting);
+
+	public Map<String, Object> selectLeader(Applicant applicant);
 
 	
 	

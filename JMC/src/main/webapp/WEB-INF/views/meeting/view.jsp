@@ -225,6 +225,19 @@ th{
 	
 }
 
+.info {
+	font-size: 20px;
+	text-align: center;
+ }
+
+
+.profile {
+	
+	width: 100px;
+	height: 100px;
+	border-radius: 20px;
+}
+
 </style>
 
 
@@ -335,15 +348,35 @@ th{
 
 <h2>모집자</h2>
 <div class=nicknameboxleader id=nicknameboxleader onclick="window.open('/meeting/applicant?userno=${applicantnick1.userno}&meetingno=${viewmeeting.meetingno}' , 'popup' , 'width=500, height=300, top=200, right=500, resizable=no')">
-	<table>
+	<table class="info">
 		<tr>
+			<th>프로필</th>
 			<th>닉네임</th>
+			<th>등급</th>
+			<th>성별</th>
 		</tr>
 
 		<tr>
+  			<td class="profileleader">
+				<c:choose>
+					<c:when test="${maptest.PROFILE_STORED_NAME eq null}">
+  					<img class="profile" src="../resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="proId">
+					</c:when>
+					<c:when test="${maptest.PROFILE_STORED_NAME ne null }">
+					<img class ="profile"src="<%=request.getContextPath()%>/userProfile/${maptest.PROFILE_STORED_NAME}" id="proId">
+					</c:when>
+				</c:choose>
+			</td>
 			<td>${applicantnick1.userNick}</td>
-
-		</tr>
+			<td>${applicantnick1.grade }</td>
+			<td><c:if test="${applicantnick1.gender eq 'M' }">
+				남자
+				</c:if>
+				<c:if test="${applicantnick1.gender eq 'F' }">
+				여자
+				</c:if>	
+				</td>		
+	</tr>
 
 	</table>
 
@@ -364,17 +397,26 @@ th{
 	<div class="nicknameboxapp" >
 	
 	
-	<table>
+	<table class="info">
 		<tr>
 			<th>프로필</th>
 			<th>닉네임</th>
-			
+			<th>등급</th>
+			<th>성별</th>
 		</tr>
 
 		<tr>
-			<td><img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"></td>
+			<td><img class="profile" src="../resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="proId"></td>
 			<td>${applicantnickagree.userNick}</td>
-
+			<td>${applicantnickagree.grade }</td>
+			<td><c:if test="${applicantnickagree.gender eq 'M' }">
+				남자
+				</c:if>
+				<c:if test="${applicantnickagree.gender eq 'F' }">
+				여자
+				</c:if>	
+				</td>			
+				
 		</tr>
 
 	</table>
@@ -395,14 +437,20 @@ th{
 	<div class="nicknameboxapp" >
 	
 	
-	<table>
+	<table class="info">
 		<tr>
+			<th>프로필</th>
 			<th>닉네임</th>
+			<th>등급</th>
+			<th>성별</th>
 		</tr>
 
 		<tr>
+			<td><img class="profile" src="../resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="proId"></td>
 			<td>${applicantnicknocheck.userNick}</td>
-
+			<td>비공개</td>
+			<td>비공개</td>
+			
 		</tr>
 
 	</table>

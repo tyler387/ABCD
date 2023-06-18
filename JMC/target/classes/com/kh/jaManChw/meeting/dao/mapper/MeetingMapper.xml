@@ -273,7 +273,7 @@ where applicant.meetingno = #{meetingno} and leader = 'no' and applicant.agree =
 	select * from users inner join applicant 
 	on users.userno = #{userno}
 	join profile_file p on p.userno = applicant.userno
-	where applicant.meetingno = #{meetingno} and leader = 'no' and applicant.agree = 'yes'
+	where applicant.meetingno = #{meetingno} and leader = 'yes' and applicant.agree = 'yes'
 	
 </select>
 
@@ -300,6 +300,13 @@ order by meetingno desc
 
 <select id="selectMyMeetingCntAll" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int" >
 	select count(*) from meeting where userno = #{userno}
+
+</select>
+
+<select id="selectLeader" parameterType="com.kh.jaManChw.dto.Applicant" resultType="map">
+	select * from users u join    (
+select * from applicant where meetingno =#{meetingno} and leader = 'yes') c on u.userno = c.userno
+left outer join profile_file p on u.userno = p.userno
 
 </select>
 </mapper>

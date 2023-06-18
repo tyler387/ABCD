@@ -169,7 +169,7 @@ flex-direction:row;
 <div id="header">
 <header>
 
-<div class="logo"><img src='/resources/image/주황로고.png' style="width: 40px; height: 40px; padding-left: 14vw;"></div>
+<div class="logo"><a href="/login/main"><img src='/resources/image/주황로고.png' style="width: 40px; height: 40px; padding-left: 14vw;"></a></div>
 <div>
 <c:if test="${role eq 'admin'}">
 	<a href="/admin/main">관리자페이지</a>

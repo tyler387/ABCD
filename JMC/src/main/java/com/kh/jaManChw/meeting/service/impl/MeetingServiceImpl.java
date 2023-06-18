@@ -258,12 +258,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		public int chkUser(Applicant applicant) {
 			return meetingDao.selectMeetingAppUser(applicant);
 		}
-	@Override
-		public List<Map<String, Object>> allInfo(Users applicantnick1) {
-		
-		
-			return meetingDao.selectAllInfo(applicantnick1);
-		}
+	
 
 	@Override
 	public List<Map<String, Object>> getApplicantAll(HttpSession session, MeetingPaging paging) {

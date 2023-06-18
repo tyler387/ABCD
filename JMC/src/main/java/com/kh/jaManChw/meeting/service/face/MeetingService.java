@@ -68,8 +68,6 @@ public interface MeetingService {
 
 	public int chkUser(Applicant applicant);
 	
-	public List<Map<String, Object>> allInfo(Users applicantnick1);
-	
 	public MeetingPaging getappliPaging(String curPage, HttpSession session);
 
 	public List<Map<String, Object>> getMyapplicant(HttpSession session, MeetingPaging paging);

@@ -39,7 +39,7 @@ div.right {
 	align-items:center;
 
 }
-img{
+.img{
 	width:150px;
 	height: 150px;
 	border-radius: 70%;
@@ -93,13 +93,13 @@ img{
  <div class="row">
   <div class="left">
   
-  <div class='profile'>
+  <div class="profile">
 	<c:if test="${empty profile}">
-      <img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png"> 
+      <img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png" class="img"> 
     </c:if>
       			  
 	<c:if test="${not empty profile}">
-		<img src="<%=request.getContextPath()%>/userProfile/${profile.profileStoredName}"> 
+		<img src="<%=request.getContextPath()%>/userProfile/${profile.profileStoredName}" class="img"> 
 	</c:if>  
 	</div>
   	<div class="userInfo">
@@ -109,7 +109,7 @@ img{
   <div class="userMenu">
   <ul class="dropdown">
 
-  <li class="list1"><a href="/mypage/main">My</a>
+  <li class="list1"><a href="/mypage/main">My Info</a>
   
   	<ul class="list2">
   		<li class="list3"><a href="/mypage/profile">프로필수정</a></li>

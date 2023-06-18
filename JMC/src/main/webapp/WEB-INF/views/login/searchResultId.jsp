@@ -58,6 +58,10 @@
 	cursor: pointer;
 }
 
+.Idresultbtn:hover{
+	background-color: #ffcca8;
+}
+
 </style>
 
 

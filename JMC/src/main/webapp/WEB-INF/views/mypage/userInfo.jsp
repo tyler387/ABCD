@@ -20,16 +20,73 @@
 	display: flex;
 	flex-direction:column;  
 	justify-content: flex-start;
-	padding-top: 5px;
+	padding-top: 10px;
 	padding-bottom: 15px;
 	width: 380px;
+}
+.box2{
+	margin-top: 15xp;
 }
 
 .userInfo-btn{
 	margin-bottom: 30px;
-	
+}
+
+input{
+	width: 350px;
+	height: 25px;
+	border: 0;
+    border: 1px #371e06 solid;
+    border-radius: 4px;
+    outline: none; 
+}
+.userbtn{
+	border: 1px solid orange;
+    background-color: orange;
+    border-radius: 7px;
+    color: #fff;
+    width: 120px;
+    height: 39px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 40px;
+    font-family: '양진체';
+
 
 }
+.userbtn:hover{
+	background-color: #ffcca8;
+}
+.btn{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #371e06;
+	color: #fff;
+	height: 40px;
+	width: 100px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 18px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.btn:hover{
+	background-color: #ffcca8;
+}
+.addrinput{
+	display: inline-block;
+	width: 240px;
+}
+.box2 input:focus{
+   border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
+}
+.box1 input:focus+label{
+ 	color: #371e06;
+}
+
 
 
 </style>
@@ -41,6 +98,7 @@
        
        <form action="/mypage/userInfo" method="post" id="userInfoForm">
        	<div><input type="hidden" id="userno" name="userno" value="${loginInfo.userno}"></div>
+       	
        	<div class="box1">
        		<div class="labelbox"><label for="userId">아이디</label></div>
 	
@@ -52,9 +110,13 @@
 	     <div class="box1">
        		<div class="labelbox"><label for="userNick">닉네임</label></div>
 	
-			<div class="">
+			<div class="box2">
 				<input type="text" name="userNick" id="userNick">
 			</div>	
+			
+			<div class="msgbox" style="padding-top: 10px;">
+				<span id="userNick_msg" style="font-size: 17px;"></span>	
+			</div>
 	    </div>
 
  
@@ -67,6 +129,10 @@
 				<input type="password" name="userPw" id="userPw">
 			</div>
 			
+			<div class="msgbox" style="padding-top: 10px;">
+				<span id="pw_msg" style="font-size: 17px;"></span>	
+			</div>	
+			
 		</div>
 
 
@@ -77,93 +143,90 @@
 			<div class="box2">
 				<input type="password" name="userPw_chk" id="userPw_chk">
 			</div>
+			
+			<div class="msgbox" style="padding-top: 10px;">
+				<span id="pwchk_msg" style="font-size: 17px;"></span>	
+			</div>	
 
 		</div>
 
 
-<div class="box1">
-
-	<div class="labelbox"><label for="userName">이름</label></div>
-	<div class="box2"><input type="text" name="userName" id="userName" disabled value="${loginInfo.userName}"></div>
-	
-</div>
-
-
-<div class="box1">
-
-	<div class="labelbox"><label for="birth">생년월일</label></div>		
-	<div class="box2"><input type="text" name="birth" id="birth" disabled value="${loginInfo.birth}"></div>	
-	
-</div>
-
-
-<div class="box1">
-
-	<div class="labelbox"><label>성별</label></div>	
-	
-	<div class="select">
-		<input type="radio" id="select" name="gender" disabled value="${loginInfo.gender}"><label for="select">남자</label>	
-	</div>
-</div>
-
-<div class="box1">
-	<div>
-		<div class="labelbox"><label>이메일</label></div>	
+		<div class="box1">
 		
-		<div class="box2">
-			<input type="text" name="email" id="userEmail1">
+			<div class="labelbox"><label for="userName">이름</label></div>
+			<div class="box2"><input type="text" name="userName" id="userName" disabled value="${loginInfo.userName}"></div>
 			
-			<select name="email" id="userEmail2">
-				<option>@naver.com</option>
-				<option>@google.com</option>
-				<option>@daum.net</option>
-				<option>@hanmail.com</option>
-			</select>
+		</div>
+
+
+		<div class="box1">
+		
+			<div class="labelbox"><label for="birth">생년월일</label></div>		
+			<div class="box2"><input type="text" name="birth" id="birth" disabled value="${loginInfo.birth}"></div>	
+			
+		</div>
+
+
+		<div class="box1">
+		
+			<div class="labelbox"><label>성별</label></div>	
+			
+			<div class="select">
+				<input type="text" id="select" name="gender" disabled value="${loginInfo.gender}">
 			</div>
 		</div>
-</div>
 
+		<div class="box1">
+			<div>
+				<div class="labelbox"><label>이메일</label></div>	
+				
+				<div class="box2">
+					<input type="text" name="email" id="userEmail1">
+				</div>
+				
+				<div class="msgbox" style="padding-top: 10px;">
+					<span id="email_msg" style="font-size: 17px;"></span>	
+				</div>	
+			</div>
+		</div>
 
-<div class="box1">
-
-	<div class="labelbox"><label for="phone">휴대전화</label></div>	
-	
-	<div class="box2">
-		<select name="phone" id="phone1">
-				<option>SKT</option>
-				<option>KT</option>
-				<option>LG</option>
-				<option>SKT알뜰폰</option>
-				<option>KT알뜰폰</option>
-				<option>LG알뜰폰</option>
-			</select>
-		<input type="tel" name="phone" id="phone">
-	</div>
-</div>
-
-
-<div class="box1">
-
-	<div class="labelbox"><label>주소</label></div>	
-	
-	<div class="box2">
-		<input type="text" name="addr1" id="addr1" placeholder="우편번호">
-		<input type="button" onclick="findAddress()" value="우편번호 찾기">
-	</div>	
-	<div class="box2">
-		<input type="text" name="addr2" id="addr2" placeholder="도로명주소">
-	</div>
-	<div class="box2">
-		<input type="text" name="addr3" id="addr3" placeholder="상세주소">
-		<input type="text" id="addr4" placeholder="참고항목">
-	</div>
-</div>
-<div class="userInfo-btn">
-        <button>저장</button>
-        <a href="/mypage/delete"><input type="button" value="회원탈퇴"></a> 
- 		<a href="/mypage/main"><input type="button" value="취소"></a>
-  </div>
-  </form>
+		<div class="box1">
+		
+			<div class="labelbox"><label for="phone">휴대전화</label></div>	
+			
+			<div class="box2">
+				<input type="tel" name="phone" id="phone">
+			</div>
+			<div class="msgbox" style="padding-top: 10px;">
+				<span id="phoneMsg" style="font-size: 17px;"></span>
+			</div>
+		</div>
+		
+		
+		<div class="box1">
+		
+			<div class="labelbox"><label>주소</label></div>	
+			
+			<div class="box2">
+				<input type="text" name="addr1" id="addr1" placeholder="우편번호" class="addrinput">
+				<input type="button" onclick="findAddress()" value="우편번호 찾기" class="btn">
+			</div>	
+			<div class="box2" style="padding-top:10px; ">
+				<input type="text" name="addr2" id="addr2" placeholder="도로명주소">
+			</div>
+			<div class="box2" style="padding-top:5px;">
+				<input type="text" name="addr3" id="addr3" placeholder="상세주소">
+			</div>
+			<div class="box2" style="padding-top:5px;">	
+				<input type="text" id="addr4" placeholder="참고항목" >
+			</div>
+		</div>
+		<div class="userInfo-btn">
+		        <button class="userbtn" id="savebtn">저장</button>
+		        <a href="/mypage/delete"><input type="button" class="userbtn" value="회원탈퇴"></a> 
+		 		<a href="/mypage/main"><input type="button" class="userbtn" value="취소"></a>
+		  </div>
+ 	 </form>
        
       </div>
    </div>
@@ -171,6 +234,123 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function(){
+
+	// FIXME: 필요 스크립트 전개 영역
+    let checkPW = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/);
+    let checkPhone = RegExp(/^\d{3}\d{3,4}\d{4}$/);        
+    let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
+    let checkNick = RegExp(/^[가-힣a-zA-Z0-9]{2,20}$/);
+         
+		
+	$('#userPw').blur(function() {
+		var userPw = $('#userPw').val();
+	
+		if(userPw === ''){	
+			$('#pw_msg').html('비밀번호를 입력해 주세요');
+			$('#pw_msg').css('color','red');
+// 			$("#userPw").focus();
+			return false;
+		}else if(!checkPW.test(userPw)){
+			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
+			$('#pw_msg').css('color','red');
+// 			$("#userPw").focus();
+			return false;
+			
+		}else if(checkPW.test(userPw)){
+			$('#pw_msg').html("사용가능한 비밀번호입니다.")
+        	$('#pw_msg').css("color", "#3f8ef7");                           
+//         	$("#userPw_chk").focus();
+        	return true;
+		}
+	}) //$('#userPw').blur ed
+	
+	$('#userPw_chk').blur(function() {
+		var userPw = $('#userPw').val();
+		var userPwChk = $('#userPw_chk').val();
+	
+		if(userPw != userPwChk){	
+			$('#pwchk_msg').html('비밀번호가 일치하지 않습니다.');
+			$('#pwchk_msg').css('color','red');
+// 			$("#userPw_chk").focus();
+			return false;
+		}else if(userPwChk == ''){
+			$('#pwchk_msg').html('비밀번호를 입력해주세요.');
+			$('#pwchk_msg').css('color','red');
+			return false;
+		}else if(userPw === userPwChk){
+			$('#pwchk_msg').html('비밀번호가 일치합니다');
+			$('#pwchk_msg').css('color','#3f8ef7');
+// 			$("#userName").focus();
+			return true;			
+		}
+	}) //$('#userPw_chk').blur ed
+	
+	$('#userEmail1').blur(function() {
+		var email = $('#userEmail1').val();
+	
+		if(email === ''){	
+			$('#email_msg').html('이메일을 입력해주세요');
+			$('#email_msg').css('color','red');
+
+			return false;
+		}else if(!checkEmail.test(email)){
+			$('#email_msg').html('옳지않은 형식입니다.');
+			$('#email_msg').css('color','red');
+
+			return false;
+			
+		}else if(checkEmail.test(email)){
+			$('#email_msg').html("");                      
+
+        	return true;
+		}
+	}) //$('#userPw_chk').blur ed
+	
+	$('#phone').blur(function() {
+		var phone = $('#phone').val();
+	
+		if(phone === ''){	
+			$('#phoneMsg').html('핸드폰 번호를 입력해주세요');
+			$('#phoneMsg').css('color','red');
+			return false;
+			
+		}else if(!checkPhone.test(phone)){
+			$('#phoneMsg').html('옳지않은 형식입니다.');
+			$('#phoneMsg').css('color','red');
+			return false;
+			
+		}else if(checkPhone.test(phone)){  
+			$('#phoneMsg').html('');
+ 			$('#phoneMsg').css('color','#3f8ef7');
+        	return true;
+		}
+	}) //$('#phone').blur ed
+	
+	$('#userNick').blur(function() {
+		var userNick = $('#userNick').val();
+	
+		if(userNick === ''){	
+			$('#userNick_msg').html('닉네임을 입력해 주세요');
+			$('#userNick_msg').css('color','red');
+// 			$("#userPw").focus();
+			return false;
+		}else if(!checkNick.test(userNick)){
+			$('#userNick_msg').html('2글자 이상의 닉네임을 입력해주세요');
+			$('#userNick_msg').css('color','red');
+// 			$("#userPw").focus();
+			return false;
+			
+		}else if(checkNick.test(userNick)){
+			$('#userNick_msg').html("")                      
+//         	$("#userPw_chk").focus();
+        	return true;
+		}
+	}) //$('#userPw').blur ed
+
+
+})//$(document).ready ed
    
    function findAddress() {
 	    new daum.Postcode({
@@ -219,7 +399,6 @@
 	        }
 	    }).open();
 	}
-   
    
    </script>
 

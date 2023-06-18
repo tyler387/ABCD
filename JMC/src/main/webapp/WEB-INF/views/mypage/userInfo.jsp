@@ -111,7 +111,7 @@ input{
        		<div class="labelbox"><label for="userNick">닉네임</label></div>
 	
 			<div class="box2">
-				<input type="text" name="userNick" id="userNick">
+				<input type="text" name="userNick" id="userNick" >
 			</div>	
 			
 			<div class="msgbox" style="padding-top: 10px;">
@@ -245,25 +245,52 @@ $(document).ready(function(){
          
 		
 	$('#userPw').blur(function() {
-		var userPw = $('#userPw').val();
+		//var userPw = $('#userPw').val();
+		const target = document.getElementById('savebtn');
+		
+		
+		$('#savebtn').prop('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+
+		$('#userPw').on('input', function() {
+		  var userPw = $(this).val();
+
+		  if (userPw === '') {
+		    $('#pw_msg').html('비밀번호를 입력해 주세요');
+		    $('#pw_msg').css('color', 'red');
+		    $('#savebtn').attr('disabled', true); // 입력값이 없으므로 버튼을 비활성화
+		    target.disabled = true;
+		  } else if (!checkPW.test(userPw)) {
+		    $('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
+		    $('#pw_msg').css('color', 'red');
+		    $('#savebtn').attr('disabled', true); // 비밀번호 형식이 맞지 않으므로 버튼을 비활성화
+		    target.disabled = true;
+		  } else if (checkPW.test(userPw)) {
+		    $('#pw_msg').html("사용가능한 비밀번호입니다.");
+		    $('#pw_msg').css("color", "#3f8ef7");
+		    $('#savebtn').attr('disabled', false); // 비밀번호 형식이 맞으므로 버튼을 활성화
+		    target.disabled = true;
+		  }
+		});
+
+		
 	
-		if(userPw === ''){	
-			$('#pw_msg').html('비밀번호를 입력해 주세요');
-			$('#pw_msg').css('color','red');
-// 			$("#userPw").focus();
-			return false;
-		}else if(!checkPW.test(userPw)){
-			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
-			$('#pw_msg').css('color','red');
-// 			$("#userPw").focus();
-			return false;
+// 		if(userPw === ''){	
+// 			$('#pw_msg').html('비밀번호를 입력해 주세요');
+// 			$('#pw_msg').css('color','red');
+// // 			$("#userPw").focus();
+// 			return false;
+// 		}else if(!checkPW.test(userPw)){
+// 			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
+// 			$('#pw_msg').css('color','red');
+// // 			$("#userPw").focus();
+// 			return false;
 			
-		}else if(checkPW.test(userPw)){
-			$('#pw_msg').html("사용가능한 비밀번호입니다.")
-        	$('#pw_msg').css("color", "#3f8ef7");                           
-//         	$("#userPw_chk").focus();
-        	return true;
-		}
+// 		}else if(checkPW.test(userPw)){
+// 			$('#pw_msg').html("사용가능한 비밀번호입니다.")
+//         	$('#pw_msg').css("color", "#3f8ef7");                           
+// //         	$("#userPw_chk").focus();
+//         	return true;
+// 		}
 	}) //$('#userPw').blur ed
 	
 	$('#userPw_chk').blur(function() {

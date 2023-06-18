@@ -21,15 +21,23 @@ body {
 }
 
 #headerimg{
-	width: 1%;
+	width: 10px;
 	height: 10px;
 }
 
 header{
-/*   position: fixed; */
-/*   top: 0; */
-/*  display: flex; */
- width: 100vw;
+position: sticky;
+  top: 0;
+  backdrop-filter: blur(30px);
+  background: #371e06;
+  color: white; 
+/*   padding-right : 10%;  */
+/*   padding-left : 10%;  */
+  display:flex; 
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw; 
+  
  }
 
 header a{
@@ -47,15 +55,16 @@ a {
 
 #header #menu{
 /*   position:relative;  */
-   z-index: 1; 
-   padding-left : 5%;
-  background-color: #f5f5f5;
-  height: 70px;
-  text-align: center;
+  /* z-index: 99;  */
+  padding-top : 12px;
+  height: 50px;
+/*   display: flex; */
+/*   background-color:red; */
+/*   justify-content:space-evenly; */
+   text-align: center;
 /*   margin-left: 130px; */
-  width:100vw;
- top: 75px;
-  position: fixed; 
+/* 	padding-left: 130px; */
+  width:100%;
 }
 
 #header [class*="main"] {
@@ -70,14 +79,21 @@ a {
 #header .main1{
   padding-left: 0px;
   height: 100%;
-	width:100vw;
+	width:100%;
   margin: 0 auto;
-  display: inline-block;
+/*   display: inline-block; */
+display: flex; 
+
+   justify-content:space-around; 
+  
 }
 #header .main1>li {
-  float: left;
-  width: 15%;
-/*   line-height: 50px; */
+/*   float: left; */
+display:flex;
+flex-direction:row;
+  width: 18%;
+ justify-content:center;
+   line-height: 50px; 
   position: relative;
   
   
@@ -88,7 +104,7 @@ a {
 #header .main1>li a {
   display: block;
   font-size: 22px;
-  color:black;
+
 }
 #header .main1>li a:hover {
   font-weight: bold;
@@ -129,9 +145,7 @@ a {
 /*    background-color: #371e06; */
 /* } */
 
- #wrap {
-  min-height: calc(100% - 120px);
-}
+
 
 
  .footer {
@@ -144,30 +158,8 @@ a {
    width:100%;
  }
  
-#headerimg{
-	width: 100px;
-	height: 100px;
-}
 
-.brownMenu{
-   z-index: 1; 
-position:fixed;
-top:0;
-/* backdrop-filter: blur(30px); */
-  background: #371e06; 
-  color: white;
-/*   padding-left: 120px;  */
-/*   padding-right: 40px;  */
-height:8vh;
-  display:flex; 
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  padding-left: 10%;
-}
-.headercontent{
-width: 35%;
-}
+
 
 </style>
 </head>
@@ -177,34 +169,33 @@ width: 35%;
 <div id="header">
 <header>
 
-<div class="brownMenu">
-	<div class="logo"><img src='/resources/image/주황로고.png' id="headerimg"></div>
-	<div class="headercontent">
-	<c:if test="${role eq 'admin'}">
-		<a href="/admin/main">관리자페이지</a>
-	</c:if>
-	
-	<c:if test="${not empty login}">
-		<a href="/login/logout">로그아웃</a>
-		<a href="/mypage/main">마이페이지</a>
-		<a href="#">알람</a>
-	</c:if>
-	<c:if test="${empty socialNum and empty login}">
-		<a href="/login/login">로그인</a>
-	</c:if>	
-	<c:if test="${not empty socialNum}">
-		<a href="/login/logout">로그아웃</a>
-		<a href="/mypage/main">마이페이지</a>
-		<a href="#">알람</a>
-	</c:if>
-	
-	<c:if test="${platFormOption eq 'naver'}">
-		<a href="/login/logout">로그아웃</a>
-		<a href="/mypage/main">마이페이지</a>
-		<a href="#">알람</a>
-	</c:if>
-	</div>
+<div class="logo"><img src='/resources/image/주황로고.png' style="width: 40px; height: 40px; padding-left: 14vw;"></div>
+<div>
+<c:if test="${role eq 'admin'}">
+	<a href="/admin/main">관리자페이지</a>
+</c:if>
+
+<c:if test="${not empty login}">
+	<a href="/login/logout">로그아웃</a>
+	<a href="/mypage/main">마이페이지</a>
+	<a href="#">알람</a>
+</c:if>
+<c:if test="${empty socialNum and empty login}">
+	<a href="/login/login">로그인</a>
+</c:if>	
+<c:if test="${not empty socialNum}">
+	<a href="/login/logout">로그아웃</a>
+	<a href="/mypage/main">마이페이지</a>
+	<a href="#">알람</a>
+</c:if>
+
+<c:if test="${platFormOption eq 'naver'}">
+	<a href="/login/logout">로그아웃</a>
+	<a href="/mypage/main">마이페이지</a>
+	<a href="#">알람</a>
+</c:if>
 </div>
+</header>
 
 <div id="menu">
   <ul class="main1">
@@ -222,5 +213,5 @@ width: 35%;
     </ul>
 </div>
 
-</header>
+
 </div>

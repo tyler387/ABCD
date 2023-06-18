@@ -111,7 +111,6 @@ th{
 .meetingviewall{
 	display: inline block;
 	width: 1200px;
-	height: 1100px;
 	margin: 0 auto;	
 	z-index: 1000;
 }

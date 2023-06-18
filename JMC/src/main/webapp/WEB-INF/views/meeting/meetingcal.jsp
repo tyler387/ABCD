@@ -56,10 +56,9 @@
 }
 
 .meetingbar {
-
-	width: 1550px;
-	text-align: right;
-
+	position: absolute;
+	width: 800px;
+	left: 65%;
 }
 .modal {
 	position: absolute;

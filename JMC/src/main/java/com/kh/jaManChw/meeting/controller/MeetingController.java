@@ -321,6 +321,14 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	}
 	
 	//모임 삭제하기 
+	@GetMapping("/meeting/delete")
+	public String meetingErase(Meeting meeting, HttpSession session) {
+		
+		
+	
+		
+		return "/meeting/meetingcal";
+	}
 	
 	
 	//선택한 모임의 신고창 조회 모달창 써서 필요X

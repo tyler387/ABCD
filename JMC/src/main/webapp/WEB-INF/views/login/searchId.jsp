@@ -173,12 +173,12 @@ select:focus{
 		
 		<div class="input-group">
 			<input type="text" name="email" id="userEmail1">		
-			<select class="emailSelect" name="email" id="userEmail2">
-				<option class="option">@naver.com</option>
-				<option class="option">@google.com</option>
-				<option class="option">@daum.net</option>
-				<option class="option">@hanmail.com</option>
-			</select>
+<!-- 			<select class="emailSelect" name="email" id="userEmail2"> -->
+<!-- 				<option class="option">@naver.com</option> -->
+<!-- 				<option class="option">@google.com</option> -->
+<!-- 				<option class="option">@daum.net</option> -->
+<!-- 				<option class="option">@hanmail.com</option> -->
+<!-- 			</select> -->
 			<div class="msgbox">
 				<span id="emailMsg" style="font-size: 17px;"></span>	
 			</div>	
@@ -240,7 +240,8 @@ $(document).ready(function(){
 	var isCertification = false; // 인증 여부 변수
 
 	$('#email_checkbtn').click(function() {
-		const email = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
+		const email = $('#userEmail1').val() 
+		//+ $('#userEmail2').val(); // 이메일 주소값 얻어오기!
 		console.log('완성된 이메일: ' + email); // 이메일 오는지 확인
 		
 		const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
@@ -276,9 +277,9 @@ $(document).ready(function(){
 			resultMsg.css('color', 'green');
 			$('#email_checkbtn').attr('disabled', true);
 			$('#userEamil1').attr('readonly', true);
-			$('#userEamil2').attr('readonly', true);
-			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-			$('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+		//	$('#userEamil2').attr('readonly', true);
+			$('#userEmail1').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+			$('#userEmail1').attr('onChange', 'this.selectedIndex = this.initialSelect');
 		} else if (inputCode === '') {
 			resultMsg.html('인증번호를 입력해주세요.');
 			resultMsg.css('color', 'red');

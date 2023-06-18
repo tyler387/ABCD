@@ -127,14 +127,14 @@ $(function () {
 
 <div class="all">
 
-
+<div class="imgbackground">
 <div class="title">
 '세상에 나쁜 위스키는 없다. 좋은 위스키와 더 좋은 위스키가 있을뿐이다.'
 </div>
 <div class="content">
 모임을 통해 다양한 위스키를 접해보세요.
 </div>
-
+</div>
 
 
 <div class="find-btn">

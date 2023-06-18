@@ -20,28 +20,21 @@ body {
   font-family: '양진체';
 }
 
-header img{
-	width: 100px;
-	height: 100px;
+#headerimg{
+	width: 1%;
+	height: 10px;
 }
 
 header{
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(30px);
-  background: #371e06;
-  color: white;
-/*   padding-left: 120px;  */
-/*   padding-right: 40px;  */
-  display:flex; 
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%; 
-}
+/*   position: fixed; */
+/*   top: 0; */
+/*  display: flex; */
+ width: 100vw;
+ }
 
 header a{
 	color : white;
-	padding : 20px;
+ 	padding : 20px;
 }
 
 *{
@@ -54,12 +47,15 @@ a {
 
 #header #menu{
 /*   position:relative;  */
-  /* z-index: 99;  */
-  padding-top : 12px;
+   z-index: 1; 
+   padding-left : 5%;
   background-color: #f5f5f5;
-  height: 50px;
+  height: 70px;
   text-align: center;
-  margin-left: 130px;
+/*   margin-left: 130px; */
+  width:100vw;
+ top: 75px;
+  position: fixed; 
 }
 
 #header [class*="main"] {
@@ -74,15 +70,16 @@ a {
 #header .main1{
   padding-left: 0px;
   height: 100%;
-  width: 1600px;
+	width:100vw;
   margin: 0 auto;
   display: inline-block;
 }
 #header .main1>li {
   float: left;
   width: 15%;
-  line-height: 50px;
+/*   line-height: 50px; */
   position: relative;
+  
   
 }
 #header .main1>li:hover .main2 {
@@ -91,6 +88,7 @@ a {
 #header .main1>li a {
   display: block;
   font-size: 22px;
+  color:black;
 }
 #header .main1>li a:hover {
   font-weight: bold;
@@ -147,8 +145,30 @@ a {
    width:100%;
  }
  
+#headerimg{
+	width: 100px;
+	height: 100px;
+}
 
-
+.brownMenu{
+   z-index: 1; 
+position:fixed;
+top:0;
+/* backdrop-filter: blur(30px); */
+  background: #371e06; 
+  color: white;
+/*   padding-left: 120px;  */
+/*   padding-right: 40px;  */
+height:8vh;
+  display:flex; 
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  padding-left: 10%;
+}
+.headercontent{
+width: 35%;
+}
 
 </style>
 </head>
@@ -158,32 +178,34 @@ a {
 <div id="header">
 <header>
 
-<div class="logo"><img src='/resources/image/주황로고.png'></div>
-<c:if test="${role eq 'admin'}">
-	<a href="/admin/main">관리자페이지</a>
-</c:if>
-
-<c:if test="${not empty login}">
-	<a href="/login/logout">로그아웃</a>
-	<a href="/mypage/main">마이페이지</a>
-	<a href="#">알람</a>
-</c:if>
-<c:if test="${empty socialNum and empty login}">
-	<a href="/login/login">로그인</a>
-</c:if>	
-<c:if test="${not empty socialNum}">
-	<a href="/login/logout">로그아웃</a>
-	<a href="/mypage/main">마이페이지</a>
-	<a href="#">알람</a>
-</c:if>
-
-<c:if test="${platFormOption eq 'naver'}">
-	<a href="/login/logout">로그아웃</a>
-	<a href="/mypage/main">마이페이지</a>
-	<a href="#">알람</a>
-</c:if>
-
-</header>
+<div class="brownMenu">
+	<div class="logo"><img src='/resources/image/주황로고.png' id="headerimg"></div>
+	<div class="headercontent">
+	<c:if test="${role eq 'admin'}">
+		<a href="/admin/main">관리자페이지</a>
+	</c:if>
+	
+	<c:if test="${not empty login}">
+		<a href="/login/logout">로그아웃</a>
+		<a href="/mypage/main">마이페이지</a>
+		<a href="#">알람</a>
+	</c:if>
+	<c:if test="${empty socialNum and empty login}">
+		<a href="/login/login">로그인</a>
+	</c:if>	
+	<c:if test="${not empty socialNum}">
+		<a href="/login/logout">로그아웃</a>
+		<a href="/mypage/main">마이페이지</a>
+		<a href="#">알람</a>
+	</c:if>
+	
+	<c:if test="${platFormOption eq 'naver'}">
+		<a href="/login/logout">로그아웃</a>
+		<a href="/mypage/main">마이페이지</a>
+		<a href="#">알람</a>
+	</c:if>
+	</div>
+</div>
 
 <div id="menu">
   <ul class="main1">
@@ -200,4 +222,6 @@ a {
     <li><a href="#">고객센터</a></li>
     </ul>
 </div>
+
+</header>
 </div>

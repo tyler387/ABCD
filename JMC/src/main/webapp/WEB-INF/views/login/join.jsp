@@ -568,7 +568,7 @@ $(document).ready(function(){
 			dataType: 'text',
 			success: function(data) {
 				/* console.log('data: ' + data); */
-				checkInput.attr('disabled', false); // 인증번호 입력이 가능하도록 속성 변환
+				checkInput.attr('disabled', true); // 인증번호 입력이 가능하도록 속성 변환
 				code = data;
 				isCertification = true; // 인증이 완료되었음을 표시
 				alert('인증번호가 전송되었습니다.');

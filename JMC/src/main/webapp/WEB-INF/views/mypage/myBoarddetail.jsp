@@ -87,6 +87,7 @@ td:hover{
 						<th>사진</th>
 					</tr>
 					
+				
 						<c:forEach var="list" items="${list }">
 					<tr>
 						<td>${list.WRITE_DATE }</td>

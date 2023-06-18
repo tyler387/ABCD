@@ -78,9 +78,7 @@ height: 300px;
 #nav{
 	background : black;
 	text-align : center;
-	position:absolute;
-	top:18vh;
-	margin-left: 13%;
+
 
 }
 #nav ul {margin:0; padding:0; list-style:none; color:white}
@@ -98,11 +96,11 @@ height: 300px;
 #merchant{
 	width:400px;
 	margin: 0 auto;
-	padding-top:32%;
+
 }
 
 #merchantList{
-padding-top:18%;
+
 	display: grid;
     grid-template-columns: repeat(3, 250px);
     grid-template-rows: repeat(3, 250px);

@@ -72,7 +72,7 @@ input{
 }
 
 .box2 #userEmail1{
-	width: 250px;
+	width: 380px;
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px; 
 }
@@ -296,12 +296,6 @@ input[type=button]:hover{
 		<div class="box2">
 			<input type="text" name="email" id="userEmail1">
 			
-			<select class="selectOption" name="email" id="userEmail2">
-				<option class="option">@naver.com</option>
-				<option class="option">@google.com</option>
-				<option class="option">@daum.net</option>
-				<option class="option">@hanmail.com</option>
-			</select>
 			</div>
 			<div class="msgbox">
 				<span id="emailMsg" style="font-size: 17px;"></span>	
@@ -332,7 +326,7 @@ input[type=button]:hover{
 		</select>
 		<input type="tel" name="phone" id="phone">
 	</div>
-		<div class="msgbox">
+		<div class="msgbox" style="padding-top:8px;">
 		<span id="phoneMsg" style="font-size: 17px;"></span>	
 	</div>	
 	
@@ -459,27 +453,6 @@ $(document).ready(function(){
 	}) //$('#userPw_chk').blur ed
 	
 	
-	$('#userName').blur(function() {
-		var userName = $('#userName').val();
-	
-		if(userName === ''){	
-			$('#name_msg').html('이름을 입력해 주세요');
-			$('#name_msg').css('color','red');
-// 			$("#userName").focus();
-			return false;
-		}else if(!checkName.test(userName)){
-			$('#name_msg').html('옳지않은 형식입니다.');
-			$('#name_msg').css('color','red');
-// 			$("#userPw").focus();
-			return false;
-			
-		}else if(checkName.test(userName)){  
-			$('#name_msg').html('');
- 			$('#name_msg').css('color','#3f8ef7');
-//         	$("#birth").focus();
-        	return true;
-		}
-	}) //$('#userName').blur ed
 	
 	$('#phone').blur(function() {
 		var phone = $('#phone').val();
@@ -583,7 +556,8 @@ $(document).ready(function(){
 	var isCertification = false; // 인증 여부 변수
 
 	$('#emailbtn').click(function() {
-		const email = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
+		const email = $('#userEmail1').val() 
+// 		+ $('#userEmail2').val(); // 이메일 주소값 얻어오기!
 		console.log('완성된 이메일: ' + email); // 이메일 오는지 확인
 		
 		const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
@@ -617,11 +591,11 @@ $(document).ready(function(){
 		} else if (inputCode === code) {
 			resultMsg.html('인증번호가 일치합니다.');
 			resultMsg.css('color', 'green');
-			$('#email_checkbtn').attr('disabled', true);
+			$('#emailbtn').attr('disabled', true);
 			$('#userEamil1').attr('readonly', true);
-			$('#userEamil2').attr('readonly', true);
-			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-			$('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+// 			$('#userEamil2').attr('readonly', true);
+			$('#userEmail1').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+ 			$('#userEmail1').attr('onChange', 'this.selectedIndex = this.initialSelect');
 		} else if (inputCode === '') {
 			resultMsg.html('인증번호를 입력해주세요.');
 			resultMsg.css('color', 'red');

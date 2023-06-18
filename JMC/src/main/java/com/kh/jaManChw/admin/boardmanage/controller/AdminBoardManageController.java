@@ -173,11 +173,10 @@ public class AdminBoardManageController {
 	@GetMapping("/qna/list")
 	public void qnAPage(
 			String curPage,
-			Paging paging,
 			Model model
 			) {
 		
-		paging = qnAQService.getPaging(curPage);
+		Paging paging = qnAQService.getPaging(curPage);
 		List<Map<String, Object>> qnAQList = qnAQService.showQnAList(paging);
 
 		

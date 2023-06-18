@@ -265,7 +265,7 @@ public class ItemManageController {
 	
 	//판매 상품 신규 등록 시 내용글중 파일을 저장한다 - summernote
 	@PostMapping(value ="/itemview/writeFileupload" , produces = "application/json; charset=utf8")
-	public @ResponseBody JSONObject adminBoardContentFileupload(
+	public @ResponseBody JSONObject itemContentFileupload(
 //			@RequestParam("files") MultipartFile multipartFile
 			@RequestParam("file") MultipartFile file
 			) {

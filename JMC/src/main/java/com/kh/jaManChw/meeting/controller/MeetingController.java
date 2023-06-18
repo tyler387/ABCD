@@ -320,6 +320,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		return url;
 	}
 	
+	//모임 삭제하기 
+	
+	
 	//선택한 모임의 신고창 조회 모달창 써서 필요X
 //	@GetMapping("/meeting/report")
 //	public String reportForm(Model model, Meeting viewMeeting) {
@@ -330,6 +333,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 //		
 //		return "/meeting/report";
 //	}
+	
 	
 	//선택한 모임 신고하기  
 	@PostMapping("/meeting/report")

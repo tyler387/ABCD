@@ -150,8 +150,8 @@ td{
 			</c:when>
 		</c:choose>	
 		<td style="width: 45%;" id="trcontent" data-userno ="${itemQnAQList.USERNO }" data-qnano="${itemQnAQList.ITEM_QNANO }">${itemQnAQList.IQ_TITLE }</td>
-		<td style="width: 15%;" id="trWriter" >${itemQnAQList.USER_ID }</td>
-		<td style="width: 25%;" id="trdate">${itemQnAQList.IQ_WRITE_DATE }</td>
+		<td style="width: 15%;" id="trWriter">${itemQnAQList.USER_ID }</td>
+		<td style="width: 25%;" id="trdate"><fmt:formatDate value="${itemQnAQList.IQ_WRITE_DATE}" pattern="yyyy.MM.dd HH:mm"/></td>
 
 </tr>
 </c:forEach>

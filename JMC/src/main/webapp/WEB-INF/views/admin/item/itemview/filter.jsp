@@ -76,7 +76,7 @@ div.admin1 {
 		<c:when test="${il.ITEM_STATUS eq 'sold_out'}">
 		<td>매진</td>
 		</c:when>
-		<c:when test="${il.ITEM_STATUS eq 'unsale'}">
+		<c:when test="${il.ITEM_STATUS eq 'stop_selling'}">
 		<td>판매중지</td>
 		</c:when>
 	</c:choose>

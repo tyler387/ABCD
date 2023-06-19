@@ -56,7 +56,7 @@
 }
 
 table {
-	width: 800px;
+	width: 900px;
 	margin: 0 auto;
 }
 

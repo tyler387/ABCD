@@ -1,21 +1,12 @@
 package com.kh.jaManChw.meeting.controller;
 
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -26,13 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.kh.jaManChw.dto.Applicant;
-import com.kh.jaManChw.dto.FriendList;
 import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.Preference;
 import com.kh.jaManChw.dto.ProfileFile;
@@ -40,7 +26,6 @@ import com.kh.jaManChw.dto.Report;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.meeting.service.face.MeetingService;
 
-import oracle.jdbc.proxy.annotation.Post;
 
 
 @Controller
@@ -152,8 +137,10 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		//전체 모임 목록 가져오기 
 		List<Meeting> meetinglist = meetingService.getMeetinglistAll(meeting);
 		
+		//등록된 총 모임 수 가져오기 
 		int meetingcount = meetingService.getMeetinglistcount(meeting);
 		
+		//현재 모집중인 모임 수 가져오기 
 		int meetingcountnow = meetingService.getMeetinglistcountnow(meeting);
 		logger.info("{}" , meetinglist);
 		

@@ -137,7 +137,7 @@ div.right {
   		<li class="list3"><a href="/mypage/friendList">내친구 목록</a></li>
   	</ul>
   </li>
-  <li class="list1"><a href="/mypage/myBoard">커뮤니티</a></li>
+  <li class="list1"><a href="/mypage/myBoarddetail">커뮤니티</a></li>
  
 </ul>
 </div>

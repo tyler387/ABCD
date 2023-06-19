@@ -94,7 +94,7 @@ td:hover{
 					<tr>
 						<td>${list.WRITE_DATE }</td>
 						<td>${list.CONTENT }</td>
-						<td><img src="<%=request.getContextPath() %>/boardFileUpload/${list.STORED_NAME}"></td>
+						<td><img src="<%=request.getContextPath() %>/boardFileUpload/${list.STORED_NAME}" style="width:10%"></td>
 					</tr>
 					</c:forEach>
 				</table>

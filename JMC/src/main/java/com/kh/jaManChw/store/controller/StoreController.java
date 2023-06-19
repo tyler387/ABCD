@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
 import com.kh.jaManChw.dto.ItemQnAQ;
+import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.ShoppingBasket;
+import com.kh.jaManChw.dto.Users;
+import com.kh.jaManChw.mypage.service.face.MypageService;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
 
@@ -36,15 +38,33 @@ public class StoreController {
 	
 	@Autowired private ItemQnAQService itemQnAQService;
 	
+	@Autowired private MypageService mypageService;
+	
 	@RequestMapping("/main")
 	public void StoreMain() {
 		logger.info("판매사이트 메인");
 	}
 	
 	@RequestMapping("/shoppingbasket")
-	public void PostStoreShoppingbasket(Model model, HttpSession session) {
+	public void PostStoreShoppingbasket(Users users, Model model, HttpSession session) {
 		
+		// 세션에서 userno 가져오기
 		int userno = (Integer)session.getAttribute("userno");
+		users.setUserno(userno);
+		logger.info("users main:{}",users);
+		
+		
+		//담아온 세션으로 파일 저장된 이름 불러오기
+		ProfileFile profile =  mypageService.fileInfo(users);
+		//ProfileFile profile= mypageService.getFileName(profileFile);
+		
+	
+		//파일 정보 모델에 넣기 가져오기	
+		model.addAttribute("profile", profile);
+		logger.info("profile 수정:{}",profile);
+		
+		
+//		int userno = (Integer)session.getAttribute("userno");
 		logger.info("세션 유저 넘버 {}", userno);
 		List<Map<String, Object>> list = storeService.getShoppingbasketList(userno);
 		logger.info("장바구니 조회결과{}", list);
@@ -202,7 +222,23 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/buylist")
-	public void storeBuyList(HttpSession session, Model model) {
+	public void storeBuyList(Users users, HttpSession session, Model model) {
+		
+		// 세션에서 userno 가져오기
+		int userno1 = (Integer)session.getAttribute("userno");
+		users.setUserno(userno1);
+		logger.info("users main:{}",users);
+		
+		
+		//담아온 세션으로 파일 저장된 이름 불러오기
+		ProfileFile profile =  mypageService.fileInfo(users);
+		//ProfileFile profile= mypageService.getFileName(profileFile);
+		
+	
+		//파일 정보 모델에 넣기 가져오기	
+		model.addAttribute("profile", profile);
+		logger.info("profile 수정:{}",profile);
+		
 		
 		String userno = String.valueOf(session.getAttribute("userno"));
 		List<Map<String,String>> map = storeService.getBuyList(userno);
@@ -210,7 +246,25 @@ public class StoreController {
 		model.addAttribute("buylist", map);
 	}
 	@RequestMapping("/detail")
-	public void storeBuyDetail(HttpSession session, Model model, @RequestParam Map<String, String> map) {
+	public void storeBuyDetail(Users users, HttpSession session, Model model, @RequestParam Map<String, String> map) {
+		
+		// 세션에서 userno 가져오기
+		int userno1 = (Integer)session.getAttribute("userno");
+		users.setUserno(userno1);
+		logger.info("users main:{}",users);
+		
+		
+		//담아온 세션으로 파일 저장된 이름 불러오기
+		ProfileFile profile =  mypageService.fileInfo(users);
+		//ProfileFile profile= mypageService.getFileName(profileFile);
+		
+	
+		//파일 정보 모델에 넣기 가져오기	
+		model.addAttribute("profile", profile);
+		logger.info("profile 수정:{}",profile);
+		
+		
+		
 		logger.info("바이리스트 출력{}", map);
 		
 		String userno = String.valueOf(session.getAttribute("userno"));

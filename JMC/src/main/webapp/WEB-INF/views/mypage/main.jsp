@@ -199,7 +199,7 @@ th {
       		<c:if test="${loginInfo.grade == '술찐'}">
 	      		<div class="imgprofile">
 	      			<div id="userinfo1">
-	      				<img src="/resources/image/2b50.png" class="img">
+	      				<img src="/resources/image/free-icon-whiskey-sour-7743462.png" class="img">
 	      			</div>
 	      			
 	      			<div id="userinfo2">

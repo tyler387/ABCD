@@ -194,7 +194,7 @@ public class ReportManageController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("filter", map);
 		return "/admin/report/post/filter";
-	}
+	} 
 	
 	@RequestMapping("/meeting/meetingview")
 	public void ReportMeetingView(Model model, @RequestParam String reportno) {

@@ -54,9 +54,9 @@ input{
 
 
 }
-.userbtn:hover{
-	background-color: #ffcca8;
-}
+/* .userbtn:hover{ */
+/* 	background-color: #ffcca8; */
+/* } */
 .btn{
 	font-family: '양진체';
 	display :inline-block;
@@ -126,7 +126,7 @@ input{
 			<div class="labelbox"><label for="userPw">패스워드</label></div>	
 			
 			<div class="box2">
-				<input type="password" name="userPw" id="userPw">
+				<input type="password" name="userPw" id="userPw" >
 			</div>
 			
 			<div class="msgbox" style="padding-top: 10px;">
@@ -243,32 +243,30 @@ $(document).ready(function(){
     let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
     let checkNick = RegExp(/^[가-힣a-zA-Z0-9]{2,20}$/);
          
+		const target = document.getElementById('savebtn');
+		$('#savebtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
 		
 	$('#userPw').blur(function() {
 		//var userPw = $('#userPw').val();
-		const target = document.getElementById('savebtn');
 		
-		
-		$('#savebtn').prop('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+		var userPw = $('#userPw').val();
 
-		$('#userPw').on('input', function() {
-		  var userPw = $(this).val();
 
 		  if (userPw === '') {
 		    $('#pw_msg').html('비밀번호를 입력해 주세요');
 		    $('#pw_msg').css('color', 'red');
 		    $('#savebtn').attr('disabled', true); // 입력값이 없으므로 버튼을 비활성화
-		    target.disabled = true;
+		
 		  } else if (!checkPW.test(userPw)) {
 		    $('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
 		    $('#pw_msg').css('color', 'red');
 		    $('#savebtn').attr('disabled', true); // 비밀번호 형식이 맞지 않으므로 버튼을 비활성화
-		    target.disabled = true;
-		  } else if (checkPW.test(userPw)) {
+		
+		  } else  {
 		    $('#pw_msg').html("사용가능한 비밀번호입니다.");
 		    $('#pw_msg').css("color", "#3f8ef7");
 		    $('#savebtn').attr('disabled', false); // 비밀번호 형식이 맞으므로 버튼을 활성화
-		    target.disabled = true;
+		
 		  }
 		});
 
@@ -291,7 +289,7 @@ $(document).ready(function(){
 // //         	$("#userPw_chk").focus();
 //         	return true;
 // 		}
-	}) //$('#userPw').blur ed
+//}) //$('#userPw').blur ed
 	
 	$('#userPw_chk').blur(function() {
 		var userPw = $('#userPw').val();

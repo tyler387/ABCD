@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.dto.FriendList;
+import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.mypage.dao.face.MypageDao;
@@ -195,6 +197,10 @@ public class MypageServiceImpl implements MypageService {
 		mypageDao.deleteFriend(userno);
 		
 	}
+
+
+
+
 
 	
 

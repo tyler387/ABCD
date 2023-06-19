@@ -28,7 +28,7 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer{
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 
-		registry.addEndpoint("/chat").setAllowedOriginPatterns("http://localhost:8888").withSockJS();
+		registry.addEndpoint("/chat").setAllowedOriginPatterns("http://192.168.10.30:8888").withSockJS();
 	}
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {

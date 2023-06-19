@@ -59,19 +59,22 @@
 	</select>
 	
 	<select id="selectEventList" resultType="map" parameterType="Paging">
-		SELECT 
-			admin_boardno
-			, title
-			, content
-			, CAST(write_date as date) write_date
-			, u.user_nick
-		FROM
-			admin_board ab
-			, users u  
-		WHERE 1 = 1
-			AND ab.userno = u.userno
-			AND ab_option = 'event'
-		ORDER BY admin_boardno DESC
+		SELECT * FROM(
+		    SELECT rownum rnum, N.* FROM(
+				SELECT 
+					admin_boardno
+					, title
+					, CAST(write_date as date) write_date
+					, u.user_nick
+				FROM
+					admin_board ab, users u  
+				WHERE 1 = 1
+					AND ab.userno = u.userno
+					AND ab_option = 'event'
+				ORDER BY admin_boardno DESC
+		        ) N
+		)
+		WHERE rnum BETWEEN #{startno} AND #{endno}
 	</select>
 	
 	<select id="selectEventDetail" resultType="map" parameterType="int">
@@ -98,21 +101,26 @@
 	</select>
 	
 	<select id="selectQnAList" resultType="map" parameterType="Paging">
-		SELECT 
-			questionno
-			, qq.userno
-			, qq.q_title
-			, qq.q_content
-			, qq.q_status
-			, qq.is_public
-			, CAST(write_date as date) write_date
-			, u.user_nick
-		FROM
-			QnA_Q qq
-			, users u  
-		WHERE 1 = 1
-			AND qq.userno = u.userno
-		ORDER BY questionno DESC
+		SELECT * FROM(
+		    SELECT rownum rnum, N.* FROM(
+				SELECT 
+					questionno
+					, qq.userno
+					, qq.q_title
+					, qq.q_content
+					, qq.q_status
+					, qq.is_public
+					, CAST(write_date as date) write_date
+					, u.user_nick
+				FROM
+					QnA_Q qq
+					, users u  
+				WHERE 1 = 1
+					AND qq.userno = u.userno
+				ORDER BY questionno DESC
+		        ) N
+		)
+		WHERE rnum BETWEEN #{startno} AND #{endno}
 	</select>
 	
 	<select id="selectQnADetail" resultType="map" parameterType="int">
@@ -148,6 +156,7 @@
 			, #{qContent}
 			, #{isPublic}
 			)
+
 	</insert>
 	
 	<update id="updateQnAQ" parameterType="QnAQ">

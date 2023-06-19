@@ -130,7 +130,7 @@ $(function(){
 	
 	function connect(){
 		chatno = "${chatno}"
-		socket = new SockJS("http://localhost:8888/chat")
+		socket = new SockJS("http://192.168.10.30:8888/chat")
 		stomp = Stomp.over(socket)
 		
 		

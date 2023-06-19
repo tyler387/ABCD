@@ -332,13 +332,16 @@ public class ItemServiceImpl implements ItemService{
 		//update로 상태를 변경하려고 했는데 상태라는게 DB항목에 전혀 없네..
 		//일단 그냥 delete로 해야할것 같음!!
 		
-		//1. itemOption 테이블에 상품 정보 제거
-		itemDao.deleteItemOption(itemno);
+//		//1. itemOption 테이블에 상품 정보 제거
+//		itemDao.deleteItemOption(itemno);
+//		
+//		//2. itemFile 테이블에 상품 정보 제거
+//		itemDao.deleteItemFile(itemno);
+//		
+//		//3. item 테이블에 상품 정보 제거
+//		itemDao.deleteItem(itemno);
 		
-		//2. itemFile 테이블에 상품 정보 제거
-		itemDao.deleteItemFile(itemno);
-		
-		//3. item 테이블에 상품 정보 제거
-		itemDao.deleteItem(itemno);
+		//item 상태만 변경으로 삭제처리를 한다
+		itemDao.updateItemStatus(itemno);
 	}
 }

@@ -90,7 +90,7 @@ div.admin1 {
 		<c:when test="${users.status eq 'block'}">정지</c:when>
 	</c:choose> </th>
 	<th>${users.grade}</th>
-	<th>${users.warnCount }</th>
+	<th>${users.warnCount}</th>
 	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
 	<th><a href="./update?userno=${users.userno }&curPage=${paging.curPage}"><button class="btn btn-secondary">블랙리스트</button></a>
 	<a href="./stop?userno=${users.userno }&curPage=${paging.curPage}"><button class="btn btn-secondary">회원정지</button></a></th>

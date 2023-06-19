@@ -121,6 +121,13 @@ public interface ItemDao {
 	 */
 	public void deleteItem(int itemno);
 
+	/**
+	 * itemno를 통해 DB에 상품 상태를 'delete로 변경한다'
+	 * 
+	 * @param itemno - 판매 상품 번호
+	 */
+	public void updateItemStatus(int itemno);
+
 
 	
 

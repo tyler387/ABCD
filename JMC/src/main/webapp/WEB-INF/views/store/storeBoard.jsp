@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <style type="text/css">
       
-        #temodal-overlay.temodal-overlay {
+        #temodal-overlay{
             width: 100%;
             height: 100%;
           
@@ -29,7 +29,7 @@
 
         }
        
-        #temodal-overlay.temodal-window {
+        #temodal-window {
             background: #FFA500;
             box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
             backdrop-filter: blur( 13.5px );
@@ -43,7 +43,7 @@
             padding: 10px;
         }
         
-        #temodal-overlay.tetitle {
+        #tetitle {
             padding-left: 10px;
             display: inline;
             text-shadow: 1px 1px 2px gray;
@@ -150,8 +150,8 @@ td{
 			</c:when>
 		</c:choose>	
 		<td style="width: 45%;" id="trcontent" data-userno ="${itemQnAQList.USERNO }" data-qnano="${itemQnAQList.ITEM_QNANO }">${itemQnAQList.IQ_TITLE }</td>
-		<td style="width: 15%;" id="trWriter" >${itemQnAQList.USER_ID }</td>
-		<td style="width: 25%;" id="trdate">${itemQnAQList.IQ_WRITE_DATE }</td>
+		<td style="width: 15%;" id="trWriter">${itemQnAQList.USER_ID }</td>
+		<td style="width: 25%;" id="trdate"><fmt:formatDate value="${itemQnAQList.IQ_WRITE_DATE}" pattern="yyyy.MM.dd HH:mm"/></td>
 
 </tr>
 </c:forEach>
@@ -176,7 +176,7 @@ td{
          <div id="modalContentDiv"></div>
           <div id="temodaldivc" style="margin-bottom:5px;">${map.IQ_CONTENT}</div>
 
-          <button id="temodalbutton" onclick="confirm">확인</button>
+          <button class="teclose-area" id="temodalbutton" onclick="confirm">확인</button>
    
         </div>
 <!--         </form> -->

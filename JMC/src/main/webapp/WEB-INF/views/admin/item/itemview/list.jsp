@@ -46,7 +46,7 @@ div.admin1 {
 		<option value="" selected>미선택</option>
 		<option value="sale">판매중</option>
 		<option value="sold_out">매진</option>
-		<option value="unsale">판매중지</option>
+		<option value="stop_selling">판매중지</option>
 	</select>
 	&nbsp;&nbsp;
 	<select class=" form-select " name="filter" id="filter"
@@ -84,7 +84,7 @@ div.admin1 {
 		<c:when test="${il.ITEM_STATUS eq 'sold_out'}">
 		<td>매진</td>
 		</c:when>
-		<c:when test="${il.ITEM_STATUS eq 'unsale'}">
+		<c:when test="${il.ITEM_STATUS eq 'stop_selling'}">
 		<td>판매중지</td>
 		</c:when>
 	</c:choose>

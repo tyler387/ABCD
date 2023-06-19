@@ -89,7 +89,7 @@
 		            , board b
 		            , users ru
 				WHERE  1 = 1 
-				    AND to_char(r.write_date,'YYYY/MM/DD') = '2023/06/12'
+				    AND to_char(r.write_date,'YYYY/MM/DD') = #{today}
 				    AND r.userno = u.userno
 		            AND r.boardno = b.boardno
 		            AND b.userno = ru.userno

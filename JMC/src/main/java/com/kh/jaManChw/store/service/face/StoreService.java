@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.kh.jaManChw.dto.ItemQnAQ;
 import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.util.Paging;
 
@@ -104,6 +105,8 @@ public interface StoreService {
 	 * @return
 	 */
 	public List<Map<String, String>> getBuyDetail(Map<String, String> map);
+
+	public Map<String, Object> getCommentDetail(ItemQnAQ itemQnAQ);
 
 
 }

@@ -84,6 +84,7 @@ public class PaymentController {
 		List<Map<String, Object>> sbList = paymentService.getParamList(basketno);
 		Map<String, String> user = paymentService.getuserinfo(userno);
 		logger.info("sbListsbListsbListsbList = {}", sbList);
+		logger.info("sbList splite : {}", user.get("PHONE").split(",")[1]);
 		logger.info("useruser = {}", user);
 		logger.info("bbsssb = {}", sbList);
 		
@@ -112,7 +113,7 @@ public class PaymentController {
 		logger.info("{}", jsonObject);
 		logger.info("{}", jsonObject.get("orderId"));
 		
-		 return "redirect:/payment/end";
+		 return "redirect:/store//buylist";
 //		 return "forward:/payment/end";
 	}
 	

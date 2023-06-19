@@ -34,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				JOIN ITEM_FILE IF
 				ON I.ITEMNO = IF.ITEMNO
 				WHERE 1=1
+					AND item_status != 'delete'
 				<if test="type == 'goods' ">
 					AND item_type = '칵테일 재료'
 					OR item_type = '칵테일 도구'
@@ -61,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				JOIN ITEM_FILE IF
 				ON I.ITEMNO = IF.ITEMNO
 				WHERE 1=1
+					AND item_status != 'delete'
 				<if test="type == 'goodsglass' ">
 					AND item_type = '칵테일 재료'
 				</if>
@@ -91,11 +93,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				WHERE 1=1
                 AND (upper(item_title) LIKE '%' || upper(#{searchData}) || '%'
                 or upper(item_content) LIKE '%' || upper(#{searchData}) || '%')
+                AND item_status != 'delete'
 				ORDER BY I.ITEMNO DESC
 			)I
 		)
 		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
-	
 	</select>
 	
 	<select id="selectItemOptionDetail" resultType="ItemOption" parameterType="int">
@@ -190,4 +192,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and buyno = ${buyno}
         and F.itemno = O.itemno
 	</select>
+	
+	<select id="selectItemQnaQ" parameterType="ItemQnAQ" resultType="map">
+		SELECT 
+			a.userno
+			, a.iq_title
+			, a.iq_content
+			, b.ia_content 
+		FROM 
+			ITEM_QNA_Q a 
+		JOIN 
+			ITEM_QNA_A b 
+		ON 
+			a.item_qnano = b.item_qnano
+        WHERE 1 = 1
+       		AND a.item_qnano= #{itemQnano}
+       		AND b.ia_status ='undelete'
+	</select>
+	
 </mapper>

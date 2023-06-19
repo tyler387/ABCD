@@ -66,6 +66,14 @@ public class ItemQnAQServiceImpl implements ItemQnAQService{
 	public Map<String, Object> showItemQnAQDetail(int itemQnano) {
 		return itemQnAQDao.selectItemQnAQDetail(itemQnano);
 	}
+
+	//**기훈 작성, 상위 showItemQnAQList와 동일하나 매개변수에 itemno 추가 됨
+	@Override
+	public List<Map<String, Object>> showItemQnAQList2(Paging itemQnAQPaging, int itemno) {
+
+		
+		return itemQnAQDao.selectItemQnAQAll2(itemQnAQPaging, itemno);
+	}
 	
 	
 	

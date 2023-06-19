@@ -88,7 +88,7 @@ public class BoardController {
 		//사진들을 클릭 했을 때 해당 글, 사진, 좋아요 수, 댓글 수 등을 가져온다.
 		@ResponseBody
 		@GetMapping("/abacabc")
-		public ModelAndView clickViewDetail(int boardno, ModelAndView mav,HttpSession session) {
+		public ModelAndView boardclickViewDetail(int boardno, ModelAndView mav,HttpSession session) {
 //			System.out.println(boardno);
 			int chkreco;
 			if(session.getAttribute("userno")==null) {
@@ -117,7 +117,10 @@ public class BoardController {
 		// SQL문도 조금 다르게 써야겠징
 		@ResponseBody
 		@GetMapping("/commentList")
-		public ModelAndView comment(int boardno, ModelAndView mav) {
+		public ModelAndView boardComment(int boardno, ModelAndView mav, HttpSession session) {
+			
+			
+			
 			List<BoardComment> list = boardService.showAllComment(boardno);
 			
 			logger.info("commentList: {}" , list);
@@ -132,12 +135,16 @@ public class BoardController {
 		
 		@ResponseBody
 		@PostMapping("/commentWrite")
-		public ModelAndView commnetWrite(String data, int boardno, ModelAndView mav) {
+		public ModelAndView boardCommnetWrite(String data, int boardno, ModelAndView mav, HttpSession session) {
 			logger.info("commentWrite");
 			logger.info("boardComment : {}", data);
 			
 			logger.info("boardno {}", boardno);
+			
+			
+			
 			BoardComment bComment = new BoardComment();
+			bComment.setUserno((int)session.getAttribute("userno"));
 			bComment.setcContent(data);
 			bComment.setBoardno(boardno);
 			
@@ -194,7 +201,7 @@ public class BoardController {
 		
 		//게시글의 글, 사진, 좋아요 수, 덧글수 등을 다시 가지고 온다.
 		@GetMapping("/coCountLikeCount")
-		public String deleteBoarDetail(@RequestParam int boardno, Model model) {
+		public String coCountLikeCount(@RequestParam int boardno, Model model) {
 			Map<String, Object> map  = new HashMap<>();
 			map = boardService.showAllDetail(boardno);
 			logger.info("map : {}" , map);
@@ -357,25 +364,23 @@ public class BoardController {
 			
 			Map<String, Integer> allLikeInfo = boardService.recoBoard(boardno,session);
 			
-			
-			
-			
+
 			return allLikeInfo;
 		}
 		
-		@RequestMapping("/boardRecoJoHuye")
-		@ResponseBody
-		public Map<String, Integer> boardRecoJoHuye(int boardno, HttpSession session, Model model) {
-			
-			Map<String, Integer> allLikeInfo = boardService.recoBoardJoHuye(boardno,session);
-			
-			
-			return allLikeInfo;
-		}
+//		@RequestMapping("/boardRecoJoHuye")
+//		@ResponseBody
+//		public Map<String, Integer> boardRecoJoHuye(int boardno, HttpSession session, Model model) {
+//			
+//			Map<String, Integer> allLikeInfo = boardService.recoBoardJoHuye(boardno,session);
+//			
+//			
+//			return allLikeInfo;
+//		}
 		
 		@RequestMapping("/search")
 		@ResponseBody
-		public List<Map<String, Object>> BoardSearch(@RequestParam(name = "boardOptionno", required = false, defaultValue = "0") int boardOptionno, String searchData, Model model) {
+		public List<Map<String, Object>> boardSearch(@RequestParam(name = "boardOptionno", required = false, defaultValue = "0") int boardOptionno, String searchData, Model model) {
 			
 			logger.info("보드옵션 번호 {}", boardOptionno);
 			

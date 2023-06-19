@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-   
 <%--     var curPage = <c:out value="${paging.curPage}"></c:out>; --%>
 <%--    var totalCount = <c:out value="${paging.totalCount}"></c:out>; --%>
 <%--     var totalPage = <c:out value="${paging.totalPage}"></c:out>; --%>
@@ -25,7 +24,20 @@
 <%-- 사용불가 표현 CSS --%>
 .disabled{
    color: gray;
+   	display: inline-block;
 }
+
+ul{
+	text-align: center;
+
+
+}
+
+li{
+display: inline-block;
+}
+
+
 </style>
 
 <div>
@@ -35,7 +47,7 @@
 <input type="hidden" value="${paging.totalPage}" id="totalPage">
 
 <nav>
-<ul class="pagination pagination-sm justify-content-center">
+<ul class="pagination pagination-sm justify-content-center" style="width: 670px;">
 <%--===========================Go to First=============================--%>
 <%-- 첫 페이지로 이동 --%>
 <c:if test="${paging.curPage ne 1}">

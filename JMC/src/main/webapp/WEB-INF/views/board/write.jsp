@@ -6,7 +6,7 @@
 
 
 <form id="uploadFile"  enctype="multipart/form-data">
-<select id="category" name="category">
+<select id="category" name="category" style="margin-bottom: 5px; margin-top: 5px;">
   	<option value="none">=== 선택 ===</option>
 	<option value ="11">모임후기</option>
 	<option value ="12">술자랑 & 구입기</option>
@@ -17,27 +17,25 @@
 
 
 
-<input type="text" placeholder="입력하세요!" id="boardWrite" name="boardWrite" style="width:300px;height:300px; font-size:12px;">
+<input type="text" size="20" placeholder="입력하세요!" id="boardWrite" name="boardWrite" style="width:300px;height:300px; font-size:12px;">
 
-
-<div class="img-wrap" style="cursor:pointer;">	
-		<img alt="picUpIcon" src="/resources/image/fileuploadIcon.png" style="width:50px;">
-	</div>
-	<div class="uploadedPic">
+<!-- 부트스트랩 제거 후 주석한 부분1 -->
+<!-- <div class="img-wrap" style="cursor:pointer;">	 -->
+<!-- 		<img alt="picUpIcon" src="/resources/image/fileuploadIcon.png" style="width:50px;"> -->
+<!-- 	</div> -->
+<!-- 	<div class="uploadedPic"> -->
 	
-	</div>
+<!-- 	</div> -->
 	<br>
-	<input type="file" id="file" name="file" multiple="multiple" class="form-control rounded-bottom d-none">
+	<input type="file" id="file" name="file" multiple="multiple" class="form-control rounded-bottom d-none" style="width:300px;height:40px; font-size:12px; margin-top:5px;">
 	<br>
-	<button type ="button" id="boardContent">등록</button>
+	<button type ="button" id="boardContent" style="margin-top:5px; margin-left: 250px">등록</button>
 </form>
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">

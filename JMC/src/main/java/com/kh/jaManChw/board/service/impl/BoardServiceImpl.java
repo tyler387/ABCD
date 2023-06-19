@@ -224,24 +224,24 @@ public class BoardServiceImpl implements BoardService {
 		return likeMap;
 	}
 
-	@Override
-	public Map<String, Integer> recoBoardJoHuye(int boardno, HttpSession session) {
-		
-		BoardLike like = new BoardLike();
-		like.setUserno((int)session.getAttribute("userno"));
-		like.setBoardno(boardno);
-		int chk = boardDao.selectReco(like);
-		
-		int allCount = boardDao.selectCntLikeAll(boardno);
-		
-		Map<String, Integer> likeMap = new HashMap<>();
-		
-		likeMap.put("chkReco", chk);
-		likeMap.put("allCount", allCount);
-		
-		
-		return likeMap;
-	}
+//	@Override
+//	public Map<String, Integer> recoBoardJoHuye(int boardno, HttpSession session) {
+//		
+//		BoardLike like = new BoardLike();
+//		like.setUserno((int)session.getAttribute("userno"));
+//		like.setBoardno(boardno);
+//		int chk = boardDao.selectReco(like);
+//		
+//		int allCount = boardDao.selectCntLikeAll(boardno);
+//		
+//		Map<String, Integer> likeMap = new HashMap<>();
+//		
+//		likeMap.put("chkReco", chk);
+//		likeMap.put("allCount", allCount);
+//		
+//		
+//		return likeMap;
+//	}
 	
 	
 

@@ -49,6 +49,14 @@ public interface StoreService {
 	public Map<String, Object> showDetailItem(int itemno);
 
 	/**
+	 * 상품에 대한 문의글 작성하기
+	 * @param modalTitle    문의글 제목
+	 * @param modalContent  문의글 내용
+	 * @param itemno        상품 번호
+	 * @param session       회원 값
+	 */
+	public void writeItemQnA(String modalTitle, String modalContent, int itemno, HttpSession session);
+	/**
 	 * 배열로 된 파라미터 쌍으로 DTO에 한번씩 담아 DTO List를 반환한다
 	 * 
 	 * @param itemOptionno - 상품 옵션 번호

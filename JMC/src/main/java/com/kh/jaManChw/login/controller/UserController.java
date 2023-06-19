@@ -55,7 +55,7 @@ public class UserController {
 		
 		if(leaveUser) {
 			session.invalidate();
-			return "redirect:/login/main";
+			return "redirect:/login/login";
 		}
 		
 		//block 유저 로그인 방지

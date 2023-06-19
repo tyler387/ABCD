@@ -94,15 +94,12 @@
             <h2>궁금한 점을 작성하세요.</h2>
         </div>
         <div class="close-area">X</div>
-        
-<!--         <form id="modalBoardWrite" action="./itemDetail" method="post"> -->
-        
+      
         <div class="content"> 
           <div id="modaldivt" style="margin-bottom:5px;">제목</div>
          
           <div id="modaldivc" style="margin-bottom:5px;">내용</div>
-        
-          
+
           <button id="modalbutton" onclick="confirm">확인</button>
    
         </div>
@@ -115,7 +112,7 @@
 <script>
     //특정 버튼을 누르면 모달창이 켜지게 하기
     const modal = document.getElementById("modal")
-    const btnModal = document.getElementById("btn-modal")
+    const btnModal = document.getElementById("answer")
     btnModal.addEventListener("click", e => {
         modal.style.display = "flex"
     })
@@ -134,12 +131,9 @@
 	    }
 	})
 	
-// 	//값 넘겨 받을려고 했는데 필요 없는 듯!
-// 	function confirm(modalBoardWrite) {
-//     	modalBoardWrite.action = "/store/boardWrite2";
-//     	modalBoardWrite.method = "post";
-//     	modalBoardWrite.submit();
-// }
+	
+	//--------------------------------------------------------------
+
 
 </script>
 

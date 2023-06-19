@@ -79,6 +79,8 @@
 						write_date, 
 						all_item_count  
 				FROM item
+				WHERE 1 = 1
+					AND item_status != 'delete' 
 				ORDER BY itemno DESC
 			)B
 		)
@@ -105,6 +107,7 @@
 					all_item_count  
 				FROM item
 				WHERE 1 = 1
+					AND item_status != 'delete' 
 					<if test="filter.content != null and !''.equals(filter.content)">
 					AND upper(${filter.filter}) LIKE '%' || upper(#{filter.content}) || '%'
 					</if>
@@ -166,8 +169,18 @@
 		WHERE itemno = #{itemno}
 	</delete>
 
-	<delete id="deleteItem" parameterType="int">
-		DELETE item WHERE itemno = #{itemno}
-	</delete>
+	<!-- item은 상태변경으로 삭제처리를 대체한다 -->
+<!-- 	<delete id="deleteItem" parameterType="int"> -->
+<!-- 		DELETE item WHERE itemno = #{itemno} -->
+<!-- 	</delete> -->
+	
+	<update id="updateItemStatus" parameterType="int">
+		UPDATE 
+			item 
+		SET 
+			item_status = 'delete' 
+		WHERE 1 = 1 
+			AND itemno = #{itemno}
+	</update>
 
 </mapper>

@@ -115,6 +115,11 @@ public interface MeetingService {
 	 */
 	public Preference getDetailPreference(Preference preference);
 	
+	/** 
+	 * 선택한 모임의 
+	 * @param meeting
+	 * @return
+	 */
 	public List<Users> getUserNickAgree(Meeting meeting);
 	
 	public List<Users> getUserNickNocheck(Meeting meeting);	

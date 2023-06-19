@@ -91,7 +91,7 @@ function backbuttonshow(){
 	padding-left: 15px;
 	height : 10%;
 }
-#back{
+#backChat{
 	display : flex;
 	width: 100%;
 }
@@ -119,7 +119,7 @@ function backbuttonshow(){
 <!-- <button id="chatbutton">채팅방</button> -->
 <div class="close">
 <div id="headerButton">
-<div id="back">
+<div id="backChat">
 <img src="../resources/image/back.png" id="backButton">
 </div>
 <div id="hideChat">

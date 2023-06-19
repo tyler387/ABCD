@@ -208,24 +208,29 @@ $(document).ready(function(){
     let checkName = RegExp(/^[가-힣a-zA-Z]{2,}$/);
     let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
 
+    
+    const target = document.getElementById('nextbtn');
+	$('#nextbtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+	
 	$('#userName').blur(function() {
 		var userName = $('#userName').val();
 	
 		if(userName === ''){	
 			$('#name_msg').html('이름을 입력해 주세요');
 			$('#name_msg').css('color','red');
-	//			$("#userName").focus();
+			$('#nextbtn').attr('disabled', true);
 			return false;
 			
 		}else if(!checkName.test(userName)){
 			$('#name_msg').html('옳지않은 형식입니다.');
 			$('#name_msg').css('color','red');
+			$('#nextbtn').attr('disabled', true);
 			return false;
 			
 		}else{  
 			$('#name_msg').html('');
 			$('#name_msg').css('color','#3f8ef7');
-	//     	$("#birth").focus();
+			$('#nextbtn').attr('disabled',false);
 	    	return true;
 		}
 	}) //$('#userName').blur ed
@@ -238,13 +243,12 @@ $(document).ready(function(){
 	// 이메일 인증
 	var code = ""; // 인증번호 저장을 위한 코드
 	var isCertification = false; // 인증 여부 변수
+	const checkInput = $('#email_checknumber');
 
 	$('#email_checkbtn').click(function() {
 		const email = $('#userEmail1').val() 
 		//+ $('#userEmail2').val(); // 이메일 주소값 얻어오기!
 		console.log('완성된 이메일: ' + email); // 이메일 오는지 확인
-		
-		const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
 		
 		$.ajax({
 			type: 'GET',
@@ -252,10 +256,11 @@ $(document).ready(function(){
 			dataType: 'text',
 			success: function(data) {
 				/* console.log('data: ' + data); */
-				checkInput.attr('disabled', false); // 인증번호 입력이 가능하도록 속성 변환
+				//checkInput.attr('disabled', false); // 인증번호 입력이 가능하도록 속성 변환
 				code = data;
 				isCertification = true; // 인증이 완료되었음을 표시
 				alert('인증번호가 전송되었습니다.');
+				$('#nextbtn').attr('disabled',false);
 			},
 			error : function() { // 결과 에러 콜백함수
 				alert('서버요청 실패');
@@ -280,6 +285,7 @@ $(document).ready(function(){
 		//	$('#userEamil2').attr('readonly', true);
 			$('#userEmail1').attr('onFocus', 'this.initialSelect = this.selectedIndex');
 			$('#userEmail1').attr('onChange', 'this.selectedIndex = this.initialSelect');
+			checkInput.attr('disabled', true); // 인증번호 입력이 가능하도록 속성 변환
 		} else if (inputCode === '') {
 			resultMsg.html('인증번호를 입력해주세요.');
 			resultMsg.css('color', 'red');

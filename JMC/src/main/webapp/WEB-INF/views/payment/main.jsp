@@ -146,6 +146,17 @@ table thead tr {
 width: 100%;
 }
 
+.userinfo {
+    height: 13px;
+    text-align:left;
+}
+
+
+.userinfoclass{
+    text-align: left;
+    padding-left: 95px;
+}
+
 </style>
   	
  	 
@@ -203,10 +214,13 @@ width: 100%;
 </tr>
 </table>
 
-<input type="hidden" id="basketno" name="basketno" value="${basketno }">
 <div style ="width: 600px; margin: 0 auto; padding-top : 80px; ">
+<div class="userinfoclass">
+기존 회원정보 불러오기
+	<input type="checkbox" class="userinfo" name="userinfo" onchange="userinfo()">
+</div> 
 	<div class="input-group mb-3">
-	<input type="checkbox" name="userinfo" onchange="userinfo()">
+	<input type="hidden" id="basketno" name="basketno" value="${basketno }">
 	  <span class="input-group-text" id="basic-addon1">이름</span>
 	  <input type="text" class="form-control" value="" aria-label="userNick" aria-describedby="basic-addon1" id="name" name="name" onchange='printName()' style="width: 120px;">
 	  <span class="input-group-text" id="basic-addon1">핸드폰 번호</span>
@@ -238,7 +252,6 @@ width: 100%;
 	  <a href="/store/shoppingbasket"><button id="payment-button" class ="paymentBtn" style="width: 100px; margin: auto;">취소하기</button></a>
 	  </div>
   </div>
-  ${user }
 </div>
   <script type="text/javascript">
 // 	var name = ${user.USER_NAME};
@@ -246,6 +259,9 @@ width: 100%;
   function userinfo() {
 //    $("#name").val(name);
    $("#name").attr("value", '${user.USER_NAME}');
+   $("#sample6_postcode").attr("value", '${user.ADDR1}');
+   $("#sample6_address").attr("value", '${user.ADDR2}');
+   $("#phone").attr("value", '${user.PHONE}');
 // 	document.getElementById('name').value = ${user.USER_NAME};
 	}
   </script>

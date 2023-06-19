@@ -161,26 +161,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectAllBuyDetail"  parameterType="map" resultType="hashmap">
-	select 
-		 orderno
-		 , userno
-		 , itemno
-		 , item_name
-		 , item_count
-		 , item_option
-		 , item_total_price
-		 , order_status
-		 , CAST(status_date as DATE) status_date
-		 , add1
-		 , add2
-		 , add3
-		 , name
-		 , phone
-		 , buyno
+   	select 
+		 O.orderno
+		 , O.userno
+		 , O.itemno
+		 , O.item_name
+		 , O.item_count
+		 , O.item_option
+		 , O.item_total_price
+		 , O.order_status
+		 , CAST(O.status_date as DATE) status_date
+		 , O.add1
+		 , O.add2
+		 , O.add3
+		 , O.name
+		 , O.phone
+		 , O.buyno
+         , F.I_STORED_NAME 
 	FROM 
-		order_detail 
+		order_detail O, item_file F 
 	where 1 = 1
-		AND userno = ${userno} 
+		AND userno = ${userno}
 		and buyno = ${buyno}
+        and F.itemno = O.itemno
 	</select>
 </mapper>

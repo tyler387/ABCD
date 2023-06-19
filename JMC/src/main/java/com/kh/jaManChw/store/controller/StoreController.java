@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
+import com.kh.jaManChw.dto.ItemQnAQ;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.dto.Users;
@@ -206,14 +207,18 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/answer")
-	public void itemQnAAnswer(int userno, int itemno) {
-		logger.info("유저번호: {}", userno);
-		logger.info("아이템번호: {}", itemno);
+	@ResponseBody
+	public Map<String,Object> itemQnAAnswer(ItemQnAQ itemQnAQ,Model model) {
+		
+		logger.info("ITEMQNQA의 값 : {}",itemQnAQ );
 		
 		
+	Map<String,Object> map = storeService.getCommentDetail(itemQnAQ);
 		
+		logger.info("맵맵맵 : {}", map);
+		model.addAttribute("map",map);
 		
-		
+		return map;
 	}
 	
 	@RequestMapping("/buylist")

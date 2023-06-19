@@ -190,4 +190,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and buyno = ${buyno}
         and F.itemno = O.itemno
 	</select>
+	
+	<select id="selectItemQnaQ" parameterType="ItemQnAQ" resultType="map">
+		select a.userno,a.iq_Title,a.iq_Content, b.ia_content from ITEM_QNA_Q a 
+		join ITEM_QNA_A b on a.item_qnano = b.item_qnano
+        WHERE a.item_qnano= #{itemQnano}
+         AND b.ia_status ='undelete'
+	</select>
+	
 </mapper>

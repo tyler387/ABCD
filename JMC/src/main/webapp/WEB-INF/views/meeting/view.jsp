@@ -344,7 +344,7 @@ th{
 			성별 여부: 
 			<c:if test="${viewpreference.gender eq 'man' }"> 남자 선호</c:if>
 			<c:if test="${viewpreference.gender eq 'woman' }"> 여자 선호</c:if>
-			
+			<c:if test="${viewpreference.gender eq 'none' }"> 성별 무관</c:if>
 			나이 여부: 
 			${viewpreference.minage} ~ ${viewpreference.maxage}					
 			</div>

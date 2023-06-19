@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
@@ -161,8 +162,9 @@ input{
 
 		<div class="box1">
 		
-			<div class="labelbox"><label for="birth">생년월일</label></div>		
-			<div class="box2"><input type="text" name="birth" id="birth" disabled value="${loginInfo.birth}"></div>	
+			<div class="labelbox"><label for="birth">생년월일</label></div>
+			<fmt:formatDate value="${loginInfo.birth}" pattern="yyyy/MM/dd" var="birthday"/>
+			<div class="box2"><input type="text" name="birth" id="birth" disabled value="${birthday}"></div>	
 			
 		</div>
 

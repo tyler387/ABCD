@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="../layout/header.jsp" />
 <c:import url="../layout/mypageAside.jsp" />
@@ -92,9 +93,9 @@ td:hover{
 					
 						<c:forEach var="list" items="${list }">
 					<tr>
-						<td>${list.WRITE_DATE }</td>
+						<td><fmt:formatDate value="${list.WRITE_DATE }" pattern="yyyy/MM/dd HH:mm"/></td>
 						<td>${list.CONTENT }</td>
-						<td><img src="<%=request.getContextPath() %>/boardFileUpload/${list.STORED_NAME}"></td>
+						<td><img src="<%=request.getContextPath() %>/boardFileUpload/${list.STORED_NAME}" style="width:50px; height: 50px;"></td>
 					</tr>
 					</c:forEach>
 				</table>

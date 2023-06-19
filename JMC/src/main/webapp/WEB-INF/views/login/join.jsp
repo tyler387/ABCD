@@ -137,7 +137,7 @@ input[type=button]:hover{
 	border-radius : 7px;
 	display: inline-block;
 	cursor: pointer;
-	height: 30px;
+	height: 35px;
 	width: 173px;
 	border: 1px solid orange;
 	line-height:  24px;
@@ -382,11 +382,11 @@ input[type=button]:hover{
 $(document).ready(function(){
 
 	// FIXME: 필요 스크립트 전개 영역
-    let checkID = RegExp(/^[a-zA-Z0-9]{6,20}$/);
+    let checkID = RegExp(/^[a-z0-9]{6,20}$/);
     let checkPW = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/);
     let checkName = RegExp(/^[가-힣]{2,}$/);
     let checkPhone = RegExp(/^\d{3}\d{3,4}\d{4}$/);        
-    let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
+    let checkEmail = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
          
     const target = document.getElementById('submit');
 	$('#submit').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
@@ -397,15 +397,19 @@ $(document).ready(function(){
 		if(userId === ''){
 			$('#id_msg').html('아이디를 입력해 주세요');	
 			$('#id_msg').css('color','red');
-
+			$('#submit').attr('disabled', true);
 			return false;
 			
 		}else if(!checkID.test(userId)) {
-			$('#id_msg').html("대소문자,숫자를 포함한 6자리~20자리로 입력해주세요.");
+			$('#id_msg').html("소문자,숫자를 포함한 6자리~20자리로 입력해주세요.");
 			$('#id_msg').css('color','red');
-               
-            return true;
+			$('#submit').attr('disabled', true);   
+            return false;
             
+        }else if(checkID.test(userId)){
+        	$('#id_msg').html("");
+        	$('#submit').attr('disabled', false);
+        	return true;
         }
 
     }); //$('#userId').blur end
@@ -416,18 +420,17 @@ $(document).ready(function(){
 		if(userPw === ''){	
 			$('#pw_msg').html('비밀번호를 입력해 주세요');
 			$('#pw_msg').css('color','red');
-
+			$('#submit').attr('disabled', true);
 			return false;
 		}else if(!checkPW.test(userPw)){
 			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
 			$('#pw_msg').css('color','red');
-// 			$("#userPw").focus();
+			$('#submit').attr('disabled', true);
 			return false;
 			
 		}else if(checkPW.test(userPw)){
-			$('#pw_msg').html("사용가능한 비밀번호입니다.")
-        	$('#pw_msg').css("color", "#3f8ef7");                           
-//         	$("#userPw_chk").focus();
+			$('#pw_msg').html("")                         
+			$('#submit').attr('disabled', false);
         	return true;
 		}
 	}) //$('#userPw').blur ed
@@ -453,6 +456,29 @@ $(document).ready(function(){
 		}
 	}) //$('#userPw_chk').blur ed
 	
+	$('#userName').blur(function() {
+		var userName = $('#userName').val();
+	
+		if(userName === ''){	
+			$('#name_msg').html('이름을 입력해 주세요');
+			$('#name_msg').css('color','red');
+			$('#submit').attr('disabled', true);
+			return false;
+			
+		}else if(!checkName.test(userName)){
+			$('#name_msg').html('옳지않은 형식입니다.');
+			$('#name_msg').css('color','red');
+			$('#submit').attr('disabled', true);
+			return false;
+			
+		}else{  
+			$('#name_msg').html('');
+			$('#name_msg').css('color','#3f8ef7');
+			$('#submit').attr('disabled', false);
+	    	return true;
+		}
+	}) //$('#userName').blur ed
+	
 	
 	
 	$('#phone').blur(function() {
@@ -461,11 +487,13 @@ $(document).ready(function(){
 		if(phone === ''){	
 			$('#phoneMsg').html('핸드폰 번호를 입력해주세요');
 			$('#phoneMsg').css('color','red');
+			$('#submit').attr('disabled', true);
 			return false;
 			
 		}else if(!checkPhone.test(phone)){
 			$('#phoneMsg').html('옳지않은 형식입니다.');
 			$('#phoneMsg').css('color','red');
+			$('#submit').attr('disabled', true);
 			return false;
 			
 		}else if(checkPhone.test(phone)){  
@@ -476,13 +504,38 @@ $(document).ready(function(){
 		}
 	}) //$('#phone').blur ed
 	
+	$('#userEmail1').blur(function() {
+		var email = $('#userEmail1').val();
+	
+		if(email === ''){	
+			$('#emailMsg').html('이메일을 입력해주세요');
+			$('#emailMsg').css('color','red');
+			$('#submit').attr('disabled', true);
+			return false;
+			
+		}else if(!checkEmail.test(email)){
+			$('#emailMsg').html('옳지않은 형식입니다.');
+			$('#emailMsg').css('color','red');
+			$('#submit').attr('disabled', true);
+			return false;
+			
+		}else if(checkEmail.test(email)){  
+			$('#emailMsg').html('');
+			$('#emailMsg').css('color','#3f8ef7');
+			$('#submit').attr('disabled', false);
+	    	return true;
+		}
+	}) //$('#userName').blur ed
+	
 
 
 })//$(document).ready ed
 
 
  function idcheck() {	
+	
 	var userId = $('#userId').val();
+
 	$.ajax({
 	    type : 'post',           // 타입 (get, post, put 등등)
 	    url : '/login/idcheck',   // 요청할 서버url

@@ -40,6 +40,7 @@ th{
   box-shadow: 0 2px 12px 0 rgba(100, 100, 100, 0.16), 0 2px 17px 0 rgba(200, 200, 200, 0.2);
   overflow: scroll;
   background-color: #E2E2E2;
+  margin-bottom: 50px;
 }
 
 

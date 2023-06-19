@@ -152,9 +152,6 @@ if(${not empty isAlreadyAnswered or isAlreadyAnswered}){
 }
 	
 </script>
-is : ${not empty isNotYourQnA || isNotYourQnA} <br>
-is : ${isNotYourQnA}<br>
-is : ${not empty isNotYourQnA}<br>
 
 <div class="main">
 	<div class="left">

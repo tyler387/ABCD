@@ -423,20 +423,7 @@ public class MypageController {
 
 		
 	}
-	
-//	//게시글 상세 페이지
-//	@GetMapping("/myBoarddetail")
-//	public void myboarddetailPage(Model model,HttpSession session,Users users) {
-//		
-//		//세션에 저장된 userno 가져오기
-//		users.setUserno((Integer)session.getAttribute("userno"));
-//		
-//		//내가 올린 사진게시물 가져오기
-//		List<BoardFile> list = mypageService.getMyboardFile(users);
-//
-//		// view로 가져갈 list값 모델에 담기
-//		model.addAttribute("list", list);
-//	}
+
 
 	
 }

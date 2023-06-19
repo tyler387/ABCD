@@ -274,6 +274,23 @@ width: 100%;
   	var loc3 = null;
   	var price = 3000;
   	
+    function userinfo() {
+//      $("#name").val(name);
+     $("#name").attr("value", '${user.USER_NAME}');
+     name = $("#name").val();
+     $("#sample6_postcode").attr("value", '${user.ADDR1}');
+     loc = $("#sample6_postcode").val();
+     $("#sample6_address").attr("value", '${user.ADDR2}');
+     loc1 = $("#sample6_address").val();
+     $("#phone").attr("value", '${user.PHONE}');
+     phone = $("#phone").val();
+//   	document.getElementById('name').value = ${user.USER_NAME};
+     console.log("이름", name);
+     console.log("이름", loc);
+     console.log("이름", loc1);
+     console.log("이름", phone);
+  	}
+  	
   	$(function() {
   		<c:forEach var='i' items='${sbList}'>
   		price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}

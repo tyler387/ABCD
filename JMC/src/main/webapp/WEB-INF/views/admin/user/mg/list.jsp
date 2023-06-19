@@ -93,7 +93,7 @@ div.admin1 {
 	
 	<div id="Alltitle" style="text-align: center; padding-top: 10px;">
 		<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
-			유저 수정 페이지
+			회원 정보 관리
 		</h1>
 	</div>
 

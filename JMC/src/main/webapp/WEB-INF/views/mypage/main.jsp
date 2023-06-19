@@ -8,7 +8,7 @@
 <style type="text/css"> 
 
 
-.img{
+.imgprofile{
 	display: flex;
 	align-items: center;
 	margin-left: 40px;
@@ -112,16 +112,18 @@ th {
       	 
       		<label for="my" style="font-size: 20px; padding-top: 38px; margin-left: 20px; ">내정보</label>
       		<div style="width:75px; margin-left: 18px;" ><hr></div>
-      		<div class="img">
+      		<div class="imgprofile">
+      		
       			<div id="userinfo1">
       			<c:if test="${empty profile}">
-      				<img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="profileimg"> 
+      				<img src="/resources/image/Default-Profile-Picture-PNG-Download-Image.png" class="img"> 
       			 </c:if>
       			  
       			   <c:if test="${not empty profile}">
-						<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" id="profileimg"> 
+						<img src="<%=request.getContextPath() %>/userProfile/${profile.profileStoredName}" class="img"> 
       			   </c:if>
       			</div>
+      			
       			<div id="userinfo2">
 		       		<div class="info">아이디 : ${userId }</div>
 		       		<div class="info">닉네임 : ${loginInfo.userNick }</div>
@@ -159,10 +161,11 @@ th {
       		<div class="grade">
       		
       		<c:if test="${loginInfo.grade == '술찐'}">
-	      		<div class="img">
+	      		<div class="imgprofile">
 	      			<div id="userinfo1">
-	      				<img src="/resources/image/2b50.png" id="gradeimg">
+	      				<img src="/resources/image/2b50.png" class="img">
 	      			</div>
+	      			
 	      			<div id="userinfo2">
 			       		<div class="info">등급 : ${loginInfo.grade}</div>
 			       	</div>

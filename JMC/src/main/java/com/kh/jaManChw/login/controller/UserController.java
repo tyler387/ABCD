@@ -71,6 +71,11 @@ public class UserController {
 		logger.info("info:{}",info);
 		model.addAttribute("info",info);
 		
+		// 프로필 정보 가져오기
+		ProfileFile profile = mypageService.fileInfo(info);	
+		if(profile !=null) {session.setAttribute("profile", profile);}
+		logger.info("profile:{}",profile);		
+		
 		// 로그인 인증
 		boolean isLogin = usersService.login(users);	
 		
@@ -78,10 +83,6 @@ public class UserController {
 			logger.info("userlogin() - 로그인 성공");
 			
 			
-			// 프로필 정보 가져오기
-			ProfileFile profile = mypageService.fileInfo(info);	
-			if(profile !=null) {session.setAttribute("profile", profile);}
-			logger.info("profile:{}",profile);		
 			
 			
 			// 세션에 파라미터 값 저장
@@ -104,7 +105,7 @@ public class UserController {
 			logger.info("userlogin() - 로그인 실패");
 
 			// 세션 삭제
-			session.invalidate();		
+			//session.invalidate();		
 			return "/login/login";
 		} // if(isLogin)문 end		
 	} // userlogin() end

@@ -96,9 +96,11 @@ height: 300px;
 #merchant{
 	width:400px;
 	margin: 0 auto;
+
 }
 
 #merchantList{
+
 	display: grid;
     grid-template-columns: repeat(3, 250px);
     grid-template-rows: repeat(3, 250px);

@@ -182,6 +182,8 @@ public class MypageController {
 			// 파일의 저장이름 세션에 저장
 			session.setAttribute("profile", profile);
 			
+		}else {
+			return "/mypage/profile";
 		}
 		
 		return "redirect:/mypage/main";

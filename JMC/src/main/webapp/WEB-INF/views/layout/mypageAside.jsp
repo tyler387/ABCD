@@ -127,8 +127,8 @@ div.right {
   <li class="list1"><a href="#">구매</a>
   
   	<ul class="list2">
-  		<li class="list3"><a href="#">장바구니</a></li>
-  		<li class="list3"><a href="#">결제 내역</a></li>
+  		<li class="list3"><a href="/store/shoppingbasket">장바구니</a></li>
+  		<li class="list3"><a href="/store/buylist">결제 내역</a></li>
   	</ul>
   	</li>
   <li class="list1"><a href="/mypage/friendList">친구</a>
@@ -138,9 +138,6 @@ div.right {
   	</ul>
   </li>
   <li class="list1"><a href="/mypage/myBoarddetail">커뮤니티</a></li>
-  <li class="list1"><a href="/store/shoppingbasket">장바구니</a></li>
-  <li class="list1"><a href="/store/buylist">결제내역</a></li>
-
  
 </ul>
 </div>

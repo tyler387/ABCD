@@ -116,12 +116,6 @@ $(function () {
 
 
 
-로그인 상태 : ${login} 
-로그인 세션 상태: ${loginAccess}
-관리자 세션 상태: ${adminAccess}
-상태 세션 상태: ${statusAccess}
-
-
 <div class="mainpage">
 <img src="../resources/image/프로젝트 메인페이지.jpg" class="main">
 

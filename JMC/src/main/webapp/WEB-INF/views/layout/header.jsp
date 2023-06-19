@@ -116,6 +116,7 @@ flex-direction:row;
   left: -9999px;
   width: 100%;
   padding: 0px;
+  z-index: 9999;
 }
 #header .main1>li:hover {
   border-bottom: 5px solid #371e06;

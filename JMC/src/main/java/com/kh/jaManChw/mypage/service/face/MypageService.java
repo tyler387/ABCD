@@ -101,6 +101,8 @@ public interface MypageService {
 	public void removeFriend(int userno);
 
 
+
+
 	
 
 

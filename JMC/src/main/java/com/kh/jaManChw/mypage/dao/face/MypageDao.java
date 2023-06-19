@@ -3,8 +3,11 @@ package com.kh.jaManChw.mypage.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.kh.jaManChw.dto.BoardFile;
 import com.kh.jaManChw.dto.FriendList;
+import com.kh.jaManChw.dto.Meeting;
 import com.kh.jaManChw.dto.ProfileFile;
 import com.kh.jaManChw.dto.Users;
 import com.kh.jaManChw.util.Paging;
@@ -111,6 +114,10 @@ public interface MypageDao {
 	 * @param userno
 	 */
 	public void deleteFriend(int userno);
+
+
+
+	
 
 
 	

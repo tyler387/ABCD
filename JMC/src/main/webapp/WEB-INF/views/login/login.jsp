@@ -166,6 +166,9 @@ input.addEventListener("keyup", function (event) {
   }
 });
 
+//const target = document.getElementById('loginBtn');
+//$('#loginBtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+
 
 
 $('#userId').blur(function() {
@@ -177,6 +180,7 @@ $('#userId').blur(function() {
 		return false;
 	}else if(userId != ''){
 		$('#idMSG').html('');
+	
 	}
 	return true;
 })
@@ -190,19 +194,21 @@ $('#userPw').blur(function() {
 		return false;
 	}else if(userPw != ''){
 		$('#pwMSG').html('');
+
 	}
 	return true;
 })
+
 
 $('#loginBtn').click(function() {
 	
 	var userId = $('#userId').val();
 	var userPw = $('#userPw').val();
 	
+	
     if (userId == "" || userPw == "") {
         alert("아이디, 비밀번호를 다시 체크해주세요");
     }
-    
 })
 		
 

@@ -29,12 +29,12 @@
 				<c:choose>
 					<c:when test="${map.PROFILE_STORED_NAME eq null}">
   					<td>
-  					<img src="../resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="proId">
+  					<img src="../resources/image/Default-Profile-Picture-PNG-Download-Image.png" id="proId" style="border-radius : 100%;">
   					</td>
 					</c:when>
 					<c:when test="${map.PROFILE_STORED_NAME ne null }">
 					<td>
-					<img src="<%=request.getContextPath()%>/userProfile/${map.PROFILE_STORED_NAME}" id="proId">
+					<img src="<%=request.getContextPath()%>/userProfile/${map.PROFILE_STORED_NAME}" id="proId" style="border-radius : 100%;">
 					</td>
 					</c:when>
 				</c:choose>

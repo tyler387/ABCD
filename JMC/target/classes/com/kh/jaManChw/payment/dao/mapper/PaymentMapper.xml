@@ -40,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,I.item_price
 			, F.I_STORED_NAME 
             , O.option_content
+            , o.extra_charge
 		FROM shopping_basket S, item I, item_file F, item_option O
 		where S.basketno = ${basketno}
 			and S.itemno = I.itemno 
@@ -62,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>	
 	<if test="basketitem.ITEM_OPTIONNO != null">
 	insert INTO order_detail(orderno, userno, itemno, item_name, item_count, item_option, item_total_price, order_status, add1, add2, add3, name, phone, buyno)
-	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{itemTitle}, ${basketitem.SB_ITEM_COUNT}, #{basketitem.OPTION_CONTENT}, ${basketitem.ITEM_PRICE * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
+	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{itemTitle}, ${basketitem.SB_ITEM_COUNT}, #{basketitem.OPTION_CONTENT}, ${(basketitem.ITEM_PRICE + basketitem.EXTRA_CHARGE) * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
 	</if>	
 	
 	</insert>

@@ -202,32 +202,25 @@ where applicant.meetingno = #{meetingno} and leader = 'no' and applicant.agree =
 
 <select id="selectApplicantPaging" resultType="map">
 
-<!--     select * from( -->
-<!--     select rownum rnum,u.*,a.applicant_content,m.mname,m.meetingno from users u join applicant a -->
-<!--     on u.userno = a.userno -->
-<!--     join meeting m  -->
-<!--     on a.meetingno = m.meetingno -->
-<!--     where a.meetingno in -->
-<!--    	<foreach collection="list" index="index" item="item" open="(" close=")" separator=","> -->
-<!-- 	#{item.meetingno} -->
-<!-- 	</foreach> -->
-<!--      and agree = 'nocheck' -->
-<!--      ) WHERE rnum BETWEEN #{paging.startno } AND #{paging.endno } -->
-    select * from(
-    select rownum rnum,u.user_nick,u.userno,a.applicant_content,m.mname,m.meetingno,p.profile_stored_name from users u join applicant a
-    on u.userno = a.userno
-    join meeting m 
-    on a.meetingno = m.meetingno
-    left outer join profile_file p 
-    on u.userno = p.userno
-    where a.meetingno in
-   	<foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+     
+     SELECT *
+FROM (
+    SELECT rownum rnum, t.*
+    FROM (
+        SELECT u.user_nick, u.userno, a.applicant_content, m.mname, m.meetingno, p.profile_stored_name, a.applicantno
+        FROM users u
+        JOIN applicant a ON u.userno = a.userno
+        JOIN meeting m ON a.meetingno = m.meetingno
+        LEFT OUTER JOIN profile_file p ON u.userno = p.userno
+        WHERE a.meetingno IN 
+      <foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
 	#{item.meetingno}
 	</foreach>
-     and agree = 'nocheck'
-     order by applicantno desc
-     ) WHERE rnum BETWEEN #{paging.startno } AND #{paging.endno }
-     
+        AND agree = 'nocheck'
+        ORDER BY a.applicantno DESC
+    ) t
+)
+WHERE rnum BETWEEN #{paging.startno } AND #{paging.endno }
 </select>
 
 <select id="selectNotFull" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
@@ -282,12 +275,23 @@ select count(*) from applicant where userno = #{userno}
 
 </select>
 <select id="selectMyApplicant" resultType="map">
-	select * from (
-	select rownum rnum,a.*,m.mname from applicant a join meeting m
-	on a.meetingno = m.meetingno where a.userno = #{applicant.userno}
 	
-	)WHERE leader = 'no' and 
-	rnum BETWEEN #{paging.startno} AND #{paging.endno}
+SELECT *
+FROM (
+    SELECT rownum rnum, t.*
+    FROM (
+        SELECT a.*, m.mname
+        FROM (
+            SELECT *
+            FROM applicant
+            WHERE userno = #{applicant.userno}
+            ORDER BY applicantno DESC
+        ) a
+        JOIN meeting m ON a.meetingno = m.meetingno
+        WHERE a.leader = 'no'
+    ) t
+)
+WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
 
 </select>
 <select id="selectMyMeetingList"  resultType="map">

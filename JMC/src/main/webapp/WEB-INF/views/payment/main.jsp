@@ -282,7 +282,7 @@ width: 100%;
      loc = $("#sample6_postcode").val();
      $("#sample6_address").attr("value", '${user.ADDR2}');
      loc1 = $("#sample6_address").val();
-     $("#phone").attr("value", '${user.PHONE}');
+     $("#phone").attr("value", '${user.PHONE.split(',')[1]}');
      phone = $("#phone").val();
 //   	document.getElementById('name').value = ${user.USER_NAME};
      console.log("이름", name);

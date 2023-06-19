@@ -89,12 +89,8 @@ div.admin1 {
 		<c:when test="${users.status eq 'blacklist'}">블랙리스트</c:when>
 		<c:when test="${users.status eq 'block'}">정지</c:when>
 	</c:choose> </th>
-	<th><c:choose>
-		<c:when test="${users.grade eq '1'}">차가움</c:when>
-		<c:when test="${users.grade eq	'2'}">보통</c:when>
-		<c:when test="${users.grade eq '3'}">따듯함</c:when>
-	</c:choose>  </th>
-	<th>${users.warnCount }</th>
+	<th>${users.grade}</th>
+	<th>${users.warnCount}</th>
 	<th><fmt:formatDate value="${users.joinDate }" pattern="yyyy-MM-dd "/></th>
 	<th><a href="./update?userno=${users.userno }&curPage=${paging.curPage}"><button class="btn btn-secondary">블랙리스트</button></a>
 	<a href="./stop?userno=${users.userno }&curPage=${paging.curPage}"><button class="btn btn-secondary">회원정지</button></a></th>

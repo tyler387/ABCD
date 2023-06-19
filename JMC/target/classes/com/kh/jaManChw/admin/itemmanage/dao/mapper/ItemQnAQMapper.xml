@@ -65,6 +65,9 @@
 		            <if test="filter.content != null and !''.equals(filter.content)">
 		            AND upper(${filter.filter}) LIKE '%' || upper(#{filter.content}) || '%'
 		            </if>
+        			<if test="filter.status != null and !''.equals(filter.status)">
+					AND upper(iq_status) = upper(#{filter.status})
+					</if>
 		            AND iqq.item_qnano = iqa.item_qnano(+)
 		            AND iqq.itemno = i.itemno
 		            AND iqq.itemno = if.itemno

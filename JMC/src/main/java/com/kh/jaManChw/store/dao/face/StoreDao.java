@@ -13,7 +13,7 @@ import com.kh.jaManChw.util.Paging;
 
 public interface StoreDao {
 
-	public List<Map<String, String>> selectAllShoppingbasketList(int userno);
+	public List<Map<String, Object>> selectAllShoppingbasketList(int userno);
 
 	public void updateSbUpdate(Map<String, String> map);
 
@@ -82,6 +82,24 @@ public interface StoreDao {
 	public void insertShoppingBasket(ShoppingBasket sb);
 	
 	public void DeleteShoppingBasket(Map<String, String> map);
+
+
+	
+	/**
+	 * 아이템 옵션 목록 출력
+	 * 
+	 * @return
+	 */
+	public List<Map<String, Object>> ItemOptionList();
+	
+	
+	public Map<String, Object> selectOptionByOptionno(Object object);
+
+	public int selectBaskteno();
+
+	public List<Map<String, String>> selectAllBuyList(String userno);
+
+	public List<Map<String, String>> selectAllBuyDetail(Map<String, String> map);
 	
 
 

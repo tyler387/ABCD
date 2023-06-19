@@ -56,10 +56,9 @@
 }
 
 .meetingbar {
-
-	width: 1550px;
-	text-align: right;
-
+	position: absolute;
+	width: 800px;
+	left: 65%;
 }
 .modal {
 	position: absolute;
@@ -117,6 +116,7 @@
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   background-color: #E2E2E2;
+
 }
 
 .meetingbox{
@@ -126,6 +126,8 @@
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
   }
 
 .meetingbox:hover{

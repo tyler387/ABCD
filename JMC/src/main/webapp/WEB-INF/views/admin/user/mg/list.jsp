@@ -10,7 +10,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
+<c:import url="../../main.jsp"></c:import>
 <style>
 table {
     margin-left:auto; 
@@ -28,8 +28,6 @@ div.admin1 {
     width: 98%;
         
 }
-
-
 </style>
 
 
@@ -58,14 +56,7 @@ div.admin1 {
 				$("#searchBtn").click();
 			}
 		})
-		
-	// 			 if (confirm("정말 삭제하시겠습니까??") == true){ 
-	// 			     document.removefrm.submit();
-	// 			 }else{   //취소
-	// 			     return false;
-	// 			 }
-	// 	})
-	}
+	})
 // 	$("#searchBtn").click(function() {
 		
 // 		filter = $("#filter").val();
@@ -99,9 +90,6 @@ div.admin1 {
 // 	})
 </script>
 <div id="resultt">
-	<c:import url="../../main.jsp"></c:import>
-	
-	
 	
 	<div id="Alltitle" style="text-align: center; padding-top: 10px;">
 		<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
@@ -181,8 +169,8 @@ div.admin1 {
 	
 </div>
 </div>
-</body>
 </div>
+</body>
 </html>
 
 

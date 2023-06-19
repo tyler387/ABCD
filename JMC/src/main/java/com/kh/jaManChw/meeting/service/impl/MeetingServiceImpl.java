@@ -289,6 +289,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		Meeting meeting = new Meeting();
 		meeting.setUserno((int)session.getAttribute("userno"));
 		int totalCount = meetingDao.selectCntAll(meeting);
+		if(totalCount == 0) {
+			totalCount = 1;
+		}
 		MeetingPaging paging = new MeetingPaging(noCurPage, totalCount);
 		return paging;
 		}
@@ -310,6 +313,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			Meeting meeting = new Meeting();
 			meeting.setUserno((int)session.getAttribute("userno"));
 			int totalCount = meetingDao.selectMyMeetingCntAll(meeting);
+			if(totalCount == 0) {
+				totalCount = 1;
+			}
 			MeetingPaging paging = new MeetingPaging(noCurPage, totalCount);
 		return paging;
 		}

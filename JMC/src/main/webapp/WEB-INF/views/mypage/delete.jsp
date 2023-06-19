@@ -143,6 +143,7 @@ input{
 
     		}else{
     			$('#id_msg').html('');	
+    			return true;
     		}
     	})
     	
@@ -154,6 +155,9 @@ input{
     			$('#pw_msg').css('color','red');
     			 $('#savebtn').attr('disabled', true); // 입력값이 없으므로 버튼을 비활성화
     			return false;
+    		}else{
+    			$('#pw_msg').html('');
+    			return true;
     		}
     	}) //$('#userPw').blur ed
     	

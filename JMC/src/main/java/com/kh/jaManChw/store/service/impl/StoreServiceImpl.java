@@ -162,7 +162,7 @@ public class StoreServiceImpl implements StoreService {
 		storeDao.insertItemQnA(itemQnAQ);
 		
 	}
-	
+	 
 	@Override
 	public void Shoppingbasketerase(Map<String, String> map) {
 		

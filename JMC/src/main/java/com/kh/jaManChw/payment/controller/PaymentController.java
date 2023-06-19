@@ -112,7 +112,7 @@ public class PaymentController {
 		logger.info("{}", jsonObject);
 		logger.info("{}", jsonObject.get("orderId"));
 		
-		 return "redirect:/payment/end";
+		 return "redirect:/store//buylist";
 //		 return "forward:/payment/end";
 	}
 	

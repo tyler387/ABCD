@@ -113,15 +113,15 @@ public class CSController {
 			
 		}else {//현재 조회된 게시글이 비공개(public)라면
 			
-			if ((Integer)session.getAttribute("userno") == ((BigDecimal)qnADetail.get("USERNO")).intValue()) {
-				logger.info("어디로 들어왔는가2? {}",(Integer)session.getAttribute("userno") == qnADetail.get("USERNO"));
+			if (session.getAttribute("userno") != null && (Integer)session.getAttribute("userno") == ((BigDecimal)qnADetail.get("USERNO")).intValue()) {
+//				logger.info("어디로 들어왔는가2? {}",(Integer)session.getAttribute("userno") == qnADetail.get("USERNO"));
 				model.addAttribute("qnADetail",qnADetail);
 				model.addAttribute("qnAADetail",qnAADetail);
 				model.addAttribute("curPage",curPage);
 				
 				return "cs/qna/detail";
 			}else {
-				logger.info("어디로 들어왔는가3? {}",(Integer)session.getAttribute("userno") == qnADetail.get("USERNO"));
+//				logger.info("어디로 들어왔는가3? {}",(Integer)session.getAttribute("userno") == qnADetail.get("USERNO"));
 				session.setAttribute("isNotYourQnA", true);
 				return "redirect:./list?curPage="+curPage;
 			}

@@ -158,7 +158,7 @@ th{
 .nicknameboxapp{
   margin-bottom: 50px;
   background-color:white;
-  width:500px;
+  width:100%;
   height:150px;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
@@ -243,6 +243,10 @@ th{
 	border-radius: 20px;
 }
 
+.h2meetinginfo {
+	margin-top: 0px;
+}
+
 </style>
 
 
@@ -299,7 +303,7 @@ th{
 <div class = "meetinginfo">
 
 
-<h2>모집 정보</h2>
+<h2 class="h2meetinginfo">모집 정보</h2>
 <div class = "meetinginfo2">
 <table>
 	<tr>

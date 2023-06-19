@@ -203,12 +203,7 @@ function dateformat(sendTime){
 	return time+" "+ hour + ":" + minute
 	
 }
-function scrollLocation(){
-	if($("#chat").scrollTop()==$("#chat").scrollHeight){ 
-		
-		$('#chat').scrollTop($('#chat')[0].scrollHeight)
-	}
-}
+
 function back(){
 	window.history.go(-1)
 }
@@ -250,6 +245,7 @@ body{
     border: 1px solid #8D7B68;
     border-radius: 0 0 30px 30px;
     border-top: 0;
+    padding-top: 10px;
 }
 #chatAll{
 	width: 100%;

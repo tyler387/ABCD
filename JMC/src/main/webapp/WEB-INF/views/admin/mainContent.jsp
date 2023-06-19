@@ -152,7 +152,7 @@ td, th{
 				생성된 신고(게시글) 수:<span>${allInfoMap.todayWriteReportBoardsCnt}</span>
 			</div>
 			<div id="todayBoardReports">
-<%-- 				<c:if test="${allInfoMap.todayWriteReportBoardsCnt ne 0}"> --%>
+				<c:if test="${allInfoMap.todayWriteReportBoardsCnt ne 0}">
 				<table>
 					<tr>
 						<th>신고번호</th>
@@ -180,10 +180,10 @@ td, th{
 						</tr>
 					</c:forEach>
 				</table>
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${allInfoMap.todayWriteReportBoardsCnt eq 0}"> --%>
-<!-- 					<h2 style="text-align: center;">오늘 신고된 게시글이 없습니다</h2> -->
-<%-- 				</c:if> --%>
+				</c:if>
+				<c:if test="${allInfoMap.todayWriteReportBoardsCnt eq 0}">
+					<h2 style="text-align: center;">오늘 신고된 게시글이 없습니다</h2>
+				</c:if>
 			</div>
 		</div>
 		<div class="reports">

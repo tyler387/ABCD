@@ -12,7 +12,7 @@
 	align-items: center;
 }
 
-form{
+.joinForm{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -32,20 +32,26 @@ input{
 	height: 25px;
 	border: 0;
     border: 1px #371e06 solid;
+    border-radius: 4px;
+    outline: none; 
 }
 
-input[type=button]{
-	border: 1px solid #371e06;
-    background-color: #371e06;
-    border-radius: 7px;
-    color: #fff;
-    width: 150px;
-    height: 30px;
-    font-size: 14px;
-    margin: 0px 0px 0px 10px;
-	padding: 0px 0px 0px 0px; 
+.btn{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #371e06;
+	color: #fff;
+	height: 40px;
+	width: 390px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 18px;
+	margin-right: 20px;
 	cursor: pointer;
-	
+}
+.btn:hover{
+	background-color: #ffcca8;
 }
 
 .box1{
@@ -60,15 +66,13 @@ input[type=button]{
 
 .box2{
 	display: flex;
-/* 	s   */
 	justify-content: flex-start;
 	padding-top: 5px;
 	padding-bottom: 15px;
-/* 	width: 380px; */
 }
 
 .box2 #userEmail1{
-	width: 250px;
+	width: 380px;
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px; 
 }
@@ -83,18 +87,7 @@ input#userId{
 	padding: 0px 0px 0px 0px; 
 }
 
-button[type=button]{
-	border: 1px solid #371e06;
-    background-color: #371e06;
-    border-radius: 7px;
-    color: #fff;
-    width: 78px;
-    height: 30px;
-    font-size: 14px;
-    margin: 0px 0px 0px 10px;
-	padding: 0px 0px 0px 0px; 
-	cursor: pointer;
-}
+
 
 input#email_checknumber{
 	margin: 0px 0px 0px 0px;
@@ -102,17 +95,24 @@ input#email_checknumber{
 	width: 170px; 
 }
 
-.btn{
-	border: 1px solid #371e06;
-    background-color: #371e06;
-    border-radius: 7px;
-    color: #fff;
-    width: 390px;
-    height: 39px;
-    font-size: 25px;
-    cursor: pointer;
+input[type=button]{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #371e06;
+	color: #fff;
+	height: 40px;
+	width: 100px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 18px;
+	margin-right: 20px;
+	cursor: pointer;
+	
+}
 
-
+input[type=button]:hover{
+	background-color: #ffcca8;
 }
 
 .select{
@@ -139,18 +139,18 @@ input#email_checknumber{
 	cursor: pointer;
 	height: 30px;
 	width: 173px;
-	border: 1px solid #371e06;
+	border: 1px solid orange;
 	line-height:  24px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 22px;
 }
 .select input[type=radio]+lable{
-	background-color: #371e06;
+	background-color: orange;
 	color :#333;
 }
 .select input[type=radio]:checked+label{
-	background-color: #371e06;
+	background-color: orange;
 	color: #fff;
 }
 
@@ -170,6 +170,28 @@ input#email_checknumber{
    box-shadow: 0 0 10px #371e06;
 }
 
+.selectOption {
+  box-sizing: border-box;
+  width: 200px;
+  padding: 4px;
+  font-size: 14px;
+  border-radius: 6px;
+  height: 34px;
+  font-size: 18px;
+}
+
+.option {
+  padding: 4px;
+  font-size: 14px;
+  color: black;
+  background: white;
+}
+.option:hover {
+	border-color:#371e06;
+   outline: none !important;
+   box-shadow: 0 0 10px #371e06;
+}
+
 
 
 </style>
@@ -177,8 +199,8 @@ input#email_checknumber{
 <body>
 <div id="continner">
 
-<form action="/login/join" method="post"> 
-<h1 style="font-size:63px;">JAMANCHU</h1> 
+<form class="joinForm" action="/login/join" method="post" > 
+	<h1 style="font-size:63px;">JAMANCHU</h1> 
 
 <div class="box1">
 
@@ -186,13 +208,12 @@ input#email_checknumber{
 	
 	<div class="box2">
 		<input type="text" name="userId" id="userId">
-		<button type="button" id="idbtn" name="idbtn" onclick="idcheck()">중복확인</button>
+		<input type="button" id="idbtn" name="idbtn" onclick="idcheck()" value="중복확인">
 	</div>	
 	
 	
 	<div class="msgbox">
 		<span id="id_msg" style="font-size: 17px;"></span>	
-	
 	</div>	
 </div>
  
@@ -275,21 +296,15 @@ input#email_checknumber{
 		<div class="box2">
 			<input type="text" name="email" id="userEmail1">
 			
-			<select name="email" id="userEmail2">
-				<option>@naver.com</option>
-				<option>@google.com</option>
-				<option>@daum.net</option>
-				<option>@hanmail.com</option>
-			</select>
 			</div>
 			<div class="msgbox">
 				<span id="emailMsg" style="font-size: 17px;"></span>	
 			</div>	
 			<div class="box3">
 				<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
-				<button type="button" id="emailbtn" name="emailbtn">본인인증</button>
+				<input type="button" id="emailbtn" name="emailbtn" value="본인인증">
 			</div>
-			<div>
+			<div style="padding-top:8px;">
 				<span id="emailNumMsg" style="font-size: 17px;"></span>
 			</div>
 		</div>
@@ -304,17 +319,14 @@ input#email_checknumber{
 	<div class="labelbox"><label for="phone">휴대전화*</label></div>	
 	
 	<div class="box2">
-		<select name="phone" id="phone1">
-				<option>SKT</option>
-				<option>KT</option>
-				<option>LG</option>
-				<option>SKT알뜰폰</option>
-				<option>KT알뜰폰</option>
-				<option>LG알뜰폰</option>
-			</select>
+		<select class="selectOption" name="phone" id="phone1">
+				<option class="option">SKT</option>
+				<option class="option">KT</option>
+				<option class="option">LG</option>
+		</select>
 		<input type="tel" name="phone" id="phone">
 	</div>
-		<div class="msgbox">
+		<div class="msgbox" style="padding-top:8px;">
 		<span id="phoneMsg" style="font-size: 17px;"></span>	
 	</div>	
 	
@@ -376,7 +388,8 @@ $(document).ready(function(){
     let checkPhone = RegExp(/^\d{3}\d{3,4}\d{4}$/);        
     let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
          
-    
+    const target = document.getElementById('submit');
+	$('#submit').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
 
 	$('#userId').blur(function() {
 		var userId = $('#userId').val();
@@ -384,22 +397,17 @@ $(document).ready(function(){
 		if(userId === ''){
 			$('#id_msg').html('아이디를 입력해 주세요');	
 			$('#id_msg').css('color','red');
-// 			$("#userId").focus();
+
 			return false;
 			
 		}else if(!checkID.test(userId)) {
 			$('#id_msg').html("대소문자,숫자를 포함한 6자리~20자리로 입력해주세요.");
 			$('#id_msg').css('color','red');
-//             $("#userId").focus();                
+               
             return true;
             
         }
-// 		else if(checkID.test(userId)) {
-//         	$('#id_msg').html("사용가능한 아이디입니다.")
-//         	$('#id_msg').css("color", "#3f8ef7");                           
-// //         	$("#userPw").focus();
-//         	return true;
-//         }
+
     }); //$('#userId').blur end
 		
 	$('#userPw').blur(function() {
@@ -408,7 +416,7 @@ $(document).ready(function(){
 		if(userPw === ''){	
 			$('#pw_msg').html('비밀번호를 입력해 주세요');
 			$('#pw_msg').css('color','red');
-// 			$("#userPw").focus();
+
 			return false;
 		}else if(!checkPW.test(userPw)){
 			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
@@ -446,27 +454,6 @@ $(document).ready(function(){
 	}) //$('#userPw_chk').blur ed
 	
 	
-	$('#userName').blur(function() {
-		var userName = $('#userName').val();
-	
-		if(userName === ''){	
-			$('#name_msg').html('이름을 입력해 주세요');
-			$('#name_msg').css('color','red');
-// 			$("#userName").focus();
-			return false;
-		}else if(!checkName.test(userName)){
-			$('#name_msg').html('옳지않은 형식입니다.');
-			$('#name_msg').css('color','red');
-// 			$("#userPw").focus();
-			return false;
-			
-		}else if(checkName.test(userName)){  
-			$('#name_msg').html('');
- 			$('#name_msg').css('color','#3f8ef7');
-//         	$("#birth").focus();
-        	return true;
-		}
-	}) //$('#userName').blur ed
 	
 	$('#phone').blur(function() {
 		var phone = $('#phone').val();
@@ -484,6 +471,7 @@ $(document).ready(function(){
 		}else if(checkPhone.test(phone)){  
 			$('#phoneMsg').html('');
  			$('#phoneMsg').css('color','#3f8ef7');
+ 			 $('#submit').attr('disabled', false);
         	return true;
 		}
 	}) //$('#phone').blur ed
@@ -568,12 +556,13 @@ $(document).ready(function(){
 	// 이메일 인증
 	var code = ""; // 인증번호 저장을 위한 코드
 	var isCertification = false; // 인증 여부 변수
+	const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
 
 	$('#emailbtn').click(function() {
-		const email = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
+		const email = $('#userEmail1').val() 
+// 		+ $('#userEmail2').val(); // 이메일 주소값 얻어오기!
 		console.log('완성된 이메일: ' + email); // 이메일 오는지 확인
 		
-		const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
 		
 		$.ajax({
 			type: 'GET',
@@ -581,10 +570,11 @@ $(document).ready(function(){
 			dataType: 'text',
 			success: function(data) {
 				/* console.log('data: ' + data); */
-				checkInput.attr('disabled', false); // 인증번호 입력이 가능하도록 속성 변환
+				//
 				code = data;
 				isCertification = true; // 인증이 완료되었음을 표시
 				alert('인증번호가 전송되었습니다.');
+				$('#submit').attr('disabled', false);
 			},
 			error : function() { // 결과 에러 콜백함수
 				alert('서버요청 실패');
@@ -604,11 +594,12 @@ $(document).ready(function(){
 		} else if (inputCode === code) {
 			resultMsg.html('인증번호가 일치합니다.');
 			resultMsg.css('color', 'green');
-			$('#email_checkbtn').attr('disabled', true);
+			$('#emailbtn').attr('disabled', true);
 			$('#userEamil1').attr('readonly', true);
-			$('#userEamil2').attr('readonly', true);
-			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-			$('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+// 			$('#userEamil2').attr('readonly', true);
+			$('#userEmail1').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+ 			$('#userEmail1').attr('onChange', 'this.selectedIndex = this.initialSelect');
+ 			checkInput.attr('disabled', true); // 인증번호 입력이 가능하도록 속성 변환
 		} else if (inputCode === '') {
 			resultMsg.html('인증번호를 입력해주세요.');
 			resultMsg.css('color', 'red');

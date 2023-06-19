@@ -41,10 +41,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
 	</select>
 	
-	<select id="getUserdata" resultType="com.kh.jaManChw.dto.Users"  parameterType="int">
-	select * FROM users WHERE userno = #{userno}
-	</select>
 
+	<select id="getUserdata" resultType="hashmap"  parameterType="int">
+	select * FROM users U where U.userno = ${userno}
+	</select>
+	<select id="getUserdataProfile" resultType="hashmap"  parameterType="int">
+	select U.*, P.profile_stored_name FROM profile_file P, users U where U.userno = #{userno} and U.userno = P.userno
+	</select>
+	<select id="selectUserProfile"  resultType="int"  parameterType="int">
+	select  count(*) FROM profile_file where userno = ${userno} 
+	</select>
 	<update id="deleteUserMgWithdraw" parameterType="int">
 	UPDATE users SET  status = 'leave'
 	WHERE userno = ${userno}
@@ -73,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateUserMgUpdate" parameterType="map">
 UPDATE users SET user_id = #{userId}, user_name = #{userName}, user_nick=#{userNick}
-, email = #{email}, phone = #{phone}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3}, birth =#{birth}, gender=#{gender}
+, email = #{email}, phone = #{phone}, addr1=${addr1}, addr2=#{addr2}, addr3=#{addr3}, gender=#{gender}
 , status=#{status} 
 	WHERE userno = ${userno}
 	</update>

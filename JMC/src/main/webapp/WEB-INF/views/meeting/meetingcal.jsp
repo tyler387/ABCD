@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:import url="../layout/header.jsp" />
-<c:import url="../chat/chatbutton.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
@@ -57,10 +56,9 @@
 }
 
 .meetingbar {
-
-	width: 1550px;
-	text-align: right;
-
+	position: absolute;
+	width: 800px;
+	left: 65%;
 }
 .modal {
 	position: absolute;
@@ -118,6 +116,7 @@
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   background-color: #E2E2E2;
+
 }
 
 .meetingbox{
@@ -127,6 +126,8 @@
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
   }
 
 .meetingbox:hover{

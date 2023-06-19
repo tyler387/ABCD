@@ -20,6 +20,8 @@
 
 th {
   text-align: left;
+     background: #371e06;
+	 color : #fff;
 }
   
   
@@ -78,7 +80,8 @@ td:hover{
   </div>
       <div class="right">
        <div id="searchFriend">
-				
+				<div  style="font-size: 20px; padding-top: 38px; margin-left: 20px; "> My board </div>
+       			<div style="width:150px; margin-left: 18px;"><hr></div>
 				<table class="friendTable">
 					<tr>
 						
@@ -91,7 +94,7 @@ td:hover{
 					<tr>
 						<td>${list.WRITE_DATE }</td>
 						<td>${list.CONTENT }</td>
-						<td><a href="./myBoarddetail?boardno=${list.BOARDNO }"><img src="<%=request.getContextPath() %>/boardFileUpload/${list.STORED_NAME}"></a></td>
+						<td><img src="<%=request.getContextPath() %>/boardFileUpload/${list.STORED_NAME}"></td>
 					</tr>
 					</c:forEach>
 				</table>

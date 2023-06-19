@@ -124,8 +124,8 @@ public class PaymentServiceImpl implements PaymentService {
 		map.put("userno", userno);
 		logger.info(" 원래 담긴 맵 {}", map);
 		
-		int abc = itemTitle.length - 1;
-		String AllItemName = itemTitle[0] +" 외 " + abc + "건";
+		int abc = itemTitle.length;
+		String AllItemName = itemTitle[0] +" 등 " + abc + "건";
 		
 		int buyno = paymentDao.selectOncetrypayno();
 		map.put("buyno", buyno);
@@ -165,6 +165,25 @@ public class PaymentServiceImpl implements PaymentService {
 			logger.info("sbList {}", sbList);
 		}
 		logger.info("장바구니쇼핑 리스트 {}", sbList);
+		
+		for(Map<String, Object> m : sbList) {
+//			if(m.get("ITEM_OPTIONNO") != null || !"".equals(m.get("ITEM_OPTIONNO"))) {
+			if(m.get("ITEM_OPTIONNO") != null) {
+				logger.info("쇼핑옵션 들어가기직전1");
+				logger.info("쇼핑옵션 들어가기직전1 맵에 담긴 옵션 값 {}", m.get("ITEM_OPTIONNO"));
+//			int optionno = (int)m.get("ITEM_OPTIONNO");
+			logger.info("쇼핑옵션 들어가기직전2");
+//			logger.info("optionno 출력 {}", optionno);
+			m.put("ITEM_OPTION", paymentDao.selectOptionByOptionno(m.get("ITEM_OPTIONNO")));
+			logger.info("map2 출력 {}", sbList);
+			}
+		}
+		
 		return sbList;
 	}
+	@Override
+	public Map<String, String> getuserinfo(String userno) {
+		return paymentDao.selectUserInfo(userno);
+	}
+	
 }	

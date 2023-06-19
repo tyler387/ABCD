@@ -56,10 +56,10 @@
 		  FROM USERS
 		  <choose>
 		    <when test="type == 'all'">
-		      WHERE (UPPER(USER_ID) LIKE '%' || UPPER(#{keyword})|| '%' OR UPPER(USER_NICK) LIKE '%' || UPPER(#{keyword}) || '%')
+		      WHERE (UPPER(USER_ID) LIKE '%' || UPPER(#{keyword})|| '%' OR USER_NICK LIKE '%' || #{keyword} || '%')
 		    </when>
 		    <otherwise>
-		      WHERE ${type} LIKE '%' || UPPER(#{keyword}) || '%'
+		      WHERE ${type} LIKE '%' || #{keyword} || '%'
 		    </otherwise>
 		  </choose>
 	</select>
@@ -99,6 +99,15 @@
 		DELETE FROM FRIEND_LIST
 	  	WHERE FRIEND_USERNO=#{friendUserno}	
 	</delete>
-
+	
+	
+	<select	id="selectMyMeeting" parameterType="Users" resultType="map">
+		select  * from (
+		select rownum rnum, m.*,c.cnt from meeting m join (select count(*) cnt, a.meetingno from applicant a  where agree = 'yes' group by a.meetingno) c
+		on m.meetingno = c.meetingno) t
+		where t.userno = #{userno} and rnum BETWEEN #{paging.startno} AND #{paging.endno}
+		order by meetingno desc
+		
+	</select>
 
   </mapper>

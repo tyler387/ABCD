@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -46,6 +48,8 @@ public class MeetingController {
 	
 @Autowired MeetingService meetingService;
 	
+@Autowired
+ServletContext context;
 private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 
 	//모임 작성 폼으로 이동 
@@ -160,9 +164,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	}
 	
 	
-	//지도에서 선택해서 AJAX로 선택한 날짜의 모임만 조회 
+	//지도에서 선택해서 AJAX로 선택한 위치의 모임만 조회 
 	@GetMapping("/meeting/meetingmapajax")
-	public String Meetingmap(Meeting meeting,@RequestParam String mapData, String mapData1, Model model) {
+	public String meetingMap(Meeting meeting,@RequestParam String mapData, String mapData1, Model model) {
 		
 		logger.info("mapdata{}",mapData);
 		logger.info("mapdata1{}",mapData1);
@@ -175,7 +179,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("map!!!{}" , meeting);
 		
 		//지도에 찍히는 위치에 해당하는 모임 정보 가져오기 
-		List<Meeting> maplist = meetingService.getMeetingByMap(mapData,mapData1);
+		List<Meeting> maplist = meetingService.getMeetingListByMap(mapData,mapData1);
 		
 		//우리의 노력
 //		mapData = new HashMap<String, Object>();
@@ -188,7 +192,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//달력에서 선택해서 AJAX로 선택한 날짜의 모임만 조회 
 	@GetMapping("/meeting/meetinglist")
-	public String Meetingcal(Meeting meeting, String data, String data1, String data2, Model model) {
+	public String meetingCal(Meeting meeting, String data, String data1, String data2, Model model) {
 		
 		if(data1.length()==1) {
 			data1 = "0"+data1;
@@ -213,7 +217,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 //		}
 		
 
-		List<Meeting> list = meetingService.getMeetingByDate(result);
+		List<Meeting> list = meetingService.getMeetingListByDate(result);
 //		List<Meeting> list = meetingService.getMeetingByDate(date);
 		
 		logger.info("list !!{}",list);
@@ -241,20 +245,20 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			
 		logger.info("map!!{}" , map);
 		
-		List<Meeting> meetingfilter = meetingService.meetingFilter(map);
+		List<Meeting> meetingfilter = meetingService.getMeetingListByFilter(map);
 		
 		model.addAttribute("meetinglist", meetingfilter);
 		
 		return "/meeting/meetinglist";
 	}
 	
-	//모임 검색하기
+	//모임 검색
 	@GetMapping("/meeting/meetingsearch")
 	public String meetingSearch(Meeting meeting, String search, Model model) {
 		
 		logger.info("search{}", search);
 		
-		List<Meeting> searchlist = meetingService.meetingsearch(search);
+		List<Meeting> searchlist = meetingService.getMeetingListByMname(search);
 
 		model.addAttribute("meetinglist",searchlist);
 		return "/meeting/meetinglist";
@@ -266,7 +270,8 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference, Applicant applicant,ProfileFile profileFile) {
 		
 		logger.info("/meeting/view [GET]");
-		
+		String path = context.getRealPath("");
+		logger.info("123123{}",path);
 		String url = "";
 		
 		//로그인 세션 검사
@@ -282,25 +287,31 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		
 		
-		
-		int appcount = meetingService.applicantCount(applicant);
-		int appcountcheck = meetingService.applicantCheckCount(applicant);
-		int appcountnocheck = meetingService.applicantNoCheckCount(applicant);
-		Meeting viewmeeting = meetingService.detailMeeting(meeting);
-		Preference viewpreference = meetingService.detailPreference(preference);
+		//모임 총원 수
+		int appcount = meetingService.getApplicantCount(applicant);
+		//모임 확정 인원 수
+		int appcountcheck = meetingService.getApplicantCheckCount(applicant);
+		//모임 확정안된 신청인원 수 
+		int appcountnocheck = meetingService.getApplicantNoCheckCount(applicant);
+		//모임 상세정보
+		Meeting viewmeeting = meetingService.getDetailMeeting(meeting);
+		//모임 선호타입(추가태그)  
+		Preference viewpreference = meetingService.getDetailPreference(preference);
+		//모임 확정된 신청인원 정보 
 		List<Users> applicantnickagree = meetingService.getUserNickAgree(meeting);
+		//모임 확정안된 신청인원 정보 
 		List<Users> applicantnicknochceck = meetingService.getUserNickNocheck(meeting);
+		// 모집자 정보 
 		Users applicantnick1 = meetingService.getUserNickLeader(meeting);
 		
+		//모집자 프로필 가져오기 
+		Map<String, Object> maptest = meetingService.getLeaderProfile(applicant);
 		
 		
-		//파일 정보 가져오기
 		
-	
-		List<Map<String, Object>> map = meetingService.allInfo(applicant);
 		
 		logger.info("{}" , viewmeeting);
-		logger.info("{}!!!!", map);
+		logger.info("{}!!!!맵확인", maptest);
 		
 		
 		model.addAttribute("appcount", appcount);
@@ -311,11 +322,21 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		model.addAttribute("applicantnickagree", applicantnickagree);
 		model.addAttribute("applicantnicknocheck", applicantnicknochceck);
 		model.addAttribute("applicantnick1", applicantnick1);
-		
-		
+		model.addAttribute("maptest" , maptest);
 		
 		return url;
 	}
+	
+	//모임 삭제하기 
+	@GetMapping("/meeting/delete")
+	public String meetingErase(Meeting meeting, HttpSession session) {
+		
+		
+	
+		
+		return "/meeting/meetingcal";
+	}
+	
 	
 	//선택한 모임의 신고창 조회 모달창 써서 필요X
 //	@GetMapping("/meeting/report")
@@ -327,6 +348,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 //		
 //		return "/meeting/report";
 //	}
+	
 	
 	//선택한 모임 신고하기  
 	@PostMapping("/meeting/report")
@@ -355,15 +377,21 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("/meeting/applicant [GET]"); 
 		
 		Users applicantuser = meetingService.getMeetingApplicantUser(users);
-		Applicant applicantview = meetingService.getMeetingApplicant(applicant);
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
 		
 		
-		logger.info("{}" , applicantview);
+		Calendar birthCalendar = Calendar.getInstance();
+		
+		birthCalendar.setTime(applicantuser.getBirth());
+		
+		Calendar currentCalendar = Calendar.getInstance();
+		
+		int age = currentCalendar.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR);
+		
+		logger.info("!!!!!{}" , age);
+		
 		
 		model.addAttribute("applicantuser" , applicantuser);
-		model.addAttribute("applicantview" , applicantview);
+		model.addAttribute("age" , age);
 	}
 	
 	

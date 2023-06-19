@@ -171,7 +171,7 @@ $(function() {
 			
 			const perPrice = $(this).parent().parent().children('b').attr("data-perPrice")
 			
-		
+		 
 			console.log("뭐죠?", count1)
 			console.log("뭐죠?1", $(this).parent().children("div").attr("data-perPrice"))
 			console.log("각 가격 ", perPrice)

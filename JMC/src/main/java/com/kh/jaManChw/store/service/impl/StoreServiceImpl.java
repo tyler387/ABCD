@@ -32,9 +32,31 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired StoreDao storeDao;
 
 	@Override
-	public List<Map<String, String>> getShoppingbasketList(int userno) {
+	public List<Map<String, Object>> getShoppingbasketList(int userno) {
 		
-		return storeDao.selectAllShoppingbasketList(userno);
+		List<Map<String, Object>> map = storeDao.ItemOptionList();
+		
+		List<Map<String, Object>> map2 = storeDao.selectAllShoppingbasketList(userno);
+		
+		logger.info("map2 출력 {}", map2);
+		logger.info("쇼핑옵션 들어가기직전");
+		for(Map<String, Object> m : map2) {
+//			if(m.get("ITEM_OPTIONNO") != null || !"".equals(m.get("ITEM_OPTIONNO"))) {
+			if(m.get("ITEM_OPTIONNO") != null) {
+				logger.info("쇼핑옵션 들어가기직전1");
+				logger.info("쇼핑옵션 들어가기직전1 맵에 담긴 옵션 값 {}", m.get("ITEM_OPTIONNO"));
+//			int optionno = (int)m.get("ITEM_OPTIONNO");
+			logger.info("쇼핑옵션 들어가기직전2");
+//			logger.info("optionno 출력 {}", optionno);
+			m.put("ITEM_OPTION", storeDao.selectOptionByOptionno(m.get("ITEM_OPTIONNO")));
+			logger.info("map2 출력 {}", map2);
+			}
+		}
+		
+//		logger.info("아이템옵션 목록 {}", map);
+		logger.info("장바구니 목록 {}", map2);
+//		logger.info("아이템옵션 목록 {}");
+		return map2;
 		
 	}
 
@@ -147,5 +169,21 @@ public class StoreServiceImpl implements StoreService {
 		storeDao.DeleteShoppingBasket(map);
 	}
 	
+	@Override
+	public int getbasketno() {
+		
+		return storeDao.selectBaskteno();
+	}
+	
+	@Override
+	public List<Map<String, String>> getBuyList(String userno) {
+		return storeDao.selectAllBuyList(userno);
+	}
+	
+	@Override
+	public List<Map<String, String>> getBuyDetail(Map<String, String> map) {
+		
+		return storeDao.selectAllBuyDetail(map);
+	}
 	
 }

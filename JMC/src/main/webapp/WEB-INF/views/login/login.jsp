@@ -55,9 +55,9 @@ div.idcheck_box{
 	padding-bottom: 20px;
 }
 
-button[type=button] {
-	border: 2px solid #371e06 ;
-	background-color:#371e06;
+#loginBtn {
+	border: 2px solid orange ;
+	background-color:orange;
 	border-radius : 7px;
 	color: #fff;
 	width: 400px;
@@ -69,8 +69,12 @@ button[type=button] {
 	cursor: pointer;
 }
 
-.loginBtn{
-	padding-bottom: 300px;
+.loginbtn{
+	margin-top: 10px;
+}
+
+.loginBtn:hover{
+	background-color: #ffcca8;
 }
 .forget a{
 	text-decoration-line: none;	
@@ -109,13 +113,13 @@ button[type=button] {
 	<div class="IDinput_box">
 		<label for="userId"></label>
 		<input type="text" name="userId" id="userId" placeholder=" ID">
-		<div><span id="idMSG"></span></div>
+		<div style="padding-top:8px;"><span id="idMSG"></span></div>
 	</div>
 
 	<div class="PWinput_box">
 		<label for="userPw"></label>
 		<input type="password" name="userPw" id="userPw" placeholder=" PASSWORD">
-		<div><span id="pwMSG"></span></div>
+		<div style="padding-top:8px;"><span id="pwMSG"></span></div>
 	</div>
 	
 	<div class="idcheck_box">
@@ -126,7 +130,7 @@ button[type=button] {
 	
 	
 	<div class="loginbtn">
-		<button type="button" id="loginBtn" onclick="submit()">Login</button><br>
+		<button id="loginBtn" onclick="submit()">Login</button><br>
 	</div>
 	
 	<div class="forget" style="margin-bottom: 10px;">
@@ -162,15 +166,21 @@ input.addEventListener("keyup", function (event) {
   }
 });
 
+//const target = document.getElementById('loginBtn');
+//$('#loginBtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+
 
 
 $('#userId').blur(function() {
 	var userId = $('#userId').val();
 
 	if(userId === ''){
-		alert('아이디를 입력해 주세요');
-		
+		$('#idMSG').html('아이디를 입력해 주세요');
+		$('#idMSG').css('color','red');
 		return false;
+	}else if(userId != ''){
+		$('#idMSG').html('');
+	
 	}
 	return true;
 })
@@ -179,23 +189,29 @@ $('#userPw').blur(function() {
 	var userPw = $('#userPw').val();
 
 	if(userPw === ''){	
-		alert('비밀번호를 입력해 주세요');
-	
+		$('#pwMSG').html('비밀번호를 입력해 주세요');
+		$('#pwMSG').css('color','red');
 		return false;
+	}else if(userPw != ''){
+		$('#pwMSG').html('');
+
 	}
 	return true;
 })
+
 
 $('#loginBtn').click(function() {
 	
 	var userId = $('#userId').val();
 	var userPw = $('#userPw').val();
 	
+	
     if (userId == "" || userPw == "") {
         alert("아이디, 비밀번호를 다시 체크해주세요");
     }
 })
 		
+
 
 
 // 아이디 저장 - 쿠키 관련 스크립트

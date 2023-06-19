@@ -54,15 +54,6 @@ public class PaymentController {
 		
 	}
 	
-//	@RequestMapping("/end")
-//	public void PaymentEnd(HttpServletRequest request,
-////			String val, String bbb,
-//			@RequestParam Map<String, String> map) {
-//		logger.info("여기는 결제가 끝난 시점");
-//		logger.info("bbb = {}", map);
-//		logger.info("request = {}", map);
-//		logger.info("여기는 결제가 끝난 시점");
-//	}
 	@RequestMapping("/end")
 	public void PaymentEnd() {
 
@@ -84,19 +75,21 @@ public class PaymentController {
 	
 	@RequestMapping("/main")
 	public void PaymentMain(
-			@RequestParam Map<String, Object> map,
+			@RequestParam Map<String, Object> map,  HttpSession session,
 			 int[] basketno, Model model
 			) {
 		logger.info("결제할 상품들 출력 맵 {}", map);
 		logger.info("결제할 상품들 출력 바스켓넘버{}", basketno);
-		
+		String userno = String.valueOf(session.getAttribute("userno"));
 		List<Map<String, Object>> sbList = paymentService.getParamList(basketno);
-//		Map<String, Object> list = paymentService.getParamList(basketno);
+		Map<String, String> user = paymentService.getuserinfo(userno);
 		logger.info("sbListsbListsbListsbList = {}", sbList);
+		logger.info("useruser = {}", user);
 		logger.info("bbsssb = {}", sbList);
 		
 		logger.info("결제할 상품들 출력{}", sbList);
 		model.addAttribute("sbList", sbList);
+		model.addAttribute("user", user);
 		model.addAttribute("basketno", basketno);
 	}
 	

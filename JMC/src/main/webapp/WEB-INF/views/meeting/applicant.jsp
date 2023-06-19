@@ -23,8 +23,29 @@
 body {
   background: beige;
   font-family: '양진체';
+  text-align: center;
 }	
 
+.checkend{
+	font-family: '양진체';
+	display :inline-block;
+	background-color: #0a0a23;
+	color: #fff;
+	height: 50px;
+	width: 100px;
+	background: orange;
+	border-radius: 20px;
+	border: none;
+	font-size: 20px;
+	margin-top: 50px;
+	
+	
+}
+
+.app{
+	margin-bottom: 20px;
+
+}
 
 
 
@@ -37,9 +58,9 @@ body {
 	
 	
 	<h2>모집자 정보</h2>
-	<div class="nick">닉네임:${applicantuser.userNick }</div>
-	<div class="age">나이: ${applicantuser.birth }</div>
-	<div class="gender">성별: 
+	<div class="app">닉네임:${applicantuser.userNick }</div>
+	<div class="app">나이: ${age }</div>
+	<div class="app">성별: 
 	<c:if test="${applicantuser.gender eq 'M' }">
 	남자
 	</c:if>
@@ -50,7 +71,7 @@ body {
 	</div>
 	
 	
-	<button onclick="window.close()">확인 완료</button>
+	<button class="checkend" onclick="window.close()">확인 완료</button>
 	
 </body>
 </html>

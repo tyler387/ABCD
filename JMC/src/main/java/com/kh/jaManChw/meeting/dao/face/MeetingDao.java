@@ -55,8 +55,6 @@ public interface MeetingDao {
 	
 	public Users selectMeetingApplicantLeader(Meeting meeting);
 	
-	public Applicant selectMeetingApplicant(Applicant applicant);
-
 	public Users selectMeetingApplicantUser(Users users);
 
 	public void insertJoinMeeting(Applicant applicant);
@@ -65,8 +63,10 @@ public interface MeetingDao {
 
 	public void insertMeetingUser(Applicant leader);
 	
-	public List<Meeting> selectMeetingByDate(String result);
-
+	public List<Meeting> selectMeetingListByDate(String result);
+	
+	public List<Meeting> selectMeetingListByMap(@Param("mapData") String mapData, @Param("mapData1")String mapData1);
+	
 	public int selectMeetingListCount(Meeting meeting);
 
 	public int selectMeetingListCountnow(Meeting meeting);
@@ -75,18 +75,13 @@ public interface MeetingDao {
 
 	public List<Meeting> selectMeetingListByFilter(Map<String, Object> map);
 
-	public List<Meeting> selectMeetingListByMap(@Param("mapData") String mapData, @Param("mapData1")String mapData1);
-
 	public Preference selectDetailPreference(Preference preference);
 
 	public int selectMeetingappcount(Meeting meeting);
 
-	public void updatestatus(Meeting meeting);
+	public void updateStatus(Meeting meeting);
 	
-
 	public List<Meeting> selectMyMeetingno(Meeting meeting);
-
-
 
 	public void updateApplicantAgree(Applicant applicant);
 
@@ -104,9 +99,6 @@ public interface MeetingDao {
 
 	public int selectMeetingAppUser(Applicant applicant);
 
-	public ProfileFile selectFileInfo(Users info);
-
-	public List<Map<String, Object>> selectAllInfo(Applicant applicant);
 	
 
 	
@@ -117,8 +109,6 @@ public interface MeetingDao {
 	
 	
 	
-	
-
 	public List<Map<String, Object>> selectMyApplicant(@Param("applicant")Applicant applicant, @Param("paging")MeetingPaging paging);
 
 	public int selectCntAll(Meeting meeting);
@@ -126,6 +116,8 @@ public interface MeetingDao {
 	public List<Map<String,Object>> selectMyMeetingList(@Param("meeting")Meeting meeting, @Param("paging")MeetingPaging paging);
 
 	public int selectMyMeetingCntAll(Meeting meeting);
+
+	public Map<String, Object> selectLeaderProfile(Applicant applicant);
 
 	
 	

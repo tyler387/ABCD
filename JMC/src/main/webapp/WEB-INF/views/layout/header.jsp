@@ -23,28 +23,29 @@ body {
   font-family: '양진체';
 }
 
-header img{
-	width: 100px;
-	height: 100px;
+#headerimg{
+	width: 10px;
+	height: 10px;
 }
 
 header{
-  position: sticky;
+position: sticky;
   top: 0;
   backdrop-filter: blur(30px);
   background: #371e06;
-  color: white;
-/*   padding-left: 120px;  */
-/*   padding-right: 40px;  */
+  color: white; 
+/*   padding-right : 10%;  */
+/*   padding-left : 10%;  */
   display:flex; 
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  width: 100%; 
-}
+  width: 100vw; 
+  
+ }
 
 header a{
 	color : white;
-	padding : 20px;
+ 	padding : 20px;
 }
 
 *{
@@ -59,10 +60,14 @@ a {
 /*   position:relative;  */
   /* z-index: 99;  */
   padding-top : 12px;
-  background-color: #f5f5f5;
   height: 50px;
-  text-align: center;
-  margin-left: 130px;
+/*   display: flex; */
+/*   background-color:red; */
+/*   justify-content:space-evenly; */
+   text-align: center;
+/*   margin-left: 130px; */
+/* 	padding-left: 130px; */
+  width:100%;
 }
 
 #header [class*="main"] {
@@ -77,15 +82,23 @@ a {
 #header .main1{
   padding-left: 0px;
   height: 100%;
-  width: 1600px;
+	width:100%;
   margin: 0 auto;
-  display: inline-block;
+/*   display: inline-block; */
+display: flex; 
+
+   justify-content:space-around; 
+  
 }
 #header .main1>li {
-  float: left;
-  width: 15%;
-  line-height: 50px;
+/*   float: left; */
+display:flex;
+flex-direction:row;
+  width: 18%;
+ justify-content:center;
+   line-height: 50px; 
   position: relative;
+  
   
 }
 #header .main1>li:hover .main2 {
@@ -94,6 +107,7 @@ a {
 #header .main1>li a {
   display: block;
   font-size: 22px;
+
 }
 #header .main1>li a:hover {
   font-weight: bold;
@@ -105,6 +119,7 @@ a {
   left: -9999px;
   width: 100%;
   padding: 0px;
+  z-index: 9999;
 }
 #header .main1>li:hover {
   border-bottom: 5px solid #371e06;
@@ -134,9 +149,7 @@ a {
 /*    background-color: #371e06; */
 /* } */
 
- #wrap {
-  min-height: calc(100% - 120px);
-}
+
 
 
  .footer {
@@ -160,7 +173,8 @@ a {
 <div id="header">
 <header>
 
-<div class="logo"><img src='/resources/image/주황로고.png'></div>
+<div class="logo"><a href="/login/main"><img src='/resources/image/주황로고.png' style="width: 40px; height: 40px; padding-left: 14vw;"></a></div>
+<div>
 <c:if test="${role eq 'admin'}">
 	<a href="<%=request.getContextPath()%>/admin/main">관리자페이지</a>
 </c:if>
@@ -184,7 +198,7 @@ a {
 	<a href="/mypage/main">마이페이지</a>
 	<a href="#">알람</a>
 </c:if>
-
+</div>
 </header>
 
 <div id="menu">
@@ -202,4 +216,6 @@ a {
     <li><a href="<%=request.getContextPath()%>/cs/notice/list">고객센터</a></li>
     </ul>
 </div>
+
+
 </div>

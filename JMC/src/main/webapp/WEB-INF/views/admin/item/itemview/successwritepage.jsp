@@ -27,7 +27,7 @@ $(function() {
 <br>
 <%-- 판매 페이지가 완성되면 상품 번호를 클릭하면 판매중인 상품의 페이지로 이동하는 기능 구현예정 --%>
 <div style="text-align: center">
-<h6>상품 번호: <a style="color:blue;" href="#">${reqisteredItemno}</a></h6>
+<h6>상품 번호: <a style="color:blue;" href="<%=request.getContextPath()%>/store/itemDetail?itemno=${reqisteredItemno}">${reqisteredItemno}</a></h6>
 <button onclick="location.href='./write'">상품 등록</button>
 <button onclick="location.href='./list'">상품 수정</button>
 </div>

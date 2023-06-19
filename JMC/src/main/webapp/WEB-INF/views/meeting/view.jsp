@@ -243,6 +243,10 @@ th{
 	border-radius: 20px;
 }
 
+.h2meetinginfo {
+	margin-top: 0px;
+}
+
 </style>
 
 
@@ -299,7 +303,7 @@ th{
 <div class = "meetinginfo">
 
 
-<h2>모집 정보</h2>
+<h2 class="h2meetinginfo">모집 정보</h2>
 <div class = "meetinginfo2">
 <table>
 	<tr>

@@ -123,6 +123,7 @@ public class ItemManageController {
 		
 		List<Map<String, Object>> filterItemList = itemService.showItemListByFilter(filterPaging , filterMap);
 	
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("filterList", true);
 		model.addAttribute("filter", filterMap);
 		model.addAttribute("paging", filterPaging);
@@ -242,6 +243,7 @@ public class ItemManageController {
 		logger.info("paging: {}", paging);
 		List<Map<String, Object>> filteredItemQnAQList =itemQnAQService.showItemQnAQListByFilter(paging, filterMap);
 
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("filterList", true);
 		model.addAttribute("filter", filterMap);
 		model.addAttribute("itemQnAQList", filteredItemQnAQList);
@@ -263,7 +265,7 @@ public class ItemManageController {
 	
 	//판매 상품 신규 등록 시 내용글중 파일을 저장한다 - summernote
 	@PostMapping(value ="/itemview/writeFileupload" , produces = "application/json; charset=utf8")
-	public @ResponseBody JSONObject adminBoardContentFileupload(
+	public @ResponseBody JSONObject itemContentFileupload(
 //			@RequestParam("files") MultipartFile multipartFile
 			@RequestParam("file") MultipartFile file
 			) {

@@ -9,10 +9,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace ="com.kh.jaManChw.store.dao.face.StoreDao">
 	
-	<select id="selectAllShoppingbasketList" parameterType="int" resultType="map">
-	<!-- 		select S.*, I.ITEM_TITLE,I.item_price, F.I_STORED_NAME FROM shopping_basket S, item I, item_file F where S.userno = ${userno} and S.itemno = I.itemno and I.itemno = F.itemno -->
-	select S.*, I.ITEM_TITLE, O.OPTION_content, I.item_price, F.I_STORED_NAME, O.extra_charge FROM shopping_basket S, item I, item_file F, item_option O
-	where S.userno = ${userno} and S.itemno = I.itemno and I.itemno = F.itemno and O.itemno = I.itemno
+	<select id="selectAllShoppingbasketList" parameterType="int" resultType="hashmap">
+<!-- 	BEGIN -->
+			select S.*, I.ITEM_TITLE,I.item_price, F.I_STORED_NAME FROM shopping_basket S, item I, item_file F where S.userno = ${userno} and S.itemno = I.itemno and I.itemno = F.itemno order by basketno desc
+<!-- 	select S.*, I.ITEM_TITLE, O.OPTION_content, I.item_price, F.I_STORED_NAME, O.extra_charge FROM shopping_basket S, item I, item_file F, item_option O -->
+<!-- 	where S.userno = ${userno} and S.itemno = I.itemno and I.itemno = F.itemno and O.itemno = I.itemno order by S.Basketno desc -->
+<!-- 	END; -->
+	</select>
+	
+	<select id="selectOptionByOptionno" resultType="hashmap">
+	select * FROM item_option where ITEM_OPTIONNO = ${object}
 	</select>
 	
 <!-- 	유저 번호 넣어야함	 -->
@@ -132,8 +138,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 		
-	<delete id="DeleteShoppingBasket" parameterType="map">
-	DELETE FROM shopping_basket
-	WHERE USERNO = ${userno} and BASKETNO = ${basketno}
+	<delete id="DeleteShoppingBasket" parameterType="map" >
+	DELETE FROM 
+		shopping_basket
+	WHERE 
+		USERNO = ${userno} 
+		and BASKETNO = ${basketno}
 	</delete>
+	
+	<select id="ItemOptionList" resultType="hashmap">
+	select * FROM item_option
+	</select>
+	
+	<select id="selectBaskteno" resultType="int">
+	SELECT * 
+		FROM (SELECT basketno FROM shopping_basket ORDER BY basketno DESC) 
+	WHERE ROWNUM = 1
+	</select>
+	
+	<select id="selectAllBuyList" parameterType="string" resultType="hashmap">
+	select * FROM buy_list where userno = ${userno} order by buyno desc
+	</select>
+	
+	<select id="selectAllBuyDetail"  parameterType="map" resultType="hashmap">
+	select 
+		 orderno
+		 , userno
+		 , itemno
+		 , item_name
+		 , item_count
+		 , item_option
+		 , item_total_price
+		 , order_status
+		 , CAST(status_date as DATE) status_date
+		 , add1
+		 , add2
+		 , add3
+		 , name
+		 , phone
+		 , buyno
+	FROM 
+		order_detail 
+	where 1 = 1
+		AND userno = ${userno} 
+		and buyno = ${buyno}
+	</select>
 </mapper>

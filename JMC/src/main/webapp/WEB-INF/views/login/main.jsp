@@ -21,6 +21,13 @@ $(function () {
 
 <style type="text/css">
 
+
+.main {	filter: blur(3px);
+		z-index: 100;
+
+
+}
+
 .mainpage {
 	height: 1200px;
 }

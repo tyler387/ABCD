@@ -60,9 +60,15 @@ public class UserManageServiceImpl implements UserManageService {
 	}
 
 	@Override
-	public Users getUserData(int userno) {
+	public Map<String, String> getUserData(int userno) {
 		
-		return userManageDao.getUserdata(userno);
+		int profile = userManageDao.selectUserProfile(userno);
+		
+		if(profile > 0) {
+			return userManageDao.getUserdataProfile(userno);
+		}else {
+			return userManageDao.getUserdata(userno);
+		} 
 	}
 	
 	@Override

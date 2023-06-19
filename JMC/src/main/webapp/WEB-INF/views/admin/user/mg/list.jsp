@@ -28,8 +28,6 @@ div.admin1 {
     width: 98%;
         
 }
-
-
 </style>
 
 

@@ -8,11 +8,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace ="com.kh.jaManChw.payment.dao.face.PaymentDao">
 
 	<insert id="insertPayment" parameterType="Payment" >
-		insert INTO buy_list values(BUY_LIST_SEQ.nextval, 23, 1, #{orderName}, 100, 'abc', current_stamp)
+		insert INTO
+			 buy_list 
+		values(
+			BUY_LIST_SEQ.nextval
+			, 23
+			, 1
+			, #{orderName}
+			, 100
+			, 'abc'
+			, current_stamp)
 	</insert>
 
 	<select id="selectShoppingAllBasketList" resultType="hashmap" parameterType="int">
-		select S.*, I.ITEM_TITLE,I.item_price, F.I_STORED_NAME FROM shopping_basket S, item I, item_file F where S.basketno = ${basketno} and S.itemno = I.itemno and I.itemno = F.itemno
+		select 
+			S.*
+			, I.ITEM_TITLE
+			,I.item_price
+			, F.I_STORED_NAME 
+		FROM shopping_basket S, item I, item_file F 
+		where S.basketno = ${basketno} 
+			and S.itemno = I.itemno 
+			and I.itemno = F.itemno
 	</select>
 	
 	<select id="selectOncetrypayno" resultType="int">
@@ -35,4 +52,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	DELETE FROM shopping_basket
 	WHERE BASKETNO = ${basketno}
 	</delete>
+	
+	<select id="selectOptionByOptionno" resultType="hashmap">
+	select * FROM item_option where ITEM_OPTIONNO = ${object}
+	</select>
+	
+	<select id="selectUserInfo" resultType="hashmap" parameterType="string">
+	select * from users where userno = ${userno}
+	</select>
 </mapper>

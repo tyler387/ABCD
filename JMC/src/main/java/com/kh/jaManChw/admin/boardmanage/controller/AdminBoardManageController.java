@@ -173,11 +173,10 @@ public class AdminBoardManageController {
 	@GetMapping("/qna/list")
 	public void qnAPage(
 			String curPage,
-			Paging paging,
 			Model model
 			) {
 		
-		paging = qnAQService.getPaging(curPage);
+		Paging paging = qnAQService.getPaging(curPage);
 		List<Map<String, Object>> qnAQList = qnAQService.showQnAList(paging);
 
 		
@@ -201,6 +200,7 @@ public class AdminBoardManageController {
 		
 		logger.info("filterL : {}", filterAndPagingList);
 		
+		model.addAttribute("filterListStatus", true);
 		model.addAttribute("filterList", true);
 		model.addAttribute("filter", filterAndPagingMap);
 		model.addAttribute("qnAQList", filterAndPagingList);
@@ -229,8 +229,6 @@ public class AdminBoardManageController {
 			QnAA qnAAParam,
 			Model model
 			) {
-		//임시로 유저정보 삽입
-//		session.setAttribute("userno", 99);
 		
 		qnAAService.writeQnAA(qnAAService.getCompleteParam(session, qnAAParam));
 		

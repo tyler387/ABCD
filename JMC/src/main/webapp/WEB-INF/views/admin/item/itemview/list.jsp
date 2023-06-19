@@ -40,7 +40,15 @@ div.admin1 {
 </div>
 <form action="./filter" method="get">
 <div class="input-group mb-12 ms-auto  justify-content-end"
-	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 600px;">
+	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 750px;">
+	<label for="content" class="input-group-text">상태</label>&nbsp;
+	<select name ="status" id="status" class="form-select" style="width:115px;">
+		<option value="" selected>미선택</option>
+		<option value="sale">판매중</option>
+		<option value="sold_out">매진</option>
+		<option value="unsale">판매중지</option>
+	</select>
+	&nbsp;&nbsp;
 	<select class=" form-select " name="filter" id="filter"
 		style="width: 100px;">
 		<option value="item_type" selected>판매유형</option>

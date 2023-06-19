@@ -26,10 +26,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, I.ITEM_TITLE
 			,I.item_price
 			, F.I_STORED_NAME 
-		FROM shopping_basket S, item I, item_file F 
-		where S.basketno = ${basketno} 
+		FROM shopping_basket S, item I, item_file F
+		where S.basketno = ${basketno}
 			and S.itemno = I.itemno 
 			and I.itemno = F.itemno
+            
+	</select>
+	
+	<select id="selectShoppingAllBasketList1" resultType="hashmap" parameterType="int">
+		select 
+			S.*
+			, I.ITEM_TITLE
+			,I.item_price
+			, F.I_STORED_NAME 
+            , O.option_content
+		FROM shopping_basket S, item I, item_file F, item_option O
+		where S.basketno = ${basketno}
+			and S.itemno = I.itemno 
+			and I.itemno = F.itemno
+            and O.ITEMNO = I.ITEMNO
+            
 	</select>
 	
 	<select id="selectOncetrypayno" resultType="int">
@@ -40,8 +56,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	</select> -->
 	<insert id="insertShoppingBasketList" parameterType="map">
 	
+	<if test="basketitem.ITEM_OPTIONNO == null">
+	insert INTO order_detail(orderno, userno, itemno, item_name, item_count, item_total_price, order_status, add1, add2, add3, name, phone, buyno)
+	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{basketitem.ITEM_TITLE}, ${basketitem.SB_ITEM_COUNT}, ${basketitem.ITEM_PRICE * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
+	</if>	
+	<if test="basketitem.ITEM_OPTIONNO != null">
 	insert INTO order_detail(orderno, userno, itemno, item_name, item_count, item_option, item_total_price, order_status, add1, add2, add3, name, phone, buyno)
-	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{basketitem.ITEM_TITLE}, ${basketitem.SB_ITEM_COUNT}, '옵션', ${basketitem.ITEM_PRICE * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
+	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{basketitem.OPTION_CONTENT}, ${basketitem.SB_ITEM_COUNT}, #{basketitem.ITEM_TITLE}, ${basketitem.ITEM_PRICE * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
+	</if>	
+	
 	</insert>
 	<insert id="insertShoppingBasketBuyList" parameterType="map">
 	insert INTO buy_list(buyno, userno, item_name, total_price, buy_option)

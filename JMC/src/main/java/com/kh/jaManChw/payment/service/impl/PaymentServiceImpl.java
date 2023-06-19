@@ -143,7 +143,6 @@ public class PaymentServiceImpl implements PaymentService {
 //			order.put("userno", userno);
 		}
 		
-		
 //		Payment payment = new Payment();
 //		payment.setOrderName((String)jsonObject.get("orderName"));
 //		paymentDao.insertPayment(payment);

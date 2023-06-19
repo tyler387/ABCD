@@ -153,6 +153,7 @@ width: 100%;
 <tr class="table-secondary">
 	<th>주문이름</th>
 	<th>상품사진</th>
+	<th>상품옵션</th>
 	<th>갯수</th>
 	<th>가격</th>
 	<th>구매시간</th>
@@ -163,9 +164,11 @@ width: 100%;
 <c:forEach var="list" items="${buylist}" varStatus="status" >
 <tr>
 	<th>${list.ITEM_NAME}</th>	 
-	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="60px" height="60px"></th>	 
+	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="60px" height="60px"></th>
+		<th><c:if test="${list.ITEM_OPTION ne null }">${list.ITEM_OPTION }</c:if>
+	<c:if test="${list.ITEM_OPTION eq null }"> 없음 </c:if></th>	 
 	<th>${list.ITEM_COUNT }</th>
-	<th class="perPrice">${list.ITEM_TOTAL_PRICE }</th> 
+	<th class="perPrice">${list.ITEM_TOTAL_PRICE }</th>
 	<th><fmt:formatDate value="${list.STATUS_DATE}" pattern="yyyy/MM/dd HH:mm"/></th>
 	<th>${list.NAME }</th>
 	<th>${list.ADD2 }  &nbsp;&nbsp; ${list.ADD3 }</th>

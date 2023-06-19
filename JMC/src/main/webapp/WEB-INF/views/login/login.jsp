@@ -122,6 +122,8 @@ div.idcheck_box{
 		<div style="padding-top:8px;"><span id="pwMSG"></span></div>
 	</div>
 	
+	<div style="padding-top:8px;"><span id="loginMSG"></span></div>
+	
 	<div class="idcheck_box">
 		<label for="saveId"></label>
 		<input type="checkbox" name="saveId" id="saveId"> 아이디 저장
@@ -166,8 +168,8 @@ input.addEventListener("keyup", function (event) {
   }
 });
 
-//const target = document.getElementById('loginBtn');
-//$('#loginBtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+const target = document.getElementById('loginBtn');
+$('#loginBtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
 
 
 
@@ -180,6 +182,7 @@ $('#userId').blur(function() {
 		return false;
 	}else if(userId != ''){
 		$('#idMSG').html('');
+		$('#loginBtn').attr('disabled', false);
 	
 	}
 	return true;
@@ -194,7 +197,7 @@ $('#userPw').blur(function() {
 		return false;
 	}else if(userPw != ''){
 		$('#pwMSG').html('');
-
+		$('#loginBtn').attr('disabled', false);
 	}
 	return true;
 })
@@ -207,7 +210,9 @@ $('#loginBtn').click(function() {
 	
 	
     if (userId == "" || userPw == "") {
-        alert("아이디, 비밀번호를 다시 체크해주세요");
+       $('#loginMSG').html("아이디, 비밀번호를 다시 체크해주세요");
+       $('#loginMSG').css('color','red');
+       return false;
     }
 })
 		

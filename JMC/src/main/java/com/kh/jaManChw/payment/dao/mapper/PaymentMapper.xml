@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where S.basketno = ${basketno}
 			and S.itemno = I.itemno 
 			and I.itemno = F.itemno
-            
+             
 	</select>
 	
 	<select id="selectShoppingAllBasketList1" resultType="hashmap" parameterType="int">

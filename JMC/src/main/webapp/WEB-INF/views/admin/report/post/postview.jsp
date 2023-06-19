@@ -56,8 +56,9 @@ $("#delete_btn").click(function(){
 	</div>
 	<div class="mb-3">
 	  <label for="exampleFormControlInput1" class="form-label">신고 게시글 및 유저 정보 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  신고 분류 : ${report.REPORT_OPTION }</label>
-	  <div>신고글 주소 : <a href="asdsaadasdasdadsdsaadssaddsasad?boarno=${report.REPORTNO }">${report.REPORTNO }</a></div>
-	  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  disabled readonly style="resize: none; height: 62px;">이름 : ${report.R_USER_NAME }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  아이디 : ${report.R_USER_ID }  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 유저 번호 : ${report.R_USERNO } &#010;주소 : 추후 수정 예정</textarea>
+	  <div>신고글 주소 : <a href="asdsaadasdasdadsdsaadssaddsasad?boarno=${report.REPORTNO }">바로기기</a></div>
+	  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  disabled readonly style="resize: none; height: 62px;">이름 : ${report.R_USER_NAME }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  아이디 : ${report.R_USER_ID }  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 유저 번호 : ${report.R_USERNO }
+	  </textarea>
 	</div>   
 	<div class="mb-3">   
 	  <label for="exampleFormControlTextarea1" class="form-label" >신고 내용</label>

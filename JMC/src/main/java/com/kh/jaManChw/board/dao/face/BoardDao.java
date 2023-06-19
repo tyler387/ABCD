@@ -81,8 +81,17 @@ public interface BoardDao {
 	 */
 	public void insertBoard(Board board);
 
+	/**
+	 * 
+	 * @param boardFile 글 쓰기 시에 첨부했던 파일 정보
+	 */
 	public void insertBoardFile(BoardFile boardFile);
 
+	/**
+	 * 좋아요를 기존에 눌렀는지 조회한다.
+	 * @param like
+	 * @return
+	 */
 	public int selectReco(BoardLike like);
 
 	public void insertReco(BoardLike like);

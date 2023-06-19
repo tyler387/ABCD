@@ -51,4 +51,12 @@ public interface ItemQnAQService {
 	 */
 	public Map<String, Object> showItemQnAQDetail(int itemQnano);
 
+	/**
+	 * 기훈 작성 : 아이템 페이지에서 해당 아이템 QnA목록을 반환 한다.
+	 * @param itemQnAQPaging 페이징
+	 * @param itemno         해당 아이템 번호
+	 * @return        아이템 페이지에서 해당 아이템 QnA목록을 반환 한다.  
+	 */
+	public List<Map<String, Object>> showItemQnAQList2(Paging itemQnAQPaging, int itemno);
+
 }

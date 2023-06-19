@@ -68,8 +68,8 @@
   grid-template-columns: repeat(4, 400px);
   grid-template-rows: repeat(2,400px);
   place-items: center;
-  margin-bottom: 50px
-  
+  margin-bottom: 50px;
+  margin-left: 150px;
 
 } 
 
@@ -158,3 +158,9 @@ $(function(){
 <c:import url="paging.jsp" />
 
 <c:import url="../layout/footer.jsp" />
+
+
+
+
+
+

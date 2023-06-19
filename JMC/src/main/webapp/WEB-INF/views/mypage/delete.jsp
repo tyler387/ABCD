@@ -26,6 +26,33 @@
 	margin : 100px 20px;
 }
 
+.userbtn{
+	border: 1px solid orange;
+    background-color: orange;
+    border-radius: 7px;
+    color: #fff;
+    width: 355px;
+    height: 39px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 40px;
+    font-family: '양진체';
+
+
+}
+.userbtn:hover{
+	background-color: #ffcca8;
+}
+input{
+	width: 350px;
+	height: 25px;
+	border: 0;
+    border: 1px #371e06 solid;
+    border-radius: 4px;
+    outline: none; 
+}
+
+
 </style>
 
   </div>
@@ -42,10 +69,10 @@
 			
 			<div class="box1">
 			
-				<div class="labelbox"><label for="userId">아이디</label></div>
+				<div class="labelbox"><label for="userId" >아이디</label></div>
 				
 				<div class="box2">
-					<input type="text" name="userId" id="userId">
+					<input type="text" name="userId" id="userId" value="${user.userId }">
 				</div>	
 				
 				<div class="msgbox" style="padding-top:8px;">
@@ -84,7 +111,7 @@
 			        	
         	
         	
-        	 <a href="/login/main"><button>회원탈퇴</button></a> 
+        	<button id="savebtn" class="userbtn">회원탈퇴</button>
         	
         	</div>
         	</form>
@@ -101,6 +128,9 @@
     	// FIXME: 필요 스크립트 전개 영역
         let checkID = RegExp(/^[a-zA-Z0-9]{6,20}$/);
         let checkPW = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/);
+        
+        const target = document.getElementById('savebtn');
+		$('#savebtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
 
     	$('#userId').blur(function() {
     		var userId = $('#userId').val();
@@ -108,9 +138,11 @@
     		if(userId === ''){
     			$('#id_msg').html('아이디를 입력해 주세요');	
     			$('#id_msg').css('color','red');
-//     			$("#userId").focus();
+    			 $('#savebtn').attr('disabled', true); // 입력값이 없으므로 버튼을 비활성화
     			return false;
 
+    		}else{
+    			$('#id_msg').html('');	
     		}
     	})
     	
@@ -120,19 +152,8 @@
     		if(userPw === ''){	
     			$('#pw_msg').html('비밀번호를 입력해 주세요');
     			$('#pw_msg').css('color','red');
-//     			$("#userPw").focus();
+    			 $('#savebtn').attr('disabled', true); // 입력값이 없으므로 버튼을 비활성화
     			return false;
-    		}else if(!checkPW.test(userPw)){
-    			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
-    			$('#pw_msg').css('color','red');
-//     			$("#userPw").focus();
-    			return false;
-    			
-    		}else if(checkPW.test(userPw)){
-    			$('#pw_msg').html("사용가능한 비밀번호입니다.")
-            	$('#pw_msg').css("color", "#3f8ef7");                           
-//             	$("#userPw_chk").focus();
-            	return true;
     		}
     	}) //$('#userPw').blur ed
     	
@@ -143,16 +164,17 @@
     		if(userPw != userPwChk){	
     			$('#pwchk_msg').html('비밀번호가 일치하지 않습니다.');
     			$('#pwchk_msg').css('color','red');
-//     			$("#userPw_chk").focus();
+    			 $('#savebtn').attr('disabled', true); // 입력값이 없으므로 버튼을 비활성화
     			return false;
     		}else if(userPwChk == ''){
     			$('#pwchk_msg').html('비밀번호를 입력해주세요.');
     			$('#pwchk_msg').css('color','red');
+    			 $('#savebtn').attr('disabled', true); // 입력값이 없으므로 버튼을 비활성화
     			return false;
     		}else if(userPw === userPwChk){
     			$('#pwchk_msg').html('비밀번호가 일치합니다');
     			$('#pwchk_msg').css('color','#3f8ef7');
-//     			$("#userName").focus();
+    		 $('#savebtn').attr('disabled', false); // 비밀번호 형식이 맞으므로 버튼을 활성화
     			return true;			
     		}
     	}) //$('#userPw_chk').blur ed

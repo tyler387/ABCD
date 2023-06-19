@@ -15,7 +15,6 @@ public interface UserManageDao {
 
 	public int selectCntAll();
 
-
 	public Map<String, String> getUserdata(int userno);
 
 	public void deleteUserMgWithdraw(int userno);

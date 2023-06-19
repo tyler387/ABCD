@@ -24,8 +24,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectReportPostView" resultType="hashMap" parameterType="String">
-      SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
-      WHERE R.reportno = #{reportno} and R.report_type = 'board' and R.userno = U.userno and R.r_userno = Q.userno
+      SELECT 
+      	R.REPORTNO
+		, R.USERNO
+		, R.R_USERNO
+		, R.BOARDNO
+		, R.MEETINGNO
+		, R.TITLE
+		, R.CONTENT
+		, R.STATUS
+		, R.REPORT_OPTION
+		, CAST(R.WRITE_DATE AS DATE) write_date
+		, R.REPORT_TYPE
+      	, U.user_id
+      	, U.user_name
+      	, Q.user_id AS R_USER_ID
+      	, Q.user_name AS R_USER_NAME 
+      FROM 
+      	report R
+      	, users U
+      	, users Q
+      WHERE 1 = 1 
+      	AND R.reportno = #{reportno} 
+      	AND R.report_type = 'board' 
+      	AND R.userno = U.userno 
+      	AND R.r_userno = Q.userno
 	</select>
 
 	<select id="selectUserPost" resultType="hashMap" parameterType="com.kh.jaManChw.util.Paging">
@@ -39,8 +62,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE rnum BETWEEN #{startno} AND #{endno}
 	</select>
 	<select id="selectReportUserView" resultType="hashMap" parameterType="String">
-      SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
-      WHERE R.reportno = #{reportno} and R.report_type = 'user' and R.userno = U.userno and R.r_userno = Q.userno
+      SELECT 
+      	R.REPORTNO
+		, R.USERNO
+		, R.R_USERNO
+		, R.BOARDNO
+		, R.MEETINGNO
+		, R.TITLE
+		, R.CONTENT
+		, R.STATUS
+		, R.REPORT_OPTION
+		, CAST(R.WRITE_DATE AS DATE) write_date
+		, R.REPORT_TYPE
+      	, U.user_id
+      	, U.user_name
+      	, Q.user_id AS R_USER_ID
+      	, Q.user_name AS R_USER_NAME 
+      FROM 
+      	report R
+      	, users U
+      	, users Q
+      WHERE 1 = 1
+      	AND R.reportno = #{reportno} 
+      	AND R.report_type = 'user' 
+      	AND R.userno = U.userno 
+      	AND R.r_userno = Q.userno
 	</select>
 	
 		<select id="selectReportPostFiltering" resultType="hashmap"  parameterType="map">
@@ -90,8 +136,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectReportMeetingView" resultType="hashMap" parameterType="String">
-      SELECT R.*, U.user_id, U.user_name, Q.user_id AS R_USER_ID, Q.user_name AS R_USER_NAME FROM report R, users U, users Q
-      WHERE R.reportno = #{reportno} and R.report_type = 'meeting' and R.userno = U.userno and R.r_userno = Q.userno
+      SELECT 
+      	R.REPORTNO
+		, R.USERNO
+		, R.R_USERNO
+		, R.BOARDNO
+		, R.MEETINGNO
+		, R.TITLE
+		, R.CONTENT
+		, R.STATUS
+		, R.REPORT_OPTION
+		, CAST(R.WRITE_DATE AS DATE) write_date
+		, R.REPORT_TYPE
+      	, U.user_id
+      	, U.user_name
+      	, Q.user_id AS R_USER_ID
+      	, Q.user_name AS R_USER_NAME
+      FROM 
+      	report R
+      	, users U
+      	, users Q
+      WHERE 1 = 1
+      	AND R.reportno = #{reportno} 
+      	AND R.report_type = 'meeting' 
+      	AND R.userno = U.userno 
+      	AND R.r_userno = Q.userno
 	</select>
 	
 	<update id="deleteReportPostBoard" parameterType="map">

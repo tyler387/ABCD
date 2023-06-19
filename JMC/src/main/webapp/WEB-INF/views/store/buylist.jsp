@@ -96,7 +96,7 @@ textarea{
 }
 .bsketbtn {
 	height: 25px;
-	width: 73px;
+	width: 100px;
 	border-radius: 10px;
 	background: orange;
 	color: #fff;
@@ -150,25 +150,22 @@ width: 100%;
 <div style="height: 30px;"></div>
 <div class="meetingform">
 <div id="result">
-<form method="post" action="/payment/main">
 <table class="table table table-hover txc-table" style="margin: auto;">
 <tr class="table-secondary">
 	<th>주문번호</th>
 	<th>주문이름</th>
 	<th>총 가격</th>
-	<th>관리</th>
+	<th></th>
 </tr>	
 <c:forEach var="list" items="${buylist}" varStatus="status" >
 <tr>
 	<th class="cart_info_td">${list.BUYNO}</th> 
 	<th>${list.ITEM_NAME}</th>	 
 	<th class="perPrice">${list.TOTAL_PRICE }</th> 
-	<th><a href="/store/detail?buyno=${list.BUYNO}"><button type="button" class="btn btn-secondary bsketbtn" data-basketno="${list.BUYNO}">상품 보기</button></a></th>
+	<th><a href="/store/detail?buyno=${list.BUYNO}"><button type="button" class="btn btn-secondary bsketbtn" data-basketno="${list.BUYNO}">주문 상세보기</button></a></th>
 </tr>
 </c:forEach> 
 </table> 
-<br><br>
-</form>
 </div>
 </div>
 </div>

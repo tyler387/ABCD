@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.kh.jaManChw.dto.Item;
 import com.kh.jaManChw.dto.ItemFile;
 import com.kh.jaManChw.dto.ItemOption;
+import com.kh.jaManChw.dto.ItemQnAQ;
 import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.util.Paging;
 
@@ -59,7 +60,7 @@ public interface StoreDao {
 	public List<ItemOption> selectItemOptionDetail(int itemno);
 
 	/**
-	 * itemno를 통해 item테이블을 조회한다 
+	 * itemno를 통해 itemFile테이블을 조회한다 
 	 * 
 	 * @param itemno - 판매 상품 번호
 	 * @return 상품 파일의 상세 정보
@@ -73,6 +74,12 @@ public interface StoreDao {
 	 * @return 상품 파일의 상세 정보
 	 */
 	public Item selectItemDetail(int itemno);
+
+	/**
+	 * 
+	 * @param itemQnAQ	QnAQ시에 필요한 모든 정보 값!
+	 */
+	public void insertItemQnA(ItemQnAQ itemQnAQ);
 
 	/**
 	 * 전달받은 파라미터를 통해 장바구니 DB에 삽입한다

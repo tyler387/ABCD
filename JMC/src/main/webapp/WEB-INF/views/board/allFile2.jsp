@@ -7,7 +7,7 @@
 
 <div id="right">
 <div class="search"><!-- 검색어 관련 -->
-  <input type="text" id="searchWrite" name="searchWrite" placeholder="검색어를 입력하세요">
+  <input type="text" id="searchWrite" name="searchWrite" placeholder="검색어를 입력하세요" style="padding: 10px 62px">
  <img id="btn_Search" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
 </div>
 

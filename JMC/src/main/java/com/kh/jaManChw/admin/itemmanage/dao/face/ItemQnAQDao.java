@@ -3,6 +3,8 @@ package com.kh.jaManChw.admin.itemmanage.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kh.jaManChw.dto.ItemQnAA;
 import com.kh.jaManChw.dto.QnAQ;
 import com.kh.jaManChw.util.Paging;
@@ -62,5 +64,15 @@ public interface ItemQnAQDao {
 	 * @param itemQnAAParam - 상품 문의 번호를 담은 DTO객체
 	 */
 	public void updateItemQnAQUnprocessed(ItemQnAA itemQnAAParam);
+
+	/**
+	 * 기훈 작성 : 아이템 페이지에서 해당 아이템 QnA목록을 반환 한다.
+	 * @param itemQnAQPaging 페이징
+	 * @param itemno         해당 아이템 번호
+	 * @return        아이템 페이지에서 해당 아이템 QnA목록을 반환 한다.  
+	 */
+	public List<Map<String, Object>> selectItemQnAQAll2(@Param("itemQnAQPaging") Paging itemQnAQPaging, @Param("itemno") int itemno);
+
+
 
 }

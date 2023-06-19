@@ -28,8 +28,7 @@ public class ReportManageController {
 	
 	@RequestMapping("/post/list")
 	public void ReportPost(
-			Model model,
-			String curPage
+			Model model,String curPage
 			) {
 		logger.info("post list");
 		String ccurpage = curPage;
@@ -46,8 +45,7 @@ public class ReportManageController {
 	
 	@RequestMapping("/post/filter")
 	public String ReportPostfiltering(
-			Model model, String curPage,
-			@RequestParam Map<String, Object> map
+			Model model, String curPage, @RequestParam Map<String, Object> map
 			) {
 		logger.info("map 출력 {}", map);
 		String ccurpage = curPage;
@@ -114,11 +112,9 @@ public class ReportManageController {
 		}
 	
 	
-	// 고쳐야함~
 	@RequestMapping("/user/list")
 	public void ReportUserList(
-			Model model,
-			String curPage
+			Model model,String curPage
 			) {
 		logger.info("user list");
 		String type = "user";
@@ -164,7 +160,6 @@ public class ReportManageController {
 		
 	}
 	
-	//고쳐야함~
 	@RequestMapping("/meeting/list")
 	public void ReportMeetingList(
 			Model model,

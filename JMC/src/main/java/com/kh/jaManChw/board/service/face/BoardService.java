@@ -80,16 +80,21 @@ public interface BoardService {
 	 * @param session 
 	 */
 	public void writeBoard(String category, String boardWrite, List<MultipartFile> file, HttpSession session);
-
-	public Map<String, Integer> recoBoard(int boardno, HttpSession session);
-
+	
 	/**
-	 * 
-	 * @param boardno
-	 * @param session
+	 * 좋아요를 누른다.
+	 * @param boardno 게시글 번호
+	 * @param session 세션
 	 * @return
 	 */
-	public Map<String, Integer> recoBoardJoHuye(int boardno, HttpSession session);
+	public Map<String, Integer> recoBoard(int boardno, HttpSession session);
+
+//	/**
+//	 * @param boardno
+//	 * @param session
+//	 * @return
+//	 */
+//	public Map<String, Integer> recoBoardJoHuye(int boardno, HttpSession session);
 
 	/**
 	 * 검색 결과에 따른 결과 보여주기
@@ -98,6 +103,12 @@ public interface BoardService {
 	 */
 	public List<Map<String, Object>> searchBoardFile(Board board, String searchData);
 
+	/**
+	 * 해당 게시글에 로그인 한 사용자가 좋아요를 눌렀는지 조회한다.
+	 * @param boardno
+	 * @param userno
+	 * @return
+	 */
 	public int chkReco(int boardno, int userno);
 
 	

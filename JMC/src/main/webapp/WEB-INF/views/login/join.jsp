@@ -388,7 +388,8 @@ $(document).ready(function(){
     let checkPhone = RegExp(/^\d{3}\d{3,4}\d{4}$/);        
     let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
          
-    
+    const target = document.getElementById('submit');
+	$('#submit').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
 
 	$('#userId').blur(function() {
 		var userId = $('#userId').val();
@@ -396,13 +397,13 @@ $(document).ready(function(){
 		if(userId === ''){
 			$('#id_msg').html('아이디를 입력해 주세요');	
 			$('#id_msg').css('color','red');
-// 			$("#userId").focus();
+
 			return false;
 			
 		}else if(!checkID.test(userId)) {
 			$('#id_msg').html("대소문자,숫자를 포함한 6자리~20자리로 입력해주세요.");
 			$('#id_msg').css('color','red');
-//             $("#userId").focus();                
+               
             return true;
             
         }
@@ -415,7 +416,7 @@ $(document).ready(function(){
 		if(userPw === ''){	
 			$('#pw_msg').html('비밀번호를 입력해 주세요');
 			$('#pw_msg').css('color','red');
-// 			$("#userPw").focus();
+
 			return false;
 		}else if(!checkPW.test(userPw)){
 			$('#pw_msg').html('대소문자,특수문자 포함한 8자리~15자리로 입력해주세요');
@@ -470,6 +471,7 @@ $(document).ready(function(){
 		}else if(checkPhone.test(phone)){  
 			$('#phoneMsg').html('');
  			$('#phoneMsg').css('color','#3f8ef7');
+ 			 $('#submit').attr('disabled', false);
         	return true;
 		}
 	}) //$('#phone').blur ed
@@ -554,13 +556,13 @@ $(document).ready(function(){
 	// 이메일 인증
 	var code = ""; // 인증번호 저장을 위한 코드
 	var isCertification = false; // 인증 여부 변수
+	const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
 
 	$('#emailbtn').click(function() {
 		const email = $('#userEmail1').val() 
 // 		+ $('#userEmail2').val(); // 이메일 주소값 얻어오기!
 		console.log('완성된 이메일: ' + email); // 이메일 오는지 확인
 		
-		const checkInput = $('#email_checknumber'); // 인증번호 입력하는 곳
 		
 		$.ajax({
 			type: 'GET',
@@ -568,10 +570,11 @@ $(document).ready(function(){
 			dataType: 'text',
 			success: function(data) {
 				/* console.log('data: ' + data); */
-				checkInput.attr('disabled', true); // 인증번호 입력이 가능하도록 속성 변환
+				//
 				code = data;
 				isCertification = true; // 인증이 완료되었음을 표시
 				alert('인증번호가 전송되었습니다.');
+				$('#submit').attr('disabled', false);
 			},
 			error : function() { // 결과 에러 콜백함수
 				alert('서버요청 실패');
@@ -596,6 +599,7 @@ $(document).ready(function(){
 // 			$('#userEamil2').attr('readonly', true);
 			$('#userEmail1').attr('onFocus', 'this.initialSelect = this.selectedIndex');
  			$('#userEmail1').attr('onChange', 'this.selectedIndex = this.initialSelect');
+ 			checkInput.attr('disabled', true); // 인증번호 입력이 가능하도록 속성 변환
 		} else if (inputCode === '') {
 			resultMsg.html('인증번호를 입력해주세요.');
 			resultMsg.css('color', 'red');

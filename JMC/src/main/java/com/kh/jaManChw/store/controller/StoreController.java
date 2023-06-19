@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
 import com.kh.jaManChw.dto.ShoppingBasket;
 import com.kh.jaManChw.store.service.face.StoreService;
 import com.kh.jaManChw.util.Paging;
@@ -27,7 +31,9 @@ public class StoreController {
 	//log4j.xml에서 <logger> 설정 필요
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired StoreService storeService;
+	@Autowired private StoreService storeService;
+	
+	@Autowired private ItemQnAQService itemQnAQService;
 	
 	@RequestMapping("/main")
 	public void StoreMain() {
@@ -58,7 +64,6 @@ public class StoreController {
 	}
 	
 	
-	
 	//칵테일 용품 카테고리로 이동 후 goods 리스트를 DESC순으로 불러오기 + Paging
 	//+ goods관련 카테고리를 클릭하면 해당 카테고리 리스트만 불러온다.
 	@RequestMapping("/goodsAll")
@@ -86,24 +91,57 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/itemDetail")
-	public void itemDetail(int itemno, String curPage, Model model) {
+	public void itemDetail(@Param("itemno") int itemno, String curPage, Model model) {
 		logger.info("아이템 번호! : {}", itemno);
 		
 		Map<String, Object> allItemDetail = storeService.showDetailItem(itemno);
 		
 		logger.info("상품에 대한 자세한 정보: {}", allItemDetail);
+		//---------------------------------------------------------
+		Paging paging = itemQnAQService.getItemQnAQPaging(curPage);
 		
+		//★관리자에서 작성한 것!+selectAll이 아니라 해당 상품에 QNA만 가지고 오는 걸로 메서드 바꾸기!
+		List<Map<String, Object>> itemQnAQList = itemQnAQService.showItemQnAQList2(itemQnAQService.getItemQnAQPaging(curPage), itemno);
+		logger.info("itemQnAQList: {}", itemQnAQList);
+		
+		
+		//--------------------------------------------------------
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("allItemDetail", allItemDetail);
+		
+
+
+		model.addAttribute("itemQnAQList", itemQnAQList);
+		model.addAttribute("paging", paging);
 	}
 	
 	@RequestMapping("/storeBoard")
-	public void storeBoard() {
+	public void storeBoard(String curPage, Model model) {
+		
+
 		
 	}
 	
-	@RequestMapping("/boardWrite2")
-	public void boardWrite() {
+	@GetMapping("/boardWrite2")
+	public void getBoardWrite() {
+		
+	}
+	
+//	@PostMapping("/boardWrite2")
+//	public void postBoardWrite(String modalTitle, String modalContent){
+//		logger.info("★★★★★★★★여기 옴????");
+//		logger.info(modalTitle);
+//		logger.info(modalContent);
+//	
+//	}
+	@RequestMapping(value = "/abcabc", method = RequestMethod.POST)
+	@ResponseBody
+	public void itemQnAWrite(String modalTitle, String modalContent, int itemno, HttpSession session,Model model) {
+		logger.info("문의글 작성한 거 받아오기");
+		logger.info(modalTitle);
+		logger.info(modalContent);
+		logger.info("item:{}",itemno);
+		storeService.writeItemQnA(modalTitle, modalContent, itemno, session);
 		
 	}
 	@RequestMapping("/buynow")
@@ -143,8 +181,18 @@ public class StoreController {
 		List<ShoppingBasket> sbList = storeService.getsbListParam(itemOptionno,sbItemCount, itemno, (Integer)session.getAttribute("userno"));
 		logger.info("what:{}",sbList);
 		storeService.writeShoppingBasket(sbList);
-		
+
 		return "redirect:../shoppingbasket";
+	}
+	
+	@RequestMapping("/answer")
+	public void itemQnAAnswer(int userno, int itemno) {
+		logger.info("유저번호: {}", userno);
+		logger.info("아이템번호: {}", itemno);
+		
+		
+		
+		
 		
 	}
 	
@@ -167,3 +215,15 @@ public class StoreController {
 		model.addAttribute("buylist", list);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

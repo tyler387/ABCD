@@ -47,7 +47,7 @@ public interface UsersDao {
 	public Users selectIdByUserNameEmail(Users users);
 
 	/**
-	 * 이름과 이메일로 아이디 조회하기
+	 * 아이디 행조회
 	 * @param users
 	 * @return userId
 	 */

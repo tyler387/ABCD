@@ -8,7 +8,7 @@
 
 
 <style type="text/css">
-	table {
+table {
   border: 1px #a39485 solid;
   font-size: .9em;
   box-shadow: 0 2px 5px rgba(0,0,0,.25);
@@ -22,6 +22,8 @@
 
 th {
   text-align: left;
+   background: #371e06;
+ color : #fff;
 }
   
   
@@ -34,6 +36,10 @@ th {
   border-bottom: 1px solid rgba(0,0,0,.1);
   background: #fff;
 }
+.friendremove{
+	cursor: pointer;
+}
+
 
   
  @media all and (max-width: 768px) {
@@ -82,12 +88,13 @@ th {
         <div id="tablebox">
          
          <div id="FriendList">
- 				<input type="hidden" name="userno" id="userno" value="${userno}">
+<%--  				<input type="hidden" name="userno" id="userno" value="${userno}"> --%>
 				<table class="friendTable">
 					<tr>
 						<th>유저 아이디</th>
 						<th>유저 닉네임</th>
 						<th>유저 이름</th>
+						<th>친구 삭제</th>
 					</tr>
 				<c:forEach var="list" items="${list}">
 					
@@ -97,7 +104,7 @@ th {
 						<td>${list.USER_NAME }</td>
 						<td>
 
-							<img src="/resources/image/optionAddIcon.png" class="friendremove" data-userno="${list.FRIEND_USERNO}" style="width:30px;height:30px;">
+							<img src="/resources/image/삭제버튼.png" class="friendremove" data-userno="${list.FRIEND_USERNO}" style="width:30px;height:30px;">
 						</td>
 					</tr>
 				</c:forEach>
@@ -109,34 +116,33 @@ th {
     </div>
     
     
-    <script type="text/javascript">
+<script type="text/javascript">
 
 $(function() {
 	
 	$("#FriendList").on("click", ".friendremove", function () {
 		
 		var userno = $(this).attr("data-userno")
+		alert("친구삭제 되었습니다.");
+		console.log(userno);		
+		dataToss2(userno);
+		return true;
 		
-		console.log(userno);
-		
-		dataToss(userno);
 	})
 	
 })
 
-function dataToss(userno) {
+function dataToss2(userno) {
 	console.log("받나요? ", userno)
 	$.ajax({
 		type:'post',
 		url:'/mypage/friendList',
-		dataType : 'json', 
+		dataType : 'html', 
 		data : {userno: userno} ,
 		success: function (data) {
 			console.log("AJAX s") 
 			console.log("result", data.result) 
-			if(data.result){
-				$(this).unwrap()
-			}
+			location.href='./friendList';
            },
         error: function () {
 			console.log("AJAX e") 

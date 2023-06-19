@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<style>
+    <style>
         #modal.modal-overlay {
             width: 100%;
             height: 100%;
@@ -99,9 +99,9 @@
         
         <div class="content"> 
           <div id="modaldivt" style="margin-bottom:5px;">제목</div>
-          <input type="text" id="modalTitle" style="width: 300px; height:30px; margin-bottom:5px;" >
+         
           <div id="modaldivc" style="margin-bottom:5px;">내용</div>
-          <input type="text" id="modalContent" style="width: 300px; height: 200px; margin-bottom:5px;">
+        
           
           <button id="modalbutton" onclick="confirm">확인</button>
    
@@ -178,4 +178,3 @@ $("#modalbutton").click(function(){
 
 
 </script>
-

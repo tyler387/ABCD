@@ -28,6 +28,8 @@ table {
 
 th {
   text-align: left;
+   background: #371e06;
+   color : #fff;
 }
   
   
@@ -39,6 +41,10 @@ th {
  td {
   border-bottom: 1px solid rgba(0,0,0,.1);
   background: #fff;
+}
+
+.friendAdd{
+	cursor: pointer;
 }
 
   
@@ -99,11 +105,11 @@ th {
         	</select>
      
 	        <div class="inputbox">
-	        	<input type="text" name="keyword" >
+	        	<input type="text" name="keyword" class="searchInput" >
 	        </div>
         
 	      
-	        <button>검색</button>
+	        <button class="selectbtn">검색</button>
 	        
 	     </div>  
 	     </form>   
@@ -116,6 +122,7 @@ th {
 					<th>유저 아이디</th>
 					<th>유저 닉네임</th>
 					<th>유저 이름</th>
+					<th>친구 등록</th> 
 				</tr>
 			
 			<c:forEach var="list" items="${list }">
@@ -145,6 +152,7 @@ $(function() {
 		
 		var userno = $(this).attr("data-userno")
 		
+		alert("친구추가 되었습니다.");
 		console.log(userno);
 		
 		dataToss(userno);

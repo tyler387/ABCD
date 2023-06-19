@@ -63,8 +63,8 @@
 	</select>
 	
 	<insert id="writeUserBoardComment" parameterType="BoardComment">
-		INSERT INTO BOARD_COMMENT
-		VALUES (boardComment_seq.nextval, #{boardno}, 10, #{cContent}, sysdate, 'active')
+		INSERT INTO BOARD_COMMENT(commentno, boardno, userno, c_content, c_status)
+		VALUES (boardComment_seq.nextval, #{boardno}, #{userno}, #{cContent}, 'active')
 	</insert>
 	
 	<update id="updateUserBoardComment" parameterType="BoardComment">
@@ -134,7 +134,12 @@
 	</select>
 
 	<select id="selectBoardFile" parameterType="map" resultType="map">
-		SELECT b.*, bf.stored_name, u.user_nick
+		SELECT b.boardno
+		, b.board_optionno
+		, b.userno
+		, b.content
+		, b.status
+		, bf.stored_name, u.user_nick
 		FROM board b, board_file bf, users u
 		WHERE 1 = 1
 		AND b.boardno = bf.boardno

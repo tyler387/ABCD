@@ -206,7 +206,7 @@ select:focus{
 $(document).ready(function(){
 
 	// FIXME: 필요 스크립트 전개 영역
-    let checkID = RegExp(/^[a-zA-Z0-9]{6,20}$/);
+    let checkID = RegExp(/^[a-z-0-9]{6,20}$/);
     let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
 
 	$('#userId').blur(function() {

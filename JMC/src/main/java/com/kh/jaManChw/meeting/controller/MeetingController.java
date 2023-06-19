@@ -181,14 +181,17 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	@GetMapping("/meeting/meetinglist")
 	public String meetingCal(Meeting meeting, String data, String data1, String data2, Model model) {
 		
+		//월수가 10이하일때 앞에 0붙이기
 		if(data1.length()==1) {
 			data1 = "0"+data1;
 		}
 		
+		//일수가 10이하일때 앞에 0붙이기
 		if(data2.length()==1) {
 			data2 = "0"+data2;
 		}
 		
+		//날짜 형식 맞추기 
 		String result = data + "-" + data1 + "-" + data2;
 		
 		logger.info("meeting{}" , meeting);
@@ -203,7 +206,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 //			e.printStackTrace();
 //		}
 		
-
+		//날짜에 맞는 모임목록 가져오기 	
 		List<Meeting> list = meetingService.getMeetingListByDate(result);
 //		List<Meeting> list = meetingService.getMeetingByDate(date);
 		
@@ -225,6 +228,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		logger.info("fee!!{}", fee);
 		logger.info("headCount!!{}", headcount);
 		
+		//맵에 요금, 인원수 삽입 
 		Map<String, Object> map = new HashMap<String, Object>();
 			map.put("fee", fee);
 			map.put("headCount" , headcount);
@@ -232,6 +236,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			
 		logger.info("map!!{}" , map);
 		
+		//필터에 맞는 모임목록 가져오기 
 		List<Meeting> meetingfilter = meetingService.getMeetingListByFilter(map);
 		
 		model.addAttribute("meetinglist", meetingfilter);
@@ -245,6 +250,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("search{}", search);
 		
+		//검색에 맞는 제목의 모임목록 가져오기 
 		List<Meeting> searchlist = meetingService.getMeetingListByMname(search);
 
 		model.addAttribute("meetinglist",searchlist);
@@ -257,6 +263,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	public String meetingDetail(HttpSession session , Model model, Meeting meeting , Preference preference, Applicant applicant,ProfileFile profileFile) {
 		
 		logger.info("/meeting/view [GET]");
+		//파일을 위한 경로 삽입
 		String path = context.getRealPath("");
 		logger.info("123123{}",path);
 		String url = "";
@@ -314,16 +321,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		return url;
 	}
 	
-	//모임 삭제하기 
-	@GetMapping("/meeting/delete")
-	public String meetingErase(Meeting meeting, HttpSession session) {
-		
-		
-	
-		
-		return "/meeting/meetingcal";
-	}
-	
 	
 	//선택한 모임의 신고창 조회 모달창 써서 필요X
 //	@GetMapping("/meeting/report")
@@ -339,7 +336,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//선택한 모임 신고하기  
 	@PostMapping("/meeting/report")
-	public String reportInput( Report reportMeeting, HttpSession session) {
+	public String reportInput(Meeting meeting,  Report reportMeeting, HttpSession session, Model model) {
 		
 		logger.info("/meeting/report [POST]");
 		
@@ -348,11 +345,32 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		//세션에서 신고하는 사람의 userno 가져오기 
 		int userno = (int)session.getAttribute("userno");
 		System.out.println(userno);
-	
+		
+		//신고자 정보 가져오기 
 		reportMeeting.setUserno(meetingService.getUserno(userno));
 		
 		//reportmeeting에 신고 추가하기  
-		meetingService.inputReportMeeting(reportMeeting);
+		
+		Users applicantLeader = meetingService.getUserNickLeader(meeting);
+		
+		if(applicantLeader.getUserno()!=(int)session.getAttribute("userno")) {
+			
+			meetingService.inputReportMeeting(reportMeeting); 
+			
+			} else { 
+					String url = "/meeting/view?meetingno="+ meetingno;
+					String message = "내가 등록한 모임입니다.";
+					model.addAttribute("message",message);
+					model.addAttribute("url",url);
+					return "./layout/alert";
+					
+					
+				}
+				
+		
+		
+		
+		
 		
 		return "redirect: /meeting/view?meetingno="+ meetingno;
 	}
@@ -363,15 +381,18 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		
 		logger.info("/meeting/applicant [GET]"); 
 		
+		//모임의 참여자 정보 가져오기 
 		Users applicantuser = meetingService.getMeetingApplicantUser(users);
 		
 		
 		Calendar birthCalendar = Calendar.getInstance();
 		
+		//참여자의 생일로 날짜 저장 
 		birthCalendar.setTime(applicantuser.getBirth());
 		
 		Calendar currentCalendar = Calendar.getInstance();
 		
+		//현재시간에서 참여자의 생일을 뺴고 년수 가져오기 
 		int age = currentCalendar.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR);
 		
 		logger.info("!!!!!{}" , age);
@@ -396,23 +417,39 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	//선택한 모임에 참여하기 
 	@PostMapping("/meeting/join")
-	public String meetingJoinInput(HttpSession session, Model model , Applicant applicant ) {
+	public String meetingJoinInput(Meeting meeting ,HttpSession session, Model model , Applicant applicant ) {
 		logger.info("/meeting/join [POST]");
 		
+		//참여할 모임 정보 가져오기 
 		int meetingno = applicant.getMeetingno();
 		
+		//세션에서 참여자 정보 가져오기 
 		int userno = (int)session.getAttribute("userno");
 		
-		
-		
+
 		logger.info("meetingno{}" , meetingno);
-		
 		logger.info("applicant{}" , applicant);
 		
+		//신청자에 세션에서 가져온 참여자 정보 저장 
 		applicant.setUserno(meetingService.getUserno(userno));
+		
+		Users applicantLeader = meetingService.getUserNickLeader(meeting);
+		
+		logger.info("leader{}" , applicantLeader);
+		
+		//신청자가 참여한 횟수 가져오기 
 		int chk = meetingService.chkUser(applicant);
 		
-		if(chk==1) {
+		logger.info("chk{}" , chk);
+		
+		if(chk>=1) {
+			
+			String url = "/meeting/view?meetingno="+ meetingno;
+			String message = "이미신청하거나 거절당한 모임입니다.";
+			model.addAttribute("message",message);
+			model.addAttribute("url",url);
+			return "./layout/alert";
+			
 			
 		}else {
 		
@@ -424,12 +461,31 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		}
+		
+		//모임에 참여자 정보 등록하기 
+		if(applicantLeader.getUserno() != (int)session.getAttribute("userno")) {
 			
-		meetingService.inputJoinMeeting(applicant);
+			
+			//모임에 참여하기
+			meetingService.inputJoinMeeting(applicant);
+			
+			
+		} else { 
+			String url = "/meeting/view?meetingno="+ meetingno;
+			String message = "내가 등록한 모임입니다.";
+			model.addAttribute("message",message);
+			model.addAttribute("url",url);
+			return "./layout/alert";
+			
+			
+		}
 		
-	}
-		
+
+	
 		return "redirect: /meeting/view?meetingno="+ meetingno;
+		
 	}
 	
 

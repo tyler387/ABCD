@@ -231,7 +231,7 @@ WHERE rnum BETWEEN #{paging.startno } AND #{paging.endno }
 
 <select id="selectApplicantCount" parameterType="com.kh.jaManChw.dto.Applicant" resultType="int">
 
-	select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' 
+	select count(*) from applicant where meetingno = #{meetingno} and leader = 'no' and not agree = 'no'
 
 </select>
 

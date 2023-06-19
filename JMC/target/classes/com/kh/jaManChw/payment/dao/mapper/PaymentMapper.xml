@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>	
 	<if test="basketitem.ITEM_OPTIONNO != null">
 	insert INTO order_detail(orderno, userno, itemno, item_name, item_count, item_option, item_total_price, order_status, add1, add2, add3, name, phone, buyno)
-	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{basketitem.OPTION_CONTENT}, ${basketitem.SB_ITEM_COUNT}, #{basketitem.ITEM_TITLE}, ${basketitem.ITEM_PRICE * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
+	values(order_detail_seq.nextval, ${userno}, ${basketitem.ITEMNO}, #{itemTitle}, ${basketitem.SB_ITEM_COUNT}, #{basketitem.OPTION_CONTENT}, ${basketitem.ITEM_PRICE * basketitem.SB_ITEM_COUNT}, 'payed', ${loc}, #{loc1}, #{loc2}, #{name}, #{phone}, ${buyno})
 	</if>	
 	
 	</insert>

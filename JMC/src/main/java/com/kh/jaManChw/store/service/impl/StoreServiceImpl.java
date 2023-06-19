@@ -170,11 +170,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 	
 	@Override
-	public int getbasketno() {
-		
-		return storeDao.selectBaskteno();
+	public List<Map<String, String>> getbasketno(int abc) {
+		return storeDao.selectBaskteno(abc);
 	}
-	
 	@Override
 	public List<Map<String, String>> getBuyList(String userno) {
 		return storeDao.selectAllBuyList(userno);

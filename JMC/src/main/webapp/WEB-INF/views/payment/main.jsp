@@ -291,14 +291,15 @@ width: 100%;
      console.log("이름", phone);
   	}
   	
-  	$(function() {
+	$(function() {
   		<c:forEach var='i' items='${sbList}'>
-  		price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}
+		<c:if test="${i.ITEM_OPTION.OPTION_CONTENT ne null }">price += ${(i.ITEM_PRICE + i.ITEM_OPTION.EXTRA_CHARGE) * i.SB_ITEM_COUNT}</c:if>
+		<c:if test="${i.ITEM_OPTION.OPTION_CONTENT eq null }">price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}</c:if>
   		</c:forEach>
   	  	console.log("가격", price);
   		$("#totalPrice").html(price)
-   		 paymentWidget.renderPaymentMethods("#payment-method", price)
-  	})
+  		 paymentWidget.renderPaymentMethods("#payment-method", price)
+	  	})
   	
   	
   	function sample6_execDaumPostcode() {

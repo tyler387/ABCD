@@ -1,5 +1,7 @@
 package com.kh.jaManChw.store.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -171,6 +173,7 @@ public class StoreController {
 			,String[] sbItemCount
 			,HttpSession session
 			,int itemno
+			,String sum
 			,Model model
 			) {
 		
@@ -180,11 +183,43 @@ public class StoreController {
 		List<ShoppingBasket> sbList = storeService.getsbListParam(itemOptionno,sbItemCount, itemno, (Integer)session.getAttribute("userno"));
 		logger.info("what:{}",sbList);
 		storeService.writeShoppingBasket(sbList);
-		int basketno = storeService.getbasketno();
+		int abc = 0;
 		
+		for( ShoppingBasket i : sbList) {
+			abc += 1;
+			logger.info("abc {}", abc);
+		}
+		logger.info("abc {}", abc);
+		 List<String> testList = new ArrayList<String>();
+		List<Map<String, String>> basketno = storeService.getbasketno(abc);
+		for(Map<String, String> i : basketno) {
+			logger.info("반복문 i는 뭔가{}", i);
+//			String basket = String.valueOf(i.get("BASKETNO"));
+			testList.add(String.valueOf(i.get("BASKETNO")));
+			logger.info("map 바스켓넘버{}", sum);
+//			 sum += sum + ",";
+			logger.info("썸 출력{}", sum);
+		}
+		
+        String str = "";
+        
+        for(String item : testList) {
+        	str += item + ",";
+        }
+		
+        String newStr = str;
+        if (newStr.endsWith(",")) {
+            newStr = newStr.substring(0, newStr.length() - 1);
+        }
+        
+        logger.info("str 출력{}", str);
+        logger.info("str 출력{}", newStr);
+		logger.info("map 리스트 출력{}", testList);
+		logger.info("map 바스켓넘버{}", basketno);
 		logger.info("맵출력 map{}", map);
-//		return "redirect:../shoppingbasket"
-		return "redirect:/payment/main?itemno="+map.get("itemno")+"&basketno="+basketno;
+		
+//		return "redirect:../shoppingbasket";
+		return "redirect:/payment/main?itemno="+map.get("itemno")+"&basketno="+newStr;
 	}
 
 	@PostMapping("/write/basket")

@@ -136,7 +136,7 @@ public class PaymentServiceImpl implements PaymentService {
 		for (int i : basketno) {
 //			Map<String, String> order = new HashMap<>();
 //			OrderDetail orderDetail = new OrderDetail();
-			map.put("basketitem",paymentDao.selectShoppingAllBasketList(i));
+			map.put("basketitem",paymentDao.selectShoppingAllBasketList1(i));
 			logger.info("장바구니 셀렉된 거 보여죽 {}", map);
 			paymentDao.insertShoppingBasketList(map);
 			paymentDao.deleteShoppingBasketList(i);

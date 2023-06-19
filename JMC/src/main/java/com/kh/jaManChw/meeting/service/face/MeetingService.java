@@ -14,43 +14,58 @@ import com.kh.jaManChw.util.MeetingPaging;
 
 public interface MeetingService {
 	
-	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant);
-
 	public int getUserno(int userno);
+
+	public void inputMeeting(Meeting meeting, Preference preference, Applicant applicant);
 	
 	public List<Meeting> getMeetinglistAll(Meeting meeting);
 	
-	public Meeting detailMeeting(Meeting meeting);
+	public int getMeetinglistcount(Meeting meeting);
+	
+	public int getMeetinglistcountnow(Meeting meeting);
+	
+	public List<Meeting> getMeetingListByDate(String result);
+	
+	public List<Meeting> getMeetingListByMap(String mapData, String mapData1);
+	
+	public List<Meeting> getMeetingListByFilter(Map<String, Object> map);
+	
+	public List<Meeting> getMeetingListByMname(String search);
+	
+	public int getApplicantCount(Applicant applicant);
+	
+	public int getApplicantCheckCount(Applicant applicant);
 
-	public Users getUserNickLeader(Meeting meeting);
+	public int getApplicantNoCheckCount(Applicant applicant);
+	
+	public Meeting getDetailMeeting(Meeting meeting);
+	
+	public Preference getDetailPreference(Preference preference);
 	
 	public List<Users> getUserNickAgree(Meeting meeting);
-
+	
 	public List<Users> getUserNickNocheck(Meeting meeting);	
 	
-	public void inputReportMeeting(Report reportMeeting);
+	public Users getUserNickLeader(Meeting meeting);
 	
-	public Applicant getMeetingApplicant(Applicant applicant);
+	public Map<String, Object> getLeaderProfile(Applicant applicant);
+	
+	public void inputReportMeeting(Report reportMeeting);
 
 	public Users getMeetingApplicantUser(Users users);
+	
+	public int chkUser(Applicant applicant);
 
 	public void inputJoinMeeting(Applicant applicant);
-
-	public List<Meeting> getMeetingByDate(String result);
-
-	public List<Meeting> getMeetingByMap(String mapData, String mapData1);
 	
-	public int getMeetinglistcount(Meeting meeting);
+	
+	//여기까지 meetingcontroller
+	
 
-	public int getMeetinglistcountnow(Meeting meeting);
 
-	public List<Meeting> meetingsearch(String search);
-
-	public List<Meeting> meetingFilter(Map<String, Object> map);
-
-	public Preference detailPreference(Preference preference);
-
+	
 	public int getMeetingappcount(Meeting meeting);
+
 	
 	public void updateApplicant(Applicant applicant);
 
@@ -60,13 +75,6 @@ public interface MeetingService {
 
 	public boolean chkHeadCount(Applicant applicant);
 
-	public int applicantCount(Applicant applicant);
-
-	public int applicantCheckCount(Applicant applicant);
-
-	public int applicantNoCheckCount(Applicant applicant);
-
-	public int chkUser(Applicant applicant);
 	
 	public MeetingPaging getappliPaging(String curPage, HttpSession session);
 
@@ -76,7 +84,6 @@ public interface MeetingService {
 
 	public MeetingPaging getMyMeetingCount(String curPage, HttpSession session);
 
-	public Map<String, Object> leader(Applicant applicant);
 		
 	
 	

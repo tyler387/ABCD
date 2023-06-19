@@ -34,6 +34,13 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 @Autowired MeetingDao meetingDao;	
 @Autowired ChatDao chatDao;
 	
+
+	@Override
+	public int getUserno(int userno) {
+	
+		return meetingDao.selectUserNo(userno);
+	}
+
 	@Override
 	public void inputMeeting(Meeting meeting, Preference preference, Applicant leader) {
 		
@@ -75,16 +82,9 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	
 	@Override
-		public int getUserno(int userno) {
-		
-			return meetingDao.selectUserNo(userno);
-		}
-	
-	
-	@Override
 		public List<Meeting> getMeetinglistAll(Meeting meeting) {
 		
-		meetingDao.updatestatus(meeting);
+		meetingDao.updateStatus(meeting);
 		
 		
 		return meetingDao.selectMeetinglistAll();
@@ -93,7 +93,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	
 	@Override
-		public Meeting detailMeeting(Meeting meeting) {
+		public Meeting getDetailMeeting(Meeting meeting) {
 		
 		meetingDao.updatehit(meeting);
 		
@@ -128,12 +128,6 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		return meetingDao.selectMeetingApplicantLeader(meeting);
 	}
 	
-	@Override
-		public Applicant getMeetingApplicant(Applicant applicant) {
-		
-		return meetingDao.selectMeetingApplicant(applicant);
-	}
-	
 	
 	@Override
 		public Users getMeetingApplicantUser(Users users) {
@@ -150,12 +144,19 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 		}
 
 	@Override
-	public List<Meeting> getMeetingByDate(String result) {
+	public List<Meeting> getMeetingListByDate(String result) {
 
 		
-		return meetingDao.selectMeetingByDate(result);
+		return meetingDao.selectMeetingListByDate(result);
 	}
 
+	@Override
+	public List<Meeting> getMeetingListByMap(String mapData, String mapData1) {
+		
+		return meetingDao.selectMeetingListByMap(mapData,mapData1);
+	}
+	
+	
 	@Override
 	public int getMeetinglistcount(Meeting meeting) {
 		
@@ -164,22 +165,17 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	
 	@Override
-		public List<Meeting> meetingsearch(String search) {
+		public List<Meeting> getMeetingListByMname(String search) {
 		
 			return meetingDao.selectMeetingListByMname(search);
 		}
 	
 	@Override
-		public List<Meeting> meetingFilter(Map<String, Object> map) {
+		public List<Meeting> getMeetingListByFilter(Map<String, Object> map) {
 		
 			return meetingDao.selectMeetingListByFilter(map);
 		}
 	
-	@Override
-		public List<Meeting> getMeetingByMap(String mapData, String mapData1) {
-		
-			return meetingDao.selectMeetingListByMap(mapData,mapData1);
-		}
 
 	@Override
 		public int getMeetinglistcountnow(Meeting meeting) {
@@ -189,7 +185,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	
 	
 	@Override
-		public Preference detailPreference(Preference preference) {
+		public Preference getDetailPreference(Preference preference) {
 			return meetingDao.selectDetailPreference(preference);
 		}
 	
@@ -237,19 +233,19 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 	}
 	
 	@Override
-		public int applicantCount(Applicant applicant) {
+		public int getApplicantCount(Applicant applicant) {
 		
 			return meetingDao.selectApplicantCount(applicant);
 		}
 	
 	@Override
-		public int applicantCheckCount(Applicant applicant) {
+		public int getApplicantCheckCount(Applicant applicant) {
 		
 			return meetingDao.selectApplicantCheckCount(applicant);
 		}
 	
 	@Override
-		public int applicantNoCheckCount(Applicant applicant) {
+		public int getApplicantNoCheckCount(Applicant applicant) {
 		
 			return meetingDao.selectApplicantNoCheckCount(applicant);
 		}
@@ -327,7 +323,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			return meetingDao.selectMyMeetingList(meeting,paging);
 		}
 		@Override
-			public Map<String, Object> leader(Applicant applicant) {
-				return meetingDao.selectLeader(applicant);
+			public Map<String, Object> getLeaderProfile(Applicant applicant) {
+				return meetingDao.selectLeaderProfile(applicant);
 			}
 }

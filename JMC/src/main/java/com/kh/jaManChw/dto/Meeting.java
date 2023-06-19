@@ -15,7 +15,7 @@ public class Meeting {
 	private String loc3;
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private Date meetingDate;
-	private double fee;
+	private int fee;
 	private String introduce;
 	private int headCount;
 	private String status;
@@ -24,25 +24,6 @@ public class Meeting {
 	private Date makeDate;
 	
 	public Meeting() {}
-
-	public Meeting(int meetingno, int userno, String mname, String loc, String loc1, String loc2, String loc3,
-			Date meetingDate, double fee, String introduce, int headCount, String status, int hit, Date makeDate) {
-		super();
-		this.meetingno = meetingno;
-		this.userno = userno;
-		this.mname = mname;
-		this.loc = loc;
-		this.loc1 = loc1;
-		this.loc2 = loc2;
-		this.loc3 = loc3;
-		this.meetingDate = meetingDate;
-		this.fee = fee;
-		this.introduce = introduce;
-		this.headCount = headCount;
-		this.status = status;
-		this.hit = hit;
-		this.makeDate = makeDate;
-	}
 
 	@Override
 	public String toString() {
@@ -116,11 +97,11 @@ public class Meeting {
 		this.meetingDate = meetingDate;
 	}
 
-	public double getFee() {
+	public int getFee() {
 		return fee;
 	}
 
-	public void setFee(double fee) {
+	public void setFee(int fee) {
 		this.fee = fee;
 	}
 
@@ -163,5 +144,24 @@ public class Meeting {
 	public void setMakeDate(Date makeDate) {
 		this.makeDate = makeDate;
 	}
-	
+
+	public Meeting(int meetingno, int userno, String mname, String loc, String loc1, String loc2, String loc3,
+			Date meetingDate, int fee, String introduce, int headCount, String status, int hit, Date makeDate) {
+		super();
+		this.meetingno = meetingno;
+		this.userno = userno;
+		this.mname = mname;
+		this.loc = loc;
+		this.loc1 = loc1;
+		this.loc2 = loc2;
+		this.loc3 = loc3;
+		this.meetingDate = meetingDate;
+		this.fee = fee;
+		this.introduce = introduce;
+		this.headCount = headCount;
+		this.status = status;
+		this.hit = hit;
+		this.makeDate = makeDate;
+	}
 }
+	

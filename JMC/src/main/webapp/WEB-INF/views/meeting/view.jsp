@@ -147,6 +147,12 @@ th{
   
   }
   
+.nicknameboxleader:hover{
+	
+	background-color: beige;	
+
+}
+
 
 
 .nicknameboxapp{
@@ -157,7 +163,8 @@ th{
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgb(100 100 100 / 16%), 0 2px 17px 0 rgb(200 200 200 / 20%);
   
-  }
+  }  
+
 
 .modal {
 	position: absolute;

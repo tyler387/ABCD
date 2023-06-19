@@ -34,8 +34,11 @@
 }
 </style>
 
-<H1>유저 수정 페이지</H1>
-<hr>
+	<div id="Alltitle" style="text-align: center; padding-top: 10px;">
+		<h1  style="margin: 0 auto;border-radius: 30px; background-color : #03a9f46e; width: 600px;  text-align: center; padding-bottom: 5px;">
+			회원 정보 수정
+		</h1>
+	</div>
 <div class="container text-center">
 <!--  <div class="row"> -->
 <!--     <div class="col"> -->

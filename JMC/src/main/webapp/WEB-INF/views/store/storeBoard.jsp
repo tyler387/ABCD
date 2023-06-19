@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <style type="text/css">
       
-        #temodal-overlay.temodal-overlay {
+        #temodal-overlay{
             width: 100%;
             height: 100%;
           
@@ -29,7 +29,7 @@
 
         }
        
-        #temodal-overlay.temodal-window {
+        #temodal-window {
             background: #FFA500;
             box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
             backdrop-filter: blur( 13.5px );
@@ -43,7 +43,7 @@
             padding: 10px;
         }
         
-        #temodal-overlay.tetitle {
+        #tetitle {
             padding-left: 10px;
             display: inline;
             text-shadow: 1px 1px 2px gray;
@@ -176,7 +176,7 @@ td{
          <div id="modalContentDiv"></div>
           <div id="temodaldivc" style="margin-bottom:5px;">${map.IQ_CONTENT}</div>
 
-          <button id="temodalbutton" onclick="confirm">확인</button>
+          <button class="teclose-area" id="temodalbutton" onclick="confirm">확인</button>
    
         </div>
 <!--         </form> -->

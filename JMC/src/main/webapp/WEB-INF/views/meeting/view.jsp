@@ -339,6 +339,15 @@ th{
 			<c:if test="${viewpreference.friend eq 'nomatter'}"> 무관</c:if>
 			<c:if test="${viewpreference.friend eq 'yes'}"> 동반자가능</c:if>
 			<c:if test="${viewpreference.friend eq 'no'}"> 동반자금지</c:if>
+			
+			<div>
+			성별 여부: 
+			<c:if test="${viewpreference.gender eq 'man' }"> 남자 선호</c:if>
+			<c:if test="${viewpreference.gender eq 'woman' }"> 여자 선호</c:if>
+			
+			나이 여부: 
+			${viewpreference.minage} ~ ${viewpreference.maxage}					
+			</div>
 	</tr>
 
 

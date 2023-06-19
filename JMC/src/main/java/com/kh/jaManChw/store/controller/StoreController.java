@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -151,7 +152,7 @@ public class StoreController {
 //		logger.info(modalContent);
 //	
 //	}
-	@PostMapping("/abcabc")
+	@RequestMapping(value = "/abcabc", method = RequestMethod.POST)
 	@ResponseBody
 	public void itemQnAWrite(String modalTitle, String modalContent, int itemno, HttpSession session,Model model) {
 		logger.info("문의글 작성한 거 받아오기");
@@ -177,6 +178,16 @@ public class StoreController {
 		List<ShoppingBasket> sbList = storeService.getsbListParam(itemOptionno,sbItemCount, itemno, (Integer)session.getAttribute("userno"));
 		logger.info("what:{}",sbList);
 		storeService.writeShoppingBasket(sbList);
+
+	}
+	
+	@RequestMapping("/answer")
+	public void itemQnAAnswer(int userno, int itemno) {
+		logger.info("유저번호: {}", userno);
+		logger.info("아이템번호: {}", itemno);
+		
+		
+		
 		
 		
 	}

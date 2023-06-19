@@ -3,7 +3,93 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <style type="text/css">
+      
+        #temodal-overlay.temodal-overlay {
+            width: 100%;
+            height: 100%;
+          
+            left: 0;
+            top: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
 
+			  position: fixed;
+			  top: 50%;
+			  left: 50%;
+			  transform: translate(-50%, -50%);
+
+        }
+       
+        #temodal-overlay.temodal-window {
+            background: #FFA500;
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            width: 320px;
+            height: 400px;
+            position: relative;
+            top: -100px;
+            padding: 10px;
+        }
+        
+        #temodal-overlay.tetitle {
+            padding-left: 10px;
+            display: inline;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+            
+        }
+        
+        #temodal-overlay.tetitle h2 {
+            display: inline;
+        }
+       
+        #temodal-overlay.teclose-area {
+            display: inline;
+            float: right;
+            padding-right: 10px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        
+        #temodal-overlay.tecontent {
+            margin-top: 20px;
+            padding: 0px 10px;
+            text-shadow: 1px 1px 2px gray;
+            color: white;
+        }
+        
+        #temodaldivt{
+        	margin-bottom: 15px;
+        	
+        }
+       
+        #temodalbutton{
+        	margin-top: 20px;
+   			margin-left: 230px;
+   			border: 2px solid white;
+			background-color: rgba(0, 0, 0, 0);
+			color: white;
+			font-size: 25px;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			cursor: pointer;
+        }
+    </style>
 <style type="text/css">
 
 table {
@@ -36,6 +122,7 @@ td{
 	cursor: pointer;
 }
 
+
 </style>
 
 
@@ -52,7 +139,7 @@ td{
 </thead>
 
 <c:forEach var="itemQnAQList" items="${itemQnAQList }">
-<tr>
+<tr id="answer">
 
 		<c:choose>
 			<c:when test="${itemQnAQList.IQ_STATUS eq 'unprocessed'}">
@@ -63,10 +150,9 @@ td{
 			</c:when>
 		</c:choose>	
 		<td style="width: 45%;" id="trcontent" data-userno ="${itemQnAQList.USERNO }" data-qnano="${itemQnAQList.ITEM_QNANO }">${itemQnAQList.IQ_TITLE }</td>
-		<td style="width: 15%;" id="trWriter">${itemQnAQList.USER_ID }</td>
+		<td style="width: 15%;" id="trWriter" >${itemQnAQList.USER_ID }</td>
 		<td style="width: 25%;" id="trdate">${itemQnAQList.IQ_WRITE_DATE }</td>
-${itemQnAQList.USERNO }
-${itemQnAQList.ITEM_QNANO }
+
 </tr>
 </c:forEach>
 
@@ -77,28 +163,75 @@ ${itemQnAQList.ITEM_QNANO }
 	</div>
 
 </div>
+<body>
+<div id="temodal-overlay" class="temodal-overlay">
+    <div class="temodal-window">
+        <div class="tetitle">
+            <h2>답변입니다.</h2>
+        </div>
+        <div class="teclose-area">X</div>
+      
+        <div class="tecontent"> 
+          <div id="temodaldivt" style="margin-bottom:5px;">${map.IQ_TITLE}</div>
+         <div id="modalContentDiv"></div>
+          <div id="temodaldivc" style="margin-bottom:5px;">${map.IQ_CONTENT}</div>
+
+          <button id="temodalbutton" onclick="confirm">확인</button>
+   
+        </div>
+<!--         </form> -->
+    </div>
+</div>
+
 <script type="text/javascript">
 
 var userno = null;
 var item_qnano = null;
 
-// $("#trcontent").click(function(){
+
 $(document).on("click", "#trcontent", function() {
 	console.log("td 버튼 클릭됨")
 	userno = $(this).attr("data-userno");
 	item_qnano = $(this).attr("data-qnano");
 	console.log(userno);
 	console.log(item_qnano);
-// 	(this).
-	var data	 =[];
-	var data2 = [];
+	var te = document.getElementById("temodal-overlay")
+	$.ajax({
+         type: "GET"
+         , url: "/store/answer"
+         , data: {userno : userno
+        	 	, itemQnano : item_qnano}
+         , dataType: "json"
+         , success: function(res){
+        	 console.log(res.IA_CONTENT)
+            console.log("AJAX 성공")
+            te.style.display = "flex"
+            $("#modalContentDiv").text(res.IA_CONTENT)             
+            
+         }
+         , error: function(){
+            console.log("AJAX 실패")   
+         }
+      })
+          //X(클로즈) 버튼에 위 예제와 반대되는 이벤트를 부여합니다.
+    const closeBtn = te.querySelector(".teclose-area")
+	closeBtn.addEventListener("click", e => {
+    te.style.display = "none"
+	})
+    
+    //모달창 바깥 영역을 클릭하면 모달창이 꺼지게 하기
+    te.addEventListener("click", e => {
+    const evTarget = e.target
+	    if(evTarget.classList.contains("modal-overlay")) {
+	        te.style.display = "none"
+	    }
+	})
 	
-	
-
-
-	//----------------------------------------
 })
-	
+
+
+
+
 
 
 </script>

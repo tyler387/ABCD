@@ -182,7 +182,6 @@ flex-direction:row;
 <c:if test="${not empty login}">
 	<a href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
 	<a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a>
-	<a href="#">알람</a>
 </c:if>
 <c:if test="${empty socialNum and empty login}">
 	<a href="<%=request.getContextPath()%>/login/login">로그인</a>
@@ -190,13 +189,11 @@ flex-direction:row;
 <c:if test="${not empty socialNum}">
 	<a href="<%=request.getContextPath()%>/login/logout">로그아웃</a>
 	<a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a>
-	<a href="#">알람</a>
 </c:if>
 
 <c:if test="${platFormOption eq 'naver'}">
 	<a href="/login/logout">로그아웃</a>
 	<a href="/mypage/main">마이페이지</a>
-	<a href="#">알람</a>
 </c:if>
 </div>
 </header>

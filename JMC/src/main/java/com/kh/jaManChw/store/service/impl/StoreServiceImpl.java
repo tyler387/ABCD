@@ -185,5 +185,11 @@ public class StoreServiceImpl implements StoreService {
 		
 		return storeDao.selectAllBuyDetail(map);
 	}
+
+	@Override
+	public Map<String, Object> getCommentDetail(ItemQnAQ itemQnAQ) {
+
+		return storeDao.selectItemQnaQ(itemQnAQ);
+	}
 	
 }

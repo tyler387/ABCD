@@ -40,6 +40,7 @@ th{
   box-shadow: 0 2px 12px 0 rgba(100, 100, 100, 0.16), 0 2px 17px 0 rgba(200, 200, 200, 0.2);
   overflow: scroll;
   background-color: #E2E2E2;
+  margin-bottom: 50px;
 }
 
 
@@ -338,6 +339,15 @@ th{
 			<c:if test="${viewpreference.friend eq 'nomatter'}"> 무관</c:if>
 			<c:if test="${viewpreference.friend eq 'yes'}"> 동반자가능</c:if>
 			<c:if test="${viewpreference.friend eq 'no'}"> 동반자금지</c:if>
+			
+			<div>
+			성별 여부: 
+			<c:if test="${viewpreference.gender eq 'man' }"> 남자 선호</c:if>
+			<c:if test="${viewpreference.gender eq 'woman' }"> 여자 선호</c:if>
+			<c:if test="${viewpreference.gender eq 'none' }"> 성별 무관</c:if>
+			나이 여부: 
+			${viewpreference.minage} ~ ${viewpreference.maxage}					
+			</div>
 	</tr>
 
 

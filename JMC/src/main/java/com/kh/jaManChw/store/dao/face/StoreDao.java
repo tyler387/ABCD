@@ -107,6 +107,8 @@ public interface StoreDao {
 	public List<Map<String, String>> selectAllBuyList(String userno);
 
 	public List<Map<String, String>> selectAllBuyDetail(Map<String, String> map);
+
+	public Map<String, Object> selectItemQnaQ(ItemQnAQ itemQnAQ);
 	
 
 

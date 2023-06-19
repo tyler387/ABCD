@@ -47,6 +47,43 @@ th {
 	cursor: pointer;
 }
 
+.searchInput {
+    display: inline-block;
+    height: 32px;
+    vertical-align: middle;
+    border: 1px solid orange;
+    width: 200px;
+    color: #371e06;
+    font-family: '양진체';
+}
+
+.selectbtn{
+	border: 1px solid orange;
+    background-color: orange;
+    border-radius: 7px;
+    color: #fff;
+    width: 60px;
+    height: 32px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 40px;
+    font-family: '양진체';
+}
+
+.selectbox{
+	margin-left: 15px;
+}
+
+.selectbox2{
+	 display: inline-block;
+    height: 32px;
+    vertical-align: middle;
+    border: 1px solid orange;
+    width: 120px;
+    color: #371e06;
+    font-family: '양진체';
+}
+
   
  @media all and (max-width: 768px) {
     
@@ -98,7 +135,7 @@ th {
        <form name="friendFind" autocomplete="off" action="/mypage/search" method="get" class="searchbox"> 
 <!--        <form name="friendFind" autocomplete="off"> -->
          <div class="selectbox">
-        	<select name="type">
+        	<select name="type" class="selectbox2">
         		<option value="all">아이디+닉네임</option>
         		<option value="user_id">아이디</option>
         		<option value="user_nick">닉네임</option>

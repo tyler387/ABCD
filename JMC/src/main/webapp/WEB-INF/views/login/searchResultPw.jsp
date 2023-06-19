@@ -149,8 +149,8 @@ $(document).ready(function(){
 			return false;
 			
 		}else if(checkPW.test(userPw)){  
-			$('#name_msg').html('');
-			$('#name_msg').css('color','#3f8ef7');
+			$('#pwMSG').html('');
+			$('#pwMSG').css('color','#3f8ef7');
 	//     	$("#birth").focus();
 	    	return true;
 		}

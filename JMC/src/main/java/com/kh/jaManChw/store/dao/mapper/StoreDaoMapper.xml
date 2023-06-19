@@ -192,10 +192,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectItemQnaQ" parameterType="ItemQnAQ" resultType="map">
-		select a.userno,a.iq_Title,a.iq_Content, b.ia_content from ITEM_QNA_Q a 
-		join ITEM_QNA_A b on a.item_qnano = b.item_qnano
-        WHERE a.item_qnano= #{itemQnano}
-         AND b.ia_status ='undelete'
+		SELECT 
+			a.userno
+			, a.iq_title
+			, a.iq_content
+			, b.ia_content 
+		FROM 
+			ITEM_QNA_Q a 
+		JOIN 
+			ITEM_QNA_A b 
+		ON 
+			a.item_qnano = b.item_qnano
+        WHERE 1 = 1
+       		AND a.item_qnano= #{itemQnano}
+       		AND b.ia_status ='undelete'
 	</select>
 	
 </mapper>

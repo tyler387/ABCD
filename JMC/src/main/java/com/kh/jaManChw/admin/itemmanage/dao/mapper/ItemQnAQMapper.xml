@@ -110,12 +110,20 @@
 		<select id="selectItemQnAQAll2" resultType="map" parameterType="Map">
 		SELECT * FROM(
 		    SELECT rownum rnum, B.* FROM (
-		        SELECT iqq.*, 
-		            user_id, 
-		            user_name, 
-		            iqa.mgr_itemno,
-		            i.item_title,
-		            i_stored_name
+		        SELECT 
+		        	iqq.item_qnano
+					, iqq.itemno
+					, iqq.userno
+					, iqq.iq_title
+					, iqq.iq_content
+					, iqq.iq_option
+					, iqq.iq_status
+					, CAST(iqq.iq_write_date AS DATE) iq_write_date 
+		            , user_id
+		            , user_name
+		            , iqa.mgr_itemno
+		             ,i.item_title
+		             ,i_stored_name
 		        FROM item_QnA_Q iqq, 
 		            USERS u, 
 		            item_QnA_A iqa, 

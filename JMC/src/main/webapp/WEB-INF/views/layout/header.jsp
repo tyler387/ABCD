@@ -5,7 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JAMANCHU</title>
+<link rel="icon" href="<%=request.getContextPath()%>/resources/image/faviconWhiskeyWestern.png">
+<title>
+	JMC  
+</title>
 <style type="text/css">
 
 @font-face {

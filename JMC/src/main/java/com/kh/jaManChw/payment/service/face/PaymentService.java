@@ -25,5 +25,7 @@ public interface PaymentService {
 
 	public JSONObject paymentInfo(HttpServletRequest request, Map<String, Object> map, int[] basketno, String[] itemTitle, HttpSession session);
 
+	public Map<String, String> getuserinfo(String userno);
+
 
 }

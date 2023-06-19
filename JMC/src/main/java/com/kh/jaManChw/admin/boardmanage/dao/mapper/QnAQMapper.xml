@@ -68,9 +68,12 @@
 		        WHERE 1 = 1
 			        AND q.userno = u.userno
 	                AND a.questionno(+) = q.questionno
-	               	<if test="filter.content != null and !''.equals(filter.content)">
+	               	<if test="content != null and !''.equals(content)">
 	                AND upper(${filter}) Like '%' || upper(#{content}) || '%'
-                </if>
+                	</if>
+                	<if test="status != null and !''.equals(status)">
+					AND upper(q_status) =upper(#{status})
+					</if>
 		        ORDER BY q.questionno DESC
 		    )B
 		)

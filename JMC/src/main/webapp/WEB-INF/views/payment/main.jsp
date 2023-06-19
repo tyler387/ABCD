@@ -177,6 +177,7 @@ width: 100%;
 <tr class="table-secondary">
 	<th>상품번호</th>
 	<th>상품이름</th>
+	<th>상품옵션</th>
 	<th>상품사진</th>
 	<th>갯수</th>
 	<th>가격</th>
@@ -185,9 +186,14 @@ width: 100%;
 <tr>
 	<th class="cart_info_td">${status.count}</th> 
 	<th>${list.ITEM_TITLE}</th>	
+		<th><c:if test="${list.ITEM_OPTION.OPTION_CONTENT ne null }">${list.ITEM_OPTION.OPTION_CONTENT }</c:if>
+	<c:if test="${list.ITEM_OPTION.OPTION_CONTENT eq null }"> 없음 </c:if></th>
 	<th><img id="material" src="/itemfile/${list.I_STORED_NAME }/" width="85px" height="85px"></th>
 	<th>${list.SB_ITEM_COUNT}</th>
-	<th class="perPrice">${list.ITEM_PRICE * list.SB_ITEM_COUNT}</th>
+	<th class="perPrice">
+	<c:if test="${list.ITEM_OPTION.OPTION_CONTENT ne null }">${(list.ITEM_PRICE + list.ITEM_OPTION.EXTRA_CHARGE)  * list.SB_ITEM_COUNT}</c:if>
+	<c:if test="${list.ITEM_OPTION.OPTION_CONTENT eq null }">${list.ITEM_PRICE * list.SB_ITEM_COUNT}</c:if>
+	</th> 
 </tr>
 </c:forEach>
 <tr>
@@ -200,6 +206,7 @@ width: 100%;
 <input type="hidden" id="basketno" name="basketno" value="${basketno }">
 <div style ="width: 600px; margin: 0 auto; padding-top : 80px; ">
 	<div class="input-group mb-3">
+	<input type="checkbox" name="userinfo" onchange="userinfo()">
 	  <span class="input-group-text" id="basic-addon1">이름</span>
 	  <input type="text" class="form-control" value="" aria-label="userNick" aria-describedby="basic-addon1" id="name" name="name" onchange='printName()' style="width: 120px;">
 	  <span class="input-group-text" id="basic-addon1">핸드폰 번호</span>
@@ -231,7 +238,17 @@ width: 100%;
 	  <a href="/store/shoppingbasket"><button id="payment-button" class ="paymentBtn" style="width: 100px; margin: auto;">취소하기</button></a>
 	  </div>
   </div>
+  ${user }
 </div>
+  <script type="text/javascript">
+// 	var name = ${user.USER_NAME};
+// 	console.log("ㅁㄴㅇ", name);
+  function userinfo() {
+//    $("#name").val(name);
+   $("#name").attr("value", '${user.USER_NAME}');
+// 	document.getElementById('name').value = ${user.USER_NAME};
+	}
+  </script>
   <script type="text/javascript"> 
   	var name = null; 
   	var phone = null;
@@ -240,7 +257,7 @@ width: 100%;
   	var loc2 = null;
   	var loc3 = null;
   	var price = 3000;
-    
+  	
   	$(function() {
   		<c:forEach var='i' items='${sbList}'>
   		price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}

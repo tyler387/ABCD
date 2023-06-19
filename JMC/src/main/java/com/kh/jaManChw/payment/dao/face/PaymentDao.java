@@ -29,6 +29,10 @@ public interface PaymentDao {
 
 	public void deleteShoppingBasketList(int i);
 
+	public Object selectOptionByOptionno(Object object);
+
+	public Map<String, String> selectUserInfo(String userno);
+
 	
 	
 

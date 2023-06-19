@@ -41,7 +41,14 @@ div.admin1 {
 </div>
 <form action="./filter" method="get">
 <div class="input-group mb-12 ms-auto  justify-content-end"
-	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 600px;">
+	style="padding-right: 50px; padding-top: 15px; margin-bottom: 15px; width: 750px;">
+	<label for="content" class="input-group-text">상태</label>&nbsp;
+	<select name ="status" id="status" class="form-select" style="width:115px;">
+		<option value="" selected>미선택</option>
+		<option value="unprocessed">미처리</option>
+		<option value="done">처리완료</option>
+	</select>
+	&nbsp;&nbsp;
 	<select class=" form-select " name="filter" id="filter"
 		style="width: 100px;">
 		<option value="iqq.itemno" selected>상품번호</option>

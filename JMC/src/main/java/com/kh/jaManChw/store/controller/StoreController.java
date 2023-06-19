@@ -39,28 +39,10 @@ public class StoreController {
 		
 		int userno = (Integer)session.getAttribute("userno");
 		logger.info("세션 유저 넘버 {}", userno);
-		List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
+		List<Map<String, Object>> list = storeService.getShoppingbasketList(userno);
 		logger.info("장바구니 조회결과{}", list);
 		model.addAttribute("list", list);
 		
-	}
-	
-	@RequestMapping("/shoppingBasketList")
-	public ModelAndView SbUpdate(
-			@RequestParam Map<String, String> map, 
-			ModelAndView mav, HttpSession session) {
-			int userno = (Integer)session.getAttribute("userno");
-			logger.info("세션 유저 넘버 {}", userno);
-	      logger.info("상품수량 갯수 {}", map);
-	      map.put("userno", Integer.toString(userno));
-	      storeService.SbUpdate(map);
-	      //유저 번호 받아야함
-	      List<Map<String, String>> list = storeService.getShoppingbasketList(userno);
-	      mav.addObject("list", list);
-		//뷰네임 지정	-> jsonView 적용
-		mav.setViewName("/store/shoppingBasketList");
-	      
-	      return mav;
 	}
 	
 	@RequestMapping("/shoppingBasketDelete")
@@ -124,9 +106,30 @@ public class StoreController {
 	public void boardWrite() {
 		
 	}
+	@RequestMapping("/buynow")
+	public String Itembuynow(@RequestParam Map<String, String> map,
+			String[] itemOptionno
+			,String[] sbItemCount
+			,HttpSession session
+			,int itemno
+			,Model model
+			) {
+		
+		logger.info("가져왓나요?: {}",itemOptionno[0]);
+		logger.info("가져왓나요?: {}",sbItemCount[0]);
+		
+		List<ShoppingBasket> sbList = storeService.getsbListParam(itemOptionno,sbItemCount, itemno, (Integer)session.getAttribute("userno"));
+		logger.info("what:{}",sbList);
+		storeService.writeShoppingBasket(sbList);
+		int basketno = storeService.getbasketno();
+		
+		logger.info("맵출력 map{}", map);
+//		return "redirect:../shoppingbasket"
+		return "redirect:/payment/main?itemno="+map.get("itemno")+"&basketno="+basketno;
+	}
 
 	@PostMapping("/write/basket")
-	public void shoppingBasketPage(
+	public String shoppingBasketPage(
 			String[] itemOptionno
 			,String[] sbItemCount
 			,HttpSession session
@@ -141,6 +144,26 @@ public class StoreController {
 		logger.info("what:{}",sbList);
 		storeService.writeShoppingBasket(sbList);
 		
+		return "redirect:../shoppingbasket";
 		
+	}
+	
+	@RequestMapping("/buylist")
+	public void storeBuyList(HttpSession session, Model model) {
+		
+		String userno = String.valueOf(session.getAttribute("userno"));
+		List<Map<String,String>> map = storeService.getBuyList(userno);
+		logger.info("바이리스트 출력{}", map);
+		model.addAttribute("buylist", map);
+	}
+	@RequestMapping("/detail")
+	public void storeBuyDetail(HttpSession session, Model model, @RequestParam Map<String, String> map) {
+		logger.info("바이리스트 출력{}", map);
+		
+		String userno = String.valueOf(session.getAttribute("userno"));
+		map.put("userno", userno);
+		List<Map<String,String>> list = storeService.getBuyDetail(map);
+		logger.info("바이리스트 출력{}", list);
+		model.addAttribute("buylist", list);
 	}
 }

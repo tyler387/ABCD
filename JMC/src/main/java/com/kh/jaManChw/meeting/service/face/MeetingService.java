@@ -108,6 +108,11 @@ public interface MeetingService {
 	 */
 	public Meeting getDetailMeeting(Meeting meeting);
 	
+	/**
+	 * 선택한 모임의 선호타입 조회하기
+	 * @param preference
+	 * @return
+	 */
 	public Preference getDetailPreference(Preference preference);
 	
 	public List<Users> getUserNickAgree(Meeting meeting);

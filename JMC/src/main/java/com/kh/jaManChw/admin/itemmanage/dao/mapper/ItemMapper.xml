@@ -157,19 +157,19 @@
 		WHERE itemno = #{itemno}
 	</update>
 	
-	<!-- item은 상태변경으로 삭제처리를 대체한다 -->
-<!-- 	<delete id="deleteItemOption" parameterType="int"> -->
-<!-- 		DELETE  -->
-<!-- 			item_option  -->
-<!-- 		WHERE itemno = #{itemno} -->
-<!-- 	</delete> -->
+	<delete id="deleteItemOption" parameterType="int">
+		DELETE 
+			item_option 
+		WHERE itemno = #{itemno}
+	</delete>
 	
-<!-- 	<delete id="deleteItemFile" parameterType="int"> -->
-<!-- 		DELETE  -->
-<!-- 			item_file  -->
-<!-- 		WHERE itemno = #{itemno} -->
-<!-- 	</delete> -->
+	<delete id="deleteItemFile" parameterType="int">
+		DELETE 
+			item_file 
+		WHERE itemno = #{itemno}
+	</delete>
 
+	<!-- item은 상태변경으로 삭제처리를 대체한다 -->
 <!-- 	<delete id="deleteItem" parameterType="int"> -->
 <!-- 		DELETE item WHERE itemno = #{itemno} -->
 <!-- 	</delete> -->

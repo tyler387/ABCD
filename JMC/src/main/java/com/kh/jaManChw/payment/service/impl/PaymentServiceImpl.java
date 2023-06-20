@@ -117,7 +117,7 @@ public class PaymentServiceImpl implements PaymentService {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
+		} 
 		logger.info("세션유저넘버 = {}", session.getAttribute("userno"));
 		String userno = String.valueOf(session.getAttribute("userno"));
 		logger.info("세션 유저넘버 {}", userno);

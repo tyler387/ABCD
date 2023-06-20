@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
 import com.kh.jaManChw.dto.ItemQnAQ;
@@ -72,6 +73,19 @@ public class StoreController {
 		logger.info("장바구니 조회결과{}", list);
 		model.addAttribute("list", list);
 		
+	}
+	
+	
+	@RequestMapping("/shoppingBasketList")
+	public String SbUpdate(
+			@RequestParam Map<String, String> map,  HttpSession session) {
+		
+		int userno = (Integer)session.getAttribute("userno");
+	      logger.info("상품수량 갯수 {}", map);
+		
+	      storeService.SbUpdate(map);
+	      
+	      return "store/shoppingbasket";
 	}
 	
 	@RequestMapping("/shoppingBasketDelete")

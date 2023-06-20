@@ -97,7 +97,7 @@ public class NaverServiceImpl implements NaverService {
 
 		String clientId = "dn2raWizUA37TfJdvO2f";
 		String clientSecret = "JQd7YyzxsC";
-		String callbackURL = "http://localhost:8888/naverlogincallback";
+		String callbackURL = "http://192.168.10.30:8888/naverlogincallback";
 
 		String redirectURI = "";
 		try {

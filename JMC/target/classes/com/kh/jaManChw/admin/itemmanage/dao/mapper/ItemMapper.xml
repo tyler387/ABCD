@@ -88,14 +88,14 @@
 	</select>
 	
 	<select id="selectCntFilterItem" resultType="int" parameterType="map">
-      SELECT count(*) FROM item
-      WHERE 1 = 1
-         <if test="content != null and !''.equals(content)">
-         AND   upper(${filter}) LIKE '%' || upper(#{content}) || '%'
-         </if>
-         <if test="status != null and !''.equals(status)">
-         AND upper(item_status) =upper(#{status})
-         </if>
+		SELECT count(*) FROM item
+		WHERE 1 = 1
+			<if test="content != null and !''.equals(content)">
+			AND	upper(${filter}) LIKE '%' || upper(#{content}) || '%'
+			</if>
+			<if test="status != null and !''.equals(status)">
+			AND upper(item_status) =upper(#{status})
+			</if>
 	</select>
 	
 	<select id="selectItemByFilter" resultType="map" parameterType="map">

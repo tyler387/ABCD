@@ -117,7 +117,7 @@ public class PaymentServiceImpl implements PaymentService {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
+		} 
 		logger.info("세션유저넘버 = {}", session.getAttribute("userno"));
 		String userno = String.valueOf(session.getAttribute("userno"));
 		logger.info("세션 유저넘버 {}", userno);
@@ -136,13 +136,12 @@ public class PaymentServiceImpl implements PaymentService {
 		for (int i : basketno) {
 //			Map<String, String> order = new HashMap<>();
 //			OrderDetail orderDetail = new OrderDetail();
-			map.put("basketitem",paymentDao.selectShoppingAllBasketList(i));
+			map.put("basketitem",paymentDao.selectShoppingAllBasketList1(i));
 			logger.info("장바구니 셀렉된 거 보여죽 {}", map);
 			paymentDao.insertShoppingBasketList(map);
 			paymentDao.deleteShoppingBasketList(i);
 //			order.put("userno", userno);
 		}
-		
 		
 //		Payment payment = new Payment();
 //		payment.setOrderName((String)jsonObject.get("orderName"));

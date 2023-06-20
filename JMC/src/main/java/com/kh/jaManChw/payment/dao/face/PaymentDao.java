@@ -33,6 +33,8 @@ public interface PaymentDao {
 
 	public Map<String, String> selectUserInfo(String userno);
 
+	public Object selectShoppingAllBasketList1(int i);
+
 	
 	
 

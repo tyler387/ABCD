@@ -1,5 +1,7 @@
 package com.kh.jaManChw.store.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jaManChw.admin.itemmanage.service.face.ItemQnAQService;
 import com.kh.jaManChw.dto.ItemQnAQ;
@@ -70,6 +73,19 @@ public class StoreController {
 		logger.info("장바구니 조회결과{}", list);
 		model.addAttribute("list", list);
 		
+	}
+	
+	
+	@RequestMapping("/shoppingBasketList")
+	public String SbUpdate(
+			@RequestParam Map<String, String> map,  HttpSession session) {
+		
+		int userno = (Integer)session.getAttribute("userno");
+	      logger.info("상품수량 갯수 {}", map);
+		
+	      storeService.SbUpdate(map);
+	      
+	      return "store/shoppingbasket";
 	}
 	
 	@RequestMapping("/shoppingBasketDelete")
@@ -171,6 +187,7 @@ public class StoreController {
 			,String[] sbItemCount
 			,HttpSession session
 			,int itemno
+			,String sum
 			,Model model
 			) {
 		
@@ -180,11 +197,43 @@ public class StoreController {
 		List<ShoppingBasket> sbList = storeService.getsbListParam(itemOptionno,sbItemCount, itemno, (Integer)session.getAttribute("userno"));
 		logger.info("what:{}",sbList);
 		storeService.writeShoppingBasket(sbList);
-		int basketno = storeService.getbasketno();
+		int abc = 0;
 		
+		for( ShoppingBasket i : sbList) {
+			abc += 1;
+			logger.info("abc {}", abc);
+		}
+		logger.info("abc {}", abc);
+		 List<String> testList = new ArrayList<String>();
+		List<Map<String, String>> basketno = storeService.getbasketno(abc);
+		for(Map<String, String> i : basketno) {
+			logger.info("반복문 i는 뭔가{}", i);
+//			String basket = String.valueOf(i.get("BASKETNO"));
+			testList.add(String.valueOf(i.get("BASKETNO")));
+			logger.info("map 바스켓넘버{}", sum);
+//			 sum += sum + ",";
+			logger.info("썸 출력{}", sum);
+		}
+		
+        String str = "";
+        
+        for(String item : testList) {
+        	str += item + ",";
+        }
+		
+        String newStr = str;
+        if (newStr.endsWith(",")) {
+            newStr = newStr.substring(0, newStr.length() - 1);
+        }
+        
+        logger.info("str 출력{}", str);
+        logger.info("str 출력{}", newStr);
+		logger.info("map 리스트 출력{}", testList);
+		logger.info("map 바스켓넘버{}", basketno);
 		logger.info("맵출력 map{}", map);
-//		return "redirect:../shoppingbasket"
-		return "redirect:/payment/main?itemno="+map.get("itemno")+"&basketno="+basketno;
+		
+//		return "redirect:../shoppingbasket";
+		return "redirect:/payment/main?itemno="+map.get("itemno")+"&basketno="+newStr;
 	}
 
 	@PostMapping("/write/basket")

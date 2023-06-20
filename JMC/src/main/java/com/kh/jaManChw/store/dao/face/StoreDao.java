@@ -102,7 +102,7 @@ public interface StoreDao {
 	
 	public Map<String, Object> selectOptionByOptionno(Object object);
 
-	public int selectBaskteno();
+	public List<Map<String, String>> selectBaskteno(int abc);
 
 	public List<Map<String, String>> selectAllBuyList(String userno);
 

@@ -157,10 +157,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * FROM item_option
 	</select>
 	
-	<select id="selectBaskteno" resultType="int">
+	<select id="selectBaskteno" resultType="hashmap" parameterType="int">
 	SELECT * 
 		FROM (SELECT basketno FROM shopping_basket ORDER BY basketno DESC) 
-	WHERE ROWNUM = 1
+	WHERE ROWNUM <![CDATA[ < ]]>= ${abc}
 	</select>
 	
 	<select id="selectAllBuyList" parameterType="string" resultType="hashmap">

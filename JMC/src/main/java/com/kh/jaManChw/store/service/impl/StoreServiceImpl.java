@@ -162,7 +162,7 @@ public class StoreServiceImpl implements StoreService {
 		storeDao.insertItemQnA(itemQnAQ);
 		
 	}
-	
+	 
 	@Override
 	public void Shoppingbasketerase(Map<String, String> map) {
 		
@@ -170,11 +170,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 	
 	@Override
-	public int getbasketno() {
-		
-		return storeDao.selectBaskteno();
+	public List<Map<String, String>> getbasketno(int abc) {
+		return storeDao.selectBaskteno(abc);
 	}
-	
 	@Override
 	public List<Map<String, String>> getBuyList(String userno) {
 		return storeDao.selectAllBuyList(userno);

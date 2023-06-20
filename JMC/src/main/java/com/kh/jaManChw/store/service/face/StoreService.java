@@ -86,9 +86,10 @@ public interface StoreService {
 	/**
 	 * 
 	 * 바로구매 장바구니 가장 최근 번호 조회
+	 * @param abc 
 	 * @return
 	 */
-	public int getbasketno();
+	public List<Map<String, String>> getbasketno(int abc);
 	
 	/**
 	 * 결제내역 모든 조회
@@ -107,6 +108,8 @@ public interface StoreService {
 	public List<Map<String, String>> getBuyDetail(Map<String, String> map);
 
 	public Map<String, Object> getCommentDetail(ItemQnAQ itemQnAQ);
+
+
 
 
 }

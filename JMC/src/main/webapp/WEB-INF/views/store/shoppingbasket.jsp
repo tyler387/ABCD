@@ -148,7 +148,9 @@ var price = 3000;
  
 	$(function() {
   		<c:forEach var='i' items='${list}'>
-  		price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}
+//   		price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}
+		<c:if test="${i.ITEM_OPTION.OPTION_CONTENT ne null }">price += ${(i.ITEM_PRICE + i.ITEM_OPTION.EXTRA_CHARGE) * i.SB_ITEM_COUNT}</c:if>
+		<c:if test="${i.ITEM_OPTION.OPTION_CONTENT eq null }">price += ${i.ITEM_PRICE * i.SB_ITEM_COUNT}</c:if>
   		</c:forEach>
   	  	console.log("가격", price);
   		$("#totalPrice").html(price)

@@ -292,8 +292,6 @@ public class MypageController {
 		
 		List<Map<String,Object>> map= meetingService.getMyMeeting(session,paging);
 		
-		logger.info("!!!{}" , map);
-		
 		model.addAttribute("map",map);
 		model.addAttribute("paging",paging);
 		

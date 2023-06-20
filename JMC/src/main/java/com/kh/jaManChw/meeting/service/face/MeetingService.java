@@ -116,24 +116,57 @@ public interface MeetingService {
 	public Preference getDetailPreference(Preference preference);
 	
 	/** 
-	 * 선택한 모임의 
-	 * @param meeting
-	 * @return
+	 * 선택한 모임의 확정된 신청자 정보 가져오기 
+	 * @param meeting 선택한 모임 
+	 * @return 모임에 확정된 신청자 정보 
 	 */
 	public List<Users> getUserNickAgree(Meeting meeting);
 	
+	/**
+	 * 선택한 모임의 확정 안된 신청자 정보 가져오기 
+	 * @param meeting 선택한 모임 
+	 * @return 모임에 확정 안된 신청자 정보 
+	 */
 	public List<Users> getUserNickNocheck(Meeting meeting);	
 	
+	/**
+	 * 선택한 모임의 모집자 정보 가져오기  
+	 * @param meeting 선택한 모임 
+	 * @return 모임을 등록한 모집자 정보 
+	 */
 	public Users getUserNickLeader(Meeting meeting);
 	
+	/** 
+	 * 선택한 모임의 모집자 프로필 가져오기  
+	 * @param applicant 신청자 정보 
+	 * @return 모임을 등록한 모집자의 프로필 
+	 */
 	public Map<String, Object> getLeaderProfile(Applicant applicant);
 	
+	/** 
+	 * 모임 신고하기 
+	 * @param reportMeeting 신고할 모임 
+	 */
 	public void inputReportMeeting(Report reportMeeting);
 
+	/** 
+	 * 모임 모집자의 정보 가져오기 
+	 * @param users 모집자의 정보 
+	 * @return 선택한 모임 모집자의 정보 
+	 */
 	public Users getMeetingApplicantUser(Users users);
 	
+	/** 
+	 * 신청자의 모임 신청횟수 가져오기  
+	 * @param applicant 신청자의 신청횟수 
+	 * @return 신청자의 신청 횟수 
+	 */
 	public int chkUser(Applicant applicant);
-
+	
+	/**
+	 * 모임에 신청하기  
+	 * @param applicant 신청자 정보 
+	 */
 	public void inputJoinMeeting(Applicant applicant);
 	
 	

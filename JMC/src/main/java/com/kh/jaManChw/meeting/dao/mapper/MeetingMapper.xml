@@ -280,11 +280,12 @@ WHERE rnum BETWEEN #{paging.startno} AND #{paging.endno}
 
 </select>
 <select id="selectMyMeetingList"  resultType="map">
-select  * from (
-select rownum rnum, m.*,c.cnt from meeting m join (select count(*) cnt, a.meetingno from applicant a  where agree = 'yes' group by a.meetingno) c
-on m.meetingno = c.meetingno) t
-where t.userno = #{meeting.userno} and rnum BETWEEN #{paging.startno} AND #{paging.endno}
-order by meetingno desc
+select * from(
+select rownum rnum,t.* from ( select  m.*,c.cnt from meeting m join 
+(select count(*) cnt, a.meetingno from applicant a where agree = 'yes' group by a.meetingno)
+c on m.meetingno = c.meetingno) t where t.userno = #{meeting.userno}) 
+
+where  rnum BETWEEN #{paging.startno}  AND #{paging.endno} order by meetingno desc
 </select>
 
 <select id="selectMyMeetingCntAll" parameterType="com.kh.jaManChw.dto.Meeting" resultType="int" >

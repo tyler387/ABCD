@@ -174,12 +174,6 @@ select:focus{
 		
 		<div class="input-group">
 			<input type="text" name="email" id="userEmail1">
-<!-- 			<select name="email" name="email" id="userEmail2"> -->
-<!-- 				<option class="option">@naver.com</option> -->
-<!-- 				<option class="option">@google.com</option> -->
-<!-- 				<option class="option">@daum.net</option> -->
-<!-- 				<option class="option">@hanmail.com</option> -->
-<!-- 			</select> -->
 			
 			<div>
 				<input type="text" name="email_checknumber" id="email_checknumber" placeholder="인증번호를 입력해주세요">
@@ -188,9 +182,6 @@ select:focus{
 				<span id="emailNumMsg" style="font-size: 17px;"></span>
 			</div>
 		</div>
-		
-	<!-- 		<a href="/login/searchResultPw"> -->
-			
 			
 			<div class="nextBtn">
 				<button class="search-pwbtn" id="nextbtn">다음</button>
@@ -209,22 +200,26 @@ $(document).ready(function(){
     let checkID = RegExp(/^[a-z-0-9]{6,20}$/);
     let checkEmail = RegExp(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/);
 
+    const target = document.getElementById('nextbtn');
+	$('#nextbtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+	
 	$('#userId').blur(function() {
 		var userId = $('#userId').val();
 	
 		if(userId === ''){	
 			$('#IdMsg').html('아이디를 입력해 주세요');
 			$('#IdMsg').css('color','red');
-	//			$("#userName").focus();
+			$('#nextbtn').attr('disabled', true);
 			return false;
 		}else if(!checkID.test(userId)){
 			$('#IdMsg').html('옳지않은 형식입니다.');
 			$('#IdMsg').css('color','red');
+			$('#nextbtn').attr('disabled', true);
 			return false;
 		}else{  
 			$('#IdMsg').html('');
 			$('#IdMsg').css('color','#3f8ef7');
-	//     	$("#birth").focus();
+			$('#nextbtn').attr('disabled', false);
 	    	return true;
 		}
 	}) //$('#userName').blur ed
@@ -235,6 +230,7 @@ $(document).ready(function(){
 	// 이메일 인증
 	var code = ""; // 인증번호 저장을 위한 코드
 	var isCertification = false; // 인증 여부 변수
+	const checkInput = $('#email_checknumber');
 
 	$('#email_checkbtn').click(function() {
 		const email = $('#userEmail1').val() 
@@ -249,10 +245,11 @@ $(document).ready(function(){
 			dataType: 'text',
 			success: function(data) {
 				/* console.log('data: ' + data); */
-				checkInput.attr('disabled', false); // 인증번호 입력이 가능하도록 속성 변환
+				
 				code = data;
 				isCertification = true; // 인증이 완료되었음을 표시
 				alert('인증번호가 전송되었습니다.');
+				$('#nextbtn').attr('disabled', false);
 			},
 			error : function() { // 결과 에러 콜백함수
 				alert('서버요청 실패');
@@ -277,6 +274,7 @@ $(document).ready(function(){
 			//$('#userEamil2').attr('readonly', true);
 			$('#userEmail1').attr('onFocus', 'this.initialSelect = this.selectedIndex');
 			$('#userEmail1').attr('onChange', 'this.selectedIndex = this.initialSelect');
+			checkInput.attr('disabled', true); // 인증번호 입력이 가능하도록 속성 변환
 		} else if (inputCode === '') {
 			resultMsg.html('인증번호를 입력해주세요.');
 			resultMsg.css('color', 'red');

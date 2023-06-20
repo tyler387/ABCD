@@ -119,7 +119,7 @@ input:focus{
 					</div>	
 				</div>	
 			
-				<a href="./login"><button class="Idresultbtn" >확인</button></a>
+				<button class="Idresultbtn" id="Idresultbtn">확인</button>
 			</div> 
 			</form> 
 	</div>
@@ -134,24 +134,28 @@ $(document).ready(function(){
 	// FIXME: 필요 스크립트 전개 영역
     let checkPW = RegExp(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/);
 
+    const target = document.getElementById('Idresultbtn');
+	$('#Idresultbtn').attr('disabled', true); // 초기에 버튼을 비활성화 상태로 설정
+	
 	$('#userPw').blur(function() {
 		var userPw = $('#userPw').val();
 	
 		if(userPw === ''){	
 			$('#pwMSG').html('비밀번호를 입력해 주세요');
 			$('#pwMSG').css('color','red');
-	//			$("#userName").focus();
+			$('#Idresultbtn').attr('disabled', true);
 			return false;
 			
 		}else if(!checkPW.test(userPw)){
 			$('#pwMSG').html('옳지않은 형식입니다.');
 			$('#pwMSG').css('color','red');
+			$('#Idresultbtn').attr('disabled', true);
 			return false;
 			
 		}else if(checkPW.test(userPw)){  
 			$('#pwMSG').html('');
 			$('#pwMSG').css('color','#3f8ef7');
-	//     	$("#birth").focus();
+			$('#Idresultbtn').attr('disabled', false);
 	    	return true;
 		}
 	}) //$('#userName').blur ed
@@ -163,17 +167,18 @@ $(document).ready(function(){
 		if(userPw != userPwChk){	
 			$('#pwchk_msg').html('비밀번호가 일치하지 않습니다.');
 			$('#pwchk_msg').css('color','red');
-// 			$("#userPw_chk").focus();
+			$('#Idresultbtn').attr('disabled', true);
 			return false;
 			
 		}else if(userPwChk == ''){
 			$('#pwchk_msg').html('비밀번호를 입력해주세요.');
 			$('#pwchk_msg').css('color','red');
+			$('#Idresultbtn').attr('disabled', true);
 			return false;
 		}else if(userPw === userPwChk){
 			$('#pwchk_msg').html('비밀번호가 일치합니다');
 			$('#pwchk_msg').css('color','#3f8ef7');
-// 			$("#userName").focus();
+			$('#Idresultbtn').attr('disabled', false);
 			return true;			
 		}
 	}) //$('#userPw_chk').blur ed

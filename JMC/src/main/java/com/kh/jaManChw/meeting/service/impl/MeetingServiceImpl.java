@@ -34,7 +34,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 @Autowired MeetingDao meetingDao;	
 @Autowired ChatDao chatDao;
 	
-
+	
 	@Override
 	public int getUserno(int userno) {
 	
@@ -325,7 +325,7 @@ private final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 			
 			Meeting meeting = new Meeting();
 			meeting.setUserno((int)session.getAttribute("userno"));
-			
+			logger.info("!@#{}",meeting);
 			return meetingDao.selectMyMeetingList(meeting,paging);
 		}
 		@Override

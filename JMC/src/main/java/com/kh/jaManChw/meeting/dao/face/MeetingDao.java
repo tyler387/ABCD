@@ -17,6 +17,14 @@ public interface MeetingDao {
 	
 	
 	/**
+	 * 유저 정보 가져오기 
+	 * 
+	 * @param userno 정보를 가져올 user의 userno 
+	 * @return userno
+	 */
+	public int selectUserNo(int userno);
+	
+	/**
 	 * 모임 등록 정보 삽입하기 
 	 * 
 	 * @param meeting - 등록될 모임 정보  
@@ -33,14 +41,19 @@ public interface MeetingDao {
 
 	
 	/**
+	 * 해당하는 모임의 모임번호 조회하기 
 	 * 
-	 * 
-	 * @return
+	 * @return 모임번호 가져오기  
 	 */
 	public int selectMeetingno();
 
+	/**
+	 * 선호하는 타입 등록하기 
+	 * 
+	 * @param preference - 등록될 선호하는 타입 정보 
+ 	 */
 	public void insertPreference(Preference preference);
-
+	
 	public List<Meeting> selectMeetinglistAll();
 
 	public Meeting selectMeeting(Meeting meeting);
@@ -59,7 +72,6 @@ public interface MeetingDao {
 
 	public void insertJoinMeeting(Applicant applicant);
 
-	public int selectUserNo(int userno);
 
 	public void insertMeetingUser(Applicant leader);
 	

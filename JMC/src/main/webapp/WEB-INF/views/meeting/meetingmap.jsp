@@ -6,7 +6,7 @@
 
 <c:import url="../layout/header.jsp" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b2df021e5cddd3c42195019a8528012&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f373ba18c77d60940d5d09f6db6a225&libraries=services,clusterer,drawing"></script>
 
 
 <style type="text/css">
